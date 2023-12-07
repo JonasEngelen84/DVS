@@ -1,0 +1,63 @@
+﻿<!--Component zur bereitstellung der ListView der Mitarbeiter-Kleidung-->
+    
+    <UserControl x:Class="DVS.Components.EmployeesListViewComponent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DVS.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <Grid>
+        <ListView x:Name="EmployeesListView"
+                  BorderThickness="1"
+                  FontSize="13"
+                  Background="{x:Null}"
+                  Foreground="#FF212129"
+                  ItemsSource="{Binding AllEmployeeClothesCollection}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID"
+                                    Width="auto"
+                                    DisplayMemberBinding="{Binding OwnerId}" />
+                    <GridViewColumn Header="Nachname"
+                                    Width="auto"
+                                    DisplayMemberBinding="{Binding OwnerLastname}" />
+                    <GridViewColumn Header="Vorname"
+                                    Width="auto"
+                                    DisplayMemberBinding="{Binding OwnerFirstname}" />
+                    <GridViewColumn Header="Kleidung"
+                                    Width="auto"
+                                    DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Saison"
+                                    Width="auto"
+                                    DisplayMemberBinding="{Binding Season}" />
+                    <GridViewColumn Header="Größe"
+                                    Width="auto"
+                                    DisplayMemberBinding="{Binding Size}" />
+                    <GridViewColumn Header="Menge"
+                                    Width="auto"
+                                    DisplayMemberBinding="{Binding Quantity}" />
+                    <GridViewColumn Header="Kommentar"
+                                    Width="auto"
+                                    DisplayMemberBinding="{Binding Comment}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!--<DataGrid x:Name="EmployeesDetailsDataGrid" AutoGenerateColumns="False"
+                      AllowDrop="True" Background="{x:Null}" ItemsSource="{Binding _allEmployeeClothesCollection}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Personal Nr." Binding="{Binding OwnerId}"/>
+                <DataGridTextColumn Header="Nachname" Binding="{Binding OwnerLastname}"/>
+                <DataGridTextColumn Header="Vorname" Binding="{Binding OwnerFirstname}"/>
+                <DataGridTextColumn Header="Kleidung" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Saison" Binding="{Binding Season}"/>
+                <DataGridTextColumn Header="Größe" Binding="{Binding Size}"/>
+                <DataGridTextColumn Header="Menge" Binding="{Binding Quantity}"/>
+                <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment}"/>
+            </DataGrid.Columns>
+        </DataGrid>-->
+    </Grid>
+</UserControl>

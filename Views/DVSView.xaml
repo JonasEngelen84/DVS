@@ -1,0 +1,179 @@
+﻿<!--MainView:
+    Wird angelegt um dem Programmierer mehr freiheiten,
+    z.B. beim festlegen von ausführungen beim start des Programms, zu geben.
+    Wird in das MainWindow eingefügt.-->
+    
+<UserControl x:Class="DVS.Views.DVSView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:DVS.Components"
+             xmlns:local="clr-namespace:DVS.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             Foreground="{x:Null}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"
+                              MinWidth="0" />
+            <ColumnDefinition Width="24" />
+            <ColumnDefinition Width="*"
+                              MinWidth="0" />
+        </Grid.ColumnDefinitions>
+
+        <!--Einfügen der Components-->
+        <components:EmployeesListViewComponent />
+        <components:ClothesListViewComponent Grid.Column="2" />
+
+        <GridSplitter Grid.Column="1"
+                      HorizontalAlignment="Center"
+                      Width="24"
+                      Margin="0,218,0,0"
+                      Cursor="SizeWE">
+            <GridSplitter.Background>
+                <LinearGradientBrush EndPoint="0.5,1"
+                                     StartPoint="0.5,0">
+                    <GradientStop Color="#FFB7B7B7"
+                                  Offset="0" />
+                    <GradientStop Color="#FFBABABA"
+                                  Offset="1" />
+                </LinearGradientBrush>
+            </GridSplitter.Background>
+        </GridSplitter>
+
+        <Button x:Name="PlusButton"
+                Width="24"
+                Height="24"
+                Grid.Column="1"
+                Margin="0,163,0,0"
+                VerticalAlignment="Top"
+                BorderBrush="{x:Null}"
+                Cursor="Hand"
+                Command="{Binding EditPlusCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius"
+                            Value="24" />
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="MinusButton"
+                Width="24"
+                Height="24"
+                Grid.Column="1"
+                Margin="0,190,0,0"
+                VerticalAlignment="Top"
+                BorderBrush="{x:Null}"
+                Cursor="Hand"
+                Command="{Binding EditMinusCommand}">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius"
+                            Value="24" />
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button x:Name="FilterButton"
+                Width="25"
+                Height="24"
+                VerticalAlignment="Top"
+                Grid.Column="1"
+                BorderThickness="0"
+                Background="{x:Null}"
+                Cursor="Hand"
+                Command="{Binding FilterListViewCommand}">
+            <StackPanel>
+                <Image Source="/Filter.png"
+                       Height="21" />
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="EditButton"
+                Width="24"
+                Height="24"
+                VerticalAlignment="Top"
+                Margin="0,27,0,0"
+                Grid.Column="1"
+                BorderThickness="0"
+                Background="{x:Null}"
+                Cursor="Hand"
+                Command="{Binding EditModelsCommand}">
+            <StackPanel>
+                <Image Source="/Bearbeiten.png"
+                       Height="21"
+                       Width="20" />
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="BackwardButton"
+                Width="24"
+                Height="24"
+                VerticalAlignment="Top"
+                Margin="0,54,0,0"
+                Grid.Column="1"
+                BorderThickness="0"
+                Background="{x:Null}"
+                Cursor="Hand"
+                Command="{Binding BackwardCommand}">
+            <StackPanel>
+                <Image Source="/Rückgängig.png"
+                       Height="21" />
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="SafeButton"
+                Width="24"
+                Height="24"
+                VerticalAlignment="Top"
+                Margin="0,81,0,0"
+                Grid.Column="1"
+                BorderThickness="0"
+                Background="{x:Null}"
+                Cursor="Hand"
+                Command="{Binding SafeCommand}">
+            <StackPanel>
+                <Image Source="/Speichern.png"
+                       Height="21"
+                       Width="20" />
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="PrintButton"
+                Width="24"
+                Height="24"
+                VerticalAlignment="Top"
+                Margin="0,108,0,0"
+                Grid.Column="1"
+                BorderThickness="0"
+                Background="{x:Null}"
+                Cursor="Hand"
+                Command="{Binding PrintCommand}">
+            <StackPanel>
+                <Image Source="/Drucken.png"
+                       Height="21"
+                       Width="20" />
+            </StackPanel>
+        </Button>
+
+        <Button x:Name="ContactButton"
+                Width="24"
+                Height="24"
+                VerticalAlignment="Top"
+                Margin="0,135,0,0"
+                Grid.Column="1"
+                BorderThickness="0"
+                Background="{x:Null}"
+                Cursor="Hand"
+                Command="{Binding ContactCommand}">
+            <StackPanel>
+                <Image Source="/Kontakt.png"
+                       Height="21"
+                       Width="20" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</UserControl>
