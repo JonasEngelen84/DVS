@@ -29,16 +29,16 @@ namespace DVS.Models
             Prize = prize;
         }
 
-        public ClothesModel(string categorie, string name, string size, string season, int quantity, int ownerId, string ownerFirstname, string ownerLastname)
-        {
-            Categorie = categorie;
-            Name = name;
-            Size = size;
-            Season = season;
-            Quantity = quantity;
-            OwnerId = ownerId;
-            OwnerFirstname = ownerFirstname;
-            OwnerLastname = ownerLastname;
-        }
+        //public ClothesModel(string categorie, string name, string size, string season, int quantity, int ownerId, string ownerFirstname, string ownerLastname)
+        //{
+        //    Categorie = categorie;
+        //    Name = name;
+        //    Size = size;
+        //    Season = season;
+        //    Quantity = quantity;
+        //    OwnerId = ownerId;
+        //    OwnerFirstname = ownerFirstname;
+        //    OwnerLastname = ownerLastname;
+        //}
     }
 }

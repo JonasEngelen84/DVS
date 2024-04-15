@@ -5,8 +5,7 @@
 <Application x:Class="DVS.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:DVS"
-             StartupUri="MainWindow.xaml">
+             xmlns:local="clr-namespace:DVS">
     <Application.Resources>
         <!--<ResourceDictionary>
             <Style x:Key="FullBackground" TargetType="ListView">

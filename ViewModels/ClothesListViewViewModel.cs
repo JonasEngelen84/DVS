@@ -15,7 +15,7 @@ namespace DVS.ViewModels
 
         public ClothesListViewViewModel(SelectedClothesStore _selectedClothesStore)
         {
-            _clothesCollection = new ObservableCollection<ClothesModel>();
+            _clothesCollection = [];
 
             HardCodedObjects();
         }
