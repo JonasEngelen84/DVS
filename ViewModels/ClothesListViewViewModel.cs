@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace DVS.ViewModels
 {
-    internal class ClothesListViewViewModel
+    public class ClothesListViewViewModel
     {
         // Bereitstellung einer ObservableCollection der vorhandenen Kleidung "_clothesCollection".
         private readonly ObservableCollection<ClothesModel> _clothesCollection;
@@ -15,32 +15,10 @@ namespace DVS.ViewModels
 
         public ClothesListViewViewModel(SelectedClothesStore _selectedClothesStore)
         {
-            _clothesCollection = new ObservableCollection<ClothesModel>();
+            _clothesCollection = [];
 
             HardCodedObjects();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         private void HardCodedObjects()
