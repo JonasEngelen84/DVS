@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVS.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,8 @@ namespace DVS.Models
         public string Firstname { get; set; } = firstname;
         public string Lastname { get; set; } = lastname;
         public int Id { get; set; } = id;
-        public List<ClothesModel> Clothes = [];
+        public string Comment { get; set; } = "";
+        public ClothesModel[,] Clothes = new ClothesModel[,] { };
     }
 
 }

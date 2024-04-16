@@ -15,18 +15,18 @@
                   FontSize="13"
                   Background="{x:Null}"
                   Foreground="#FF212129"
-                  ItemsSource="{Binding AllEmployeeClothesCollection}">
+                  ItemsSource="{Binding EmployeeList}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID"
                                     Width="auto"
-                                    DisplayMemberBinding="{Binding OwnerId}" />
+                                    DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Nachname"
                                     Width="auto"
-                                    DisplayMemberBinding="{Binding OwnerLastname}" />
+                                    DisplayMemberBinding="{Binding Lastname}" />
                     <GridViewColumn Header="Vorname"
                                     Width="auto"
-                                    DisplayMemberBinding="{Binding OwnerFirstname}" />
+                                    DisplayMemberBinding="{Binding Firstname}" />
                     <GridViewColumn Header="Kleidung"
                                     Width="auto"
                                     DisplayMemberBinding="{Binding Name}" />
