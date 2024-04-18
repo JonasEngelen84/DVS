@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DVS.ViewModels
 {
-    internal class EmployeesListViewItemViewModel : ViewModelBase
+    internal class AddClothesViewModel : ViewModelBase
     {
     }
 }

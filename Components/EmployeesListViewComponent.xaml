@@ -15,27 +15,24 @@
                   FontSize="13"
                   Background="{x:Null}"
                   Foreground="#FF212129"
-                  ItemsSource="{Binding EmployeeList}">
+                  ItemsSource="{Binding EmployeeClothesList}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID"
                                     Width="auto"
-                                    DisplayMemberBinding="{Binding Id}" />
+                                    DisplayMemberBinding="{Binding EmployeeId}" />
                     <GridViewColumn Header="Nachname"
                                     Width="auto"
-                                    DisplayMemberBinding="{Binding Lastname}" />
+                                    DisplayMemberBinding="{Binding EmployeeLastname}" />
                     <GridViewColumn Header="Vorname"
                                     Width="auto"
-                                    DisplayMemberBinding="{Binding Firstname}" />
+                                    DisplayMemberBinding="{Binding EmployeeFirstname}" />
                     <GridViewColumn Header="Kleidung"
                                     Width="auto"
-                                    DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Saison"
-                                    Width="auto"
-                                    DisplayMemberBinding="{Binding Season}" />
+                                    DisplayMemberBinding="{Binding ClothesName}" />
                     <GridViewColumn Header="Größe"
                                     Width="auto"
-                                    DisplayMemberBinding="{Binding Size}" />
+                                    DisplayMemberBinding="{Binding ClothesSize}" />
                     <GridViewColumn Header="Menge"
                                     Width="auto"
                                     DisplayMemberBinding="{Binding Quantity}" />
@@ -45,19 +42,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
-        <!--<DataGrid x:Name="EmployeesDetailsDataGrid" AutoGenerateColumns="False"
-                      AllowDrop="True" Background="{x:Null}" ItemsSource="{Binding _allEmployeeClothesCollection}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Personal Nr." Binding="{Binding OwnerId}"/>
-                <DataGridTextColumn Header="Nachname" Binding="{Binding OwnerLastname}"/>
-                <DataGridTextColumn Header="Vorname" Binding="{Binding OwnerFirstname}"/>
-                <DataGridTextColumn Header="Kleidung" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Saison" Binding="{Binding Season}"/>
-                <DataGridTextColumn Header="Größe" Binding="{Binding Size}"/>
-                <DataGridTextColumn Header="Menge" Binding="{Binding Quantity}"/>
-                <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment}"/>
-            </DataGrid.Columns>
-        </DataGrid>-->
     </Grid>
 </UserControl>

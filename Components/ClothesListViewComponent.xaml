@@ -33,9 +33,6 @@
                     <GridViewColumn Header="Menge"
                                     Width="auto"
                                     DisplayMemberBinding="{Binding Quantity}" />
-                    <GridViewColumn Header="Preis"
-                                    Width="auto"
-                                    DisplayMemberBinding="{Binding Prize}" />
                     <GridViewColumn Header="Kommentar"
                                     Width="auto"
                                     DisplayMemberBinding="{Binding Comment}" />

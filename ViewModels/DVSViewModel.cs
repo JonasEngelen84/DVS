@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using DVS.Commands;
 using DVS.Stores;
 using System.Windows.Input;
+using System.Windows;
+using DVS.Views;
 
 namespace DVS.ViewModels
 {
@@ -26,5 +28,10 @@ namespace DVS.ViewModels
             //ClothesDetailsViewModel = new ClothesListViewViewModel(_selectedClothesStore);
             //FilterListViewCommand = new FilterListViewCommand(this);
         }
+
+        readonly AddClothesViewModel addClothesViewModel = new();
+
+        public void OpenAddClothes(object sender, RoutedEventArgs e)
+            => addClothesViewModel._addClothesView.Visibility = Visibility.Visible;
     }
 }

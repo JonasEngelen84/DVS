@@ -50,7 +50,8 @@
                 VerticalAlignment="Top"
                 BorderBrush="{x:Null}"
                 Cursor="Hand"
-                Command="{Binding EditPlusCommand}">
+                Command="{Binding EditPlusCommand}"
+                Click="OpenAddClothes">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius"

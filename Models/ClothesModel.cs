@@ -6,26 +6,16 @@ using System.Threading.Tasks;
 
 namespace DVS.Models
 {
-    public class ClothesModel(string categorie, string name, string size, string season, int quantity, double prize)
+    public enum Categorie { Hose, Pullover, Shirt, Jacke, Kopfbedeckung }
+    public enum Season { Sommer, Winter, Saisonlos}
+
+    public class ClothesModel(Categorie categorie, string name, string size, Season season, int quantity)
     {
-        public string Categorie { get; set; } = categorie;
+        public Categorie Categorie { get; set; } = categorie;
         public string Name { get; set; } = name;
-        public string Season { get; set; } = season;
+        public Season Season { get; set; } = season;
         public string Size { get; } = size;
         public int Quantity { get; set; } = quantity;
-        public double Prize { get; set; } = prize;
         public string Comment { get; set; } = "";
-
-        //public ClothesModel(string categorie, string name, string size, string season, int quantity, int ownerId, string ownerFirstname, string ownerLastname)
-        //{
-        //    Categorie = categorie;
-        //    Name = name;
-        //    Size = size;
-        //    Season = season;
-        //    Quantity = quantity;
-        //    OwnerId = ownerId;
-        //    OwnerFirstname = ownerFirstname;
-        //    OwnerLastname = ownerLastname;
-        //}
     }
 }

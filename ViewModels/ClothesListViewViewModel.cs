@@ -23,29 +23,29 @@ namespace DVS.ViewModels
 
         private void HardCodedObjects()
         {
-            _clothesCollection.Add(new ClothesModel("Shirt", "Sommershirt", "XL", "Sommer", 12, 19.99));
-            _clothesCollection.Add(new ClothesModel("Shirt", "Sommershirt", "L", "Sommer", 8, 19.99));
-            _clothesCollection.Add(new ClothesModel("Shirt", "Sommershirt", "M", "Sommer", 10, 19.99));
-            _clothesCollection.Add(new ClothesModel("Shirt", "Wintershirt", "XL", "Winter", 8, 19.99));
-            _clothesCollection.Add(new ClothesModel("Shirt", "Wintershirt", "L", "Winter", 5, 19.99));
-            _clothesCollection.Add(new ClothesModel("Shirt", "Wintershirt", "M", "Winter", 15, 19.99));
-            _clothesCollection.Add(new ClothesModel("Hose", "Sommerhose", "58", "Sommer", 6, 50.29));
-            _clothesCollection.Add(new ClothesModel("Hose", "Sommerhose", "55", "Sommer", 3, 50.29));
-            _clothesCollection.Add(new ClothesModel("Hose", "Sommerhose", "48", "Sommer", 11, 50.29));
-            _clothesCollection.Add(new ClothesModel("Hose", "Winterhose", "58", "Winter", 6, 19.99));
-            _clothesCollection.Add(new ClothesModel("Hose", "Winterhose", "55", "Winter", 10, 19.99));
-            _clothesCollection.Add(new ClothesModel("Hose", "Winterhose", "48", "Winter", 3, 19.99));
-            _clothesCollection.Add(new ClothesModel("Jacke", "Regenjacke", "XL", "", 12, 25.99));
-            _clothesCollection.Add(new ClothesModel("Jacke", "Regenjacke", "L", "", 7, 25.99));
-            _clothesCollection.Add(new ClothesModel("Jacke", "Regenjacke", "M", "", 5, 25.99));
-            _clothesCollection.Add(new ClothesModel("Jacke", "Fleecejacke", "L", "", 7, 25.99));
-            _clothesCollection.Add(new ClothesModel("Jacke", "Fleecejacke", "M", "", 8, 25.99));
-            _clothesCollection.Add(new ClothesModel("Jacke", "Fleecejacke", "S", "", 9, 25.99));
-            _clothesCollection.Add(new ClothesModel("Jacke", "Winterjacke", "XL", "Winter", 2, 45.99));
-            _clothesCollection.Add(new ClothesModel("Jacke", "Winterjacke", "L", "Winter", 5, 45.99));
-            _clothesCollection.Add(new ClothesModel("Jacke", "Winterjacke", "M", "Winter", 7, 45.99));
-            _clothesCollection.Add(new ClothesModel("Kopfbedeckung", "Sommerkappe", "", "Sommer", 8, 10.99));
-            _clothesCollection.Add(new ClothesModel("Kopfbedeckung", "Winterkappe", "", "Winter", 4, 15.99));
+            _clothesCollection.Add(new ClothesModel(Categorie.Shirt, "Sommershirt", "XL", Season.Sommer, 12));
+            _clothesCollection.Add(new ClothesModel(Categorie.Shirt, "Sommershirt", "L", Season.Sommer, 8));
+            _clothesCollection.Add(new ClothesModel(Categorie.Shirt, "Sommershirt", "M", Season.Sommer, 10));
+            _clothesCollection.Add(new ClothesModel(Categorie.Shirt, "Wintershirt", "XL", Season.Winter, 8));
+            _clothesCollection.Add(new ClothesModel(Categorie.Shirt, "Wintershirt", "L", Season.Winter, 5));
+            _clothesCollection.Add(new ClothesModel(Categorie.Shirt, "Wintershirt", "M", Season.Winter, 15));
+            _clothesCollection.Add(new ClothesModel(Categorie.Hose, "Sommerhose", "58", Season.Sommer, 6));
+            _clothesCollection.Add(new ClothesModel(Categorie.Hose, "Sommerhose", "55", Season.Sommer, 3));
+            _clothesCollection.Add(new ClothesModel(Categorie.Hose, "Sommerhose", "48", Season.Sommer, 11));
+            _clothesCollection.Add(new ClothesModel(Categorie.Hose, "Winterhose", "58", Season.Winter, 6));
+            _clothesCollection.Add(new ClothesModel(Categorie.Hose, "Winterhose", "55", Season.Winter, 10));
+            _clothesCollection.Add(new ClothesModel(Categorie.Hose, "Winterhose", "48", Season.Winter, 3));
+            _clothesCollection.Add(new ClothesModel(Categorie.Jacke, "Regenjacke", "XL", Season.Saisonlos, 12));
+            _clothesCollection.Add(new ClothesModel(Categorie.Jacke, "Regenjacke", "L", Season.Saisonlos, 7));
+            _clothesCollection.Add(new ClothesModel(Categorie.Jacke, "Regenjacke", "M", Season.Saisonlos, 59));
+            _clothesCollection.Add(new ClothesModel(Categorie.Jacke, "Fleecejacke", "L", Season.Saisonlos, 7));
+            _clothesCollection.Add(new ClothesModel(Categorie.Jacke, "Fleecejacke", "M", Season.Saisonlos, 8));
+            _clothesCollection.Add(new ClothesModel(Categorie.Jacke, "Fleecejacke", "S", Season.Saisonlos, 9));
+            _clothesCollection.Add(new ClothesModel(Categorie.Jacke, "Winterjacke", "XL", Season.Winter, 2));
+            _clothesCollection.Add(new ClothesModel(Categorie.Jacke, "Winterjacke", "L", Season.Winter, 5));
+            _clothesCollection.Add(new ClothesModel(Categorie.Jacke, "Winterjacke", "M", Season.Winter, 7));
+            _clothesCollection.Add(new ClothesModel(Categorie.Kopfbedeckung, "Sommerkappe", "", Season.Saisonlos, 8));
+            _clothesCollection.Add(new ClothesModel(Categorie.Kopfbedeckung, "Winterkappe", "", Season.Saisonlos, 4));
         }
     }
 }
