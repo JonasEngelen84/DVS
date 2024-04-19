@@ -1,5 +1,4 @@
-﻿using DVS.Stores;
-using DVS.ViewModels;
+﻿using DVS.ViewModels;
 using System.Windows.Controls;
 
 namespace DVS.Components

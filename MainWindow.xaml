@@ -32,6 +32,7 @@
 
         <!--Einfügen der MainView-->
         <views:DVSView />
+        <views:AddClothesView />
 
     </Grid>
 </Window>

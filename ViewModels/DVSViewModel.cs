@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using DVS.Commands;
-using DVS.Stores;
 using System.Windows.Input;
 using System.Windows;
 using DVS.Views;
+using DVS.Components;
 
 namespace DVS.ViewModels
 {
@@ -18,20 +18,19 @@ namespace DVS.ViewModels
         //public ICommand BackwardCommand { get; }
         //public ICommand SafeCommand { get; }
         //public ICommand PrintCommand { get; }
-        //public ICommand ContactCommand { get; }
         //public ICommand EditPlusCommand { get; }
         //public ICommand EditMinusCommand { get; }
 
-        public DVSViewModel(SelectedClothesStore _selectedClothesStore)
+        public DVSViewModel()
         {
             //EmployeesDetailsViewModel = new EmployeesListViewViewModel(_selectedClothesStore);
             //ClothesDetailsViewModel = new ClothesListViewViewModel(_selectedClothesStore);
             //FilterListViewCommand = new FilterListViewCommand(this);
         }
 
-        readonly AddClothesViewModel addClothesViewModel = new();
+        readonly AddClothesView addClothesView = new();
 
-        public void OpenAddClothes(object sender, RoutedEventArgs e)
-            => addClothesViewModel._addClothesView.Visibility = Visibility.Visible;
+        public void OpenAddClothesView(object sender, RoutedEventArgs e)
+            => addClothesView._AddClothesView.Visibility = Visibility.Visible;
     }
 }

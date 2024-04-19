@@ -39,18 +39,5 @@
                 </GridView>
             </ListView.View>
         </ListView>
-
-        <!--<DataGrid x:Name="ClothesDetailsDataGrid" AutoGenerateColumns="False"
-                      AllowDrop="True" Background="{x:Null}" ItemsSource="{Binding _clothesCollection}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Kategorie" Binding="{Binding Categorie}"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Saison" Binding="{Binding Season}"/>
-                <DataGridTextColumn Header="Größe" Binding="{Binding Size}"/>
-                <DataGridTextColumn Header="Menge" Binding="{Binding Quantity}"/>
-                <DataGridTextColumn Header="Preis" Binding="{Binding Prize}"/>
-                <DataGridTextColumn Header="Kommentar" Binding="{Binding Comment}"/>
-            </DataGrid.Columns>
-        </DataGrid>-->
     </Grid>
 </UserControl>

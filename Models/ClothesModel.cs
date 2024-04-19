@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace DVS.Models
 {
-    public enum Categorie { Hose, Pullover, Shirt, Jacke, Kopfbedeckung }
-    public enum Season { Sommer, Winter, Saisonlos}
+    
 
     public class ClothesModel(Categorie categorie, string name, string size, Season season, int quantity)
     {

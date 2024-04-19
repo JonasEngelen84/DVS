@@ -15,11 +15,9 @@
              Foreground="{x:Null}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"
-                              MinWidth="0" />
+            <ColumnDefinition Width="*" MinWidth="0" />
             <ColumnDefinition Width="24" />
-            <ColumnDefinition Width="*"
-                              MinWidth="0" />
+            <ColumnDefinition Width="*" MinWidth="0" />
         </Grid.ColumnDefinitions>
 
         <!--Einfügen der Components-->
@@ -51,7 +49,7 @@
                 BorderBrush="{x:Null}"
                 Cursor="Hand"
                 Command="{Binding EditPlusCommand}"
-                Click="OpenAddClothes">
+                Click="OpenAddClothesView">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius"
@@ -154,23 +152,6 @@
                 Command="{Binding PrintCommand}">
             <StackPanel>
                 <Image Source="/Drucken.png"
-                       Height="21"
-                       Width="20" />
-            </StackPanel>
-        </Button>
-
-        <Button x:Name="ContactButton"
-                Width="24"
-                Height="24"
-                VerticalAlignment="Top"
-                Margin="0,135,0,0"
-                Grid.Column="1"
-                BorderThickness="0"
-                Background="{x:Null}"
-                Cursor="Hand"
-                Command="{Binding ContactCommand}">
-            <StackPanel>
-                <Image Source="/Kontakt.png"
                        Height="21"
                        Width="20" />
             </StackPanel>

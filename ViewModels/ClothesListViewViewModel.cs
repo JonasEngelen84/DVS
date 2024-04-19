@@ -1,5 +1,4 @@
 ﻿using DVS.Models;
-using DVS.Stores;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -13,7 +12,7 @@ namespace DVS.ViewModels
         // Zur encapsulation (private) von "_clothesCollection" wird ein IEnumerable als pointer verwendet.
         public IEnumerable<ClothesModel> ClothesCollection => _clothesCollection;
 
-        public ClothesListViewViewModel(SelectedClothesStore _selectedClothesStore)
+        public ClothesListViewViewModel()
         {
             _clothesCollection = [];
 

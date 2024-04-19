@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using DVS.Stores;
 using DVS.ViewModels;
 
 namespace DVS.Components
@@ -15,7 +14,7 @@ namespace DVS.Components
         {
             InitializeComponent();
 
-            DataContext = new ClothesListViewViewModel(new SelectedClothesStore());
+            DataContext = new ClothesListViewViewModel();
         }
     }
 }

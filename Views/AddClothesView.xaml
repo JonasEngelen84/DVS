@@ -9,7 +9,7 @@
              d:DesignWidth="300"
              Background="#FFE2F2FF"
              Visibility="Hidden"
-             x:Name="_addClothesView">
+             x:Name="_AddClothesView">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />

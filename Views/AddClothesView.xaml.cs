@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVS.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace DVS.Views
         public AddClothesView()
         {
             InitializeComponent();
+
+            DataContext = new AddClothesViewModel();
         }
     }
 }

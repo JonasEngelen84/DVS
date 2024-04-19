@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVS.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,14 @@ namespace DVS.Views
         public DVSView()
         {
             InitializeComponent();
+
+            DataContext = new DVSViewModel();
+
         }
+
+        //readonly AddClothesView addClothesView = new();
+
+        //public void OpenAddClothesView(object sender, RoutedEventArgs e)
+        //    => addClothesView._AddClothesView.Visibility = Visibility.Visible;
     }
 }
