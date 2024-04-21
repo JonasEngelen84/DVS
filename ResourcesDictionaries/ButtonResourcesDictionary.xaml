@@ -8,6 +8,36 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Cursor" Value="Hand" />
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseDirectlyOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width"
+                                             To="22"
+                                             Duration="0:0:0.001" />
+                            <DoubleAnimation Storyboard.TargetProperty="Height"
+                                             To="22"
+                                             Duration="0:0:0.001" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                    
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width"
+                                             To="25"
+                                             Duration="0:0:0.001" />
+                            <DoubleAnimation Storyboard.TargetProperty="Height"
+                                             To="25"
+                                             Duration="0:0:0.001" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="RoundButtonStyle" TargetType="Button">

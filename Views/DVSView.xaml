@@ -19,11 +19,11 @@
         
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="24" />
+                <ColumnDefinition Width="24" />
+                <ColumnDefinition Width="24" />
+                <ColumnDefinition Width="24" />
+                <ColumnDefinition Width="24" />
             </Grid.ColumnDefinitions>
 
             <Button x:Name="FilterButton"
