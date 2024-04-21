@@ -9,152 +9,128 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:DVS.Components"
-             mc:Ignorable="d" 
-             d:DesignHeight="450"
-             d:DesignWidth="800"
-             Foreground="{x:Null}">
+             mc:Ignorable="d">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="0" />
-            <ColumnDefinition Width="24" />
-            <ColumnDefinition Width="*" MinWidth="0" />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <!--Einfügen der Components-->
-        <components:EmployeesListViewComponent />
-        <components:ClothesListViewComponent Grid.Column="2" />
+        
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
 
-        <GridSplitter Grid.Column="1"
-                      HorizontalAlignment="Center"
-                      Width="24"
-                      Margin="0,218,0,0"
-                      Cursor="SizeWE">
-            <GridSplitter.Background>
-                <LinearGradientBrush EndPoint="0.5,1"
-                                     StartPoint="0.5,0">
-                    <GradientStop Color="#FFB7B7B7"
-                                  Offset="0" />
-                    <GradientStop Color="#FFBABABA"
-                                  Offset="1" />
-                </LinearGradientBrush>
-            </GridSplitter.Background>
-        </GridSplitter>
+            <Button x:Name="FilterButton"
+                    Grid.Column="0"
+                    Style="{StaticResource SquareButtonStyle}"
+                    Command="{Binding FilterListViewCommand}">
+                <StackPanel>
+                    <Image Source="/Images/Filter.png" Height="20" Width="20" />
+                </StackPanel>
+            </Button>
 
-        <Button x:Name="PlusButton"
-                Width="24"
-                Height="24"
-                Grid.Column="1"
-                Margin="0,163,0,0"
-                VerticalAlignment="Top"
-                BorderBrush="{x:Null}"
-                Cursor="Hand"
-                Command="{Binding EditPlusCommand}"
-                Click="OpenAddClothesView">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius"
-                            Value="24" />
-                </Style>
-            </Button.Resources>
-        </Button>
+            <Button x:Name="AddButton"
+                    Grid.Column="1"
+                    Style="{StaticResource SquareButtonStyle}"
+                    Command="{Binding BackwardCommand}">
+                <StackPanel>
+                    <Image Source="/Images/Rückgängig.png" Height="22" Width="22" />
+                </StackPanel>
+            </Button>
 
-        <Button x:Name="MinusButton"
-                Width="24"
-                Height="24"
-                Grid.Column="1"
-                Margin="0,190,0,0"
-                VerticalAlignment="Top"
-                BorderBrush="{x:Null}"
-                Cursor="Hand"
-                Command="{Binding EditMinusCommand}">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius"
-                            Value="24" />
-                </Style>
-            </Button.Resources>
-        </Button>
+            <Button x:Name="EditButton"
+                    Grid.Column="2"
+                    Style="{StaticResource SquareButtonStyle}"
+                    Command="{Binding EditModelsCommand}">
+                <StackPanel>
+                    <Image Source="/Images/Bearbeiten.png" Height="20" Width="20" />
+                </StackPanel>
+            </Button>
 
-        <Button x:Name="FilterButton"
-                Width="25"
-                Height="24"
-                VerticalAlignment="Top"
-                Grid.Column="1"
-                BorderThickness="0"
-                Background="{x:Null}"
-                Cursor="Hand"
-                Command="{Binding FilterListViewCommand}">
+            <Button x:Name="SafeButton"
+                    Grid.Column="3"
+                    Style="{StaticResource SquareButtonStyle}"
+                    Command="{Binding EditModelsCommand}">
+                <StackPanel>
+                    <Image Source="/Images/Speichern.png" Height="20" Width="20" />
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="PrintButton"
+                    Grid.Column="4"
+                    Style="{StaticResource SquareButtonStyle}"
+                    Command="{Binding EditModelsCommand}">
             <StackPanel>
-                <Image Source="/Filter.png"
-                       Height="21" />
+                <Image Source="/Images/Drucken.png" Height="20" Width="20" />
             </StackPanel>
-        </Button>
+            </Button>
+        </Grid>
 
-        <Button x:Name="EditButton"
-                Width="24"
-                Height="24"
-                VerticalAlignment="Top"
-                Margin="0,27,0,0"
-                Grid.Column="1"
-                BorderThickness="0"
-                Background="{x:Null}"
-                Cursor="Hand"
-                Command="{Binding EditModelsCommand}">
-            <StackPanel>
-                <Image Source="/Bearbeiten.png"
-                       Height="21"
-                       Width="20" />
-            </StackPanel>
-        </Button>
+        
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"
+                                  MinWidth="0" />
+                <ColumnDefinition Width="24" />
+                <ColumnDefinition Width="*"
+                                  MinWidth="0" />
+            </Grid.ColumnDefinitions>
 
-        <Button x:Name="BackwardButton"
-                Width="24"
-                Height="24"
-                VerticalAlignment="Top"
-                Margin="0,54,0,0"
-                Grid.Column="1"
-                BorderThickness="0"
-                Background="{x:Null}"
-                Cursor="Hand"
-                Command="{Binding BackwardCommand}">
-            <StackPanel>
-                <Image Source="/Rückgängig.png"
-                       Height="21" />
-            </StackPanel>
-        </Button>
+            <!--Einfügen der Components--> 
+            <components:EmployeesListViewComponent />
+            <components:ClothesListViewComponent Grid.Column="2" />
 
-        <Button x:Name="SafeButton"
-                Width="24"
-                Height="24"
-                VerticalAlignment="Top"
-                Margin="0,81,0,0"
-                Grid.Column="1"
-                BorderThickness="0"
-                Background="{x:Null}"
-                Cursor="Hand"
-                Command="{Binding SafeCommand}">
-            <StackPanel>
-                <Image Source="/Speichern.png"
-                       Height="21"
-                       Width="20" />
-            </StackPanel>
-        </Button>
+            <Button x:Name="PlusButton"
+                    Grid.Column="1"
+                    Command="{Binding EditPlusCommand}"
+                    Style="{StaticResource RoundButtonStyle}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="24" />
+                    </Style>
+                </Button.Resources>
+                <StackPanel>
+                    <Image Source="/Images/Plus.png" Height="24" Width="24" />
+                </StackPanel>
+            </Button>
 
-        <Button x:Name="PrintButton"
-                Width="24"
-                Height="24"
-                VerticalAlignment="Top"
-                Margin="0,108,0,0"
-                Grid.Column="1"
-                BorderThickness="0"
-                Background="{x:Null}"
-                Cursor="Hand"
-                Command="{Binding PrintCommand}">
-            <StackPanel>
-                <Image Source="/Drucken.png"
-                       Height="21"
-                       Width="20" />
-            </StackPanel>
-        </Button>
+            <Button x:Name="MinusButton"
+                    Grid.Column="1"
+                    Margin="0,25,0,0"
+                    Command="{Binding EditMinusCommand}"
+                    Style="{StaticResource RoundButtonStyle}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="24" />
+                    </Style>
+                </Button.Resources>
+                <StackPanel>
+                    <Image Source="/Images/Minus.png" Height="20" Width="20" />
+                </StackPanel>
+            </Button>
+            
+            <GridSplitter Grid.Column="1"
+                          HorizontalAlignment="Center"
+                          Width="24"
+                          Margin="0,50,0,0"
+                          Cursor="SizeWE">
+                <GridSplitter.Background>
+                    <LinearGradientBrush EndPoint="0.5,1"
+                                         StartPoint="0.5,0">
+                        <GradientStop Color="#FFCCCBCB"
+                                      Offset="0" />
+                        <GradientStop Color="#FFBABABA"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </GridSplitter.Background>
+            </GridSplitter>
+        </Grid>
+        
     </Grid>
 </UserControl>

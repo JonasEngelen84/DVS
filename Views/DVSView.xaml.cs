@@ -26,12 +26,6 @@ namespace DVS.Views
             InitializeComponent();
 
             DataContext = new DVSViewModel();
-
         }
-
-        //readonly AddClothesView addClothesView = new();
-
-        //public void OpenAddClothesView(object sender, RoutedEventArgs e)
-        //    => addClothesView._AddClothesView.Visibility = Visibility.Visible;
     }
 }
