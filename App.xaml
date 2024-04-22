@@ -1,5 +1,5 @@
 ﻿ <!--Durch ResourceDictionary.MergedDictionaries
-    können mehrere selbst erstellte Dictionaries gelade werden.-->
+    können mehrere selbst erstellte Dictionaries geladen werden.-->
 
 <Application x:Class="DVS.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -7,7 +7,9 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ResourcesDictionaries/ButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="ResourcesDictionaries/ButtonResourcesDictionaries/CircleButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="ResourcesDictionaries/ButtonResourcesDictionaries/SquareButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="ResourcesDictionaries/ListViewResourcesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

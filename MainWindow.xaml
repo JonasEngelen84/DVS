@@ -17,14 +17,14 @@
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1"
                              StartPoint="0.5,0">
-            <GradientStop Color="#d1cfcb"
+            <GradientStop Color="#FFCCCBCB"
                           Offset="0" />
-            <GradientStop Color="#FFBABABA"
+            <GradientStop Color="#FFDEDEDE"
                           Offset="0.809" />
         </LinearGradientBrush>
     </Window.Background>
 
-    <Grid Margin="10,0,10,10">
+    <Grid Margin="10,1,10,10">
         <views:DVSView />
     </Grid>
 </Window>

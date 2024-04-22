@@ -23,7 +23,7 @@
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
-                    
+
                 <Trigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
@@ -38,14 +38,5 @@
                 </Trigger.ExitActions>
             </Trigger>
         </Style.Triggers>
-    </Style>
-
-    <Style x:Key="RoundButtonStyle" TargetType="Button">
-        <Setter Property="BorderBrush" Value="DarkGray" />
-        <Setter Property="Width" Value="24" />
-        <Setter Property="Height" Value="24" />
-        <Setter Property="FontSize" Value="25" />
-        <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Cursor" Value="Hand" /> 
     </Style>
 </ResourceDictionary>
