@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="ResourcesDictionaries/ButtonResourcesDictionaries/SquareButtonResourcesDictionary.xaml" />
                 <ResourceDictionary Source="ResourcesDictionaries/ListViewResourcesDictionary.xaml" />
                 <ResourceDictionary Source="ResourcesDictionaries/TextStyleResourcesDictionary.xaml" />
+                <ResourceDictionary Source="ResourcesDictionaries/ButtonResourcesDictionaries/ModalButtonDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

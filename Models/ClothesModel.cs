@@ -8,10 +8,11 @@ namespace DVS.Models
 {
     
 
-    public class ClothesModel(Categorie categorie, string name, string size, Season season, int quantity)
+    public class ClothesModel(int id, string name, Categorie categorie, string size, Season season, int quantity)
     {
-        public Categorie Categorie { get; set; } = categorie;
+        public int Id { get; set; } = id;
         public string Name { get; set; } = name;
+        public Categorie Categorie { get; set; } = categorie;
         public Season Season { get; set; } = season;
         public string Size { get; } = size;
         public int Quantity { get; set; } = quantity;
