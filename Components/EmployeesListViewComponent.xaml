@@ -13,7 +13,7 @@
                   Style="{StaticResource ListviewStyle}"
                   ItemsSource="{Binding EmployeeClothesList}">
             <ListView.View>
-                <GridView>
+                <GridView >
                     <GridViewColumn Header="ID"
                                     Width="auto"
                                     DisplayMemberBinding="{Binding EmployeeId}" />

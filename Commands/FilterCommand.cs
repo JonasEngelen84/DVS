@@ -2,18 +2,18 @@
 
 namespace DVS.Commands
 {
-    internal class FilterListViewCommand : CommandBase
+    internal class FilterCommand : CommandBase
     {
         private DVSViewModel dVSViewModel;
 
-        public FilterListViewCommand(DVSViewModel dVSViewModel)
+        public FilterCommand(DVSViewModel dVSViewModel)
         {
             this.dVSViewModel = dVSViewModel;
         }
 
         public override void Execute(object parameter)
         {
-            //TODO: das Command testen
+            
         }
     }
 }

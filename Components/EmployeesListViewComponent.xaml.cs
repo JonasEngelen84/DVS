@@ -3,9 +3,6 @@ using System.Windows.Controls;
 
 namespace DVS.Components
 {
-    /// <summary>
-    /// Interaktionslogik für EmployeesListViewComponent.xaml
-    /// </summary>
     public partial class EmployeesListViewComponent : UserControl
     {
         public EmployeesListViewComponent()

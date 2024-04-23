@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DVS.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,15 @@ using System.Windows.Shapes;
 namespace DVS.Components
 {
     /// <summary>
-    /// Interaktionslogik für CategorieCheckboxChoiceComponent.xaml
+    /// Interaktionslogik für ClothesSeasonChoiceComponent.xaml
     /// </summary>
-    public partial class CategorieCheckboxChoiceComponent : UserControl
+    public partial class ClothesSeasonChoiceComponent : UserControl
     {
-        public CategorieCheckboxChoiceComponent()
+        public ClothesSeasonChoiceComponent()
         {
             InitializeComponent();
+
+            DataContext = new ClothesSeasonChoiceViewModel();
         }
     }
 }

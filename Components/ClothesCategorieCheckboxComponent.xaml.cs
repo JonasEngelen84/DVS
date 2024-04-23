@@ -14,15 +14,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DVS.Views
+namespace DVS.Components
 {
-    public partial class AddClothesView : UserControl
+    public partial class ClothesCategorieCheckboxComponent : UserControl
     {
-        public AddClothesView()
+        public ClothesCategorieCheckboxComponent()
         {
             InitializeComponent();
 
-            DataContext = new AddClothesViewModel();
+            DataContext = new ClothesCategorieCheckboxViewModel();
         }
     }
 }

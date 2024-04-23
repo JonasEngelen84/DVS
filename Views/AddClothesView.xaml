@@ -5,25 +5,109 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:DVS.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="450"
-             d:DesignWidth="300"
+             d:DesignHeight="350"
+             d:DesignWidth="203"
              Background="#FFE2F2FF"
-             Visibility="Hidden"
              x:Name="_AddClothesView">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
+            <RowDefinition Height="30" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0"
-                   Text="Kleidung Hinzufügen "
+                   Text=" Kleidung Hinzufügen "
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Top"
                    FontSize="20"
-                   FontWeight="Regular"
                    Foreground="#FF1448EA" />
 
-        <components:AddClothesComponent Grid.Row="1"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <components:ClothesCategorieCheckboxComponent Grid.Column="0" />
+                <components:ClothesSeasonChoiceComponent Grid.Column="1" />
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Name:"
+                           Margin="8 5 0 0"
+                           Style="{StaticResource ModalTextStyle}" />
+
+                <TextBox Grid.Column="1"
+                         Height="15"
+                         Width="149"
+                         VerticalAlignment="Bottom"/>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Größe:"
+                           Margin="8 5 0 0"
+                           Style="{StaticResource ModalTextStyle}" />
+
+                <TextBox Grid.Column="1"
+                         Height="15"
+                         Width="149"
+                         VerticalAlignment="Bottom" />
+            </Grid>
+
+            <Grid Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Menge:"
+                           Margin="8 5 0 0"
+                           Style="{StaticResource ModalTextStyle}" />
+
+                <TextBox Grid.Column="1"
+                         Height="15"
+                         Width="149"
+                         VerticalAlignment="Bottom" />
+            </Grid>
+
+            <Grid Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Kommentar:"
+                           Margin="8 5 0 0"
+                           Style="{StaticResource ModalTextStyle}" />
+
+                <TextBox Grid.Column="1"
+                         Height="15"
+                         Width="115"
+                         VerticalAlignment="Bottom" />
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

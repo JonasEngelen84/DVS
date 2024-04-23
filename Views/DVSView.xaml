@@ -19,17 +19,17 @@
         
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="24" />
-                <ColumnDefinition Width="24" />
-                <ColumnDefinition Width="24" />
-                <ColumnDefinition Width="24" />
-                <ColumnDefinition Width="24" />
+                <ColumnDefinition Width="25" />
+                <ColumnDefinition Width="25" />
+                <ColumnDefinition Width="25" />
+                <ColumnDefinition Width="25" />
+                <ColumnDefinition Width="25" />
             </Grid.ColumnDefinitions>
 
             <Button x:Name="FilterButton"
                     Grid.Column="0"
                     Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding FilterListViewCommand}"
+                    Command="{Binding FilterCommand}"
                     Cursor="Hand">
                 <Button.ToolTip>
                     <Label>Filtern</Label>
@@ -42,7 +42,7 @@
             <Button x:Name="AddButton"
                     Grid.Column="1"
                     Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding BackwardCommand}">
+                    Command="{Binding AddCommand}">
                 <Button.ToolTip>
                     <Label>Erstellen</Label>
                 </Button.ToolTip>
@@ -54,7 +54,7 @@
             <Button x:Name="EditButton"
                     Grid.Column="2"
                     Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding EditModelsCommand}">
+                    Command="{Binding EditCommand}">
                 <Button.ToolTip>
                     <Label>Bearbeiten</Label>
                 </Button.ToolTip>
@@ -66,7 +66,7 @@
             <Button x:Name="SafeButton"
                     Grid.Column="3"
                     Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding EditModelsCommand}">
+                    Command="{Binding SafeCommand}">
                 <Button.ToolTip>
                     <Label>Speichern</Label>
                 </Button.ToolTip>
@@ -78,7 +78,7 @@
             <Button x:Name="PrintButton"
                     Grid.Column="4"
                     Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding EditModelsCommand}">
+                    Command="{Binding PrintCommand}">
                 <Button.ToolTip>
                     <Label>Drucken</Label>
                 </Button.ToolTip>
@@ -91,21 +91,20 @@
         
         <Grid Grid.Row="1" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"
-                                  MinWidth="0" />
-                <ColumnDefinition Width="24" />
-                <ColumnDefinition Width="*"
-                                  MinWidth="0" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="18" />
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <!--Einfügen der Components--> 
-            <components:EmployeesListViewComponent />
+            <components:EmployeesListViewComponent Grid.Column="0" />
             <components:ClothesListViewComponent Grid.Column="2" />
 
             <Button x:Name="PlusButton"
                     Grid.Column="1"
                     Content="+"
-                    Command="{Binding EditPlusCommand}"
+                    Margin="0,-708,0,0"
+                    Command="{Binding PlusCommand}"
                     Style="{StaticResource CircleButtonStyle}">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -120,9 +119,10 @@
             <Button x:Name="MinusButton"
                     Grid.Column="1"
                     Content="-"
-                    Margin="0,25,0,0"
-                    Command="{Binding EditMinusCommand}"
-                    Style="{StaticResource CircleButtonStyle}">
+                    Margin="0,-672,0,0"
+                    Command="{Binding MinusCommand}"
+                    Style="{StaticResource CircleButtonStyle}"
+                    Cursor="Hand">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="24" />
@@ -135,8 +135,8 @@
             
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Center"
-                          Width="24"
-                          Margin="0,50,0,0"
+                          Width="18"
+                          Margin="0,36,0,0"
                           Cursor="SizeWE">
                 <GridSplitter.Background>
                     <LinearGradientBrush EndPoint="0.5,1"
@@ -149,6 +149,5 @@
                 </GridSplitter.Background>
             </GridSplitter>
         </Grid>
-        
     </Grid>
 </UserControl>

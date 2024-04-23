@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DVS.Components.CategorieCheckboxChoiceComponent"
+﻿<UserControl x:Class="DVS.Components.ClothesCategorieCheckboxComponent"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -35,14 +35,11 @@
 
             <TextBlock Grid.Column="0"
                        Text="Hose"
-                       Margin="2.5,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Bottom" />
+                       Style="{StaticResource ModalTextStyle}"/>
 
             <CheckBox Grid.Column="1"
-                      Margin="5,0"
-                      Height="10"
-                      Width="10" />
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding PantsChecked}" />
         </Grid>
 
         <Grid Grid.Row="2">
@@ -53,14 +50,11 @@
 
             <TextBlock Grid.Column="0"
                        Text="Pullover"
-                       Margin="2.5,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Bottom" />
+                       Style="{StaticResource ModalTextStyle}"/>
 
             <CheckBox Grid.Column="1"
-                      Margin="5,0"
-                      Height="10"
-                      Width="10" />
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding SweaterChecked}" />
         </Grid>
 
         <Grid Grid.Row="3">
@@ -71,14 +65,11 @@
 
             <TextBlock Grid.Column="0"
                        Text="Shirt"
-                       Margin="2.5,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Bottom" />
+                       Style="{StaticResource ModalTextStyle}"/>
 
             <CheckBox Grid.Column="1"
-                      Margin="5,0"
-                      Height="10"
-                      Width="10" />
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding ShirtChecked}" />
         </Grid>
 
         <Grid Grid.Row="4">
@@ -89,14 +80,11 @@
 
             <TextBlock Grid.Column="0"
                        Text="Jacke"
-                       Margin="2.5,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Bottom" />
+                       Style="{StaticResource ModalTextStyle}"/>
 
             <CheckBox Grid.Column="1"
-                      Margin="5,0"
-                      Height="10"
-                      Width="10" />
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding JacketChecked}" />
         </Grid>
 
         <Grid Grid.Row="5">
@@ -107,14 +95,11 @@
 
             <TextBlock Grid.Column="0"
                        Text="Kopfbedeckung"
-                       Margin="2.5,0"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Bottom" />
+                       Style="{StaticResource ModalTextStyle}"/>
 
             <CheckBox Grid.Column="1"
-                      Margin="5,0"
-                      Height="10"
-                      Width="10" />
+                      VerticalAlignment="Center"
+                      IsChecked="{Binding HeadgearChecked}" />
         </Grid>
     </Grid>
 </UserControl>
