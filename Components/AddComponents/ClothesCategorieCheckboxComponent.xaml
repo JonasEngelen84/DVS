@@ -4,9 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="120"
+             d:DesignHeight="109"
              d:DesignWidth="100"
-             Margin="15 20 3 10"
              BorderThickness="1"
              BorderBrush="Black"
              Background="White">
@@ -14,11 +13,11 @@
     <Grid Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
-            <RowDefinition Height="18" />
-            <RowDefinition Height="18" />
-            <RowDefinition Height="18" />
-            <RowDefinition Height="18" />
-            <RowDefinition Height="18" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="16" />
+            <RowDefinition Height="16" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0"

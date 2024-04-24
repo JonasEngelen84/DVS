@@ -34,10 +34,5 @@ namespace DVS.ViewModels
             PlusCommand = new PlusCommand(this);
             MinusCommand = new MinusCommand(this);
         }
-
-        //readonly AddClothesView addClothesView = new();
-
-        //public void OpenAddClothesView(object sender, RoutedEventArgs e)
-        //    => addClothesView._AddClothesView.Visibility = Visibility.Visible;
     }
 }

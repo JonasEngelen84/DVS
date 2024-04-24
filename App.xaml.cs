@@ -3,9 +3,6 @@ using System.Windows;
 
 namespace DVS
 {
-    public enum Categorie { Hose, Pullover, Shirt, Jacke, Kopfbedeckung }
-    public enum Season { Sommer, Winter, Saisonlos }
-
     public partial class App : Application
     {
         // Festlegen des DataContext von MainWindow

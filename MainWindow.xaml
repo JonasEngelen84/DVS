@@ -15,12 +15,9 @@
         Icon="/Images/DVS Icon.png">
 
     <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1"
-                             StartPoint="0.5,0">
-            <GradientStop Color="#FFCCCBCB"
-                          Offset="0" />
-            <GradientStop Color="#FFDEDEDE"
-                          Offset="0.809" />
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFCCCBCB" Offset="0" />
+            <GradientStop Color="#FFDEDEDE" Offset="0.809" />
         </LinearGradientBrush>
     </Window.Background>
 
