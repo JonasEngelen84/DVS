@@ -16,13 +16,16 @@ using System.Windows.Shapes;
 
 namespace DVS.Views
 {
-    public partial class AddClothesView : UserControl
+    /// <summary>
+    /// Interaktionslogik für AddView.xaml
+    /// </summary>
+    public partial class AddView : UserControl
     {
-        public AddClothesView()
+        public AddView()
         {
-            InitializeComponent();
+            InitializeComponent(); AddViewModel
 
-            DataContext = new AddClothesViewModel();
+            DataContext = new AddViewModel();
         }
     }
 }

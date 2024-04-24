@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="DVS.Views.AddView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:DVS.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="350"
+             d:DesignWidth="400"
+             Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Hinzufügen "
+                   FontSize="19"
+                   Margin="0 5 0 0"
+                   HorizontalAlignment="Center" />
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <components:AddClothesComponent Grid.Column="0"/>
+            <components:AddClothesComponent Grid.Column="1"/>
+        </Grid>
+    </Grid>
+</UserControl>
