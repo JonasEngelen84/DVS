@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DVS.ViewModels
+namespace DVS.ViewModels.AddViewModels
 {
     class ClothesCategorieCheckboxViewModel : ViewModelBase
     {

@@ -1,13 +1,13 @@
 ﻿<UserControl x:Class="DVS.Views.AddView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:DVS.Components"
-             mc:Ignorable="d" 
-             d:DesignHeight="350"
-             d:DesignWidth="400"
-             Background="White">
+             mc:Ignorable="d"
+             d:DesignWidth="386"
+             Background="White"
+             Height="315">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -16,32 +16,35 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0"
-                   Text="Mitarbeiter/Kleidung Erstellen"
+                   Text="Mitarbeiter-/Kleidung Erstellen"
                    FontSize="20"
-                   Margin="12 5 0 0"
+                   Margin="12 5 0 15"
                    HorizontalAlignment="Left" />
 
-        <Grid Grid.Row="1">
+        <components:AddClothesComponent Grid.Row="1"
+                                        Margin="0 0 0 -20" />
+
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <components:AddEmployeeComponent Grid.Column="0" />
+            <components:AddEmployeeComponent Grid.Column="0" Margin="0 0 0 0" />
 
             <Grid Grid.Column="1">
                 <Button x:Name="EnterAddClothesCommand"
                         Content="Erstellen"
+                        Margin=" 63 35 0 35"
                         Style="{StaticResource ModalButtonStyle}"
                         Command="{Binding EnterAddClothesCommand}" />
 
                 <Button x:Name="CancelAddClothesCommand"
-                        Content="Abbrechen"
+                        Content="Beenden"
+                        Margin=" 63 64 0 0"
                         Style="{StaticResource ModalButtonStyle}"
                         Command="{Binding CancelAddClothesCommand}" />
             </Grid>
         </Grid>
-
-        <components:AddClothesComponent Grid.Row="2" />
     </Grid>
 </UserControl>

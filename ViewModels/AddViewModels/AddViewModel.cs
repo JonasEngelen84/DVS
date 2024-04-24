@@ -1,13 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DVS.Commands.AddViewCommands;
+using System.Windows.Input;
 
-namespace DVS.ViewModels
+namespace DVS.ViewModels.AddViewModels
 {
-    class AddViewModel : ViewModelBase
+    internal class AddViewModel : ViewModelBase
     {
+        public ICommand EnterAddClothesCommand { get; }
+        public ICommand CancelAddClothesCommand { get; }
 
+        public AddViewModel()
+        {
+            EnterAddClothesCommand = new EnterAddClothesCommand(this);
+            CancelAddClothesCommand = new CancelAddClothesCommand(this);
+        }
     }
 }

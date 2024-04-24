@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using DVS.Commands;
+﻿using DVS.Commands;
 using System.Windows.Input;
-using System.Windows;
-using DVS.Views;
-using DVS.Components;
+using DVS.Commands.DVSViewCommands;
 
 namespace DVS.ViewModels
 {

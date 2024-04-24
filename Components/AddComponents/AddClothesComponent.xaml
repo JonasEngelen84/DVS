@@ -17,8 +17,8 @@
         <TextBlock Grid.Row="0"
                    Text="Kleidung"
                    FontSize="18"
-                   Margin="0 5 0 0"
-                   HorizontalAlignment="Center" />
+                   Margin="12 5 0 0"
+                   HorizontalAlignment="Left" />
 
         <Grid Grid.Row="1" Grid.IsSharedSizeScope="True">
             <Grid.ColumnDefinitions>
@@ -37,7 +37,7 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 
-                <Grid Grid.Row="0" Margin="0 12 0 5">
+                <Grid Grid.Row="0" Margin="0 5 0 5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
                         <ColumnDefinition Width="*" />
@@ -129,10 +129,10 @@
             </Grid>
 
             <Grid Grid.Column="1">
-                <components:ClothesCategorieCheckboxComponent Grid.Column="0"  Margin="15 15 5 30" />
+                <components:ClothesCategorieCheckboxComponent Grid.Column="0"  Margin="15 8 5 30" />
             </Grid>
             <Grid Grid.Column="2">
-                <components:ClothesSeasonChoiceComponent Grid.Column="0" Margin="0 15 0 30" />
+                <components:ClothesSeasonChoiceComponent Grid.Column="0" Margin="0 8 0 30" />
             </Grid>
         </Grid>
     </Grid>

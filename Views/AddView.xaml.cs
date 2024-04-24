@@ -1,4 +1,6 @@
-﻿using DVS.ViewModels;
+﻿using DVS.Components;
+using DVS.ViewModels;
+using DVS.ViewModels.AddViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +18,13 @@ using System.Windows.Shapes;
 
 namespace DVS.Views
 {
-    /// <summary>
-    /// Interaktionslogik für AddView.xaml
-    /// </summary>
     public partial class AddView : UserControl
     {
         public AddView()
         {
-            InitializeComponent(); AddViewModel
+            InitializeComponent();
 
-            DataContext = new AddViewModel();
+            DataContext = new AddView();
         }
     }
 }

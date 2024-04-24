@@ -1,4 +1,5 @@
 ﻿using DVS.ViewModels;
+using DVS.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,13 @@ using System.Windows.Shapes;
 
 namespace DVS.Components
 {
-    /// <summary>
-    /// Interaktionslogik für ClothesSeasonChoiceComponent.xaml
-    /// </summary>
     public partial class ClothesSeasonChoiceComponent : UserControl
     {
         public ClothesSeasonChoiceComponent()
         {
             InitializeComponent();
 
-            DataContext = new ClothesSeasonChoiceViewModel();
+            DataContext = new ClothesSeasonChoiceComponent();
         }
     }
 }

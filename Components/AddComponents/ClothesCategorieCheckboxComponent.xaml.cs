@@ -22,7 +22,7 @@ namespace DVS.Components
         {
             InitializeComponent();
 
-            DataContext = new ClothesCategorieCheckboxViewModel();
+            DataContext = new ClothesCategorieCheckboxComponent();
         }
     }
 }

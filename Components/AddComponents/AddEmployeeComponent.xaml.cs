@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DVS.ViewModels;
+using DVS.ViewModels.AddViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,18 +15,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DVS.Components.AddComponents
+namespace DVS.Components
 {
-    /// <summary>
-    /// Interaktionslogik für AddEmployeeComponent.xaml
-    /// </summary>
     public partial class AddEmployeeComponent : UserControl
     {
         public AddEmployeeComponent()
         {
             InitializeComponent();
 
-            DataContext = new AddEmployeeComponent();
+            DataContext = new AddEmployeeViewModel();
         }
     }
 }
