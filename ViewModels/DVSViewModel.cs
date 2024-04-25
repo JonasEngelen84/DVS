@@ -6,7 +6,7 @@ namespace DVS.ViewModels
 {
     internal class DVSViewModel : ViewModelBase
     {
-        public EmployeesListViewViewModel EmployeesDetailsViewModel { get; }
+        public EmployeesClothesListViewViewModel EmployeesDetailsViewModel { get; }
         public ClothesListViewViewModel ClothesDetailsViewModel { get; }
 
         public ICommand FilterCommand { get; }
@@ -19,7 +19,7 @@ namespace DVS.ViewModels
 
         public DVSViewModel()
         {
-            EmployeesDetailsViewModel = new EmployeesListViewViewModel();
+            EmployeesDetailsViewModel = new EmployeesClothesListViewViewModel();
             ClothesDetailsViewModel = new ClothesListViewViewModel();
             
             FilterCommand = new FilterCommand(this);

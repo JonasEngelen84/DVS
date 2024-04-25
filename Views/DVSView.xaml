@@ -96,8 +96,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <!--Einfügen der Components--> 
-            <components:EmployeesListViewComponent Grid.Column="0" />
+            <!--Einfügen der Components-->
+            <components:EmployeesClothesListViewComponent Grid.Column="0" />
             <components:ClothesListViewComponent Grid.Column="2" />
 
             <Button x:Name="PlusButton"

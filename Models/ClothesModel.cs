@@ -15,7 +15,7 @@ namespace DVS.Models
         public string Name { get; set; } = name;
         public Categorie Categorie { get; set; } = categorie;
         public Season Season { get; set; } = season;
-        public string Size { get; } = size;
+        public string Size { get; set; } = size;
         public int Quantity { get; set; } = quantity;
         public string Comment { get; set; } = "";
     }
