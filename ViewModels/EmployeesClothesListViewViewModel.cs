@@ -6,46 +6,97 @@ namespace DVS.ViewModels
 {
     public class EmployeesClothesListViewViewModel : ViewModelBase
     {
-        // Bereitstellung einer ObservableCollection der Mitarbeiter-Kleidung "_allEmployeeClothesCollection".
+        // Bereitstellung einer Mitarbeiterliste
+        // (plus eines KleiderDictionary pro Mitarbeiter).
+        private readonly List<EmployeeModel> EmployeeList;
+
+        // Bereitstellung einer ObservableCollection der Mitarbeiter-Kleidung
+        // (Kleidungsliste der Mitarbeiter aufgelöst für ListView).
         private readonly ObservableCollection<EmployeeModel> _employeeClothesList;
 
-        // Zur encapsulation (private) von "_allEmployeeClothesCollection" wird ein IEnumerable als pointer verwendet.
+        // Zur encapsulation (private) von "_employeeClothesList"
+        // wird ein IEnumerable als pointer verwendet.
         public IEnumerable<EmployeeModel> EmployeeClothesList => _employeeClothesList;
 
         public EmployeesClothesListViewViewModel()
         {
+            EmployeeList = [];
             _employeeClothesList = [];
 
-            HardCodedObjects();
+            FillEL();
+            FillOC();
         }
 
-        private void HardCodedObjects()
+        private void FillOC()
         {
-            _employeeClothesList.Add(new EmployeeModel("Jonas", "Engelen", 001, "Sommershirt", "XL", 4));
-            _employeeClothesList.Add(new EmployeeModel("Jonas", "Engelen", 001, "Wintershirt", "M", 2));
-            _employeeClothesList.Add(new EmployeeModel("Jonas", "Engelen", 001, "Sommerhose", "54", 3));
-            _employeeClothesList.Add(new EmployeeModel("Jonas", "Engelen", 001, "Winterhose", "54", 2));
-            _employeeClothesList.Add(new EmployeeModel("Jonas", "Engelen", 001, "Regenjacke", "L", 1));
-            _employeeClothesList.Add(new EmployeeModel("Jonas", "Engelen", 001, "Fleecejacke", "S", 1));
-            _employeeClothesList.Add(new EmployeeModel("Jonas", "Engelen", 001, "Winterjacke", "XL", 1));
-            _employeeClothesList.Add(new EmployeeModel("Jonas", "Engelen", 001, "Sommerkappe", "", 1));
-            _employeeClothesList.Add(new EmployeeModel("Jonas", "Engelen", 001, "Winterkappe", "", 1));
+            foreach (var employee in EmployeeList)
+            {
+                employee.EmployeeClothesDictionary[0].
+                _employeeClothesList.Add(new EmployeeClothesListViewItemViewModel(
+                    employee.EmployeeId, employee.EmployeeFirstname, employee.EmployeeLastname,
+                    employee.EmployeeClothesDictionary[0].Key, employee.EmployeeClothesDictionary[0],
+                    )
+            }//TODO: hier
+        }
 
-            _employeeClothesList.Add(new EmployeeModel("Markus", "Oettken", 123, "Sommershirt", "XL", 2));
-            _employeeClothesList.Add(new EmployeeModel("Markus", "Oettken", 123, "Sommerhose", "56", 2));
-            _employeeClothesList.Add(new EmployeeModel("Markus", "Oettken", 123, "Winterhose", "56", 2));
-            _employeeClothesList.Add(new EmployeeModel("Markus", "Oettken", 123, "Regenjacke", "L", 1));
-            _employeeClothesList.Add(new EmployeeModel("Markus", "Oettken", 123, "Winterjacke", "XL", 1));
-
-            _employeeClothesList.Add(new EmployeeModel("Nadine", "Molik", 456, "Sommershirt", "XL", 1));
-            _employeeClothesList.Add(new EmployeeModel("Nadine", "Molik", 456, "Wintershirt", "M", 1));
-            _employeeClothesList.Add(new EmployeeModel("Nadine", "Molik", 456, "Sommerhose", "48", 1));
-            _employeeClothesList.Add(new EmployeeModel("Nadine", "Molik", 456, "Winterhose", "48", 1));
-            _employeeClothesList.Add(new EmployeeModel("Nadine", "Molik", 456, "Regenjacke", "L", 1));
-            _employeeClothesList.Add(new EmployeeModel("Nadine", "Molik", 456, "Fleecejacke", "S", 1));
-            _employeeClothesList.Add(new EmployeeModel("Nadine", "Molik", 456, "Winterjacke", "XL", 1));
-            _employeeClothesList.Add(new EmployeeModel("Nadine", "Molik", 456, "Sommerkappe", "", 1));
-            _employeeClothesList.Add(new EmployeeModel("Nadine", "Molik", 456, "Winterkappe", "", 1));
+        private void FillEL()
+        {
+            EmployeeList.Add(new EmployeeModel(111, "Jonas", "Engelen"));
+            EmployeeList[0].EmployeeClothesDictionary.Add(111, 4);
+            EmployeeList[0].EmployeeClothesDictionary.Add(444, 3);
+            EmployeeList[0].EmployeeClothesDictionary.Add(123, 2);
+            EmployeeList[0].EmployeeClothesDictionary.Add(147, 1);
+            EmployeeList[0].EmployeeClothesDictionary.Add(654, 1);
+            EmployeeList[0].EmployeeClothesDictionary.Add(852, 1);
+            EmployeeList.Add(new EmployeeModel(123, "Markus", "Oettken"));
+            EmployeeList[1].EmployeeClothesDictionary.Add(111, 4);
+            EmployeeList[1].EmployeeClothesDictionary.Add(444, 3);
+            EmployeeList[1].EmployeeClothesDictionary.Add(123, 2);
+            EmployeeList[1].EmployeeClothesDictionary.Add(147, 1);
+            EmployeeList[1].EmployeeClothesDictionary.Add(654, 1);
+            EmployeeList[1].EmployeeClothesDictionary.Add(852, 1);
+            EmployeeList.Add(new EmployeeModel(456, "Nadine", "Molik"));
+            EmployeeList[2].EmployeeClothesDictionary.Add(111, 4);
+            EmployeeList[2].EmployeeClothesDictionary.Add(444, 3);
+            EmployeeList[2].EmployeeClothesDictionary.Add(123, 2);
+            EmployeeList[2].EmployeeClothesDictionary.Add(147, 1);
+            EmployeeList[2].EmployeeClothesDictionary.Add(654, 1);
+            EmployeeList[2].EmployeeClothesDictionary.Add(852, 1);
+            EmployeeList.Add(new EmployeeModel(134, "Kemal", "Yüksel"));
+            EmployeeList[3].EmployeeClothesDictionary.Add(111, 4);
+            EmployeeList[3].EmployeeClothesDictionary.Add(444, 3);
+            EmployeeList[3].EmployeeClothesDictionary.Add(123, 2);
+            EmployeeList[3].EmployeeClothesDictionary.Add(147, 1);
+            EmployeeList[3].EmployeeClothesDictionary.Add(654, 1);
+            EmployeeList[3].EmployeeClothesDictionary.Add(852, 1);
+            EmployeeList.Add(new EmployeeModel(133, "Irfan", "Yüksel"));
+            EmployeeList[4].EmployeeClothesDictionary.Add(111, 4);
+            EmployeeList[4].EmployeeClothesDictionary.Add(444, 3);
+            EmployeeList[4].EmployeeClothesDictionary.Add(123, 2);
+            EmployeeList[4].EmployeeClothesDictionary.Add(147, 1);
+            EmployeeList[4].EmployeeClothesDictionary.Add(654, 1);
+            EmployeeList[4].EmployeeClothesDictionary.Add(852, 1);
+            EmployeeList.Add(new EmployeeModel(245, "Walther", "Löwenkamp"));
+            EmployeeList[5].EmployeeClothesDictionary.Add(111, 4);
+            EmployeeList[5].EmployeeClothesDictionary.Add(444, 3);
+            EmployeeList[5].EmployeeClothesDictionary.Add(123, 2);
+            EmployeeList[5].EmployeeClothesDictionary.Add(147, 1);
+            EmployeeList[5].EmployeeClothesDictionary.Add(654, 1);
+            EmployeeList[5].EmployeeClothesDictionary.Add(852, 1);
+            EmployeeList.Add(new EmployeeModel(142, "Daniel", "Nickol"));
+            EmployeeList[6].EmployeeClothesDictionary.Add(111, 4);
+            EmployeeList[6].EmployeeClothesDictionary.Add(444, 3);
+            EmployeeList[6].EmployeeClothesDictionary.Add(123, 2);
+            EmployeeList[6].EmployeeClothesDictionary.Add(147, 1);
+            EmployeeList[6].EmployeeClothesDictionary.Add(654, 1);
+            EmployeeList[6].EmployeeClothesDictionary.Add(852, 1);
+            EmployeeList.Add(new EmployeeModel(231, "Stefan", "Killen"));
+            EmployeeList[7].EmployeeClothesDictionary.Add(111, 4);
+            EmployeeList[7].EmployeeClothesDictionary.Add(444, 3);
+            EmployeeList[7].EmployeeClothesDictionary.Add(123, 2);
+            EmployeeList[7].EmployeeClothesDictionary.Add(147, 1);
+            EmployeeList[7].EmployeeClothesDictionary.Add(654, 1);
+            EmployeeList[7].EmployeeClothesDictionary.Add(852, 1);
         }
     }
 }

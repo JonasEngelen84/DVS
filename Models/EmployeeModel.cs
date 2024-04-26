@@ -7,17 +7,12 @@ using System.Threading.Tasks;
 
 namespace DVS.Models
 {
-    public class EmployeeModel(string employeeFirstname, string employeeLastname, int employeeId, string clothesName, string clothesSize,int quantity)
+    public class EmployeeModel(int employeeId, string employeeFirstname, string employeeLastname)
     {
+        public int EmployeeId { get; set; } = employeeId;
         public string EmployeeFirstname { get; set; } = employeeFirstname;
         public string EmployeeLastname { get; set; } = employeeLastname;
-        public int EmployeeId { get; set; } = employeeId;
-        public string ClothesName { get; set; } = clothesName;
-        public string ClothesSize { get; set; } = clothesSize;
-        public int Quantity { get; set; } = quantity;
-        public string Comment { get; set; } = "";
-
-        //TODO: Auf ListingItem umbauen (ClothesList implementieren)
+        public Dictionary<int, int> EmployeeClothesDictionary { get; set; } = [];
     }
 
 }

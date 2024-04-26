@@ -12,7 +12,7 @@
                   ItemsSource="{Binding EmployeeClothesList}">
             <ListView.View>
                 <GridView >
-                    <GridViewColumn Header="ID"
+                    <GridViewColumn Header="Mitarbeiter ID"
                                     Width="auto"
                                     DisplayMemberBinding="{Binding EmployeeId}" />
                     <GridViewColumn Header="Nachname"
@@ -21,6 +21,9 @@
                     <GridViewColumn Header="Vorname"
                                     Width="auto"
                                     DisplayMemberBinding="{Binding EmployeeFirstname}" />
+                    <GridViewColumn Header="Kleidungs ID"
+                                    Width="auto"
+                                    DisplayMemberBinding="{Binding ClothesId}" />
                     <GridViewColumn Header="Kleidung"
                                     Width="auto"
                                     DisplayMemberBinding="{Binding ClothesName}" />
