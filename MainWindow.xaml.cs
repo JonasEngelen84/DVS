@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using DVS.Stores;
+using System.Windows;
 
 namespace DVS
 {

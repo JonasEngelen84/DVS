@@ -11,7 +11,8 @@
     <Grid>
         <ListView x:Name="ClothesListView"
                   Style="{StaticResource ListviewStyle}"
-                  ItemsSource="{Binding ClothesCollection}">
+                  ItemsSource="{Binding ClothesCollection}"
+                  SelectedItem="{Binding SelectedClothesItem}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id"

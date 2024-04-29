@@ -1,4 +1,5 @@
-﻿using DVS.ViewModels;
+﻿using DVS.Components;
+using DVS.ViewModels;
 using System.Windows.Controls;
 
 namespace DVS.Views
@@ -9,7 +10,16 @@ namespace DVS.Views
         {
             InitializeComponent();
 
-            DataContext = new DVSViewModel();
+            //DataContext = new DVSViewModel();
+
+            //ClothesListViewComponent = new ClothesListViewComponent();
         }
+
+        //public ClothesListViewComponent ClothesListViewComponent { get; }
+
+        //public void PlusButtonClick(object sender, EventArgs e)
+        //{
+        //    ClothesListViewComponent.ClothesListView.Visibility = System.Windows.Visibility.Hidden;
+        //}
     }
 }

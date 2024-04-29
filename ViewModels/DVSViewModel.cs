@@ -1,13 +1,15 @@
 ﻿using DVS.Commands;
 using System.Windows.Input;
 using DVS.Commands.DVSViewCommands;
+using DVS.Components;
 
 namespace DVS.ViewModels
 {
     internal class DVSViewModel : ViewModelBase
     {
-        public EmployeesClothesListViewViewModel EmployeesDetailsViewModel { get; }
-        public ClothesListViewViewModel ClothesDetailsViewModel { get; }
+        public EmployeesClothesListViewViewModel EmployeesClothesListViewViewModel { get; }
+        public ClothesListViewViewModel ClothesListViewViewModel { get; }
+        public ClothesListViewComponent ClothesListViewComponent { get; }
 
         public ICommand FilterCommand { get; }
         public ICommand AddCommand { get; }
@@ -19,8 +21,9 @@ namespace DVS.ViewModels
 
         public DVSViewModel()
         {
-            EmployeesDetailsViewModel = new EmployeesClothesListViewViewModel();
-            ClothesDetailsViewModel = new ClothesListViewViewModel();
+            EmployeesClothesListViewViewModel = new EmployeesClothesListViewViewModel();
+            ClothesListViewViewModel = new ClothesListViewViewModel();
+            ClothesListViewComponent = new ClothesListViewComponent();
             
             FilterCommand = new FilterCommand(this);
             AddCommand = new AddCommand(this);
@@ -29,6 +32,11 @@ namespace DVS.ViewModels
             PrintCommand = new PrintCommand(this);
             PlusCommand = new PlusCommand(this);
             MinusCommand = new MinusCommand(this);
+        }
+
+        public void PlusButtonClick(object sender, EventArgs e)
+        {
+            ClothesListViewComponent.ClothesListView.Visibility = System.Windows.Visibility.Hidden;
         }
     }
 }
