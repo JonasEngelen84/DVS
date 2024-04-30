@@ -6,11 +6,9 @@ namespace DVS.ViewModels
     public class EmployeesClothesListViewViewModel : ViewModelBase
     {
         // Bereitstellung einer ObservableCollection der Mitarbeiter-Kleidung
-        // (Kleidungsliste der Mitarbeiter aufgelöst für ListView).
         private readonly ObservableCollection<EmployeeClothesModel> _employeeClothesList;
 
-        // Zur encapsulation (private) von "_employeeClothesList"
-        // wird ein IEnumerable als pointer verwendet.
+        // Zur encapsulation (private) von "_employeeClothesList" wird ein IEnumerable als pointer verwendet.
         public IEnumerable<EmployeeClothesModel> EmployeeClothesList => _employeeClothesList;
 
         public EmployeesClothesListViewViewModel()
@@ -18,6 +16,19 @@ namespace DVS.ViewModels
             _employeeClothesList = [];
 
             FillEL();
+        }
+
+        private EmployeesClothesListViewViewModel _selectedEmployeeClothesItem;
+        public EmployeesClothesListViewViewModel SelectedEmployeeClothesItem
+        {
+            get
+            {
+                return _selectedEmployeeClothesItem;
+            }
+            set
+            {
+                _selectedEmployeeClothesItem = value;
+            }
         }
 
         private void FillEL()

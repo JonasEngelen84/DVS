@@ -22,6 +22,6 @@
     </Window.Background>
 
     <Grid Margin="10,1,10,10">
-        <views:DVSView DataContext="{Binding DVSViewModel}"/>
+        <views:DVSView />
     </Grid>
 </Window>

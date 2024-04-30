@@ -15,7 +15,7 @@ namespace DVS.ViewModels
         {
             _clothesCollection = [];
 
-            HardCodedObjects();
+            FillCL();
         }
 
         private ClothesListViewViewModel _selectedClothesItem;
@@ -31,7 +31,7 @@ namespace DVS.ViewModels
             }
         }
 
-        private void HardCodedObjects()
+        private void FillCL()
         {
             _clothesCollection.Add(new ClothesModel(111, "Sommershirt", Categorie.Shirt, "XL", Season.Sommer, 12));
             _clothesCollection.Add(new ClothesModel(112, "Sommershirt", Categorie.Shirt, "L", Season.Sommer, 8));
