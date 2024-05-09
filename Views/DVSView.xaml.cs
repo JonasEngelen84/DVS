@@ -13,10 +13,5 @@ namespace DVS.Views
             InitializeComponent();
             DataContext = new DVSViewModel();
         }
-
-        public void PlusButtonClick(object sender, RoutedEventArgs e)
-        {
-            MinusButton.Visibility = Visibility.Hidden;
-        }
     }
 }

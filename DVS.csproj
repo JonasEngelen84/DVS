@@ -21,6 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="SimpleModal.WPF" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\Bearbeiten.png" />
     <Resource Include="Images\Drucken.png" />
     <Resource Include="Images\DVS Icon.png" />

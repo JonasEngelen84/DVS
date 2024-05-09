@@ -109,7 +109,6 @@
                 <Button x:Name="PlusButton"
                         Grid.Row="0"
                         Content="+"
-                        Click="PlusButtonClick"
                         Style="{StaticResource CircleButtonStyle}">
                     <Button.Resources>
                         <Style TargetType="Border">

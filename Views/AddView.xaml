@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
-            <components:AddEmployeeComponent Grid.Column="0" Margin="0 0 0 0" />
+            <components:AddEmployeeComponent Grid.Column="0" Margin="0,10,0,-10" />
 
             <Grid Grid.Column="1">
                 <Button x:Name="EnterAddClothesCommand"
