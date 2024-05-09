@@ -129,7 +129,7 @@
             </Grid>
 
             <Grid Grid.Column="1">
-                <!--<components:ClothesCategorieCheckboxComponent Grid.Column="0"  Margin="15 8 5 30" />-->
+                <components:ClothesCategorieCheckboxComponent Grid.Column="0"  Margin="15 8 5 30" />
             </Grid>
             <Grid Grid.Column="2">
                 <components:ClothesSeasonChoiceComponent Grid.Column="0" Margin="0 8 0 30" />
