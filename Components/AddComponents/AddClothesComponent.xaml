@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:DVS.Components"
              mc:Ignorable="d" 
-             d:DesignHeight="170"
-             d:DesignWidth="390"
+             Height="173"
+             Width="425"
              Background="White">
     <Grid>
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
 
         <TextBlock Grid.Row="0"
                    Text="Kleidung"
-                   FontSize="18"
+                   FontSize="20"
                    Margin="12 5 0 0"
                    HorizontalAlignment="Left" />
 

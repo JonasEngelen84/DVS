@@ -1,8 +1,5 @@
 ﻿using DVS.Stores;
 using DVS.ViewModels.AddViewModels;
-using System.Reflection;
-using System.Runtime.ConstrainedExecution;
-using System.Windows.Media;
 
 namespace DVS.ViewModels
 {

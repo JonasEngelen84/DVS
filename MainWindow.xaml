@@ -23,6 +23,7 @@
         </LinearGradientBrush>
     </Window.Background>
 
+    <!--Festlegen des DataType für AddView-->
     <Window.Resources>
         <DataTemplate DataType="{x:Type vms:AddViewModel}">
             <views:AddView />
@@ -30,7 +31,8 @@
     </Window.Resources>
 
     <Grid>
-        <custom:Modal IsOpen="{Binding IsModalOpen}">
+        <!--Implementierung des NuGet Pakets zur Modal Steuerung-->
+        <custom:Modal Panel.ZIndex="1" IsOpen="{Binding IsModalOpen}">
             <ContentControl Content="{Binding CurrentModalViewModel}" />
         </custom:Modal>
         

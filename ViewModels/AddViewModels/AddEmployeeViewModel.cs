@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DVS.ViewModels.AddViewModels
 {
-    class AddEmployeeViewModel
+    class AddEmployeeViewModel : ViewModelBase
     {
     }
 }

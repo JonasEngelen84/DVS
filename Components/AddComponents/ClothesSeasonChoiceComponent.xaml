@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="109"
-             d:DesignWidth="69"
+             Height="113"
+             Width="77"
              BorderThickness="1"
              BorderBrush="Black"
              Background="White">
@@ -22,7 +22,7 @@
                    Text="Saison"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"
-                   FontSize="16"
+                   FontSize="18"
                    FontWeight="Regular" />
 
         <Grid Grid.Row="1">
