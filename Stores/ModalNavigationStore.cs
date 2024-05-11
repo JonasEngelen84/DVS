@@ -1,9 +1,5 @@
-﻿using DVS.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using DVS.ViewModels;
 
 namespace DVS.Stores
 {
@@ -17,16 +13,16 @@ namespace DVS.Stores
     /// Somit existiert diese eine Instanz die gesamte Lebensdauer der App hinweg.
     /// Von App.xaml.cs wird diese Instanz weitergereicht an das MainViewModel.
     /// </summary>
-    class ModalNavigationStore
+    public class ModalNavigationStore
     {
-        private ViewModelBase _currentViewModelBase;
+        private ViewModelBase _currentViewModel;
         public ViewModelBase CurrentViewModel
         {
-            get { return _currentViewModelBase; }
+            get => _currentViewModel;
 
             set
             {
-                _currentViewModelBase = value;
+                _currentViewModel = value;
                 CurrentViewModelChanged?.Invoke();
             }
         }
@@ -35,5 +31,10 @@ namespace DVS.Stores
         public bool IsOpen => CurrentViewModel != null;
 
         public event Action CurrentViewModelChanged;
+
+        public void Close()
+        {
+            CurrentViewModel = null;
+        }
     }
 }

@@ -1,14 +1,20 @@
-﻿using DVS.ViewModels.AddViewModels;
+﻿using DVS.Stores;
+using DVS.ViewModels.AddViewModels;
 
 namespace DVS.Commands.AddViewCommands
 {
-    internal class CancelAddClothesCommand(AddViewModel addViewModel) : CommandBase
+    internal class CancelAddClothesCommand : CommandBase
     {
-        private readonly AddViewModel addViewModel = addViewModel;
+        private readonly ModalNavigationStore _modalNavigationStore;
+
+        public CancelAddClothesCommand(ModalNavigationStore modalNavigationStore)
+        {
+            _modalNavigationStore = modalNavigationStore;
+        }
 
         public override void Execute(object parameter)
         {
-            
+            _modalNavigationStore.Close();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DVS.Commands.AddViewCommands;
+using DVS.Stores;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.AddViewModels
@@ -8,10 +9,10 @@ namespace DVS.ViewModels.AddViewModels
         public ICommand EnterAddClothesCommand { get; }
         public ICommand CancelAddClothesCommand { get; }
 
-        public AddViewModel()
+        public AddViewModel(ModalNavigationStore _modalNavigationStore)
         {
             EnterAddClothesCommand = new EnterAddClothesCommand(this);
-            CancelAddClothesCommand = new CancelAddClothesCommand(this);
+            CancelAddClothesCommand = new CancelAddClothesCommand(_modalNavigationStore);
         }
     }
 }

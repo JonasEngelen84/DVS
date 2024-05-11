@@ -6,15 +6,15 @@ namespace DVS
 {
     public partial class App : Application
     {
-        // Einzige Instanzen von "ModalNavigationStore" und "DVSViewModel"
+        // Einzige Instanzen von "DVSViewModel" und "ModalNavigationStore"
         // Werden der MainViewModel Instanz übergeben.
-        private readonly ModalNavigationStore _modalNavigationStore;
         private readonly DVSViewModel _dVSViewModel;
+        private readonly ModalNavigationStore _modalNavigationStore;
 
         public App()
         {
             _modalNavigationStore = new();
-            _dVSViewModel = new();
+            _dVSViewModel = new(_modalNavigationStore);
         }
 
 
@@ -26,7 +26,7 @@ namespace DVS
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_modalNavigationStore, _dVSViewModel)
+                DataContext = new MainViewModel(_dVSViewModel, _modalNavigationStore)
             };
 
             MainWindow.Show();

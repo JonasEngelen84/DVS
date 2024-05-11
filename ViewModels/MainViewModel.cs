@@ -1,5 +1,4 @@
 ﻿using DVS.Stores;
-using DVS.ViewModels.AddViewModels;
 
 namespace DVS.ViewModels
 {
@@ -24,17 +23,15 @@ namespace DVS.ViewModels
         // Pointer auf "_modalNavigationStore.IsOpen" zur Prüfung ob das aktuelle Modal bereits geöffnet ist.
         public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
-        public MainViewModel(ModalNavigationStore modalNavigationStore, DVSViewModel dVSViewModel)
+        public MainViewModel(DVSViewModel dVSViewModel, ModalNavigationStore modalNavigationStore)
         {
-            _modalNavigationStore = modalNavigationStore;
             DVSViewModel = dVSViewModel;
+            _modalNavigationStore = modalNavigationStore;
 
             _modalNavigationStore.CurrentViewModelChanged += ModalNavigationStore_CurrentViewModelChanged;
-
-            _modalNavigationStore.CurrentViewModel = new AddViewModel();
         }
 
-        // Schließen des aktuellen Modal.
+        // TODO:???
         protected override void Dispose()
         {
             _modalNavigationStore.CurrentViewModelChanged -= ModalNavigationStore_CurrentViewModelChanged;

@@ -3,6 +3,7 @@ using System.Windows.Input;
 using DVS.Commands.DVSViewCommands;
 using DVS.Components;
 using System.Windows;
+using DVS.Stores;
 
 namespace DVS.ViewModels
 {
@@ -19,13 +20,13 @@ namespace DVS.ViewModels
         public ICommand PlusCommand { get; }
         public ICommand MinusCommand { get; }
 
-        public DVSViewModel()
+        public DVSViewModel(ModalNavigationStore _modalNavigationStore)
         {
             EmployeesClothesListViewViewModel = new();
             ClothesListViewViewModel = new();
 
             FilterCommand = new FilterCommand(this);
-            AddCommand = new AddCommand(this);
+            AddCommand = new OpenAddEmployeeClothesCommand(_modalNavigationStore);
             EditCommand = new EditCommand(this);
             SafeCommand = new SafeCommand(this);
             PrintCommand = new PrintCommand(this);

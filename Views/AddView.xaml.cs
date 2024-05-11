@@ -8,8 +8,6 @@ namespace DVS.Views
         public AddView()
         {
             InitializeComponent();
-
-            DataContext = new AddViewModel();
         }
     }
 }
