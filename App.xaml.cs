@@ -4,10 +4,14 @@ using System.Windows;
 
 namespace DVS
 {
+    /// <summary>
+    /// App.xaml.cs wird genutzt um Konfigurationenen, bei Programmstart, festzulegen.
+    /// In App.xaml werden zB. Dictionaries implementiert, welche im gesamten code genutzt weden können.
+    /// </summary>
     public partial class App : Application
     {
         // Einzige Instanzen von "DVSViewModel" und "ModalNavigationStore"
-        // Werden der MainViewModel Instanz übergeben.
+        // Diese werden der MainViewModel Instanz übergeben.
         private readonly DVSViewModel _dVSViewModel;
         private readonly ModalNavigationStore _modalNavigationStore;
 

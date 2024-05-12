@@ -27,7 +27,8 @@
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" SharedSizeGroup="Kategorie" />
+                <ColumnDefinition Width="auto"
+                                  SharedSizeGroup="Season" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
@@ -42,7 +43,7 @@
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" SharedSizeGroup="Kategorie" />
+                <ColumnDefinition Width="auto" SharedSizeGroup="Season" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 
@@ -57,8 +58,7 @@
 
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"
-                                  SharedSizeGroup="Kategorie" />
+                <ColumnDefinition Width="auto" SharedSizeGroup="Season" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
 

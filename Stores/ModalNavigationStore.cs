@@ -30,11 +30,10 @@ namespace DVS.Stores
         // Bool zur Prüfung ob das aktuelle Modal bereits geöffnet ist.
         public bool IsOpen => CurrentViewModel != null;
 
+        // Event zur Ausführung der Operation.
         public event Action CurrentViewModelChanged;
 
-        public void Close()
-        {
-            CurrentViewModel = null;
-        }
+        // Methode zum Schließen des Modal.
+        public void Close() => CurrentViewModel = null;
     }
 }
