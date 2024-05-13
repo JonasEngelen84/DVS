@@ -14,16 +14,20 @@
         Width="1100"
         MinWidth="440"
         WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanResizeWithGrip"
+        Background="Transparent"
         Icon="/Images/DVS Icon.png">
 
-    <Window.Background>
+    <!--<Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FFCCCBCB" Offset="0" />
-            <GradientStop Color="#FFDEDEDE" Offset="0.809" />
+            <GradientStop Color="#FFDEDEDE" Offset="0.809" /> 
         </LinearGradientBrush>
-    </Window.Background>
+    </Window.Background>-->
 
-    <!--Festlegen des DataType für AddClothesView-->
+    <!--Festlegen des DataType der Modals-->
     <Window.Resources>
         <DataTemplate DataType="{x:Type vms:AddClothesViewModel}">
             <views:AddClothesView />
@@ -35,11 +39,30 @@
     </Window.Resources>
 
     <Grid>
+        <!--Background-->
+        <Border Height="800"
+                Width="1100"
+                CornerRadius="10"
+                Background="#524E4F">
+            <Border.Effect>
+                <DropShadowEffect Color="#000000"
+                                  Opacity="0.5"
+                                  Direction="90"
+                                  ShadowDepth="2"
+                                  BlurRadius="35" />
+            </Border.Effect>
+            
+        </Border>
         <!--Implementierung des NuGet Pakets "SimpleModal.WPF" zur Steuerung der Modals-->
-        <custom:Modal Panel.ZIndex="1" IsOpen="{Binding IsModalOpen}">
-            <ContentControl Margin="0" Content="{Binding CurrentModalViewModel}" />
+        <custom:Modal Panel.ZIndex="1"
+                      IsOpen="{Binding IsModalOpen}">
+            <ContentControl Margin="0"
+                            Content="{Binding CurrentModalViewModel}" />
         </custom:Modal>
-        
-        <views:DVSView Margin="10,1,10,10" DataContext="{Binding DVSViewModel}"/>
+
+        <views:DVSView Margin="10,1,10,10"
+                       DataContext="{Binding DVSViewModel}" />
     </Grid>
+
+    
 </Window>

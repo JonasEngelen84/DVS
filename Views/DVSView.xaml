@@ -36,7 +36,8 @@
                     <Label>Filtern</Label>
                 </Button.ToolTip>
                 <StackPanel>
-                    <Image Source="/Images/Filter.png" Height="20" Width="20" />
+                    <Image Source="/Images/Filter.png" Height="20"
+                           Width="20" />
                 </StackPanel>
             </Button>
 
@@ -48,7 +49,9 @@
                     <Label>Erstellen</Label>
                 </Button.ToolTip>
                 <StackPanel>
-                    <Image Source="/Images/Rückgängig.png" Height="22" Width="22" />
+                    <Image Source="/Images/Rückgängig.png"
+                           Height="22"
+                           Width="22" />
                 </StackPanel>
             </Button>
 
@@ -60,7 +63,9 @@
                     <Label>Bearbeiten</Label>
                 </Button.ToolTip>
                 <StackPanel>
-                    <Image Source="/Images/Bearbeiten.png" Height="20" Width="20" />
+                    <Image Source="/Images/Bearbeiten.png"
+                           Height="20"
+                           Width="20" />
                 </StackPanel>
             </Button>
 
@@ -72,7 +77,9 @@
                     <Label>Speichern</Label>
                 </Button.ToolTip>
                 <StackPanel>
-                    <Image Source="/Images/Speichern.png" Height="20" Width="20" />
+                    <Image Source="/Images/Speichern.png"
+                           Height="20"
+                           Width="20" />
                 </StackPanel>
             </Button>
 
@@ -84,8 +91,10 @@
                     <Label>Drucken</Label>
                 </Button.ToolTip>
                 <StackPanel>
-                <Image Source="/Images/Drucken.png" Height="20" Width="20" />
-            </StackPanel>
+                    <Image Source="/Images/Drucken.png"
+                           Height="20"
+                           Width="20" />
+                </StackPanel>
             </Button>
         </Grid>
 
