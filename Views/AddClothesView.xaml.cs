@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace DVS.Views
 {
-    public partial class AddView : UserControl
+    public partial class AddClothesView : UserControl
     {
-        public AddView()
+        public AddClothesView()
         {
             InitializeComponent();
         }

@@ -3,13 +3,11 @@ using System.Windows.Controls;
 
 namespace DVS.Components
 {
-    public partial class AddEmployeeComponent : UserControl
+    public partial class DVSEmployeeForm : UserControl
     {
-        public AddEmployeeComponent()
+        public DVSEmployeeForm()
         {
             InitializeComponent();
-
-            DataContext = new AddEmployeeViewModel();
         }
     }
 }

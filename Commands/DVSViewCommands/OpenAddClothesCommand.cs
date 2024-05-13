@@ -3,14 +3,14 @@ using DVS.ViewModels.AddViewModels;
 
 namespace DVS.Commands
 {
-    internal class OpenAddEmployeeClothesCommand(ModalNavigationStore modalNavigationStore) : CommandBase
+    internal class OpenAddClothesCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
         public override void Execute(object parameter)
         {
-            AddViewModel addViewModel = new(_modalNavigationStore);
-            _modalNavigationStore.CurrentViewModel = addViewModel;
+            AddClothesViewModel addClothesViewModel = new(_modalNavigationStore);
+            _modalNavigationStore.CurrentViewModel = addClothesViewModel;
         }
     }
 }

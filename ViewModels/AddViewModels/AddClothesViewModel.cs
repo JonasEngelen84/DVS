@@ -1,15 +1,17 @@
-﻿using DVS.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using DVS.Commands.AddViewCommands;
+using DVS.Stores;
+using System.Windows.Input;
 
 namespace DVS.ViewModels.AddViewModels
 {
-    internal class AddClothesViewModel : ViewModelBase
+    class AddClothesViewModel : ViewModelBase
     {
-        
+        public ICommand CancelAddClothesCommand { get; }
+
+        public AddClothesViewModel(ModalNavigationStore _modalNavigationStore)
+        {
+            ICommand EnterAddClothesCommand = new EnterAddClothesCommand(this);
+            CancelAddClothesCommand = new CancelAddClothesCommand(_modalNavigationStore);
+        }
     }
 }

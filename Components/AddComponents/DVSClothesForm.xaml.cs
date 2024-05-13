@@ -3,13 +3,11 @@ using System.Windows.Controls;
 
 namespace DVS.Components
 {
-    public partial class AddClothesComponent : UserControl
+    public partial class DVSClothesForm : UserControl
     {
-        public AddClothesComponent()
+        public DVSClothesForm()
         {
             InitializeComponent();
-
-            DataContext = new AddClothesViewModel();
         }
     }
 }

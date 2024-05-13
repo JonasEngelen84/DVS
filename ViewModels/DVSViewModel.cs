@@ -26,7 +26,7 @@ namespace DVS.ViewModels
             ClothesListViewViewModel = new();
 
             FilterCommand = new FilterCommand(this);
-            AddCommand = new OpenAddEmployeeClothesCommand(_modalNavigationStore);
+            AddCommand = new OpenAddClothesCommand(_modalNavigationStore);
             EditCommand = new EditCommand(this);
             SafeCommand = new SafeCommand(this);
             PrintCommand = new PrintCommand(this);

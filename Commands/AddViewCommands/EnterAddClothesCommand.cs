@@ -2,9 +2,9 @@
 
 namespace DVS.Commands.AddViewCommands
 {
-    class EnterAddClothesCommand(AddViewModel addViewModel) : CommandBase
+    class EnterAddClothesCommand(AddClothesViewModel addClothesViewModel) : CommandBase
     {
-        private readonly AddViewModel addViewModel = addViewModel;
+        private readonly AddClothesViewModel addClothesViewModel = addClothesViewModel;
 
         public override void Execute(object parameter)
         {

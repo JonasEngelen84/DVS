@@ -23,10 +23,14 @@
         </LinearGradientBrush>
     </Window.Background>
 
-    <!--Festlegen des DataType für AddView-->
+    <!--Festlegen des DataType für AddClothesView-->
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vms:AddViewModel}">
-            <views:AddView />
+        <DataTemplate DataType="{x:Type vms:AddClothesViewModel}">
+            <views:AddClothesView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type vms:AddEmployeeViewModel}">
+            <views:AddEmployeeView />
         </DataTemplate>
     </Window.Resources>
 
