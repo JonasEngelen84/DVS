@@ -20,7 +20,7 @@
         
         <Grid Grid.Row="0" >
             <Border Height="25"
-                    Width="400"
+                    Width="390"
                     Background="#363435"
                     BorderBrush="#363435"
                     BorderThickness="2"
@@ -29,15 +29,16 @@
                     CornerRadius="5"
                     Margin="0 0 0 1"/>
 
-            <!-- MenuItems -->
+            <!-- Menu links -->
             <Menu Height="20"
-                  Width="500"
+                  Width="390"
                   Background="#363435"
                   VerticalAlignment="Top"
                   HorizontalAlignment="Left"
                   Margin="0 2 0 2">
 
-                <MenuItem Header="Filtern"
+                <!-- MenuItems -->
+                <MenuItem Header="FILTERN"
                           Style="{StaticResource MenuItemWithDropDown}">
                     <MenuItem.Icon>
                         <Image Source="/Images/Filter.png"
@@ -46,17 +47,57 @@
 
                     <MenuItem Header="Mitarbeiter"
                               Height="30"
-                              Width="100"
+                              Width="80"
                               Style="{StaticResource SubMenuItem}">
-                        
+
                     </MenuItem>
 
                     <MenuItem Header="Kleidung"
                               Height="30"
-                              Width="100"
+                              Width="80"
                               Style="{StaticResource SubMenuItem}">
 
                     </MenuItem>
+                </MenuItem>
+
+                <MenuItem Header="ERSTELLEN"
+                          Style="{StaticResource MenuItemWithDropDown}">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/Plus.png"
+                               Stretch="Uniform" />
+                    </MenuItem.Icon>
+
+                    <MenuItem Header="Mitarbeiter"
+                              Height="30"
+                              Width="80"
+                              Style="{StaticResource SubMenuItem}"
+                              Command="{Binding AddEmployeeCommand}">
+
+                    </MenuItem>
+
+                    <MenuItem Header="Kleidung"
+                              Height="30"
+                              Width="80"
+                              Style="{StaticResource SubMenuItem}"
+                              Command="{Binding AddClothesCommand}">
+
+                    </MenuItem>
+                </MenuItem>
+
+                <MenuItem Header="BEARBEITEN"
+                          Style="{StaticResource MainMenuItem}">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/Bearbeiten.png"
+                               Stretch="Uniform" />
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Header="SPEICHERN"
+                          Style="{StaticResource MainMenuItem}">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/Speichern.png"
+                               Stretch="Uniform" />
+                    </MenuItem.Icon>
                 </MenuItem>
             </Menu>
         </Grid>
@@ -113,7 +154,7 @@
                           Width="18"
                           Margin="0,38,0,0"
                           Cursor="SizeWE"
-                          Background="#524E4F">
+                          Background="#363435">
                 <!--<GridSplitter.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFCCCBCB" Offset="0" />

@@ -7,23 +7,25 @@
                 <ControlTemplate TargetType="{x:Type MenuItem}">
                     <Border x:Name="border"
                             Background="#363435"
-                            BorderThickness="0">
+                            BorderThickness="0"
+                            Height="25"
+                            Width="auto">
                         <Grid>
                             <!-- Icon -->
                             <ContentPresenter ContentSource="Icon"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
-                                              Height="22"
-                                              Width="22"
+                                              Height="18"
+                                              Width="18"
                                               Margin="8 0 0 0" />
                             <!-- Text -->
                             <ContentPresenter ContentSource="Header"
                                               TextBlock.Foreground="#D3D7DC"
                                               TextBlock.FontFamily="Rubik Medium"
-                                              TextBlock.FontSize="15"
+                                              TextBlock.FontSize="14"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
-                                              Margin="40 0 0 0"/>
+                                              Margin="30 0 0 0"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

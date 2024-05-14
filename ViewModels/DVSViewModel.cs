@@ -13,7 +13,8 @@ namespace DVS.ViewModels
         public ClothesListViewViewModel ClothesListViewViewModel { get; }
 
         public ICommand FilterCommand { get; }
-        public ICommand AddCommand { get; }
+        public ICommand AddEmployeeCommand { get; }
+        public ICommand AddClothesCommand { get; }
         public ICommand EditCommand { get; }
         public ICommand SafeCommand { get; }
         public ICommand PrintCommand { get; }
@@ -26,7 +27,8 @@ namespace DVS.ViewModels
             ClothesListViewViewModel = new();
 
             FilterCommand = new FilterCommand(this);
-            AddCommand = new OpenAddClothesCommand(_modalNavigationStore);
+            AddEmployeeCommand = new OpenAddEmployeeCommand(_modalNavigationStore);
+            AddClothesCommand = new OpenAddClothesCommand(_modalNavigationStore);
             EditCommand = new EditCommand(this);
             SafeCommand = new SafeCommand(this);
             PrintCommand = new PrintCommand(this);

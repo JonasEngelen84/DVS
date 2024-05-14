@@ -39,8 +39,14 @@
     </Window.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
         <!--Background-->
-        <Border CornerRadius="10"
+        <Border Grid.RowSpan="2"
+                CornerRadius="15"
                 Background="#524E4F">
             <Border.Effect>
                 <DropShadowEffect Color="#000000"
@@ -49,18 +55,71 @@
                                   ShadowDepth="2"
                                   BlurRadius="35" />
             </Border.Effect>
-            
         </Border>
+
+        <!-- App Icon und Title -->
+        <Border Grid.Row="0"
+                Height="20"
+                Width="80"
+                CornerRadius="5"
+                Background="#363435"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Margin="10 2 0 0">
+            <Border.Effect>
+                <DropShadowEffect Color="#000000"
+                                  Opacity="0.5"
+                                  Direction="90"
+                                  ShadowDepth="2"
+                                  BlurRadius="35" />
+            </Border.Effect>
+
+            <!--<Image Source="/Images/DVS Icon.png"
+                   HorizontalAlignment="Left" 
+                   Margin="5 0 0 0"/>-->
+
+            <TextBlock Text="DVS"
+                       FontSize="22"
+                       VerticalAlignment="Center"
+                       Margin="30 0 0 0" />
+        </Border>
+
+        <!-- Menu rechts -->
+        <Menu Grid.Row="0"
+              Height="20"
+              Width="100"
+              Background="#363435"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Right"
+              Margin="0 2 0 2">
+
+            <!-- Minimize Button -->
+            <Button x:Name="MinimizeApp"
+                    Style="{StaticResource CircleButtonStyle}"
+                    Click="MinimizAppClick" />
+
+            <!-- Fullscreen Button -->
+            <Button x:Name="FullscreenApp"
+                    Style="{StaticResource CircleButtonStyle}"
+                    Click="FullscreenAppClick" />
+
+            <!-- Close Button -->
+            <Button x:Name="CloseApp"
+                    Style="{StaticResource CircleButtonStyle}"
+                    Click="CloseAppClick" />
+        </Menu>
+
         <!--Implementierung des NuGet Pakets "SimpleModal.WPF" zur Steuerung der Modals-->
-        <custom:Modal Panel.ZIndex="1"
+        <custom:Modal Grid.Row="1"
+                      Panel.ZIndex="1"
                       IsOpen="{Binding IsModalOpen}">
             <ContentControl Margin="0"
                             Content="{Binding CurrentModalViewModel}" />
         </custom:Modal>
 
-        <views:DVSView Margin="10,1,10,10"
+        <!-- Implementierung DVSView-->
+        <views:DVSView Grid.Row="1"
+                       Margin="10,1,10,10"
                        DataContext="{Binding DVSViewModel}" />
     </Grid>
-
-    
 </Window>

@@ -9,7 +9,7 @@
                             Background="#363435"
                             BorderThickness="0"
                             Height="25"
-                            Width="100">
+                            Width="auto">
                         <Grid>
                             <!-- Icon -->
                             <ContentPresenter ContentSource="Icon"
@@ -22,7 +22,7 @@
                             <ContentPresenter ContentSource="Header"
                                               TextBlock.Foreground="#D3D7DC"
                                               TextBlock.FontFamily="Rubik Medium"
-                                              TextBlock.FontSize="18"
+                                              TextBlock.FontSize="14"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               Margin="30 0 0 0" />
