@@ -9,9 +9,9 @@
         mc:Ignorable="d"
         
         Title="DVS"
-        Height="800"
+        Height="700"
         MinHeight="400"
-        Width="1100"
+        Width="1000"
         MinWidth="440"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -40,9 +40,7 @@
 
     <Grid>
         <!--Background-->
-        <Border Height="800"
-                Width="1100"
-                CornerRadius="10"
+        <Border CornerRadius="10"
                 Background="#524E4F">
             <Border.Effect>
                 <DropShadowEffect Color="#000000"

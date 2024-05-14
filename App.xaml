@@ -7,11 +7,13 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ResourcesDictionaries/ButtonResourcesDictionaries/CircleButtonResourcesDictionary.xaml" />
-                <ResourceDictionary Source="ResourcesDictionaries/ButtonResourcesDictionaries/SquareButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="ResourcesDictionaries/CircleButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="ResourcesDictionaries/ModalButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="ResourcesDictionaries/MenuItemResourcesDictionary.xaml" />
+                <ResourceDictionary Source="ResourcesDictionaries/DropDownMenuItemResourcesDictionary.xaml" />
+                <ResourceDictionary Source="ResourcesDictionaries/SubMenuItemResourcesDictionary.xaml" />
                 <ResourceDictionary Source="ResourcesDictionaries/ListViewResourcesDictionary.xaml" />
                 <ResourceDictionary Source="ResourcesDictionaries/TextStyleResourcesDictionary.xaml" />
-                <ResourceDictionary Source="ResourcesDictionaries/ButtonResourcesDictionaries/ModalButtonDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

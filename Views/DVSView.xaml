@@ -1,4 +1,4 @@
-﻿<!--MainView:
+﻿<!--HauptView:
     Wird angelegt um dem Programmierer mehr freiheiten,
     z.B. beim festlegen von ausführungen beim start des Programms, zu geben.
     Wird in das MainWindow eingefügt.-->
@@ -18,84 +18,47 @@
         </Grid.RowDefinitions>
 
         
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="25" />
-                <ColumnDefinition Width="25" />
-                <ColumnDefinition Width="25" />
-                <ColumnDefinition Width="25" />
-                <ColumnDefinition Width="25" />
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" >
+            <Border Height="25"
+                    Width="400"
+                    Background="#363435"
+                    BorderBrush="#363435"
+                    BorderThickness="2"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    CornerRadius="5"
+                    Margin="0 0 0 1"/>
 
-            <Button x:Name="FilterButton"
-                    Grid.Column="0"
-                    Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding FilterCommand}"
-                    Cursor="Hand">
-                <Button.ToolTip>
-                    <Label>Filtern</Label>
-                </Button.ToolTip>
-                <StackPanel>
-                    <Image Source="/Images/Filter.png" Height="20"
-                           Width="20" />
-                </StackPanel>
-            </Button>
+            <!-- MenuItems -->
+            <Menu Height="20"
+                  Width="500"
+                  Background="#363435"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left"
+                  Margin="0 2 0 2">
 
-            <Button x:Name="AddButton"
-                    Grid.Column="1"
-                    Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding AddCommand}">
-                <Button.ToolTip>
-                    <Label>Erstellen</Label>
-                </Button.ToolTip>
-                <StackPanel>
-                    <Image Source="/Images/Rückgängig.png"
-                           Height="22"
-                           Width="22" />
-                </StackPanel>
-            </Button>
+                <MenuItem Header="Filtern"
+                          Style="{StaticResource MenuItemWithDropDown}">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/Filter.png"
+                               Stretch="Uniform" />
+                    </MenuItem.Icon>
 
-            <Button x:Name="EditButton"
-                    Grid.Column="2"
-                    Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding EditCommand}">
-                <Button.ToolTip>
-                    <Label>Bearbeiten</Label>
-                </Button.ToolTip>
-                <StackPanel>
-                    <Image Source="/Images/Bearbeiten.png"
-                           Height="20"
-                           Width="20" />
-                </StackPanel>
-            </Button>
+                    <MenuItem Header="Mitarbeiter"
+                              Height="30"
+                              Width="100"
+                              Style="{StaticResource SubMenuItem}">
+                        
+                    </MenuItem>
 
-            <Button x:Name="SafeButton"
-                    Grid.Column="3"
-                    Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding SafeCommand}">
-                <Button.ToolTip>
-                    <Label>Speichern</Label>
-                </Button.ToolTip>
-                <StackPanel>
-                    <Image Source="/Images/Speichern.png"
-                           Height="20"
-                           Width="20" />
-                </StackPanel>
-            </Button>
+                    <MenuItem Header="Kleidung"
+                              Height="30"
+                              Width="100"
+                              Style="{StaticResource SubMenuItem}">
 
-            <Button x:Name="PrintButton"
-                    Grid.Column="4"
-                    Style="{StaticResource SquareButtonStyle}"
-                    Command="{Binding PrintCommand}">
-                <Button.ToolTip>
-                    <Label>Drucken</Label>
-                </Button.ToolTip>
-                <StackPanel>
-                    <Image Source="/Images/Drucken.png"
-                           Height="20"
-                           Width="20" />
-                </StackPanel>
-            </Button>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
         </Grid>
 
         
@@ -149,13 +112,14 @@
                           HorizontalAlignment="Center"
                           Width="18"
                           Margin="0,38,0,0"
-                          Cursor="SizeWE">
-                <GridSplitter.Background>
+                          Cursor="SizeWE"
+                          Background="#524E4F">
+                <!--<GridSplitter.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFCCCBCB" Offset="0" />
                         <GradientStop Color="#FFDEDEDE" Offset="0.809" />
                     </LinearGradientBrush>
-                </GridSplitter.Background>
+                </GridSplitter.Background>-->
             </GridSplitter>
         </Grid>
     </Grid>
