@@ -2,7 +2,7 @@
 
 namespace DVS.Commands.DVSViewCommands
 {
-    internal class EditCommand(DVSViewModel dVSViewModel) : CommandBase
+    internal class OpenEditCommand(DVSViewModel dVSViewModel) : CommandBase
     {
         private readonly DVSViewModel dVSViewModel = dVSViewModel;
 

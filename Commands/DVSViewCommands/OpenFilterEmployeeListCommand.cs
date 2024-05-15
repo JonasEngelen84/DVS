@@ -2,7 +2,7 @@
 
 namespace DVS.Commands.DVSViewCommands
 {
-    internal class FilterCommand(DVSViewModel dVSViewModel) : CommandBase
+    internal class OpenFilterEmployeeListCommand(DVSViewModel dVSViewModel) : CommandBase
     {
         private readonly DVSViewModel dVSViewModel = dVSViewModel;
 

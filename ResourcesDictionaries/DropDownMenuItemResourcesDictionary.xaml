@@ -8,8 +8,9 @@
                     <Border x:Name="border"
                             Background="#363435"
                             BorderThickness="0"
-                            Height="25"
-                            Width="auto">
+                            Height="18"
+                            Width="auto"
+                            Margin="0 0 5 0">
                         <Grid>
                             <!-- Icon -->
                             <ContentPresenter ContentSource="Icon"
@@ -17,22 +18,21 @@
                                               VerticalAlignment="Center"
                                               Height="18"
                                               Width="18"
-                                              Margin="5 0 0 0" />
+/>
                             <!-- Text-->
                             <ContentPresenter ContentSource="Header"
                                               TextBlock.Foreground="#D3D7DC"
                                               TextBlock.FontFamily="Rubik Medium"
                                               TextBlock.FontSize="14"
                                               HorizontalAlignment="Left"
-                                              VerticalAlignment="Center"
-                                              Margin="30 0 0 0" />
+                                              VerticalAlignment="Bottom"
+                                              Margin="20 0 0 -1" />
                             
                             <!-- DropDown-->
                             <Image Source="Images/Filter.png"
                                    Stretch="None"
                                    HorizontalAlignment="Right"
-                                   VerticalAlignment="Center"
-                                   Margin="0 0 5 0" />
+                                   VerticalAlignment="Center"/>
                             
                             <!-- Popup-->
                             <Popup x:Name="PartPopup"
@@ -45,16 +45,12 @@
                                         Background="#484546"
                                         BorderBrush="#484546">
 
-                                    <ScrollViewer x:Name="SubMenuScrollViewer"
-                                                  Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer,TypeInTargetAssembly={x:Type FrameworkElement}}}">
+                                    <Grid RenderOptions.ClearTypeHint="Enabled">
+                                        <Canvas HorizontalAlignment="Left"
+                                                VerticalAlignment="Top" />
 
-                                        <Grid RenderOptions.ClearTypeHint="Enabled">
-                                            <Canvas HorizontalAlignment="Left"
-                                                    VerticalAlignment="Top" />
-
-                                            <ItemsPresenter x:Name="ItemsPresenter" />
-                                        </Grid>
-                                    </ScrollViewer>
+                                        <ItemsPresenter x:Name="ItemsPresenter" />
+                                    </Grid>
                                 </Border>
                             </Popup>
                         </Grid>

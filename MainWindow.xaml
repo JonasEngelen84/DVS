@@ -8,7 +8,6 @@
         xmlns:vms="clr-namespace:DVS.ViewModels.AddViewModels"
         mc:Ignorable="d"
         
-        Title="DVS"
         Height="700"
         MinHeight="400"
         Width="1000"
@@ -38,7 +37,7 @@
         </DataTemplate>
     </Window.Resources>
 
-    <Grid>
+    <Grid Margin="0 5 0 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="25" />
             <RowDefinition Height="*" />
@@ -58,63 +57,67 @@
         </Border>
 
         <!-- App Icon und Title -->
-        <Border Grid.Row="0"
-                Height="20"
-                Width="80"
-                CornerRadius="5"
-                Background="#363435"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Left"
-                Margin="10 2 0 0">
-            <Border.Effect>
-                <DropShadowEffect Color="#000000"
-                                  Opacity="0.5"
-                                  Direction="90"
-                                  ShadowDepth="2"
-                                  BlurRadius="35" />
-            </Border.Effect>
+        <Grid Grid.Row="0">
+            <Border Height="25"
+                    Width="80"
+                    CornerRadius="5"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="10 2 0 0"
+                    Background="#363435" />
 
-            <!--<Image Source="/Images/DVS Icon.png"
-                   HorizontalAlignment="Left" 
-                   Margin="5 0 0 0"/>-->
+            <Image Source="/Images/DVS Icon.png"
+                   Height="20"
+                   Width="20"
+                   HorizontalAlignment="Left"
+                   Margin="15 0 0 0" />
 
             <TextBlock Text="DVS"
-                       FontSize="22"
+                       FontSize="28"
                        VerticalAlignment="Center"
-                       Margin="30 0 0 0" />
-        </Border>
+                       Margin="37 0 0 0" />
+        </Grid>
 
-        <!-- Menu rechts -->
-        <Menu Grid.Row="0"
-              Height="20"
-              Width="100"
-              Background="#363435"
-              VerticalAlignment="Top"
-              HorizontalAlignment="Right"
-              Margin="0 2 0 2">
+        <!-- App Menu rechts -->
+        <Grid Grid.Row="0">
+            <Border Height="25"
+                    Width="80"
+                    CornerRadius="5"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Margin="0 2 10 0"
+                    Background="#363435" />
 
-            <!-- Minimize Button -->
-            <Button x:Name="MinimizeApp"
-                    Style="{StaticResource CircleButtonStyle}"
-                    Click="MinimizAppClick" />
+            <Menu Grid.Row="0"
+                  Height="25"
+                  Width="100"
+                  Background="#363435"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Right"
+                  Margin="0 2 10 2">
 
-            <!-- Fullscreen Button -->
-            <Button x:Name="FullscreenApp"
-                    Style="{StaticResource CircleButtonStyle}"
-                    Click="FullscreenAppClick" />
+                <!-- Minimize Button -->
+                <Button x:Name="MinimizeApp"
+                        Style="{StaticResource CircleButtonStyle}"
+                        Click="MinimizAppClick" />
 
-            <!-- Close Button -->
-            <Button x:Name="CloseApp"
-                    Style="{StaticResource CircleButtonStyle}"
-                    Click="CloseAppClick" />
-        </Menu>
+                <!-- Fullscreen Button -->
+                <Button x:Name="FullscreenApp"
+                        Style="{StaticResource CircleButtonStyle}"
+                        Click="FullscreenAppClick" />
+
+                <!-- Close Button -->
+                <Button x:Name="CloseApp"
+                        Style="{StaticResource CircleButtonStyle}"
+                        Click="CloseAppClick" />
+            </Menu>
+        </Grid>
 
         <!--Implementierung des NuGet Pakets "SimpleModal.WPF" zur Steuerung der Modals-->
         <custom:Modal Grid.Row="1"
                       Panel.ZIndex="1"
                       IsOpen="{Binding IsModalOpen}">
-            <ContentControl Margin="0"
-                            Content="{Binding CurrentModalViewModel}" />
+            <ContentControl Content="{Binding CurrentModalViewModel}" />
         </custom:Modal>
 
         <!-- Implementierung DVSView-->

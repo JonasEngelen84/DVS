@@ -17,15 +17,15 @@ namespace DVS
 
         private void MinimizAppClick(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            WindowState = WindowState.Minimized;
         }
 
         private void FullscreenAppClick(object sender, RoutedEventArgs e)
         {
-            if (this.WindowState == WindowState.Maximized)
-                this.WindowState = WindowState.Normal;
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
             else
-                this.WindowState = WindowState.Maximized;
+                WindowState = WindowState.Maximized;
         }
     }
 }

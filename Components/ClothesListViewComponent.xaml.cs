@@ -8,8 +8,6 @@ namespace DVS.Components
         public ClothesListViewComponent()
         {
             InitializeComponent();
-
-            DataContext = new ClothesListViewViewModel();
         }
     }
 }

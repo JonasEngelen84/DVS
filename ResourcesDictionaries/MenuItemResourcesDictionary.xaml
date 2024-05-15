@@ -1,31 +1,32 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style x:Key="MainMenuItem" TargetType="MenuItem">
+    <Style x:Key="MainMenuItem"
+           TargetType="MenuItem">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type MenuItem}">
                     <Border x:Name="border"
                             Background="#363435"
                             BorderThickness="0"
-                            Height="25"
-                            Width="auto">
+                            Height="18"
+                            Width="auto"
+                            Margin="0 0 5 0">
                         <Grid>
                             <!-- Icon -->
                             <ContentPresenter ContentSource="Icon"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Center"
                                               Height="18"
-                                              Width="18"
-                                              Margin="8 0 0 0" />
+                                              Width="18"/>
                             <!-- Text -->
                             <ContentPresenter ContentSource="Header"
                                               TextBlock.Foreground="#D3D7DC"
                                               TextBlock.FontFamily="Rubik Medium"
                                               TextBlock.FontSize="14"
                                               HorizontalAlignment="Left"
-                                              VerticalAlignment="Center"
-                                              Margin="30 0 0 0"/>
+                                              VerticalAlignment="Bottom"
+                                              Margin="20 0 0 -1"/>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
