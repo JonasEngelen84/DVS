@@ -1,4 +1,6 @@
 ﻿using DVS.Stores;
+using System.Drawing;
+using System.Windows.Input;
 
 namespace DVS.ViewModels
 {
@@ -45,5 +47,7 @@ namespace DVS.ViewModels
             OnPropertyChanged(nameof(CurrentModalViewModel));
             OnPropertyChanged(nameof(IsModalOpen));
         }
+
+        
     }
 }

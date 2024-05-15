@@ -18,14 +18,16 @@
         </Grid.RowDefinitions>
 
         <!-- Menu links -->
-        <Border Grid.Row="0" Height="25"
+        <Border Grid.Row="0"
+                Height="25"
                 Width="372"
                 Background="#363435"
                 BorderBrush="#363435"
                 BorderThickness="2"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
-                CornerRadius="5">
+                CornerRadius="10"
+                Margin="0 0 0 2">
 
             <Grid>
                 <Menu Height="18"
@@ -38,7 +40,7 @@
                     <MenuItem Header="FILTERN"
                               Style="{StaticResource MenuItemWithDropDown}">
                         <MenuItem.Icon>
-                            <Image Source="/Images/Filter.png"
+                            <Image Source="/Resources/Images/Filter.png"
                                    Stretch="Uniform" />
                         </MenuItem.Icon>
 
@@ -62,7 +64,7 @@
                     <MenuItem Header="ERSTELLEN"
                               Style="{StaticResource MenuItemWithDropDown}">
                         <MenuItem.Icon>
-                            <Image Source="/Images/Plus.png"
+                            <Image Source="/Resources/Images/Plus.png"
                                    Stretch="Uniform" />
                         </MenuItem.Icon>
 
@@ -86,7 +88,7 @@
                     <MenuItem Header="BEARBEITEN"
                               Style="{StaticResource MainMenuItem}">
                         <MenuItem.Icon>
-                            <Image Source="/Images/Bearbeiten.png"
+                            <Image Source="/Resources/Images/Bearbeiten.png"
                                    Stretch="Uniform" />
                         </MenuItem.Icon>
                     </MenuItem>
@@ -94,7 +96,7 @@
                     <MenuItem Header="SPEICHERN"
                               Style="{StaticResource MainMenuItem}">
                         <MenuItem.Icon>
-                            <Image Source="/Images/Speichern.png"
+                            <Image Source="/Resources/Images/Speichern.png"
                                    Stretch="Uniform" />
                         </MenuItem.Icon>
                     </MenuItem>
@@ -158,7 +160,7 @@
                           Width="18"
                           Margin="0,38,0,0"
                           Cursor="SizeWE"
-                          Background="#363435">
+                          Background="#524E4F">
                 <!--<GridSplitter.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFCCCBCB" Offset="0" />
