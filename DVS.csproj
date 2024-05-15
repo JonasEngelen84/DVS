@@ -25,15 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Images\Bearbeiten.png" />
-    <Resource Include="Resources\Images\Drucken.png" />
     <Resource Include="Resources\Images\DVS Icon.png" />
     <Resource Include="Resources\Images\Filter.png" />
-    <Resource Include="Resources\Images\Kontakt.png" />
-    <Resource Include="Resources\Images\Minus.png" />
-    <Resource Include="Resources\Images\Plus.png" />
-    <Resource Include="Resources\Images\Rückgängig.png" />
-    <Resource Include="Resources\Images\Speichern.png" />
   </ItemGroup>
 
 </Project>

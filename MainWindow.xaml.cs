@@ -33,32 +33,9 @@ namespace DVS
         }
 
         // removable MainWindow
-        // 
-        private bool isDragging = false;
-        private Point startPoint;
-
         private void WindowMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            isDragging = true;
-            startPoint = e.GetPosition(this);
-        }
-
-        private void WindowMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            isDragging = false;
-        }
-
-        private void WindowMouseMove(object sender, MouseEventArgs e)
-        {
-            if (isDragging)
-            {
-                Point endPoint = e.GetPosition(this);
-                double dx = endPoint.X - startPoint.X;
-                double dy = endPoint.Y - startPoint.Y;
-
-                Left += dx;
-                Top += dy;
-            }
+            DragMove();
         }
     }
 }

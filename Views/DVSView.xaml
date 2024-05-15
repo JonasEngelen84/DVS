@@ -17,10 +17,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Menu links -->
+        <!-- Menu -->
         <Border Grid.Row="0"
                 Height="25"
-                Width="372"
+                Width="375"
                 Background="#363435"
                 BorderBrush="#363435"
                 BorderThickness="2"
@@ -64,7 +64,7 @@
                     <MenuItem Header="ERSTELLEN"
                               Style="{StaticResource MenuItemWithDropDown}">
                         <MenuItem.Icon>
-                            <Image Source="/Resources/Images/Plus.png"
+                            <Image Source="/Resources/Images/Add.png"
                                    Stretch="Uniform" />
                         </MenuItem.Icon>
 
@@ -88,7 +88,7 @@
                     <MenuItem Header="BEARBEITEN"
                               Style="{StaticResource MainMenuItem}">
                         <MenuItem.Icon>
-                            <Image Source="/Resources/Images/Bearbeiten.png"
+                            <Image Source="/Resources/Images/Edit.png"
                                    Stretch="Uniform" />
                         </MenuItem.Icon>
                     </MenuItem>
@@ -96,7 +96,7 @@
                     <MenuItem Header="SPEICHERN"
                               Style="{StaticResource MainMenuItem}">
                         <MenuItem.Icon>
-                            <Image Source="/Resources/Images/Speichern.png"
+                            <Image Source="/Resources/Images/Save.png"
                                    Stretch="Uniform" />
                         </MenuItem.Icon>
                     </MenuItem>

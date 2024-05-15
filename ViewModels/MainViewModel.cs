@@ -47,7 +47,5 @@ namespace DVS.ViewModels
             OnPropertyChanged(nameof(CurrentModalViewModel));
             OnPropertyChanged(nameof(IsModalOpen));
         }
-
-        
     }
 }
