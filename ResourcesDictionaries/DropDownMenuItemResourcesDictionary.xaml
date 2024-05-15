@@ -25,8 +25,8 @@
                                               TextBlock.FontFamily="Rubik Medium"
                                               TextBlock.FontSize="14"
                                               HorizontalAlignment="Left"
-                                              VerticalAlignment="Bottom"
-                                              Margin="20 0 0 -1" />
+                                              VerticalAlignment="Center"
+                                              Margin="20 0 0 -2" />
                             
                             <!-- DropDown-->
                             <Image Source="Images/Filter.png"
