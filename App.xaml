@@ -7,11 +7,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/CircleButtonResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/ModalButtonResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/MenuItemResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/DropDownMenuItemResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/SubMenuItemResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/CircleButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/ModalButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/MenuItemResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/DropDownMenuItemResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/SubMenuItemResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/TitleButtonResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/ResourcesDictionaries/ListViewResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/ResourcesDictionaries/TextStyleResourcesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>

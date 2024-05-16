@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
+//TODO: Zu Normalize.png ändern wenn app durch "maus an top screen" maximiert wird
 namespace DVS
 {
     public partial class MainWindow : Window
@@ -30,12 +31,12 @@ namespace DVS
             if (WindowState == WindowState.Normal)
             {
                 WindowState = WindowState.Maximized;
-                //MaximizePNG.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Normalize.png"));
+                MaximizePNG.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Normalize.png"));
             }
             else
             {
                 WindowState = WindowState.Normal;
-                //MaximizePNG.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Maximize.png"));
+                MaximizePNG.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Maximize.png"));
             }
                 
         }

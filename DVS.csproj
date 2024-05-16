@@ -11,10 +11,13 @@
   <ItemGroup>
     <None Remove="Close.png" />
     <None Remove="Maximize.png" />
-    <None Remove="Minimize.png" />
     <None Remove="Normalize.png" />
+    <None Remove="Resources\Images\Close.png" />
     <None Remove="Resources\Images\DVS Icon.png" />
+    <None Remove="Resources\Images\Maximize.png" />
+    <None Remove="Resources\Images\Minimize.png" />
     <None Remove="Resources\Images\Minus.png" />
+    <None Remove="Resources\Images\Normalize.png" />
     <None Remove="Resources\Images\Plus.png" />
     <None Remove="Resources\Images\Rückgängig.png" />
     <None Remove="Resources\Images\Speichern.png" />
@@ -25,11 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Close.png" />
-    <Resource Include="Maximize.png" />
-    <Resource Include="Minimize.png" />
-    <Resource Include="Normalize.png" />
+    <Resource Include="Resources\Images\Close.png" />
     <Resource Include="Resources\Images\DVS Icon.png" />
+    <Resource Include="Resources\Images\Maximize.png" />
+    <Resource Include="Resources\Images\Minimize.png" />
+    <Resource Include="Resources\Images\Normalize.png" />
   </ItemGroup>
 
 </Project>

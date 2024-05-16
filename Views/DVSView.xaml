@@ -35,6 +35,7 @@
                       HorizontalAlignment="Left"
                       Margin="4,0,0,0">
 
+                    <!-- MenuItems -->
                     <MenuItem Header="FILTERN"
                               Style="{StaticResource MenuItemWithDropDown}">
                         <MenuItem Header="Mitarbeiter"
@@ -88,8 +89,13 @@
                                                           Margin="0 3 0 0"
                                                           DataContext="{Binding EmployeesClothesListViewViewModel}" />
 
-            <StackPanel Grid.Column="1"
-                        Margin="0 3 0 0">
+            <Grid Grid.Column="1"
+                  Margin="0 3 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="19" />
+                    <RowDefinition Height="19" />
+                </Grid.RowDefinitions>
+
                 <Button x:Name="PlusButton"
                         Grid.Row="0"
                         Content="+"
@@ -107,7 +113,6 @@
 
                 <Button x:Name="MinusButton"
                         Grid.Row="1"
-                        Margin="0 3 0 0"
                         Content="-"
                         Command="{Binding MinusCommand}"
                         Style="{StaticResource CircleButtonStyle}">
@@ -121,12 +126,12 @@
                         <Image Source="/Images/Minus.png" Height="20" Width="20" />
                     </StackPanel>-->
                 </Button>
-            </StackPanel>
+            </Grid>
 
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Center"
                           Width="18"
-                          Margin="0,43,0,0"
+                          Margin="0,41,0,0"
                           Cursor="SizeWE"
                           Background="#524E4F">
                 <!--<GridSplitter.Background>
@@ -136,7 +141,7 @@
                     </LinearGradientBrush>
                 </GridSplitter.Background>-->
             </GridSplitter>
-
+            
             <components:ClothesListViewComponent Grid.Column="2"
                                                  Margin="0 3 0 0"
                                                  DataContext="{Binding ClothesListViewViewModel}" />

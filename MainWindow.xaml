@@ -39,7 +39,7 @@
     </Window.Resources>
 
     <!--Background-->
-    <Border CornerRadius="10"
+    <Border CornerRadius="15 15 10 10"
             Background="#524E4F"
             Padding="10">
         <Border.Effect>
@@ -63,8 +63,7 @@
                     Background="#FF2F2E2E">
 
                 <Grid>
-                    <WrapPanel Orientation="Horizontal"
-                               VerticalAlignment="Center">
+                    <WrapPanel VerticalAlignment="Center">
                         <Image Source="/Resources/Images/DVS Icon.png"
                                Height="24"
                                Width="24"
@@ -86,7 +85,7 @@
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 Click="MinimizAppClick">
-                            <Image Source="/Minimize.png"
+                            <Image Source="/Resources/Images/Minimize.png"
                                    Height="14"
                                    Width="14"
                                    HorizontalAlignment="Center" />
@@ -99,7 +98,7 @@
                                 BorderBrush="Transparent"
                                 Click="MaximizeAppClick">
                             <Image x:Name="MaximizePNG"
-                                   Source="/Normalize.png"
+                                   Source="/Resources/Images/Maximize.png"
                                    Height="14"
                                    Width="14"
                                    HorizontalAlignment="Center" />
@@ -111,7 +110,7 @@
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 Click="CloseAppClick">
-                            <Image Source="/Close.png"
+                            <Image Source="/Resources/Images/Close.png"
                                    Height="18"
                                    Width="18" 
                                    HorizontalAlignment="Center"/>

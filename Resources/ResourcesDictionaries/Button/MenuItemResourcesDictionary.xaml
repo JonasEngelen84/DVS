@@ -15,7 +15,7 @@
                         <Grid>
                             <!-- Text -->
                             <ContentPresenter ContentSource="Header"
-                                              TextBlock.Foreground="#D3D7DC"
+                                              TextBlock.Foreground="#FFE4E4E4"
                                               TextBlock.FontFamily="Rubik Medium"
                                               TextBlock.FontSize="14"
                                               HorizontalAlignment="Left"
@@ -27,10 +27,10 @@
                         <Trigger Property="IsHighlighted" Value="True">
                             <Setter Property="Background"
                                     TargetName="border"
-                                    Value="#524E4F" />
+                                    Value="#6f7070" />
                             <Setter Property="BorderBrush"
                                     TargetName="border"
-                                    Value="#524E4F" />
+                                    Value="#6f7070" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
