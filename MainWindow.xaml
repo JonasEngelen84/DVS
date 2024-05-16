@@ -39,9 +39,9 @@
     </Window.Resources>
 
     <!--Background-->
-    <Border CornerRadius="15"
-            Margin="3 5 3 3"
-            Background="#524E4F">
+    <Border CornerRadius="10"
+            Background="#524E4F"
+            Padding="10">
         <Border.Effect>
             <DropShadowEffect Color="#000000"
                               Opacity="0.5"
@@ -52,23 +52,24 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <!-- Titlebar -->
-            <Border Height="30"
-                    CornerRadius="15 15 0 0"
+            <Border Height="40"
+                    CornerRadius="10 10 0 0"
                     HorizontalAlignment="Stretch"
                     Background="#FF2F2E2E">
 
                 <Grid>
-                    <WrapPanel Orientation="Horizontal">
+                    <WrapPanel Orientation="Horizontal"
+                               VerticalAlignment="Center">
                         <Image Source="/Resources/Images/DVS Icon.png"
                                Height="24"
                                Width="24"
                                HorizontalAlignment="Left"
-                               Margin="10 0 5 0" />
+                               Margin="10 0 7 0" />
 
                         <TextBlock Text="DVS"
                                    FontSize="25"
@@ -81,36 +82,39 @@
                                 HorizontalAlignment="Right">
                         <!-- Minimize Button -->
                         <Button x:Name="MinimizeApp"
-                                Width="25"
+                                Width="40"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 Click="MinimizAppClick">
                             <Image Source="/Minimize.png"
-                                   Height="20"
-                                   Width="20" />
+                                   Height="14"
+                                   Width="14"
+                                   HorizontalAlignment="Center" />
                         </Button>
 
                         <!-- Maximize Button -->
                         <Button x:Name="MaximizeApp"
-                                Width="25"
+                                Width="40"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 Click="MaximizeAppClick">
                             <Image x:Name="MaximizePNG"
                                    Source="/Normalize.png"
-                                   Height="20"
-                                   Width="20" />
+                                   Height="14"
+                                   Width="14"
+                                   HorizontalAlignment="Center" />
                         </Button>
 
                         <!-- Close Button -->
                         <Button x:Name="CloseApp"
-                                Width="25"
+                                Width="40"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 Click="CloseAppClick">
                             <Image Source="/Close.png"
-                                   Height="20"
-                                   Width="20" />
+                                   Height="18"
+                                   Width="18" 
+                                   HorizontalAlignment="Center"/>
                         </Button>
                     </StackPanel>
 
@@ -127,7 +131,7 @@
 
             <!-- Implementierung DVSView-->
             <views:DVSView Grid.Row="1"
-                           Margin="10,1,10,10"
+                           Margin="0,3,0,0"
                            DataContext="{Binding DVSViewModel}" />
 
         </Grid>
