@@ -40,7 +40,7 @@
 
     <!--Background-->
     <Border CornerRadius="15"
-            Margin="5"
+            Margin="3 5 3 3"
             Background="#524E4F">
         <Border.Effect>
             <DropShadowEffect Color="#000000"
@@ -60,7 +60,7 @@
             <Border Height="30"
                     CornerRadius="15 15 0 0"
                     HorizontalAlignment="Stretch"
-                    Background="#ffffff">
+                    Background="#FF2F2E2E">
 
                 <Grid>
                     <WrapPanel Orientation="Horizontal">
@@ -72,7 +72,8 @@
 
                         <TextBlock Text="DVS"
                                    FontSize="25"
-                                   VerticalAlignment="Center" />
+                                   VerticalAlignment="Center"
+                                   Foreground="#FFBDBDBD" />
                     </WrapPanel>
 
                     <StackPanel Margin="0 0 10 0"
@@ -84,18 +85,19 @@
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 Click="MinimizAppClick">
-                            <Image Source="/Resources/Images/Minimize.png"
+                            <Image Source="/Minimize.png"
                                    Height="20"
                                    Width="20" />
                         </Button>
 
-                        <!-- Fullscreen Button -->
+                        <!-- Maximize Button -->
                         <Button x:Name="MaximizeApp"
                                 Width="25"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
-                                Click="FullscreenAppClick">
-                            <Image Source="/Resources/Images/Maximize.png"
+                                Click="MaximizeAppClick">
+                            <Image x:Name="MaximizePNG"
+                                   Source="/Normalize.png"
                                    Height="20"
                                    Width="20" />
                         </Button>
@@ -106,7 +108,7 @@
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 Click="CloseAppClick">
-                            <Image Source="/Resources/Images/Close.png"
+                            <Image Source="/Close.png"
                                    Height="20"
                                    Width="20" />
                         </Button>

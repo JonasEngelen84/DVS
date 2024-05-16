@@ -1,6 +1,7 @@
 ﻿using DVS.Stores;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace DVS
 {
@@ -23,13 +24,20 @@ namespace DVS
             WindowState = WindowState.Minimized;
         }
 
-        // Fullscreen/normal MainWindow
-        private void FullscreenAppClick(object sender, RoutedEventArgs e)
+        // Maximize/Normalize MainWindow
+        private void MaximizeAppClick(object sender, RoutedEventArgs e)
         {
-            if (WindowState == WindowState.Maximized)
-                WindowState = WindowState.Normal;
-            else
+            if (WindowState == WindowState.Normal)
+            {
                 WindowState = WindowState.Maximized;
+                //MaximizePNG.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Normalize.png"));
+            }
+            else
+            {
+                WindowState = WindowState.Normal;
+                //MaximizePNG.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Maximize.png"));
+            }
+                
         }
 
         // removable MainWindow

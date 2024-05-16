@@ -9,11 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Images\Bearbeiten.png" />
-    <None Remove="Resources\Images\Drucken.png" />
+    <None Remove="Close.png" />
+    <None Remove="Maximize.png" />
+    <None Remove="Minimize.png" />
+    <None Remove="Normalize.png" />
     <None Remove="Resources\Images\DVS Icon.png" />
-    <None Remove="Resources\Images\Filter.png" />
-    <None Remove="Resources\Images\Kontakt.png" />
     <None Remove="Resources\Images\Minus.png" />
     <None Remove="Resources\Images\Plus.png" />
     <None Remove="Resources\Images\Rückgängig.png" />
@@ -25,8 +25,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Close.png" />
+    <Resource Include="Maximize.png" />
+    <Resource Include="Minimize.png" />
+    <Resource Include="Normalize.png" />
     <Resource Include="Resources\Images\DVS Icon.png" />
-    <Resource Include="Resources\Images\Filter.png" />
   </ItemGroup>
 
 </Project>
