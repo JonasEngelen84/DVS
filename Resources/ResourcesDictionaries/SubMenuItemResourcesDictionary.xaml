@@ -15,8 +15,7 @@
                                               TextBlock.FontFamily="Rubik Medium"
                                               TextBlock.FontSize="15"
                                               HorizontalAlignment="Left"
-                                              VerticalAlignment="Center"
-                                              Margin="2 0 0 0" />
+                                              VerticalAlignment="Center"/>
 
                             <Grid x:Name="Highlighter"
                                   Height="35"

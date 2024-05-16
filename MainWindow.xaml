@@ -7,6 +7,7 @@
         xmlns:custom="clr-namespace:ModalControl;assembly=ModalControl"
         xmlns:vms="clr-namespace:DVS.ViewModels.AddViewModels"
         mc:Ignorable="d"
+        
         Height="750"
         MinHeight="400"
         Width="1050"
@@ -39,6 +40,7 @@
 
     <!--Background-->
     <Border CornerRadius="15"
+            Margin="5"
             Background="#524E4F">
         <Border.Effect>
             <DropShadowEffect Color="#000000"
@@ -50,28 +52,29 @@
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="35" />
+                <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <!-- Titlebar -->
-            <Border Height="35"
+            <Border Height="30"
                     CornerRadius="15 15 0 0"
                     HorizontalAlignment="Stretch"
                     Background="#ffffff">
 
                 <Grid>
-                    <Image Source="/Resources/Images/DVS Icon.png"
-                           Height="18"
-                           Width="18"
-                           HorizontalAlignment="Left"
-                           Margin="7 0 0 0" />
+                    <WrapPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/DVS Icon.png"
+                               Height="24"
+                               Width="24"
+                               HorizontalAlignment="Left"
+                               Margin="10 0 5 0" />
 
-                    <TextBlock Text="DVS"
-                               FontSize="25"
-                               VerticalAlignment="Center"
-                               Margin="30 0 0 3" />
-                    
+                        <TextBlock Text="DVS"
+                                   FontSize="25"
+                                   VerticalAlignment="Center" />
+                    </WrapPanel>
+
                     <StackPanel Margin="0 0 10 0"
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Right">
@@ -87,7 +90,7 @@
                         </Button>
 
                         <!-- Fullscreen Button -->
-                        <Button x:Name="FullscreenApp"
+                        <Button x:Name="MaximizeApp"
                                 Width="25"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
@@ -109,31 +112,9 @@
                         </Button>
                     </StackPanel>
 
-                    
+
                 </Grid>
             </Border>
-
-            <!-- App Menu rechts -->
-            <!--<Border Grid.Row="0"
-                    Height="25"
-                    Width="105"
-                    CornerRadius="10"
-                    VerticalAlignment="Center"
-                    HorizontalAlignment="Right"
-                    Margin="0 5 10 2"
-                    Background="#363435">
-
-                <Grid>
-                    <Menu Height="20"
-                          Width="96"
-                          Background="#363435"
-                          VerticalAlignment="Center"
-                          HorizontalAlignment="Center">
-
-                        
-                    </Menu>
-                </Grid>
-            </Border>-->
 
             <!--Implementierung des NuGet Pakets "SimpleModal.WPF" zur Steuerung der Modals-->
             <custom:Modal Grid.Row="1"
