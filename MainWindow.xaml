@@ -63,6 +63,7 @@
                     Background="#FF2F2E2E">
 
                 <Grid>
+                    <!-- App-Icon/Title-->
                     <WrapPanel VerticalAlignment="Center">
                         <Image Source="/Resources/Images/DVS Icon.png"
                                Height="24"

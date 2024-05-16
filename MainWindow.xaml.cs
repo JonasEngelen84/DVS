@@ -13,6 +13,12 @@ namespace DVS
             InitializeComponent();
         }
 
+        // removable MainWindow
+        private void WindowMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
         // Close MainWindow
         private void CloseAppClick(object sender, RoutedEventArgs e)
         {
@@ -39,12 +45,6 @@ namespace DVS
                 MaximizePNG.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Maximize.png"));
             }
                 
-        }
-
-        // removable MainWindow
-        private void WindowMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
         }
     }
 }
