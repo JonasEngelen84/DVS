@@ -14,7 +14,8 @@
                 <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/SubMenuItemResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/TitleButtonResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/ResourcesDictionaries/ListViewResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/TextStyleResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/ResourcesDictionaries/ModalTextResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/ResourcesDictionaries/TextBoxResourcesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

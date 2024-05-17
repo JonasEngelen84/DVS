@@ -2,10 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Style x:Key="ModalTextStyle" TargetType="TextBlock">
-        <Setter Property="Margin" Value="2.5 0"/>
         <Setter Property="FontWeight" Value="bold"/>
-        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontSize" Value="14"/>
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="500 0 0 0"/>
     </Style>
 </ResourceDictionary>
