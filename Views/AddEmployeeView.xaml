@@ -5,39 +5,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:DVS.Components"
              mc:Ignorable="d">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
+    
+    <Border Background="#FFDEDEDE">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0"
-                   Text="Mitarbeiter hinzufügen"
-                   FontSize="24"
-                   Margin="12 5 0 15"
-                   HorizontalAlignment="Left" />
+            <Border Background="#FFBFBFBF">
+                <TextBlock Grid.Row="0"
+                           Text="Mitarbeiter erstellen"
+                           FontSize="24"
+                           Margin="5 0 "
+                           VerticalAlignment="Center" />
+            </Border>
 
-        <components:DVSEmployeeForm Grid.Row="1"
-                                   DataContext="{Binding DVSEmployeeFormViewModel}" />
+            <components:DVSEmployeeForm Grid.Row="1"
+                                       Margin="5 10"
+                                       DataContext="{Binding DVSEmployeeFormViewModel}" />
 
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <Button x:Name="EnterAddClothesCommand"
-                    Grid.Column="0"
-                    Content="Erstellen"
-                    Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding EnterAddEmployeeCommand}" />
+                <Button Grid.Column="0"
+                        Content="ERSTELLEN"
+                        Style="{StaticResource ModalButtonStyle}"
+                        Command="{Binding EnterAddClothesCommand}" />
 
-            <Button x:Name="CancelAddClothesCommand"
-                    Grid.Column="1"
-                    Content="Abbrechen"
-                    Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding CancelAddEmployeeCommand}" />
+                <Button Grid.Column="1"
+                        Content="ABBRECHEN"
+                        Style="{StaticResource ModalButtonStyle}"
+                        Command="{Binding CancelAddClothesCommand}" />
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </UserControl>

@@ -33,12 +33,12 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0"
-                        Content="Erstellen"
+                        Content="ERSTELLEN"
                         Style="{StaticResource ModalButtonStyle}"
                         Command="{Binding EnterAddClothesCommand}" />
 
                 <Button Grid.Column="1"
-                        Content="Abbrechen"
+                        Content="ABBRECHEN"
                         Style="{StaticResource ModalButtonStyle}"
                         Command="{Binding CancelAddClothesCommand}" />
             </Grid>

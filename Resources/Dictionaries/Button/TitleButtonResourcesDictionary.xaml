@@ -15,13 +15,11 @@
                                           ContentSource="Content" />
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
                             <Setter TargetName="MainBorder"
-                                    Property="Background" Value="#474747" />
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="MainBorder"
-                                    Property="Background" Value="#474747"/>
+                                    Property="Background"
+                                    Value="#474747" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
