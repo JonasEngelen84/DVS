@@ -6,7 +6,7 @@
              xmlns:components="clr-namespace:DVS.Components"
              mc:Ignorable="d">
 
-    <Border Background="DarkGray">
+    <Border Background="#FFDEDEDE">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
@@ -14,31 +14,30 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <Border Background="Gray">
+            <Border Background="#FFBFBFBF">
                 <TextBlock Grid.Row="0"
                            Text="Kleidung hinzufügen"
                            FontSize="24"
+                           Margin="5 0 "
                            VerticalAlignment="Center" />
             </Border>
 
             <components:DVSClothesForm Grid.Row="1"
-                                       Margin="0 10"
+                                       Margin="5 10"
                                        DataContext="{Binding DVSClothesFormViewModel}" />
 
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Button x:Name="EnterAddClothesCommand"
-                        Grid.Column="0"
+                <Button Grid.Column="0"
                         Content="Erstellen"
                         Style="{StaticResource ModalButtonStyle}"
                         Command="{Binding EnterAddClothesCommand}" />
 
-                <Button x:Name="CancelAddClothesCommand"
-                        Grid.Column="1"
+                <Button Grid.Column="1"
                         Content="Abbrechen"
                         Style="{StaticResource ModalButtonStyle}"
                         Command="{Binding CancelAddClothesCommand}" />

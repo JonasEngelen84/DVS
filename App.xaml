@@ -7,15 +7,16 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/CircleButtonResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/ModalButtonResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/MenuItemResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/DropDownMenuItemResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/SubMenuItemResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/Button/TitleButtonResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/ListViewResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/ModalTextResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/ResourcesDictionaries/TextBoxResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/Button/CircleButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/Button/ModalButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/Button/MenuItemResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/Button/DropDownMenuItemResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/Button/SubMenuItemResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/Button/TitleButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/ComboBoxResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/ListViewResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/ModalTextResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/TextBoxResourcesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
