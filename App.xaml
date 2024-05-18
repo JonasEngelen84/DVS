@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="Resources/Dictionaries/ListViewResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/ModalTextResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/TextBoxResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/BorderDragClothesToEmployeeListView.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

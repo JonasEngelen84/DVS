@@ -16,15 +16,15 @@
 
             <Border Background="#FFBFBFBF">
                 <TextBlock Grid.Row="0"
-                           Text="Kleidung hinzufügen"
+                           Text="Bekleidung erstellen"
                            FontSize="24"
                            Margin="5 0 "
                            VerticalAlignment="Center" />
             </Border>
 
-            <components:DVSClothesForm Grid.Row="1"
+            <components:AddClothesForm Grid.Row="1"
                                        Margin="5 10"
-                                       DataContext="{Binding DVSClothesFormViewModel}" />
+                                       DataContext="{Binding AddClothesFormViewModel}" />
 
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>

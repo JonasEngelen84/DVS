@@ -8,6 +8,10 @@ namespace DVS
     /// App.xaml.cs wird genutzt um Konfigurationenen, bei Programmstart, festzulegen.
     /// In App.xaml werden zB. Dictionaries implementiert, welche im gesamten code genutzt weden können.
     /// </summary>
+
+    public enum Categorie { Hose, Pullover, Shirt, Jacke, Kopfbedeckung }
+    public enum Season { Sommer, Winter, Saisonlos }
+
     public partial class App : Application
     {
         // Einzige Instanzen von "DVSViewModel" und "ModalNavigationStore"

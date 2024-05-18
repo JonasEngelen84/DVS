@@ -44,7 +44,7 @@
 
                         </MenuItem>
 
-                        <MenuItem Header="Kleidung"
+                        <MenuItem Header="Bekleidung"
                                   Style="{StaticResource SubMenuItem}"
                                   Command="{Binding FilterClothesCommand}">
 
@@ -59,7 +59,7 @@
 
                         </MenuItem>
 
-                        <MenuItem Header="Kleidung"
+                        <MenuItem Header="Bekleidung"
                                   Style="{StaticResource SubMenuItem}"
                                   Command="{Binding AddClothesCommand}">
 

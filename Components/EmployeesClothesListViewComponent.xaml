@@ -13,13 +13,13 @@
                 <GridView >
                     <GridViewColumn Header="Mitarbeiter ID"
                                     Width="auto"
-                                    DisplayMemberBinding="{Binding EmployeeId}" />
+                                    DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Nachname"
                                     Width="auto"
-                                    DisplayMemberBinding="{Binding EmployeeLastname}" />
+                                    DisplayMemberBinding="{Binding Lastname}" />
                     <GridViewColumn Header="Vorname"
                                     Width="auto"
-                                    DisplayMemberBinding="{Binding EmployeeFirstname}" />
+                                    DisplayMemberBinding="{Binding Firstname}" />
                     <GridViewColumn Header="Kleidungs ID"
                                     Width="auto"
                                     DisplayMemberBinding="{Binding ClothesId}" />

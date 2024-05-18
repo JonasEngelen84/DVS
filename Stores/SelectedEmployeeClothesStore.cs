@@ -4,9 +4,9 @@ namespace DVS.Stores
 {
     class SelectedEmployeeClothesStore
     {
-        private EmployeeClothesModel _selectedEmployeeClothesModel;
+        private EmployeeModel _selectedEmployeeClothesModel;
 
-        public EmployeeClothesModel SelectedEmployeeClothesModel
+        public EmployeeModel SelectedEmployeeClothesModel
         {
             get
             {

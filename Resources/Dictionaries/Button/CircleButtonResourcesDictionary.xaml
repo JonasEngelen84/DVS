@@ -2,43 +2,43 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Style x:Key="CircleButtonStyle" TargetType="Button">
-    <Setter Property="Background" Value="#FFFDFCFC" />
-    <Setter Property="Width" Value="18" />
-    <Setter Property="Height" Value="18" />
-    <Setter Property="Padding" Value="0 -7 0 0" />
-    <Setter Property="VerticalAlignment" Value="Center" />
-    <Setter Property="HorizontalAlignment" Value="Center" />
-    <Setter Property="FontSize" Value="20" />
-    <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Background" Value="#FFFDFCFC" />
+        <Setter Property="Width" Value="18" />
+        <Setter Property="Height" Value="18" />
+        <Setter Property="Padding" Value="0 -7 0 0" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Cursor" Value="Hand" />
 
-    <Style.Triggers>
-        <Trigger Property="IsMouseDirectlyOver" Value="True">
-            <Trigger.EnterActions>
-                <BeginStoryboard>
-                    <Storyboard>
-                        <DoubleAnimation Storyboard.TargetProperty="Width"
-                                         To="15"
-                                         Duration="0:0:0.001" />
-                        <DoubleAnimation Storyboard.TargetProperty="Height"
-                                         To="15"
-                                         Duration="0:0:0.001" />
-                    </Storyboard>
-                </BeginStoryboard>
-            </Trigger.EnterActions>
+        <Style.Triggers>
+            <Trigger Property="IsMouseDirectlyOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width"
+                                             To="15"
+                                             Duration="0:0:0.001" />
+                            <DoubleAnimation Storyboard.TargetProperty="Height"
+                                             To="15"
+                                             Duration="0:0:0.001" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
 
-            <Trigger.ExitActions>
-                <BeginStoryboard>
-                    <Storyboard>
-                        <DoubleAnimation Storyboard.TargetProperty="Width"
-                                         To="18"
-                                         Duration="0:0:0.001" />
-                        <DoubleAnimation Storyboard.TargetProperty="Height"
-                                         To="18"
-                                         Duration="0:0:0.001" />
-                    </Storyboard>
-                </BeginStoryboard>
-            </Trigger.ExitActions>
-        </Trigger>
-    </Style.Triggers>
-</Style>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width"
+                                             To="18"
+                                             Duration="0:0:0.001" />
+                            <DoubleAnimation Storyboard.TargetProperty="Height"
+                                             To="18"
+                                             Duration="0:0:0.001" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

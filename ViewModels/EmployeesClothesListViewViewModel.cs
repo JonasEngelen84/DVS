@@ -6,10 +6,10 @@ namespace DVS.ViewModels
     public class EmployeesClothesListViewViewModel : ViewModelBase
     {
         // Bereitstellung einer ObservableCollection der Mitarbeiter-Kleidung
-        private readonly ObservableCollection<EmployeeClothesModel> _employeeClothesList;
+        private readonly ObservableCollection<EmployeeModel> _employeeClothesList;
 
         // Zur encapsulation (private) von "_employeeClothesList" wird ein IEnumerable als pointer verwendet.
-        public IEnumerable<EmployeeClothesModel> EmployeeClothesList => _employeeClothesList;
+        public IEnumerable<EmployeeModel> EmployeeClothesList => _employeeClothesList;
 
         public EmployeesClothesListViewViewModel()
         {
@@ -33,26 +33,26 @@ namespace DVS.ViewModels
 
         private void FillEL()
         {
-            _employeeClothesList.Add(new EmployeeClothesModel(000, "Jonas", "Engelen", 111, "Sommershirt", "XL", 4));
-            _employeeClothesList.Add(new EmployeeClothesModel(000, "Jonas", "Engelen", 114, "Wintershirt", "XL", 3));
-            _employeeClothesList.Add(new EmployeeClothesModel(000, "Jonas", "Engelen", 311, "Winterhose", "58", 2));
-            _employeeClothesList.Add(new EmployeeClothesModel(000, "Jonas", "Engelen", 411, "Regenjacke", "XL", 1));
-            _employeeClothesList.Add(new EmployeeClothesModel(000, "Jonas", "Engelen", 511, "Fleecejacke", "XL", 1));
-            _employeeClothesList.Add(new EmployeeClothesModel(000, "Jonas", "Engelen", 611, "Sommerkappe", "", 1));
-            _employeeClothesList.Add(new EmployeeClothesModel(123, "Markus", "Oettken", 112, "Sommershirt", "L", 6));
-            _employeeClothesList.Add(new EmployeeClothesModel(123, "Markus", "Oettken", 115, "Wintershirt", "L", 4));
-            _employeeClothesList.Add(new EmployeeClothesModel(123, "Markus", "Oettken", 212, "Sommerhose", "55", 6));
-            _employeeClothesList.Add(new EmployeeClothesModel(123, "Markus", "Oettken", 412, "Regenjacke", "L", 1));
-            _employeeClothesList.Add(new EmployeeClothesModel(456, "Nadine", "Molik", 112, "Sommershirt", "L", 6));
-            _employeeClothesList.Add(new EmployeeClothesModel(456, "Nadine", "Molik", 115, "Wintershirt", "L", 4));
-            _employeeClothesList.Add(new EmployeeClothesModel(456, "Nadine", "Molik", 212, "Sommerhose", "55", 6));
-            _employeeClothesList.Add(new EmployeeClothesModel(456, "Nadine", "Molik", 412, "Regenjacke", "L", 1));
-            _employeeClothesList.Add(new EmployeeClothesModel(134, "Kemal", "Yüksel", 111, "Sommershirt", "XL", 4));
-            _employeeClothesList.Add(new EmployeeClothesModel(134, "Kemal", "Yüksel", 114, "Wintershirt", "XL", 3));
-            _employeeClothesList.Add(new EmployeeClothesModel(134, "Kemal", "Yüksel", 511, "Fleecejacke", "XL", 1));
-            _employeeClothesList.Add(new EmployeeClothesModel(133, "Irfan", "Yüksel", 114, "Wintershirt", "XL", 3));
-            _employeeClothesList.Add(new EmployeeClothesModel(133, "Irfan", "Yüksel", 311, "Winterhose", "58", 2));
-            _employeeClothesList.Add(new EmployeeClothesModel(133, "Irfan", "Yüksel", 412, "Regenjacke", "L", 1));
+            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
+            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
+            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
+            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
+            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
+            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
+            _employeeClothesList.Add(new EmployeeModel(123, "Markus", "Oettken"));
+            _employeeClothesList.Add(new EmployeeModel(123, "Markus", "Oettken"));
+            _employeeClothesList.Add(new EmployeeModel(123, "Markus", "Oettken"));
+            _employeeClothesList.Add(new EmployeeModel(123, "Markus", "Oettken"));
+            _employeeClothesList.Add(new EmployeeModel(456, "Nadine", "Molik"));
+            _employeeClothesList.Add(new EmployeeModel(456, "Nadine", "Molik"));
+            _employeeClothesList.Add(new EmployeeModel(456, "Nadine", "Molik"));
+            _employeeClothesList.Add(new EmployeeModel(456, "Nadine", "Molik"));
+            _employeeClothesList.Add(new EmployeeModel(134, "Kemal", "Yüksel"));
+            _employeeClothesList.Add(new EmployeeModel(134, "Kemal", "Yüksel"));
+            _employeeClothesList.Add(new EmployeeModel(134, "Kemal", "Yüksel"));
+            _employeeClothesList.Add(new EmployeeModel(133, "Irfan", "Yüksel"));
+            _employeeClothesList.Add(new EmployeeModel(133, "Irfan", "Yüksel"));
+            _employeeClothesList.Add(new EmployeeModel(133, "Irfan", "Yüksel"));
         }
     }
 }

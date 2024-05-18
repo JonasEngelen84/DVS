@@ -11,7 +11,7 @@ namespace DVS.ViewModels.AddViewModels
         public AddEmployeeViewModel(ModalNavigationStore _modalNavigationStore)
         {
             ICommand EnterAddEmployeeCommand = new EnterAddEmployeeCommand(this);
-            CancelAddEmployeeCommand = new CancelAddClothesCommand(_modalNavigationStore);
+            CancelAddEmployeeCommand = new CancelAddEmployeeCommand(_modalNavigationStore);
         }
     }
 }

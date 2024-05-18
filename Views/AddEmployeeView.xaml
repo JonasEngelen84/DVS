@@ -22,9 +22,9 @@
                            VerticalAlignment="Center" />
             </Border>
 
-            <components:DVSEmployeeForm Grid.Row="1"
-                                       Margin="5 10"
-                                       DataContext="{Binding DVSEmployeeFormViewModel}" />
+            <components:AddEmployeeForm Grid.Row="1"
+                                        Margin="5 10"
+                                        DataContext="{Binding AddEmployeeFormViewModel}" />
 
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -40,7 +40,7 @@
                 <Button Grid.Column="1"
                         Content="ABBRECHEN"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding CancelAddClothesCommand}" />
+                        Command="{Binding CancelAddEmployeeCommand}" />
             </Grid>
         </Grid>
     </Border>

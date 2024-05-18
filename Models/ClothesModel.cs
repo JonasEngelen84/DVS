@@ -1,14 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DVS.Models
+﻿namespace DVS.Models
 {
-    public enum Categorie { Hose, Pullover, Shirt, Jacke, Kopfbedeckung }
-    public enum Season { Sommer, Winter, Saisonlos }
-
     public class ClothesModel(int id, string name, Categorie categorie, string size, Season season, int quantity)
     {
         public int Id { get; set; } = id;

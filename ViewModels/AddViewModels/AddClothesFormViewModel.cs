@@ -1,6 +1,6 @@
 ﻿namespace DVS.ViewModels.AddViewModels
 {
-    internal class DVSClothesFormViewModel : ViewModelBase
+    internal class AddClothesFormViewModel : ViewModelBase
     {
         
     }
