@@ -11,7 +11,6 @@
                             Background="#363435"
                             BorderThickness="0">
                         <Grid>
-                            <!-- Text -->
                             <ContentPresenter ContentSource="Header"
                                               TextBlock.Foreground="#D3D7DC"
                                               TextBlock.FontFamily="Rubik Medium"

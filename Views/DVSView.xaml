@@ -35,7 +35,7 @@
                       HorizontalAlignment="Left"
                       Margin="4,0,0,0">
 
-                    <!-- MenuItems -->
+                    <!-- Filter -->
                     <MenuItem Header="FILTERN"
                               Style="{StaticResource MenuItemWithDropDown}">
                         <MenuItem Header="Mitarbeiter"
@@ -51,6 +51,7 @@
                         </MenuItem>
                     </MenuItem>
 
+                    <!-- Add -->
                     <MenuItem Header="ERSTELLEN"
                               Style="{StaticResource MenuItemWithDropDown}">
                         <MenuItem Header="Mitarbeiter"
@@ -66,10 +67,12 @@
                         </MenuItem>
                     </MenuItem>
 
+                    <!-- Edit -->
                     <MenuItem Header="BEARBEITEN"
                               Style="{StaticResource MainMenuItem}">
                     </MenuItem>
 
+                    <!-- Save -->
                     <MenuItem Header="SPEICHERN"
                               Style="{StaticResource MainMenuItem}"
                               Width="79">
@@ -86,10 +89,12 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
+            <!-- EmployeesClothesListViewComponent -->
             <components:EmployeesClothesListViewComponent Grid.Column="0"
                                                           Margin="0 3 0 0"
                                                           DataContext="{Binding EmployeesClothesListViewViewModel}" />
 
+            <!-- Plus/Minus button -->
             <Grid Grid.Column="1"
                   Margin="0 3 0 0">
                 <Grid.RowDefinitions>
@@ -97,9 +102,9 @@
                     <RowDefinition Height="19" />
                 </Grid.RowDefinitions>
 
-                <Button x:Name="PlusButton"
-                        Grid.Row="0"
-                        Content="+"
+                <!-- Plus -->
+                <Button Grid.Row="0"
+                        Command="{Binding PlusCommand}"
                         Style="{StaticResource CircleButtonStyle}">
                     <Button.Resources>
                         <Style TargetType="Border">
@@ -107,14 +112,13 @@
                                     Value="24" />
                         </Style>
                     </Button.Resources>
-                    <!--<StackPanel>
-                        <Image Source="/Images/Plus.png" Height="24" Width="24" />
-                    </StackPanel>-->
+                    <Image Source="/Resources/Images/Plus.png"
+                           Height="18"
+                           Width="18"/>
                 </Button>
 
-                <Button x:Name="MinusButton"
-                        Grid.Row="1"
-                        Content="-"
+                <!-- Minus -->
+                <Button Grid.Row="1"
                         Command="{Binding MinusCommand}"
                         Style="{StaticResource CircleButtonStyle}">
                     <Button.Resources>
@@ -123,12 +127,13 @@
                                     Value="24" />
                         </Style>
                     </Button.Resources>
-                    <!--<StackPanel>
-                        <Image Source="/Images/Minus.png" Height="20" Width="20" />
-                    </StackPanel>-->
+                    <Image Source="/Resources/Images/Minus.png"
+                           Height="18"
+                           Width="18" />
                 </Button>
             </Grid>
 
+            <!-- GridSplitter -->
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Center"
                           Width="18"
@@ -143,6 +148,7 @@
                 </GridSplitter.Background>-->
             </GridSplitter>
 
+            <!-- ClothesListViewComponent -->
             <components:ClothesListViewComponent Grid.Column="2"
                                                  Margin="0 3 0 0"
                                                  DataContext="{Binding ClothesListViewViewModel}" />

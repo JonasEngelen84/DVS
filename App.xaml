@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Resources/Dictionaries/Button/DropDownMenuItemResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/Button/SubMenuItemResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/Button/TitleButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/Button/EditCategorieComboBoxResourcesDictionarie.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/ComboBoxResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/ListViewResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/ModalTextResourcesDictionary.xaml" />

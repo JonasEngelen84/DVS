@@ -5,10 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
 
+    <!-- Clothes Details -->
     <StackPanel Orientation="Vertical"
                 Grid.IsSharedSizeScope="True">
 
-        <Grid Grid.Row="0" Margin="0 0 0 5">
+        <!-- Id -->
+        <Grid Margin="0 0 0 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
                 <ColumnDefinition Width="*" />
@@ -22,7 +24,8 @@
                      Style="{StaticResource TextBoxStyle}" />
         </Grid>
 
-        <Grid Grid.Row="1" Margin="0 0 0 5">
+        <!-- Name -->
+        <Grid Margin="0 0 0 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
                 <ColumnDefinition Width="*" />
@@ -36,7 +39,8 @@
                      Style="{StaticResource TextBoxStyle}" />
         </Grid>
 
-        <Grid Grid.Row="2" Margin="0 0 0 5">
+        <!-- Size -->
+        <Grid Margin="0 0 0 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
                 <ColumnDefinition Width="*" />
@@ -50,7 +54,8 @@
                      Style="{StaticResource TextBoxStyle}" />
         </Grid>
 
-        <Grid Grid.Row="3" Margin="0 0 0 5">
+        <!-- Quantity -->
+        <Grid Margin="0 0 0 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
                 <ColumnDefinition Width="*" />
@@ -64,7 +69,8 @@
                      Style="{StaticResource TextBoxStyle}" />
         </Grid>
 
-        <Grid Grid.Row="4">
+        <!-- Comment -->
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition SharedSizeGroup="Details" />
                 <ColumnDefinition />
@@ -78,38 +84,70 @@
                      Style="{StaticResource TextBoxStyle}" />
         </Grid>
 
-        <ComboBox Grid.Row="5"
-                  Name="ComboBoxCategorie"
-                  Margin="1 10 0 5"
-                  Style="{StaticResource ComboBoxStyle}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Fill="{Binding Name}"
-                                   Width="20"
-                                   Height="20"
-                                   Margin="5"/>
-                        <TextBlock Text="{Binding Name}" FontSize="20" />
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+        <Label Content="Kategorie"
+               FontSize="13"
+               FontWeight="DemiBold"
+               Margin="-4 10 0 0" />
 
-        <ComboBox Grid.Row="6"
-                  Name="ComboBoxSeason"
-                  Margin="1 0 0 10"
-                  Style="{StaticResource ComboBoxStyle}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Rectangle Fill="{Binding Name}"
-                                   Width="20"
-                                   Height="20"
-                                   Margin="5" />
-                        <TextBlock Text="{Binding Name}" FontSize="20" />
-                    </StackPanel>
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+        <!-- Categorie -->
+        <StackPanel Orientation="Horizontal">
+            <ComboBox Name="ComboBoxCategorie"
+                      Text="Kategorie"
+                      Margin="1 0 0 5"
+                      Style="{StaticResource ComboBoxStyle}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Fill="{Binding Name}"
+                                       Width="20"
+                                       Height="20"
+                                       Margin="5" />
+                            <TextBlock Text="{Binding Name}"
+                                       FontSize="20" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Button Style="{StaticResource EditComboBoxButtonStyle}"
+                    Margin="5 -4 0 0">
+                <Image x:Name="categorieEditButton"
+                       Source="/Resources/Images/Edit.png"
+                       HorizontalAlignment="Center" />
+            </Button>
+        </StackPanel>
+
+        <Label Content="Saison"
+               FontSize="13"
+               FontWeight="DemiBold"
+               Margin="-4 0 0 -3" />
+
+        <!-- Season -->
+        <StackPanel Orientation="Horizontal">
+            <ComboBox Name="ComboBoxSeason"
+                      Text="Saison"
+                      Margin="1 0 0 10"
+                      Style="{StaticResource ComboBoxStyle}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Fill="{Binding Name}"
+                                       Width="20"
+                                       Height="20"
+                                       Margin="5" />
+                            <TextBlock Text="{Binding Name}"
+                                       FontSize="20" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <Button Style="{StaticResource EditComboBoxButtonStyle}"
+                    Margin="5 0 0 9">
+                <Image x:Name="seasonEditButton"
+                       Source="/Resources/Images/Edit.png"
+                       HorizontalAlignment="Center" />
+            </Button>
+        </StackPanel>
     </StackPanel>
 </UserControl>

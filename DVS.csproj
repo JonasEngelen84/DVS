@@ -14,6 +14,8 @@
     <None Remove="Normalize.png" />
     <None Remove="Resources\Images\Close.png" />
     <None Remove="Resources\Images\DVS Icon.png" />
+    <None Remove="Resources\Images\Edit.gif" />
+    <None Remove="Resources\Images\Edit.png" />
     <None Remove="Resources\Images\Maximize.png" />
     <None Remove="Resources\Images\Minimize.png" />
     <None Remove="Resources\Images\Minus.png" />
@@ -30,9 +32,12 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Close.png" />
     <Resource Include="Resources\Images\DVS Icon.png" />
+    <Resource Include="Resources\Images\Edit.png" />
     <Resource Include="Resources\Images\Maximize.png" />
     <Resource Include="Resources\Images\Minimize.png" />
+    <Resource Include="Resources\Images\Minus.png" />
     <Resource Include="Resources\Images\Normalize.png" />
+    <Resource Include="Resources\Images\Plus.png" />
   </ItemGroup>
 
 </Project>

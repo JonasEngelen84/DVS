@@ -83,22 +83,16 @@
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Right">
                         <!-- Minimize Button -->
-                        <Button x:Name="MinimizeApp"
-                                Width="40"
-                                Background="Transparent"
-                                BorderBrush="Transparent"
+                        <Button Style="{StaticResource TitleBarButtonStyle}"
                                 Click="MinimizAppClick">
                             <Image Source="/Resources/Images/Minimize.png"
-                                   Height="14"
-                                   Width="14"
+                                   Height="16"
+                                   Width="16"
                                    HorizontalAlignment="Center" />
                         </Button>
 
                         <!-- Maximize Button -->
-                        <Button x:Name="MaximizeApp"
-                                Width="40"
-                                Background="Transparent"
-                                BorderBrush="Transparent"
+                        <Button Style="{StaticResource TitleBarButtonStyle}"
                                 Click="MaximizeAppClick">
                             <Image x:Name="MaximizePNG"
                                    Source="/Resources/Images/Maximize.png"
@@ -108,10 +102,7 @@
                         </Button>
 
                         <!-- Close Button -->
-                        <Button x:Name="CloseApp"
-                                Width="40"
-                                Background="Transparent"
-                                BorderBrush="Transparent"
+                        <Button Style="{StaticResource TitleBarButtonStyle}"
                                 Click="CloseAppClick">
                             <Image Source="/Resources/Images/Close.png"
                                    Height="18"

@@ -2,21 +2,65 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Style x:Key="CircleButtonStyle" TargetType="Button">
-        <Setter Property="Background" Value="#FFFDFCFC" />
         <Setter Property="Width" Value="18" />
         <Setter Property="Height" Value="18" />
         <Setter Property="Padding" Value="0 -7 0 0" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="20" />
-        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Gray" />
 
-        <Style.Triggers>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border"
+                            Background="#363435"
+                            BorderThickness="0"
+                            CornerRadius="24">
+                        <Grid>
+                            <ContentPresenter ContentSource="Header"
+                                              TextBlock.Foreground="#D3D7DC"
+                                              TextBlock.FontFamily="Rubik Medium"
+                                              TextBlock.FontSize="15"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"
+                                              Margin="2 0 0 0" />
+
+                            <Grid x:Name="Highlighter"
+                                  Height="35"
+                                  Width="2"
+                                  Background="#FFFFFF"
+                                  HorizontalAlignment="Left"
+                                  VerticalAlignment="Center"
+                                  Visibility="Collapsed" />
+
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted"
+                                 Value="True">
+                            <Setter Property="Background"
+                                    TargetName="border"
+                                    Value="#524E4F" />
+                            <Setter Property="BorderBrush"
+                                    TargetName="border"
+                                    Value="#3E3C3D" />
+                            <Setter Property="Visibility"
+                                    TargetName="Highlighter"
+                                    Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <!--<Style.Triggers>
             <Trigger Property="IsMouseDirectlyOver" Value="True">
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Width"
+                            <DoubleAnimation Storyboard.TargetProperty="BorderBrush"
                                              To="15"
                                              Duration="0:0:0.001" />
                             <DoubleAnimation Storyboard.TargetProperty="Height"
@@ -39,6 +83,6 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
-        </Style.Triggers>
+        </Style.Triggers>-->
     </Style>
 </ResourceDictionary>

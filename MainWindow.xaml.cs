@@ -43,10 +43,19 @@ namespace DVS
         // Change Min/Max-Image when WindowState changed (Drag window to top screen)
         private void WindowStateChanged(object sender, EventArgs e)
         {
-            if (WindowState == WindowState.Normal)
-                MaximizePNG.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Maximize.png"));
+            if (WindowState == WindowState.Normal) 
+            {
+                MaximizePNG.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Maximize.png")); 
+                MaximizePNG.Width = 14;
+                MaximizePNG.Height = 14;
+            }
             else
+            {
                 MaximizePNG.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/Images/Normalize.png"));
-        }
+                MaximizePNG.Width = 17;
+                MaximizePNG.Height = 17;
+            }
+
+        }       
     }
 }

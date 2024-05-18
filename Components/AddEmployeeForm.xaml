@@ -12,10 +12,12 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         
+        <!-- Employee details -->
         <StackPanel Grid.Row="0"
                     Orientation="Vertical"
                     Grid.IsSharedSizeScope="True">
 
+            <!-- Id -->
             <Grid Margin="0 0 0 5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
@@ -30,6 +32,7 @@
                          Style="{StaticResource TextBoxStyle}" />
             </Grid>
 
+            <!-- Lastname -->
             <Grid Margin="0 0 0 5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
@@ -44,6 +47,7 @@
                          Style="{StaticResource TextBoxStyle}" />
             </Grid>
 
+            <!-- Forname -->
             <Grid Margin="0 0 0 5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
@@ -58,6 +62,7 @@
                          Style="{StaticResource TextBoxStyle}" />
             </Grid>
 
+            <!-- Comment -->
             <Grid Margin="0 0 0 10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition SharedSizeGroup="Details" />
@@ -73,13 +78,13 @@
             </Grid>
         </StackPanel>
 
-        <TextBlock Grid.Row="1"
-                   Text="Kleidung hinzufügen"
-                   FontSize="14"
-                   FontFamily="Bold"
-                   Margin="1 0 0 5"
-                   FontWeight="DemiBold" />
+        <Label Grid.Row="1"
+               Content="Bekleidung hinzufügen"
+               FontSize="13"
+               FontWeight="DemiBold"
+               Margin="-4 0 0 0"/>
 
+        <!-- Add clothes to employee -->
         <Grid Grid.Row="2"
               Margin="0 0 0 10">
             <Grid.ColumnDefinitions>
@@ -87,6 +92,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
+            <!-- Employee get-ClothesList -->
             <Border Grid.Column="0"
                     Margin="0 0 3 0"
                     Style="{StaticResource BorderAddEmployeeListViewStyle}">
@@ -103,6 +109,7 @@
                 </Grid>
             </Border>
 
+            <!-- Available clothesList -->
             <Border Grid.Column="1"
                     Margin="3 0 0 0"
                     Style="{StaticResource BorderAddEmployeeListViewStyle}">
