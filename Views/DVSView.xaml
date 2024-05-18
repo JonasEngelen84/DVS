@@ -27,8 +27,8 @@
                 HorizontalAlignment="Left"
                 CornerRadius="10">
 
-            <Grid HorizontalAlignment="Left"
-                  Width="298">
+            <Grid HorizontalAlignment="Center"
+                  Width="302">
                 <Menu Height="18"
                       Width="305"
                       Background="#363435"
@@ -71,7 +71,8 @@
                     </MenuItem>
 
                     <MenuItem Header="SPEICHERN"
-                              Style="{StaticResource MainMenuItem}">
+                              Style="{StaticResource MainMenuItem}"
+                              Width="79">
                     </MenuItem>
                 </Menu>
             </Grid>
@@ -141,7 +142,7 @@
                     </LinearGradientBrush>
                 </GridSplitter.Background>-->
             </GridSplitter>
-            
+
             <components:ClothesListViewComponent Grid.Column="2"
                                                  Margin="0 3 0 0"
                                                  DataContext="{Binding ClothesListViewViewModel}" />

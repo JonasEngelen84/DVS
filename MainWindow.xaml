@@ -18,7 +18,8 @@
         ResizeMode="CanResizeWithGrip"
         Background="Transparent"
         Icon="/Resources/Images/DVS Icon.png"
-        MouseLeftButtonDown="WindowMouseLeftButtonDown">
+        MouseLeftButtonDown="DragWindow"
+        StateChanged="WindowStateChanged">
 
     <!--<Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -69,7 +70,8 @@
                                Height="24"
                                Width="24"
                                HorizontalAlignment="Left"
-                               Margin="10 0 7 0" />
+                               Margin="10 0 7 0">
+                        </Image>
 
                         <TextBlock Text="DVS"
                                    FontSize="25"
@@ -122,7 +124,8 @@
                 </Grid>
             </Border>
 
-            <!--Implementierung des NuGet Pakets "SimpleModal.WPF" zur Steuerung der Modals-->
+            <!-- Implementierung des NuGet Pakets "SimpleModal.WPF"
+                 zur Steuerung des ModalViewModel -->
             <custom:Modal Grid.Row="1"
                           Panel.ZIndex="1"
                           IsOpen="{Binding IsModalOpen}">
