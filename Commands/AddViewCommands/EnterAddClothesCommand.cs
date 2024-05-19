@@ -1,4 +1,4 @@
-﻿using DVS.ViewModels.AddViewModels;
+﻿using DVS.ViewModels.AddEditViewModels;
 
 namespace DVS.Commands.AddViewCommands
 {

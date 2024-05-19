@@ -2,7 +2,7 @@
 using DVS.Stores;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.AddViewModels
+namespace DVS.ViewModels.AddEditViewModels
 {
     class AddClothesViewModel : ViewModelBase
     {

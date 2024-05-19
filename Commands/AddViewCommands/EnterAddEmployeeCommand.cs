@@ -1,9 +1,4 @@
-﻿using DVS.ViewModels.AddViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DVS.ViewModels.AddEditViewModels;
 
 namespace DVS.Commands.AddViewCommands
 {

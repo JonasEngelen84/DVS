@@ -107,8 +107,8 @@
                         Command="{Binding PlusCommand}"
                         Style="{StaticResource CircleButtonStyle}">
                     <Image Source="/Resources/Images/Plus.png"
-                           Height="16"
-                           Width="16"/>
+                           Height="14"
+                           Width="14"/>
                 </Button>
 
                 <!-- Minus -->
@@ -116,8 +116,8 @@
                         Command="{Binding MinusCommand}"
                         Style="{StaticResource CircleButtonStyle}">
                     <Image Source="/Resources/Images/Minus.png"
-                           Height="16"
-                           Width="16" />
+                           Height="13"
+                           Width="13" />
                 </Button>
             </Grid>
 

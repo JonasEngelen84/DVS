@@ -23,10 +23,10 @@
                            VerticalAlignment="Center" />
             </Border>
 
-            <!-- AddEmployeeForm_Component -->
-            <components:AddEmployeeForm Grid.Row="1"
+            <!-- DVSAddEditEmployeeForm_Component -->
+            <components:DVSAddEditEmployeeForm Grid.Row="1"
                                         Margin="5 10"
-                                        DataContext="{Binding AddEmployeeFormViewModel}" />
+                                               DataContext="{Binding DVSAddEditEmployeeFormViewModel}" />
 
             <!-- Button -->
             <Grid Grid.Row="2">

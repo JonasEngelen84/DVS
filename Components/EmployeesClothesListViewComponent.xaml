@@ -10,7 +10,7 @@
                   ItemsSource="{Binding EmployeeClothesList}"
                   SelectedItem="{Binding SelectedEmployeeClothesItem}">
             <ListView.View>
-                <GridView >
+                <GridView>
                     <GridViewColumn Header="Mitarbeiter ID"
                                     Width="auto"
                                     DisplayMemberBinding="{Binding Id}" />
