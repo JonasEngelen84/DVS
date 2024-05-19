@@ -12,6 +12,7 @@
                     <Border BorderBrush="Transparent"
                             BorderThickness="1"
                             Background="Transparent">
+                        
                         <ContentPresenter x:Name="image"
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Center"
@@ -19,6 +20,7 @@
                                           Width="16"
                                           Height="16"/>
                     </Border>
+                    
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Trigger.EnterActions>
@@ -52,8 +54,7 @@
                             </Trigger.ExitActions>
                         </Trigger>
 
-                        <Trigger Property="IsPressed"
-                                 Value="True">
+                        <Trigger Property="IsPressed" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>

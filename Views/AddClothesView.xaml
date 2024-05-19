@@ -6,6 +6,7 @@
              xmlns:components="clr-namespace:DVS.Components"
              mc:Ignorable="d">
 
+    <!-- Background -->
     <Border Background="#FFDEDEDE">
         <Grid>
             <Grid.RowDefinitions>
@@ -14,6 +15,7 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
+            <!-- Title -->
             <Border Background="#FFBFBFBF">
                 <TextBlock Grid.Row="0"
                            Text="Bekleidung erstellen"
@@ -22,10 +24,12 @@
                            VerticalAlignment="Center" />
             </Border>
 
+            <!-- AddClothesForm_Component -->
             <components:AddClothesForm Grid.Row="1"
                                        Margin="5 10"
                                        DataContext="{Binding AddClothesFormViewModel}" />
 
+            <!-- Button -->
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />

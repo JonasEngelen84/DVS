@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
+//TODO: Alle Clicks zu Commands
 namespace DVS
 {
     public partial class MainWindow : Window

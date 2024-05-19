@@ -12,10 +12,12 @@
                             BorderBrush="Transparent"
                             BorderThickness="1"
                             Background="Transparent">
+                        
                         <ContentPresenter VerticalAlignment="Center"
                                           HorizontalAlignment="Center"
                                           ContentSource="Content" />
                     </Border>
+                    
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="MainBorder"

@@ -12,8 +12,8 @@
                             Height="18"
                             Width="auto"
                             Margin="0 0 5 0">
+                        
                         <Grid>
-                            <!-- Text-->
                             <ContentPresenter ContentSource="Header"
                                               TextBlock.Foreground="#FFE4E4E4"
                                               TextBlock.FontFamily="Rubik Medium"
@@ -22,7 +22,6 @@
                                               VerticalAlignment="Center"
                                               Margin="0 2 5 0"/>
 
-                            <!-- Popup-->
                             <Popup x:Name="PartPopup"
                                    AllowsTransparency="True"
                                    IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"

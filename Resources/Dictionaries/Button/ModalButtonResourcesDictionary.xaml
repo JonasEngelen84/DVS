@@ -16,10 +16,12 @@
                             BorderBrush="Transparent"
                             BorderThickness="1"
                             Background="#FFAFAFAF">
+                        
                         <ContentPresenter VerticalAlignment="Center"
                                           HorizontalAlignment="Center"
                                           ContentSource="Content" />
                     </Border>
+                    
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver"
                                  Value="True">
@@ -27,6 +29,7 @@
                                     Property="Background"
                                     Value="#FFC1C1C1" />
                         </Trigger>
+                        
                         <Trigger Property="IsPressed"
                                  Value="True">
                             <Setter TargetName="MainBorder"

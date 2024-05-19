@@ -8,81 +8,39 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Gray" />
+        <Setter Property="BorderBrush" Value="Transparent" />
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border"
-                            Background="#363435"
-                            BorderThickness="0"
+                    <Border x:Name="MainBorder"
+                            BorderBrush="Transparent"
+                            BorderThickness="1"
+                            Background="Transparent"
                             CornerRadius="24">
-                        <Grid>
-                            <ContentPresenter ContentSource="Header"
-                                              TextBlock.Foreground="#D3D7DC"
-                                              TextBlock.FontFamily="Rubik Medium"
-                                              TextBlock.FontSize="15"
-                                              HorizontalAlignment="Left"
-                                              VerticalAlignment="Center"
-                                              Margin="2 0 0 0" />
 
-                            <Grid x:Name="Highlighter"
-                                  Height="35"
-                                  Width="2"
-                                  Background="#FFFFFF"
-                                  HorizontalAlignment="Left"
-                                  VerticalAlignment="Center"
-                                  Visibility="Collapsed" />
-
-                        </Grid>
+                        <ContentPresenter VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          ContentSource="Content" />
                     </Border>
-
+                    
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsHighlighted"
+                        <Trigger Property="IsMouseOver"
                                  Value="True">
-                            <Setter Property="Background"
-                                    TargetName="border"
-                                    Value="#524E4F" />
-                            <Setter Property="BorderBrush"
-                                    TargetName="border"
-                                    Value="#3E3C3D" />
-                            <Setter Property="Visibility"
-                                    TargetName="Highlighter"
-                                    Value="Visible" />
+                            <Setter TargetName="MainBorder"
+                                    Property="BorderBrush"
+                                    Value="DarkGray" />
+                        </Trigger>
+                        
+                        <Trigger Property="IsPressed"
+                                 Value="True">
+                            <Setter TargetName="MainBorder"
+                                    Property="Background"
+                                    Value="DarkGray" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
-        <!--<Style.Triggers>
-            <Trigger Property="IsMouseDirectlyOver" Value="True">
-                <Trigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="BorderBrush"
-                                             To="15"
-                                             Duration="0:0:0.001" />
-                            <DoubleAnimation Storyboard.TargetProperty="Height"
-                                             To="15"
-                                             Duration="0:0:0.001" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.EnterActions>
-
-                <Trigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.TargetProperty="Width"
-                                             To="18"
-                                             Duration="0:0:0.001" />
-                            <DoubleAnimation Storyboard.TargetProperty="Height"
-                                             To="18"
-                                             Duration="0:0:0.001" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.ExitActions>
-            </Trigger>
-        </Style.Triggers>-->
     </Style>
 </ResourceDictionary>
