@@ -1,11 +1,9 @@
-﻿using DVS.ViewModels;
+﻿using DVS.Stores;
 
 namespace DVS.Commands.DVSViewCommands
 {
-    internal class OpenFilterEmployeeListCommand(DVSViewModel dVSViewModel) : CommandBase
+    internal class OpenFilterEmployeeListCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {
-        private readonly DVSViewModel dVSViewModel = dVSViewModel;
-
         public override void Execute(object parameter)
         {
             

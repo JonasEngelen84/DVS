@@ -1,11 +1,9 @@
-﻿using DVS.ViewModels;
+﻿using DVS.Stores;
 
 namespace DVS.Commands.DVSViewCommands
 {
-    internal class PlusCommand(DVSViewModel dVSViewModel) : CommandBase
+    public class PlusCommand : CommandBase
     {
-        private readonly DVSViewModel dVSViewModel = dVSViewModel;
-
         public override void Execute(object parameter)
         {
 

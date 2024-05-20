@@ -1,6 +1,11 @@
-﻿namespace DVS.ViewModels.AddViewModels.Forms
+﻿using DVS.Commands;
+using DVS.Stores;
+using System.Windows.Input;
+
+namespace DVS.ViewModels.AddViewModels.Forms
 {
-    class DVSAddEditCategorieFormViewModel
+    class DVSAddEditCategorieFormViewModel(ModalNavigationStore _modalNavigationStore) : ViewModelBase
     {
+        ICommand 
     }
 }

@@ -2,7 +2,7 @@
 
 namespace DVS.Commands.DVSViewCommands
 {
-    public class MinusCommand : CommandBase
+    internal class OpenEditEmployeeClothesCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {
         public override void Execute(object parameter)
         {

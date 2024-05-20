@@ -19,7 +19,7 @@
 
         <!-- Menu -->
         <Border Height="25"
-                Width="307"
+                Width="308"
                 Background="#363435"
                 BorderBrush="#363435"
                 BorderThickness="2"
@@ -40,13 +40,13 @@
                               Style="{StaticResource MenuItemWithDropDown}">
                         <MenuItem Header="Mitarbeiter"
                                   Style="{StaticResource SubMenuItem}"
-                                  Command="{Binding FilterEmployeeCommand}">
+                                  Command="{Binding OpenFilterEmployeeCommand}">
 
                         </MenuItem>
 
                         <MenuItem Header="Bekleidung"
                                   Style="{StaticResource SubMenuItem}"
-                                  Command="{Binding FilterClothesCommand}">
+                                  Command="{Binding OpenFilterClothesCommand}">
 
                         </MenuItem>
                     </MenuItem>
@@ -56,26 +56,27 @@
                               Style="{StaticResource MenuItemWithDropDown}">
                         <MenuItem Header="Mitarbeiter"
                                   Style="{StaticResource SubMenuItem}"
-                                  Command="{Binding AddEmployeeCommand}">
+                                  Command="{Binding OpenAddEmployeeCommand}">
 
                         </MenuItem>
 
                         <MenuItem Header="Bekleidung"
                                   Style="{StaticResource SubMenuItem}"
-                                  Command="{Binding AddClothesCommand}">
+                                  Command="{Binding OpenAddClothesCommand}">
 
                         </MenuItem>
                     </MenuItem>
 
                     <!-- Edit -->
                     <MenuItem Header="BEARBEITEN"
-                              Style="{StaticResource MainMenuItem}">
+                              Style="{StaticResource MainMenuItem}"
+                              Command="{Binding OpenEditEmployeeClothesCommand}">
                     </MenuItem>
 
                     <!-- Save -->
                     <MenuItem Header="SPEICHERN"
                               Style="{StaticResource MainMenuItem}"
-                              Width="79">
+                              Command="{Binding SaveCommand}">
                     </MenuItem>
                 </Menu>
             </Grid>
