@@ -1,4 +1,5 @@
-﻿using DVS.Commands.AddViewCommands;
+﻿using DVS.Commands;
+using DVS.Commands.AddEmployeeViewCommands;
 using DVS.Stores;
 using System.Windows.Input;
 
@@ -6,12 +7,12 @@ namespace DVS.ViewModels.AddEditViewModels
 {
     class AddEmployeeViewModel : ViewModelBase
     {
-        public ICommand CancelAddEmployeeCommand { get; }
+        public ICommand CloseModalCommand { get; }
 
         public AddEmployeeViewModel(ModalNavigationStore _modalNavigationStore)
         {
             ICommand EnterAddEmployeeCommand = new EnterAddEmployeeCommand(this);
-            CancelAddEmployeeCommand = new CancelAddEmployeeCommand(_modalNavigationStore);
+            CloseModalCommand = new CloseModalCommand(_modalNavigationStore);
         }
     }
 }

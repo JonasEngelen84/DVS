@@ -43,7 +43,7 @@
                 <Button Grid.Column="1"
                         Content="ABBRECHEN"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding CancelAddEmployeeCommand}" />
+                        Command="{Binding CloseModalCommand}" />
             </Grid>
         </Grid>
     </Border>

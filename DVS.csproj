@@ -40,4 +40,9 @@
     <Resource Include="Resources\Images\Plus.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\AddCategorieViewCommands\" />
+    <Folder Include="Commands\AddSeasonViewCommands\" />
+  </ItemGroup>
+
 </Project>

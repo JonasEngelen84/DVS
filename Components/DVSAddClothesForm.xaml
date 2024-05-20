@@ -89,7 +89,7 @@
                FontWeight="DemiBold"
                Margin="-4 10 0 0" />
 
-        <!-- Categorie -->
+        <!-- Categorie ComboBox and Button  -->
         <StackPanel Orientation="Horizontal">
             <ComboBox Name="ComboBoxCategorie"
                       Text="Kategorie"
@@ -111,7 +111,7 @@
 
             <Button Margin="5 -4 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
-                    Command="{Binding OpenAddEditSeasons}">
+                    Command="{Binding OpenAddEditCategoriesCommand}">
                 <Image x:Name="categorieEditButton"
                        Source="/Resources/Images/Edit.png"
                        HorizontalAlignment="Center" />
@@ -123,7 +123,7 @@
                FontWeight="DemiBold"
                Margin="-4 0 0 -3" />
 
-        <!-- Season -->
+        <!-- Season ComboBox and Button -->
         <StackPanel Orientation="Horizontal">
             <ComboBox Name="ComboBoxSeason"
                       Text="Saison"
@@ -145,7 +145,7 @@
 
             <Button Margin="5 0 0 9" 
                     Style="{StaticResource EditComboBoxButtonStyle}"
-                    Command="{Binding OpenAddEditCategories}">
+                    Command="{Binding CloseModalCommand}">
                 <Image x:Name="seasonEditButton"
                        Source="/Resources/Images/Edit.png"
                        HorizontalAlignment="Center" />

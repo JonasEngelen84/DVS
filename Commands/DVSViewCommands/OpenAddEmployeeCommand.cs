@@ -9,10 +9,8 @@ namespace DVS.Commands.DVSViewCommands
 
         public override void Execute(object parameter)
         {
-            //AddEmployeeViewModel addEmployeeViewModel = new(_modalNavigationStore);
-            //_modalNavigationStore.CurrentViewModel = addEmployeeViewModel;
-            AddEditCategorieViewModel addEditCategorieViewModel = new(_modalNavigationStore);
-            _modalNavigationStore.CurrentViewModel = addEditCategorieViewModel;
+            AddEmployeeViewModel addEmployeeViewModel = new(_modalNavigationStore);
+            _modalNavigationStore.CurrentViewModel = addEmployeeViewModel;
         }
     }
 }

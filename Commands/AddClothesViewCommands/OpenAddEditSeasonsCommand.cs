@@ -1,6 +1,6 @@
 ﻿using DVS.Stores;
 
-namespace DVS.Commands.AddViewCommands
+namespace DVS.Commands.AddClothesViewCommands
 {
     class OpenAddEditSeasonsCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {
@@ -8,7 +8,7 @@ namespace DVS.Commands.AddViewCommands
 
         public override void Execute(object parameter)
         {
-            
+
         }
     }
 }

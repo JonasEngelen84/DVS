@@ -1,8 +1,8 @@
 ﻿using DVS.Stores;
 
-namespace DVS.Commands.AddViewCommands
+namespace DVS.Commands
 {
-    public class CancelAddEmployeeCommand(ModalNavigationStore modalNavigationStore) : CommandBase
+    public class CloseModalCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 

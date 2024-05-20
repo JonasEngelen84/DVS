@@ -1,6 +1,6 @@
 ﻿using DVS.ViewModels.AddEditViewModels;
 
-namespace DVS.Commands.AddViewCommands
+namespace DVS.Commands.AddEmployeeViewCommands
 {
     class EnterAddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel) : CommandBase
     {
