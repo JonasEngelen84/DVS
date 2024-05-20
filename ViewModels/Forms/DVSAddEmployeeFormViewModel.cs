@@ -1,6 +1,6 @@
 ﻿namespace DVS.ViewModels.AddViewModels.Forms
 {
-    class DVSAddEditEmployeeFormViewModel : ViewModelBase
+    class DVSAddEmployeeFormViewModel : ViewModelBase
     {
 
     }

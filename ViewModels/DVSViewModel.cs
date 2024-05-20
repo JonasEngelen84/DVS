@@ -1,11 +1,7 @@
-﻿using DVS.Commands;
-using System.Windows.Input;
-using DVS.Commands.DVSViewCommands;
-using DVS.Components;
-using System.Windows;
+﻿using DVS.Commands.DVSViewCommands;
 using DVS.Stores;
+using System.Windows.Input;
 
-// TODO: CircleButtonStyle ändern in Resources (Plus/Minus Button in DVSView.xaml)
 namespace DVS.ViewModels
 {
     internal class DVSViewModel : ViewModelBase

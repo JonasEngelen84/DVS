@@ -25,9 +25,9 @@
             </Border>
 
             <!-- AddClothesForm_Component -->
-            <components:DVSAddEditClothesForm Grid.Row="1"
+            <components:DVSAddClothesForm Grid.Row="1"
                                               Margin="5 10"
-                                              DataContext="{Binding DVSAddEditClothesFormViewModel}" />
+                                              DataContext="{Binding DVSAddClothesFormViewModel}" />
 
             <!-- Button -->
             <Grid Grid.Row="2">

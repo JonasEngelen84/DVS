@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DVS.Components.DVSAddEditEmployeeForm"
+﻿<UserControl x:Class="DVS.Components.DVSAddEmployeeForm"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -92,12 +92,12 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <!-- Employee get-ClothesList -->
+            <!-- Employee get-ClothesListView -->
             <Border Grid.Column="0"
                     Margin="0 0 3 0"
                     Style="{StaticResource BorderAddEmployeeListViewStyle}">
                 <Grid>
-                    <!-- ListView CornerRadius-->
+                    <!-- Bookmark: ListView CornerRadius-->
                     <Grid.OpacityMask>
                         <VisualBrush Visual="{Binding ElementName=border}" />
                     </Grid.OpacityMask>
@@ -109,7 +109,7 @@
                 </Grid>
             </Border>
 
-            <!-- Available clothesList -->
+            <!-- Available clothesListView -->
             <Border Grid.Column="1"
                     Margin="3 0 0 0"
                     Style="{StaticResource BorderAddEmployeeListViewStyle}">

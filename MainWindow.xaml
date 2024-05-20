@@ -29,6 +29,10 @@
         <DataTemplate DataType="{x:Type vms:AddEmployeeViewModel}">
             <views:AddEmployeeView />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vms:AddEditCategorieViewModel}">
+            <views:AddEditCategorieView />
+        </DataTemplate>
     </Window.Resources>
 
     <!--Background-->

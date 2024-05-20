@@ -1,4 +1,4 @@
-﻿namespace DVS.ViewModels
+﻿namespace DVS.ViewModels.ListViewItems
 {
     class EmployeeClothesListViewItemViewModel(int employeeId, string employeeFirstname, string employeeLastname,
         int clothesId, string clothesName, string clothesSize, int clothesQuantity, string comment)

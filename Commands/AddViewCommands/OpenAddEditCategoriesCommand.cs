@@ -10,7 +10,7 @@ namespace DVS.Commands.AddViewCommands
         public override void Execute(object parameter)
         {
             AddEditCategorieViewModel addEditCategorieViewModel = new(_modalNavigationStore);
-            _modalNavigationStore.CurrentViewModel = addEditCategoriesViewModel;
+            _modalNavigationStore.CurrentViewModel = addEditCategorieViewModel;
         }
     }
 }
