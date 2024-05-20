@@ -10,6 +10,7 @@
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
+            <RowDefinition />
         </Grid.RowDefinitions>
         
         <!-- Employee details -->
@@ -84,7 +85,7 @@
                FontWeight="DemiBold"
                Margin="-4 0 0 0"/>
 
-        <!-- Add clothes to employee -->
+        <!-- Add clothes to employee ListViews -->
         <Grid Grid.Row="2"
               Margin="0 0 0 10">
             <Grid.ColumnDefinitions>
@@ -124,6 +125,29 @@
                     <ListView BorderThickness="0" />
                 </Grid>
             </Border>
+        </Grid>
+
+        <!-- Button -->
+        <Grid Grid.Row="3"
+              Margin="0 20 0 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Content="ERSTELLEN"
+                    Width="80"
+                    Height="30"
+                    Style="{StaticResource ModalButtonStyle}"
+                    Command="{Binding EnterAddClothesCommand}" />
+
+            <Button Grid.Column="1"
+                    Content="ABBRECHEN"
+                    Width="80"
+                    Height="30"
+                    Style="{StaticResource ModalButtonStyle}"
+                    Command="{Binding CloseModalCommand}" />
         </Grid>
     </Grid>
 </UserControl>

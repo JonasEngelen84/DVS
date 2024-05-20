@@ -151,5 +151,27 @@
                        HorizontalAlignment="Center" />
             </Button>
         </StackPanel>
+
+        <!-- Button -->
+        <Grid Margin="0 20 0 5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Content="ERSTELLEN"
+                    Width="80"
+                    Height="30"
+                    Style="{StaticResource ModalButtonStyle}"
+                    Command="{Binding EnterAddClothesCommand}" />
+
+            <Button Grid.Column="1"
+                    Content="ABBRECHEN"
+                    Width="80"
+                    Height="30"
+                    Style="{StaticResource ModalButtonStyle}"
+                    Command="{Binding CloseModalCommand}" />
+        </Grid>
     </StackPanel>
 </UserControl>

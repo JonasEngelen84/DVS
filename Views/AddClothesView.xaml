@@ -26,26 +26,8 @@
 
             <!-- AddClothesForm_Component -->
             <components:DVSAddClothesForm Grid.Row="1"
-                                              Margin="5 10"
-                                              DataContext="{Binding DVSAddClothesFormViewModel}" />
-
-            <!-- Button -->
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Button Grid.Column="0"
-                        Content="ERSTELLEN"
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding EnterAddClothesCommand}" />
-
-                <Button Grid.Column="1"
-                        Content="ABBRECHEN"
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding CloseModalCommand}" />
-            </Grid>
+                                          Margin="5 10"
+                                          DataContext="{Binding DVSAddClothesFormViewModel}" />
         </Grid>
     </Border>
 </UserControl>

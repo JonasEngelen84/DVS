@@ -28,24 +28,6 @@
             <components:DVSAddEditCategorieForm Grid.Row="1"
                                                 Margin="5 10"
                                                 DataContext="{Binding DVSAddEditCategorieFormViewModel}" />
-
-            <!-- Button -->
-            <StackPanel Grid.Row="2"
-                        Orientation="Horizontal">
-                <Button Content="LÖSCHEN"
-                        Width="65" 
-                        Height="20"
-                        Margin="5 5 3 20"/>
-                <Button Content="LEEREN"
-                        Width="65"
-                        Height="20"
-                        Margin="2 5 2 20" />
-                <Button Content="BEENDEN"
-                        Width="65"
-                        Height="20"
-                        Margin="3 5 5 20"
-                        Command="{Binding CloseModalCommand}"/>
-            </StackPanel>
         </Grid>
     </Border>
 </UserControl>
