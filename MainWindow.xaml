@@ -7,6 +7,7 @@
         xmlns:custom="clr-namespace:ModalControl;assembly=ModalControl"
         xmlns:vms="clr-namespace:DVS.ViewModels.View_ViewModels"
         mc:Ignorable="d"
+        Icon="/Resources/Images/DVS Icon.png"
         Height="750"
         MinHeight="400"
         Width="1050"
@@ -16,7 +17,6 @@
         AllowsTransparency="True"
         ResizeMode="CanResizeWithGrip"
         Background="Transparent"
-        Icon="/Resources/Images/DVS Icon.png"
         MouseLeftButtonDown="DragWindow"
         StateChanged="WindowStateChanged">
 
@@ -116,7 +116,7 @@
             </Border>
 
             <!-- NuGet Package "SimpleModal.WPF"
-                 handling ModalViewModel -->
+             => handling navigation ModalViewModel -->
             <custom:Modal Grid.Row="1"
                           Panel.ZIndex="1"
                           IsOpen="{Binding IsModalOpen}">
