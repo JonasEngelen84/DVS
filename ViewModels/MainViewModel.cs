@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Input;
 
-namespace DVS.ViewModels
+namespace DVS.ViewModels.Forms
 {
     /// <summary>
     /// Hauptklasse zur Implementierung der allgemeinen Betrefflickeiten der App:

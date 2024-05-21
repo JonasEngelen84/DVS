@@ -4,7 +4,7 @@ using DVS.Stores;
 using System.Windows.Input;
 using DVS.ViewModels.AddViewModels.Forms;
 
-namespace DVS.ViewModels.AddEditViewModels
+namespace DVS.ViewModels.View_ViewModels
 {
     public class AddClothesViewModel : ViewModelBase
     {

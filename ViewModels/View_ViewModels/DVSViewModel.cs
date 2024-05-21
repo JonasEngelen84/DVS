@@ -2,7 +2,7 @@
 using DVS.Stores;
 using System.Windows.Input;
 
-namespace DVS.ViewModels
+namespace DVS.ViewModels.Forms
 {
     public class DVSViewModel(ModalNavigationStore _modalNavigationStore) : ViewModelBase
     {

@@ -1,11 +1,9 @@
-﻿using DVS.Commands;
-using DVS.Commands.AddCategorieViewCommands;
-using DVS.Components;
+﻿using DVS.Commands.AddCategorieViewCommands;
 using DVS.Stores;
 using DVS.ViewModels.AddViewModels.Forms;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.AddEditViewModels
+namespace DVS.ViewModels.View_ViewModels
 {
     public class AddEditCategorieViewModel : ViewModelBase
     {

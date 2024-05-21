@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:DVS.Components"
+             xmlns:components="clr-namespace:DVS.Components.Forms"
              mc:Ignorable="d">
     
     <Border Background="#FFDEDEDE">
@@ -18,10 +18,11 @@
             <Border Grid.Row="0"
                     Background="#FFBFBFBF">
                 <TextBlock Grid.Row="0"
-                           Text="Kategorieen bearbeiten"
+                           Text="Kategorie bearbeiten"
                            FontSize="20"
                            Margin="4 0 "
-                           VerticalAlignment="Center" />
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center"/>
             </Border>
 
             <!-- DVSAddEditCategorieForm -->

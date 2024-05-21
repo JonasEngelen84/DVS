@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:DVS.Views"
         xmlns:custom="clr-namespace:ModalControl;assembly=ModalControl"
-        xmlns:vms="clr-namespace:DVS.ViewModels.AddEditViewModels"
+        xmlns:vms="clr-namespace:DVS.ViewModels.View_ViewModels"
         mc:Ignorable="d"
         Height="750"
         MinHeight="400"
@@ -32,6 +32,10 @@
 
         <DataTemplate DataType="{x:Type vms:AddEditCategorieViewModel}">
             <views:AddEditCategorieView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vms:AddEditSeasonViewModel}">
+            <views:AddEditSeasonView />
         </DataTemplate>
     </Window.Resources>
 

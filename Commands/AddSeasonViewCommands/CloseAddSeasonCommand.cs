@@ -1,9 +1,9 @@
 ﻿using DVS.Stores;
 using DVS.ViewModels.View_ViewModels;
 
-namespace DVS.Commands.AddCategorieViewCommands
+namespace DVS.Commands.AddSeasonViewCommands
 {
-    public class CloseAddCategorieCommand(ModalNavigationStore modalNavigationStore) : CommandBase
+    public class CloseAddSeasonCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
