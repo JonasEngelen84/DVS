@@ -2,9 +2,9 @@
 
 namespace DVS.Components.Forms
 {
-    public partial class DVSAddEditSeasonForm : UserControl
+    public partial class AddEditSeasonForm : UserControl
     {
-        public DVSAddEditSeasonForm()
+        public AddEditSeasonForm()
         {
             InitializeComponent();
         }

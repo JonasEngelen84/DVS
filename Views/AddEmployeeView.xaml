@@ -23,10 +23,10 @@
                            VerticalAlignment="Center" />
             </Border>
 
-            <!-- DVSAddEditEmployeeForm_Component -->
-            <components:DVSAddEmployeeForm Grid.Row="1"
-                                           Margin="5 10"
-                                           DataContext="{Binding DVSAddEmployeeFormViewModel}" />
+            <!-- AddEditEmployeeForm_Component -->
+            <components:AddEditEmployeeForm Grid.Row="1"
+                                            Margin="5 10"
+                                            DataContext="{Binding AddEditEmployeeFormViewModel}" />
         </Grid>
     </Border>
 </UserControl>

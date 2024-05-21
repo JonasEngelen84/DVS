@@ -7,7 +7,7 @@ namespace DVS.ViewModels.View_ViewModels
 {
     public class AddEditSeasonViewModel : ViewModelBase
     {
-        public DVSAddEditSeasonFormViewModel DVSAddEditSeasonFormViewModel { get; }
+        public AddEditSeasonFormViewModel AddEditSeasonFormViewModel { get; }
 
         public AddEditSeasonViewModel(ModalNavigationStore _modalNavigationStore)
         {
@@ -17,7 +17,7 @@ namespace DVS.ViewModels.View_ViewModels
             ICommand clearSeasonListCommand = new ClearSeasonListCommand(this, _modalNavigationStore);
             ICommand closeAddSeasonCommand = new CloseAddSeasonCommand(_modalNavigationStore);
 
-            DVSAddEditSeasonFormViewModel = new DVSAddEditSeasonFormViewModel(submitAddSeasonCommand,
+            AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(submitAddSeasonCommand,
                 editSeasonCommand, deleteSeasonCommand, clearSeasonListCommand, closeAddSeasonCommand);
         }
     }

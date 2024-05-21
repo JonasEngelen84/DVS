@@ -8,13 +8,13 @@ namespace DVS.ViewModels.View_ViewModels
 {
     public class AddEmployeeViewModel : ViewModelBase
     {
-        public DVSAddEmployeeFormViewModel DVSAddEmployeeFormViewModel { get; }
+        public AddEditEmployeeFormViewModel AddEditEmployeeFormViewModel { get; }
 
         public AddEmployeeViewModel(ModalNavigationStore _modalNavigationStore)
         {
             ICommand SubmitAddEmployeeCommand = new SubmitAddEmployeeCommand(this, _modalNavigationStore);
             ICommand CloseModalCommand = new CloseModalCommand(_modalNavigationStore);
-            DVSAddEmployeeFormViewModel = new DVSAddEmployeeFormViewModel(SubmitAddEmployeeCommand, CloseModalCommand);
+            AddEditEmployeeFormViewModel = new AddEditEmployeeFormViewModel(SubmitAddEmployeeCommand, CloseModalCommand);
         }
     }
 }

@@ -25,10 +25,10 @@
                            HorizontalAlignment="Center"/>
             </Border>
 
-            <!-- DVSAddEditCategorieForm -->
-            <components:DVSAddEditCategorieForm Grid.Row="1"
+            <!-- AddEditCategorieForm -->
+            <components:AddEditCategorieForm Grid.Row="1"
                                                 Margin="5 10"
-                                                DataContext="{Binding DVSAddEditCategorieFormViewModel}" />
+                                                DataContext="{Binding AddEditCategorieFormViewModel}" />
         </Grid>
     </Border>
 </UserControl>

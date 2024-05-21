@@ -25,10 +25,10 @@
                            HorizontalAlignment="Center"/>
             </Border>
 
-            <!-- DVSAddEditSeasonForm -->
-            <components:DVSAddEditSeasonForm Grid.Row="1"
+            <!-- AddEditSeasonForm -->
+            <components:AddEditSeasonForm Grid.Row="1"
                                              Margin="5 10"
-                                             DataContext="{Binding DVSAddEditSeasonFormViewModel}" />
+                                             DataContext="{Binding AddEditSeasonFormViewModel}" />
         </Grid>
     </Border>
 </UserControl>

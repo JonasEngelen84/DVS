@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
 
-namespace DVS.ViewModels.AddViewModels.Forms
+namespace DVS.ViewModels.Forms
 {
-    public class DVSAddEditCategorieFormViewModel(ICommand submitAddCategorieCommand, ICommand editCategorieCommand,
+    public class AddEditCategorieFormViewModel(ICommand submitAddCategorieCommand, ICommand editCategorieCommand,
         ICommand deleteCategorieCommand, ICommand clearCategorieListCommand, ICommand closeAddCategorieCommand) : ViewModelBase
     {
         public ICommand SubmitAddCategorieCommand { get; } = submitAddCategorieCommand;

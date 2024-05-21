@@ -2,7 +2,7 @@
 
 namespace DVS.ViewModels.Forms
 {
-    public class DVSAddEditSeasonFormViewModel(ICommand submitAddSeasonCommand, ICommand editSeasonCommand,
+    public class AddEditSeasonFormViewModel(ICommand submitAddSeasonCommand, ICommand editSeasonCommand,
         ICommand deleteSeasonCommand, ICommand clearSeasonListCommand, ICommand closeAddSeasonCommand) : ViewModelBase
     {
         public ICommand SubmitAddSeasonCommand { get; } = submitAddSeasonCommand;

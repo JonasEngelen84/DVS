@@ -1,12 +1,11 @@
-﻿<UserControl x:Class="DVS.Views.AddClothesView"
+﻿<UserControl x:Class="DVS.Views.EditClothesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:DVS.Components.Forms"
              mc:Ignorable="d">
-
-    <!-- Background -->
+    
     <Border Background="#FFDEDEDE">
         <Grid>
             <Grid.RowDefinitions>
@@ -18,8 +17,8 @@
             <!-- Title -->
             <Border Background="#FFBFBFBF">
                 <TextBlock Grid.Row="0"
-                           Text="Bekleidung erstellen"
-                           FontSize="24"
+                           Text="Bekleidung bearbeiten"
+                           FontSize="21"
                            Margin="5 0 "
                            VerticalAlignment="Center" />
             </Border>

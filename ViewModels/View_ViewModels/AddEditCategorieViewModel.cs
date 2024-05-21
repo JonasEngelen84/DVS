@@ -1,13 +1,13 @@
 ﻿using DVS.Commands.AddCategorieViewCommands;
 using DVS.Stores;
-using DVS.ViewModels.AddViewModels.Forms;
+using DVS.ViewModels.Forms;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.View_ViewModels
 {
     public class AddEditCategorieViewModel : ViewModelBase
     {
-        public DVSAddEditCategorieFormViewModel DVSAddEditCategorieFormViewModel { get; }
+        public AddEditCategorieFormViewModel AddEditCategorieFormViewModel { get; }
 
         public AddEditCategorieViewModel(ModalNavigationStore _modalNavigationStore)
         {
@@ -17,7 +17,7 @@ namespace DVS.ViewModels.View_ViewModels
             ICommand clearCategorieListCommand = new ClearCategorieListCommand(this, _modalNavigationStore);
             ICommand closeAddCategorieCommand = new CloseAddCategorieCommand(_modalNavigationStore);
 
-            DVSAddEditCategorieFormViewModel = new DVSAddEditCategorieFormViewModel(submitAddCategorieCommand,
+            AddEditCategorieFormViewModel = new AddEditCategorieFormViewModel(submitAddCategorieCommand,
                 editCategorieCommand, deleteCategorieCommand, clearCategorieListCommand, closeAddCategorieCommand);
         }
     }
