@@ -140,7 +140,7 @@
                     Width="80"
                     Height="30"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding EnterAddClothesCommand}" />
+                    Command="{Binding SubmitAddEmployeeCommand}" />
 
             <Button Grid.Column="1"
                     Content="ABBRECHEN"

@@ -6,14 +6,18 @@ using DVS.ViewModels.AddViewModels.Forms;
 
 namespace DVS.ViewModels.AddEditViewModels
 {
-    class AddClothesViewModel : ViewModelBase
+    public class AddClothesViewModel : ViewModelBase
     {
-        public DVSAddClothesFormViewModel DVSAddClothesViewModel { get; }
+        public DVSAddClothesFormViewModel DVSAddClothesFormViewModel { get; }
 
         public AddClothesViewModel(ModalNavigationStore _modalNavigationStore)
         {
-            ICommand EnterAddClothesCommand = new EnterAddClothesCommand();
-            ICommand CloseModalCommand = new CloseModalCommand(_modalNavigationStore);
+            ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(_modalNavigationStore);
+            ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(_modalNavigationStore);
+            ICommand submitAddClothesCommand = new SubmitAddClothesCommand(this, _modalNavigationStore);
+            ICommand closeModalCommand = new CloseModalCommand(_modalNavigationStore);
+
+            DVSAddClothesFormViewModel = new(openAddEditCategoriesCommand, openAddEditSeasonsCommand, submitAddClothesCommand, closeModalCommand);
         }
     }
 }

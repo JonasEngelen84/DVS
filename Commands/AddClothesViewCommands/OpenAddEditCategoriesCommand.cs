@@ -3,7 +3,7 @@ using DVS.ViewModels.AddEditViewModels;
 
 namespace DVS.Commands.AddClothesViewCommands
 {
-    internal class OpenAddEditCategoriesCommand(ModalNavigationStore modalNavigationStore) : CommandBase
+    public class OpenAddEditCategoriesCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 

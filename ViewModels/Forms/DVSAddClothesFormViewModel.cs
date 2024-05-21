@@ -1,19 +1,13 @@
-﻿using DVS.Commands;
-using DVS.Commands.AddClothesViewCommands;
-using DVS.Stores;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace DVS.ViewModels.AddViewModels.Forms
 {
-    internal class DVSAddClothesFormViewModel : ViewModelBase
+    public class DVSAddClothesFormViewModel(ICommand openAddEditCategoriesCommand, ICommand openAddEditSeasonsCommand,
+        ICommand submitAddClothesCommand, ICommand closeModalCommand) : ViewModelBase
     {
-        public ICommand OpenAddEditCategoriesCommand {  get; }
-        public ICommand CloseModalCommand {  get; }
-
-        public DVSAddClothesFormViewModel(ICommand openAddEditCategoriesCommand, ICommand closeModalCommand)
-        {
-            OpenAddEditCategoriesCommand = openAddEditCategoriesCommand;
-            CloseModalCommand = closeModalCommand;
-        }
+        public ICommand OpenAddEditCategoriesCommand { get; } = openAddEditCategoriesCommand;
+        public ICommand OpenAddEditSeasonsCommand { get; } = openAddEditSeasonsCommand;
+        public ICommand SubmitAddClothesCommand { get; } = submitAddClothesCommand;
+        public ICommand CloseModalCommand { get; } = closeModalCommand;
     }
 }

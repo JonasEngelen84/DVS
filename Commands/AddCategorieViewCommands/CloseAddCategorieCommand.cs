@@ -1,9 +1,9 @@
 ﻿using DVS.Stores;
 using DVS.ViewModels.AddEditViewModels;
 
-namespace DVS.Commands.DVSViewCommands
+namespace DVS.Commands.AddCategorieViewCommands
 {
-    public class OpenAddClothesCommand(ModalNavigationStore modalNavigationStore) : CommandBase
+    public class CloseAddCategorieCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 

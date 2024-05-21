@@ -9,8 +9,8 @@ namespace DVS.ViewModels
         public EmployeesClothesListViewViewModel EmployeesClothesListViewViewModel { get; } = new();
         public ClothesListViewViewModel ClothesListViewViewModel { get; } = new();
 
-        public ICommand OpenFilterClothesCommand { get; } = new OpenFilterClothesListCommand(_modalNavigationStore);
-        public ICommand OpenFilterEmployeeCommand { get; } = new OpenFilterEmployeeListCommand(_modalNavigationStore);
+        public ICommand OpenFilterClothesListCommand { get; } = new OpenFilterClothesListCommand(_modalNavigationStore);
+        public ICommand OpenFilterEmployeeListCommand { get; } = new OpenFilterEmployeeListCommand(_modalNavigationStore);
         public ICommand OpenAddEmployeeCommand { get; } = new OpenAddEmployeeCommand(_modalNavigationStore);
         public ICommand OpenAddClothesCommand { get; } = new OpenAddClothesCommand(_modalNavigationStore);
         public ICommand OpenEditEmployeeClothesCommand { get; } = new OpenEditEmployeeClothesCommand(_modalNavigationStore);

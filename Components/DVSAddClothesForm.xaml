@@ -145,7 +145,7 @@
 
             <Button Margin="5 0 0 9" 
                     Style="{StaticResource EditComboBoxButtonStyle}"
-                    Command="{Binding CloseModalCommand}">
+                    Command="{Binding OpenAddEditSeasonCommand}">
                 <Image x:Name="seasonEditButton"
                        Source="/Resources/Images/Edit.png"
                        HorizontalAlignment="Center" />
@@ -164,7 +164,7 @@
                     Width="80"
                     Height="30"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding EnterAddClothesCommand}" />
+                    Command="{Binding SubmitAddClothesCommand}" />
 
             <Button Grid.Column="1"
                     Content="ABBRECHEN"
