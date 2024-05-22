@@ -1,5 +1,5 @@
 ﻿using DVS.Commands;
-using DVS.Commands.AddClothesViewCommands;
+using DVS.Commands.ClothesCommands;
 using DVS.Stores;
 using System.Windows.Input;
 using DVS.ViewModels.Forms;

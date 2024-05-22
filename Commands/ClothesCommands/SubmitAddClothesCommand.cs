@@ -1,7 +1,7 @@
 ﻿using DVS.Stores;
 using DVS.ViewModels.View_ViewModels;
 
-namespace DVS.Commands.AddClothesViewCommands
+namespace DVS.Commands.ClothesCommands
 {
     class SubmitAddClothesCommand(AddClothesViewModel addClothesViewModel, ModalNavigationStore modalNavigationStore) : CommandBase
     {

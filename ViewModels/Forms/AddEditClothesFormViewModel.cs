@@ -2,12 +2,20 @@
 
 namespace DVS.ViewModels.Forms
 {
-    public class AddEditClothesFormViewModel(ICommand openAddEditCategoriesCommand, ICommand openAddEditSeasonsCommand,
-        ICommand submitAddClothesCommand, ICommand closeModalCommand) : ViewModelBase
+    public class AddEditClothesFormViewModel : ViewModelBase
     {
-        public ICommand OpenAddEditCategoriesCommand { get; } = openAddEditCategoriesCommand;
-        public ICommand OpenAddEditSeasonsCommand { get; } = openAddEditSeasonsCommand;
-        public ICommand SubmitAddClothesCommand { get; } = submitAddClothesCommand;
-        public ICommand CloseModalCommand { get; } = closeModalCommand;
+        public ICommand OpenAddEditCategoriesCommand { get; }
+        public ICommand OpenAddEditSeasonsCommand { get; }
+        public ICommand SubmitAddClothesCommand { get; }
+        public ICommand CloseModalCommand { get; }
+
+        public AddEditClothesFormViewModel(ICommand openAddEditCategoriesCommand, ICommand openAddEditSeasonsCommand,
+            ICommand submitAddClothesCommand, ICommand closeModalCommand)
+        {
+            OpenAddEditCategoriesCommand = openAddEditCategoriesCommand;
+            OpenAddEditSeasonsCommand = openAddEditSeasonsCommand;
+            SubmitAddClothesCommand = submitAddClothesCommand;
+            CloseModalCommand = closeModalCommand;
+        }
     }
 }

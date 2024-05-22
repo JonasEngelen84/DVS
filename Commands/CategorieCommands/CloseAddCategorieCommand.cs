@@ -1,7 +1,7 @@
 ﻿using DVS.Stores;
 using DVS.ViewModels.View_ViewModels;
 
-namespace DVS.Commands.AddCategorieViewCommands
+namespace DVS.Commands.CategorieCommands
 {
     public class CloseAddCategorieCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {

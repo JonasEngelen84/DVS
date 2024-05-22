@@ -4,18 +4,33 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
-    public class DVSViewModel(ModalNavigationStore _modalNavigationStore) : ViewModelBase
+    public class DVSViewModel : ViewModelBase
     {
-        public EmployeesClothesListViewViewModel EmployeesClothesListViewViewModel { get; } = new();
-        public ClothesListViewViewModel ClothesListViewViewModel { get; } = new();
+        public EmployeesClothesListViewViewModel EmployeesClothesListViewViewModel { get; }
+        public ClothesListViewViewModel ClothesListViewViewModel { get; }
 
-        public ICommand OpenFilterClothesListCommand { get; } = new OpenFilterClothesListCommand(_modalNavigationStore);
-        public ICommand OpenFilterEmployeeListCommand { get; } = new OpenFilterEmployeeListCommand(_modalNavigationStore);
-        public ICommand OpenAddEmployeeCommand { get; } = new OpenAddEmployeeCommand(_modalNavigationStore);
-        public ICommand OpenAddClothesCommand { get; } = new OpenAddClothesCommand(_modalNavigationStore);
-        public ICommand OpenEditEmployeeClothesCommand { get; } = new OpenEditEmployeeClothesCommand(_modalNavigationStore);
-        public ICommand SaveCommand { get; } = new SaveCommand();
-        public ICommand PlusCommand { get; } = new PlusCommand();
-        public ICommand MinusCommand { get; } = new MinusCommand();
+        public ICommand OpenFilterClothesListCommand { get; }
+        public ICommand OpenFilterEmployeeListCommand { get; }
+        public ICommand OpenAddEmployeeCommand { get; }
+        public ICommand OpenAddClothesCommand { get; }
+        public ICommand OpenEditEmployeeClothesCommand { get; }
+        public ICommand SaveCommand { get; }
+        public ICommand PlusCommand { get; }
+        public ICommand MinusCommand { get; }
+
+        public DVSViewModel(ModalNavigationStore _modalNavigationStore)
+        {
+            EmployeesClothesListViewViewModel = new();
+            ClothesListViewViewModel = new();
+
+            OpenFilterClothesListCommand = new OpenFilterClothesListCommand(_modalNavigationStore);
+            OpenFilterEmployeeListCommand = new OpenFilterEmployeeListCommand(_modalNavigationStore);
+            OpenAddEmployeeCommand = new OpenAddEmployeeCommand(_modalNavigationStore);
+            OpenAddClothesCommand = new OpenAddClothesCommand(_modalNavigationStore);
+            OpenEditEmployeeClothesCommand = new OpenEditEmployeeClothesCommand(_modalNavigationStore);
+            SaveCommand = new SaveCommand();
+            PlusCommand = new PlusCommand();
+            MinusCommand = new MinusCommand();
+        }
     }
 }

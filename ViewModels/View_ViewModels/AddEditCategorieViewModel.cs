@@ -1,4 +1,4 @@
-﻿using DVS.Commands.AddCategorieViewCommands;
+﻿using DVS.Commands.CategorieCommands;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
 using System.Windows.Input;
