@@ -3,10 +3,19 @@ using DVS.ViewModels.View_ViewModels;
 
 namespace DVS.Commands.CategorieCommands
 {
-    public class ClearCategorieListCommand(AddEditCategorieViewModel addEditCategorieViewModel, ModalNavigationStore modalNavigationStore) : CommandBase
+    public class ClearCategorieListCommand : CommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
+        private readonly ModalNavigationStore _modalNavigationStore;
 
-        public override void Execute(object parameter) => _modalNavigationStore.Close();
+        public ClearCategorieListCommand(AddEditCategorieViewModel addEditCategorieViewModel, ModalNavigationStore modalNavigationStore)
+        {
+            _modalNavigationStore = modalNavigationStore;
+        }
+
+        public override void Execute(object parameter)
+        {
+            AddClothesViewModel addClothesViewModel = new(_modalNavigationStore);
+            _modalNavigationStore.CurrentViewModel = addClothesViewModel;
+        }
     }
 }

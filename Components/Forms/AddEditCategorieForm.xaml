@@ -19,7 +19,7 @@
         <!-- Edit Categorie-->
         <StackPanel Orientation="Horizontal"
                     Margin="0 10 0 20">
-            <TextBox Text="Saison wählen"
+            <TextBox Text="Kategorie wählen"
                      Width="105"
                      Style="{StaticResource TextBoxStyle}" />
             <Button Content="BEARBEITEN"

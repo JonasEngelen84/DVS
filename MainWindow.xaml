@@ -37,6 +37,14 @@
         <DataTemplate DataType="{x:Type vms:AddEditSeasonViewModel}">
             <views:AddEditSeasonView />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vms:EditClothesViewModel}">
+            <views:EditClothesView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vms:EditEmployeeViewModel}">
+            <views:EditEmployeeView />
+        </DataTemplate>
     </Window.Resources>
 
     <!--Background-->

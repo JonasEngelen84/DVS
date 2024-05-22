@@ -164,7 +164,7 @@
                     Width="80"
                     Height="30"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding SubmitAddClothesCommand}" />
+                    Command="{Binding SubmitAddEditClothesCommand}" />
 
             <Button Grid.Column="1"
                     Content="ABBRECHEN"

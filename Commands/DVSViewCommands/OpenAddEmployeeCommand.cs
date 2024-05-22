@@ -3,9 +3,14 @@ using DVS.ViewModels.View_ViewModels;
 
 namespace DVS.Commands.DVSViewCommands
 {
-    internal class OpenAddEmployeeCommand(ModalNavigationStore modalNavigationStore) : CommandBase
+    public class OpenAddEmployeeCommand : CommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
+        private readonly ModalNavigationStore _modalNavigationStore;
+
+        public OpenAddEmployeeCommand(ModalNavigationStore modalNavigationStore)
+        {
+            _modalNavigationStore = modalNavigationStore;
+        }
 
         public override void Execute(object parameter)
         {

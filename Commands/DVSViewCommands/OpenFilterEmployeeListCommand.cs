@@ -2,8 +2,15 @@
 
 namespace DVS.Commands.DVSViewCommands
 {
-    internal class OpenFilterEmployeeListCommand(ModalNavigationStore modalNavigationStore) : CommandBase
+    public class OpenFilterEmployeeListCommand : CommandBase
     {
+        private readonly ModalNavigationStore _modalNavigationStore;
+
+        public OpenFilterEmployeeListCommand(ModalNavigationStore modalNavigationStore)
+        {
+            _modalNavigationStore = modalNavigationStore;
+        }
+
         public override void Execute(object parameter)
         {
             

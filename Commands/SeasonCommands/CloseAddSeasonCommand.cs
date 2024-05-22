@@ -3,9 +3,14 @@ using DVS.ViewModels.View_ViewModels;
 
 namespace DVS.Commands.SeasonCommands
 {
-    public class CloseAddSeasonCommand(ModalNavigationStore modalNavigationStore) : CommandBase
+    public class CloseAddSeasonCommand : CommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
+        private readonly ModalNavigationStore _modalNavigationStore;
+
+        public CloseAddSeasonCommand(ModalNavigationStore modalNavigationStore)
+        {
+            _modalNavigationStore = modalNavigationStore;
+        }
 
         public override void Execute(object parameter)
         {

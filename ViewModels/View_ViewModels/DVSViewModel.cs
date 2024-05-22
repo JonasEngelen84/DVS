@@ -28,9 +28,9 @@ namespace DVS.ViewModels.Forms
             OpenAddEmployeeCommand = new OpenAddEmployeeCommand(_modalNavigationStore);
             OpenAddClothesCommand = new OpenAddClothesCommand(_modalNavigationStore);
             OpenEditEmployeeClothesCommand = new OpenEditEmployeeClothesCommand(_modalNavigationStore);
-            SaveCommand = new SaveCommand();
-            PlusCommand = new PlusCommand();
-            MinusCommand = new MinusCommand();
+            SaveCommand = new SaveCommand(_modalNavigationStore);
+            PlusCommand = new PlusCommand(_modalNavigationStore);
+            MinusCommand = new MinusCommand(_modalNavigationStore);
         }
     }
 }

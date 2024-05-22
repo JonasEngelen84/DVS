@@ -4,12 +4,12 @@ namespace DVS.ViewModels.AddViewModels.Forms
 {
     public class AddEditEmployeeFormViewModel : ViewModelBase
     {
-        public ICommand SubmitAddEmployeeCommand { get; }
+        public ICommand SubmitAddEditEmployeeCommand { get; }
         public ICommand CloseModalCommand { get; }
 
         public AddEditEmployeeFormViewModel(ICommand submitAddEmployeeCommand, ICommand closeModalCommand)
         {
-            SubmitAddEmployeeCommand = submitAddEmployeeCommand;
+            SubmitAddEditEmployeeCommand = submitAddEmployeeCommand;
             CloseModalCommand = closeModalCommand;
         }
     }

@@ -3,9 +3,14 @@ using DVS.ViewModels.View_ViewModels;
 
 namespace DVS.Commands.CategorieCommands
 {
-    public class CloseAddCategorieCommand(ModalNavigationStore modalNavigationStore) : CommandBase
+    public class CloseAddCategorieCommand : CommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
+        private readonly ModalNavigationStore _modalNavigationStore;
+
+        public CloseAddCategorieCommand(ModalNavigationStore modalNavigationStore)
+        {
+            _modalNavigationStore = modalNavigationStore;
+        }
 
         public override void Execute(object parameter)
         {

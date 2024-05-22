@@ -19,7 +19,7 @@
                     Background="#FFBFBFBF">
                 <TextBlock Grid.Row="0"
                            Text="Saison bearbeiten"
-                           FontSize="20"
+                           FontSize="23"
                            Margin="4 0 "
                            VerticalAlignment="Center" 
                            HorizontalAlignment="Center"/>
