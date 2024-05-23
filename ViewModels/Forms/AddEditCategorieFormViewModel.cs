@@ -5,19 +5,19 @@ namespace DVS.ViewModels.Forms
     public class AddEditCategorieFormViewModel : ViewModelBase
     {
         public ICommand SubmitAddCategorieCommand { get; }
-        public ICommand EditCategorieCommand { get; }
+        public ICommand SubmitEditCategorieCommand { get; }
         public ICommand DeleteCategorieCommand { get; }
         public ICommand ClearCategorieListCommand { get; }
         public ICommand CloseAddCategorieCommand { get; } 
 
-        public AddEditCategorieFormViewModel(ICommand submitAddCategorieCommand, ICommand editCategorieCommand,
+        public AddEditCategorieFormViewModel(ICommand submitAddCategorieCommand, ICommand submitEditCategorieCommand,
             ICommand deleteCategorieCommand, ICommand clearCategorieListCommand, ICommand closeAddCategorieCommand)
         {
             SubmitAddCategorieCommand = submitAddCategorieCommand;
-            EditCategorieCommand = editCategorieCommand;
+            SubmitEditCategorieCommand = submitEditCategorieCommand;
             DeleteCategorieCommand = deleteCategorieCommand;
             ClearCategorieListCommand = clearCategorieListCommand;
             CloseAddCategorieCommand = closeAddCategorieCommand;
-    }
+        }
     }
 }

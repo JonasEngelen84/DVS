@@ -13,24 +13,24 @@ namespace DVS.ViewModels.Forms
         public ICommand OpenFilterEmployeeListCommand { get; }
         public ICommand OpenAddEmployeeCommand { get; }
         public ICommand OpenAddClothesCommand { get; }
-        public ICommand OpenEditEmployeeClothesCommand { get; }
+        public ICommand OpenEditCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand PlusCommand { get; }
         public ICommand MinusCommand { get; }
 
-        public DVSViewModel(ModalNavigationStore _modalNavigationStore)
+        public DVSViewModel(SelectedClothesStore selectedClothesStore, SelectedEmployeeClothesStore selectedEmployeeClothesStore, ModalNavigationStore modalNavigationStore)
         {
             EmployeesClothesListViewViewModel = new();
             ClothesListViewViewModel = new();
 
-            OpenFilterClothesListCommand = new OpenFilterClothesListCommand(_modalNavigationStore);
-            OpenFilterEmployeeListCommand = new OpenFilterEmployeeListCommand(_modalNavigationStore);
-            OpenAddEmployeeCommand = new OpenAddEmployeeCommand(_modalNavigationStore);
-            OpenAddClothesCommand = new OpenAddClothesCommand(_modalNavigationStore);
-            OpenEditEmployeeClothesCommand = new OpenEditEmployeeClothesCommand(_modalNavigationStore);
-            SaveCommand = new SaveCommand(_modalNavigationStore);
-            PlusCommand = new PlusCommand(_modalNavigationStore);
-            MinusCommand = new MinusCommand(_modalNavigationStore);
+            OpenFilterClothesListCommand = new OpenFilterClothesListCommand(modalNavigationStore);
+            OpenFilterEmployeeListCommand = new OpenFilterEmployeeListCommand(modalNavigationStore);
+            OpenAddEmployeeCommand = new OpenAddEmployeeCommand(modalNavigationStore);
+            OpenAddClothesCommand = new OpenAddClothesCommand(modalNavigationStore);
+            OpenEditCommand = new OpenEditCommand(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);
+            SaveCommand = new SaveCommand(modalNavigationStore);
+            PlusCommand = new PlusCommand(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);
+            MinusCommand = new MinusCommand(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);
         }
     }
 }

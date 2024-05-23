@@ -2,10 +2,9 @@
 
 namespace DVS.Stores
 {
-    class SelectedClothesStore
+    public class SelectedClothesStore
     {
         private ClothesModel _selectedClothesModel;
-
         public ClothesModel SelectedClothesModel
         {
             get
@@ -15,7 +14,10 @@ namespace DVS.Stores
             set
             {
                 _selectedClothesModel = value;
+                SelectedClothesModelChanged?.Invoke();
             }
         }
+
+        public event Action SelectedClothesModelChanged;
     }
 }

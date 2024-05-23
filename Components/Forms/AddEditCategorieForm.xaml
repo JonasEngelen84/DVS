@@ -25,7 +25,7 @@
             <Button Content="BEARBEITEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding SubmitAddCategorieCommand}" />
+                    Command="{Binding SubmitEditCategorieCommand}" />
         </StackPanel>
 
         <Grid>

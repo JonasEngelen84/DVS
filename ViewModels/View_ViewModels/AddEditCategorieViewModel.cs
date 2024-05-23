@@ -9,13 +9,13 @@ namespace DVS.ViewModels.View_ViewModels
     {
         public AddEditCategorieFormViewModel AddEditCategorieFormViewModel { get; }
 
-        public AddEditCategorieViewModel(ModalNavigationStore _modalNavigationStore)
+        public AddEditCategorieViewModel(ModalNavigationStore modalNavigationStore)
         {
-            ICommand submitAddCategorieCommand = new SubmitAddCategorieCommand(this, _modalNavigationStore);
-            ICommand editCategorieCommand = new EditCategorieCommand(this, _modalNavigationStore);
-            ICommand deleteCategorieCommand = new DeleteCategorieCommand(this, _modalNavigationStore);
-            ICommand clearCategorieListCommand = new ClearCategorieListCommand(this, _modalNavigationStore);
-            ICommand closeAddCategorieCommand = new CloseAddCategorieCommand(_modalNavigationStore);
+            ICommand submitAddCategorieCommand = new SubmitAddCategorieCommand(this, modalNavigationStore);
+            ICommand editCategorieCommand = new EditCategorieCommand(this, modalNavigationStore);
+            ICommand deleteCategorieCommand = new DeleteCategorieCommand(this, modalNavigationStore);
+            ICommand clearCategorieListCommand = new ClearCategorieListCommand(this, modalNavigationStore);
+            ICommand closeAddCategorieCommand = new CloseAddCategorieCommand(modalNavigationStore);
 
             AddEditCategorieFormViewModel = new AddEditCategorieFormViewModel(submitAddCategorieCommand,
                 editCategorieCommand, deleteCategorieCommand, clearCategorieListCommand, closeAddCategorieCommand);

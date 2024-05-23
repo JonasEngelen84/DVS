@@ -10,12 +10,12 @@ namespace DVS.ViewModels.View_ViewModels
     {
         public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
 
-        public AddClothesViewModel(ModalNavigationStore _modalNavigationStore)
+        public AddClothesViewModel(ModalNavigationStore modalNavigationStore)
         {
-            ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(_modalNavigationStore);
-            ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(_modalNavigationStore);
-            ICommand submitAddClothesCommand = new SubmitAddClothesCommand(this, _modalNavigationStore);
-            ICommand closeModalCommand = new CloseModalCommand(_modalNavigationStore);
+            ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore);
+            ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(modalNavigationStore);
+            ICommand submitAddClothesCommand = new SubmitAddClothesCommand(this, modalNavigationStore);
+            ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
 
             AddEditClothesFormViewModel = new(openAddEditCategoriesCommand, openAddEditSeasonsCommand, submitAddClothesCommand, closeModalCommand);
         }

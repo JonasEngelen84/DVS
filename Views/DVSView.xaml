@@ -70,7 +70,7 @@
                     <!-- Edit -->
                     <MenuItem Header="BEARBEITEN"
                               Style="{StaticResource MainMenuItem}"
-                              Command="{Binding OpenEditEmployeeClothesCommand}">
+                              Command="{Binding OpenEditCommand}">
                     </MenuItem>
 
                     <!-- Save -->

@@ -18,16 +18,21 @@ namespace DVS.ViewModels.Forms
     class MainViewModel : ViewModelBase
     {
         public DVSViewModel DVSViewModel { get; }
+        private readonly SelectedClothesStore _selectedClothesStore;
+        private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
 
         // Pointer auf das aktuelle Modal(ViewModel) 
         public ViewModelBase CurrentModalViewModel => _modalNavigationStore.CurrentViewModel;
+
         // Pointer auf "_modalNavigationStore.IsOpen" zur Prüfung ob das aktuelle Modal bereits geöffnet ist.
         public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
-        public MainViewModel(DVSViewModel dVSViewModel, ModalNavigationStore modalNavigationStore)
+        public MainViewModel(DVSViewModel dVSViewModel, SelectedClothesStore selectedClothesStore, SelectedEmployeeClothesStore selectedEmployeeClothesStore, ModalNavigationStore modalNavigationStore)
         {
             DVSViewModel = dVSViewModel;
+            _selectedClothesStore = selectedClothesStore;
+            _selectedEmployeeClothesStore = selectedEmployeeClothesStore;
             _modalNavigationStore = modalNavigationStore;
 
             _modalNavigationStore.CurrentViewModelChanged += ModalNavigationStore_CurrentViewModelChanged;

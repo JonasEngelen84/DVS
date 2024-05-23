@@ -1,15 +1,24 @@
-﻿namespace DVS.ViewModels.ListViewItems
+﻿using DVS.Models;
+
+namespace DVS.ViewModels.ListViewItems
 {
-    class EmployeeClothesListViewItemViewModel(int employeeId, string employeeFirstname, string employeeLastname,
-        int clothesId, string clothesName, string clothesSize, int clothesQuantity, string comment)
+    public class EmployeeClothesListViewItemViewModel : ViewModelBase
     {
-        public int EmployeeId { get; set; } = employeeId;
-        public string EmployeeFirstname { get; set; } = employeeFirstname;
-        public string EmployeeLastname { get; set; } = employeeLastname;
-        public int ClothesId { get; set; } = clothesId;
-        public string ClothesName { get; set; } = clothesName;
-        public string ClothesSize { get; set; } = clothesSize;
-        public int ClothesQuantity { get; set; } = clothesQuantity;
-        public string Comment { get; set; } = comment;
+        public EmployeeModel EmployeeModel { get; private set; }
+
+        public EmployeeClothesListViewItemViewModel(EmployeeModel employeeModel)
+        {
+            EmployeeModel = employeeModel;
+        }
+        
+        public int EmployeeId => EmployeeModel.Id;
+        public string Lastname => EmployeeModel.Lastname;
+        public string Firstname => EmployeeModel.Firstname;
+        public int ClothesId;
+        public string ClothesName;
+        public string Size;
+        public string Quantity;
+        public string Comment;
+
     }
 }
