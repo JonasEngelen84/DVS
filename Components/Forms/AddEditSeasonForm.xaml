@@ -47,7 +47,8 @@
                             CornerRadius="5" />
 
                     <ListView BorderThickness="0" 
-                              Width="105"/>
+                              Width="105"
+                              ItemsSource="{Binding Season}"/>
                 </Grid>
             </Border>
 

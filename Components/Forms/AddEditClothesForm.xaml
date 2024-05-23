@@ -21,7 +21,7 @@
                        Style="{StaticResource ModalTextStyle}" />
 
             <TextBox Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}" />
+                     Style="{StaticResource TextBoxStyle}"/>
         </Grid>
 
         <!-- Name -->
@@ -36,7 +36,8 @@
                        Style="{StaticResource ModalTextStyle}" />
 
             <TextBox Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}" />
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
         <!-- Size -->
@@ -51,7 +52,8 @@
                        Style="{StaticResource ModalTextStyle}" />
 
             <TextBox Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}" />
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Size, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
         <!-- Quantity -->
@@ -66,7 +68,8 @@
                        Style="{StaticResource ModalTextStyle}" />
 
             <TextBox Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}" />
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
         <!-- Comment -->
@@ -81,33 +84,21 @@
                        Style="{StaticResource ModalTextStyle}" />
 
             <TextBox Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}" />
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
-        <Label Content="Kategorie"
-               FontSize="13"
-               FontWeight="DemiBold"
+        <Label Content="Kategorie:"
+               FontSize="14"
+               FontWeight="Bold"
                Margin="-4 10 0 0" />
 
         <!-- Categorie ComboBox and Button  -->
         <StackPanel Orientation="Horizontal">
-            <ComboBox Name="ComboBoxCategorie"
-                      Text="Kategorie"
-                      Margin="1 0 0 5"
-                      Style="{StaticResource ComboBoxStyle}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Rectangle Fill="{Binding Name}"
-                                       Width="20"
-                                       Height="20"
-                                       Margin="5" />
-                            <TextBlock Text="{Binding Name}"
-                                       FontSize="20" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <ComboBox Margin="1 0 0 5"
+                      Style="{StaticResource ComboBoxStyle}"
+                      ItemsSource="{Binding Categories}"
+                      SelectedItem="{Binding SelectedCategorie, Mode=TwoWay}" />
 
             <Button Margin="5 -4 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
@@ -118,30 +109,17 @@
             </Button>
         </StackPanel>
 
-        <Label Content="Saison"
-               FontSize="13"
-               FontWeight="DemiBold"
+        <Label Content="Saison:"
+               FontSize="14"
+               FontWeight="Bold"
                Margin="-4 0 0 -3" />
 
         <!-- Season ComboBox and Button -->
         <StackPanel Orientation="Horizontal">
-            <ComboBox Name="ComboBoxSeason"
-                      Text="Saison"
-                      Margin="1 0 0 10"
-                      Style="{StaticResource ComboBoxStyle}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Rectangle Fill="{Binding Name}"
-                                       Width="20"
-                                       Height="20"
-                                       Margin="5" />
-                            <TextBlock Text="{Binding Name}"
-                                       FontSize="20" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+            <ComboBox Margin="1 0 0 10"
+                      Style="{StaticResource ComboBoxStyle}"
+                      ItemsSource="{Binding Seasons}"
+                      SelectedItem="{Binding SelectedSeason, Mode=TwoWay}" />
 
             <Button Margin="5 0 0 9" 
                     Style="{StaticResource EditComboBoxButtonStyle}"

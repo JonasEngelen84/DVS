@@ -2,6 +2,7 @@
 using DVS.Commands.ClothesCommands;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.View_ViewModels
@@ -17,7 +18,8 @@ namespace DVS.ViewModels.View_ViewModels
             ICommand closeModalCommand = new CloseModalCommand(_modalNavigationStore);
             ICommand SubmitEditClothesCommand = new SubmitEditClothesCommand(this, _modalNavigationStore);
 
-            AddEditClothesFormViewModel = new AddEditClothesFormViewModel(openAddEditCategoriesCommand, openAddEditSeasonsCommand, closeModalCommand, SubmitEditClothesCommand);
+            AddEditClothesFormViewModel = new AddEditClothesFormViewModel(openAddEditCategoriesCommand,
+                openAddEditSeasonsCommand, closeModalCommand, SubmitEditClothesCommand);
         }
     }
 }

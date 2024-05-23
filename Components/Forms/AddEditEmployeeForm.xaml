@@ -30,7 +30,8 @@
                            Style="{StaticResource ModalTextStyle}" />
 
                 <TextBox Grid.Column="1"
-                         Style="{StaticResource TextBoxStyle}" />
+                         Style="{StaticResource TextBoxStyle}"
+                         Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
 
             <!-- Lastname -->
@@ -45,7 +46,8 @@
                            Style="{StaticResource ModalTextStyle}" />
 
                 <TextBox Grid.Column="1"
-                         Style="{StaticResource TextBoxStyle}" />
+                         Style="{StaticResource TextBoxStyle}"
+                         Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
 
             <!-- Forname -->
@@ -60,7 +62,8 @@
                            Style="{StaticResource ModalTextStyle}" />
 
                 <TextBox Grid.Column="1"
-                         Style="{StaticResource TextBoxStyle}" />
+                         Style="{StaticResource TextBoxStyle}"
+                         Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
 
             <!-- Comment -->
@@ -75,14 +78,15 @@
                            Style="{StaticResource ModalTextStyle}" />
 
                 <TextBox Grid.Column="1"
-                         Style="{StaticResource TextBoxStyle}" />
+                         Style="{StaticResource TextBoxStyle}"
+                         Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </StackPanel>
 
         <Label Grid.Row="1"
-               Content="Bekleidung hinzufügen"
-               FontSize="13"
-               FontWeight="DemiBold"
+               Content="Bekleidung hinzufügen:"
+               FontSize="14"
+               FontWeight="Bold"
                Margin="-4 0 0 0"/>
 
         <!-- Add clothes to employee ListViews -->

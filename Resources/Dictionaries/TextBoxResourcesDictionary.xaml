@@ -6,5 +6,6 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Height" Value="20" />
         <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="DemiBold"/>
     </Style>
 </ResourceDictionary>

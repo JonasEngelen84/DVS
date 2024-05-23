@@ -3,7 +3,9 @@
     
     <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
         <Setter Property="Width" Value="180" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Height" Value="20" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="DemiBold" />
     </Style>
 </ResourceDictionary>
