@@ -4,17 +4,17 @@ namespace DVS.Stores
 {
     public class SelectedEmployeeClothesStore
     {
-        private EmployeeModel _selectedEmployeeClothesModel;
+        private EmployeeModel _selectedEmployeeClothes;
 
-        public EmployeeModel SelectedEmployeeClothesModel
+        public EmployeeModel SelectedEmployeeClothes
         {
             get
             {
-                return _selectedEmployeeClothesModel;
+                return _selectedEmployeeClothes;
             }
             set
             {
-                _selectedEmployeeClothesModel = value;
+                _selectedEmployeeClothes = value;
                 SelectedEmployeeClothesModelChanged?.Invoke();
             }
         }

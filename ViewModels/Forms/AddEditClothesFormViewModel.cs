@@ -13,8 +13,6 @@ namespace DVS.ViewModels.Forms
         public ICommand CloseModalCommand { get; } = closeModalCommand;
 
         private ObservableCollection<string> categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];
-        private ObservableCollection<string> seasons = ["Sommer", "Winter", "Saisonlos"];
-
         public ObservableCollection<string> Categories
         {
             get { return categories; }
@@ -25,6 +23,7 @@ namespace DVS.ViewModels.Forms
             }
         }
 
+        private ObservableCollection<string> seasons = ["Sommer", "Winter", "Saisonlos"];
         public ObservableCollection<string> Seasons
         {
             get { return seasons; }

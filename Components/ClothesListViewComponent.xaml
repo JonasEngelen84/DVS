@@ -8,7 +8,7 @@
         <ListView x:Name="ClothesListView"
                   Style="{StaticResource ListviewStyle}"
                   ItemsSource="{Binding ClothesCollection}"
-                  SelectedItem="{Binding SelectedClothesItem}">
+                  SelectedItem="{Binding SelectedClothesItem, Mode=TwoWay}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id"

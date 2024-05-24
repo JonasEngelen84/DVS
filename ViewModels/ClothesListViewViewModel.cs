@@ -1,34 +1,31 @@
 ﻿using DVS.Models;
+using DVS.Stores;
 using System.Collections.ObjectModel;
 
 namespace DVS.ViewModels
 {
     public class ClothesListViewViewModel
     {
-        // Bereitstellung einer ObservableCollection der vorhandenen Kleidung "_clothesCollection".
-        private readonly ObservableCollection<ClothesModel> _clothesCollection;
+        private readonly SelectedClothesStore _selectedClothesStore;
+        private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
+        private readonly ModalNavigationStore _modalNavigationStore;
 
+        // Bereitstellung einer ObservableCollection der vorhandenen Kleidung "_clothesCollection".
         // Zur encapsulation (private) von "_clothesCollection" wird ein IEnumerable als pointer verwendet.
+        private readonly ObservableCollection<ClothesModel> _clothesCollection;
         public IEnumerable<ClothesModel> ClothesCollection => _clothesCollection;
 
-        public ClothesListViewViewModel()
+        public ClothesListViewViewModel(
+            SelectedClothesStore selectedClothesStore,
+            SelectedEmployeeClothesStore selectedEmployeeClothesStore,
+            ModalNavigationStore modalNavigationStore)
         {
+            _selectedClothesStore = selectedClothesStore;
+            _selectedEmployeeClothesStore = selectedEmployeeClothesStore;
+            _modalNavigationStore = modalNavigationStore;
             _clothesCollection = [];
 
             FillCL();
-        }
-
-        private ClothesListViewViewModel _selectedClothesItem;
-        public ClothesListViewViewModel SelectedClothesItem
-        {
-            get
-            {
-                return _selectedClothesItem;
-            }
-            set
-            {
-                _selectedClothesItem = value;
-            }
         }
 
         private void FillCL()

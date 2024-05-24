@@ -1,8 +1,8 @@
 ﻿using DVS.Commands;
-using DVS.Commands.ClothesCommands;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
 using System.Collections.ObjectModel;
+using DVS.Commands.ClothesCommands;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.View_ViewModels

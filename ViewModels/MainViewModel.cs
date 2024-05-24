@@ -25,7 +25,7 @@ namespace DVS.ViewModels.Forms
         // Pointer auf das aktuelle Modal(ViewModel) 
         public ViewModelBase CurrentModalViewModel => _modalNavigationStore.CurrentViewModel;
 
-        // Pointer auf "_modalNavigationStore.IsOpen" zur Prüfung ob das aktuelle Modal bereits geöffnet ist.
+        // Pointer auf "_modalNavigationStore.IsOpen" zur Prüfung ob ein Modal bereits geöffnet ist.
         public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
         public MainViewModel(DVSViewModel dVSViewModel, SelectedClothesStore selectedClothesStore, SelectedEmployeeClothesStore selectedEmployeeClothesStore, ModalNavigationStore modalNavigationStore)
@@ -38,7 +38,7 @@ namespace DVS.ViewModels.Forms
             _modalNavigationStore.CurrentViewModelChanged += ModalNavigationStore_CurrentViewModelChanged;
         }
 
-        // TODO:???
+        // Vorheriges Modal-ViewModel vernichten.
         protected override void Dispose()
         {
             _modalNavigationStore.CurrentViewModelChanged -= ModalNavigationStore_CurrentViewModelChanged;
@@ -46,7 +46,7 @@ namespace DVS.ViewModels.Forms
             base.Dispose();
         }
 
-        // Aktualisieren des aktuellen Modal.
+        // Aktualisieren des Modal-ViewModel.
         private void ModalNavigationStore_CurrentViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentModalViewModel));

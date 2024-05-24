@@ -1,58 +1,52 @@
 ﻿using DVS.Models;
+using DVS.Stores;
+using DVS.ViewModels.ListViewItems;
 using System.Collections.ObjectModel;
 
 namespace DVS.ViewModels
 {
     public class EmployeesClothesListViewViewModel : ViewModelBase
     {
-        // Bereitstellung einer ObservableCollection der Mitarbeiter-Kleidung
-        private readonly ObservableCollection<EmployeeModel> _employeeClothesList;
+        private readonly SelectedClothesStore _selectedClothesStore;
+        private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
+        private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly ClothesListViewViewModel _clothesListViewViewModel;
 
-        // Zur encapsulation (private) von "_employeeClothesList" wird ein IEnumerable als pointer verwendet.
-        public IEnumerable<EmployeeModel> EmployeeClothesList => _employeeClothesList;
+        private readonly List<EmployeeModel> _employeeList;
 
-        public EmployeesClothesListViewViewModel()
+        private readonly ObservableCollection<EmployeeClothesListViewItemViewModel> _employeeClothesList;
+        public IEnumerable<EmployeeClothesListViewItemViewModel> EmployeeClothesList => _employeeClothesList;
+
+        public EmployeesClothesListViewViewModel(
+            SelectedClothesStore selectedClothesStore,
+            SelectedEmployeeClothesStore selectedEmployeeClothesStore,
+            ModalNavigationStore modalNavigationStore,
+            ClothesListViewViewModel clothesListViewViewModel)
         {
+            _selectedClothesStore = selectedClothesStore;
+            _selectedEmployeeClothesStore = selectedEmployeeClothesStore;
+            _modalNavigationStore = modalNavigationStore;
+            _clothesListViewViewModel = clothesListViewViewModel;
+            _employeeList = [];
             _employeeClothesList = [];
-
-            FillEL();
         }
 
-        private EmployeesClothesListViewViewModel _selectedEmployeeClothesItem;
-        public EmployeesClothesListViewViewModel SelectedEmployeeClothesItem
+        public EmployeeClothesListViewItemViewModel SelectedEmployeeClothesListViewItemViewModel
         {
             get
             {
-                return _selectedEmployeeClothesItem;
+                return _employeeClothesList
+                    .FirstOrDefault(y => y.EmployeeModel?.Id == _selectedEmployeeClothesStore.SelectedEmployeeClothes?.Id);
             }
             set
             {
-                _selectedEmployeeClothesItem = value;
+                _selectedEmployeeClothesStore.SelectedEmployeeClothes = value?.EmployeeModel;
             }
         }
 
-        private void FillEL()
+        private void AddEmployeeClothesListViewItem()
         {
-            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
-            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
-            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
-            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
-            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
-            _employeeClothesList.Add(new EmployeeModel(000, "Jonas", "Engelen"));
-            _employeeClothesList.Add(new EmployeeModel(123, "Markus", "Oettken"));
-            _employeeClothesList.Add(new EmployeeModel(123, "Markus", "Oettken"));
-            _employeeClothesList.Add(new EmployeeModel(123, "Markus", "Oettken"));
-            _employeeClothesList.Add(new EmployeeModel(123, "Markus", "Oettken"));
-            _employeeClothesList.Add(new EmployeeModel(456, "Nadine", "Molik"));
-            _employeeClothesList.Add(new EmployeeModel(456, "Nadine", "Molik"));
-            _employeeClothesList.Add(new EmployeeModel(456, "Nadine", "Molik"));
-            _employeeClothesList.Add(new EmployeeModel(456, "Nadine", "Molik"));
-            _employeeClothesList.Add(new EmployeeModel(134, "Kemal", "Yüksel"));
-            _employeeClothesList.Add(new EmployeeModel(134, "Kemal", "Yüksel"));
-            _employeeClothesList.Add(new EmployeeModel(134, "Kemal", "Yüksel"));
-            _employeeClothesList.Add(new EmployeeModel(133, "Irfan", "Yüksel"));
-            _employeeClothesList.Add(new EmployeeModel(133, "Irfan", "Yüksel"));
-            _employeeClothesList.Add(new EmployeeModel(133, "Irfan", "Yüksel"));
+            
         }
     }
 }

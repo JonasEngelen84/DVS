@@ -18,10 +18,13 @@ namespace DVS.ViewModels.Forms
         public ICommand PlusCommand { get; }
         public ICommand MinusCommand { get; }
 
-        public DVSViewModel(SelectedClothesStore selectedClothesStore, SelectedEmployeeClothesStore selectedEmployeeClothesStore, ModalNavigationStore modalNavigationStore)
+        public DVSViewModel(
+            SelectedClothesStore selectedClothesStore,
+            SelectedEmployeeClothesStore selectedEmployeeClothesStore,
+            ModalNavigationStore modalNavigationStore)
         {
-            EmployeesClothesListViewViewModel = new();
-            ClothesListViewViewModel = new();
+            ClothesListViewViewModel = new(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);
+            EmployeesClothesListViewViewModel = new(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore, ClothesListViewViewModel);
 
             OpenFilterClothesListCommand = new OpenFilterClothesListCommand(modalNavigationStore);
             OpenFilterEmployeeListCommand = new OpenFilterEmployeeListCommand(modalNavigationStore);
