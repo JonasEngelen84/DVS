@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -28,9 +29,10 @@ namespace DVS.ViewModels.Forms
             }
         }
 
+        // TODO: Sort CategoryCollection
         private readonly ObservableCollection<string> _categoryCollection;
         private readonly CollectionViewSource _categoryCollectionViewSource;
-        public IEnumerable<string> CategoryCollection => _categoryCollection;
+        private string _selectedCategory;
 
 
         public ICommand SubmitAddCategoryCommand { get; }
@@ -48,14 +50,39 @@ namespace DVS.ViewModels.Forms
             ClearCategoryListCommand = clearCategoryListCommand;
             CloseAddCategoryCommand = closeAddCategoryCommand;
             _categoryCollection = ["Sweatshirt", "Hose", "Pullover", "Kopfbedeckung", "Jacke", "Schuhwerk", "Hemd"];
+            _categoryCollectionViewSource = new CollectionViewSource { Source = _categoryCollection };
+            _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
 
             EditCategory = "Kategorie wählen";
         }
 
-        public void AddCategory()
+        public IEnumerable<string> CategoryCollection => _categoryCollectionViewSource.View.Cast<string>();
+        //public IEnumerable<string> CategoryCollection => (IEnumerable<string>)_categoryCollectionViewSource;
+
+        public string SelectedCategory
         {
-            _categoryCollection.Add(AddNewCategory);
+            get => _selectedCategory;
+            set
+            {
+                if (_selectedCategory != value)
+                {
+                    _selectedCategory = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private void AddCategory(string category)
+        {
+            _categoryCollection.Add(category);
+            _categoryCollectionViewSource.View.Refresh();
             AddNewCategory = "";
+            OnPropertyChanged(nameof(CategoryCollection));
+        }
+
+        private void Edit_Category()
+        {
+
         }
     }
 }
