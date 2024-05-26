@@ -10,8 +10,6 @@ namespace DVS.ViewModels
         private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        // Bereitstellung einer ObservableCollection der vorhandenen Kleidung "_clothesCollection".
-        // Zur encapsulation (private) von "_clothesCollection" wird ein IEnumerable als pointer verwendet.
         private readonly ObservableCollection<ClothesModel> _clothesCollection;
         public IEnumerable<ClothesModel> ClothesCollection => _clothesCollection;
 

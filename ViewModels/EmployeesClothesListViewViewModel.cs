@@ -14,39 +14,40 @@ namespace DVS.ViewModels
 
         private readonly List<EmployeeModel> _employeeList;
 
-        private readonly ObservableCollection<EmployeeClothesListViewItemViewModel> _employeeClothesList;
-        public IEnumerable<EmployeeClothesListViewItemViewModel> EmployeeClothesList => _employeeClothesList;
+        private readonly ObservableCollection<EmployeeClothesListViewItemViewModel> _employeeClothesListViewItemCollection;
+        public IEnumerable<EmployeeClothesListViewItemViewModel> EmployeeClothesListViewItemCollection => _employeeClothesListViewItemCollection;
 
-        public EmployeesClothesListViewViewModel(
-            SelectedClothesStore selectedClothesStore,
-            SelectedEmployeeClothesStore selectedEmployeeClothesStore,
-            ModalNavigationStore modalNavigationStore,
-            ClothesListViewViewModel clothesListViewViewModel)
+        public EmployeesClothesListViewViewModel(SelectedClothesStore selectedClothesStore, SelectedEmployeeClothesStore selectedEmployeeClothesStore,
+            ModalNavigationStore modalNavigationStore, ClothesListViewViewModel clothesListViewViewModel)
         {
             _selectedClothesStore = selectedClothesStore;
             _selectedEmployeeClothesStore = selectedEmployeeClothesStore;
             _modalNavigationStore = modalNavigationStore;
             _clothesListViewViewModel = clothesListViewViewModel;
             _employeeList = [];
-            _employeeClothesList = [];
+            _employeeClothesListViewItemCollection = [];
         }
 
-        public EmployeeClothesListViewItemViewModel SelectedEmployeeClothesListViewItemViewModel
-        {
-            get
-            {
-                return _employeeClothesList
-                    .FirstOrDefault(y => y.EmployeeModel?.Id == _selectedEmployeeClothesStore.SelectedEmployeeClothes?.Id);
-            }
-            set
-            {
-                _selectedEmployeeClothesStore.SelectedEmployeeClothes = value?.EmployeeModel;
-            }
-        }
+        //public EmployeeClothesListViewItemViewModel SelectedEmployeeClothesListViewItemViewModel
+        //{
+        //    get
+        //    {
+        //        return _employeeClothesCollection
+        //            .FirstOrDefault(y => y.Employee?.Id == _selectedEmployeeClothesStore.SelectedEmployeeClothes?.Id);
+        //    }
+        //    set
+        //    {
+        //        _selectedEmployeeClothesStore.SelectedEmployeeClothes = value?.Employee;
+        //    }
+        //}
 
-        private void AddEmployeeClothesListViewItem()
+        //TODO: AddEmployee
+        private void AddEmployeeClothesListViewItem(EmployeeModel employee)
         {
-            
+            foreach(ClothesModel clothes in employee.EmployeeClothesList)
+            {
+                _employeeClothesListViewItemCollection.Add(new EmployeeClothesListViewItemViewModel(employee, clothes));
+            }
         }
     }
 }

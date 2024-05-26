@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DVS.Views.AddEditCategorieView"
+﻿<UserControl x:Class="DVS.Views.AddEditCategoryView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -26,9 +26,9 @@
             </Border>
 
             <!-- AddEditCategorieForm -->
-            <components:AddEditCategorieForm Grid.Row="1"
+            <components:AddEditCategoryForm Grid.Row="1"
                                                 Margin="5 10"
-                                                DataContext="{Binding AddEditCategorieFormViewModel}" />
+                                                DataContext="{Binding AddEditCategoryFormViewModel}" />
         </Grid>
     </Border>
 </UserControl>

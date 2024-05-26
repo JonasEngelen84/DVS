@@ -34,15 +34,15 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string _selectedCategorie;
-        public string SelectedCategorie
+        private string _selectedCategory;
+        public string SelectedCategory
         {
-            get => _selectedCategorie;
+            get => _selectedCategory;
             set
             {
-                if (_selectedCategorie != value)
+                if (_selectedCategory != value)
                 {
-                    _selectedCategorie = value;
+                    _selectedCategory = value;
                     OnPropertyChanged();
                 }
             }
@@ -51,12 +51,12 @@ namespace DVS.ViewModels.Forms
         private string _selectedSeason;
         public string SelectedSeason
         {
-            get => _selectedCategorie;
+            get => _selectedCategory;
             set
             {
-                if (_selectedCategorie != value)
+                if (_selectedCategory != value)
                 {
-                    _selectedCategorie = value;
+                    _selectedCategory = value;
                     OnPropertyChanged();
                 }
             }

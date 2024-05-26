@@ -1,13 +1,13 @@
 ﻿using DVS.Stores;
 using DVS.ViewModels.View_ViewModels;
 
-namespace DVS.Commands.CategorieCommands
+namespace DVS.Commands.CategoryCommands
 {
-    public class DeleteCategorieCommand : CommandBase
+    public class ClearCategoryListCommand : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public DeleteCategorieCommand(AddEditCategorieViewModel addEditCategorieViewModel, ModalNavigationStore modalNavigationStore)
+        public ClearCategoryListCommand(AddEditCategoryViewModel addEditCategorieViewModel, ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
         }

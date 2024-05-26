@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DVS.Components.Forms.AddEditCategorieForm"
+﻿<UserControl x:Class="DVS.Components.Forms.AddEditCategoryForm"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,26 +6,27 @@
              mc:Ignorable="d">
     
     <StackPanel>
-        <!-- Add Categorie-->
+        <!-- Add Category-->
         <StackPanel Orientation="Horizontal">
             <TextBox Width="105"
-                     Style="{StaticResource TextBoxStyle}" />
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding AddNewCategory, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="ERSTELLEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding SubmitAddCategorieCommand}" />
+                    Command="{Binding SubmitAddCategoryCommand}" />
         </StackPanel>
 
-        <!-- Edit Categorie-->
+        <!-- Edit Category-->
         <StackPanel Orientation="Horizontal"
                     Margin="0 10 0 20">
-            <TextBox Text="Kategorie wählen"
-                     Width="105"
-                     Style="{StaticResource TextBoxStyle}" />
+            <TextBox Width="105"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding EditCategory}" />
             <Button Content="BEARBEITEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding SubmitEditCategorieCommand}" />
+                    Command="{Binding SubmitEditCategoryCommand}" />
         </StackPanel>
 
         <Grid>
@@ -34,7 +35,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <!-- Categorie-ListView-->
+            <!-- Category-ListView-->
             <Border Grid.Column="0"
                     Style="{StaticResource BorderAddEmployeeListViewStyle}">
                 <Grid>
@@ -47,7 +48,8 @@
                             CornerRadius="5" />
 
                     <ListView BorderThickness="0"
-                              Width="105" />
+                              Width="105" 
+                              ItemsSource="{Binding CategoryCollection}"/>
                 </Grid>
             </Border>
 
@@ -56,15 +58,15 @@
                 <Button Content="LÖSCHEN"
                         Margin="5 0 0 0"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding DeleteCategorieCommand}" />
+                        Command="{Binding DeleteCategoryCommand}" />
                 <Button Content="LEEREN"
                         Margin="5 5 0 0"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding ClearCategorieListCommand}" />
+                        Command="{Binding ClearCategoryListCommand}" />
                 <Button Content="BEENDEN"
                         Margin="5 5 0 0"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding CloseAddCategorieCommand}" />
+                        Command="{Binding CloseAddCategoryCommand}" />
             </StackPanel>
         </Grid>
     </StackPanel>

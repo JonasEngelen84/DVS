@@ -30,8 +30,8 @@
             <views:AddEmployeeView />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type vms:AddEditCategorieViewModel}">
-            <views:AddEditCategorieView />
+        <DataTemplate DataType="{x:Type vms:AddEditCategoryViewModel}">
+            <views:AddEditCategoryView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type vms:AddEditSeasonViewModel}">

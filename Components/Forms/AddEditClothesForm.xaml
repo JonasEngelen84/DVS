@@ -98,7 +98,7 @@
             <ComboBox Margin="1 0 0 5"
                       Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Categories}"
-                      SelectedItem="{Binding SelectedCategorie, Mode=TwoWay}" />
+                      SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" />
 
             <Button Margin="5 -4 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"

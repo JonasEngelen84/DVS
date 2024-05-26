@@ -4,7 +4,7 @@ namespace DVS.ViewModels
 {
     public class ViewModelBase : INotifyPropertyChanged
     {
-        //TODO: Klasse dokumentieren
+        //TODO: ViewModelBase dokumentieren
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged(string? propertyName = null)
