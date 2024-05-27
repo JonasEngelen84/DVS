@@ -16,7 +16,7 @@ namespace DVS.Commands.CategoryCommands
 
         public override void Execute(object parameter)
         {
-            //_addEditCategoryViewModel.AddEditCategoryFormViewModel.AddCategory();
+            
         }
     }
 }

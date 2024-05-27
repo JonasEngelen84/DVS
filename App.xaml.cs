@@ -15,6 +15,10 @@ namespace DVS
         // Bestehen die ganze App-Lebensdauer und werden der MainViewModel Instanz übergeben.
         private readonly SelectedClothesStore _selectedClothesStore;
         private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
+        private readonly SelectedCategoryStore _selectedCategoryStore;
+        private readonly SelectedSeasonStore _selectedSeasonStore;
+        private readonly ClothesStore _clothesStore;
+        private readonly EmployeeStore _employeeStore;
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly DVSViewModel _dVSViewModel;
 
@@ -22,8 +26,14 @@ namespace DVS
         {
             _selectedClothesStore = new();
             _selectedEmployeeClothesStore = new();
+            _selectedCategoryStore = new();
+            _selectedSeasonStore = new();
             _modalNavigationStore = new();
-            _dVSViewModel = new(_selectedClothesStore, _selectedEmployeeClothesStore, _modalNavigationStore);
+            _dVSViewModel = new(_selectedClothesStore,
+                                _selectedEmployeeClothesStore,
+                                _selectedCategoryStore,
+                                _selectedSeasonStore,
+                                _modalNavigationStore);
         }
 
 
@@ -35,7 +45,12 @@ namespace DVS
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_dVSViewModel, _selectedClothesStore, _selectedEmployeeClothesStore, _modalNavigationStore)
+                DataContext = new MainViewModel(_dVSViewModel,
+                                                _selectedClothesStore,
+                                                _selectedEmployeeClothesStore,
+                                                _selectedCategoryStore,
+                                                _selectedSeasonStore,
+                                                _modalNavigationStore)
             };
 
             MainWindow.Show();

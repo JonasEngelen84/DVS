@@ -28,12 +28,9 @@ namespace DVS.ViewModels.Forms
                 OnPropertyChanged(nameof(EditCategory));
             }
         }
-
-        // TODO: Sort CategoryCollection
+                
         private readonly ObservableCollection<string> _categoryCollection;
         private readonly CollectionViewSource _categoryCollectionViewSource;
-        private string _selectedCategory;
-
 
         public ICommand SubmitAddCategoryCommand { get; }
         public ICommand SubmitEditCategoryCommand { get; }
@@ -57,24 +54,10 @@ namespace DVS.ViewModels.Forms
         }
 
         public IEnumerable<string> CategoryCollection => _categoryCollectionViewSource.View.Cast<string>();
-        //public IEnumerable<string> CategoryCollection => (IEnumerable<string>)_categoryCollectionViewSource;
 
-        public string SelectedCategory
+        private void AddCategory()
         {
-            get => _selectedCategory;
-            set
-            {
-                if (_selectedCategory != value)
-                {
-                    _selectedCategory = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private void AddCategory(string category)
-        {
-            _categoryCollection.Add(category);
+            _categoryCollection.Add(AddNewCategory);
             _categoryCollectionViewSource.View.Refresh();
             AddNewCategory = "";
             OnPropertyChanged(nameof(CategoryCollection));
