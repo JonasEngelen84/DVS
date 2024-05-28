@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using DVS.Stores;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
+    //TODO: erstellte Instanz zerstören (Dispose)
     public class AddEditCategoryFormViewModel : ViewModelBase
     {
         private string _addNewCategory;
@@ -29,6 +31,8 @@ namespace DVS.ViewModels.Forms
             }
         }
                 
+        private readonly SelectedCategoryStore _selectedCategoryStore;
+
         private readonly ObservableCollection<string> _categoryCollection;
         private readonly CollectionViewSource _categoryCollectionViewSource;
 
@@ -36,16 +40,17 @@ namespace DVS.ViewModels.Forms
         public ICommand SubmitEditCategoryCommand { get; }
         public ICommand DeleteCategoryCommand { get; }
         public ICommand ClearCategoryListCommand { get; }
-        public ICommand CloseAddCategoryCommand { get; } 
+        public ICommand CloseAddEditCategoryCommand { get; } 
 
-        public AddEditCategoryFormViewModel(ICommand submitAddCategoryCommand, ICommand submitEditCategoryCommand,
+        public AddEditCategoryFormViewModel(SelectedCategoryStore selectedCategoryStore, ICommand submitAddCategoryCommand, ICommand submitEditCategoryCommand,
             ICommand deleteCategoryCommand, ICommand clearCategoryListCommand, ICommand closeAddCategoryCommand)
         {
+            _selectedCategoryStore = selectedCategoryStore;
             SubmitAddCategoryCommand = submitAddCategoryCommand;
             SubmitEditCategoryCommand = submitEditCategoryCommand;
             DeleteCategoryCommand = deleteCategoryCommand;
             ClearCategoryListCommand = clearCategoryListCommand;
-            CloseAddCategoryCommand = closeAddCategoryCommand;
+            CloseAddEditCategoryCommand = closeAddCategoryCommand;
             _categoryCollection = ["Sweatshirt", "Hose", "Pullover", "Kopfbedeckung", "Jacke", "Schuhwerk", "Hemd"];
             _categoryCollectionViewSource = new CollectionViewSource { Source = _categoryCollection };
             _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
@@ -55,7 +60,7 @@ namespace DVS.ViewModels.Forms
 
         public IEnumerable<string> CategoryCollection => _categoryCollectionViewSource.View.Cast<string>();
 
-        private void AddCategory()
+        private void SelectedCategoryStore_AddCategory()
         {
             _categoryCollection.Add(AddNewCategory);
             _categoryCollectionViewSource.View.Refresh();

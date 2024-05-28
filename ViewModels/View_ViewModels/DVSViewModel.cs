@@ -19,7 +19,7 @@ namespace DVS.ViewModels.Forms
         public ICommand MinusCommand { get; }
 
         public DVSViewModel(SelectedClothesStore selectedClothesStore, SelectedEmployeeClothesStore selectedEmployeeClothesStore,
-            SelectedCategoryStore _selectedCategoryStore, SelectedSeasonStore _selectedSeasonStore, ModalNavigationStore modalNavigationStore)
+            SelectedCategoryStore selectedCategoryStore, SelectedSeasonStore selectedSeasonStore, ModalNavigationStore modalNavigationStore)
         {
             ClothesListViewViewModel = new(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);
             EmployeesClothesListViewViewModel = new(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore, ClothesListViewViewModel);
@@ -27,8 +27,8 @@ namespace DVS.ViewModels.Forms
             OpenFilterClothesListCommand = new OpenFilterClothesListCommand(modalNavigationStore);
             OpenFilterEmployeeListCommand = new OpenFilterEmployeeListCommand(modalNavigationStore);
             OpenAddEmployeeCommand = new OpenAddEmployeeCommand(modalNavigationStore);
-            OpenAddClothesCommand = new OpenAddClothesCommand(modalNavigationStore);
-            OpenEditCommand = new OpenEditCommand(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);
+            OpenAddClothesCommand = new OpenAddClothesCommand(modalNavigationStore, selectedCategoryStore);
+            OpenEditCommand = new OpenEditCommand(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore, selectedCategoryStore);
             SaveCommand = new SaveCommand(modalNavigationStore);
             PlusCommand = new PlusCommand(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);
             MinusCommand = new MinusCommand(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);

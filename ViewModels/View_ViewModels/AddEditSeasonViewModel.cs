@@ -9,13 +9,13 @@ namespace DVS.ViewModels.View_ViewModels
     {
         public AddEditSeasonFormViewModel AddEditSeasonFormViewModel { get; }
 
-        public AddEditSeasonViewModel(ModalNavigationStore modalNavigationStore)
+        public AddEditSeasonViewModel(ModalNavigationStore modalNavigationStore, SelectedCategoryStore selectedCategoryStore)
         {
-            ICommand submitAddSeasonCommand = new SubmitAddSeasonCommand(this, modalNavigationStore);
+            ICommand submitAddSeasonCommand = new AddSeasonCommand(this, modalNavigationStore);
             ICommand editSeasonCommand = new EditSeasonCommand(this, modalNavigationStore);
             ICommand deleteSeasonCommand = new DeleteSeasonCommand(this, modalNavigationStore);
             ICommand clearSeasonListCommand = new ClearSeasonListCommand(this, modalNavigationStore);
-            ICommand closeAddSeasonCommand = new CloseAddSeasonCommand(modalNavigationStore);
+            ICommand closeAddSeasonCommand = new CloseAddEditSeasonCommand(modalNavigationStore, selectedCategoryStore);
 
             AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(submitAddSeasonCommand,
                 editSeasonCommand, deleteSeasonCommand, clearSeasonListCommand, closeAddSeasonCommand);

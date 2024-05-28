@@ -3,19 +3,19 @@ using DVS.ViewModels.View_ViewModels;
 
 namespace DVS.Commands.SeasonCommands
 {
-    public class SubmitAddSeasonCommand : CommandBase
+    public class AddSeasonCommand : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly SelectedCategoryStore _selectedCategoryStore;
 
-        public SubmitAddSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, ModalNavigationStore modalNavigationStore)
+        public AddSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
         }
 
         public override void Execute(object parameter)
         {
-            AddClothesViewModel addClothesViewModel = new(_modalNavigationStore);
-            _modalNavigationStore.CurrentViewModel = addClothesViewModel;
+            
         }
     }
 }

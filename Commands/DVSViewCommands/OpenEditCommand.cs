@@ -6,15 +6,18 @@ namespace DVS.Commands.DVSViewCommands
 {
     public class OpenEditCommand : CommandBase
     {
-        private readonly SelectedClothesStore selectedClothesStore;
-        private readonly SelectedEmployeeClothesStore selectedEmployeeClothesStore;
+        private readonly SelectedClothesStore _selectedClothesStore;
+        private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly SelectedCategoryStore _selectedCategoryStore;
 
-        public OpenEditCommand(SelectedClothesStore selectedClothesStore, SelectedEmployeeClothesStore selectedEmployeeClothesStore, ModalNavigationStore modalNavigationStore)
+        public OpenEditCommand(SelectedClothesStore selectedClothesStore, SelectedEmployeeClothesStore selectedEmployeeClothesStore,
+            ModalNavigationStore modalNavigationStore, SelectedCategoryStore selectedCategoryStore)
         {
-            this.selectedClothesStore = selectedClothesStore;
-            this.selectedEmployeeClothesStore = selectedEmployeeClothesStore;
+            _selectedClothesStore = selectedClothesStore;
+            _selectedEmployeeClothesStore = selectedEmployeeClothesStore;
             _modalNavigationStore = modalNavigationStore;
+            _selectedCategoryStore = selectedCategoryStore;
         }
 
         int i = 0;
@@ -22,7 +25,7 @@ namespace DVS.Commands.DVSViewCommands
         {
             if(i%2 == 0)
             {
-                EditClothesViewModel editClothesViewModel = new EditClothesViewModel(_modalNavigationStore);
+                EditClothesViewModel editClothesViewModel = new EditClothesViewModel(_modalNavigationStore, _selectedCategoryStore);
                 _modalNavigationStore.CurrentViewModel = editClothesViewModel;
             }
             else

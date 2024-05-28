@@ -14,8 +14,7 @@ namespace DVS.Commands.CategoryCommands
 
         public override void Execute(object parameter)
         {
-            AddClothesViewModel addClothesViewModel = new(_modalNavigationStore);
-            _modalNavigationStore.CurrentViewModel = addClothesViewModel;
+            
         }
     }
 }

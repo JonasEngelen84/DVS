@@ -6,6 +6,7 @@ namespace DVS.Commands.SeasonCommands
     public class DeleteSeasonCommand : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly SelectedCategoryStore _selectedCategoryStore;
 
         public DeleteSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, ModalNavigationStore modalNavigationStore)
         {
@@ -14,8 +15,7 @@ namespace DVS.Commands.SeasonCommands
 
         public override void Execute(object parameter)
         {
-            AddClothesViewModel addClothesViewModel = new(_modalNavigationStore);
-            _modalNavigationStore.CurrentViewModel = addClothesViewModel;
+            
         }
     }
 }
