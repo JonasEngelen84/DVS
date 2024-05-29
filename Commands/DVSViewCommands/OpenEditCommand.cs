@@ -36,7 +36,13 @@ namespace DVS.Commands.DVSViewCommands
         {
             if(i%2 == 0)
             {
-                EditClothesViewModel editClothesViewModel = new EditClothesViewModel(_modalNavigationStore, _categoryStore, _seasonStore, _selectedCategoryStore, _selectedSeasonStore);
+                EditClothesViewModel editClothesViewModel = new EditClothesViewModel(
+                    _modalNavigationStore,
+                    _categoryStore,
+                    _seasonStore,
+                    _selectedCategoryStore,
+                    _selectedSeasonStore);
+
                 _modalNavigationStore.CurrentViewModel = editClothesViewModel;
             }
             else
