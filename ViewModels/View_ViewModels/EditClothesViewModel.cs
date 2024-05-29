@@ -11,15 +11,31 @@ namespace DVS.ViewModels.View_ViewModels
     {
         public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
 
-        public EditClothesViewModel(ModalNavigationStore modalNavigationStore, SelectedCategoryStore selectedCategoryStore)
+        public EditClothesViewModel(ModalNavigationStore modalNavigationStore,
+                                    CategoryStore categoryStore,
+                                    SeasonStore seasonStore,
+                                    SelectedCategoryStore selectedCategoryStore,
+                                    SelectedSeasonStore selectedSeasonStore)
         {
-            ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore, selectedCategoryStore);
-            ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(modalNavigationStore, selectedCategoryStore);
+            ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore,
+                                                                               categoryStore,
+                                                                               seasonStore,
+                                                                               selectedCategoryStore,
+                                                                               selectedSeasonStore);
+
+            ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(modalNavigationStore,
+                                                                               categoryStore,
+                                                                               seasonStore,
+                                                                               selectedCategoryStore,
+                                                                               selectedSeasonStore);
+
             ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
             ICommand submitEditClothesCommand = new SubmitEditClothesCommand(this, modalNavigationStore);
 
             AddEditClothesFormViewModel = new AddEditClothesFormViewModel(openAddEditCategoriesCommand,
-                openAddEditSeasonsCommand, closeModalCommand, submitEditClothesCommand);
+                                                                          openAddEditSeasonsCommand,
+                                                                          closeModalCommand,
+                                                                          submitEditClothesCommand);
         }
     }
 }

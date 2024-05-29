@@ -6,7 +6,6 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
-    //TODO: erstellte Instanz zerstören (Dispose)
     public class AddEditCategoryFormViewModel : ViewModelBase
     {
         private string _addNewCategory;
@@ -42,7 +41,8 @@ namespace DVS.ViewModels.Forms
         public ICommand ClearCategoryListCommand { get; }
         public ICommand CloseAddEditCategoryCommand { get; } 
 
-        public AddEditCategoryFormViewModel(SelectedCategoryStore selectedCategoryStore, ICommand submitAddCategoryCommand, ICommand submitEditCategoryCommand,
+        public AddEditCategoryFormViewModel(CategoryStore categoryStore, SelectedCategoryStore selectedCategoryStore,
+            ICommand submitAddCategoryCommand, ICommand submitEditCategoryCommand,
             ICommand deleteCategoryCommand, ICommand clearCategoryListCommand, ICommand closeAddCategoryCommand)
         {
             _selectedCategoryStore = selectedCategoryStore;
@@ -60,7 +60,12 @@ namespace DVS.ViewModels.Forms
 
         public IEnumerable<string> CategoryCollection => _categoryCollectionViewSource.View.Cast<string>();
 
-        private void SelectedCategoryStore_AddCategory()
+        private void Load()
+        {
+
+        }
+
+        private void CategoryStore_AddCategory()
         {
             _categoryCollection.Add(AddNewCategory);
             _categoryCollectionViewSource.View.Refresh();
