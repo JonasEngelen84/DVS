@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DVS.Components.Forms.AddEditClothesForm"
+﻿<UserControl x:Class="DVS.Components.Forms.EditClothesForm"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -142,14 +142,14 @@
                     Width="80"
                     Height="30"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding SubmitAddEditClothesCommand}" />
+                    Command="{Binding EditClothesCommand}" />
 
             <Button Grid.Column="1"
                     Content="ABBRECHEN"
                     Width="80"
                     Height="30"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding CloseModalCommand}" />
+                    Command="{Binding CancelClothesCommand}" />
         </Grid>
     </StackPanel>
 </UserControl>

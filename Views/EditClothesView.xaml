@@ -23,10 +23,10 @@
                            VerticalAlignment="Center" />
             </Border>
 
-            <!-- AddEditClothesForm_Component -->
-            <components:AddEditClothesForm Grid.Row="1"
+            <!-- EditClothesForm_Component -->
+            <components:EditClothesForm Grid.Row="1"
                                            Margin="5 10"
-                                           DataContext="{Binding AddEditClothesFormViewModel}" />
+                                           DataContext="{Binding EditClothesFormViewModel}" />
         </Grid>
     </Border>
 </UserControl>

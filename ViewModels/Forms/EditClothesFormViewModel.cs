@@ -3,17 +3,17 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
-    public class AddEditClothesFormViewModel(
+    public class EditClothesFormViewModel(
         ICommand openAddEditCategoriesCommand,
         ICommand openAddEditSeasonsCommand,
-        ICommand submitAddClothesCommand,
-        ICommand closeModalCommand)
+        ICommand editClothesCommand,
+        ICommand cancelClothesCommand)
         : ViewModelBase
     {
         public ICommand OpenAddEditCategoriesCommand { get; } = openAddEditCategoriesCommand;
         public ICommand OpenAddEditSeasonsCommand { get; } = openAddEditSeasonsCommand;
-        public ICommand SubmitAddEditClothesCommand { get; } = submitAddClothesCommand;
-        public ICommand CloseModalCommand { get; } = closeModalCommand;
+        public ICommand EditClothesCommand { get; } = editClothesCommand;
+        public ICommand CancelClothesCommand { get; } = cancelClothesCommand;
 
         private ObservableCollection<string> categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];
         public ObservableCollection<string> Categories

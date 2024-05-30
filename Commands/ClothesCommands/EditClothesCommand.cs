@@ -3,11 +3,11 @@ using DVS.ViewModels.View_ViewModels;
 
 namespace DVS.Commands.ClothesCommands
 {
-    public class SubmitEditClothesCommand : CommandBase
+    public class EditClothesCommand : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public SubmitEditClothesCommand(EditClothesViewModel editClothesViewModel, ModalNavigationStore modalNavigationStore)
+        public EditClothesCommand(EditClothesViewModel editClothesViewModel, ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
         }

@@ -8,7 +8,7 @@ namespace DVS.ViewModels.View_ViewModels
 {
     public class AddClothesViewModel : ViewModelBase
     {
-        public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
+        public AddClothesFormViewModel AddClothesFormViewModel { get; }
 
         public AddClothesViewModel(
             ModalNavigationStore modalNavigationStore,
@@ -17,29 +17,25 @@ namespace DVS.ViewModels.View_ViewModels
             SelectedCategoryStore selectedCategoryStore,
             SelectedSeasonStore selectedSeasonStore)
         {
-            ICommand submitAddClothesCommand = new SubmitAddClothesCommand(this, modalNavigationStore);
+            ICommand AddClothesCommand = new AddClothesCommand(this, modalNavigationStore);
             ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
 
-            ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(
-                modalNavigationStore,
-                categoryStore,
-                seasonStore,
-                selectedCategoryStore,
-                selectedSeasonStore);
+            ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore,
+                                                                                     categoryStore,
+                                                                                     seasonStore,
+                                                                                     selectedCategoryStore,
+                                                                                     selectedSeasonStore);
 
-            ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(
-                modalNavigationStore,
-                categoryStore,
-                seasonStore,
-                selectedCategoryStore,
-                selectedSeasonStore);
+            ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(modalNavigationStore,
+                                                                               categoryStore,
+                                                                               seasonStore,
+                                                                               selectedCategoryStore,
+                                                                               selectedSeasonStore);
 
-
-            AddEditClothesFormViewModel = new(
-                openAddEditCategoriesCommand,
-                openAddEditSeasonsCommand,
-                submitAddClothesCommand,
-                closeModalCommand);
+            AddClothesFormViewModel = new(openAddEditCategoriesCommand,
+                                              openAddEditSeasonsCommand,
+                                              AddClothesCommand,
+                                              closeModalCommand);
         }
     }
 }

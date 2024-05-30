@@ -1,15 +1,14 @@
 ﻿using DVS.Commands;
+using DVS.Commands.ClothesCommands;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
-using System.Collections.ObjectModel;
-using DVS.Commands.ClothesCommands;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.View_ViewModels
 {
     public class EditClothesViewModel : ViewModelBase
     {
-        public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
+        public EditClothesFormViewModel EditClothesFormViewModel { get; }
 
         public EditClothesViewModel(ModalNavigationStore modalNavigationStore,
                                     CategoryStore categoryStore,
@@ -17,13 +16,14 @@ namespace DVS.ViewModels.View_ViewModels
                                     SelectedCategoryStore selectedCategoryStore,
                                     SelectedSeasonStore selectedSeasonStore)
         {
-            ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
-            ICommand submitEditClothesCommand = new SubmitEditClothesCommand(this, modalNavigationStore);
+            ICommand cancelClothesCommand = new CloseModalCommand(modalNavigationStore);
+            ICommand editClothesCommand = new EditClothesCommand(this, modalNavigationStore);
+
             ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore,
-                                                                                     categoryStore,
-                                                                                     seasonStore,
-                                                                                     selectedCategoryStore,
-                                                                                     selectedSeasonStore);
+                                                                               categoryStore,
+                                                                               seasonStore,
+                                                                               selectedCategoryStore,
+                                                                               selectedSeasonStore);
 
             ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(modalNavigationStore,
                                                                                categoryStore,
@@ -32,10 +32,10 @@ namespace DVS.ViewModels.View_ViewModels
                                                                                selectedSeasonStore);
 
 
-            AddEditClothesFormViewModel = new AddEditClothesFormViewModel(openAddEditCategoriesCommand,
-                                                                          openAddEditSeasonsCommand,
-                                                                          closeModalCommand,
-                                                                          submitEditClothesCommand);
+            EditClothesFormViewModel = new EditClothesFormViewModel(openAddEditCategoriesCommand,
+                                                                    openAddEditSeasonsCommand,
+                                                                    cancelClothesCommand,
+                                                                    editClothesCommand);
         }
     }
 }

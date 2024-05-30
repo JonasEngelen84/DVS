@@ -8,14 +8,14 @@ namespace DVS.ViewModels.View_ViewModels
 {
     public class EditEmployeeViewModel : ViewModelBase
     {
-        public AddEditEmployeeFormViewModel AddEditEmployeeFormViewModel { get; }
+        public EditEmployeeFormViewModel EditEmployeeFormViewModel { get; }
 
         public EditEmployeeViewModel(ModalNavigationStore modalNavigationStore)
         {
-            ICommand submitEditEmployeeCommand = new SubmitEditEmployeeCommand(this, modalNavigationStore);
-            ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
+            ICommand EditEmployeeCommand = new EditEmployeeCommand(this, modalNavigationStore);
+            ICommand cancelEmployeeCommand = new CloseModalCommand(modalNavigationStore);
 
-            AddEditEmployeeFormViewModel = new AddEditEmployeeFormViewModel(submitEditEmployeeCommand, closeModalCommand);
+            EditEmployeeFormViewModel = new EditEmployeeFormViewModel(EditEmployeeCommand, cancelEmployeeCommand);
         }
     }
 }

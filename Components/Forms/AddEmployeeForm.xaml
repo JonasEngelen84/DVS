@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DVS.Components.Forms.AddEditEmployeeForm"
+﻿<UserControl x:Class="DVS.Components.Forms.AddEmployeeForm"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -140,18 +140,18 @@
             </Grid.ColumnDefinitions>
 
             <Button Grid.Column="0"
-                    Content="BESTÄTIGEN"
+                    Content="ERSTELLEN"
                     Width="80"
                     Height="30"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding SubmitAddEditEmployeeCommand}" />
+                    Command="{Binding AddEmployeeCommand}" />
 
             <Button Grid.Column="1"
                     Content="ABBRECHEN"
                     Width="80"
                     Height="30"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding CloseModalCommand}" />
+                    Command="{Binding CancelEmployeeCommand}" />
         </Grid>
     </Grid>
 </UserControl>

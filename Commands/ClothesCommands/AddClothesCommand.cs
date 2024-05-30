@@ -1,13 +1,13 @@
 ﻿using DVS.Stores;
 using DVS.ViewModels.View_ViewModels;
 
-namespace DVS.Commands.EmployeeCommands
+namespace DVS.Commands.ClothesCommands
 {
-    public class SubmitEditEmployeeCommand : CommandBase
+    public class AddClothesCommand : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public SubmitEditEmployeeCommand(EditEmployeeViewModel editEmployeeViewModel, ModalNavigationStore modalNavigationStore)
+        public AddClothesCommand(AddClothesViewModel addClothesViewModel, ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
         }

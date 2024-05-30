@@ -3,11 +3,11 @@ using DVS.ViewModels.View_ViewModels;
 
 namespace DVS.Commands.EmployeeCommands
 {
-    public class SubmitAddEmployeeCommand : CommandBase
+    public class AddEmployeeCommand : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public SubmitAddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel, ModalNavigationStore modalNavigationStore)
+        public AddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel, ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
         }
