@@ -14,6 +14,7 @@ namespace DVS.ViewModels.View_ViewModels
         {
             ICommand submitAddEmployeeCommand = new SubmitAddEmployeeCommand(this, modalNavigationStore);
             ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
+
             AddEditEmployeeFormViewModel = new AddEditEmployeeFormViewModel(submitAddEmployeeCommand, closeModalCommand);
         }
     }

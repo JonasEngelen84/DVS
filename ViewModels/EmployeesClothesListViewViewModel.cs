@@ -17,8 +17,11 @@ namespace DVS.ViewModels
         private readonly ObservableCollection<EmployeeClothesListViewItemViewModel> _employeeClothesListViewItemCollection;
         public IEnumerable<EmployeeClothesListViewItemViewModel> EmployeeClothesListViewItemCollection => _employeeClothesListViewItemCollection;
 
-        public EmployeesClothesListViewViewModel(SelectedClothesStore selectedClothesStore, SelectedEmployeeClothesStore selectedEmployeeClothesStore,
-            ModalNavigationStore modalNavigationStore, ClothesListViewViewModel clothesListViewViewModel)
+        public EmployeesClothesListViewViewModel(
+            SelectedClothesStore selectedClothesStore,
+            SelectedEmployeeClothesStore selectedEmployeeClothesStore,
+            ModalNavigationStore modalNavigationStore,
+            ClothesListViewViewModel clothesListViewViewModel)
         {
             _selectedClothesStore = selectedClothesStore;
             _selectedEmployeeClothesStore = selectedEmployeeClothesStore;

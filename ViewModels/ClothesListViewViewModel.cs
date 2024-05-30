@@ -26,6 +26,16 @@ namespace DVS.ViewModels
             FillCL();
         }
 
+
+
+
+
+
+
+
+
+
+
         private void FillCL()
         {
             _clothesCollection.Add(new ClothesModel(111, "Sommershirt", "Shirt", "XL", "Sommer", 12));

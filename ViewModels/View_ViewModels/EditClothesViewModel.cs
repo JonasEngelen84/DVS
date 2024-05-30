@@ -17,11 +17,13 @@ namespace DVS.ViewModels.View_ViewModels
                                     SelectedCategoryStore selectedCategoryStore,
                                     SelectedSeasonStore selectedSeasonStore)
         {
+            ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
+            ICommand submitEditClothesCommand = new SubmitEditClothesCommand(this, modalNavigationStore);
             ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore,
-                                                                               categoryStore,
-                                                                               seasonStore,
-                                                                               selectedCategoryStore,
-                                                                               selectedSeasonStore);
+                                                                                     categoryStore,
+                                                                                     seasonStore,
+                                                                                     selectedCategoryStore,
+                                                                                     selectedSeasonStore);
 
             ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(modalNavigationStore,
                                                                                categoryStore,
@@ -29,8 +31,6 @@ namespace DVS.ViewModels.View_ViewModels
                                                                                selectedCategoryStore,
                                                                                selectedSeasonStore);
 
-            ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
-            ICommand submitEditClothesCommand = new SubmitEditClothesCommand(this, modalNavigationStore);
 
             AddEditClothesFormViewModel = new AddEditClothesFormViewModel(openAddEditCategoriesCommand,
                                                                           openAddEditSeasonsCommand,

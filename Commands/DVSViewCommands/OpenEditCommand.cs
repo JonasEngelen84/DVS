@@ -14,13 +14,14 @@ namespace DVS.Commands.DVSViewCommands
         private readonly SelectedCategoryStore _selectedCategoryStore;
         private readonly SelectedSeasonStore _selectedSeasonStore;
 
-        public OpenEditCommand(ModalNavigationStore modalNavigationStore,
-                               CategoryStore categoryStore,
-                               SeasonStore seasonStore,
-                               SelectedCategoryStore selectedCategoryStore,
-                               SelectedSeasonStore selectedSeasonStore,
-                               SelectedClothesStore selectedClothesStore,
-                               SelectedEmployeeClothesStore selectedEmployeeClothesStore)
+        public OpenEditCommand(
+            ModalNavigationStore modalNavigationStore,
+            CategoryStore categoryStore,
+            SeasonStore seasonStore,
+            SelectedCategoryStore selectedCategoryStore,
+            SelectedSeasonStore selectedSeasonStore,
+            SelectedClothesStore selectedClothesStore,
+            SelectedEmployeeClothesStore selectedEmployeeClothesStore)
         {
             _selectedClothesStore = selectedClothesStore;
             _selectedEmployeeClothesStore = selectedEmployeeClothesStore;
@@ -36,18 +37,18 @@ namespace DVS.Commands.DVSViewCommands
         {
             if(i%2 == 0)
             {
-                EditClothesViewModel editClothesViewModel = new EditClothesViewModel(
-                    _modalNavigationStore,
-                    _categoryStore,
-                    _seasonStore,
-                    _selectedCategoryStore,
-                    _selectedSeasonStore);
+                EditClothesViewModel editClothesViewModel = new EditClothesViewModel(_modalNavigationStore,
+                                                                                     _categoryStore,
+                                                                                     _seasonStore,
+                                                                                     _selectedCategoryStore,
+                                                                                     _selectedSeasonStore);
 
                 _modalNavigationStore.CurrentViewModel = editClothesViewModel;
             }
             else
             {
                 EditEmployeeViewModel editEmployeeViewModel = new EditEmployeeViewModel(_modalNavigationStore);
+
                 _modalNavigationStore.CurrentViewModel = editEmployeeViewModel;
             }
 

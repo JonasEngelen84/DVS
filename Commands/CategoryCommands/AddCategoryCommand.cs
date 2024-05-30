@@ -9,8 +9,10 @@ namespace DVS.Commands.CategoryCommands
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
 
-        public AddCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel,
-            ModalNavigationStore modalNavigationStore, SelectedCategoryStore selectedCategoryStore)
+        public AddCategoryCommand(
+            AddEditCategoryViewModel addEditCategoryViewModel,
+            ModalNavigationStore modalNavigationStore,
+            SelectedCategoryStore selectedCategoryStore)
         {
             _addEditCategoryViewModel = addEditCategoryViewModel;
             _modalNavigationStore = modalNavigationStore;
@@ -19,7 +21,7 @@ namespace DVS.Commands.CategoryCommands
 
         public override void Execute(object parameter)
         {
-            //_addEditCategoryViewModel.AddEditCategoryFormViewModel
+            
         }
     }
 }

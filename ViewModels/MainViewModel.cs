@@ -28,9 +28,13 @@ namespace DVS.ViewModels.Forms
         // Pointer auf "_modalNavigationStore.IsOpen" zur Prüfung ob ein Modal bereits geöffnet ist.
         public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
-        public MainViewModel(DVSViewModel dVSViewModel, SelectedClothesStore selectedClothesStore,
-            SelectedEmployeeClothesStore selectedEmployeeClothesStore, SelectedCategoryStore _selectedCategoryStore,
-            SelectedSeasonStore _selectedSeasonStore, ModalNavigationStore modalNavigationStore)
+        public MainViewModel(
+            DVSViewModel dVSViewModel,
+            SelectedClothesStore selectedClothesStore,
+            SelectedEmployeeClothesStore selectedEmployeeClothesStore,
+            SelectedCategoryStore _selectedCategoryStore,
+            SelectedSeasonStore _selectedSeasonStore,
+            ModalNavigationStore modalNavigationStore)
         {
             DVSViewModel = dVSViewModel;
             _selectedClothesStore = selectedClothesStore;
@@ -40,7 +44,7 @@ namespace DVS.ViewModels.Forms
             _modalNavigationStore.CurrentViewModelChanged += ModalNavigationStore_CurrentViewModelChanged;
         }
 
-        // Vorheriges Modal-ViewModel vernichten.
+        
         protected override void Dispose()
         {
             _modalNavigationStore.CurrentViewModelChanged -= ModalNavigationStore_CurrentViewModelChanged;

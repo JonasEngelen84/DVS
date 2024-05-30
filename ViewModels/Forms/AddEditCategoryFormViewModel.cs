@@ -29,11 +29,14 @@ namespace DVS.ViewModels.Forms
                 OnPropertyChanged(nameof(EditCategory));
             }
         }
-                
+
+        private readonly CategoryStore _categoryStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
 
+        //TODO: Dispose Collections?
         private readonly ObservableCollection<string> _categoryCollection;
         private readonly CollectionViewSource _categoryCollectionViewSource;
+        public IEnumerable<string> CategoryCollection => _categoryCollectionViewSource.View.Cast<string>();
 
         public ICommand SubmitAddCategoryCommand { get; }
         public ICommand SubmitEditCategoryCommand { get; }
@@ -41,41 +44,64 @@ namespace DVS.ViewModels.Forms
         public ICommand ClearCategoryListCommand { get; }
         public ICommand CloseAddEditCategoryCommand { get; } 
 
-        public AddEditCategoryFormViewModel(CategoryStore categoryStore, SelectedCategoryStore selectedCategoryStore,
-            ICommand submitAddCategoryCommand, ICommand submitEditCategoryCommand,
-            ICommand deleteCategoryCommand, ICommand clearCategoryListCommand, ICommand closeAddCategoryCommand)
+        public AddEditCategoryFormViewModel(
+            CategoryStore categoryStore,
+            SelectedCategoryStore selectedCategoryStore,
+            ICommand submitAddCategoryCommand,
+            ICommand submitEditCategoryCommand,
+            ICommand deleteCategoryCommand,
+            ICommand clearCategoryListCommand,
+            ICommand closeAddCategoryCommand)
         {
+            _categoryStore = categoryStore;
             _selectedCategoryStore = selectedCategoryStore;
             SubmitAddCategoryCommand = submitAddCategoryCommand;
             SubmitEditCategoryCommand = submitEditCategoryCommand;
             DeleteCategoryCommand = deleteCategoryCommand;
             ClearCategoryListCommand = clearCategoryListCommand;
             CloseAddEditCategoryCommand = closeAddCategoryCommand;
+
+            EditCategory = "Kategorie wählen";
+
             _categoryCollection = ["Sweatshirt", "Hose", "Pullover", "Kopfbedeckung", "Jacke", "Schuhwerk", "Hemd"];
             _categoryCollectionViewSource = new CollectionViewSource { Source = _categoryCollection };
             _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
 
-            EditCategory = "Kategorie wählen";
-        }
-
-        public IEnumerable<string> CategoryCollection => _categoryCollectionViewSource.View.Cast<string>();
-
-        private void Load()
-        {
+            _categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
 
         }
 
-        private void CategoryStore_AddCategory()
+
+        protected override void Dispose()
         {
-            _categoryCollection.Add(AddNewCategory);
-            _categoryCollectionViewSource.View.Refresh();
-            AddNewCategory = "";
-            OnPropertyChanged(nameof(CategoryCollection));
+            _categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
+
+            base.Dispose();
+        }
+
+
+        private void CategoryStore_CategoriesLoaded()
+        {
+            _categoryCollection.Clear();
+
+            foreach(string category in _categoryStore.Categories)
+            {
+                AddCategory(category);
+            }
         }
 
         private void Edit_Category()
         {
 
         }
+        
+        private void AddCategory(string categorie)
+        {
+            _categoryCollection.Add(categorie);
+            _categoryCollectionViewSource.View.Refresh();
+            AddNewCategory = "";
+            OnPropertyChanged(nameof(CategoryCollection));
+        }
+
     }
 }
