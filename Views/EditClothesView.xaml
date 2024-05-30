@@ -9,7 +9,6 @@
     <Border Background="#FFDEDEDE">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
@@ -18,14 +17,15 @@
             <Border Background="#FFBFBFBF">
                 <TextBlock Grid.Row="0"
                            Text="Bekleidung bearbeiten"
-                           FontSize="21"
-                           Margin="5 0 "
+                           FontSize="28"
+                           FontWeight="SemiBold"
+                           Margin="9 0 0 0"
                            VerticalAlignment="Center" />
             </Border>
 
             <!-- EditClothesForm_Component -->
             <components:EditClothesForm Grid.Row="1"
-                                           Margin="5 10"
+                                           Margin="10"
                                            DataContext="{Binding EditClothesFormViewModel}" />
         </Grid>
     </Border>

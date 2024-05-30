@@ -131,7 +131,7 @@
         </StackPanel>
 
         <!-- Button -->
-        <Grid Margin="0 20 0 5">
+        <Grid Margin="0 20 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />

@@ -5,30 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:components="clr-namespace:DVS.Components.Forms"
              mc:Ignorable="d">
-    
-    <Grid>
-        <Border Background="#FFDEDEDE">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
 
-                <!-- Title -->
-                <Border Background="#FFBFBFBF">
-                    <TextBlock Grid.Row="0"
-                               Text="Mitarbeiter bearbeiten"
-                               FontSize="24"
-                               Margin="5 0 "
-                               VerticalAlignment="Center" />
-                </Border>
+    <Border Background="#FFDEDEDE">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-                <!-- EditEmployeeForm_Component -->
-                <components:EditEmployeeForm Grid.Row="1"
-                                                Margin="5 10"
-                                                DataContext="{Binding EditEmployeeFormViewModel}" />
-            </Grid>
-        </Border>
-    </Grid>
+            <!-- Title -->
+            <Border Background="#FFBFBFBF">
+                <TextBlock Grid.Row="0"
+                           Text="Mitarbeiter bearbeiten"
+                           FontSize="28"
+                           FontWeight="SemiBold"
+                           Margin="9 0 0 0"
+                           VerticalAlignment="Center" />
+            </Border>
+
+            <!-- EditEmployeeForm_Component -->
+            <components:EditEmployeeForm Grid.Row="1"
+                                         Margin="10"
+                                         DataContext="{Binding EditEmployeeFormViewModel}" />
+        </Grid>
+    </Border>
 </UserControl>

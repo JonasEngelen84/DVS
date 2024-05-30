@@ -9,7 +9,6 @@
     <Border Background="#FFDEDEDE">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="35" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
@@ -17,17 +16,16 @@
             <!-- Title -->
             <Border Grid.Row="0"
                     Background="#FFBFBFBF">
-                <TextBlock Grid.Row="0"
-                           Text="Kategorie bearbeiten"
-                           FontSize="20"
-                           Margin="4 0 "
-                           VerticalAlignment="Center" 
-                           HorizontalAlignment="Center"/>
+                <TextBlock Text="Kategorie bearbeiten"
+                           FontSize="26"
+                           FontWeight="SemiBold"
+                           Margin="9 0 0 0"
+                           VerticalAlignment="Center"/>
             </Border>
 
             <!-- AddEditCategorieForm -->
             <components:AddEditCategoryForm Grid.Row="1"
-                                                Margin="5 10"
+                                                Margin="10"
                                                 DataContext="{Binding AddEditCategoryFormViewModel}" />
         </Grid>
     </Border>
