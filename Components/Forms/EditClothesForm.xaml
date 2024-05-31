@@ -6,86 +6,115 @@
              mc:Ignorable="d">
 
     <!-- Clothes Details -->
-    <StackPanel Orientation="Vertical"
-                Grid.IsSharedSizeScope="True">
+    <StackPanel Orientation="Vertical">
 
-        <!-- Id -->
-        <Grid Margin="0 0 0 5">
+        <Grid Grid.IsSharedSizeScope="True">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Column="0"
-                       Text="Id:"
-                       Style="{StaticResource ModalTextStyle}" />
+            <StackPanel Grid.Column="0">
+                <!-- Id -->
+                <Grid Margin="0 0 0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"
+                                          SharedSizeGroup="Details" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-            <TextBox Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}"/>
-        </Grid>
+                    <TextBlock Grid.Column="0"
+                               Text="Id:"
+                               Style="{StaticResource ModalTextStyle}" />
 
-        <!-- Name -->
-        <Grid Margin="0 0 0 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="1"
+                             Style="{StaticResource TextBoxStyle}" />
+                </Grid>
 
-            <TextBlock Grid.Column="0"
-                       Text="Name:"
-                       Style="{StaticResource ModalTextStyle}" />
+                <!-- Name -->
+                <Grid Margin="0 0 0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"
+                                          SharedSizeGroup="Details" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-            <TextBox Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-        </Grid>
+                    <TextBlock Grid.Column="0"
+                               Text="Name:"
+                               Style="{StaticResource ModalTextStyle}" />
 
-        <!-- Size -->
-        <Grid Margin="0 0 0 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="1"
+                             Style="{StaticResource TextBoxStyle}"
+                             Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
 
-            <TextBlock Grid.Column="0"
-                       Text="Größe:"
-                       Style="{StaticResource ModalTextStyle}" />
+                <!-- Size -->
+                <Grid Margin="0 0 0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"
+                                          SharedSizeGroup="Details" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-            <TextBox Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Size, UpdateSourceTrigger=PropertyChanged}" />
-        </Grid>
+                    <TextBlock Grid.Column="0"
+                               Text="Größe:"
+                               Style="{StaticResource ModalTextStyle}" />
 
-        <!-- Quantity -->
-        <Grid Margin="0 0 0 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" SharedSizeGroup="Details" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="1"
+                             Style="{StaticResource TextBoxStyle}"
+                             Text="{Binding Size, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
 
-            <TextBlock Grid.Column="0"
-                       Text="Menge:"
-                       Style="{StaticResource ModalTextStyle}" />
+                <!-- Quantity -->
+                <Grid Margin="0 0 0 5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"
+                                          SharedSizeGroup="Details" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-            <TextBox Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
-        </Grid>
+                    <TextBlock Grid.Column="0"
+                               Text="Menge:"
+                               Style="{StaticResource ModalTextStyle}" />
 
-        <!-- Comment -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition SharedSizeGroup="Details" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="1"
+                             Style="{StaticResource TextBoxStyle}"
+                             Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
 
-            <TextBlock Grid.Column="0"
-                       Text="Kommentar:"
-                       Style="{StaticResource ModalTextStyle}" />
+                <!-- Comment -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition SharedSizeGroup="Details" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
 
-            <TextBox Grid.Column="1"
-                     Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Grid.Column="0"
+                               Text="Kommentar: "
+                               Style="{StaticResource ModalTextStyle}" />
+
+                    <TextBox Grid.Column="1"
+                             Style="{StaticResource TextBoxStyle}"
+                             Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+            </StackPanel>
+
+            <!-- Button -->
+            <StackPanel Grid.Column="1"
+                        Margin="5 0 0 0" >
+
+                <Button Content="BESTÄTIGEN"
+                        Width="80"
+                        Height="30"
+                        Style="{StaticResource ModalButtonStyle}"
+                        Command="{Binding EditClothesCommand}" />
+
+                <Button Content="ABBRECHEN"
+                        Width="80"
+                        Height="30"
+                        Style="{StaticResource ModalButtonStyle}"
+                        Command="{Binding CancelClothesCommand}" />
+            </StackPanel>
         </Grid>
 
         <Label Content="Kategorie:"
@@ -95,12 +124,12 @@
 
         <!-- Categorie ComboBox and Button  -->
         <StackPanel Orientation="Horizontal">
-            <ComboBox Margin="1 0 0 5"
+            <ComboBox Margin="2 0 0 0"
                       Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Categories}"
                       SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" />
 
-            <Button Margin="5 -4 0 0"
+            <Button Margin="5 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
                     Command="{Binding OpenAddEditCategoriesCommand}">
                 <Image x:Name="categorieEditButton"
@@ -112,16 +141,16 @@
         <Label Content="Saison:"
                FontSize="14"
                FontWeight="Bold"
-               Margin="-4 0 0 -3" />
+               Margin="-4 0 0 -5" />
 
         <!-- Season ComboBox and Button -->
         <StackPanel Orientation="Horizontal">
-            <ComboBox Margin="1 0 0 10"
+            <ComboBox Margin="2 0 0 0"
                       Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Seasons}"
                       SelectedItem="{Binding SelectedSeason, Mode=TwoWay}" />
 
-            <Button Margin="5 0 0 9" 
+            <Button Margin="5 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
                     Command="{Binding OpenAddEditSeasonsCommand}">
                 <Image x:Name="seasonEditButton"
@@ -129,27 +158,5 @@
                        HorizontalAlignment="Center" />
             </Button>
         </StackPanel>
-
-        <!-- Button -->
-        <Grid Margin="0 20 0 5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0"
-                    Content="BESTÄTIGEN"
-                    Width="80"
-                    Height="30"
-                    Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding EditClothesCommand}" />
-
-            <Button Grid.Column="1"
-                    Content="ABBRECHEN"
-                    Width="80"
-                    Height="30"
-                    Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding CancelClothesCommand}" />
-        </Grid>
     </StackPanel>
 </UserControl>

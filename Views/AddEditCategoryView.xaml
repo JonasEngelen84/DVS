@@ -9,7 +9,7 @@
     <Border Background="#FFDEDEDE">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
+                <RowDefinition Height="45" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
@@ -17,9 +17,9 @@
             <Border Grid.Row="0"
                     Background="#FFBFBFBF">
                 <TextBlock Text="Kategorie bearbeiten"
-                           FontSize="26"
+                           FontSize="28"
                            FontWeight="SemiBold"
-                           Margin="9 0 0 0"
+                           Margin="9 0 9 0"
                            VerticalAlignment="Center"/>
             </Border>
 

@@ -9,7 +9,7 @@
     <Border Background="#FFDEDEDE">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
+                <RowDefinition Height="45" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
@@ -17,7 +17,7 @@
             <Border Grid.Row="0"
                     Background="#FFBFBFBF">
                 <TextBlock Text="Saison bearbeiten"
-                           FontSize="25"
+                           FontSize="28"
                            FontWeight="SemiBold"
                            Margin="9 0 0 0"
                            VerticalAlignment="Center" />
