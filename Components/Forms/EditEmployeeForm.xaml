@@ -117,8 +117,8 @@
             </StackPanel>
         </Grid>
 
-        <Label Grid.Row="1"
-               Content="Bekleidung hinzufügen:"
+        <Label Content="Bekleidung hinzufügen:"
+               Grid.Row="1"
                FontSize="14"
                FontWeight="Bold"
                Margin="-4 0 0 0" />

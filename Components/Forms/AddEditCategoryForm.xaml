@@ -60,7 +60,7 @@
                         Style="{StaticResource ModalButtonStyle}"
                         Command="{Binding ClearCategoryListCommand}" />
                 <Button Content="BEENDEN"
-                        Margin="5 5 0 0"
+                        Margin="5 129 0 0"
                         Style="{StaticResource ModalButtonStyle}"
                         Command="{Binding CloseAddEditCategoryCommand}" />
             </StackPanel>

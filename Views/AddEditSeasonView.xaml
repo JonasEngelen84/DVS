@@ -19,14 +19,14 @@
                 <TextBlock Text="Saison bearbeiten"
                            FontSize="28"
                            FontWeight="SemiBold"
-                           Margin="9 0 0 0"
-                           HorizontalAlignment="Center"
+                           Margin="14 0 0 0"
+                           HorizontalAlignment="Left"
                            VerticalAlignment="Center" />
             </Border>
 
             <!-- AddEditSeasonForm -->
             <components:AddEditSeasonForm Grid.Row="1"
-                                          Margin="30 20"
+                                          Margin="15 10 15 15"
                                           DataContext="{Binding AddEditSeasonFormViewModel}" />
         </Grid>
     </Border>

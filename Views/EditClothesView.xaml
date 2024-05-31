@@ -19,14 +19,13 @@
                            Text="Bekleidung bearbeiten"
                            FontSize="28"
                            FontWeight="SemiBold"
-                           Margin="9 0 0 0"
                            HorizontalAlignment="Center" 
                            VerticalAlignment="Center"/>
             </Border>
 
             <!-- EditClothesForm_Component -->
             <components:EditClothesForm Grid.Row="1"
-                                        Margin="30 20"
+                                        Margin="15 10 15 15"
                                         DataContext="{Binding EditClothesFormViewModel}" />
         </Grid>
     </Border>
