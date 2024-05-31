@@ -12,6 +12,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
+        <!-- Employee details and Button -->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -92,6 +93,7 @@
                 </Grid>
             </StackPanel>
 
+            <!-- Button -->
             <StackPanel Grid.Column="1">
                 <Button Content="BEARBEITEN"
                         HorizontalAlignment="Right"

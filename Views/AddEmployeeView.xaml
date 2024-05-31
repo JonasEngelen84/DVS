@@ -20,12 +20,13 @@
                            FontSize="28"
                            FontWeight="SemiBold"
                            Margin="9 0 0 0"
+                           HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
             </Border>
 
             <!-- AddEmployeeForm_Component -->
             <components:AddEmployeeForm Grid.Row="1"
-                                        Margin="10"
+                                        Margin="30 20"
                                         DataContext="{Binding AddEmployeeFormViewModel}" />
         </Grid>
     </Border>

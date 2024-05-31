@@ -20,13 +20,14 @@
                            FontSize="28"
                            FontWeight="SemiBold"
                            Margin="9 0 9 0"
-                           VerticalAlignment="Center"/>
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
             </Border>
 
             <!-- AddEditCategorieForm -->
             <components:AddEditCategoryForm Grid.Row="1"
-                                                Margin="10"
-                                                DataContext="{Binding AddEditCategoryFormViewModel}" />
+                                            Margin="30 15"
+                                            DataContext="{Binding AddEditCategoryFormViewModel}" />
         </Grid>
     </Border>
 </UserControl>

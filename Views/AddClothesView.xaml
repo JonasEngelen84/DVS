@@ -21,12 +21,13 @@
                            FontSize="28"
                            FontWeight="SemiBold"
                            Margin="9 0 0 0"
+                           HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
             </Border>
 
             <!-- AddClothesForm_Component -->
             <components:AddClothesForm Grid.Row="1"
-                                           Margin="10"
+                                           Margin="30 15"
                                            DataContext="{Binding AddClothesFormViewModel}" />
         </Grid>
     </Border>

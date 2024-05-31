@@ -20,13 +20,14 @@
                            FontSize="28"
                            FontWeight="SemiBold"
                            Margin="9 0 0 0"
-                           VerticalAlignment="Center" />
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"/>
             </Border>
 
             <!-- EditClothesForm_Component -->
             <components:EditClothesForm Grid.Row="1"
-                                           Margin="10"
-                                           DataContext="{Binding EditClothesFormViewModel}" />
+                                        Margin="30 20"
+                                        DataContext="{Binding EditClothesFormViewModel}" />
         </Grid>
     </Border>
 </UserControl>
