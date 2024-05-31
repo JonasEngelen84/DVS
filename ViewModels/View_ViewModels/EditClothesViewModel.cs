@@ -18,6 +18,8 @@ namespace DVS.ViewModels.View_ViewModels
         {
             ICommand cancelClothesCommand = new CloseModalCommand(modalNavigationStore);
             ICommand editClothesCommand = new EditClothesCommand(this, modalNavigationStore);
+            ICommand deleteClothesCommand = new DeleteClothesCommand();
+            ICommand clearClothesListCommand = new ClearClothesListCommand();
 
             ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore,
                                                                                categoryStore,
@@ -35,7 +37,9 @@ namespace DVS.ViewModels.View_ViewModels
             EditClothesFormViewModel = new EditClothesFormViewModel(openAddEditCategoriesCommand,
                                                                     openAddEditSeasonsCommand,
                                                                     cancelClothesCommand,
-                                                                    editClothesCommand);
+                                                                    editClothesCommand,
+                                                                    deleteClothesCommand,
+                                                                    clearClothesListCommand);
         }
     }
 }

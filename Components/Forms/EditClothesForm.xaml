@@ -168,11 +168,11 @@
                 
                 <Button Content="LÖSCHEN"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding EditClothesCommand}" />
+                        Command="{Binding DeleteClothesCommand}" />
                 
                 <Button Content="LEEREN"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding EditClothesCommand}" />
+                        Command="{Binding ClearClothesListCommand}" />
 
                 <Button Margin="0 97 0 0 "
                         Content="BEENDEN"

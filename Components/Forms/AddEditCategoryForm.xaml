@@ -6,7 +6,7 @@
              mc:Ignorable="d">
     
     <StackPanel>
-        <!-- Add Category-->
+        <!-- Add Category and Add-Button-->
         <StackPanel Orientation="Horizontal">
             <TextBox Style="{StaticResource TextBoxStyle}"
                      Text="{Binding AddNewCategory, UpdateSourceTrigger=PropertyChanged}" />
@@ -16,7 +16,7 @@
                     Command="{Binding AddCategoryCommand}" />
         </StackPanel>
 
-        <!-- Edit Category-->
+        <!-- Edit Category and Edit-Button-->
         <StackPanel Orientation="Horizontal"
                     Margin="0 10 0 20">
             <TextBox Style="{StaticResource TextBoxStyle}"

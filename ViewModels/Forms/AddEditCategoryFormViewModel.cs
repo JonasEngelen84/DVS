@@ -38,8 +38,8 @@ namespace DVS.ViewModels.Forms
         private readonly CollectionViewSource _categoryCollectionViewSource;
         public IEnumerable<string> CategoryCollection => _categoryCollectionViewSource.View.Cast<string>();
 
-        public ICommand SubmitAddCategoryCommand { get; }
-        public ICommand SubmitEditCategoryCommand { get; }
+        public ICommand AddCategoryCommand { get; }
+        public ICommand EditCategoryCommand { get; }
         public ICommand DeleteCategoryCommand { get; }
         public ICommand ClearCategoryListCommand { get; }
         public ICommand CloseAddEditCategoryCommand { get; } 
@@ -47,19 +47,19 @@ namespace DVS.ViewModels.Forms
         public AddEditCategoryFormViewModel(
             CategoryStore categoryStore,
             SelectedCategoryStore selectedCategoryStore,
-            ICommand submitAddCategoryCommand,
-            ICommand submitEditCategoryCommand,
+            ICommand addCategoryCommand,
+            ICommand editCategoryCommand,
             ICommand deleteCategoryCommand,
             ICommand clearCategoryListCommand,
-            ICommand closeAddCategoryCommand)
+            ICommand closeAddEditCategoryCommand)
         {
             _categoryStore = categoryStore;
             _selectedCategoryStore = selectedCategoryStore;
-            SubmitAddCategoryCommand = submitAddCategoryCommand;
-            SubmitEditCategoryCommand = submitEditCategoryCommand;
+            AddCategoryCommand = addCategoryCommand;
+            EditCategoryCommand = editCategoryCommand;
             DeleteCategoryCommand = deleteCategoryCommand;
             ClearCategoryListCommand = clearCategoryListCommand;
-            CloseAddEditCategoryCommand = closeAddCategoryCommand;
+            CloseAddEditCategoryCommand = closeAddEditCategoryCommand;
 
             EditCategory = "Kategorie wählen";
 

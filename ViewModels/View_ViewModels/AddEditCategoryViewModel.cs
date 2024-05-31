@@ -16,11 +16,11 @@ namespace DVS.ViewModels.View_ViewModels
             SelectedCategoryStore selectedCategoryStore,
             SelectedSeasonStore selectedSeasonStore)
         {
-            ICommand submitAddCategoryCommand = new AddCategoryCommand(this, modalNavigationStore, selectedCategoryStore);
+            ICommand addCategoryCommand = new AddCategoryCommand(this, modalNavigationStore, selectedCategoryStore);
             ICommand editCategoryCommand = new EditCategoryCommand(this, modalNavigationStore, selectedCategoryStore);
             ICommand deleteCategoryCommand = new DeleteCategoryCommand(this, modalNavigationStore, selectedCategoryStore);
             ICommand clearCategoryListCommand = new ClearCategoryListCommand(this, modalNavigationStore);
-            ICommand closeAddCategoryCommand = new CloseAddEditCategoryCommand(modalNavigationStore,
+            ICommand closeAddEditCategoryCommand = new CloseAddEditCategoryCommand(modalNavigationStore,
                                                                                categoryStore,
                                                                                seasonStore,
                                                                                selectedCategoryStore,
@@ -29,11 +29,11 @@ namespace DVS.ViewModels.View_ViewModels
             AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(
                 categoryStore,
                 selectedCategoryStore,
-                submitAddCategoryCommand,
+                addCategoryCommand,
                 editCategoryCommand,
                 deleteCategoryCommand,
                 clearCategoryListCommand,
-                closeAddCategoryCommand);
+                closeAddEditCategoryCommand);
         }
     }
 }

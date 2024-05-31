@@ -7,12 +7,16 @@ namespace DVS.ViewModels.Forms
         ICommand openAddEditCategoriesCommand,
         ICommand openAddEditSeasonsCommand,
         ICommand editClothesCommand,
+        ICommand deleteClothesCommand,
+        ICommand clearClothesListCommand,
         ICommand cancelClothesCommand)
         : ViewModelBase
     {
         public ICommand OpenAddEditCategoriesCommand { get; } = openAddEditCategoriesCommand;
         public ICommand OpenAddEditSeasonsCommand { get; } = openAddEditSeasonsCommand;
         public ICommand EditClothesCommand { get; } = editClothesCommand;
+        public ICommand DeleteClothesCommand { get; } = deleteClothesCommand;
+        public ICommand ClearClothesListCommand { get; } = clearClothesListCommand;
         public ICommand CancelClothesCommand { get; } = cancelClothesCommand;
 
         private ObservableCollection<string> categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];
@@ -110,6 +114,9 @@ namespace DVS.ViewModels.Forms
         }
         
         private string _comment;
+        private ICommand deleteClothesCommand;
+        private ICommand clearClothesListCommand;
+
         public string Comment
         {
             get => _comment;
