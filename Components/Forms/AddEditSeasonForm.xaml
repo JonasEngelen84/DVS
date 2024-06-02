@@ -12,7 +12,7 @@
             <Button Content="ERSTELLEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding SubmitAddSeasonCommand}" />
+                    Command="{Binding AddSeasonCommand}" />
         </StackPanel>
 
         <!-- Edit Season-->

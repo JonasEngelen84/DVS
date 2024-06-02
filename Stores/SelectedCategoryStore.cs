@@ -1,25 +1,25 @@
-﻿using DVS.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DVS.Stores
+﻿namespace DVS.Stores
 {
     public class SelectedCategoryStore
     {
         private string _selectedCategory;
         public string SelectedCategory
         {
-            get
-            {
-                return _selectedCategory;
-            }
+            get => _selectedCategory;
             set
             {
                 _selectedCategory = value;
                 SelectedCategoryChanged?.Invoke();
+            }
+        }
+
+        private string _editedCategory;
+        public string EditedCategory
+        {
+            get => _editedCategory;
+            set
+            {
+                _editedCategory = value;
             }
         }
 

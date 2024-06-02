@@ -5,11 +5,19 @@ namespace DVS.ViewModels.AddViewModels.Forms
     public class EditEmployeeFormViewModel : ViewModelBase
     {
         public ICommand EditEmployeeCommand { get; }
+        public ICommand DeleteEmployeeCommand { get; }
+        public ICommand ClearEmployeeClothesListCommand { get; }
         public ICommand CancelEmployeeCommand { get; }
 
-        public EditEmployeeFormViewModel(ICommand editEmployeeCommand, ICommand cancelEmployeeCommand)
+        public EditEmployeeFormViewModel(
+            ICommand editEmployeeCommand,
+            ICommand clearEmployeeClothesListCommand,
+            ICommand deleteEmployeeCommand,
+            ICommand cancelEmployeeCommand)
         {
             EditEmployeeCommand = editEmployeeCommand;
+            ClearEmployeeClothesListCommand = clearEmployeeClothesListCommand;
+            DeleteEmployeeCommand = deleteEmployeeCommand;
             CancelEmployeeCommand = cancelEmployeeCommand;
         }
 

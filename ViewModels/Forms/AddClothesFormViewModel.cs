@@ -6,13 +6,13 @@ namespace DVS.ViewModels.Forms
     public class AddClothesFormViewModel(
         ICommand openAddEditCategoriesCommand,
         ICommand openAddEditSeasonsCommand,
-        ICommand AddClothesCommand,
+        ICommand addClothesCommand,
         ICommand cancelClothesCommand)
         : ViewModelBase
     {
         public ICommand OpenAddEditCategoriesCommand { get; } = openAddEditCategoriesCommand;
         public ICommand OpenAddEditSeasonsCommand { get; } = openAddEditSeasonsCommand;
-        public ICommand AddClothesCommand { get; } = AddClothesCommand;
+        public ICommand AddClothesCommand { get; } = addClothesCommand;
         public ICommand CancelClothesCommand { get; } = cancelClothesCommand;
 
         private ObservableCollection<string> categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];

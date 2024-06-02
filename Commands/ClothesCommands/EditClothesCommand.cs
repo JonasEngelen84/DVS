@@ -12,6 +12,9 @@ namespace DVS.Commands.ClothesCommands
             _modalNavigationStore = modalNavigationStore;
         }
 
-        public override void Execute(object parameter) => _modalNavigationStore.Close(); 
+        public override void Execute(object parameter)
+        {
+            _modalNavigationStore.Close();
+        }
     }
 }

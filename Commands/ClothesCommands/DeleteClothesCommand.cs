@@ -5,14 +5,16 @@ namespace DVS.Commands.ClothesCommands
 {
     public class DeleteClothesCommand : CommandBase
     {
-        public DeleteClothesCommand()
-        {
+        private readonly ModalNavigationStore _modalNavigationStore;
 
+        public DeleteClothesCommand(ModalNavigationStore modalNavigationStore)
+        {
+            _modalNavigationStore = modalNavigationStore;
         }
 
         public override void Execute(object parameter) 
         {
-
+            _modalNavigationStore.Close();
         }
     }
 }

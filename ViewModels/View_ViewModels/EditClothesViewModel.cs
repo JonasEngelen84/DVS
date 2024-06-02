@@ -18,8 +18,8 @@ namespace DVS.ViewModels.View_ViewModels
         {
             ICommand cancelClothesCommand = new CloseModalCommand(modalNavigationStore);
             ICommand editClothesCommand = new EditClothesCommand(this, modalNavigationStore);
-            ICommand deleteClothesCommand = new DeleteClothesCommand();
-            ICommand clearClothesListCommand = new ClearClothesListCommand();
+            ICommand deleteClothesCommand = new DeleteClothesCommand(modalNavigationStore);
+            ICommand clearClothesListCommand = new ClearClothesListCommand(modalNavigationStore);
 
             ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore,
                                                                                categoryStore,

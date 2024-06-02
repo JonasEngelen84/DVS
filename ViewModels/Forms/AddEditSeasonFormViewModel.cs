@@ -4,16 +4,16 @@ namespace DVS.ViewModels.Forms
 {
     public class AddEditSeasonFormViewModel : ViewModelBase
     {
-        public ICommand SubmitAddSeasonCommand { get; }
+        public ICommand AddSeasonCommand { get; }
         public ICommand EditSeasonCommand { get; }
         public ICommand DeleteSeasonCommand { get; }
         public ICommand ClearSeasonListCommand { get; }
         public ICommand CloseAddSeasonCommand { get; } 
 
-        public AddEditSeasonFormViewModel(ICommand submitAddSeasonCommand, ICommand editSeasonCommand,
+        public AddEditSeasonFormViewModel(ICommand addSeasonCommand, ICommand editSeasonCommand,
             ICommand deleteSeasonCommand, ICommand clearSeasonListCommand, ICommand closeAddSeasonCommand)
         {
-            SubmitAddSeasonCommand = submitAddSeasonCommand;
+            AddSeasonCommand = addSeasonCommand;
             EditSeasonCommand = editSeasonCommand;
             DeleteSeasonCommand = deleteSeasonCommand;
             ClearSeasonListCommand = clearSeasonListCommand;

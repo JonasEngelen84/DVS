@@ -19,11 +19,21 @@ namespace DVS.Stores
         public ViewModelBase CurrentViewModel
         {
             get => _currentViewModel;
-
             set
             {
+                _previousViewModel = _currentViewModel;
                 _currentViewModel = value;
                 CurrentViewModelChanged?.Invoke();
+            }
+        }
+
+        private ViewModelBase _previousViewModel;
+        public ViewModelBase PreviousViewModel
+        {
+            get => _previousViewModel;
+            set
+            {
+                _previousViewModel = value;
             }
         }
 

@@ -15,7 +15,7 @@ namespace DVS.Commands.SeasonCommands
 
         public override void Execute(object parameter)
         {
-            
+            _modalNavigationStore.Close();
         }
     }
 }

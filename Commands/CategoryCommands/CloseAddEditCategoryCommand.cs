@@ -27,13 +27,26 @@ namespace DVS.Commands.CategoryCommands
 
         public override void Execute(object parameter)
         {
-            AddClothesViewModel addClothesViewModel = new(_modalNavigationStore,
+            if(_modalNavigationStore.PreviousViewModel is AddClothesViewModel)
+            {
+                AddClothesViewModel addClothesViewModel = new(_modalNavigationStore,
                                                           _categoryStore,
                                                           _seasonStore,
                                                           _selectedCategoryStore,
                                                           _selectedSeasonStore);
 
-            _modalNavigationStore.CurrentViewModel = addClothesViewModel;
+                _modalNavigationStore.CurrentViewModel = addClothesViewModel;
+            }
+            else
+            {
+                EditClothesViewModel editClothesViewModel = new EditClothesViewModel(_modalNavigationStore,
+                                                                                     _categoryStore,
+                                                                                     _seasonStore,
+                                                                                     _selectedCategoryStore,
+                                                                                     _selectedSeasonStore);
+
+                _modalNavigationStore.CurrentViewModel = editClothesViewModel;
+            }
         }
     }
 }
