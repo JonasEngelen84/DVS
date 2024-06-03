@@ -42,11 +42,12 @@
                         <VisualBrush Visual="{Binding ElementName=border}" />
                     </Grid.OpacityMask>
                     <Border x:Name="border"
-                            Background="White"
+                            Background="#FFDEDEDE"
                             CornerRadius="5" />
 
                     <ListView BorderThickness="0"
                               FontSize="14"
+                              Background="#FFDEDEDE"
                               ItemsSource="{Binding SeasonCollection}"
                               SelectedItem="{Binding EditSeason}" />
                 </Grid>

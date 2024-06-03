@@ -64,13 +64,13 @@ namespace DVS.ViewModels.Forms
 
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
-        private readonly CategoryStore _categoryStore;
-        private readonly SelectedCategoryStore _selectedCategoryStore;
-
         //TODO: Dispose Collections?
         private readonly ObservableCollection<string> _categoryCollection;
         private readonly CollectionViewSource _categoryCollectionViewSource;
         public IEnumerable<string> CategoryCollection => _categoryCollectionViewSource.View.Cast<string>();
+        
+        private readonly CategoryStore _categoryStore;
+        private readonly SelectedCategoryStore _selectedCategoryStore;
 
         public ICommand AddCategoryCommand { get; }
         public ICommand EditCategoryCommand { get; }

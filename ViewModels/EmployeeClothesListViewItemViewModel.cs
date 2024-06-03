@@ -14,24 +14,24 @@ namespace DVS.ViewModels.ListViewItems
         public string ClothesName => Clothes.Name;
         public string Size => Clothes.Size;
 
-        private string quantity;
+        private string _quantity;
         public string Quantity
         {
-            get => quantity;
+            get => _quantity;
             set
             {
-                quantity = value;
-                OnPropertyChanged(nameof(quantity));
+                _quantity = value;
+                OnPropertyChanged(nameof(_quantity));
             }
         }
 
-        private string comment;
+        private string _comment;
         public string Comment
         {
-            get => comment;
+            get => _comment;
             set
             {
-                comment = value;
+                _comment = value;
                 OnPropertyChanged(nameof(Comment));
             }
         }

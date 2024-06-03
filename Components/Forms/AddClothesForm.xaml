@@ -98,7 +98,7 @@
         <Label Content="Kategorie:"
                FontSize="14"
                FontWeight="Bold"
-               Margin="-4 1 0 -4" />
+               Margin="-4 3 0 -4" />
 
         <!-- Categorie ComboBox and Edit-Button  -->
         <StackPanel Orientation="Horizontal">
@@ -151,7 +151,7 @@
                     <Grid.OpacityMask>
                         <VisualBrush Visual="{Binding ElementName=border}" />
                     </Grid.OpacityMask>
-                    <Border Background="White"
+                    <Border Background="#FFDEDEDE"
                             CornerRadius="5" />
 
                     <ListView BorderThickness="0" />

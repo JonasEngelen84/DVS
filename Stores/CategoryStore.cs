@@ -1,8 +1,10 @@
-﻿namespace DVS.Stores
+﻿using System.Collections.ObjectModel;
+
+namespace DVS.Stores
 {
     public class CategoryStore
     {
-        private readonly List<String> _categories;
+        private readonly ObservableCollection<string> _categories;
         public IEnumerable<string> Categories => _categories;
 
         public event Action CategoriesLoaded;

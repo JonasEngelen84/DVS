@@ -140,10 +140,11 @@
                         <VisualBrush Visual="{Binding ElementName=border}" />
                     </Grid.OpacityMask>
                     <Border x:Name="border"
-                            Background="White"
+                            Background="#FFDEDEDE"
                             CornerRadius="5" />
 
-                    <ListView BorderThickness="0" />
+                    <ListView BorderThickness="0"
+                              Background="#FFDEDEDE" />
                 </Grid>
             </Border>
 
@@ -155,10 +156,11 @@
                     <Grid.OpacityMask>
                         <VisualBrush Visual="{Binding ElementName=border}" />
                     </Grid.OpacityMask>
-                    <Border Background="White"
+                    <Border Background="#FFDEDEDE"
                             CornerRadius="5" />
 
-                    <ListView BorderThickness="0" />
+                    <ListView BorderThickness="0"
+                              Background="#FFDEDEDE" />
                 </Grid>
             </Border>
         </Grid>

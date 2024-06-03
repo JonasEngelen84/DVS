@@ -32,10 +32,12 @@ namespace DVS.ViewModels.Views
                                                                                selectedCategoryStore,
                                                                                selectedSeasonStore);
 
-            AddClothesFormViewModel = new(openAddEditCategoriesCommand,
-                                              openAddEditSeasonsCommand,
-                                              AddClothesCommand,
-                                              closeModalCommand);
+            AddClothesFormViewModel = new(categoryStore,
+                                          seasonStore,
+                                          openAddEditCategoriesCommand,
+                                          openAddEditSeasonsCommand,
+                                          AddClothesCommand,
+                                          closeModalCommand);
         }
     }
 }

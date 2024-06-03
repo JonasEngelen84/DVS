@@ -1,19 +1,13 @@
-﻿using System.Collections.ObjectModel;
+﻿using DVS.Stores;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
-    public class AddClothesFormViewModel(ICommand openAddEditCategoriesCommand,
-                                         ICommand openAddEditSeasonsCommand,
-                                         ICommand addClothesCommand,
-                                         ICommand cancelClothesCommand)
-                                         : ViewModelBase
+    public class AddClothesFormViewModel : ViewModelBase
     {
-        public ICommand OpenAddEditCategoriesCommand { get; } = openAddEditCategoriesCommand;
-        public ICommand OpenAddEditSeasonsCommand { get; } = openAddEditSeasonsCommand;
-        public ICommand AddClothesCommand { get; } = addClothesCommand;
-        public ICommand CancelClothesCommand { get; } = cancelClothesCommand;
-
         private string _id;
         public string Id
         {
@@ -97,26 +91,79 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private ObservableCollection<string> categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];
-        public ObservableCollection<string> Categories
+        private bool _isSubmitting;
+        public bool IsSubmitting
         {
-            get { return categories; }
+            get
+            {
+                return _isSubmitting;
+            }
             set
             {
-                categories = value;
-                OnPropertyChanged();
+                _isSubmitting = value;
+                OnPropertyChanged(nameof(IsSubmitting));
             }
         }
 
-        private ObservableCollection<string> seasons = ["Sommer", "Winter", "Saisonlos"];
-        public ObservableCollection<string> Seasons
+        private string _errorMessage;
+        public string ErrorMessage
         {
-            get { return seasons; }
+            get
+            {
+                return _errorMessage;
+            }
             set
             {
-                categories = value;
-                OnPropertyChanged();
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+                OnPropertyChanged(nameof(HasErrorMessage));
             }
         }
+
+        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+
+        //public bool CanSubmit => !string.IsNullOrEmpty(Username);
+
+        private readonly ObservableCollection<string> _categories;
+        //private readonly CollectionViewSource _categoryCollectionViewSource;
+        public IEnumerable<string> Categories => _categories;
+
+        private  ObservableCollection<string> _seasons;
+        //private readonly CollectionViewSource _seasonCollectionViewSource;
+        public IEnumerable<string> Seasons => _seasons; //_seasonCollectionViewSource.View.Cast<string>()
+
+        private readonly CategoryStore _categoryStore;
+        private readonly SeasonStore _seasonStore;
+
+        public ICommand OpenAddEditCategoriesCommand { get; }
+        public ICommand OpenAddEditSeasonsCommand { get; }
+        public ICommand AddClothesCommand { get; }
+        public ICommand CancelClothesCommand { get; }
+
+        public AddClothesFormViewModel(
+            CategoryStore categoryStore,
+            SeasonStore seasonStore,
+            ICommand openAddEditCategoriesCommand,
+            ICommand openAddEditSeasonsCommand,
+            ICommand addClothesCommand,
+            ICommand cancelClothesCommand)
+        {
+            _categoryStore = categoryStore;
+            _seasonStore = seasonStore;
+
+            _categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung", "Hose2", "Pullover2", "Shirt2", "Jacke2", "Kopfbedeckung2"];
+            //_categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
+            //_categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
+            
+            _seasons = ["Saisonlos", "Sommer", "Winter"];
+            //_seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
+            //_seasonCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
+
+            OpenAddEditCategoriesCommand = openAddEditCategoriesCommand;
+            OpenAddEditSeasonsCommand = openAddEditSeasonsCommand;
+            AddClothesCommand = addClothesCommand;
+            CancelClothesCommand = cancelClothesCommand;
+        }
+
     }
 }
