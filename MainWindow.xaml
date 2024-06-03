@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:DVS.Views"
         xmlns:custom="clr-namespace:ModalControl;assembly=ModalControl"
-        xmlns:vms="clr-namespace:DVS.ViewModels.View_ViewModels"
+        xmlns:vms="clr-namespace:DVS.ViewModels.Views"
         mc:Ignorable="d"
         Icon="/Resources/Images/DVS Icon.png"
         Height="750"

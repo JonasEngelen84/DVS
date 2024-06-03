@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DVS.Stores
+﻿namespace DVS.Stores
 {
     public class SelectedSeasonStore
     {
@@ -18,10 +12,20 @@ namespace DVS.Stores
             set
             {
                 _selectedSeason = value;
-                SelectedSeasonChanged?.Invoke();
             }
         }
-
-        public event Action SelectedSeasonChanged;
+        
+        private string _editedSeason;
+        public string EditedSeason
+        {
+            get
+            {
+                return _editedSeason;
+            }
+            set
+            {
+                _editedSeason = value;
+            }
+        }
     }
 }

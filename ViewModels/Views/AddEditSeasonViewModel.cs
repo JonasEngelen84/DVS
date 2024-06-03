@@ -3,7 +3,7 @@ using DVS.Stores;
 using DVS.ViewModels.Forms;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.View_ViewModels
+namespace DVS.ViewModels.Views
 {
     public class AddEditSeasonViewModel : ViewModelBase
     {
@@ -16,7 +16,7 @@ namespace DVS.ViewModels.View_ViewModels
             SelectedCategoryStore selectedCategoryStore,
             SelectedSeasonStore selectedSeasonStore)
         {
-            ICommand addSeasonCommand = new AddSeasonCommand(this, modalNavigationStore);
+            ICommand addSeasonCommand = new AddSeasonCommand(this, seasonStore);
             ICommand editSeasonCommand = new EditSeasonCommand(this, modalNavigationStore);
             ICommand deleteSeasonCommand = new DeleteSeasonCommand(this, modalNavigationStore);
             ICommand clearSeasonListCommand = new ClearSeasonListCommand(this, modalNavigationStore);
@@ -28,6 +28,8 @@ namespace DVS.ViewModels.View_ViewModels
                 selectedSeasonStore);
 
             AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(
+                seasonStore,
+                selectedSeasonStore,
                 addSeasonCommand,
                 editSeasonCommand,
                 deleteSeasonCommand,

@@ -1,5 +1,6 @@
 ﻿using DVS.Stores;
-using DVS.ViewModels.Forms;
+using DVS.ViewModels;
+using DVS.ViewModels.Views;
 using System.Windows;
 
 namespace DVS
@@ -10,9 +11,6 @@ namespace DVS
     /// </summary>
     public partial class App : Application
     {
-        // Einzige Instanzen von:
-        // DVSViewModel, ModalNavigationStore, SelectedClothesStore und SelectedEmployeeClothesStore
-        // Bestehen die ganze App-Lebensdauer und werden der MainViewModel Instanz übergeben.
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
@@ -46,10 +44,6 @@ namespace DVS
                                 _selectedEmployeeClothesStore);
         }
 
-
-        // Festlegen des DataContext von MainWindow.cs auf MainViewModel.cs
-        // Bei der Erstellung der einzigen Istanz von "MainViewModel", wird dieser,
-        // die einzigen Instanzen von "ModalNavigationStore" und "DVSViewModel" übergeben.
         protected override void OnStartup(StartupEventArgs e)
         {
 

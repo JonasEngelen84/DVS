@@ -1,6 +1,6 @@
 ﻿using DVS.Stores;
 using DVS.ViewModels.Forms;
-using DVS.ViewModels.View_ViewModels;
+using DVS.ViewModels.Views;
 
 namespace DVS.Commands.CategoryCommands
 {

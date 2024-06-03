@@ -10,7 +10,7 @@
 
         public CategoryStore()
         {
-            _categories = new List<string>();
+            _categories = [];
         }
 
         public async Task Load()

@@ -25,6 +25,7 @@ namespace DVS.ViewModels.Forms
             get => _editCategory;
             set
             {
+                _selectedCategoryStore.SelectedCategory = value;
                 _editCategory = value;
                 OnPropertyChanged(nameof(EditCategory));
             }
@@ -140,6 +141,5 @@ namespace DVS.ViewModels.Forms
             AddNewCategory = "";
             OnPropertyChanged(nameof(CategoryCollection));
         }
-
     }
 }

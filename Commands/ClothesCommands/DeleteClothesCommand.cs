@@ -1,5 +1,4 @@
 ﻿using DVS.Stores;
-using DVS.ViewModels.View_ViewModels;
 
 namespace DVS.Commands.ClothesCommands
 {

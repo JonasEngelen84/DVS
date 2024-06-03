@@ -2,7 +2,7 @@
 using DVS.Stores;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.Forms
+namespace DVS.ViewModels.Views
 {
     public class DVSViewModel : ViewModelBase
     {

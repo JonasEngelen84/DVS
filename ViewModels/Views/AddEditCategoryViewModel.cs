@@ -3,7 +3,7 @@ using DVS.Stores;
 using DVS.ViewModels.Forms;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.View_ViewModels
+namespace DVS.ViewModels.Views
 {
     public class AddEditCategoryViewModel : ViewModelBase
     {
@@ -26,14 +26,13 @@ namespace DVS.ViewModels.View_ViewModels
                                                                                selectedCategoryStore,
                                                                                selectedSeasonStore);
 
-            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(
-                categoryStore,
-                selectedCategoryStore,
-                addCategoryCommand,
-                editCategoryCommand,
-                deleteCategoryCommand,
-                clearCategoryListCommand,
-                closeAddEditCategoryCommand);
+            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(categoryStore,
+                                                                            selectedCategoryStore,
+                                                                            addCategoryCommand,
+                                                                            editCategoryCommand,
+                                                                            deleteCategoryCommand,
+                                                                            clearCategoryListCommand,
+                                                                            closeAddEditCategoryCommand);
         }
     }
 }

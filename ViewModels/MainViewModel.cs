@@ -1,8 +1,7 @@
 ﻿using DVS.Stores;
-using System.Drawing;
-using System.Windows.Input;
+using DVS.ViewModels.Views;
 
-namespace DVS.ViewModels.Forms
+namespace DVS.ViewModels
 {
     /// <summary>
     /// Hauptklasse zur Implementierung der allgemeinen Betrefflickeiten der App:

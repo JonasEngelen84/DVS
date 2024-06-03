@@ -9,7 +9,6 @@
             set
             {
                 _selectedCategory = value;
-                SelectedCategoryChanged?.Invoke();
             }
         }
 
@@ -22,7 +21,5 @@
                 _editedCategory = value;
             }
         }
-
-        public event Action SelectedCategoryChanged;
     }
 }

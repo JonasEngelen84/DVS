@@ -1,6 +1,5 @@
 ﻿using DVS.Stores;
-using DVS.ViewModels.View_ViewModels;
-using DVS.Views;
+using DVS.ViewModels.Views;
 
 namespace DVS.Commands.DVSViewCommands
 {
