@@ -9,7 +9,7 @@
         <!-- Add Category and Add-Button-->
         <StackPanel Orientation="Horizontal">
             <TextBox Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding AddNewCategory, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding AddNewCategory}" />
             <Button Content="ERSTELLEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
@@ -20,7 +20,7 @@
         <StackPanel Orientation="Horizontal"
                     Margin="0 10 0 20">
             <TextBox Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding EditCategory}" />
+                     Text="{Binding _selectedCategoryStore.SelectedCategory}" />
             <Button Content="BEARBEITEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"

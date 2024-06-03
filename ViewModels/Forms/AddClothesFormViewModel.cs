@@ -3,37 +3,69 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
-    public class AddClothesFormViewModel(
-        ICommand openAddEditCategoriesCommand,
-        ICommand openAddEditSeasonsCommand,
-        ICommand addClothesCommand,
-        ICommand cancelClothesCommand)
-        : ViewModelBase
+    public class AddClothesFormViewModel(ICommand openAddEditCategoriesCommand,
+                                         ICommand openAddEditSeasonsCommand,
+                                         ICommand addClothesCommand,
+                                         ICommand cancelClothesCommand)
+                                         : ViewModelBase
     {
         public ICommand OpenAddEditCategoriesCommand { get; } = openAddEditCategoriesCommand;
         public ICommand OpenAddEditSeasonsCommand { get; } = openAddEditSeasonsCommand;
         public ICommand AddClothesCommand { get; } = addClothesCommand;
         public ICommand CancelClothesCommand { get; } = cancelClothesCommand;
 
-        private ObservableCollection<string> categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];
-        public ObservableCollection<string> Categories
+        private string _id;
+        public string Id
         {
-            get { return categories; }
+            get => _id;
             set
             {
-                categories = value;
-                OnPropertyChanged();
+                _id = value;
+                OnPropertyChanged(nameof(Id));
             }
         }
 
-        private ObservableCollection<string> seasons = ["Sommer", "Winter", "Saisonlos"];
-        public ObservableCollection<string> Seasons
+        private string _name;
+        public string Name
         {
-            get { return seasons; }
+            get => _name;
             set
             {
-                categories = value;
-                OnPropertyChanged();
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        private string _size;
+        public string Size
+        {
+            get => _size;
+            set
+            {
+                _size = value;
+                OnPropertyChanged(nameof(Size));
+            }
+        }
+
+        private string _quantity;
+        public string Quantity
+        {
+            get => _quantity;
+            set
+            {
+                _quantity = value;
+                OnPropertyChanged(nameof(Quantity));
+            }
+        }
+
+        private string _comment;
+        public string Comment
+        {
+            get => _comment;
+            set
+            {
+                _comment = value;
+                OnPropertyChanged(nameof(Comment));
             }
         }
 
@@ -65,58 +97,25 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string _id;
-        public string Id
+        private ObservableCollection<string> categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];
+        public ObservableCollection<string> Categories
         {
-            get => _id;
+            get { return categories; }
             set
             {
-                _id = value;
-                OnPropertyChanged(nameof(Id));
+                categories = value;
+                OnPropertyChanged();
             }
         }
-        
-        private string _name;
-        public string Name
+
+        private ObservableCollection<string> seasons = ["Sommer", "Winter", "Saisonlos"];
+        public ObservableCollection<string> Seasons
         {
-            get => _name;
+            get { return seasons; }
             set
             {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
-        
-        private string _size;
-        public string Size
-        {
-            get => _size;
-            set
-            {
-                _size = value;
-                OnPropertyChanged(nameof(Size));
-            }
-        }
-        
-        private string _quantity;
-        public string Quantity
-        {
-            get => _quantity;
-            set
-            {
-                _quantity = value;
-                OnPropertyChanged(nameof(Quantity));
-            }
-        }
-        
-        private string _comment;
-        public string Comment
-        {
-            get => _comment;
-            set
-            {
-                _comment = value;
-                OnPropertyChanged(nameof(Comment));
+                categories = value;
+                OnPropertyChanged();
             }
         }
     }

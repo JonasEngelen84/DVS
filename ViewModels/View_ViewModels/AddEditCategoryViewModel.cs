@@ -16,7 +16,7 @@ namespace DVS.ViewModels.View_ViewModels
             SelectedCategoryStore selectedCategoryStore,
             SelectedSeasonStore selectedSeasonStore)
         {
-            ICommand addCategoryCommand = new AddCategoryCommand(this, modalNavigationStore, selectedCategoryStore);
+            ICommand addCategoryCommand = new AddCategoryCommand(this, categoryStore);
             ICommand editCategoryCommand = new EditCategoryCommand(this, modalNavigationStore, selectedCategoryStore);
             ICommand deleteCategoryCommand = new DeleteCategoryCommand(this, modalNavigationStore, selectedCategoryStore);
             ICommand clearCategoryListCommand = new ClearCategoryListCommand(this, modalNavigationStore);

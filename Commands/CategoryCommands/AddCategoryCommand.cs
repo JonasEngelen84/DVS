@@ -1,27 +1,32 @@
 ﻿using DVS.Stores;
+using DVS.ViewModels.Forms;
 using DVS.ViewModels.View_ViewModels;
 
 namespace DVS.Commands.CategoryCommands
 {
-    public class AddCategoryCommand : CommandBase
+    public class AddCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel,
+                                    CategoryStore categoryStore)
+                                    : CommandBase
     {
-        private AddEditCategoryViewModel _addEditCategoryViewModel { get; }
-        private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly SelectedCategoryStore _selectedCategoryStore;
-
-        public AddCategoryCommand(
-            AddEditCategoryViewModel addEditCategoryViewModel,
-            ModalNavigationStore modalNavigationStore,
-            SelectedCategoryStore selectedCategoryStore)
+        public override async void Execute(object parameter)
         {
-            _addEditCategoryViewModel = addEditCategoryViewModel;
-            _modalNavigationStore = modalNavigationStore;
-            _selectedCategoryStore = selectedCategoryStore;
-        }
+            AddEditCategoryFormViewModel addEditCategoryFormViewModel = addEditCategoryViewModel.AddEditCategoryFormViewModel;
+            addEditCategoryFormViewModel.ErrorMessage = null;
+            addEditCategoryFormViewModel.IsSubmitting = true;
+            string newCategory = addEditCategoryFormViewModel.AddNewCategory;
 
-        public override void Execute(object parameter)
-        {
-            _modalNavigationStore.Close();
+            try
+            {
+                await categoryStore.Add(newCategory);
+            }
+            catch (Exception)
+            {
+                addEditCategoryFormViewModel.ErrorMessage = "Erstellen der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+            }
+            finally
+            {
+                addEditCategoryFormViewModel.IsSubmitting = false;
+            }
         }
     }
 }

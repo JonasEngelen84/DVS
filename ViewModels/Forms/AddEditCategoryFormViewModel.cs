@@ -30,6 +30,39 @@ namespace DVS.ViewModels.Forms
             }
         }
 
+        private bool _isSubmitting;
+        public bool IsSubmitting
+        {
+            get
+            {
+                return _isSubmitting;
+            }
+            set
+            {
+                _isSubmitting = value;
+                OnPropertyChanged(nameof(IsSubmitting));
+            }
+        }
+
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get
+            {
+                return _errorMessage;
+            }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+                OnPropertyChanged(nameof(HasErrorMessage));
+            }
+        }
+
+        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+
+        //public bool CanSubmit => !string.IsNullOrEmpty(Username);
+
         private readonly CategoryStore _categoryStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
 
@@ -63,22 +96,22 @@ namespace DVS.ViewModels.Forms
 
             EditCategory = "Kategorie wählen";
 
-            _categoryCollection = ["Sweatshirt", "Hose", "Pullover", "Kopfbedeckung", "Jacke", "Schuhwerk", "Hemd"];
+            _categoryCollection = [];
             _categoryCollectionViewSource = new CollectionViewSource { Source = _categoryCollection };
             _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
 
             _categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
+            _categoryStore.CategoryAdded += CategoryStore_CategoryAdded;
 
         }
-
 
         protected override void Dispose()
         {
             _categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
+            _categoryStore.CategoryAdded -= CategoryStore_CategoryAdded;
 
             base.Dispose();
         }
-
 
         private void CategoryStore_CategoriesLoaded()
         {
@@ -88,6 +121,11 @@ namespace DVS.ViewModels.Forms
             {
                 AddCategory(category);
             }
+        }
+
+        private void CategoryStore_CategoryAdded(string category)
+        {
+            AddCategory(category);
         }
 
         private void Edit_Category()

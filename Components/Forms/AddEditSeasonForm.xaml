@@ -26,6 +26,7 @@
                     Command="{Binding EditSeasonCommand}" />
         </StackPanel>
 
+        <!-- Season-ListView and Button-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />

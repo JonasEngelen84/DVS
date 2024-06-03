@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DVS.Stores
+﻿namespace DVS.Stores
 {
     public class CategoryStore
     {
@@ -13,20 +6,22 @@ namespace DVS.Stores
         public IEnumerable<string> Categories => _categories;
 
         public event Action CategoriesLoaded;
+        public event Action<string> CategoryAdded;
 
         public CategoryStore()
         {
-            _categories = ["Sweatshirt", "Hose", "Pullover", "Kopfbedeckung", "Jacke", "Schuhwerk", "Hemd"];
+            _categories = new List<string>();
         }
 
-        public void Load()
+        public async Task Load()
         {
             CategoriesLoaded?.Invoke();
         }
 
-        public void Add(string category)
+        public async Task Add(string category)
         {
             _categories.Add(category);
+            CategoryAdded?.Invoke(category);
         }
     }
 }
