@@ -1,4 +1,5 @@
 ﻿using DVS.Stores;
+using DVS.ViewModels;
 using DVS.ViewModels.Views;
 
 namespace DVS.Commands.DVSViewCommands
@@ -12,6 +13,7 @@ namespace DVS.Commands.DVSViewCommands
         private readonly SeasonStore _seasonStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
         private readonly SelectedSeasonStore _selectedSeasonStore;
+        private readonly ClothesListViewViewModel _clothesListViewViewModel;
 
         public OpenEditCommand(
             ModalNavigationStore modalNavigationStore,
@@ -20,7 +22,8 @@ namespace DVS.Commands.DVSViewCommands
             SelectedCategoryStore selectedCategoryStore,
             SelectedSeasonStore selectedSeasonStore,
             SelectedClothesStore selectedClothesStore,
-            SelectedEmployeeClothesStore selectedEmployeeClothesStore)
+            SelectedEmployeeClothesStore selectedEmployeeClothesStore,
+            ClothesListViewViewModel clothesListViewViewModel)
         {
             _selectedClothesStore = selectedClothesStore;
             _selectedEmployeeClothesStore = selectedEmployeeClothesStore;
@@ -29,6 +32,7 @@ namespace DVS.Commands.DVSViewCommands
             _seasonStore = seasonStore;
             _selectedCategoryStore = selectedCategoryStore;
             _selectedSeasonStore = selectedSeasonStore;
+            _clothesListViewViewModel = clothesListViewViewModel;
         }
 
         int i = 0;
@@ -40,7 +44,8 @@ namespace DVS.Commands.DVSViewCommands
                                                                                      _categoryStore,
                                                                                      _seasonStore,
                                                                                      _selectedCategoryStore,
-                                                                                     _selectedSeasonStore);
+                                                                                     _selectedSeasonStore,
+                                                                                     _clothesListViewViewModel);
 
                 _modalNavigationStore.CurrentViewModel = editClothesViewModel;
             }

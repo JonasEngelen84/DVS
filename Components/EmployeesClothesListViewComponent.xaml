@@ -6,7 +6,9 @@
              mc:Ignorable="d">
     <Grid>
         <ListView x:Name="EmployeesListView"
-                  Style="{StaticResource ListviewStyle}"
+                  FontSize="14"
+                  Foreground="#FF212129"
+                  Background="WhiteSmoke"
                   ItemsSource="{Binding EmployeeClothesListViewItemCollection}"
                   SelectedItem="{Binding SelectedEmployeeClothesListViewItemViewModel, Mode=TwoWay}">
             <ListView.View>

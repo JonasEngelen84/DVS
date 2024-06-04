@@ -100,7 +100,7 @@
                         Command="{Binding AddEmployeeCommand}" />
 
                 <Button Content="BEENDEN"
-                        Margin="0 54 0 0"
+                        Margin="0 56 0 0"
                         HorizontalAlignment="Right"
                         Style="{StaticResource ModalButtonStyle}"
                         Command="{Binding CancelEmployeeCommand}" />

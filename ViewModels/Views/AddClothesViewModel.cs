@@ -15,7 +15,8 @@ namespace DVS.ViewModels.Views
             CategoryStore categoryStore,
             SeasonStore seasonStore,
             SelectedCategoryStore selectedCategoryStore,
-            SelectedSeasonStore selectedSeasonStore)
+            SelectedSeasonStore selectedSeasonStore,
+            ClothesListViewViewModel clothesListViewViewModel)
         {
             ICommand AddClothesCommand = new AddClothesCommand(this, modalNavigationStore);
             ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
@@ -24,16 +25,19 @@ namespace DVS.ViewModels.Views
                                                                                      categoryStore,
                                                                                      seasonStore,
                                                                                      selectedCategoryStore,
-                                                                                     selectedSeasonStore);
+                                                                                     selectedSeasonStore,
+                                                                                     clothesListViewViewModel);
 
             ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(modalNavigationStore,
                                                                                categoryStore,
                                                                                seasonStore,
                                                                                selectedCategoryStore,
-                                                                               selectedSeasonStore);
+                                                                               selectedSeasonStore,
+                                                                               clothesListViewViewModel);
 
             AddClothesFormViewModel = new(categoryStore,
                                           seasonStore,
+                                          clothesListViewViewModel,
                                           openAddEditCategoriesCommand,
                                           openAddEditSeasonsCommand,
                                           AddClothesCommand,

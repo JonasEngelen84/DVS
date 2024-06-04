@@ -50,7 +50,8 @@ namespace DVS.ViewModels.Views
                 categoryStore,
                 seasonStore,
                 selectedCategoryStore,
-                selectedSeasonStore);
+                selectedSeasonStore,
+                ClothesListViewViewModel);
 
             OpenEditCommand = new OpenEditCommand(
                 modalNavigationStore,
@@ -59,7 +60,8 @@ namespace DVS.ViewModels.Views
                 selectedCategoryStore,
                 selectedSeasonStore,
                 selectedClothesStore,
-                selectedEmployeeClothesStore);
+                selectedEmployeeClothesStore,
+                ClothesListViewViewModel);
 
             PlusCommand = new PlusCommand(
                 selectedClothesStore,

@@ -122,8 +122,10 @@ namespace DVS.ViewModels.Forms
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
+        //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
+        //TODO: Category-/Season-ComboBoxes sortieren
         private readonly ObservableCollection<string> _categories;
         //private readonly CollectionViewSource _categoryCollectionViewSource;
         public IEnumerable<string> Categories => _categories;
@@ -135,6 +137,8 @@ namespace DVS.ViewModels.Forms
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
 
+        public ClothesListViewViewModel ClothesListViewViewModel { get; }
+
         public ICommand OpenAddEditCategoriesCommand { get; }
         public ICommand OpenAddEditSeasonsCommand { get; }
         public ICommand AddClothesCommand { get; }
@@ -143,6 +147,7 @@ namespace DVS.ViewModels.Forms
         public AddClothesFormViewModel(
             CategoryStore categoryStore,
             SeasonStore seasonStore,
+            ClothesListViewViewModel clothesListViewViewModel,
             ICommand openAddEditCategoriesCommand,
             ICommand openAddEditSeasonsCommand,
             ICommand addClothesCommand,
@@ -150,6 +155,8 @@ namespace DVS.ViewModels.Forms
         {
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
+
+            ClothesListViewViewModel = clothesListViewViewModel;
 
             _categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung", "Hose2", "Pullover2", "Shirt2", "Jacke2", "Kopfbedeckung2"];
             //_categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
