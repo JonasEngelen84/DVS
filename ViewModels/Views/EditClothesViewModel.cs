@@ -37,7 +37,10 @@ namespace DVS.ViewModels.Views
                                                                                clothesListViewViewModel);
 
 
-            EditClothesFormViewModel = new EditClothesFormViewModel(openAddEditCategoriesCommand,
+            EditClothesFormViewModel = new EditClothesFormViewModel(categoryStore,
+                                                                    seasonStore,
+                                                                    clothesListViewViewModel,
+                                                                    openAddEditCategoriesCommand,
                                                                     openAddEditSeasonsCommand,
                                                                     cancelClothesCommand,
                                                                     editClothesCommand,

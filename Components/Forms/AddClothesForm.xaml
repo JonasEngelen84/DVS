@@ -4,9 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:DVS.Components"
-             mc:Ignorable="d"
-             MaxHeight="500"
-             MaxWidth="508">
+             mc:Ignorable="d">
 
     <StackPanel>
 
@@ -166,6 +164,6 @@
 
         <!-- AddEditClothes_ClothesListViewComponent -->
         <components:AddEditClothes_ClothesListViewComponent Margin="2 15 0 0"
-                                             DataContext="{Binding ClothesListViewViewModel}" />
+                                                            DataContext="{Binding ClothesListViewViewModel}" />
     </StackPanel>
 </UserControl>

@@ -144,21 +144,20 @@ namespace DVS.ViewModels.Forms
         public ICommand AddClothesCommand { get; }
         public ICommand CancelClothesCommand { get; }
 
-        public AddClothesFormViewModel(
-            CategoryStore categoryStore,
-            SeasonStore seasonStore,
-            ClothesListViewViewModel clothesListViewViewModel,
-            ICommand openAddEditCategoriesCommand,
-            ICommand openAddEditSeasonsCommand,
-            ICommand addClothesCommand,
-            ICommand cancelClothesCommand)
+        public AddClothesFormViewModel(CategoryStore categoryStore,
+                                       SeasonStore seasonStore,
+                                       ClothesListViewViewModel clothesListViewViewModel,
+                                       ICommand openAddEditCategoriesCommand,
+                                       ICommand openAddEditSeasonsCommand,
+                                       ICommand addClothesCommand,
+                                       ICommand cancelClothesCommand)
         {
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
 
             ClothesListViewViewModel = clothesListViewViewModel;
 
-            _categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung", "Hose2", "Pullover2", "Shirt2", "Jacke2", "Kopfbedeckung2"];
+            _categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];
             //_categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
             //_categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
             
@@ -171,6 +170,5 @@ namespace DVS.ViewModels.Forms
             AddClothesCommand = addClothesCommand;
             CancelClothesCommand = cancelClothesCommand;
         }
-
     }
 }
