@@ -6,157 +6,195 @@
              mc:Ignorable="d">
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <!-- Employee details and Button -->
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+            <!-- Employee details and Button -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-            <!-- Employee details -->
-            <StackPanel Grid.Row="0"
-                        HorizontalAlignment="Left"
-                        Orientation="Vertical"
-                        Grid.IsSharedSizeScope="True">
+                <!-- Employee details -->
+                <StackPanel Grid.Row="0"
+                            HorizontalAlignment="Left"
+                            Orientation="Vertical"
+                            Grid.IsSharedSizeScope="True">
 
-                <!-- Id -->
-                <Grid Margin="0 0 0 5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"
-                                          SharedSizeGroup="Details" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+                    <!-- Id -->
+                    <Grid Margin="0 0 0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"
+                                              SharedSizeGroup="Details" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0"
-                               Text="Id:"
-                               Style="{StaticResource ModalTextStyle}" />
+                        <TextBlock Grid.Column="0"
+                                   Text="Id:"
+                                   Style="{StaticResource ModalTextStyle}" />
 
-                    <TextBox Grid.Column="1"
-                             Style="{StaticResource TextBoxStyle}"
-                             Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
-                </Grid>
+                        <TextBox Grid.Column="1"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
 
-                <!-- Lastname -->
-                <Grid Margin="0 0 0 5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"
-                                          SharedSizeGroup="Details" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+                    <!-- Lastname -->
+                    <Grid Margin="0 0 0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"
+                                              SharedSizeGroup="Details" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0"
-                               Text="Nachname:"
-                               Style="{StaticResource ModalTextStyle}" />
+                        <TextBlock Grid.Column="0"
+                                   Text="Nachname:"
+                                   Style="{StaticResource ModalTextStyle}" />
 
-                    <TextBox Grid.Column="1"
-                             Style="{StaticResource TextBoxStyle}"
-                             Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" />
-                </Grid>
+                        <TextBox Grid.Column="1"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
 
-                <!-- Forname -->
-                <Grid Margin="0 0 0 5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"
-                                          SharedSizeGroup="Details" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+                    <!-- Forname -->
+                    <Grid Margin="0 0 0 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"
+                                              SharedSizeGroup="Details" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0"
-                               Text="Vorname:"
-                               Style="{StaticResource ModalTextStyle}" />
+                        <TextBlock Grid.Column="0"
+                                   Text="Vorname:"
+                                   Style="{StaticResource ModalTextStyle}" />
 
-                    <TextBox Grid.Column="1"
-                             Style="{StaticResource TextBoxStyle}"
-                             Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" />
-                </Grid>
+                        <TextBox Grid.Column="1"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
 
-                <!-- Comment -->
-                <Grid Margin="0 0 0 10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="Details" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
+                    <!-- Comment -->
+                    <Grid Margin="0 0 0 10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="Details" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Column="0"
-                               Text="Kommentar: "
-                               Style="{StaticResource ModalTextStyle}" />
+                        <TextBlock Grid.Column="0"
+                                   Text="Kommentar: "
+                                   Style="{StaticResource ModalTextStyle}" />
 
-                    <TextBox Grid.Column="1"
-                             Style="{StaticResource TextBoxStyle}"
-                             Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
-                </Grid>
-            </StackPanel>
+                        <TextBox Grid.Column="1"
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </StackPanel>
 
-            <!-- Button -->
-            <StackPanel Grid.Column="1">
-                <Button Content="BEARBEITEN"
-                        HorizontalAlignment="Right"
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding EditEmployeeCommand}" />
+                <!-- Button -->
+                <StackPanel Grid.Column="1">
+                    <Button Content="BEARBEITEN"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource ModalButtonStyle}"
+                            Command="{Binding EditEmployeeCommand}" />
 
-                <Button Content="LÖSCHEN"
-                        HorizontalAlignment="Right"
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding DeleteEmployeeCommand}" />
-                
-                <Button Content="LEEREN"
-                        HorizontalAlignment="Right"
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding ClearEmployeeClothesListCommand}" />
+                    <Button Content="LÖSCHEN"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource ModalButtonStyle}"
+                            Command="{Binding DeleteEmployeeCommand}" />
 
-                <Button Content="BEENDEN"
-                        HorizontalAlignment="Right"
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding CancelEmployeeCommand}" />
-            </StackPanel>
+                    <Button Content="LEEREN"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource ModalButtonStyle}"
+                            Command="{Binding ClearEmployeeClothesListCommand}" />
+
+                    <Button Content="BEENDEN"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource ModalButtonStyle}"
+                            Command="{Binding CancelEmployeeCommand}" />
+                </StackPanel>
+            </Grid>
+
+            <Label Content="Bekleidung hinzufügen:"
+                   Grid.Row="1"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Margin="-4 0 0 0" />
+
+            <!-- Drag clothes to employee ListViews -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!-- Employee get-ClothesListView -->
+                <Border Grid.Column="0"
+                        Margin="0 0 5 0"
+                        Style="{StaticResource BorderAddEmployeeListViewStyle}">
+                    <Grid>
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=border}" />
+                        </Grid.OpacityMask>
+                        <Border x:Name="border"
+                                Background="#FFDEDEDE"
+                                CornerRadius="5" />
+
+                        <ListView BorderThickness="0"
+                                  Background="#FFDEDEDE" />
+                    </Grid>
+                </Border>
+
+                <!-- Available clothesListView -->
+                <Border Grid.Column="1"
+                        Style="{StaticResource BorderAddEmployeeListViewStyle}">
+                    <Grid>
+                        <!-- ListView CornerRadius-->
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=border}" />
+                        </Grid.OpacityMask>
+                        <Border Background="#FFDEDEDE"
+                                CornerRadius="5" />
+
+                        <ListView BorderThickness="0"
+                                  Background="#FFDEDEDE" />
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
 
-        <Label Content="Bekleidung hinzufügen:"
-               Grid.Row="1"
-               FontSize="14"
-               FontWeight="Bold"
-               Margin="-4 0 0 0" />
+        <!-- Available clothesListView -->
+        <Grid Grid.Column="1"
+              Margin="9 -9 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <!-- Drag clothes to employee ListViews -->
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+            <Label Content="Mitarbeiter:"
+                   Grid.Row="0"
+                   FontSize="14"
+                   FontWeight="Bold" />
 
-            <!-- Employee get-ClothesListView -->
-            <Border Grid.Column="0"
-                    Margin="0 0 5 0"
-                    Style="{StaticResource BorderAddEmployeeListViewStyle}">
+            <Border Grid.Row="1"
+                    Width="200"
+                    BorderBrush="Black"
+                    BorderThickness="0.5"
+                    CornerRadius="5">
                 <Grid>
-                    <!-- Bookmark: ListView CornerRadius-->
                     <Grid.OpacityMask>
-                        <VisualBrush Visual="{Binding ElementName=border}" />
+                        <VisualBrush Visual="{Binding ElementName=border3}" />
                     </Grid.OpacityMask>
-                    <Border x:Name="border"
+                    <Border x:Name="border3"
                             Background="#FFDEDEDE"
-                            CornerRadius="5" />
-
-                    <ListView BorderThickness="0"
-                              Background="#FFDEDEDE" />
-                </Grid>
-            </Border>
-
-            <!-- Available clothesListView -->
-            <Border Grid.Column="1"
-                    Style="{StaticResource BorderAddEmployeeListViewStyle}">
-                <Grid>
-                    <!-- ListView CornerRadius-->
-                    <Grid.OpacityMask>
-                        <VisualBrush Visual="{Binding ElementName=border}" />
-                    </Grid.OpacityMask>
-                    <Border Background="#FFDEDEDE"
                             CornerRadius="5" />
 
                     <ListView BorderThickness="0"
@@ -165,4 +203,5 @@
             </Border>
         </Grid>
     </Grid>
+    
 </UserControl>
