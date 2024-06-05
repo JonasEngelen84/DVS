@@ -1,16 +1,14 @@
 ﻿using DVS.Models;
 using DVS.Stores;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
     public class AddClothesFormViewModel : ViewModelBase
     {
-        private string _id;
-        public string Id
+        private string? _id;
+        public string? Id
         {
             get => _id;
             set
@@ -20,8 +18,8 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string _name;
-        public string Name
+        private string? _name;
+        public string? Name
         {
             get => _name;
             set
@@ -31,8 +29,8 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string _size;
-        public string Size
+        private string? _size;
+        public string? Size
         {
             get => _size;
             set
@@ -42,8 +40,8 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string _quantity;
-        public string Quantity
+        private int? _quantity;
+        public int? Quantity
         {
             get => _quantity;
             set
@@ -53,42 +51,42 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string _comment;
-        public string Comment
+        private string? _selectedCategory;
+        public string? SelectedCategory
+        {
+            get => _selectedCategory;
+            set
+            {
+                if (_selectedCategory != value)
+                {
+                    _selectedCategory = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string? _selectedSeason;
+        public string? SelectedSeason
+        {
+            get => _selectedSeason;
+            set
+            {
+                if (_selectedSeason != value)
+                {
+                    _selectedSeason = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string? _comment;
+        public string? Comment
         {
             get => _comment;
             set
             {
                 _comment = value;
                 OnPropertyChanged(nameof(Comment));
-            }
-        }
-
-        private string _selectedCategory;
-        public string SelectedCategory
-        {
-            get => _selectedCategory;
-            set
-            {
-                if (_selectedCategory != value)
-                {
-                    _selectedCategory = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _selectedSeason;
-        public string SelectedSeason
-        {
-            get => _selectedCategory;
-            set
-            {
-                if (_selectedCategory != value)
-                {
-                    _selectedCategory = value;
-                    OnPropertyChanged();
-                }
             }
         }
 
@@ -167,17 +165,18 @@ namespace DVS.ViewModels.Forms
 
             _categories = [];
             _seasons = [];
-            //_clothes = [];
 
             CategoryStore_CategoriesLoaded();
             SeasonStore_SeasonsLoaded();
-            //ClothesStore_ClothesLoaded();
+
+            _clothesStore.ClothesAdded += ClothesStore_AddClothes;
+
         }
 
 
         protected override void Dispose()
         {
-
+            _clothesStore.ClothesAdded -= ClothesStore_AddClothes;
 
             base.Dispose();
         }
@@ -202,37 +201,16 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        //private void ClothesStore_ClothesLoaded()
-        //{
-        //    _clothes.Clear();
-
-        //    foreach (ClothesModel clothes in _clothesStore.Clothes)
-        //    {
-        //        AddClothes(clothes);
-        //    }
-        //}
-
-        //private void ClothesStore_ClothesAdded(ClothesModel clothes)
-        //{
-        //    AddClothes(clothes);
-        //}
-
-        private void Edit_Clothes()
+        private void ClothesStore_AddClothes(ClothesModel clothes)
         {
-
+            Id = null;
+            Name = null;
+            Size = null;
+            Quantity = null;
+            Comment = null;
+            SelectedCategory = null;
+            SelectedSeason = null;
+            Comment = null;
         }
-
-        //private void AddClothes(ClothesModel clothes)
-        //{
-        //    _clothes.Add(clothes);
-
-        //    Id = "";
-        //    Name = "";
-        //    Size = "";
-        //    Quantity = "";
-        //    Comment = "";
-
-        //    OnPropertyChanged(nameof(Clothes));
-        //}
     }
 }

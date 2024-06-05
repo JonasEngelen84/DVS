@@ -7,15 +7,15 @@ namespace DVS.ViewModels.ListViewItems
         public EmployeeModel Employee { get; private set; }
         public ClothesModel Clothes { get; private set; }
 
-        public int EmployeeId => Employee.Id;
-        public string Lastname => Employee.Lastname;
-        public string Firstname => Employee.Firstname;
-        public int ClothesId => Clothes.Id;
-        public string ClothesName => Clothes.Name;
-        public string Size => Clothes.Size;
+        public int? EmployeeId => Employee.Id;
+        public string? Lastname => Employee.Lastname;
+        public string? Firstname => Employee.Firstname;
+        public string? ClothesId => Clothes.Id;
+        public string? ClothesName => Clothes.Name;
+        public string? Size => Clothes.Size;
 
-        private string _quantity;
-        public string Quantity
+        private int? _quantity;
+        public int? Quantity
         {
             get => _quantity;
             set
@@ -25,8 +25,8 @@ namespace DVS.ViewModels.ListViewItems
             }
         }
 
-        private string _comment;
-        public string Comment
+        private string? _comment;
+        public string? Comment
         {
             get => _comment;
             set

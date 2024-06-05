@@ -8,8 +8,8 @@ namespace DVS.ViewModels.Forms
 {
     public class AddEditCategoryFormViewModel : ViewModelBase
     {
-        private string _addNewCategory;
-        public string AddNewCategory
+        private string? _addNewCategory;
+        public string? AddNewCategory
         {
             get => _addNewCategory;
             set
@@ -19,8 +19,8 @@ namespace DVS.ViewModels.Forms
             }
         }
         
-        private string _editCategory;
-        public string EditCategory
+        private string? _editCategory;
+        public string? EditCategory
         {
             get => _editCategory;
             set
@@ -139,7 +139,7 @@ namespace DVS.ViewModels.Forms
         {
             _categories.Add(categorie);
             _categoryCollectionViewSource.View.Refresh();
-            AddNewCategory = "";
+            AddNewCategory = null;
             OnPropertyChanged(nameof(Categories));
         }
     }

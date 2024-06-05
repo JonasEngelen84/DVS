@@ -22,6 +22,7 @@ namespace DVS.ViewModels
             _clothes = [];
             _clothesStore = clothesStore;
             LoadClothes();
+            _clothesStore.ClothesAdded += ClothesStore_ClothesAdded;
         }
 
         private void LoadClothes()
@@ -33,6 +34,17 @@ namespace DVS.ViewModels
                 _clothes.Add(clothes);
             }
 
+        }
+
+        private void ClothesStore_ClothesAdded(ClothesModel clothes)
+        {
+            AddClothes(clothes);
+        }
+        
+        private void AddClothes(ClothesModel clothes)
+        {
+            _clothes.Add(clothes);
+            OnPropertyChanged(nameof(_clothes));
         }
     }
 }

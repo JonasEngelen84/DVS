@@ -13,8 +13,8 @@ namespace DVS.ViewModels.AddViewModels.Forms
             CancelEmployeeCommand = cancelEmployeeCommand;
         }
 
-        private string _id;
-        public string Id
+        private string? _id;
+        public string? Id
         {
             get => _id;
             set
@@ -24,8 +24,8 @@ namespace DVS.ViewModels.AddViewModels.Forms
             }
         }
 
-        private string _lastname;
-        public string Lastname
+        private string? _lastname;
+        public string? Lastname
         {
             get => _lastname;
             set
@@ -35,8 +35,8 @@ namespace DVS.ViewModels.AddViewModels.Forms
             }
         }
 
-        private string _firstname;
-        public string Firstname
+        private string? _firstname;
+        public string? Firstname
         {
             get => _firstname;
             set
@@ -46,8 +46,8 @@ namespace DVS.ViewModels.AddViewModels.Forms
             }
         }
 
-        private string _comment;
-        public string Comment
+        private string? _comment;
+        public string? Comment
         {
             get => _comment;
             set

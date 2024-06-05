@@ -1,5 +1,4 @@
-﻿using DVS.Commands.ClothesCommands;
-using DVS.Models;
+﻿using DVS.Models;
 using DVS.Stores;
 using System.Collections.ObjectModel;
 

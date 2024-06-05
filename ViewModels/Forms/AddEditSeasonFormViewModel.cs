@@ -8,8 +8,8 @@ namespace DVS.ViewModels.Forms
 {
     public class AddEditSeasonFormViewModel : ViewModelBase
     {
-        private string _addNewSeason;
-        public string AddNewSeason
+        private string? _addNewSeason;
+        public string? AddNewSeason
         {
             get => _addNewSeason;
             set
@@ -19,8 +19,8 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string _editSeason;
-        public string EditSeason
+        private string? _editSeason;
+        public string? EditSeason
         {
             get => _editSeason;
             set

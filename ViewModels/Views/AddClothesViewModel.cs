@@ -1,6 +1,5 @@
 ﻿using DVS.Commands;
 using DVS.Commands.ClothesCommands;
-using DVS.Models;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
 using System.Windows.Input;
@@ -18,7 +17,7 @@ namespace DVS.ViewModels.Views
                                    SelectedSeasonStore selectedSeasonStore,
                                    ClothesStore clothesStore)
         {
-            ICommand AddClothesCommand = new AddClothesCommand(this, modalNavigationStore);
+            ICommand AddClothesCommand = new AddClothesCommand(this, clothesStore);
             ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
 
             ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore,
