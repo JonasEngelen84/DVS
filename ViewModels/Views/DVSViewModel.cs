@@ -28,14 +28,11 @@ namespace DVS.ViewModels.Views
                             SelectedClothesStore selectedClothesStore,
                             SelectedEmployeeClothesStore selectedEmployeeClothesStore)
         {
-            ClothesListViewViewModel = new(selectedClothesStore,
-                                           selectedEmployeeClothesStore,
-                                           modalNavigationStore);
+            ClothesListViewViewModel = new(clothesStore);
 
             EmployeesClothesListViewViewModel = new(selectedClothesStore,
                                                     selectedEmployeeClothesStore,
-                                                    modalNavigationStore,
-                                                    ClothesListViewViewModel);
+                                                    modalNavigationStore);
 
             OpenFilterClothesListCommand = new OpenFilterClothesListCommand(modalNavigationStore);
             OpenFilterEmployeeListCommand = new OpenFilterEmployeeListCommand(modalNavigationStore);
@@ -47,7 +44,7 @@ namespace DVS.ViewModels.Views
                                                               seasonStore,
                                                               selectedCategoryStore,
                                                               selectedSeasonStore,
-                                                              ClothesListViewViewModel);
+                                                              clothesStore);
 
             OpenEditCommand = new OpenEditCommand(modalNavigationStore,
                                                   categoryStore,
@@ -56,7 +53,7 @@ namespace DVS.ViewModels.Views
                                                   selectedSeasonStore,
                                                   selectedClothesStore,
                                                   selectedEmployeeClothesStore,
-                                                  ClothesListViewViewModel);
+                                                  clothesStore);
 
             PlusCommand = new PlusCommand(selectedClothesStore,
                                           selectedEmployeeClothesStore,

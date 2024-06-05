@@ -147,7 +147,6 @@ namespace DVS.ViewModels.Forms
 
         public EditClothesFormViewModel(CategoryStore categoryStore,
                                         SeasonStore seasonStore,
-                                        ClothesListViewViewModel clothesListViewViewModel,
                                         ICommand openAddEditCategoriesCommand,
                                         ICommand openAddEditSeasonsCommand,
                                         ICommand editClothesCommand,
@@ -157,8 +156,6 @@ namespace DVS.ViewModels.Forms
         {
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
-
-            ClothesListViewViewModel = clothesListViewViewModel;
 
             _categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];
             //_categoryCollectionViewSource = new CollectionViewSource { Source = _categories };

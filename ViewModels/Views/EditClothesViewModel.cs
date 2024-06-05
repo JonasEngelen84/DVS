@@ -15,7 +15,7 @@ namespace DVS.ViewModels.Views
                                     SeasonStore seasonStore,
                                     SelectedCategoryStore selectedCategoryStore,
                                     SelectedSeasonStore selectedSeasonStore,
-                                    ClothesListViewViewModel clothesListViewViewModel)
+                                    ClothesStore clothesStore)
         {
             ICommand cancelClothesCommand = new CloseModalCommand(modalNavigationStore);
             ICommand editClothesCommand = new EditClothesCommand(this, modalNavigationStore);
@@ -27,19 +27,18 @@ namespace DVS.ViewModels.Views
                                                                                seasonStore,
                                                                                selectedCategoryStore,
                                                                                selectedSeasonStore,
-                                                                               clothesListViewViewModel);
+                                                                               clothesStore);
 
             ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(modalNavigationStore,
                                                                                categoryStore,
                                                                                seasonStore,
                                                                                selectedCategoryStore,
                                                                                selectedSeasonStore,
-                                                                               clothesListViewViewModel);
+                                                                               clothesStore);
 
 
             EditClothesFormViewModel = new EditClothesFormViewModel(categoryStore,
                                                                     seasonStore,
-                                                                    clothesListViewViewModel,
                                                                     openAddEditCategoriesCommand,
                                                                     openAddEditSeasonsCommand,
                                                                     cancelClothesCommand,

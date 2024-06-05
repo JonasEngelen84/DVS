@@ -1,5 +1,4 @@
 ﻿using DVS.Stores;
-using DVS.ViewModels;
 using DVS.ViewModels.Views;
 
 namespace DVS.Commands.DVSViewCommands
@@ -8,31 +7,30 @@ namespace DVS.Commands.DVSViewCommands
     {
         private readonly SelectedClothesStore _selectedClothesStore;
         private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
+        private readonly ClothesStore _clothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
         private readonly SelectedSeasonStore _selectedSeasonStore;
-        private readonly ClothesListViewViewModel _clothesListViewViewModel;
 
-        public OpenEditCommand(
-            ModalNavigationStore modalNavigationStore,
-            CategoryStore categoryStore,
-            SeasonStore seasonStore,
-            SelectedCategoryStore selectedCategoryStore,
-            SelectedSeasonStore selectedSeasonStore,
-            SelectedClothesStore selectedClothesStore,
-            SelectedEmployeeClothesStore selectedEmployeeClothesStore,
-            ClothesListViewViewModel clothesListViewViewModel)
+        public OpenEditCommand(ModalNavigationStore modalNavigationStore,
+                               CategoryStore categoryStore,
+                               SeasonStore seasonStore,
+                               SelectedCategoryStore selectedCategoryStore,
+                               SelectedSeasonStore selectedSeasonStore,
+                               SelectedClothesStore selectedClothesStore,
+                               SelectedEmployeeClothesStore selectedEmployeeClothesStore,
+                               ClothesStore clothesStore)
         {
             _selectedClothesStore = selectedClothesStore;
             _selectedEmployeeClothesStore = selectedEmployeeClothesStore;
+            _clothesStore = clothesStore;
             _modalNavigationStore = modalNavigationStore;
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
             _selectedCategoryStore = selectedCategoryStore;
             _selectedSeasonStore = selectedSeasonStore;
-            _clothesListViewViewModel = clothesListViewViewModel;
         }
 
         int i = 0;
@@ -45,8 +43,7 @@ namespace DVS.Commands.DVSViewCommands
                                                                                      _seasonStore,
                                                                                      _selectedCategoryStore,
                                                                                      _selectedSeasonStore,
-                                                                                     _clothesListViewViewModel);
-
+                                                                                     _clothesStore);
                 _modalNavigationStore.CurrentViewModel = editClothesViewModel;
             }
             else

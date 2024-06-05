@@ -8,7 +8,7 @@ namespace DVS.Stores
         private readonly ObservableCollection<ClothesModel> _clothes;
         public IEnumerable<ClothesModel> Clothes => _clothes;
 
-        public event Action CLothesLoaded;
+        public event Action ClothesLoaded;
         public event Action<ClothesModel> ClothesAdded;
 
         public ClothesStore()
@@ -31,13 +31,12 @@ namespace DVS.Stores
                         new ClothesModel(511, "Fleecejacke", "Jacke", "L", "Saisonlos", 7),
                         new ClothesModel(512, "Winterjacke", "Jacke", "XL", "Winter", 2),
                         new ClothesModel(611, "Sommerkappe", "Kopfbedeckung", "", "Saisonlos", 8),
-                        new ClothesModel(612, "Winterkappe", "Kopfbedeckung", "", "Saisonlos", 4)
-            ];
+                        new ClothesModel(612, "Winterkappe", "Kopfbedeckung", "", "Saisonlos", 4)];
         }
 
         public async Task Load()
         {
-            CLothesLoaded?.Invoke();
+            ClothesLoaded?.Invoke();
         }
 
         public async Task Add(ClothesModel clothes)

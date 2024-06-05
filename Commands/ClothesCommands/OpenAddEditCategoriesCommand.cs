@@ -11,7 +11,7 @@ namespace DVS.Commands.ClothesCommands
         private readonly SeasonStore _seasonStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
         private readonly SelectedSeasonStore _selectedSeasonStore;
-        private readonly ClothesListViewViewModel _clothesListViewViewModel;
+        private readonly ClothesStore _clothesStore;
 
         public OpenAddEditCategoriesCommand(
             ModalNavigationStore modalNavigationStore,
@@ -19,14 +19,14 @@ namespace DVS.Commands.ClothesCommands
             SeasonStore seasonStore,
             SelectedCategoryStore selectedCategoryStore,
             SelectedSeasonStore selectedSeasonStore,
-            ClothesListViewViewModel clothesListViewViewModel)
+            ClothesStore clothesStore)
         {
             _modalNavigationStore = modalNavigationStore;
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
             _selectedCategoryStore = selectedCategoryStore;
             _selectedSeasonStore = selectedSeasonStore;
-            _clothesListViewViewModel = clothesListViewViewModel;
+            _clothesStore = clothesStore;
         }
 
         public override void Execute(object parameter)
@@ -36,7 +36,7 @@ namespace DVS.Commands.ClothesCommands
                                                                      _seasonStore,
                                                                      _selectedCategoryStore,
                                                                      _selectedSeasonStore,
-                                                                     _clothesListViewViewModel);
+                                                                     _clothesStore);
 
             _modalNavigationStore.CurrentViewModel = addEditCategorieViewModel;
         }

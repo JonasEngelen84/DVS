@@ -165,6 +165,6 @@
 
         <!-- AddEditClothes_ClothesListViewComponent -->
         <components:AddEditClothes_ClothesListViewComponent Margin="2 15 0 0"
-                                                            DataContext="{Binding ClothesListViewViewModel}" />
+                                                            DataContext="{Binding AddEditClothes_ClothesListViewViewModel}" />
     </StackPanel>
 </UserControl>

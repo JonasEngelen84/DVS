@@ -15,18 +15,18 @@ namespace DVS.ViewModels.Views
             SeasonStore seasonStore,
             SelectedCategoryStore selectedCategoryStore,
             SelectedSeasonStore selectedSeasonStore,
-            ClothesListViewViewModel clothesListViewViewModel)
+            ClothesStore clothesStore)
         {
             ICommand addCategoryCommand = new AddCategoryCommand(this, categoryStore);
             ICommand editCategoryCommand = new EditCategoryCommand(this, modalNavigationStore, selectedCategoryStore);
             ICommand deleteCategoryCommand = new DeleteCategoryCommand(this, modalNavigationStore, selectedCategoryStore);
             ICommand clearCategoryListCommand = new ClearCategoryListCommand(this, modalNavigationStore);
             ICommand closeAddEditCategoryCommand = new CloseAddEditCategoryCommand(modalNavigationStore,
-                                                                               categoryStore,
-                                                                               seasonStore,
-                                                                               selectedCategoryStore,
-                                                                               selectedSeasonStore,
-                                                                               clothesListViewViewModel);
+                                                                                   categoryStore,
+                                                                                   seasonStore,
+                                                                                   selectedCategoryStore,
+                                                                                   selectedSeasonStore,
+                                                                                   clothesStore);
 
             AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(categoryStore,
                                                                             selectedCategoryStore,

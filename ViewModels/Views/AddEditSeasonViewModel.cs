@@ -15,7 +15,7 @@ namespace DVS.ViewModels.Views
             SeasonStore seasonStore,
             SelectedCategoryStore selectedCategoryStore,
             SelectedSeasonStore selectedSeasonStore,
-            ClothesListViewViewModel clothesListViewViewModel)
+            ClothesStore clothesStore)
         {
             ICommand addSeasonCommand = new AddSeasonCommand(this, seasonStore);
             ICommand editSeasonCommand = new EditSeasonCommand(this, modalNavigationStore);
@@ -27,7 +27,7 @@ namespace DVS.ViewModels.Views
                 seasonStore,
                 selectedCategoryStore,
                 selectedSeasonStore,
-                clothesListViewViewModel);
+                clothesStore);
 
             AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(
                 seasonStore,

@@ -1,5 +1,4 @@
 ﻿using DVS.Stores;
-using DVS.ViewModels;
 using DVS.ViewModels.Views;
 
 namespace DVS.Commands.SeasonCommands
@@ -11,22 +10,21 @@ namespace DVS.Commands.SeasonCommands
         private readonly SeasonStore _seasonStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
         private readonly SelectedSeasonStore _selectedSeasonStore;
-        private readonly ClothesListViewViewModel _clothesListViewViewModel;
+        private readonly ClothesStore _clothesStore;
 
-        public CloseAddEditSeasonCommand(
-            ModalNavigationStore modalNavigationStore,
-            CategoryStore categoryStore,
-            SeasonStore seasonStore,
-            SelectedCategoryStore selectedCategoryStore,
-            SelectedSeasonStore selectedSeasonStore,
-            ClothesListViewViewModel clothesListViewViewModel)
+        public CloseAddEditSeasonCommand(ModalNavigationStore modalNavigationStore,
+                                         CategoryStore categoryStore,
+                                         SeasonStore seasonStore,
+                                         SelectedCategoryStore selectedCategoryStore,
+                                         SelectedSeasonStore selectedSeasonStore,
+                                         ClothesStore clothesStore)
         {
             _modalNavigationStore = modalNavigationStore;
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
             _selectedCategoryStore = selectedCategoryStore;
             _selectedSeasonStore = selectedSeasonStore;
-            _clothesListViewViewModel = clothesListViewViewModel;
+            _clothesStore = clothesStore;
         }
 
         public override void Execute(object parameter)
@@ -38,7 +36,7 @@ namespace DVS.Commands.SeasonCommands
                                                           _seasonStore,
                                                           _selectedCategoryStore,
                                                           _selectedSeasonStore,
-                                                          _clothesListViewViewModel);
+                                                          _clothesStore);
 
                 _modalNavigationStore.CurrentViewModel = addClothesViewModel;
             }
@@ -49,7 +47,7 @@ namespace DVS.Commands.SeasonCommands
                                                                                      _seasonStore,
                                                                                      _selectedCategoryStore,
                                                                                      _selectedSeasonStore,
-                                                                                     _clothesListViewViewModel);
+                                                                                     _clothesStore);
 
                 _modalNavigationStore.CurrentViewModel = editClothesViewModel;
             }

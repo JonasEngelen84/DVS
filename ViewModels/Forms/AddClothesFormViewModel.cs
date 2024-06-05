@@ -1,4 +1,5 @@
-﻿using DVS.Stores;
+﻿using DVS.Models;
+using DVS.Stores;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
@@ -125,52 +126,113 @@ namespace DVS.ViewModels.Forms
         //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
-        //TODO: Category-/Season-ComboBoxes sortieren (Dispose?)
         private readonly ObservableCollection<string> _categories;
-        //private readonly CollectionViewSource _categoryCollectionViewSource;
         public IEnumerable<string> Categories => _categories;
 
-        private  ObservableCollection<string> _seasons;
-        //private readonly CollectionViewSource _seasonCollectionViewSource;
-        public IEnumerable<string> Seasons => _seasons; //_seasonCollectionViewSource.View.Cast<string>()
+        private readonly ObservableCollection<string> _seasons;
+        public IEnumerable<string> Seasons => _seasons;
+
+        //private readonly ObservableCollection<ClothesModel> _clothes;
+        //public IEnumerable<ClothesModel> Clothes => _clothes;
+
+        public AddEditClothes_ClothesListViewViewModel AddEditClothes_ClothesListViewViewModel { get; }
 
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
-
-        public ClothesListViewViewModel ClothesListViewViewModel { get; }
+        private readonly ClothesStore _clothesStore;
 
         public ICommand OpenAddEditCategoriesCommand { get; }
         public ICommand OpenAddEditSeasonsCommand { get; }
         public ICommand AddClothesCommand { get; }
         public ICommand CancelClothesCommand { get; }
 
+
         public AddClothesFormViewModel(CategoryStore categoryStore,
                                        SeasonStore seasonStore,
-                                       ClothesListViewViewModel clothesListViewViewModel,
+                                       ClothesStore clothesStore,
                                        ICommand openAddEditCategoriesCommand,
                                        ICommand openAddEditSeasonsCommand,
                                        ICommand addClothesCommand,
                                        ICommand cancelClothesCommand)
         {
+            AddEditClothes_ClothesListViewViewModel = new(clothesStore);
+            
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
-
-            ClothesListViewViewModel = clothesListViewViewModel;
-
-            _categories = [];
-            //_categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
-            //_categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
-            
-            _seasons = [];
-            //_seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
-            //_seasonCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
-
+            _clothesStore = clothesStore;
             OpenAddEditCategoriesCommand = openAddEditCategoriesCommand;
             OpenAddEditSeasonsCommand = openAddEditSeasonsCommand;
             AddClothesCommand = addClothesCommand;
             CancelClothesCommand = cancelClothesCommand;
+
+            _categories = [];
+            _seasons = [];
+            //_clothes = [];
+
+            CategoryStore_CategoriesLoaded();
+            SeasonStore_SeasonsLoaded();
+            //ClothesStore_ClothesLoaded();
         }
 
 
+        protected override void Dispose()
+        {
+
+
+            base.Dispose();
+        }
+
+        private void CategoryStore_CategoriesLoaded()
+        {
+            _categories.Clear();
+
+            foreach (string category in _categoryStore.Categories)
+            {
+                _categories.Add(category);
+            }
+        }
+
+        private void SeasonStore_SeasonsLoaded()
+        {
+            _seasons.Clear();
+
+            foreach (string season in _seasonStore.Seasons)
+            {
+                _seasons.Add(season);
+            }
+        }
+
+        //private void ClothesStore_ClothesLoaded()
+        //{
+        //    _clothes.Clear();
+
+        //    foreach (ClothesModel clothes in _clothesStore.Clothes)
+        //    {
+        //        AddClothes(clothes);
+        //    }
+        //}
+
+        //private void ClothesStore_ClothesAdded(ClothesModel clothes)
+        //{
+        //    AddClothes(clothes);
+        //}
+
+        private void Edit_Clothes()
+        {
+
+        }
+
+        //private void AddClothes(ClothesModel clothes)
+        //{
+        //    _clothes.Add(clothes);
+
+        //    Id = "";
+        //    Name = "";
+        //    Size = "";
+        //    Quantity = "";
+        //    Comment = "";
+
+        //    OnPropertyChanged(nameof(Clothes));
+        //}
     }
 }

@@ -10,7 +10,7 @@
               FontSize="10"
               Foreground="Black"
               Background="WhiteSmoke"
-              ItemsSource="{Binding ClothesCollection}"
+              ItemsSource="{Binding Clothes}"
               SelectedItem="{Binding SelectedClothesItem, Mode=TwoWay}">
         <ListView.View>
             <GridView>
