@@ -8,7 +8,7 @@ namespace DVS.Stores
 {
     public class EmployeeStore
     {
-        public EmployeeStore(SelectedCategoryStore selectedCategoryStore, SelectedSeasonStore selectedSeasonStore)
+        public EmployeeStore()
         {
 
         }

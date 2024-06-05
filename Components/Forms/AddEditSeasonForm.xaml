@@ -49,7 +49,7 @@
                               FontSize="14"
                               Foreground="Black"
                               Background="WhiteSmoke"
-                              ItemsSource="{Binding SeasonCollection}"
+                              ItemsSource="{Binding Seasons}"
                               SelectedItem="{Binding EditSeason}" />
                 </Grid>
             </Border>

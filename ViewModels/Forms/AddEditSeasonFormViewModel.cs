@@ -68,9 +68,9 @@ namespace DVS.ViewModels.Forms
         private readonly SelectedSeasonStore _selectedSeasonStore;
 
         //TODO: Dispose Collections?
-        private readonly ObservableCollection<string> _seasonCollection;
+        private readonly ObservableCollection<string> _seasons;
         private readonly CollectionViewSource _seasonCollectionViewSource;
-        public IEnumerable<string> SeasonCollection => _seasonCollectionViewSource.View.Cast<string>();
+        public IEnumerable<string> Seasons => _seasonCollectionViewSource.View.Cast<string>();
 
         public ICommand AddSeasonCommand { get; }
         public ICommand EditSeasonCommand { get; }
@@ -78,14 +78,13 @@ namespace DVS.ViewModels.Forms
         public ICommand ClearSeasonListCommand { get; }
         public ICommand CloseAddSeasonCommand { get; } 
 
-        public AddEditSeasonFormViewModel(
-            SeasonStore seasonStore,
-            SelectedSeasonStore selectedSeasonStore,
-            ICommand addSeasonCommand,
-            ICommand editSeasonCommand,
-            ICommand deleteSeasonCommand,
-            ICommand clearSeasonListCommand,
-            ICommand closeAddSeasonCommand)
+        public AddEditSeasonFormViewModel(SeasonStore seasonStore,
+                                          SelectedSeasonStore selectedSeasonStore,
+                                          ICommand addSeasonCommand,
+                                          ICommand editSeasonCommand,
+                                          ICommand deleteSeasonCommand,
+                                          ICommand clearSeasonListCommand,
+                                          ICommand closeAddSeasonCommand)
         {
             _seasonStore = seasonStore;
             _selectedSeasonStore = selectedSeasonStore;
@@ -97,17 +96,18 @@ namespace DVS.ViewModels.Forms
 
             EditSeason = "Saison wählen";
 
-            _seasonCollection = [];
-            _seasonCollectionViewSource = new CollectionViewSource { Source = _seasonCollection };
+            _seasons = [];
+            _seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
             _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
 
-            _seasonStore.SeasonsLoaded += SeasonStore_SeasonsLoaded;
+            SeasonStore_SeasonsLoaded();
+            //_seasonStore.SeasonsLoaded += SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonsAdded += SeasonStore_SeasonAdded;
         }
 
         protected override void Dispose()
         {
-            _seasonStore.SeasonsLoaded -= SeasonStore_SeasonsLoaded;
+            //_seasonStore.SeasonsLoaded -= SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonsAdded -= SeasonStore_SeasonAdded;
 
             base.Dispose();
@@ -115,7 +115,7 @@ namespace DVS.ViewModels.Forms
 
         private void SeasonStore_SeasonsLoaded()
         {
-            _seasonCollection.Clear();
+            _seasons.Clear();
 
             foreach (string season in _seasonStore.Seasons)
             {
@@ -135,10 +135,10 @@ namespace DVS.ViewModels.Forms
 
         private void AddSeason(string season)
         {
-            _seasonCollection.Add(season);
+            _seasons.Add(season);
             _seasonCollectionViewSource.View.Refresh();
             AddNewSeason = "";
-            OnPropertyChanged(nameof(SeasonCollection));
+            OnPropertyChanged(nameof(Seasons));
         }
     }
 }

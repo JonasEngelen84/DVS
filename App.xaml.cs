@@ -28,11 +28,12 @@ namespace DVS
             _seasonStore = new();
             _selectedCategoryStore = new();
             _selectedSeasonStore = new();
-            _clothesStore = new(_selectedCategoryStore, _selectedSeasonStore);
-            _employeeStore = new(_selectedCategoryStore, _selectedSeasonStore);
+            _clothesStore = new();
+            _employeeStore = new();
             _selectedClothesStore = new();
             _selectedEmployeeClothesStore = new();
             _modalNavigationStore = new();
+
             _dVSViewModel = new(_modalNavigationStore,
                                 _categoryStore,
                                 _seasonStore,

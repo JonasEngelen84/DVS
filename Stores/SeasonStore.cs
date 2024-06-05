@@ -1,8 +1,10 @@
-﻿namespace DVS.Stores
+﻿using System.Collections.ObjectModel;
+
+namespace DVS.Stores
 {
     public class SeasonStore
     {
-        private readonly List<String> _seasons;
+        private readonly ObservableCollection<String> _seasons;
         public IEnumerable<string> Seasons => _seasons;
 
         public event Action SeasonsLoaded;
@@ -10,7 +12,7 @@
 
         public SeasonStore()
         {
-            _seasons = [];
+            _seasons = ["Saisonlos", "Sommer", "Winter"];
         }
 
         public async Task Load()

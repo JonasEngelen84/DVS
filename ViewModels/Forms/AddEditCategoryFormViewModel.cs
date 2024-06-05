@@ -65,9 +65,9 @@ namespace DVS.ViewModels.Forms
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
         //TODO: Dispose Collections?
-        private readonly ObservableCollection<string> _categoryCollection;
+        private readonly ObservableCollection<string> _categories;
         private readonly CollectionViewSource _categoryCollectionViewSource;
-        public IEnumerable<string> CategoryCollection => _categoryCollectionViewSource.View.Cast<string>();
+        public IEnumerable<string> Categories => _categoryCollectionViewSource.View.Cast<string>();
         
         private readonly CategoryStore _categoryStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
@@ -78,14 +78,14 @@ namespace DVS.ViewModels.Forms
         public ICommand ClearCategoryListCommand { get; }
         public ICommand CloseAddEditCategoryCommand { get; } 
 
-        public AddEditCategoryFormViewModel(
-            CategoryStore categoryStore,
-            SelectedCategoryStore selectedCategoryStore,
-            ICommand addCategoryCommand,
-            ICommand editCategoryCommand,
-            ICommand deleteCategoryCommand,
-            ICommand clearCategoryListCommand,
-            ICommand closeAddEditCategoryCommand)
+
+        public AddEditCategoryFormViewModel(CategoryStore categoryStore,
+                                            SelectedCategoryStore selectedCategoryStore,
+                                            ICommand addCategoryCommand,
+                                            ICommand editCategoryCommand,
+                                            ICommand deleteCategoryCommand,
+                                            ICommand clearCategoryListCommand,
+                                            ICommand closeAddEditCategoryCommand)
         {
             _categoryStore = categoryStore;
             _selectedCategoryStore = selectedCategoryStore;
@@ -97,18 +97,19 @@ namespace DVS.ViewModels.Forms
 
             EditCategory = "Kategorie wählen";
 
-            _categoryCollection = [];
-            _categoryCollectionViewSource = new CollectionViewSource { Source = _categoryCollection };
+            _categories = [];
+            _categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
             _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
 
-            _categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
+            CategoryStore_CategoriesLoaded();
+            //_categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded += CategoryStore_CategoryAdded;
-
         }
+
 
         protected override void Dispose()
         {
-            _categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
+            //_categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded -= CategoryStore_CategoryAdded;
 
             base.Dispose();
@@ -116,9 +117,9 @@ namespace DVS.ViewModels.Forms
 
         private void CategoryStore_CategoriesLoaded()
         {
-            _categoryCollection.Clear();
+            _categories.Clear();
 
-            foreach(string category in _categoryStore.Categories)
+            foreach (string category in _categoryStore.Categories)
             {
                 AddCategory(category);
             }
@@ -136,10 +137,10 @@ namespace DVS.ViewModels.Forms
         
         private void AddCategory(string categorie)
         {
-            _categoryCollection.Add(categorie);
+            _categories.Add(categorie);
             _categoryCollectionViewSource.View.Refresh();
             AddNewCategory = "";
-            OnPropertyChanged(nameof(CategoryCollection));
+            OnPropertyChanged(nameof(Categories));
         }
     }
 }

@@ -157,11 +157,11 @@ namespace DVS.ViewModels.Forms
 
             ClothesListViewViewModel = clothesListViewViewModel;
 
-            _categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];
+            _categories = [];
             //_categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
             //_categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
             
-            _seasons = ["Saisonlos", "Sommer", "Winter"];
+            _seasons = [];
             //_seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
             //_seasonCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
 
@@ -170,5 +170,7 @@ namespace DVS.ViewModels.Forms
             AddClothesCommand = addClothesCommand;
             CancelClothesCommand = cancelClothesCommand;
         }
+
+
     }
 }
