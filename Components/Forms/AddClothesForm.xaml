@@ -32,7 +32,8 @@
                                    Style="{StaticResource ModalTextStyle}" />
 
                         <TextBox Grid.Column="1"
-                                 Style="{StaticResource TextBoxStyle}" />
+                                 Style="{StaticResource TextBoxStyle}"
+                                 Text="{Binding Id}"/>
                     </Grid>
 
                     <!-- Name -->
@@ -49,7 +50,7 @@
 
                         <TextBox Grid.Column="1"
                                  Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                                 Text="{Binding Name}" />
                     </Grid>
 
                     <!-- Size -->
@@ -66,7 +67,7 @@
 
                         <TextBox Grid.Column="1"
                                  Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Size, UpdateSourceTrigger=PropertyChanged}" />
+                                 Text="{Binding Size}" />
                     </Grid>
 
                     <!-- Quantity -->
@@ -83,7 +84,7 @@
 
                         <TextBox Grid.Column="1"
                                  Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}" />
+                                 Text="{Binding Quantity}" />
                     </Grid>
 
                     <!-- Comment -->
@@ -99,7 +100,7 @@
 
                         <TextBox Grid.Column="1"
                                  Style="{StaticResource TextBoxStyle}"
-                                 Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
+                                 Text="{Binding Comment}" />
                     </Grid>
                 </StackPanel>
             </Grid>

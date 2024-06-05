@@ -46,7 +46,8 @@
 
                     <ListView BorderThickness="0"
                               FontSize="14"
-                              Background="#FFDEDEDE"
+                              Foreground="Black"
+                              Background="WhiteSmoke"
                               ItemsSource="{Binding CategoryCollection}"
                               SelectedItem="{Binding EditCategory}"/>
                 </Grid>

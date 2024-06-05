@@ -179,7 +179,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Label Content="Mitarbeiter:"
+            <Label Content="Vorhandene Mitarbeiter:"
                    Grid.Row="0"
                    FontSize="14"
                    FontWeight="Bold" />

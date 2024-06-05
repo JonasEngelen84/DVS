@@ -47,7 +47,8 @@
 
                     <ListView BorderThickness="0"
                               FontSize="14"
-                              Background="#FFDEDEDE"
+                              Foreground="Black"
+                              Background="WhiteSmoke"
                               ItemsSource="{Binding SeasonCollection}"
                               SelectedItem="{Binding EditSeason}" />
                 </Grid>

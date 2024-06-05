@@ -140,7 +140,8 @@
                                 CornerRadius="5" />
 
                         <ListView BorderThickness="0"
-                                  Background="#FFDEDEDE" />
+                                  Foreground="Black"
+                                  Background="WhiteSmoke" />
                     </Grid>
                 </Border>
 
@@ -156,13 +157,14 @@
                                 CornerRadius="5" />
 
                         <ListView BorderThickness="0"
-                                  Background="#FFDEDEDE" />
+                                  Foreground="Black"
+                                  Background="WhiteSmoke" />
                     </Grid>
                 </Border>
             </Grid>
         </Grid>
 
-        <!-- Available clothesListView -->
+        <!-- Available EmployeeListView -->
         <Grid Grid.Column="1"
               Margin="9 -9 0 0">
             <Grid.RowDefinitions>
@@ -170,7 +172,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <Label Content="Mitarbeiter:"
+            <Label Content="Vorhandene Mitarbeiter:"
                    Grid.Row="0"
                    FontSize="14"
                    FontWeight="Bold" />
@@ -189,7 +191,8 @@
                             CornerRadius="5" />
 
                     <ListView BorderThickness="0"
-                              Background="#FFDEDEDE" />
+                              Foreground="Black"
+                              Background="WhiteSmoke" />
                 </Grid>
             </Border>
         </Grid>

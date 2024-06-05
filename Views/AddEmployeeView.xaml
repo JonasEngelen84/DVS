@@ -19,8 +19,7 @@
                 <TextBlock Text="Mitarbeiter erstellen"
                            FontSize="28"
                            FontWeight="SemiBold"
-                           Margin="14 0 0 0"
-                           HorizontalAlignment="Left"
+                           HorizontalAlignment="Center"
                            VerticalAlignment="Center" />
             </Border>
 

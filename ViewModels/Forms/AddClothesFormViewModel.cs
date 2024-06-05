@@ -125,7 +125,7 @@ namespace DVS.ViewModels.Forms
         //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
-        //TODO: Category-/Season-ComboBoxes sortieren
+        //TODO: Category-/Season-ComboBoxes sortieren (Dispose?)
         private readonly ObservableCollection<string> _categories;
         //private readonly CollectionViewSource _categoryCollectionViewSource;
         public IEnumerable<string> Categories => _categories;
@@ -134,6 +134,7 @@ namespace DVS.ViewModels.Forms
         //private readonly CollectionViewSource _seasonCollectionViewSource;
         public IEnumerable<string> Seasons => _seasons; //_seasonCollectionViewSource.View.Cast<string>()
 
+        private readonly ClothesStore _clothesStore;
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
 
@@ -144,7 +145,8 @@ namespace DVS.ViewModels.Forms
         public ICommand AddClothesCommand { get; }
         public ICommand CancelClothesCommand { get; }
 
-        public AddClothesFormViewModel(CategoryStore categoryStore,
+        public AddClothesFormViewModel(ClothesStore clothesStore,
+                                       CategoryStore categoryStore,
                                        SeasonStore seasonStore,
                                        ClothesListViewViewModel clothesListViewViewModel,
                                        ICommand openAddEditCategoriesCommand,
@@ -169,6 +171,16 @@ namespace DVS.ViewModels.Forms
             OpenAddEditSeasonsCommand = openAddEditSeasonsCommand;
             AddClothesCommand = addClothesCommand;
             CancelClothesCommand = cancelClothesCommand;
+        }
+
+        private void ClothesStore_ClothesLoaded()
+        {
+            
+        }
+        
+        private void ClothesStore_ClothesAdded()
+        {
+
         }
     }
 }

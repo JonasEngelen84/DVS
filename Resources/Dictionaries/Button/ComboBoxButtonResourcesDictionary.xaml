@@ -17,8 +17,8 @@
                                           VerticalAlignment="Center"
                                           HorizontalAlignment="Center"
                                           ContentSource="Content" 
-                                          Width="16"
-                                          Height="16"/>
+                                          Width="20"
+                                          Height="20"/>
                     </Border>
                     
                     <ControlTemplate.Triggers>
@@ -28,11 +28,11 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="image"
                                                          Storyboard.TargetProperty="Width"
-                                                         To="23"
+                                                         To="30"
                                                          Duration="0:0:0.2" />
                                         <DoubleAnimation Storyboard.TargetName="image"
                                                          Storyboard.TargetProperty="Height"
-                                                         To="23"
+                                                         To="30"
                                                          Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -43,11 +43,11 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="image"
                                                          Storyboard.TargetProperty="Width"
-                                                         To="16"
+                                                         To="20"
                                                          Duration="0:0:0.2" />
                                         <DoubleAnimation Storyboard.TargetName="image"
                                                          Storyboard.TargetProperty="Height"
-                                                         To="16"
+                                                         To="20"
                                                          Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
