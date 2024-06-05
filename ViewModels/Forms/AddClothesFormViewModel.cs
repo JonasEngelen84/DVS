@@ -134,7 +134,6 @@ namespace DVS.ViewModels.Forms
         //private readonly CollectionViewSource _seasonCollectionViewSource;
         public IEnumerable<string> Seasons => _seasons; //_seasonCollectionViewSource.View.Cast<string>()
 
-        private readonly ClothesStore _clothesStore;
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
 
@@ -145,8 +144,7 @@ namespace DVS.ViewModels.Forms
         public ICommand AddClothesCommand { get; }
         public ICommand CancelClothesCommand { get; }
 
-        public AddClothesFormViewModel(ClothesStore clothesStore,
-                                       CategoryStore categoryStore,
+        public AddClothesFormViewModel(CategoryStore categoryStore,
                                        SeasonStore seasonStore,
                                        ClothesListViewViewModel clothesListViewViewModel,
                                        ICommand openAddEditCategoriesCommand,
@@ -171,16 +169,6 @@ namespace DVS.ViewModels.Forms
             OpenAddEditSeasonsCommand = openAddEditSeasonsCommand;
             AddClothesCommand = addClothesCommand;
             CancelClothesCommand = cancelClothesCommand;
-        }
-
-        private void ClothesStore_ClothesLoaded()
-        {
-            
-        }
-        
-        private void ClothesStore_ClothesAdded()
-        {
-
         }
     }
 }
