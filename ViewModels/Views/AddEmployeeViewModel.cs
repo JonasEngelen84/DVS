@@ -1,7 +1,7 @@
 ﻿using DVS.Commands;
 using DVS.Commands.EmployeeCommands;
 using DVS.Stores;
-using DVS.ViewModels.AddViewModels.Forms;
+using DVS.ViewModels.Forms;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Views

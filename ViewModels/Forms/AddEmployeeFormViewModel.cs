@@ -3,7 +3,7 @@ using DVS.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.AddViewModels.Forms
+namespace DVS.ViewModels.Forms
 {
     public class AddEmployeeFormViewModel : ViewModelBase
     {
@@ -87,6 +87,7 @@ namespace DVS.ViewModels.AddViewModels.Forms
 
         public AddEditEmployee_ClothesListviewViewModel AddEditEmployee_ClothesListviewViewModel { get; }
         public AddEditEmployee_EmployeeClothesListViewViewModel AddEditEmployee_EmployeeClothesListviewViewModel { get; }
+        public AddEditEmployee_EmployeeListViewViewModel AddEditEmployee_EmployeeListViewViewModel { get; }
 
         private readonly EmployeeStore _employeeStore;
 
@@ -99,6 +100,7 @@ namespace DVS.ViewModels.AddViewModels.Forms
                                         ICommand cancelEmployeeCommand)
         {
             AddEditEmployee_ClothesListviewViewModel = new(clothesStore);
+            AddEditEmployee_EmployeeListViewViewModel = new(employeeStore);
             AddEditEmployee_EmployeeClothesListviewViewModel = new();
 
             _employeeStore = employeeStore;

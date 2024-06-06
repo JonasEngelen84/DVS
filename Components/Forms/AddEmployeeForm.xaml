@@ -130,7 +130,6 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Employee get-ClothesListView -->
-                <!-- AddEditEmployee_EmployeeClothesListviewComponent -->
                 <components:AddEditEmployee_EmployeeClothesListViewComponent Grid.Column="0"
                                                                              Margin="0 0 1.5 0"
                                                                              Foreground="Black"
@@ -138,7 +137,6 @@
                                                                              DataContext="{Binding AddEditEmployee_EmployeeClothesListviewViewModel}" />
 
                 <!-- Available clothesListView -->
-                <!-- AddEditEmployee_ClothesListviewComponent -->
                 <components:AddEditEmployee_ClothesListviewComponent Grid.Column="1"
                                                                      Margin="1.5 0 0 0"
                                                                      Foreground="Black"
@@ -148,36 +146,17 @@
         </Grid>
 
         <!-- Available EmployeeListView -->
-        <Grid Grid.Column="1"
-              Margin="9 -9 0 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition />
-            </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1"
+                    Margin="10 -9 0 0">
 
             <Label Content="Vorhandene Mitarbeiter:"
                    Grid.Row="0"
+                   Margin="-5 0 0 0"
                    FontSize="14"
                    FontWeight="Bold" />
 
-            <Border Grid.Row="1"
-                    Width="200"
-                    BorderBrush="Black"
-                    BorderThickness="0.5"
-                    CornerRadius="5">
-                <Grid>
-                    <Grid.OpacityMask>
-                        <VisualBrush Visual="{Binding ElementName=border3}" />
-                    </Grid.OpacityMask>
-                    <Border x:Name="border3"
-                            Background="#FFDEDEDE"
-                            CornerRadius="5" />
-
-                    <ListView BorderThickness="0"
-                              Foreground="Black"
-                              Background="WhiteSmoke" />
-                </Grid>
-            </Border>
-        </Grid>
+            <components:AddEditEmployee_EmployeeListViewComponent Grid.Column="1"
+                                                                 DataContext="{Binding AddEditEmployee_EmployeeListViewViewModel}"/>
+        </StackPanel>
     </Grid>
 </UserControl>

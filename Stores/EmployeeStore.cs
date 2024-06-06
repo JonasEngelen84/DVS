@@ -18,7 +18,13 @@ namespace DVS.Stores
 
         public EmployeeStore()
         {
-            
+            _employees = [new EmployeeModel("1324", "Engelen", "Jonas", null),
+                          new EmployeeModel("1212", "Molik", "Nadine", null),
+                          new EmployeeModel("1112", "Yüksel", "Kemal", null),
+                          new EmployeeModel("1213", "Oetken", "Markus", null),
+                          new EmployeeModel("1231", "Nickol", "Daniel", null),
+                          new EmployeeModel("1132", "Yüksel", "Irfan", null),
+                          new EmployeeModel("1221", "Killen", "Stefan", null)];
         }
 
         public async Task Load()
