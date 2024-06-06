@@ -1,17 +1,49 @@
-﻿using DVS.Stores;
+﻿using DVS.Models;
+using DVS.Stores;
+using DVS.ViewModels;
+using DVS.ViewModels.AddViewModels.Forms;
+using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
 
 namespace DVS.Commands.EmployeeCommands
 {
-    public class AddEmployeeCommand : CommandBase
+    public class AddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel,
+                                    EmployeeStore employeeStore)
+                                    : AsyncCommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly AddEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
+        private readonly EmployeeStore _employeeStore = employeeStore;
 
-        public AddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel, ModalNavigationStore modalNavigationStore)
+        public override async Task ExecuteAsync(object parameter)
         {
-            _modalNavigationStore = modalNavigationStore;
-        }
+            AddEmployeeFormViewModel addEmployeeFormViewModel = _addEmployeeViewModel.AddEmployeeFormViewModel;
 
-        public override void Execute(object parameter) => _modalNavigationStore.Close();
+            addEmployeeFormViewModel.ErrorMessage = null;
+            addEmployeeFormViewModel.IsSubmitting = true;
+
+            EmployeeModel employee = new(
+                addEmployeeFormViewModel.Id,
+                addEmployeeFormViewModel.Firstname,
+                addEmployeeFormViewModel.Lastname,
+                addEmployeeFormViewModel.Comment);
+
+            foreach(ClothesModel clothes in addEmployeeFormViewModel.AddEditEmployee_EmployeeClothesListviewViewModel.Employeeclothes)
+            {
+                employee.Clothes.Add(clothes);
+            }
+
+            try
+            {
+                await _employeeStore.Add(employee);
+            }
+            catch (Exception)
+            {
+                addEmployeeFormViewModel.ErrorMessage = "Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+            }
+            finally
+            {
+                addEmployeeFormViewModel.IsSubmitting = false;
+            }
+        }
     }
 }

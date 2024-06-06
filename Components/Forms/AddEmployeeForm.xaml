@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:DVS.Components"
              mc:Ignorable="d">
 
     <Grid>
@@ -100,7 +101,8 @@
                 </StackPanel>
 
                 <!-- Button -->
-                <StackPanel Grid.Column="1">
+                <StackPanel Grid.Column="1"
+                            Margin="5 0 0 0">
                     <Button Content="ERSTELLEN"
                             HorizontalAlignment="Right"
                             Style="{StaticResource ModalButtonStyle}"
@@ -128,39 +130,20 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Employee get-ClothesListView -->
-                <Border Grid.Column="0"
-                        Margin="0 0 5 0"
-                        Style="{StaticResource BorderAddEmployeeListViewStyle}">
-                    <Grid>
-                        <Grid.OpacityMask>
-                            <VisualBrush Visual="{Binding ElementName=border}" />
-                        </Grid.OpacityMask>
-                        <Border x:Name="border"
-                                Background="#FFDEDEDE"
-                                CornerRadius="5" />
-
-                        <ListView BorderThickness="0"
-                                  Foreground="Black"
-                                  Background="WhiteSmoke" />
-                    </Grid>
-                </Border>
+                <!-- AddEditEmployee_EmployeeClothesListviewComponent -->
+                <components:AddEditEmployee_EmployeeClothesListViewComponent Grid.Column="0"
+                                                                             Margin="0 0 1.5 0"
+                                                                             Foreground="Black"
+                                                                             Background="WhiteSmoke"
+                                                                             DataContext="{Binding AddEditEmployee_EmployeeClothesListviewViewModel}" />
 
                 <!-- Available clothesListView -->
-                <Border Grid.Column="1"
-                        Style="{StaticResource BorderAddEmployeeListViewStyle}">
-                    <Grid>
-                        <Grid.OpacityMask>
-                            <VisualBrush Visual="{Binding ElementName=border2}" />
-                        </Grid.OpacityMask>
-                        <Border x:Name="border2"
-                                Background="#FFDEDEDE"
-                                CornerRadius="5" />
-
-                        <ListView BorderThickness="0"
-                                  Foreground="Black"
-                                  Background="WhiteSmoke" />
-                    </Grid>
-                </Border>
+                <!-- AddEditEmployee_ClothesListviewComponent -->
+                <components:AddEditEmployee_ClothesListviewComponent Grid.Column="1"
+                                                                     Margin="1.5 0 0 0"
+                                                                     Foreground="Black"
+                                                                     Background="WhiteSmoke"
+                                                                     DataContext="{Binding AddEditEmployee_ClothesListviewViewModel}" />
             </Grid>
         </Grid>
 

@@ -6,7 +6,7 @@
              xmlns:components="clr-namespace:DVS.Components"
              mc:Ignorable="d">
 
-    <StackPanel>
+    <StackPanel Margin="0 0 2 0">
 
         <!-- Clothes Details and Button -->
         <Grid>
@@ -164,7 +164,7 @@
         </StackPanel>
 
         <!-- AddEditClothes_ClothesListViewComponent -->
-        <components:AddEditClothes_ClothesListViewComponent Margin="2 15 0 0"
+        <components:AddEditClothes_ClothesListViewComponent Margin="1 15 0 0"
                                                             DataContext="{Binding AddEditClothes_ClothesListViewViewModel}" />
     </StackPanel>
 </UserControl>

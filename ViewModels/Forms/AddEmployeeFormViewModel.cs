@@ -1,18 +1,12 @@
-﻿using System.Windows.Input;
+﻿using DVS.Models;
+using DVS.Stores;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace DVS.ViewModels.AddViewModels.Forms
 {
     public class AddEmployeeFormViewModel : ViewModelBase
     {
-        public ICommand AddEmployeeCommand { get; }
-        public ICommand CancelEmployeeCommand { get; }
-
-        public AddEmployeeFormViewModel(ICommand addEmployeeCommand, ICommand cancelEmployeeCommand)
-        {
-            AddEmployeeCommand = addEmployeeCommand;
-            CancelEmployeeCommand = cancelEmployeeCommand;
-        }
-
         private string? _id;
         public string? Id
         {
@@ -55,6 +49,79 @@ namespace DVS.ViewModels.AddViewModels.Forms
                 _comment = value;
                 OnPropertyChanged(nameof(Comment));
             }
+        }
+
+        private bool _isSubmitting;
+        public bool IsSubmitting
+        {
+            get
+            {
+                return _isSubmitting;
+            }
+            set
+            {
+                _isSubmitting = value;
+                OnPropertyChanged(nameof(IsSubmitting));
+            }
+        }
+
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get
+            {
+                return _errorMessage;
+            }
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+                OnPropertyChanged(nameof(HasErrorMessage));
+            }
+        }
+
+        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+
+        //TODO: CanSubmit
+        //public bool CanSubmit => !string.IsNullOrEmpty(Username);
+
+        public AddEditEmployee_ClothesListviewViewModel AddEditEmployee_ClothesListviewViewModel { get; }
+        public AddEditEmployee_EmployeeClothesListViewViewModel AddEditEmployee_EmployeeClothesListviewViewModel { get; }
+
+        private readonly EmployeeStore _employeeStore;
+
+        public ICommand AddEmployeeCommand { get; }
+        public ICommand CancelEmployeeCommand { get; }
+
+        public AddEmployeeFormViewModel(ClothesStore clothesStore,
+                                        EmployeeStore employeeStore,
+                                        ICommand addEmployeeCommand,
+                                        ICommand cancelEmployeeCommand)
+        {
+            AddEditEmployee_ClothesListviewViewModel = new(clothesStore);
+            AddEditEmployee_EmployeeClothesListviewViewModel = new();
+
+            _employeeStore = employeeStore;
+            AddEmployeeCommand = addEmployeeCommand;
+            CancelEmployeeCommand = cancelEmployeeCommand;
+
+            _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
+        }
+
+        protected override void Dispose()
+        {
+            _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
+
+            base.Dispose();
+        }
+
+        private void EmployeeStore_EmployeeAdded(EmployeeModel employee)
+        {
+            Id = null;
+            Firstname = null;
+            Lastname = null;
+            Comment = null;
+            AddEditEmployee_EmployeeClothesListviewViewModel.ClearCollection();
         }
     }
 }

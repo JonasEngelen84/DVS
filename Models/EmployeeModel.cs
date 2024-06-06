@@ -1,12 +1,13 @@
-﻿namespace DVS.Models
+﻿using System.Collections.ObjectModel;
+
+namespace DVS.Models
 {
-    public class EmployeeModel(int id, string firstname, string lastname)
+    public class EmployeeModel(string? id, string? firstname, string? lastname, string? comment)
     {
-        public int? Id { get; set; } = id;
+        public string? Id { get; set; } = id;
         public string? Firstname { get; set; } = firstname;
         public string? Lastname { get; set; } = lastname;
-        public string? Comment { get; set; } = null;
-        public List<ClothesModel> EmployeeClothesList = [];
+        public string? Comment { get; set; } = comment;
+        public ObservableCollection<ClothesModel> Clothes { get; private set; } = [];
     }
-
 }

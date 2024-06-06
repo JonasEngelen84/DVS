@@ -5,19 +5,19 @@ using System.Collections.ObjectModel;
 
 namespace DVS.ViewModels
 {
-    public class EmployeesClothesListViewViewModel : ViewModelBase
+    public class DVSEmployeesClothesListViewViewModel : ViewModelBase
     {
         private readonly SelectedClothesStore _selectedClothesStore;
         private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly ClothesListViewViewModel _clothesListViewViewModel;
+        private readonly DVSClothesListViewViewModel _clothesListViewViewModel;
 
         private readonly List<EmployeeModel> _employeeList;
 
         private readonly ObservableCollection<EmployeeClothesListViewItemViewModel> _employeeClothesListViewItemCollection;
         public IEnumerable<EmployeeClothesListViewItemViewModel> EmployeeClothesListViewItemCollection => _employeeClothesListViewItemCollection;
 
-        public EmployeesClothesListViewViewModel(SelectedClothesStore selectedClothesStore,
+        public DVSEmployeesClothesListViewViewModel(SelectedClothesStore selectedClothesStore,
                                                  SelectedEmployeeClothesStore selectedEmployeeClothesStore,
                                                  ModalNavigationStore modalNavigationStore)
         {
@@ -45,7 +45,7 @@ namespace DVS.ViewModels
         //TODO: AddEmployee
         private void AddEmployeeClothesListViewItem(EmployeeModel employee)
         {
-            foreach(ClothesModel clothes in employee.EmployeeClothesList)
+            foreach(ClothesModel clothes in employee.Clothes)
             {
                 _employeeClothesListViewItemCollection.Add(new EmployeeClothesListViewItemViewModel(employee, clothes));
             }

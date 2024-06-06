@@ -1,12 +1,11 @@
-﻿<UserControl x:Class="DVS.Components.AddEditClothes_ClothesListViewComponent"
+﻿<UserControl x:Class="DVS.Components.AddEditEmployee_ClothesListviewComponent"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
-
+    
     <ListView Height="250"
-              Width="335"
               FontSize="10"
               Foreground="Black"
               Background="WhiteSmoke"
@@ -17,15 +16,9 @@
                 <GridViewColumn Header="Id"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Id}" />
-                <GridViewColumn Header="Kategorie"
-                                Width="auto"
-                                DisplayMemberBinding="{Binding Categorie}" />
                 <GridViewColumn Header="Name"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Name}" />
-                <GridViewColumn Header="Saison"
-                                Width="auto"
-                                DisplayMemberBinding="{Binding Season}" />
                 <GridViewColumn Header="Größe"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Size}" />

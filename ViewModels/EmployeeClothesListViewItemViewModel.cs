@@ -7,7 +7,7 @@ namespace DVS.ViewModels.ListViewItems
         public EmployeeModel Employee { get; private set; }
         public ClothesModel Clothes { get; private set; }
 
-        public int? EmployeeId => Employee.Id;
+        public string? EmployeeId => Employee.Id;
         public string? Lastname => Employee.Lastname;
         public string? Firstname => Employee.Firstname;
         public string? ClothesId => Clothes.Id;

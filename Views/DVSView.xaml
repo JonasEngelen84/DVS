@@ -90,10 +90,10 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- EmployeesClothesListViewComponent -->
-            <components:EmployeesClothesListViewComponent Grid.Column="0"
-                                                          Margin="0 3 0 0"
-                                                          DataContext="{Binding EmployeesClothesListViewViewModel}" />
+            <!-- DVSEmployeesClothesListViewComponent -->
+            <components:DVSEmployeesClothesListViewComponent Grid.Column="0"
+                                                             Margin="0 3 0 0"
+                                                             DataContext="{Binding DVSEmployeesClothesListViewViewModel}" />
 
             <!-- Plus/Minus button -->
             <Grid Grid.Column="1"
@@ -131,10 +131,10 @@
                           Background="#524E4F">
             </GridSplitter>
 
-            <!-- ClothesListViewComponent -->
-            <components:ClothesListViewComponent Grid.Column="2"
-                                                 Margin="0 3 0 0"
-                                                 DataContext="{Binding ClothesListViewViewModel}" />
+            <!-- DVSClothesListViewComponent -->
+            <components:DVSClothesListViewComponent Grid.Column="2"
+                                                    Margin="0 3 0 0"
+                                                    DataContext="{Binding DVSClothesListViewViewModel}" />
         </Grid>
     </Grid>
 </UserControl>

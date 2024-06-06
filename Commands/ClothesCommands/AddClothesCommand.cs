@@ -5,7 +5,9 @@ using DVS.ViewModels.Views;
 
 namespace DVS.Commands.ClothesCommands
 {
-    public class AddClothesCommand(AddClothesViewModel addClothesViewModel, ClothesStore clothesStore) : AsyncCommandBase
+    public class AddClothesCommand(AddClothesViewModel addClothesViewModel,
+                                   ClothesStore clothesStore)
+                                   : AsyncCommandBase
     {
         private readonly AddClothesViewModel _addClothesViewModel = addClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
