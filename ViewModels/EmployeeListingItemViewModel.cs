@@ -43,8 +43,8 @@ namespace DVS.ViewModels.ListViewItems
         }
 
         public bool IsExpanded { get; set; }
-
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+
 
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }

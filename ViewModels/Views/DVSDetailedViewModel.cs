@@ -19,14 +19,14 @@ namespace DVS.ViewModels.Views
         public ICommand MinusCommand { get; }
 
         public DVSDetailedViewModel(ModalNavigationStore modalNavigationStore,
-                            CategoryStore categoryStore,
-                            SeasonStore seasonStore,
-                            SelectedCategoryStore selectedCategoryStore,
-                            SelectedSeasonStore selectedSeasonStore,
-                            ClothesStore clothesStore,
-                            EmployeeStore employeeStore,
-                            SelectedClothesStore selectedClothesStore,
-                            SelectedEmployeeClothesStore selectedEmployeeClothesStore)
+                                    CategoryStore categoryStore,
+                                    SeasonStore seasonStore,
+                                    SelectedCategoryStore selectedCategoryStore,
+                                    SelectedSeasonStore selectedSeasonStore,
+                                    ClothesStore clothesStore,
+                                    EmployeeStore employeeStore,
+                                    SelectedClothesStore selectedClothesStore,
+                                    SelectedEmployeeClothesStore selectedEmployeeClothesStore)
         {
             DVSClothesListViewViewModel = new(clothesStore);
 

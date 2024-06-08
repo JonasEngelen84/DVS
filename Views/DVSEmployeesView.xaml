@@ -7,7 +7,13 @@
              mc:Ignorable="d">
     
     <Grid>
-        <components:EmployeesListing Margin="0 3 0 0"
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <components:EmployeesListing Grid.Column="0"
+                                     Margin="0 3 0 0"
                                      DataContext="{Binding EmployeesListingViewModel}" />
     </Grid>
 </UserControl>

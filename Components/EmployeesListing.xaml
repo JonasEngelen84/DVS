@@ -21,7 +21,6 @@
 
                 <ListView BorderThickness="0"
                           ItemsSource="{Binding EmployeeListingItemCollection}"
-                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           SelectedItem="{Binding SelectedEmployeeListingItemViewModel}"
                           SelectionMode="Single">
                     <ListView.ItemContainerStyle>

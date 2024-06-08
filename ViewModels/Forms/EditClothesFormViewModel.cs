@@ -7,8 +7,8 @@ namespace DVS.ViewModels.Forms
 {
     public class EditClothesFormViewModel : ViewModelBase
     {
-        private string? _id;
-        public string? Id
+        private string _id;
+        public string Id
         {
             get => _id;
             set
@@ -18,8 +18,8 @@ namespace DVS.ViewModels.Forms
             }
         }
         
-        private string? _name;
-        public string? Name
+        private string _name;
+        public string Name
         {
             get => _name;
             set
@@ -29,8 +29,8 @@ namespace DVS.ViewModels.Forms
             }
         }
         
-        private string? _size;
-        public string? Size
+        private string _size;
+        public string Size
         {
             get => _size;
             set
@@ -40,8 +40,8 @@ namespace DVS.ViewModels.Forms
             }
         }
         
-        private int? _quantity;
-        public int? Quantity
+        private int _quantity;
+        public int Quantity
         {
             get => _quantity;
             set
@@ -62,8 +62,8 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string? _selectedCategory;
-        public string? SelectedCategory
+        private string _selectedCategory;
+        public string SelectedCategory
         {
             get => _selectedCategory;
             set
@@ -76,8 +76,8 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string? _selectedSeason;
-        public string? SelectedSeason
+        private string _selectedSeason;
+        public string SelectedSeason
         {
             get => _selectedCategory;
             set
