@@ -2,9 +2,9 @@
 
 namespace DVS.Views
 {
-    public partial class DVSView : UserControl
+    public partial class DVSDetailedView : UserControl
     {
-        public DVSView()
+        public DVSDetailedView()
         {
             InitializeComponent();
         }

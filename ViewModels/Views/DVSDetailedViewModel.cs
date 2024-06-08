@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Views
 {
-    public class DVSViewModel : ViewModelBase
+    public class DVSDetailedViewModel : ViewModelBase
     {
         public DVSEmployeesClothesListViewViewModel DVSEmployeesClothesListViewViewModel { get; }
         public DVSClothesListViewViewModel DVSClothesListViewViewModel { get; }
@@ -18,7 +18,7 @@ namespace DVS.ViewModels.Views
         public ICommand PlusCommand { get; }
         public ICommand MinusCommand { get; }
 
-        public DVSViewModel(ModalNavigationStore modalNavigationStore,
+        public DVSDetailedViewModel(ModalNavigationStore modalNavigationStore,
                             CategoryStore categoryStore,
                             SeasonStore seasonStore,
                             SelectedCategoryStore selectedCategoryStore,

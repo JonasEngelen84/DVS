@@ -11,8 +11,8 @@ namespace DVS.ViewModels.AddViewModels.Forms
 
         public EditEmployeeFormViewModel(
             ICommand editEmployeeCommand,
-            ICommand clearEmployeeClothesListCommand,
             ICommand deleteEmployeeCommand,
+            ICommand clearEmployeeClothesListCommand,
             ICommand cancelEmployeeCommand)
         {
             EditEmployeeCommand = editEmployeeCommand;

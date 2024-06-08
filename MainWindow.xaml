@@ -131,10 +131,13 @@
                 <ContentControl Content="{Binding CurrentModalViewModel}" />
             </custom:Modal>
 
-            <!-- DVSView-->
-            <views:DVSView Grid.Row="1"
-                           Margin="0,3,0,0"
-                           DataContext="{Binding DVSViewModel}" />
+            <!--<views:DVSDetailedView Grid.Row="1"
+                                   Margin="0,3,0,0"
+                                   DataContext="{Binding DVSDetailedViewModel}" />-->
+
+            <views:DVSEmployeesView Grid.Row="1"
+                                    Margin="0,3,0,0"
+                                    DataContext="{Binding DVSEmployeesViewModel}" />
 
         </Grid>
     </Border>
