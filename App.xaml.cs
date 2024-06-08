@@ -21,6 +21,7 @@ namespace DVS
         private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly DVSDetailedViewModel _dVSDetailedViewModel;
+        private readonly DVSEmployeesViewModel _dVSEmployeesViewModel;
 
         public App()
         {
@@ -33,6 +34,8 @@ namespace DVS
             _selectedClothesStore = new();
             _selectedEmployeeClothesStore = new();
             _modalNavigationStore = new();
+
+            _dVSEmployeesViewModel = new DVSEmployeesViewModel();
 
             _dVSDetailedViewModel = new(_modalNavigationStore,
                                 _categoryStore,

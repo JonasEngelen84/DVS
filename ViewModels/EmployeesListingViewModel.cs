@@ -11,12 +11,12 @@ namespace DVS.ViewModels
 {
     public class EmployeesListingViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeListingItemViewModelCollection;
-        public IEnumerable<EmployeeListingItemViewModel> EmployeeListingItemViewModelCollection => _employeeListingItemViewModelCollection;
+        private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeListingItemCollection;
+        public IEnumerable<EmployeeListingItemViewModel> EmployeeListingItemCollection => _employeeListingItemCollection;
 
         public EmployeesListingViewModel()
         {
-            _employeeListingItemViewModelCollection = [];
+            _employeeListingItemCollection = [];
 
             var employee1 = new EmployeeModel("1324", "Engelen", "Jonas", null);
             employee1.Clothes.Add(new ClothesModel("111", "Sommershirt", "Shirt", "XL", "Sommer", 12, null));
@@ -28,8 +28,8 @@ namespace DVS.ViewModels
             employee2.Clothes.Add(new ClothesModel("115", "Wintershirt", "Shirt", "L", "Winter", 5, null));
             employee2.Clothes.Add(new ClothesModel("111", "Sommershirt", "Shirt", "XL", "Sommer", 12, null));
 
-            _employeeListingItemViewModelCollection.Add(new EmployeeListingItemViewModel(employee1));
-            _employeeListingItemViewModelCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
         }
     }
 }
