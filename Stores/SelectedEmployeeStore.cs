@@ -37,7 +37,7 @@ namespace DVS.Stores
 
         private void EmployeeStore_EmployeeUpdated(EmployeeModel EmployeeModel)
         {
-            if (EmployeeModel.Id == SelectedEmployee?.Id)
+            if (EmployeeModel.ID == SelectedEmployee?.ID)
             {
                 SelectedEmployee = EmployeeModel;
             }
