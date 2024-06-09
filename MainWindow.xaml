@@ -131,9 +131,9 @@
                 <ContentControl Content="{Binding CurrentModalViewModel}" />
             </custom:Modal>
 
-            <!--<views:DVSDetailedView Grid.Row="1"
+            <views:DVSDetailedView Grid.Row="1"
                                    Margin="0,3,0,0"
-                                   DataContext="{Binding DVSDetailedViewModel}" />-->
+                                   DataContext="{Binding DVSDetailedViewModel}" />
 
             <views:DVSEmployeesView Grid.Row="1"
                                     Margin="0,3,0,0"

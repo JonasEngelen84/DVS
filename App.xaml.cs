@@ -53,7 +53,8 @@ namespace DVS
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_dVSDetailedViewModel,
+                DataContext = new MainViewModel(_dVSEmployeesViewModel,
+                                                _dVSDetailedViewModel,
                                                 _selectedClothesStore,
                                                 _selectedEmployeeClothesStore,
                                                 _selectedCategoryStore,
