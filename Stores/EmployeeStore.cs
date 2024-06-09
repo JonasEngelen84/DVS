@@ -15,6 +15,7 @@ namespace DVS.Stores
 
         public event Action EmployeesLoaded;
         public event Action<EmployeeModel> EmployeeAdded;
+        public event Action<EmployeeModel> EmployeeUpdated;
 
         public EmployeeStore()
         {
