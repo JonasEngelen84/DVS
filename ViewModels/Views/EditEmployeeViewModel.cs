@@ -15,7 +15,7 @@ namespace DVS.ViewModels.Views
             ICommand editEmployeeCommand = new EditEmployeeCommand(this, modalNavigationStore);
             ICommand cancelEmployeeCommand = new CloseModalCommand(modalNavigationStore);
             ICommand clearEmployeeClothesListCommand = new ClearEmployeeClothesListCommand(modalNavigationStore);
-            ICommand deleteEmployeeCommand = new DeleteEmployeeCommand(modalNavigationStore);
+            ICommand deleteEmployeeCommand = new DeleteEmployeeCommand();
 
             EditEmployeeFormViewModel = new EditEmployeeFormViewModel(editEmployeeCommand,
                                                                       deleteEmployeeCommand,

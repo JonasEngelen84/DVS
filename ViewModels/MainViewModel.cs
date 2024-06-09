@@ -16,7 +16,7 @@ namespace DVS.ViewModels
     /// </summary>
     class MainViewModel : ViewModelBase
     {
-        public DVSViewModel DVSViewModel { get; }
+        public DVSDetailedViewModel DVSDetailedViewModel { get; }
         private readonly SelectedClothesStore _selectedClothesStore;
         private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
@@ -27,14 +27,14 @@ namespace DVS.ViewModels
         // Pointer auf "_modalNavigationStore.IsOpen" zur Prüfung ob ein Modal bereits geöffnet ist.
         public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
-        public MainViewModel(DVSViewModel dVSViewModel,
+        public MainViewModel(DVSDetailedViewModel dVSViewModel,
                              SelectedClothesStore selectedClothesStore,
                              SelectedEmployeeClothesStore selectedEmployeeClothesStore,
                              SelectedCategoryStore _selectedCategoryStore,
                              SelectedSeasonStore _selectedSeasonStore,
                              ModalNavigationStore modalNavigationStore)
         {
-            DVSViewModel = dVSViewModel;
+            DVSDetailedViewModel = dVSViewModel;
             _selectedClothesStore = selectedClothesStore;
             _selectedEmployeeClothesStore = selectedEmployeeClothesStore;
             _modalNavigationStore = modalNavigationStore;

@@ -4,25 +4,8 @@ namespace DVS.ViewModels.AddViewModels.Forms
 {
     public class EditEmployeeFormViewModel : ViewModelBase
     {
-        public ICommand EditEmployeeCommand { get; }
-        public ICommand DeleteEmployeeCommand { get; }
-        public ICommand ClearEmployeeClothesListCommand { get; }
-        public ICommand CancelEmployeeCommand { get; }
-
-        public EditEmployeeFormViewModel(
-            ICommand editEmployeeCommand,
-            ICommand clearEmployeeClothesListCommand,
-            ICommand deleteEmployeeCommand,
-            ICommand cancelEmployeeCommand)
-        {
-            EditEmployeeCommand = editEmployeeCommand;
-            ClearEmployeeClothesListCommand = clearEmployeeClothesListCommand;
-            DeleteEmployeeCommand = deleteEmployeeCommand;
-            CancelEmployeeCommand = cancelEmployeeCommand;
-        }
-
-        private string? _id;
-        public string? Id
+        private string _id;
+        public string Id
         {
             get => _id;
             set
@@ -32,8 +15,8 @@ namespace DVS.ViewModels.AddViewModels.Forms
             }
         }
 
-        private string? _lastname;
-        public string? Lastname
+        private string _lastname;
+        public string Lastname
         {
             get => _lastname;
             set
@@ -43,8 +26,8 @@ namespace DVS.ViewModels.AddViewModels.Forms
             }
         }
 
-        private string? _firstname;
-        public string? Firstname
+        private string _firstname;
+        public string Firstname
         {
             get => _firstname;
             set
@@ -64,5 +47,23 @@ namespace DVS.ViewModels.AddViewModels.Forms
                 OnPropertyChanged(nameof(Comment));
             }
         }
+
+        public ICommand EditEmployeeCommand { get; }
+        public ICommand DeleteEmployeeCommand { get; }
+        public ICommand ClearEmployeeClothesListCommand { get; }
+        public ICommand CancelEmployeeCommand { get; }
+
+        public EditEmployeeFormViewModel(
+            ICommand editEmployeeCommand,
+            ICommand deleteEmployeeCommand,
+            ICommand clearEmployeeClothesListCommand,
+            ICommand cancelEmployeeCommand)
+        {
+            EditEmployeeCommand = editEmployeeCommand;
+            ClearEmployeeClothesListCommand = clearEmployeeClothesListCommand;
+            DeleteEmployeeCommand = deleteEmployeeCommand;
+            CancelEmployeeCommand = cancelEmployeeCommand;
+        }
+
     }
 }

@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="DVS.Components.EmployeesListing"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DVS.Components"
+             mc:Ignorable="d">
+
+    <Grid>
+        <Border BorderBrush="#1c1c1c"
+                BorderThickness="1"
+                CornerRadius="5"
+                SnapsToDevicePixels="True">
+            <Grid>
+                <Grid.OpacityMask>
+                    <VisualBrush Visual="{Binding ElementName=border}" />
+                </Grid.OpacityMask>
+                <Border x:Name="border"
+                        Background="White"
+                        CornerRadius="5" />
+
+                <ListView BorderThickness="0"
+                          ItemsSource="{Binding EmployeeListingItemCollection}"
+                          SelectedItem="{Binding SelectedEmployeeListingItemViewModel}"
+                          SelectionMode="Single">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Stretch" />
+                            <Setter Property="AutomationProperties.AutomationId"
+                                    Value="{Binding ID, StringFormat={}{0}_EmployeeListingItem}" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <local:EmployeeListingItem />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

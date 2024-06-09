@@ -14,8 +14,8 @@ namespace DVS.ViewModels
 
         private readonly List<EmployeeModel> _employeeList;
 
-        private readonly ObservableCollection<EmployeeClothesListViewItemViewModel> _employeeClothesListViewItemCollection;
-        public IEnumerable<EmployeeClothesListViewItemViewModel> EmployeeClothesListViewItemCollection => _employeeClothesListViewItemCollection;
+        private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeClothesListViewItemCollection;
+        public IEnumerable<EmployeeListingItemViewModel> EmployeeClothesListViewItemCollection => _employeeClothesListViewItemCollection;
 
         public DVSEmployeesClothesListViewViewModel(SelectedClothesStore selectedClothesStore,
                                                  SelectedEmployeeClothesStore selectedEmployeeClothesStore,
@@ -47,7 +47,7 @@ namespace DVS.ViewModels
         {
             foreach(ClothesModel clothes in employee.Clothes)
             {
-                _employeeClothesListViewItemCollection.Add(new EmployeeClothesListViewItemViewModel(employee, clothes));
+                //_employeeClothesListViewItemCollection.Add(new EmployeeListingItemViewModel(employee));
             }
         }
     }

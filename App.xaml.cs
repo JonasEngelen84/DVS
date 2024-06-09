@@ -20,7 +20,8 @@ namespace DVS
         private readonly SelectedClothesStore _selectedClothesStore;
         private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly DVSViewModel _dVSViewModel;
+        private readonly DVSDetailedViewModel _dVSDetailedViewModel;
+        private readonly DVSEmployeesViewModel _dVSEmployeesViewModel;
 
         public App()
         {
@@ -34,15 +35,17 @@ namespace DVS
             _selectedEmployeeClothesStore = new();
             _modalNavigationStore = new();
 
-            _dVSViewModel = new(_modalNavigationStore,
-                                _categoryStore,
-                                _seasonStore,
-                                _selectedCategoryStore,
-                                _selectedSeasonStore,
-                                _clothesStore,
-                                _employeeStore,
-                                _selectedClothesStore,
-                                _selectedEmployeeClothesStore);
+            _dVSEmployeesViewModel = new();
+
+            _dVSDetailedViewModel = new(_modalNavigationStore,
+                                        _categoryStore,
+                                        _seasonStore,
+                                        _selectedCategoryStore,
+                                        _selectedSeasonStore,
+                                        _clothesStore,
+                                        _employeeStore,
+                                        _selectedClothesStore,
+                                        _selectedEmployeeClothesStore);
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -50,7 +53,7 @@ namespace DVS
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_dVSViewModel,
+                DataContext = new MainViewModel(_dVSDetailedViewModel,
                                                 _selectedClothesStore,
                                                 _selectedEmployeeClothesStore,
                                                 _selectedCategoryStore,

@@ -7,8 +7,8 @@ namespace DVS.ViewModels.Forms
 {
     public class AddEmployeeFormViewModel : ViewModelBase
     {
-        private string? _id;
-        public string? Id
+        private string _id;
+        public string Id
         {
             get => _id;
             set
@@ -18,8 +18,8 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string? _lastname;
-        public string? Lastname
+        private string _lastname;
+        public string Lastname
         {
             get => _lastname;
             set
@@ -29,8 +29,8 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string? _firstname;
-        public string? Firstname
+        private string _firstname;
+        public string Firstname
         {
             get => _firstname;
             set
