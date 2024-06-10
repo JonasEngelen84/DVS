@@ -48,15 +48,16 @@
 
         <!-- Kleidungsliste des Mitarbeiters -->
         <ItemsControl Grid.Row="1"
-                      ItemsSource="{Binding Employee}"
+                      ItemsSource="{Binding EmployeeClothesList}"
                       Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Lastname}" />
+                    <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
+        <!-- Firstname and DropDownMenu -->
         <Border Grid.Row="1"
                 TextBlock.FontSize="14"
                 Background="AliceBlue"
@@ -64,39 +65,38 @@
                 CornerRadius="0 0 10 10"
                 SnapsToDevicePixels="True">
 
-            <!-- Firstname -->
             <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
+                <!-- Firstname -->
                 <TextBlock Grid.Column="0"
                            Text="{Binding Firstname}"
                            HorizontalAlignment="Stretch" />
 
-                <!-- DropDownMenu -->
                 <Grid Grid.Column="1"
                       Margin="10 0 0 0">
                     <!--<Grid>
-        <Grid.Style>
-            <Style TargetType="Grid">
-                <Setter Property="Visibility"
-                        Value="Collapsed" />
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding IsDeleting}"
-                                 Value="True">
-                        <Setter Property="Visibility"
-                                Value="Visible" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
-        </Grid.Style>
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="Visibility"
+                                        Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsDeleting}"
+                                                 Value="True">
+                                        <Setter Property="Visibility"
+                                                Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
 
-        <loadingspinner:LoadingSpinner Diameter="20"
-                                       IsLoading="True"
-                                       Thickness="2" />
-    </Grid>-->
+                        <loadingspinner:LoadingSpinner Diameter="20"
+                                                       IsLoading="True"
+                                                       Thickness="2" />
+                    </Grid>-->
 
                     <Grid>
                         <Grid.Style>
