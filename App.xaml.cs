@@ -55,10 +55,6 @@ namespace DVS
             {
                 DataContext = new MainViewModel(_dVSEmployeesViewModel,
                                                 _dVSDetailedViewModel,
-                                                _selectedClothesStore,
-                                                _selectedEmployeeClothesStore,
-                                                _selectedCategoryStore,
-                                                _selectedSeasonStore,
                                                 _modalNavigationStore)
             };
 

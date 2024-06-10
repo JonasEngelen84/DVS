@@ -1,11 +1,8 @@
 ﻿using DVS.Models;
 using DVS.ViewModels.ListViewItems;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace DVS.ViewModels
 {
@@ -30,6 +27,43 @@ namespace DVS.ViewModels
 
             _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
             _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
+        }
+
+        public void OnEmployeeItemClicked(object sender, MouseButtonEventArgs e)
+        {
+            var border = sender as Border;
+            if (border != null)
+            {
+                var employeeViewModel = border.DataContext as EmployeeListingItemViewModel;
+                if (employeeViewModel != null)
+                {
+                    employeeViewModel.IsExpanded = !employeeViewModel.IsExpanded;
+                }
+            }
         }
     }
 }

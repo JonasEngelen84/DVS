@@ -18,8 +18,6 @@ namespace DVS.ViewModels
     {
         public DVSEmployeesViewModel DVSEmployeesViewModel { get; }
         public DVSDetailedViewModel DVSDetailedViewModel { get; }
-        private readonly SelectedClothesStore _selectedClothesStore;
-        private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
 
         // Pointer auf das aktuelle Modal(ViewModel) 
@@ -30,16 +28,10 @@ namespace DVS.ViewModels
 
         public MainViewModel(DVSEmployeesViewModel dVSEmployeesViewModel,
                              DVSDetailedViewModel dVSViewModel,
-                             SelectedClothesStore selectedClothesStore,
-                             SelectedEmployeeClothesStore selectedEmployeeClothesStore,
-                             SelectedCategoryStore _selectedCategoryStore,
-                             SelectedSeasonStore _selectedSeasonStore,
                              ModalNavigationStore modalNavigationStore)
         {
             DVSEmployeesViewModel = dVSEmployeesViewModel;
             DVSDetailedViewModel = dVSViewModel;
-            _selectedClothesStore = selectedClothesStore;
-            _selectedEmployeeClothesStore = selectedEmployeeClothesStore;
             _modalNavigationStore = modalNavigationStore;
 
             _modalNavigationStore.CurrentViewModelChanged += ModalNavigationStore_CurrentViewModelChanged;
