@@ -11,67 +11,101 @@
     </UserControl.Resources>
 
     <Grid>
-        <Grid.OpacityMask>
-            <VisualBrush Visual="{Binding ElementName=border}" />
-        </Grid.OpacityMask>
-        <Border x:Name="border"
-                Background="White"
-                BorderBrush="Black"
-                BorderThickness="1"
-                CornerRadius="10"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
         
-        <Border Padding="5"
+        <Border Grid.Row="0"
                 TextBlock.FontSize="14"
+                Background="AliceBlue"
+                Padding="5"
+                CornerRadius="10 10 0 0"
                 SnapsToDevicePixels="True">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
 
-                    <!--Lastname and errormessage-->
-                    <StackPanel Grid.Column="0">
-                        <TextBlock Text="{Binding Lastname}" />
+                <!--Lastname and errormessage-->
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="{Binding Lastname}" />
 
-                        <TextBlock FontSize="10"
-                                   Foreground="Red"
-                                   Text="{Binding ErrorMessage}"
-                                   Visibility="{Binding HasErrorMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                    </StackPanel>
+                    <TextBlock FontSize="10"
+                               Foreground="Red"
+                               Text="{Binding ErrorMessage}"
+                               Visibility="{Binding HasErrorMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </StackPanel>
 
-                    <TextBlock Grid.Column="1"
-                               Text="{Binding ID}"
-                               HorizontalAlignment="Stretch" />
-                </Grid>
+                <TextBlock Grid.Column="1"
+                           Text="{Binding ID}"
+                           HorizontalAlignment="Stretch" />
+            </Grid>
+        </Border>
 
-                <!--Lastname and ID-->
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
+        <!-- Kleidungsliste des Mitarbeiters -->
+        <ItemsControl Grid.Row="1"
+                      ItemsSource="{Binding Employee}"
+                      Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Lastname}" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
-                    <TextBlock Grid.Column="0"
-                               Text="{Binding Firstname}"
-                               HorizontalAlignment="Stretch" />
+        <Border Grid.Row="1"
+                TextBlock.FontSize="14"
+                Background="AliceBlue"
+                Padding="5"
+                CornerRadius="0 0 10 10"
+                SnapsToDevicePixels="True">
 
-                    <!--DropDownMenu-->
-                    <Grid Grid.Column="1"
-                          Margin="10 0 0 0">
-                        <!--<Grid>
+            <!-- Firstname -->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="{Binding Firstname}"
+                           HorizontalAlignment="Stretch" />
+
+                <!-- DropDownMenu -->
+                <Grid Grid.Column="1"
+                      Margin="10 0 0 0">
+                    <!--<Grid>
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Setter Property="Visibility"
+                        Value="Collapsed" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsDeleting}"
+                                 Value="True">
+                        <Setter Property="Visibility"
+                                Value="Visible" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+
+        <loadingspinner:LoadingSpinner Diameter="20"
+                                       IsLoading="True"
+                                       Thickness="2" />
+    </Grid>-->
+
+                    <Grid>
                         <Grid.Style>
                             <Style TargetType="Grid">
                                 <Setter Property="Visibility"
                                         Value="Collapsed" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsDeleting}"
-                                                 Value="True">
+                                                 Value="False">
                                         <Setter Property="Visibility"
                                                 Value="Visible" />
                                     </DataTrigger>
@@ -79,90 +113,69 @@
                             </Style>
                         </Grid.Style>
 
-                        <loadingspinner:LoadingSpinner Diameter="20"
-                                                       IsLoading="True"
-                                                       Thickness="2" />
-                    </Grid>-->
+                        <custom:DropdownMenu x:Name="dropdown">
+                            <Border Background="White"
+                                    BorderBrush="Gray"
+                                    BorderThickness="1">
+                                <StackPanel MinWidth="125">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background"
+                                                    Value="#f0f0f0" />
+                                            <Setter Property="Foreground"
+                                                    Value="Black" />
+                                            <Setter Property="Padding"
+                                                    Value="20 10" />
+                                            <Setter Property="Cursor"
+                                                    Value="Hand" />
+                                            <EventSetter Event="Click"
+                                                         Handler="Button_Click" />
 
-                        <Grid>
-                            <Grid.Style>
-                                <Style TargetType="Grid">
-                                    <Setter Property="Visibility"
-                                            Value="Collapsed" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsDeleting}"
-                                                     Value="False">
-                                            <Setter Property="Visibility"
-                                                    Value="Visible" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Grid.Style>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Margin="{TemplateBinding Margin}"
+                                                                Padding="{TemplateBinding Padding}"
+                                                                Background="{TemplateBinding Background}">
+                                                            <ContentPresenter />
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
 
-                            <custom:DropdownMenu x:Name="dropdown">
-                                <Border Background="White"
-                                        BorderBrush="Gray"
-                                        BorderThickness="1">
-                                    <StackPanel MinWidth="125">
-                                        <StackPanel.Resources>
-                                            <Style TargetType="Button">
-                                                <Setter Property="Background"
-                                                        Value="#f0f0f0" />
-                                                <Setter Property="Foreground"
-                                                        Value="Black" />
-                                                <Setter Property="Padding"
-                                                        Value="20 10" />
-                                                <Setter Property="Cursor"
-                                                        Value="Hand" />
-                                                <EventSetter Event="Click"
-                                                             Handler="Button_Click" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver"
+                                                         Value="True">
+                                                    <Trigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                                                                To="#c7c7c7"
+                                                                                Duration="0:0:0.1" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.EnterActions>
+                                                    <Trigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                                                                To="#f0f0f0"
+                                                                                Duration="0:0:0.1" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </Trigger.ExitActions>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Resources>
 
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate TargetType="Button">
-                                                            <Border Margin="{TemplateBinding Margin}"
-                                                                    Padding="{TemplateBinding Padding}"
-                                                                    Background="{TemplateBinding Background}">
-                                                                <ContentPresenter />
-                                                            </Border>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-
-                                                <Style.Triggers>
-                                                    <Trigger Property="IsMouseOver"
-                                                             Value="True">
-                                                        <Trigger.EnterActions>
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                                                    To="#c7c7c7"
-                                                                                    Duration="0:0:0.1" />
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </Trigger.EnterActions>
-                                                        <Trigger.ExitActions>
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                                                                    To="#f0f0f0"
-                                                                                    Duration="0:0:0.1" />
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </Trigger.ExitActions>
-                                                    </Trigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </StackPanel.Resources>
-
-                                        <Button Command="{Binding EditCommand}"
-                                                Content="Bearbeiten" />
-                                        <Button Command="{Binding DeleteCommand}"
-                                                Content="Löschen" />
-                                    </StackPanel>
-                                </Border>
-                            </custom:DropdownMenu>
-                        </Grid>
+                                    <Button Command="{Binding EditCommand}"
+                                            Content="Bearbeiten" />
+                                    <Button Command="{Binding DeleteCommand}"
+                                            Content="Löschen" />
+                                </StackPanel>
+                            </Border>
+                        </custom:DropdownMenu>
                     </Grid>
                 </Grid>
             </Grid>

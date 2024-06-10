@@ -42,7 +42,17 @@ namespace DVS.ViewModels.ListViewItems
             }
         }
 
-        public bool IsExpanded { get; set; }
+        private bool _isExpanded;
+        public bool IsExpanded
+        {
+            get => _isExpanded;
+            set
+            {
+                _isExpanded = value;
+                OnPropertyChanged(nameof(IsExpanded));
+            }
+        }
+
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
 

@@ -53,17 +53,6 @@ namespace DVS.ViewModels
             _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
         }
 
-        public void OnEmployeeItemClicked(object sender, MouseButtonEventArgs e)
-        {
-            var border = sender as Border;
-            if (border != null)
-            {
-                var employeeViewModel = border.DataContext as EmployeeListingItemViewModel;
-                if (employeeViewModel != null)
-                {
-                    employeeViewModel.IsExpanded = !employeeViewModel.IsExpanded;
-                }
-            }
-        }
+        
     }
 }
