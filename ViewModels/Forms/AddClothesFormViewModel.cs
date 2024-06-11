@@ -7,14 +7,14 @@ namespace DVS.ViewModels.Forms
 {
     public class AddClothesFormViewModel : ViewModelBase
     {
-        private string _id;
-        public string Id
+        private string _iD;
+        public string ID
         {
-            get => _id;
+            get => _iD;
             set
             {
-                _id = value;
-                OnPropertyChanged(nameof(Id));
+                _iD = value;
+                OnPropertyChanged(nameof(ID));
             }
         }
 
@@ -203,7 +203,7 @@ namespace DVS.ViewModels.Forms
 
         private void ClothesStore_AddClothes(ClothesModel clothes)
         {
-            Id = null;
+            ID = null;
             Name = null;
             Size = null;
             //Quantity = null;

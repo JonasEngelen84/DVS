@@ -1,5 +1,4 @@
 ﻿using DVS.Commands;
-using DVS.Commands.DVSViewCommands;
 using DVS.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;

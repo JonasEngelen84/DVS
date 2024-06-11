@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
     
-    <ListView x:Name="ClothesListView"
-              FontSize="14"
+    <ListView FontSize="14"
               Foreground="#FF212129"
               Background="WhiteSmoke"
               ItemsSource="{Binding Clothes}"
@@ -15,7 +14,7 @@
             <GridView>
                 <GridViewColumn Header="Id"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding Id}" />
+                                DisplayMemberBinding="{Binding ID}" />
                 <GridViewColumn Header="Kategorie"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Categorie}" />

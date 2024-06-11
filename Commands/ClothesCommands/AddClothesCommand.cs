@@ -20,7 +20,7 @@ namespace DVS.Commands.ClothesCommands
             addClothesFormViewModel.IsSubmitting = true;
 
             ClothesModel clothes = new(
-                addClothesFormViewModel.Id,
+                addClothesFormViewModel.ID,
                 addClothesFormViewModel.Name,
                 addClothesFormViewModel.SelectedCategory,
                 addClothesFormViewModel.Size,

@@ -11,13 +11,12 @@ namespace DVS.Components
             InitializeComponent();
         }
 
+        //TODO: OnEmployeeItemClicked beschreiben
         public void OnEmployeeItemClicked(object sender, MouseButtonEventArgs e)
         {
-            var listViewItem = sender as ListViewItem;
-            if (listViewItem != null)
+            if (sender is ListViewItem listViewItem)
             {
-                var viewModel = listViewItem.DataContext as EmployeeListingItemViewModel;
-                if (viewModel != null)
+                if (listViewItem.DataContext is EmployeeListingItemViewModel viewModel)
                 {
                     viewModel.IsExpanded = !viewModel.IsExpanded;
                 }
