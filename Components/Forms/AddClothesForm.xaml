@@ -162,9 +162,5 @@
                        HorizontalAlignment="Center" />
             </Button>
         </StackPanel>
-
-        <!-- AddEditClothes_ClothesListViewComponent -->
-        <components:AddEditClothes_ClothesListViewComponent Margin="1 15 0 0"
-                                                            DataContext="{Binding AddEditClothes_ClothesListViewViewModel}" />
     </StackPanel>
 </UserControl>

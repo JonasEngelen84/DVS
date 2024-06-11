@@ -136,7 +136,7 @@ namespace DVS.ViewModels.Forms
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
 
-        public DVSClothesListViewViewModel ClothesListViewViewModel { get; }
+        public DVSDetailedClothesListingViewModel ClothesListViewViewModel { get; }
 
         public ICommand OpenAddEditCategoriesCommand { get; }
         public ICommand OpenAddEditSeasonsCommand { get; }

@@ -133,8 +133,6 @@ namespace DVS.ViewModels.Forms
         //private readonly ObservableCollection<ClothesModel> _clothes;
         //public IEnumerable<ClothesModel> Clothes => _clothes;
 
-        public AddEditClothes_ClothesListviewViewModel AddEditClothes_ClothesListViewViewModel { get; }
-
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
         private readonly ClothesStore _clothesStore;
@@ -153,8 +151,6 @@ namespace DVS.ViewModels.Forms
                                        ICommand addClothesCommand,
                                        ICommand cancelClothesCommand)
         {
-            AddEditClothes_ClothesListViewViewModel = new(clothesStore);
-            
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
             _clothesStore = clothesStore;

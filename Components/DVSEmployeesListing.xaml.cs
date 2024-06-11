@@ -4,9 +4,9 @@ using System.Windows.Input;
 
 namespace DVS.Components
 {
-    public partial class EmployeesListing : UserControl
+    public partial class DVSEmployeesListing : UserControl
     {
-        public EmployeesListing()
+        public DVSEmployeesListing()
         {
             InitializeComponent();
         }

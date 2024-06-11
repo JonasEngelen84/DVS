@@ -27,13 +27,15 @@
 
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Lastname and errormessage -->
                 <StackPanel Grid.Column="0">
-                    <TextBlock Text="{Binding Lastname}" />
+                    <TextBlock Text="{Binding Lastname}"
+                               Margin="0 0 10 0"/>
 
                     <TextBlock FontSize="10"
                                Foreground="Red"
@@ -42,7 +44,13 @@
                 </StackPanel>
 
                 <TextBlock Grid.Column="1"
+                           Text="{Binding Comment}"
+                           Foreground="DarkGray"
+                           TextWrapping="WrapWithOverflow"/>
+
+                <TextBlock Grid.Column="2"
                            Text="{Binding ID}"
+                           Margin="10 0 0 0"
                            HorizontalAlignment="Stretch" />
             </Grid>
         </Border>

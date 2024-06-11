@@ -13,9 +13,9 @@
               SelectedItem="{Binding SelectedEmployeeClothesItem, Mode=TwoWay}">
         <ListView.View>
             <GridView>
-                <GridViewColumn Header="Id"
+                <GridViewColumn Header="ID"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding Id}" />
+                                DisplayMemberBinding="{Binding ID}" />
                 <GridViewColumn Header="Name"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Name}" />

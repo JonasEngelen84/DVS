@@ -12,8 +12,8 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <components:EmployeesListing Grid.Column="0"
+        <components:DVSEmployeesListing Grid.Column="0"
                                      Margin="0 27 0 0"
-                                     DataContext="{Binding EmployeesListingViewModel}" />
+                                     DataContext="{Binding DVSEmployeesListingViewModel}" />
     </Grid>
 </UserControl>

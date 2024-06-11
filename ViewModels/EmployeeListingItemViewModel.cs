@@ -1,6 +1,5 @@
 ﻿using DVS.Commands;
 using DVS.Models;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.ListViewItems
@@ -12,6 +11,7 @@ namespace DVS.ViewModels.ListViewItems
         public string ID => Employee.ID;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
+        public string Comment => Employee.Comment;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -54,12 +54,6 @@ namespace DVS.ViewModels.ListViewItems
         }
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
-
-        private ObservableCollection<ClothesModel> EmployeeClothesList
-        {
-            get => Employee.Clothes;
-        }
-        
 
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }

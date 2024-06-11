@@ -86,9 +86,9 @@
             </Grid.ColumnDefinitions>
 
             <!-- DVSEmployeesClothesListViewComponent -->
-            <components:DVSEmployeesClothesListViewComponent Grid.Column="0"
-                                                             Margin="0 3 0 0"
-                                                             DataContext="{Binding DVSEmployeesClothesListViewViewModel}" />
+            <components:DVSDetailedEmployeesListing Grid.Column="0"
+                                                    Margin="0 3 0 0"
+                                                    DataContext="{Binding DVSDetailedEmployeesListingViewModel}" />
 
             <!-- Plus/Minus button -->
             <Grid Grid.Column="1"
@@ -127,9 +127,9 @@
             </GridSplitter>
 
             <!-- DVSClothesListViewComponent -->
-            <components:DVSClothesListViewComponent Grid.Column="2"
-                                                    Margin="0 3 0 0"
-                                                    DataContext="{Binding DVSClothesListViewViewModel}" />
+            <components:DVSDetailedClothesListing Grid.Column="2"
+                                                  Margin="0 3 0 0"
+                                                  DataContext="{Binding DVSDetailedClothesListingViewModel}" />
         </Grid>
     </Grid>
 </UserControl>

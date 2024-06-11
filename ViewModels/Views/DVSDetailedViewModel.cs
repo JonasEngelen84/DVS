@@ -6,8 +6,8 @@ namespace DVS.ViewModels.Views
 {
     public class DVSDetailedViewModel : ViewModelBase
     {
-        public DVSEmployeesClothesListViewViewModel DVSEmployeesClothesListViewViewModel { get; }
-        public DVSClothesListViewViewModel DVSClothesListViewViewModel { get; }
+        public DVSDetailedEmployeesListingViewModel DVSDetailedEmployeesListingViewModel { get; }
+        public DVSDetailedClothesListingViewModel DVSDetailedClothesListingViewModel { get; }
 
         public ICommand OpenFilterClothesListCommand { get; }
         public ICommand OpenFilterEmployeeListCommand { get; }
@@ -28,9 +28,9 @@ namespace DVS.ViewModels.Views
                                     SelectedClothesStore selectedClothesStore,
                                     SelectedEmployeeClothesStore selectedEmployeeClothesStore)
         {
-            DVSClothesListViewViewModel = new(clothesStore);
+            DVSDetailedClothesListingViewModel = new(clothesStore);
 
-            DVSEmployeesClothesListViewViewModel = new(selectedClothesStore,
+            DVSDetailedEmployeesListingViewModel = new(selectedClothesStore,
                                                     selectedEmployeeClothesStore,
                                                     modalNavigationStore);
 

@@ -2,9 +2,9 @@
 
 namespace DVS.Components
 {
-    public partial class DVSEmployeesClothesListViewComponent : UserControl
+    public partial class DVSDetailedEmployeesListing : UserControl
     {
-        public DVSEmployeesClothesListViewComponent()
+        public DVSDetailedEmployeesListing()
         {
             InitializeComponent();
         }

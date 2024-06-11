@@ -5,19 +5,19 @@ using System.Collections.ObjectModel;
 
 namespace DVS.ViewModels
 {
-    public class DVSEmployeesClothesListViewViewModel : ViewModelBase
+    public class DVSDetailedEmployeesListingViewModel : ViewModelBase
     {
         private readonly SelectedClothesStore _selectedClothesStore;
         private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly DVSClothesListViewViewModel _clothesListViewViewModel;
+        private readonly DVSDetailedClothesListingViewModel _dVSDetailedClothesListingViewModel;
 
         private readonly List<EmployeeModel> _employeeList;
 
         private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeClothesListViewItemCollection;
         public IEnumerable<EmployeeListingItemViewModel> EmployeeClothesListViewItemCollection => _employeeClothesListViewItemCollection;
 
-        public DVSEmployeesClothesListViewViewModel(SelectedClothesStore selectedClothesStore,
+        public DVSDetailedEmployeesListingViewModel(SelectedClothesStore selectedClothesStore,
                                                  SelectedEmployeeClothesStore selectedEmployeeClothesStore,
                                                  ModalNavigationStore modalNavigationStore)
         {

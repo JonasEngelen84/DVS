@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace DVS.ViewModels
 {
-    public class DVSClothesListViewViewModel : ViewModelBase
+    public class DVSDetailedClothesListingViewModel : ViewModelBase
     {
         //private readonly SelectedClothesStore _selectedClothesStore;
         //private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
@@ -15,7 +15,7 @@ namespace DVS.ViewModels
         public IEnumerable<ClothesModel> Clothes => _clothes;
 
 
-        public DVSClothesListViewViewModel(ClothesStore clothesStore)
+        public DVSDetailedClothesListingViewModel(ClothesStore clothesStore)
         {
             //_selectedClothesStore = selectedClothesStore;
             //_selectedEmployeeClothesStore = selectedEmployeeClothesStore;
