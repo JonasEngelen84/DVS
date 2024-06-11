@@ -9,6 +9,6 @@ namespace DVS.Models
         public string Lastname { get; set; } = lastname;
         public string? Comment { get; set; } = comment;
 
-        public ObservableCollection<ClothesModel> Clothes { get; private set; } = [];
+        public ObservableCollection<EmployeeClothesModel> Clothes { get; private set; } = [];
     }
 }

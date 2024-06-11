@@ -133,12 +133,12 @@
 
             <views:DVSDetailedView Grid.Row="1"
                                    Margin="0,3,0,0"
-                                   Visibility="Hidden"
+                                   Visibility="Visible"
                                    DataContext="{Binding DVSDetailedViewModel}" />
 
             <views:DVSEmployeesView Grid.Row="1"
                                     Margin="0,3,0,0"
-                                    Visibility="Visible"
+                                    Visibility="Hidden"
                                     DataContext="{Binding DVSEmployeesViewModel}" />
 
         </Grid>

@@ -19,14 +19,11 @@ namespace DVS.Commands.ClothesCommands
             addClothesFormViewModel.ErrorMessage = null;
             addClothesFormViewModel.IsSubmitting = true;
 
-            ClothesModel clothes = new(
-                addClothesFormViewModel.ID,
-                addClothesFormViewModel.Name,
-                addClothesFormViewModel.SelectedCategory,
-                addClothesFormViewModel.Size,
-                addClothesFormViewModel.SelectedSeason,
-                addClothesFormViewModel.Quantity,
-                addClothesFormViewModel.Comment);
+            ClothesModel clothes = new(addClothesFormViewModel.ID,
+                                       addClothesFormViewModel.Name,
+                                       addClothesFormViewModel.SelectedCategory,
+                                       addClothesFormViewModel.SelectedSeason,
+                                       addClothesFormViewModel.Comment);
 
             try
             {

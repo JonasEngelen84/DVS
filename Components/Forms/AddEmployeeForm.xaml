@@ -124,14 +124,14 @@
             </Grid.ColumnDefinitions>
 
             <!-- Employee get-ClothesListView -->
-            <components:AddEditEmployee_EmployeeClothesListViewComponent Grid.Column="0"
+            <components:AddEditEmployee_EmployeeClothesList Grid.Column="0"
                                                                          Margin="0 0 1.5 0"
                                                                          Foreground="Black"
                                                                          Background="WhiteSmoke"
                                                                          DataContext="{Binding AddEditEmployee_EmployeeClothesListviewViewModel}" />
 
             <!-- Available clothesListView -->
-            <components:AddEditEmployee_ClothesListviewComponent Grid.Column="1"
+            <components:AddEditEmployeeClothesList Grid.Column="1"
                                                                  Margin="1.5 0 0 0"
                                                                  Foreground="Black"
                                                                  Background="WhiteSmoke"

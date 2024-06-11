@@ -13,11 +13,11 @@ namespace DVS.Stores
 
         public ClothesStore()
         {
-            _clothes = [new ClothesModel("111", "Sommershirt", "Shirt", "XL", "Sommer", 12, null),
-                        new ClothesModel("112", "Sommershirt", "Shirt", "L", "Sommer", 8, null),
-                        new ClothesModel("113", "Sommershirt", "Shirt", "M", "Sommer", 10, null),
-                        new ClothesModel("114", "Wintershirt", "Shirt", "XL", "Winter", 8, null),
-                        new ClothesModel("115", "Wintershirt", "Shirt", "L", "Winter", 5, null)];
+            _clothes = [new ClothesModel("111", "Sommershirt", "Shirt", "Sommer", null),
+                        new ClothesModel("112", "Sommershirt", "Shirt", "Sommer", null),
+                        new ClothesModel("113", "Sommershirt", "Shirt", "Sommer", null),
+                        new ClothesModel("114", "Wintershirt", "Shirt", "Winter", null),
+                        new ClothesModel("115", "Wintershirt", "Shirt", "Winter", null)];
         }
 
         public async Task Load()
