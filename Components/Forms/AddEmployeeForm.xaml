@@ -128,14 +128,14 @@
                                                                          Margin="0 0 1.5 0"
                                                                          Foreground="Black"
                                                                          Background="WhiteSmoke"
-                                                                         DataContext="{Binding AddEditEmployee_EmployeeClothesListviewViewModel}" />
+                                                                         DataContext="{Binding AddEditEmployee_EmployeeClothesListViewModel}" />
 
             <!-- Available clothesListView -->
-            <components:AddEditEmployeeClothesList Grid.Column="1"
+            <components:AddEditEmployee_ClothesList Grid.Column="1"
                                                                  Margin="1.5 0 0 0"
                                                                  Foreground="Black"
                                                                  Background="WhiteSmoke"
-                                                                 DataContext="{Binding AddEditEmployee_ClothesListviewViewModel}" />
+                                                                 DataContext="{Binding AddEditEmployee_ClothesListViewModel}" />
         </Grid>
     </Grid>
 </UserControl>

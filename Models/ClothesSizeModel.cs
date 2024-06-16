@@ -1,8 +1,9 @@
 ﻿namespace DVS.Models
 {
-    public class ClothesSizeModel(string size, int quantity)
+    public class ClothesSizeModel(string size, int quantity, string? comment)
     {
-        private string _size { get; set; } = size;
-        private int _quantity { get; set; } = quantity;
+        public string Size { get; set; } = size;
+        public int Quantity { get; set; } = quantity;
+        public string? Comment { get; set; } = comment;
     }
 }

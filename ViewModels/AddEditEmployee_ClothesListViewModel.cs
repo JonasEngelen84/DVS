@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace DVS.ViewModels
 {
-    public class AddEditEmployee_ClothesListviewViewModel : ViewModelBase
+    public class AddEditEmployee_ClothesListViewModel : ViewModelBase
     {
 
         private readonly ObservableCollection<ClothesModel> _clothes;
@@ -13,7 +13,7 @@ namespace DVS.ViewModels
         private readonly ClothesStore _clothesStore;
 
 
-        public AddEditEmployee_ClothesListviewViewModel(ClothesStore clothesStore)
+        public AddEditEmployee_ClothesListViewModel(ClothesStore clothesStore)
         {
             _clothes = [];
             _clothesStore = clothesStore;

@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Style x:Key="TextBoxStyle" TargetType="TextBox">
-        <Setter Property="Width" Value="165" />
+        <Setter Property="Width" Value="252" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Height" Value="23" />
         <Setter Property="FontSize" Value="14"/>

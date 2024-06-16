@@ -27,7 +27,7 @@ namespace DVS.Commands.EmployeeCommands
 
             foreach(ClothesModel clothes in addEmployeeFormViewModel.AddEditEmployee_EmployeeClothesListviewViewModel.Employeeclothes)
             {
-                employee.Clothes.Add(clothes);
+                //employee.Clothes.Add(clothes);
             }
 
             try

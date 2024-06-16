@@ -19,11 +19,20 @@ namespace DVS.Commands.ClothesCommands
             addClothesFormViewModel.ErrorMessage = null;
             addClothesFormViewModel.IsSubmitting = true;
 
+            var selectedSizes = addClothesFormViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+            ? addClothesFormViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+            : addClothesFormViewModel.AvailableSizesEU.Where(size => size.IsSelected);
+
             ClothesModel clothes = new(addClothesFormViewModel.ID,
                                        addClothesFormViewModel.Name,
-                                       addClothesFormViewModel.SelectedCategory,
-                                       addClothesFormViewModel.SelectedSeason,
+                                       addClothesFormViewModel.Category,
+                                       addClothesFormViewModel.Season,
                                        addClothesFormViewModel.Comment);
+
+            foreach (var size in selectedSizes)
+            {
+                clothes.Sizes.Add(new ClothesSizeModel(size.Size, size.Quantity, size.Comment));
+            }
 
             try
             {

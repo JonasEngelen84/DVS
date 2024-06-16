@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace DVS.ViewModels
 {
-    public class AddEditEmployee_EmployeeClothesListViewViewModel : ViewModelBase
+    public class AddEditEmployee_EmployeeClothesListViewModel : ViewModelBase
     {
         private readonly ObservableCollection<ClothesModel> _employeeclothes = [];
         public IEnumerable<ClothesModel> Employeeclothes => _employeeclothes;

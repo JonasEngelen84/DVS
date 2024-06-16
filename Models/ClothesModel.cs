@@ -10,6 +10,6 @@ namespace DVS.Models
         public string Season { get; set; } = season;
         public string? Comment { get; set; } = comment;
 
-        public ObservableCollection<ClothesSizeModel> Size { get; private set; } = [];
+        public List<ClothesSizeModel> Sizes { get; set; } = [];
     }
 }

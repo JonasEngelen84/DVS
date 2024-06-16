@@ -10,7 +10,7 @@
         <!-- Id -->
         <TextBox Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding Id}" />
+                 Text="{Binding ID}" />
 
         <!-- Name -->
         <TextBox Margin="0 0 0 5"
@@ -31,7 +31,7 @@
         <StackPanel Orientation="Horizontal">
             <ComboBox Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Categories}"
-                      SelectedItem="{Binding SelectedCategory, Mode=TwoWay}" />
+                      SelectedItem="{Binding Category, Mode=TwoWay}" />
 
             <Button Margin="5 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
@@ -48,10 +48,11 @@
                Margin="-5.5 0 0 -4" />
 
         <!-- Season ComboBox and Edit-Button -->
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal"
+                    Margin="0 0 0 3">
             <ComboBox Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Seasons}"
-                      SelectedItem="{Binding SelectedSeason, Mode=TwoWay}" />
+                      SelectedItem="{Binding Season, Mode=TwoWay}" />
 
             <Button Margin="5 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
@@ -62,21 +63,87 @@
             </Button>
         </StackPanel>
 
-        <Border HorizontalAlignment="Left"
-                Margin="0 10 0 10"
-                Width="150"
-                Height="150">
-            
-        </Border>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Größe (eu):"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Margin="-5.5 0 0 -2" />
 
-        <Button Content="ERSTELLEN"
-                Style="{StaticResource ModalButtonStyle}"
-                Command="{Binding AddClothesCommand}" />
+            <Label Content="Größe (us):"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Margin="39 0 0 -2" />
+        </StackPanel>
 
-        <Button Content="BEENDEN"
-                Margin="0 0 0 0 "
-                Style="{StaticResource ModalButtonStyle}"
-                Command="{Binding CancelClothesCommand}" />
+        <!-- SizeLists -->
+        <StackPanel Orientation="Horizontal">
+
+            <!-- SizeListEU -->
+            <Border Margin="0 0 5 20"
+                    Height="150"
+                    BorderThickness="0.5"
+                    BorderBrush="Black">
+
+                <ScrollViewer>
+                    <StackPanel>
+                        <ItemsControl ItemsSource="{Binding AvailableSizesEU}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox IsChecked="{Binding IsSelected}"
+                                                  Content="{Binding Size}"
+                                                  Margin="5" />
+                                        <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
+                                                 Width="46"
+                                                 Margin="5" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- SizeListUS -->
+            <Border Margin="5 0 0 20"
+                    Height="150"
+                    BorderThickness="0.5"
+                    BorderBrush="Black">
+
+                <ScrollViewer>
+                    <StackPanel>
+                        <ItemsControl ItemsSource="{Binding AvailableSizesUS}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox IsChecked="{Binding IsSelected}"
+                                                  Content="{Binding Size}"
+                                                  Margin="5"
+                                                  Width="40"/>
+                                        <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
+                                                 Width="46"
+                                                 Margin="5" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    Margin="0 0 0 5">
+            <Button Content="ERSTELLEN"
+                    Margin="40 0 0 0 "
+                    Style="{StaticResource ModalButtonStyle}"
+                    Command="{Binding AddClothesCommand}" />
+
+            <Button Content="BEENDEN"
+                    Margin="20 0 0 0 "
+                    Style="{StaticResource ModalButtonStyle}"
+                    Command="{Binding CancelClothesCommand}" />
+        </StackPanel>
 
     </StackPanel>
 </UserControl>

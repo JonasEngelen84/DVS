@@ -85,8 +85,8 @@ namespace DVS.ViewModels.Forms
         //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
-        public AddEditEmployee_ClothesListviewViewModel AddEditEmployee_ClothesListviewViewModel { get; }
-        public AddEditEmployee_EmployeeClothesListViewViewModel AddEditEmployee_EmployeeClothesListviewViewModel { get; }
+        public AddEditEmployee_ClothesListViewModel AddEditEmployee_ClothesListviewViewModel { get; }
+        public AddEditEmployee_EmployeeClothesListViewModel AddEditEmployee_EmployeeClothesListviewViewModel { get; }
 
         private readonly EmployeeStore _employeeStore;
 

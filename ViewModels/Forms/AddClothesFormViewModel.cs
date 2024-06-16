@@ -1,5 +1,6 @@
 ﻿using DVS.Models;
 using DVS.Stores;
+using DVS.ViewModels;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -29,56 +30,6 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string _size;
-        public string Size
-        {
-            get => _size;
-            set
-            {
-                _size = value;
-                OnPropertyChanged(nameof(Size));
-            }
-        }
-
-        private int _quantity;
-        public int Quantity
-        {
-            get => _quantity;
-            set
-            {
-                _quantity = value;
-                OnPropertyChanged(nameof(Quantity));
-            }
-        }
-
-        private string _selectedCategory;
-        public string SelectedCategory
-        {
-            get => _selectedCategory;
-            set
-            {
-                if (_selectedCategory != value)
-                {
-                    _selectedCategory = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        private string _selectedSeason;
-        public string SelectedSeason
-        {
-            get => _selectedSeason;
-            set
-            {
-                if (_selectedSeason != value)
-                {
-                    _selectedSeason = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         private string? _comment;
         public string? Comment
         {
@@ -87,6 +38,34 @@ namespace DVS.ViewModels.Forms
             {
                 _comment = value;
                 OnPropertyChanged(nameof(Comment));
+            }
+        }
+
+        private string _category;
+        public string Category
+        {
+            get => _category;
+            set
+            {
+                if (_category != value)
+                {
+                    _category = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private string _season;
+        public string Season
+        {
+            get => _season;
+            set
+            {
+                if (_season != value)
+                {
+                    _season = value;
+                    OnPropertyChanged();
+                }
             }
         }
 
@@ -130,8 +109,55 @@ namespace DVS.ViewModels.Forms
         private readonly ObservableCollection<string> _seasons;
         public IEnumerable<string> Seasons => _seasons;
 
-        //private readonly ObservableCollection<ClothesModel> _clothes;
-        //public IEnumerable<ClothesModel> Clothes => _clothes;
+        private ObservableCollection<SizeOption> _availableSizesEU = [
+            new SizeOption { Size = "44" },
+            new SizeOption { Size = "46" },
+            new SizeOption { Size = "48" },
+            new SizeOption { Size = "50" },
+            new SizeOption { Size = "52" },
+            new SizeOption { Size = "54" },
+            new SizeOption { Size = "56" },
+            new SizeOption { Size = "58" },
+            new SizeOption { Size = "60" },
+            new SizeOption { Size = "62" }
+            ];
+
+        public ObservableCollection<SizeOption> AvailableSizesEU
+        {
+            get => _availableSizesEU;
+            set
+            {
+                if (_availableSizesEU != value)
+                {
+                    _availableSizesEU = value;
+                    OnPropertyChanged(nameof(AvailableSizesEU));
+                }
+            }
+        }
+
+        private ObservableCollection<SizeOption> _availableSizesUS = [
+            new SizeOption { Size = "XS" },
+            new SizeOption { Size = "S" },
+            new SizeOption { Size = "M" },
+            new SizeOption { Size = "L" },
+            new SizeOption { Size = "XL" },
+            new SizeOption { Size = "XLL" },
+            new SizeOption { Size = "3XL" },
+            new SizeOption { Size = "4XL" },
+            new SizeOption { Size = "5XL" },
+            new SizeOption { Size = "6XL" }
+            ];
+        public ObservableCollection<SizeOption> AvailableSizesUS
+        {
+            get => _availableSizesUS;
+            set
+            {
+                if (_availableSizesUS != value)
+                {
+                    _availableSizesUS = value;
+                }
+            }
+        }
 
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
@@ -162,51 +188,30 @@ namespace DVS.ViewModels.Forms
             _categories = [];
             _seasons = [];
 
-            CategoryStore_CategoriesLoaded();
-            SeasonStore_SeasonsLoaded();
+            _iD = "ID";
+            _name = "Name";
+            _comment = "Kommentar";
 
-            _clothesStore.ClothesAdded += ClothesStore_AddClothes;
+            LoadCategories();
+            LoadSeasons();
 
         }
 
 
-        protected override void Dispose()
+        private void LoadCategories()
         {
-            _clothesStore.ClothesAdded -= ClothesStore_AddClothes;
-
-            base.Dispose();
-        }
-
-        private void CategoryStore_CategoriesLoaded()
-        {
-            _categories.Clear();
-
             foreach (string category in _categoryStore.Categories)
             {
                 _categories.Add(category);
             }
         }
 
-        private void SeasonStore_SeasonsLoaded()
+        private void LoadSeasons()
         {
-            _seasons.Clear();
-
             foreach (string season in _seasonStore.Seasons)
             {
                 _seasons.Add(season);
             }
-        }
-
-        private void ClothesStore_AddClothes(ClothesModel clothes)
-        {
-            ID = null;
-            Name = null;
-            Size = null;
-            //Quantity = null;
-            Comment = null;
-            SelectedCategory = null;
-            SelectedSeason = null;
-            Comment = null;
         }
     }
 }

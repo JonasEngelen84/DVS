@@ -45,10 +45,10 @@ namespace DVS.ViewModels
         //TODO: AddEmployee
         private void AddEmployeeClothesListViewItem(EmployeeModel employee)
         {
-            foreach(ClothesModel clothes in employee.Clothes)
-            {
-                //_employeeClothesListViewItemCollection.Add(new EmployeeListingItemViewModel(employee));
-            }
+            //foreach(ClothesModel clothes in employee.Clothes)
+            //{
+            //    //_employeeClothesListViewItemCollection.Add(new EmployeeListingItemViewModel(employee));
+            //}
         }
     }
 }
