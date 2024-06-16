@@ -10,14 +10,16 @@ namespace DVS.ViewModels.Views
     {
         public AddEmployeeFormViewModel AddEmployeeFormViewModel { get; }
 
-        public AddEmployeeViewModel(ClothesStore clothesStore,
+        public AddEmployeeViewModel(DVSDetailedClothesListingViewModel dVSDetailedClothesListingViewModel,
+                                    ClothesStore clothesStore,
                                     EmployeeStore employeeStore,
                                     ModalNavigationStore modalNavigationStore)
         {
             ICommand addEmployeeCommand = new AddEmployeeCommand(this, employeeStore);
             ICommand cancelEmployeeCommand = new CloseModalCommand(modalNavigationStore);
 
-            AddEmployeeFormViewModel = new AddEmployeeFormViewModel(clothesStore,
+            AddEmployeeFormViewModel = new AddEmployeeFormViewModel(dVSDetailedClothesListingViewModel,
+                                                                    clothesStore,
                                                                     employeeStore,
                                                                     addEmployeeCommand,
                                                                     cancelEmployeeCommand);

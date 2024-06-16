@@ -15,20 +15,20 @@ namespace DVS.Stores
         {
             _clothes =
             [
-                new ClothesModel("111", "Sommershirt", "Shirt", "Sommer", null)
-                    { Sizes = [new ClothesSizeModel("M", 5, null), new ClothesSizeModel("L", 3, null)] },
+                new ClothesModel("111", "Winterhose", "Hose", "Winter", null)
+                    { Sizes = [new ClothesSizeModel("S", 15, null), new ClothesSizeModel("M", 7, null), new ClothesSizeModel("L", 5, null), new ClothesSizeModel("XL", 2, null)] },
 
                 new ClothesModel("112", "Sommershirt", "Shirt", "Sommer", null)
-                    { Sizes = [new ClothesSizeModel("M", 5, null), new ClothesSizeModel("L", 3, null)] },
+                    { Sizes = [new ClothesSizeModel("M", 5, null), new ClothesSizeModel("L", 6, null), new ClothesSizeModel("XL", 7, null)] },
 
-                new ClothesModel("113", "Sommershirt", "Shirt", "Sommer", null)
-                    { Sizes = [new ClothesSizeModel("M", 5, null), new ClothesSizeModel("L", 3, null)] },
+                new ClothesModel("113", "Regenjacke", "Jacke", "Saisonlos", null)
+                    { Sizes = [new ClothesSizeModel("S", 12, null), new ClothesSizeModel("M", 14, null), new ClothesSizeModel("L", 11, null), new ClothesSizeModel("XL", 8, null)] },
 
                 new ClothesModel("114", "Wintershirt", "Shirt", "Winter", null)
-                    { Sizes = [new ClothesSizeModel("M", 5, null), new ClothesSizeModel("L", 3, null)] },
+                    { Sizes = [new ClothesSizeModel("S", 3, null), new ClothesSizeModel("M", 10, null), new ClothesSizeModel("L", 7, null), new ClothesSizeModel("XL", 6, null)] },
 
-                new ClothesModel("115", "Wintershirt", "Shirt", "Winter", null)
-                    { Sizes = [new ClothesSizeModel("M", 5, null), new ClothesSizeModel("L", 3, null)] }
+                new ClothesModel("115", "Schuhe", "Schuhwerk", "Saisonlos", null)
+                    { Sizes = [new ClothesSizeModel("M", 11, null), new ClothesSizeModel("L", 10, null), new ClothesSizeModel("XL", 9, null)] }
             ];
         }
 

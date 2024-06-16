@@ -29,6 +29,7 @@
 
         <!-- Categorie ComboBox and Edit-Button  -->
         <StackPanel Orientation="Horizontal">
+            
             <ComboBox Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Categories}"
                       SelectedItem="{Binding Category, Mode=TwoWay}" />
@@ -50,6 +51,7 @@
         <!-- Season ComboBox and Edit-Button -->
         <StackPanel Orientation="Horizontal"
                     Margin="0 0 0 3">
+            
             <ComboBox Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Seasons}"
                       SelectedItem="{Binding Season, Mode=TwoWay}" />
@@ -64,6 +66,7 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
+            
             <Label Content="Größe (eu):"
                    FontSize="14"
                    FontWeight="Bold"
@@ -75,11 +78,11 @@
                    Margin="39 0 0 -2" />
         </StackPanel>
 
-        <!-- SizeLists -->
+        <!-- Checkboxes -->
         <StackPanel Orientation="Horizontal">
 
             <!-- SizeListEU -->
-            <Border Margin="0 0 5 20"
+            <Border Margin="0 0 10 0"
                     Height="150"
                     BorderThickness="0.5"
                     BorderBrush="Black">
@@ -105,8 +108,7 @@
             </Border>
 
             <!-- SizeListUS -->
-            <Border Margin="5 0 0 20"
-                    Height="150"
+            <Border Height="150"
                     BorderThickness="0.5"
                     BorderBrush="Black">
 
@@ -132,8 +134,10 @@
             </Border>
         </StackPanel>
 
+        <!-- Button -->
         <StackPanel Orientation="Horizontal"
-                    Margin="0 0 0 5">
+                    Margin="0 20 0 0">
+            
             <Button Content="ERSTELLEN"
                     Margin="40 0 0 0 "
                     Style="{StaticResource ModalButtonStyle}"

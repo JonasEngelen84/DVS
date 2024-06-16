@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace DVS.Models
+﻿namespace DVS.Models
 {
     public class ClothesModel(string id, string name, string categorie, string season, string? comment)
     {

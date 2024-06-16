@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
     
-    <ListView Height="250"
+    <ListView Height="120"
               FontSize="10"
               Foreground="Black"
               Background="WhiteSmoke"
-              ItemsSource="{Binding Clothes}"
+              ItemsSource="{Binding _dVSDetailedClothesListingViewModel.DetailedClothesListingItemCollection}"
               SelectedItem="{Binding SelectedClothesItem, Mode=TwoWay}">
         <ListView.View>
             <GridView>

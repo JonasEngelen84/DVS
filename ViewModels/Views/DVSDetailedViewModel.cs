@@ -36,7 +36,8 @@ namespace DVS.ViewModels.Views
 
             OpenFilterClothesListCommand = new OpenFilterClothesListCommand(modalNavigationStore);
             OpenFilterEmployeeListCommand = new OpenFilterEmployeeListCommand(modalNavigationStore);
-            OpenAddEmployeeCommand = new OpenAddEmployeeCommand(clothesStore,
+            OpenAddEmployeeCommand = new OpenAddEmployeeCommand(DVSDetailedClothesListingViewModel,
+                                                                clothesStore,
                                                                 employeeStore,
                                                                 modalNavigationStore);
             SaveCommand = new SaveCommand(modalNavigationStore);

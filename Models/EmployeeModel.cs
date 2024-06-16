@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-namespace DVS.Models
+﻿namespace DVS.Models
 {
     public class EmployeeModel(string id, string lastname, string firstname, string? comment)
     {
@@ -9,6 +7,6 @@ namespace DVS.Models
         public string Lastname { get; set; } = lastname;
         public string? Comment { get; set; } = comment;
 
-        public ObservableCollection<EmployeeClothesModel> Clothes { get; private set; } = [];
+        public List<ClothesModel> Clothes { get; set; } = [];
     }
 }

@@ -6,16 +6,18 @@ namespace DVS.ViewModels
 {
     public class AddEditEmployee_ClothesListViewModel : ViewModelBase
     {
+        public DVSDetailedClothesListingViewModel _dVSDetailedClothesListingViewModel;
+        private readonly ClothesStore _clothesStore;
 
         private readonly ObservableCollection<ClothesModel> _clothes;
         public IEnumerable<ClothesModel> Clothes => _clothes;
 
-        private readonly ClothesStore _clothesStore;
 
-
-        public AddEditEmployee_ClothesListViewModel(ClothesStore clothesStore)
+        public AddEditEmployee_ClothesListViewModel(DVSDetailedClothesListingViewModel dVSDetailedClothesListingViewModel,
+                                                    ClothesStore clothesStore)
         {
             _clothes = [];
+            _dVSDetailedClothesListingViewModel = dVSDetailedClothesListingViewModel;
             _clothesStore = clothesStore;
             LoadClothes();
         }

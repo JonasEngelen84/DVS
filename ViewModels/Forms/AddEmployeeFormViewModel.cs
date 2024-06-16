@@ -1,19 +1,20 @@
 ﻿using DVS.Models;
 using DVS.Stores;
 using System.Collections.ObjectModel;
+using System.Security.Cryptography;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
     public class AddEmployeeFormViewModel : ViewModelBase
     {
-        private string _id;
+        private string _iD;
         public string Id
         {
-            get => _id;
+            get => _iD;
             set
             {
-                _id = value;
+                _iD = value;
                 OnPropertyChanged(nameof(Id));
             }
         }
@@ -85,43 +86,37 @@ namespace DVS.ViewModels.Forms
         //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
+        private readonly EmployeeStore _employeeStore;
+
         public AddEditEmployee_ClothesListViewModel AddEditEmployee_ClothesListviewViewModel { get; }
         public AddEditEmployee_EmployeeClothesListViewModel AddEditEmployee_EmployeeClothesListviewViewModel { get; }
-
-        private readonly EmployeeStore _employeeStore;
 
         public ICommand AddEmployeeCommand { get; }
         public ICommand CancelEmployeeCommand { get; }
 
-        public AddEmployeeFormViewModel(ClothesStore clothesStore,
+        public AddEmployeeFormViewModel(DVSDetailedClothesListingViewModel dVSDetailedClothesListingViewModel,
+                                        ClothesStore clothesStore,
                                         EmployeeStore employeeStore,
                                         ICommand addEmployeeCommand,
                                         ICommand cancelEmployeeCommand)
         {
-            AddEditEmployee_ClothesListviewViewModel = new(clothesStore);
+            AddEditEmployee_ClothesListviewViewModel = new(dVSDetailedClothesListingViewModel,
+                                                           clothesStore);
             AddEditEmployee_EmployeeClothesListviewViewModel = new();
 
             _employeeStore = employeeStore;
             AddEmployeeCommand = addEmployeeCommand;
             CancelEmployeeCommand = cancelEmployeeCommand;
 
-            _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
+            _iD = "ID";
+            _lastname = "Nachname";
+            _firstname = "Vorname";
+            _comment = "Kommentar";
         }
 
-        protected override void Dispose()
+        private void LoadClothesList(EmployeeModel employee)
         {
-            _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
-
-            base.Dispose();
-        }
-
-        private void EmployeeStore_EmployeeAdded(EmployeeModel employee)
-        {
-            Id = null;
-            Firstname = null;
-            Lastname = null;
-            Comment = null;
-            AddEditEmployee_EmployeeClothesListviewViewModel.ClearCollection();
+            
         }
     }
 }

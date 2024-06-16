@@ -109,7 +109,8 @@ namespace DVS.ViewModels.Forms
         private readonly ObservableCollection<string> _seasons;
         public IEnumerable<string> Seasons => _seasons;
 
-        private ObservableCollection<SizeOption> _availableSizesEU = [
+        private readonly ObservableCollection<SizeOption> _availableSizesEU =
+        [
             new SizeOption { Size = "44" },
             new SizeOption { Size = "46" },
             new SizeOption { Size = "48" },
@@ -120,22 +121,11 @@ namespace DVS.ViewModels.Forms
             new SizeOption { Size = "58" },
             new SizeOption { Size = "60" },
             new SizeOption { Size = "62" }
-            ];
+        ];
+        public ObservableCollection<SizeOption> AvailableSizesEU => _availableSizesEU;
 
-        public ObservableCollection<SizeOption> AvailableSizesEU
-        {
-            get => _availableSizesEU;
-            set
-            {
-                if (_availableSizesEU != value)
-                {
-                    _availableSizesEU = value;
-                    OnPropertyChanged(nameof(AvailableSizesEU));
-                }
-            }
-        }
-
-        private ObservableCollection<SizeOption> _availableSizesUS = [
+        private readonly ObservableCollection<SizeOption> _availableSizesUS =
+        [
             new SizeOption { Size = "XS" },
             new SizeOption { Size = "S" },
             new SizeOption { Size = "M" },
@@ -146,18 +136,8 @@ namespace DVS.ViewModels.Forms
             new SizeOption { Size = "4XL" },
             new SizeOption { Size = "5XL" },
             new SizeOption { Size = "6XL" }
-            ];
-        public ObservableCollection<SizeOption> AvailableSizesUS
-        {
-            get => _availableSizesUS;
-            set
-            {
-                if (_availableSizesUS != value)
-                {
-                    _availableSizesUS = value;
-                }
-            }
-        }
+        ];
+        public ObservableCollection<SizeOption> AvailableSizesUS => _availableSizesUS;
 
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;

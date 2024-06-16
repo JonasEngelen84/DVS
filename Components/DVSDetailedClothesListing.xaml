@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
     
-    <ListView FontSize="14"
+    <ListView FontSize="12"
               Foreground="#FF212129"
               Background="WhiteSmoke"
               ItemsSource="{Binding DetailedClothesListingItemCollection}"

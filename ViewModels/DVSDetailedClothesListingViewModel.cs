@@ -1,7 +1,6 @@
 ﻿using DVS.Models;
 using DVS.Stores;
 using System.Collections.ObjectModel;
-using System.Xml.Linq;
 
 namespace DVS.ViewModels
 {
