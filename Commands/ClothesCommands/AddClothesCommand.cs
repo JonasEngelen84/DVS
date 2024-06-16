@@ -1,16 +1,19 @@
 ﻿using DVS.Models;
 using DVS.Stores;
+using DVS.ViewModels;
 using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
 
 namespace DVS.Commands.ClothesCommands
 {
     public class AddClothesCommand(AddClothesViewModel addClothesViewModel,
-                                   ClothesStore clothesStore)
+                                   ClothesStore clothesStore,
+                                   ModalNavigationStore modalNavigationStore)
                                    : AsyncCommandBase
     {
         private readonly AddClothesViewModel _addClothesViewModel = addClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
+        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
         public override async Task ExecuteAsync(object parameter)
         {
@@ -19,6 +22,8 @@ namespace DVS.Commands.ClothesCommands
             addClothesFormViewModel.ErrorMessage = null;
             addClothesFormViewModel.IsSubmitting = true;
 
+            // Alle ausgewählten Größen in eine ZwischenListe speichern.
+            // Diese wird der GrößenListe (Size) des ClothesModel hinzugefügt.
             var selectedSizes = addClothesFormViewModel.AvailableSizesUS.Any(size => size.IsSelected)
             ? addClothesFormViewModel.AvailableSizesUS.Where(size => size.IsSelected)
             : addClothesFormViewModel.AvailableSizesEU.Where(size => size.IsSelected);
@@ -29,7 +34,7 @@ namespace DVS.Commands.ClothesCommands
                                        addClothesFormViewModel.Season,
                                        addClothesFormViewModel.Comment);
 
-            foreach (var size in selectedSizes)
+            foreach (SizeOption size in selectedSizes)
             {
                 clothes.Sizes.Add(new ClothesSizeModel(size.Size, size.Quantity, size.Comment));
             }
@@ -45,6 +50,7 @@ namespace DVS.Commands.ClothesCommands
             finally
             {
                 addClothesFormViewModel.IsSubmitting = false;
+                _modalNavigationStore.Close();
             }
         }
     }

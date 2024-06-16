@@ -13,7 +13,7 @@ namespace DVS.ViewModels
         {
             _employeeListingItemCollection = [];
 
-            Fill_employeeListingItemCollection();
+            LoadEmployeeListingItemCollection();
             
         }
 
@@ -26,7 +26,7 @@ namespace DVS.ViewModels
 
 
 
-        public void Fill_employeeListingItemCollection()
+        public void LoadEmployeeListingItemCollection()
         {
             var employee1 = new EmployeeModel("1324", "Engelen", "Jonas", "Vertrag läuft am 31.07.24 aus lbabla" +
                 "lblb albl ablablbal balabla blablabalba lbalablab lablab alba lbalab lablabla bla!!!");

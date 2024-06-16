@@ -8,7 +8,7 @@
     <ListView FontSize="14"
               Foreground="#FF212129"
               Background="WhiteSmoke"
-              ItemsSource="{Binding Clothes}"
+              ItemsSource="{Binding DetailedClothesListingItemCollection}"
               SelectedItem="{Binding SelectedClothesItem, Mode=TwoWay}">
         <ListView.View>
             <GridView>

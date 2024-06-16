@@ -17,7 +17,7 @@ namespace DVS.ViewModels.Views
                                    SelectedSeasonStore selectedSeasonStore,
                                    ClothesStore clothesStore)
         {
-            ICommand AddClothesCommand = new AddClothesCommand(this, clothesStore);
+            ICommand AddClothesCommand = new AddClothesCommand(this, clothesStore, modalNavigationStore);
             ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
 
             ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore,

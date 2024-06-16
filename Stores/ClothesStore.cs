@@ -13,11 +13,23 @@ namespace DVS.Stores
 
         public ClothesStore()
         {
-            _clothes = [new ClothesModel("111", "Sommershirt", "Shirt", "Sommer", null),
-                        new ClothesModel("112", "Sommershirt", "Shirt", "Sommer", null),
-                        new ClothesModel("113", "Sommershirt", "Shirt", "Sommer", null),
-                        new ClothesModel("114", "Wintershirt", "Shirt", "Winter", null),
-                        new ClothesModel("115", "Wintershirt", "Shirt", "Winter", null)];
+            _clothes =
+            [
+                new ClothesModel("111", "Sommershirt", "Shirt", "Sommer", null)
+                    { Sizes = [new ClothesSizeModel("M", 5, null), new ClothesSizeModel("L", 3, null)] },
+
+                new ClothesModel("112", "Sommershirt", "Shirt", "Sommer", null)
+                    { Sizes = [new ClothesSizeModel("M", 5, null), new ClothesSizeModel("L", 3, null)] },
+
+                new ClothesModel("113", "Sommershirt", "Shirt", "Sommer", null)
+                    { Sizes = [new ClothesSizeModel("M", 5, null), new ClothesSizeModel("L", 3, null)] },
+
+                new ClothesModel("114", "Wintershirt", "Shirt", "Winter", null)
+                    { Sizes = [new ClothesSizeModel("M", 5, null), new ClothesSizeModel("L", 3, null)] },
+
+                new ClothesModel("115", "Wintershirt", "Shirt", "Winter", null)
+                    { Sizes = [new ClothesSizeModel("M", 5, null), new ClothesSizeModel("L", 3, null)] }
+            ];
         }
 
         public async Task Load()
