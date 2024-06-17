@@ -6,7 +6,20 @@ namespace DVS.ViewModels
 {
     public class AddEditEmployee_ClothesListViewModel : ViewModelBase
     {
-        public DVSDetailedClothesListingViewModel _dVSDetailedClothesListingViewModel;
+        private DVSDetailedClothesListingViewModel _dVSDetailedClothesListingViewModel;
+        public DVSDetailedClothesListingViewModel DVSDetailedClothesListingViewModel
+        {
+            get => _dVSDetailedClothesListingViewModel;
+            set
+            {
+                if (_dVSDetailedClothesListingViewModel != value)
+                {
+                    _dVSDetailedClothesListingViewModel = value;
+                    OnPropertyChanged(nameof(DVSDetailedClothesListingViewModel));
+                }
+            }
+        }
+
         private readonly ClothesStore _clothesStore;
 
         private readonly ObservableCollection<ClothesModel> _clothes;
@@ -17,7 +30,7 @@ namespace DVS.ViewModels
                                                     ClothesStore clothesStore)
         {
             _clothes = [];
-            _dVSDetailedClothesListingViewModel = dVSDetailedClothesListingViewModel;
+            _dVSDetailedClothesListingViewModel = new(clothesStore);
             _clothesStore = clothesStore;
             LoadClothes();
         }
