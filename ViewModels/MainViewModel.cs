@@ -26,6 +26,7 @@ namespace DVS.ViewModels
         // Pointer auf "_modalNavigationStore.IsOpen" zur Prüfung ob ein Modal bereits geöffnet ist.
         public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
+
         public MainViewModel(DVSEmployeesViewModel dVSEmployeesViewModel,
                              DVSDetailedViewModel dVSViewModel,
                              ModalNavigationStore modalNavigationStore)

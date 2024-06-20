@@ -1,7 +1,5 @@
 ﻿using DVS.Models;
 using DVS.Stores;
-using System.Collections.ObjectModel;
-using System.Security.Cryptography;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
@@ -100,8 +98,7 @@ namespace DVS.ViewModels.Forms
                                         ICommand addEmployeeCommand,
                                         ICommand cancelEmployeeCommand)
         {
-            AddEditEmployee_ClothesListviewViewModel = new(dVSDetailedClothesListingViewModel,
-                                                           clothesStore);
+            AddEditEmployee_ClothesListviewViewModel = new(dVSDetailedClothesListingViewModel);
             AddEditEmployee_EmployeeClothesListviewViewModel = new();
 
             _employeeStore = employeeStore;

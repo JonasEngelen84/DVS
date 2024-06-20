@@ -2,7 +2,6 @@
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
-//TODO: Alle Clicks zu Commands
 namespace DVS
 {
     public partial class MainWindow : Window
@@ -10,6 +9,21 @@ namespace DVS
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        // Change View
+        private void ChangeViewClick(object sender, RoutedEventArgs e)
+        {
+            if (DetailedView.Visibility == Visibility.Visible)
+            {
+                DetailedView.Visibility = Visibility.Hidden;
+                EmployeesView.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                DetailedView.Visibility = Visibility.Visible;
+                EmployeesView.Visibility = Visibility.Hidden;
+            }
         }
 
         // removable MainWindow
@@ -25,7 +39,7 @@ namespace DVS
         }
 
         // Minimize MainWindow
-        private void MinimizAppClick(object sender, RoutedEventArgs e)
+        private void MinimizeAppClick(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
@@ -56,6 +70,6 @@ namespace DVS
                 MaximizePNG.Height = 17;
             }
 
-        }       
+        }
     }
 }
