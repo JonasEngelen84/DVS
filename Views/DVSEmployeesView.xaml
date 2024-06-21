@@ -9,15 +9,24 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
+            <ColumnDefinition Width="5"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <components:DVSEmployeesListing Grid.Column="0"
-                                        Margin="0 27 2.5 0"
+                                        Margin="0 27 0 0"
                                         DataContext="{Binding DVSEmployeesListingViewModel}" />
-        
-        <components:DVSClothesListing Grid.Column="1"
-                                      Margin="2.5 27 0 0"
+
+        <GridSplitter Grid.Column="1"
+                      HorizontalAlignment="Center"
+                      Width="5"
+                      Margin="0,0,0,0"
+                      Cursor="SizeWE"
+                      Background="#524E4F">
+        </GridSplitter>
+
+        <components:DVSClothesListing Grid.Column="2"
+                                      Margin="0 27 0 0"
                                       DataContext="{Binding DVSClothesListingViewModel}" />
     </Grid>
 </UserControl>

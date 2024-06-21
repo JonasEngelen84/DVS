@@ -79,7 +79,7 @@
                     Background="#FF2F2E2E">
 
                 <Grid>
-                    <!-- App-Icon/Title-->
+                    <!-- Title and App-Icon/Button -->
                     <WrapPanel VerticalAlignment="Center">
                         <TextBlock Text="DVS"
                                    FontSize="25"
@@ -138,12 +138,12 @@
             <views:DVSDetailedView x:Name="DetailedView"
                                    Grid.Row="1"
                                    Margin="0,3,0,0"
-                                   Visibility="Hidden"
                                    DataContext="{Binding DVSDetailedViewModel}" />
 
             <views:DVSEmployeesView x:Name="EmployeesView"
                                     Grid.Row="1"
                                     Margin="0,3,0,0"
+                                    Visibility="Hidden"
                                     DataContext="{Binding DVSEmployeesViewModel}" />
 
         </Grid>
