@@ -1,4 +1,5 @@
 ﻿using DVS.Models;
+using DVS.Stores;
 using DVS.ViewModels.ListViewItems;
 using System.Collections.ObjectModel;
 
@@ -6,41 +7,48 @@ namespace DVS.ViewModels
 {
     public class DVSEmployeesListingViewModel : ViewModelBase
     {
+        private readonly EmployeeStore _employeeStore;
+
         private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeListingItemCollection;
         public IEnumerable<EmployeeListingItemViewModel> EmployeeListingItemCollection => _employeeListingItemCollection;
 
-        public DVSEmployeesListingViewModel()
+
+        public DVSEmployeesListingViewModel(EmployeeStore employeeStore)
         {
+            _employeeStore = employeeStore;
             _employeeListingItemCollection = [];
 
-            LoadEmployeeListingItemCollection();
-            
+            EmployeeStore_EmployeesLoaded();
         }
 
 
-
-
-
-
-
-
-
-
-        public void LoadEmployeeListingItemCollection()
+        protected override void Dispose()
         {
-            var employee1 = new EmployeeModel("1324", "Engelen", "Jonas", "Vertrag läuft am 31.07.24 aus lbabla" +
-                "lblb albl ablablbal balabla blablabalba lbalablab lablab alba lbalab lablabla bla!!!");
-            //employee1.Clothes.Add(new EmployeeClothesModel(new ClothesModel("111", "Sommershirt", "Shirt", "Sommer", null), 2));
+            _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
+            _employeeStore.EmployeesLoaded -= EmployeeStore_EmployeesLoaded;
 
-            var employee2 = new EmployeeModel("4567", "Mustermann", "Max", null);
-            //employee2.Clothes.Add(new EmployeeClothesModel(new ClothesModel("111", "Sommershirt", "Shirt", "Sommer", null), 2));
+            base.Dispose();
+        }
 
-            var employee3 = new EmployeeModel("1596", "Musterfrau", "Mona", null);
-            //employee3.Clothes.Add(new EmployeeClothesModel(new ClothesModel("111", "Sommershirt", "Shirt", "Sommer", null), 2));
+        public void EmployeeStore_EmployeesLoaded()
+        {
+            _employeeListingItemCollection.Clear();
 
-            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee1));
-            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee2));
-            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee3));
+            foreach (EmployeeModel employee in _employeeStore.Employees)
+            {
+                EmployeeStore_EmployeeAdded(employee);
+            }
+        }
+
+        public void EmployeeStore_EmployeeAdded(EmployeeModel employee)
+        {
+            EmployeeListingItemViewModel item = new(employee);
+            _employeeListingItemCollection.Add(item);
+        }
+
+        private void ClotheStore_ClothesEdit(ClothesModel clothes)
+        {
+
         }
     }
 }

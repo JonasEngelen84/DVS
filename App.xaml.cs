@@ -35,7 +35,8 @@ namespace DVS
             _selectedEmployeeClothesStore = new();
             _modalNavigationStore = new();
 
-            _dVSEmployeesViewModel = new(_clothesStore);
+            _dVSEmployeesViewModel = new(_employeeStore,
+                                         _clothesStore);
 
             _dVSDetailedViewModel = new(_modalNavigationStore,
                                         _categoryStore,

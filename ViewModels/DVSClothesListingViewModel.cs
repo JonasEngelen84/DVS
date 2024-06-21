@@ -12,6 +12,7 @@ namespace DVS.ViewModels
         private readonly ObservableCollection<ClothesListingItemViewModel> _clothesListingItemCollection;
         public IEnumerable<ClothesListingItemViewModel> ClothesListingItemCollection => _clothesListingItemCollection;
 
+
         public DVSClothesListingViewModel(ClothesStore clothesStore)
         {
             _clothesStore = clothesStore;
@@ -21,6 +22,7 @@ namespace DVS.ViewModels
             _clothesStore.ClothesLoaded += ClothesStore_ClothesLoaded;
             _clothesStore.ClothesAdded += ClothesStore_ClothesAdded;
         }
+
 
         protected override void Dispose()
         {

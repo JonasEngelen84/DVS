@@ -1,10 +1,6 @@
 ﻿using DVS.Models;
-using System;
-using System.Collections.Generic;
+using DVS.ViewModels;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DVS.Stores
 {
@@ -19,8 +15,16 @@ namespace DVS.Stores
 
         public EmployeeStore()
         {
-            _employees = [new EmployeeModel("1324", "Engelen", "Jonas", null),
-                          new EmployeeModel("1212", "Molik", "Nadine", null),
+            _employees = [new EmployeeModel("1324", "Engelen", "Jonas", null)
+                            {
+                                Clothes = [new DetailedClothesListingItem("666", "Regenjacke", "Jacke", "Saisonlos", "XL", 1, null),
+                                           new DetailedClothesListingItem("999", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, null),
+                              ]
+                          },
+                          new EmployeeModel("1212", "Molik", "Nadine", null)
+                          {
+
+                          },
                           new EmployeeModel("1112", "Yüksel", "Kemal", null),
                           new EmployeeModel("1213", "Oetken", "Markus", null),
                           new EmployeeModel("1231", "Nickol", "Daniel", null),

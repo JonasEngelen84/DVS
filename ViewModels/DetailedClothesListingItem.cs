@@ -6,13 +6,13 @@ namespace DVS.ViewModels
     {
         public ClothesModel Clothes { get; private set; }
 
-        public string ID => Clothes.ID;
-        public string Name => Clothes.Name;
-        public string Categorie => Clothes.Categorie;
-        public string Season => Clothes.Season;
+        public string ID { get; private set; }
+        public string Name { get; private set; }
+        public string Categorie { get; private set; }
+        public string Season { get; private set; }
         public string Size {  get; private set; }
         public int Quantity { get; private set; }
-        public string? Comment => Clothes.Comment;
+        public string? Comment { get; private set; }
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -57,11 +57,21 @@ namespace DVS.ViewModels
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
 
-        public DetailedClothesListingItem(ClothesModel clothes, string size, int quantity)
+        public DetailedClothesListingItem(string iD,
+                                          string name,
+                                          string categorie,
+                                          string season,
+                                          string size,
+                                          int quantity,
+                                          string? comment)
         {
-            Clothes = clothes;
+            ID = iD;
+            Name = name;
+            Categorie = categorie;
+            Season = season;
             Size = size;
             Quantity = quantity;
+            Comment = comment;
         }
 
 
