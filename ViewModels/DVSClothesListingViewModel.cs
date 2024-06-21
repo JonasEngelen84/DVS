@@ -12,50 +12,43 @@ namespace DVS.ViewModels
         private readonly ObservableCollection<ClothesListingItemViewModel> _clothesListingItemCollection;
         public IEnumerable<ClothesListingItemViewModel> ClothesListingItemCollection => _clothesListingItemCollection;
 
-        public DVSClothesListingViewModel()
+        public DVSClothesListingViewModel(ClothesStore clothesStore)
         {
+            _clothesStore = clothesStore;
             _clothesListingItemCollection = [];
 
-            LoadClothesListingItemCollection();
-            
+            ClothesStore_ClothesLoaded();
+            _clothesStore.ClothesLoaded += ClothesStore_ClothesLoaded;
+            _clothesStore.ClothesAdded += ClothesStore_ClothesAdded;
         }
 
-
-
-
-
-
-
-
-
-
-        public void LoadClothesListingItemCollection()
+        protected override void Dispose()
         {
-            var clothes1 = new ClothesModel("1111", "Sommerhose", "Hose", "Sommer", "Auslaufmodell lbabla" +
-                "lblb albl ablablbal balabla blabl abalba lbalablab lablab alba lbalab lablabla blablabla blalbabla!!!");
-            clothes1.Sizes.Add(new ClothesSizeModel("S", 22, "Auslaufmodell"));
-            clothes1.Sizes.Add(new ClothesSizeModel("M", 18, "Auslaufmodell"));
-            clothes1.Sizes.Add(new ClothesSizeModel("L", 10, "Auslaufmodell"));
-            clothes1.Sizes.Add(new ClothesSizeModel("XL", 15, "Auslaufmodell"));
+            _clothesStore.ClothesLoaded -= ClothesStore_ClothesLoaded;
+            _clothesStore.ClothesAdded -= ClothesStore_ClothesAdded;
 
-            var clothes2 = new ClothesModel("2222", "Winterhose", "Hose", "Winter", "Testweise im Sortiment");
-            clothes2.Sizes.Add(new ClothesSizeModel("S", 22, null));
-            clothes2.Sizes.Add(new ClothesSizeModel("M", 18, null));
-            clothes2.Sizes.Add(new ClothesSizeModel("L", 10, null));
-            clothes2.Sizes.Add(new ClothesSizeModel("XL", 11, null));
-            clothes2.Sizes.Add(new ClothesSizeModel("XLL", 3, "Auslaufmodell"));
+            base.Dispose();
+        }
 
-            var clothes3 = new ClothesModel("3333", "Regenjacke", "Jacke", "Saisonlos", null);
-            clothes3.Sizes.Add(new ClothesSizeModel("S", 22, "Auslaufmodell"));
-            clothes3.Sizes.Add(new ClothesSizeModel("M", 18, null));
-            clothes3.Sizes.Add(new ClothesSizeModel("L", 10, null));
-            clothes3.Sizes.Add(new ClothesSizeModel("XL", 15, null));
-            clothes3.Sizes.Add(new ClothesSizeModel("XLL", 8, null));
-            clothes3.Sizes.Add(new ClothesSizeModel("3XL", 14, null));
+        public void ClothesStore_ClothesLoaded()
+        {
+            _clothesListingItemCollection.Clear();
 
-            _clothesListingItemCollection.Add(new ClothesListingItemViewModel(clothes1));
-            _clothesListingItemCollection.Add(new ClothesListingItemViewModel(clothes2));
-            _clothesListingItemCollection.Add(new ClothesListingItemViewModel(clothes3));
+            foreach (ClothesModel clothes in _clothesStore.Clothes)
+            {
+                ClothesStore_ClothesAdded(clothes);
+            }
+        }
+
+        private void ClothesStore_ClothesAdded(ClothesModel clothes)
+        {
+            ClothesListingItemViewModel item = new ClothesListingItemViewModel(clothes);
+            _clothesListingItemCollection.Add(item);
+        }
+
+        private void ClotheStore_ClothesEdit(ClothesModel clothes)
+        {
+
         }
     }
 }
