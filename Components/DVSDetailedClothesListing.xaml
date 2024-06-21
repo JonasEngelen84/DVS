@@ -12,7 +12,7 @@
               SelectedItem="{Binding SelectedClothesItem, Mode=TwoWay}">
         <ListView.View>
             <GridView>
-                <GridViewColumn Header="Id"
+                <GridViewColumn Header="ID"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding ID}" />
                 <GridViewColumn Header="Kategorie"
