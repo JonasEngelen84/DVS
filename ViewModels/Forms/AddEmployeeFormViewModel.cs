@@ -1,5 +1,4 @@
-﻿using DVS.Models;
-using DVS.Stores;
+﻿using DVS.Stores;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
@@ -86,7 +85,7 @@ namespace DVS.ViewModels.Forms
 
         private readonly EmployeeStore _employeeStore;
 
-        public AddEditEmployee_ClothesListViewModel AddEditEmployee_ClothesListviewViewModel { get; }
+        public DVSDetailedClothesListingViewModel DVSDetailedClothesListingViewModel { get; }
         public AddEditEmployee_EmployeeClothesListViewModel AddEditEmployee_EmployeeClothesListviewViewModel { get; }
 
         public ICommand AddEmployeeCommand { get; }
@@ -98,7 +97,7 @@ namespace DVS.ViewModels.Forms
                                         ICommand addEmployeeCommand,
                                         ICommand cancelEmployeeCommand)
         {
-            AddEditEmployee_ClothesListviewViewModel = new(dVSDetailedClothesListingViewModel);
+            DVSDetailedClothesListingViewModel = dVSDetailedClothesListingViewModel;
             AddEditEmployee_EmployeeClothesListviewViewModel = new();
 
             _employeeStore = employeeStore;
@@ -109,11 +108,6 @@ namespace DVS.ViewModels.Forms
             _lastname = "Nachname";
             _firstname = "Vorname";
             _comment = "Kommentar";
-        }
-
-        private void LoadClothesList(EmployeeModel employee)
-        {
-            
         }
     }
 }

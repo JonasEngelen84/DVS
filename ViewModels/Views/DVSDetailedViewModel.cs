@@ -34,13 +34,14 @@ namespace DVS.ViewModels.Views
                                                     selectedEmployeeClothesStore,
                                                     modalNavigationStore);
 
+            SaveCommand = new SaveCommand(modalNavigationStore);
             OpenFilterClothesListCommand = new OpenFilterClothesListCommand(modalNavigationStore);
             OpenFilterEmployeeListCommand = new OpenFilterEmployeeListCommand(modalNavigationStore);
+
             OpenAddEmployeeCommand = new OpenAddEmployeeCommand(DVSDetailedClothesListingViewModel,
                                                                 clothesStore,
                                                                 employeeStore,
                                                                 modalNavigationStore);
-            SaveCommand = new SaveCommand(modalNavigationStore);
 
             OpenAddClothesCommand = new OpenAddClothesCommand(modalNavigationStore,
                                                               categoryStore,

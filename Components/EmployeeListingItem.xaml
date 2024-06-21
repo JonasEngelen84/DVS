@@ -91,43 +91,6 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <!--<Border x:Name="ECL"
-                Grid.Row="1"
-                Padding="5 0 5 0"
-                Visibility="Visible">
-            <ListView FontSize="14"
-                      Foreground="#FF212129"
-                      Background="WhiteSmoke"
-                      ItemsSource="{Binding Employee.Clothes}">
-                
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Id"
-                                        Width="auto"
-                                        DisplayMemberBinding="{Binding ID}" />
-                        <GridViewColumn Header="Kategorie"
-                                        Width="auto"
-                                        DisplayMemberBinding="{Binding Categorie}" />
-                        <GridViewColumn Header="Name"
-                                        Width="auto"
-                                        DisplayMemberBinding="{Binding Name}" />
-                        <GridViewColumn Header="Saison"
-                                        Width="auto"
-                                        DisplayMemberBinding="{Binding Season}" />
-                        <GridViewColumn Header="Größe"
-                                        Width="auto"
-                                        DisplayMemberBinding="{Binding Size}" />
-                        <GridViewColumn Header="Menge"
-                                        Width="auto"
-                                        DisplayMemberBinding="{Binding Quantity}" />
-                        <GridViewColumn Header="Kommentar"
-                                        Width="auto"
-                                        DisplayMemberBinding="{Binding Comment}" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Border>-->
-
         <!-- Bottom Item -->
         <Border Grid.Row="2"
                 TextBlock.FontSize="14"

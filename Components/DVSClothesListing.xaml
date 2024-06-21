@@ -23,6 +23,12 @@
                       SelectedItem="{Binding SelectedClothesListingItemViewModel}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       SelectionMode="Single">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <local:ClothesListingItem />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment"
@@ -33,11 +39,6 @@
                                      Handler="OnClothesItemClicked" />
                     </Style>
                 </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <local:ClothesListingItem />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
             </ListView>
         </Grid>
     </Border>

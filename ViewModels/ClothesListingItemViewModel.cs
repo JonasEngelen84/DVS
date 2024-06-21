@@ -12,7 +12,7 @@ namespace DVS.ViewModels.ListViewItems
         public string Name => Clothes.Name;
         public string Categorie => Clothes.Categorie;
         public string Season => Clothes.Season;
-        public string Comment => Clothes.Comment;
+        public string? Comment => Clothes.Comment;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -71,12 +71,12 @@ namespace DVS.ViewModels.ListViewItems
 
         private void EditEmployee()
         {
-            // Implementiere die Bearbeitungslogik
+            
         }
 
         private void DeleteEmployee()
         {
-            // Implementiere die Löschlogik
+            
         }
     }
 }

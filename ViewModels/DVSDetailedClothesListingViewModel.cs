@@ -51,29 +51,13 @@ namespace DVS.ViewModels
         {
             foreach (ClothesSizeModel size in clothes.Sizes)
             {
-                DetailedClothesListingItem item = new()
-                {
-                    ID = clothes.ID,
-                    Categorie = clothes.Categorie,
-                    Name = clothes.Name,
-                    Season = clothes.Season,
-                    Size = size.Size,
-                    Quantity = size.Quantity,
-                    Comment = clothes.Comment
-                };
-
-                AddClothesItem(item);
+                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItem(clothes, size.Size, size.Quantity));
             }
         }
         
         private void ClotheStore_ClothesEdit(ClothesModel clothes)
         {
             
-        }
-
-        private void AddClothesItem(DetailedClothesListingItem item)
-        {
-            _detailedClothesListingItemCollection.Add(item);
         }
     }
 }

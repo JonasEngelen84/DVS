@@ -42,7 +42,7 @@ namespace DVS.ViewModels
 
         private void ClothesStore_ClothesAdded(ClothesModel clothes)
         {
-            ClothesListingItemViewModel item = new ClothesListingItemViewModel(clothes);
+            ClothesListingItemViewModel item = new(clothes);
             _clothesListingItemCollection.Add(item);
         }
 

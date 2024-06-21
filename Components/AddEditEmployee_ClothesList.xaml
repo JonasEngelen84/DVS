@@ -9,7 +9,7 @@
               FontSize="10"
               Foreground="Black"
               Background="WhiteSmoke"
-              ItemsSource="{Binding Clothes}"
+              ItemsSource="{Binding DetailedClothesListingItemCollection}"
               SelectedItem="{Binding SelectedClothesItem, Mode=TwoWay}">
         <ListView.View>
             <GridView>
@@ -22,6 +22,12 @@
                 <GridViewColumn Header="Größe"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Size}" />
+                <GridViewColumn Header="Menge"
+                                Width="auto"
+                                DisplayMemberBinding="{Binding Quantity}" />
+                <GridViewColumn Header="Kommentar."
+                                Width="auto"
+                                DisplayMemberBinding="{Binding Comment}" />
             </GridView>
         </ListView.View>
     </ListView>
