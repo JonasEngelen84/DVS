@@ -1,4 +1,6 @@
-﻿using System.Windows.Input;
+﻿using DVS.Models;
+using DVS.Stores;
+using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
@@ -82,17 +84,17 @@ namespace DVS.ViewModels.Forms
         //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
-        public AddEditEmployee_ClothesListViewModel AddEditEmployee_ClothesListViewModel { get; }
+        public DVSClothesListingViewModel DVSClothesListingViewModel { get; }
         public AddEditEmployee_EmployeeClothesListViewModel AddEditEmployee_EmployeeClothesListViewModel { get; }
 
         public ICommand AddEmployeeCommand { get; }
         public ICommand CancelEmployeeCommand { get; }
 
-        public AddEmployeeFormViewModel(DVSDetailedClothesListingViewModel dVSDetailedClothesListingViewModel,
+        public AddEmployeeFormViewModel(ClothesStore clothesStore,
                                         ICommand addEmployeeCommand,
                                         ICommand cancelEmployeeCommand)
         {
-            AddEditEmployee_ClothesListViewModel = new(dVSDetailedClothesListingViewModel);
+            DVSClothesListingViewModel = new(clothesStore);
             AddEditEmployee_EmployeeClothesListViewModel = new();
 
             AddEmployeeCommand = addEmployeeCommand;
@@ -105,22 +107,22 @@ namespace DVS.ViewModels.Forms
         }
 
 
-        //public void AddClothesToEmployee(DetailedClothesListingItem clothes)
-        //{
-        //    if (SelectedEmployee != null && clothes != null)
-        //    {
-        //        SelectedEmployee.Clothes.Add(clothes);
-        //        AvailableClothes.Remove(clothes); // Entfernen Sie das Kleidungsstück aus der verfügbaren Liste, wenn nötig
-        //    }
-        //}
+        public void AddClothesToEmployee(DetailedClothesListingItemModel clothes)
+        {
+            if (clothes != null)
+            {
+                AddEditEmployee_EmployeeClothesListViewModel.AddClothes(clothes);
+                DVSClothesListingViewModel.RemoveClothes(clothes);
+            }
+        }
 
-        //public void RemoveClothesFromEmployee(DetailedClothesListingItem clothes)
-        //{
-        //    if (SelectedEmployee != null && clothes != null)
-        //    {
-        //        SelectedEmployee.Clothes.Remove(clothes);
-        //        AvailableClothes.Add(clothes); // Fügen Sie das Kleidungsstück zur verfügbaren Liste hinzu, wenn nötig
-        //    }
-        //}
+        public void RemoveClothesFromEmployee(DetailedClothesListingItemModel clothes)
+        {
+            if (clothes != null)
+            {
+                AddEditEmployee_EmployeeClothesListViewModel.RemoveClothes(clothes);
+                DVSClothesListingViewModel.AddClothes(clothes);
+            }
+        }
     }
 }

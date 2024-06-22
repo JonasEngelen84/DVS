@@ -9,7 +9,7 @@
               FontSize="10"
               Foreground="Black"
               Background="WhiteSmoke"
-              ItemsSource="{Binding DVSDetailedClothesListingViewModel.DetailedClothesListingItemCollection}"
+              ItemsSource="{Binding DetailedClothesListingItemCollection}"
               SelectedItem="{Binding SelectedClothesItem, Mode=TwoWay}">
         <ListView.View>
             <GridView>
