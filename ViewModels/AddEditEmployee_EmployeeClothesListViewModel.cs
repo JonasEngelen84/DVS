@@ -5,12 +5,18 @@ namespace DVS.ViewModels
 {
     public class AddEditEmployee_EmployeeClothesListViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<ClothesModel> _employeeclothes = [];
-        public IEnumerable<ClothesModel> Employeeclothes => _employeeclothes;
+        private readonly ObservableCollection<DetailedClothesListingItemModel> _employeeClothes = [];
+        public IEnumerable<DetailedClothesListingItemModel> EmployeeClothes => _employeeClothes;
 
-        public void ClearCollection()
+        public AddEditEmployee_EmployeeClothesListViewModel()
         {
-            _employeeclothes.Clear();
+            _employeeClothes = [new DetailedClothesListingItemModel("951",
+                                                                    "Test",
+                                                                    "Schuhe",
+                                                                    "Winter",
+                                                                    "46",
+                                                                    1,
+                                                                    "Testweise")];
         }
     }
 }

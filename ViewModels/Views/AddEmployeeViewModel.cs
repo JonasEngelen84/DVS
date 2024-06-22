@@ -11,7 +11,6 @@ namespace DVS.ViewModels.Views
         public AddEmployeeFormViewModel AddEmployeeFormViewModel { get; }
 
         public AddEmployeeViewModel(DVSDetailedClothesListingViewModel dVSDetailedClothesListingViewModel,
-                                    ClothesStore clothesStore,
                                     EmployeeStore employeeStore,
                                     ModalNavigationStore modalNavigationStore)
         {

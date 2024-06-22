@@ -1,5 +1,6 @@
 ﻿using DVS.Models;
 using DVS.Stores;
+using DVS.ViewModels;
 using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
 
@@ -23,6 +24,11 @@ namespace DVS.Commands.EmployeeCommands
                                          addEmployeeFormViewModel.Firstname,
                                          addEmployeeFormViewModel.Lastname,
                                          addEmployeeFormViewModel.Comment);
+
+            foreach (DetailedClothesListingItemModel clothes in _addEmployeeViewModel.AddEmployeeFormViewModel.AddEditEmployee_EmployeeClothesListViewModel.EmployeeClothes)
+            {
+                employee.Clothes.Add(clothes);
+            }
 
             try
             {
