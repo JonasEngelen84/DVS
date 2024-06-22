@@ -19,16 +19,10 @@ namespace DVS.Commands.EmployeeCommands
             addEmployeeFormViewModel.ErrorMessage = null;
             addEmployeeFormViewModel.IsSubmitting = true;
 
-            EmployeeModel employee = new(
-                addEmployeeFormViewModel.Id,
-                addEmployeeFormViewModel.Firstname,
-                addEmployeeFormViewModel.Lastname,
-                addEmployeeFormViewModel.Comment);
-
-            foreach(ClothesModel clothes in addEmployeeFormViewModel.AddEditEmployee_EmployeeClothesListviewViewModel.Employeeclothes)
-            {
-                //employee.Clothes.Add(clothes);
-            }
+            EmployeeModel employee = new(addEmployeeFormViewModel.Id,
+                                         addEmployeeFormViewModel.Firstname,
+                                         addEmployeeFormViewModel.Lastname,
+                                         addEmployeeFormViewModel.Comment);
 
             try
             {

@@ -46,7 +46,7 @@
             <!-- Available clothesListView -->
             <components:AddEditEmployee_ClothesList Foreground="Black"
                                                     Background="WhiteSmoke"
-                                                    DataContext="{Binding DVSDetailedClothesListingViewModel}" />
+                                                    DataContext="{Binding AddEditEmployee_ClothesListViewModel}" />
         </StackPanel>
 
         <!-- Button -->

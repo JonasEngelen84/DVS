@@ -83,24 +83,17 @@ namespace DVS.ViewModels.Forms
         //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
-        private readonly EmployeeStore _employeeStore;
-
-        public DVSDetailedClothesListingViewModel DVSDetailedClothesListingViewModel { get; }
-        public AddEditEmployee_EmployeeClothesListViewModel AddEditEmployee_EmployeeClothesListviewViewModel { get; }
+        public AddEditEmployee_ClothesListViewModel AddEditEmployee_ClothesListViewModel { get; }
 
         public ICommand AddEmployeeCommand { get; }
         public ICommand CancelEmployeeCommand { get; }
 
         public AddEmployeeFormViewModel(DVSDetailedClothesListingViewModel dVSDetailedClothesListingViewModel,
-                                        ClothesStore clothesStore,
-                                        EmployeeStore employeeStore,
                                         ICommand addEmployeeCommand,
                                         ICommand cancelEmployeeCommand)
         {
-            DVSDetailedClothesListingViewModel = dVSDetailedClothesListingViewModel;
-            AddEditEmployee_EmployeeClothesListviewViewModel = new();
+            AddEditEmployee_ClothesListViewModel = new(dVSDetailedClothesListingViewModel);
 
-            _employeeStore = employeeStore;
             AddEmployeeCommand = addEmployeeCommand;
             CancelEmployeeCommand = cancelEmployeeCommand;
 

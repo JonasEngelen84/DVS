@@ -1,6 +1,5 @@
 ﻿using DVS.Models;
 using DVS.Stores;
-using DVS.ViewModels.ListViewItems;
 using System.Collections.ObjectModel;
 
 namespace DVS.ViewModels
@@ -53,16 +52,49 @@ namespace DVS.ViewModels
 
         private void EmployeeStore_EmployeeAdded(EmployeeModel employee)
         {
-            foreach (DetailedClothesListingItemModel clothes in employee.Clothes)
+            if (employee.Clothes.Count == 0)
             {
-                _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemModel(employee.ID,
-                                                                                                employee.Lastname,
-                                                                                                employee.Firstname,
-                                                                                                clothes.ID,
-                                                                                                clothes.Name,
-                                                                                                clothes.Size,
-                                                                                                clothes.Quantity,
-                                                                                                clothes.Comment));
+                string employeeID = employee.ID;
+                string employeeLastname = employee.Lastname;
+                string employeeFirstname = employee.Firstname;
+                string clothesID = null;
+                string clothesName = null;
+                string clothesSize = null;
+                int? clothesQuantity = null;
+                string clothesComment = null;
+
+                _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemModel(employeeID,
+                                                                                                employeeLastname,
+                                                                                                employeeFirstname,
+                                                                                                clothesID,
+                                                                                                clothesName,
+                                                                                                clothesSize,
+                                                                                                clothesQuantity,
+                                                                                                clothesComment));
+            }
+            else
+            {
+                foreach (DetailedClothesListingItemModel clothes in employee.Clothes)
+                {
+                    string employeeID = employee.ID;
+                    string employeeLastname = employee.Lastname;
+                    string employeeFirstname = employee.Firstname;
+                    string clothesID = clothes.ID;
+                    string clothesName = clothes.Name;
+                    string clothesSize = clothes.Size;
+                    int clothesQuantity = clothes.Quantity;
+                    string clothesComment = clothes.Comment;
+
+                    _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemModel(employeeID,
+                                                                                                    employeeLastname,
+                                                                                                    employeeFirstname,
+                                                                                                    clothesID,
+                                                                                                    clothesName,
+                                                                                                    clothesSize,
+                                                                                                    clothesQuantity,
+                                                                                                    clothesComment));
+                }
+                
             }
         }
 

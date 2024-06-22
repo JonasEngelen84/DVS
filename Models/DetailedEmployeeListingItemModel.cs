@@ -8,7 +8,7 @@
         public string ClothesID { get; private set; }
         public string ClothesName { get; private set; }
         public string Size {  get; private set; }
-        public int Quantity { get; private set; }
+        public int? Quantity { get; private set; }
         public string? Comment { get; private set; }
 
         public DetailedEmployeeListingItemModel(string iD,
@@ -17,7 +17,7 @@
                                           string clothesID,
                                           string clothesName,
                                           string size,
-                                          int quantity,
+                                          int? quantity,
                                           string? comment)
         {
             ID = iD;

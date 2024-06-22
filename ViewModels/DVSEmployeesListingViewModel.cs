@@ -19,6 +19,8 @@ namespace DVS.ViewModels
             _employeeListingItemCollection = [];
 
             EmployeeStore_EmployeesLoaded();
+            _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
+            _employeeStore.EmployeesLoaded += EmployeeStore_EmployeesLoaded;
         }
 
 
