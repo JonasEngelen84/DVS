@@ -8,13 +8,13 @@
     <ListView FontSize="12"
               Foreground="#FF212129"
               Background="WhiteSmoke"
-              ItemsSource="{Binding EmployeeClothesListViewItemCollection}"
+              ItemsSource="{Binding DetailedEmployeeListingItemCollection}"
               SelectedItem="{Binding SelectedEmployeeClothesListViewItemViewModel, Mode=TwoWay}">
         <ListView.View>
             <GridView>
                 <GridViewColumn Header="Mitarbeiter ID"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding Id}" />
+                                DisplayMemberBinding="{Binding ID}" />
                 <GridViewColumn Header="Nachname"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Lastname}" />
@@ -23,13 +23,13 @@
                                 DisplayMemberBinding="{Binding Firstname}" />
                 <GridViewColumn Header="Kleidungs ID"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding ClothesId}" />
+                                DisplayMemberBinding="{Binding ClothesID}" />
                 <GridViewColumn Header="Kleidung"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding ClothesName}" />
                 <GridViewColumn Header="Größe"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding ClothesSize}" />
+                                DisplayMemberBinding="{Binding Size}" />
                 <GridViewColumn Header="Menge"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Quantity}" />

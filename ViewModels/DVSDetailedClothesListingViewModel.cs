@@ -11,8 +11,8 @@ namespace DVS.ViewModels
         //private readonly ModalNavigationStore _modalNavigationStore;
         private readonly ClothesStore _clothesStore;
 
-        private readonly ObservableCollection<DetailedClothesListingItem> _detailedClothesListingItemCollection;
-        public IEnumerable<DetailedClothesListingItem> DetailedClothesListingItemCollection => _detailedClothesListingItemCollection;
+        private readonly ObservableCollection<DetailedClothesListingItemModel> _detailedClothesListingItemCollection;
+        public IEnumerable<DetailedClothesListingItemModel> DetailedClothesListingItemCollection => _detailedClothesListingItemCollection;
 
 
         public DVSDetailedClothesListingViewModel(ClothesStore clothesStore)
@@ -51,13 +51,13 @@ namespace DVS.ViewModels
         {
             foreach (ClothesSizeModel size in clothes.Sizes)
             {
-                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItem(clothes.ID,
-                                                                                         clothes.Name,
-                                                                                         clothes.Categorie,
-                                                                                         clothes.Season,
-                                                                                         size.Size,
-                                                                                         size.Quantity,
-                                                                                         clothes.Comment));
+                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemModel(clothes.ID,
+                                                                                              clothes.Name,
+                                                                                              clothes.Categorie,
+                                                                                              clothes.Season,
+                                                                                              size.Size,
+                                                                                              size.Quantity,
+                                                                                              clothes.Comment));
             }
         }
         

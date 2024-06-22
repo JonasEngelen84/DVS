@@ -2,6 +2,7 @@
 {
     public class SizeOption : ViewModelBase
     {
+        //TODO: SizeOption aus ViewModels verschieben
         public string Size { get; set; }
 
         private int _quantity;

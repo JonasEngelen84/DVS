@@ -78,7 +78,7 @@
                    Margin="39 0 0 -2" />
         </StackPanel>
 
-        <!-- Checkboxes -->
+        <!-- Size Checkboxes -->
         <StackPanel Orientation="Horizontal">
 
             <!-- SizeListEU -->

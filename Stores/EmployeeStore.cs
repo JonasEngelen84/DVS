@@ -16,14 +16,15 @@ namespace DVS.Stores
         public EmployeeStore()
         {
             _employees = [new EmployeeModel("1324", "Engelen", "Jonas", null)
-                            {
-                                Clothes = [new DetailedClothesListingItem("666", "Regenjacke", "Jacke", "Saisonlos", "XL", 1, null),
-                                           new DetailedClothesListingItem("999", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, null),
-                              ]
+                          {
+                              Clothes = [new DetailedClothesListingItemModel("666", "Regenjacke", "Jacke", "Saisonlos", "XL", 1, null),
+                                         new DetailedClothesListingItemModel("999", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, null),]
                           },
                           new EmployeeModel("1212", "Molik", "Nadine", null)
                           {
-
+                              Clothes = [new DetailedClothesListingItemModel("666", "Regenjacke", "Jacke", "Saisonlos", "XL", 1, null),
+                                         new DetailedClothesListingItemModel("999", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, null),
+                                         new DetailedClothesListingItemModel("999", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, null),]
                           },
                           new EmployeeModel("1112", "Yüksel", "Kemal", null),
                           new EmployeeModel("1213", "Oetken", "Markus", null),

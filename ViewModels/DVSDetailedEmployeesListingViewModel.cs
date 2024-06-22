@@ -11,33 +11,64 @@ namespace DVS.ViewModels
         //private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         //private readonly ModalNavigationStore _modalNavigationStore;
         //private readonly DVSDetailedClothesListingViewModel _dVSDetailedClothesListingViewModel;
+        private readonly EmployeeStore _employeeStore;
 
-        private readonly List<EmployeeModel> _employeeList;
+        private readonly ObservableCollection<DetailedEmployeeListingItemModel> _detailedEmployeeListingItemCollection;
+        public IEnumerable<DetailedEmployeeListingItemModel> DetailedEmployeeListingItemCollection => _detailedEmployeeListingItemCollection;
 
-        private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeClothesListViewItemCollection;
-        public IEnumerable<EmployeeListingItemViewModel> EmployeeClothesListViewItemCollection => _employeeClothesListViewItemCollection;
-
-        public DVSDetailedEmployeesListingViewModel(SelectedClothesStore selectedClothesStore,
+        public DVSDetailedEmployeesListingViewModel(EmployeeStore employeeStore,
+                                                    SelectedClothesStore selectedClothesStore,
                                                     SelectedEmployeeClothesStore selectedEmployeeClothesStore,
                                                     ModalNavigationStore modalNavigationStore)
         {
             //_selectedClothesStore = selectedClothesStore;
             //_selectedEmployeeClothesStore = selectedEmployeeClothesStore;
             //_modalNavigationStore = modalNavigationStore;
-
-            _employeeList = [];
-            _employeeClothesListViewItemCollection = [];
+            _employeeStore = employeeStore;
+            _detailedEmployeeListingItemCollection = [];
+        
+            EmployeeStore_EmployeesLoaded();
+            _employeeStore.EmployeesLoaded += EmployeeStore_EmployeesLoaded;
+            _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
         }
 
-        
 
-        //TODO: AddEmployee
-        private void AddEmployeeClothesListViewItem(EmployeeModel employee)
+        protected override void Dispose()
         {
-            //foreach(ClothesModel clothes in employee.Clothes)
-            //{
-            //    //_employeeClothesListViewItemCollection.Add(new EmployeeListingItemViewModel(employee));
-            //}
+            _employeeStore.EmployeesLoaded -= EmployeeStore_EmployeesLoaded;
+            _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
+
+            base.Dispose();
+        }
+
+        public void EmployeeStore_EmployeesLoaded()
+        {
+            _detailedEmployeeListingItemCollection.Clear();
+
+            foreach (EmployeeModel employee in _employeeStore.Employees)
+            {
+                EmployeeStore_EmployeeAdded(employee);
+            }
+        }
+
+        private void EmployeeStore_EmployeeAdded(EmployeeModel employee)
+        {
+            foreach (DetailedClothesListingItemModel clothes in employee.Clothes)
+            {
+                _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemModel(employee.ID,
+                                                                                                employee.Lastname,
+                                                                                                employee.Firstname,
+                                                                                                clothes.ID,
+                                                                                                clothes.Name,
+                                                                                                clothes.Size,
+                                                                                                clothes.Quantity,
+                                                                                                clothes.Comment));
+            }
+        }
+
+        private void EmployeeStore_EmployeeEdit(ClothesModel clothes)
+        {
+
         }
     }
 }

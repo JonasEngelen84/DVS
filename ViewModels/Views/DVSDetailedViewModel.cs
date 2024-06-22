@@ -30,9 +30,10 @@ namespace DVS.ViewModels.Views
         {
             DVSDetailedClothesListingViewModel = new(clothesStore);
 
-            DVSDetailedEmployeesListingViewModel = new(selectedClothesStore,
-                                                    selectedEmployeeClothesStore,
-                                                    modalNavigationStore);
+            DVSDetailedEmployeesListingViewModel = new(employeeStore,
+                                                       selectedClothesStore,
+                                                       selectedEmployeeClothesStore,
+                                                       modalNavigationStore);
 
             SaveCommand = new SaveCommand(modalNavigationStore);
             OpenFilterClothesListCommand = new OpenFilterClothesListCommand(modalNavigationStore);
