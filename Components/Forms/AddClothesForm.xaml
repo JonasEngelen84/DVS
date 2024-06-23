@@ -135,18 +135,31 @@
         </StackPanel>
 
         <!-- Button -->
-        <StackPanel Orientation="Horizontal"
-                    Margin="0 20 0 0">
-            
-            <Button Content="ERSTELLEN"
-                    Margin="40 0 0 0 "
-                    Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding AddClothesCommand}" />
+        <StackPanel Margin="0 20 0 0">
 
-            <Button Content="BEENDEN"
-                    Margin="20 0 0 0 "
-                    Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding CancelClothesCommand}" />
+            <StackPanel Orientation="Horizontal">
+                <Button Content="ERSTELLEN"
+                        Margin="35 0 35 10 "
+                        Style="{StaticResource ModalButtonStyle}"
+                        Command="{Binding AddClothesCommand}" />
+
+                <Button Content="BEARBEITEN"
+                        Margin="0 0 0 10 "
+                        Style="{StaticResource ModalButtonStyle}"
+                        Command="{Binding EditClothesCommand}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <Button Content="LEEREN"
+                        Margin="35 0 35 0 "
+                        Style="{StaticResource ModalButtonStyle}"
+                        Command="{Binding ClearClothesListCommand}" />
+                
+                <Button Content="LÖSCHEN"
+                        Margin="0 0 0 0 "
+                        Style="{StaticResource ModalButtonStyle}"
+                        Command="{Binding DeleteClothesCommand}" />
+            </StackPanel>
         </StackPanel>
 
     </StackPanel>

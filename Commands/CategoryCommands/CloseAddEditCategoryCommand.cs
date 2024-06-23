@@ -31,28 +31,14 @@ namespace DVS.Commands.CategoryCommands
 
         public override void Execute(object parameter)
         {
-            if(_modalNavigationStore.PreviousViewModel is AddClothesViewModel)
-            {
-                AddClothesViewModel addClothesViewModel = new(_modalNavigationStore,
-                                                              _categoryStore,
-                                                              _seasonStore,
-                                                              _selectedCategoryStore,
-                                                              _selectedSeasonStore,
-                                                              _clothesStore);
+            AddClothesViewModel addClothesViewModel = new(_modalNavigationStore,
+                                                          _categoryStore,
+                                                          _seasonStore,
+                                                          _selectedCategoryStore,
+                                                          _selectedSeasonStore,
+                                                          _clothesStore);
 
-                _modalNavigationStore.CurrentViewModel = addClothesViewModel;
-            }
-            else
-            {
-                EditClothesViewModel editClothesViewModel = new EditClothesViewModel(_modalNavigationStore,
-                                                                                     _categoryStore,
-                                                                                     _seasonStore,
-                                                                                     _selectedCategoryStore,
-                                                                                     _selectedSeasonStore,
-                                                                                     _clothesStore);
-
-                _modalNavigationStore.CurrentViewModel = editClothesViewModel;
-            }
+            _modalNavigationStore.CurrentViewModel = addClothesViewModel;
         }
     }
 }

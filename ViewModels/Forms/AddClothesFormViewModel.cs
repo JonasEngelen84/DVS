@@ -1,6 +1,4 @@
-﻿using DVS.Models;
-using DVS.Stores;
-using DVS.ViewModels;
+﻿using DVS.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -109,6 +107,7 @@ namespace DVS.ViewModels.Forms
         private readonly ObservableCollection<string> _seasons;
         public IEnumerable<string> Seasons => _seasons;
 
+        //TODO: Sizes in Stores implementieren
         private readonly ObservableCollection<SizeOption> _availableSizesEU =
         [
             new SizeOption { Size = "44" },
@@ -146,7 +145,9 @@ namespace DVS.ViewModels.Forms
         public ICommand OpenAddEditCategoriesCommand { get; }
         public ICommand OpenAddEditSeasonsCommand { get; }
         public ICommand AddClothesCommand { get; }
-        public ICommand CancelClothesCommand { get; }
+        public ICommand EditClothesCommand { get; }
+        public ICommand DeleteClothesCommand { get; }
+        public ICommand ClearClothesListCommand { get; }
 
 
         public AddClothesFormViewModel(CategoryStore categoryStore,
@@ -155,7 +156,9 @@ namespace DVS.ViewModels.Forms
                                        ICommand openAddEditCategoriesCommand,
                                        ICommand openAddEditSeasonsCommand,
                                        ICommand addClothesCommand,
-                                       ICommand cancelClothesCommand)
+                                       ICommand editClothesCommand,
+                                       ICommand deleteClothesCommand,
+                                       ICommand clearClothesListCommand)
         {
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
@@ -163,11 +166,14 @@ namespace DVS.ViewModels.Forms
             OpenAddEditCategoriesCommand = openAddEditCategoriesCommand;
             OpenAddEditSeasonsCommand = openAddEditSeasonsCommand;
             AddClothesCommand = addClothesCommand;
-            CancelClothesCommand = cancelClothesCommand;
+            EditClothesCommand = editClothesCommand;
+            DeleteClothesCommand = deleteClothesCommand;
+            ClearClothesListCommand = clearClothesListCommand;
 
             _categories = [];
             _seasons = [];
 
+            //TODO: in Commands festlegen
             _iD = "ID";
             _name = "Name";
             _comment = "Kommentar";

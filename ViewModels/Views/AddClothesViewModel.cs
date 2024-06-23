@@ -9,6 +9,7 @@ namespace DVS.ViewModels.Views
     public class AddClothesViewModel : ViewModelBase
     {
         public AddClothesFormViewModel AddClothesFormViewModel { get; }
+        public ICommand CloseModalCommand { get; }
 
         public AddClothesViewModel(ModalNavigationStore modalNavigationStore,
                                    CategoryStore categoryStore,
@@ -17,8 +18,11 @@ namespace DVS.ViewModels.Views
                                    SelectedSeasonStore selectedSeasonStore,
                                    ClothesStore clothesStore)
         {
-            ICommand AddClothesCommand = new AddClothesCommand(this, clothesStore, modalNavigationStore);
-            ICommand closeModalCommand = new CloseModalCommand(modalNavigationStore);
+            CloseModalCommand = new CloseModalCommand(modalNavigationStore);
+            ICommand addClothesCommand = new AddClothesCommand(this, clothesStore, modalNavigationStore);
+            ICommand editClothesCommand = new EditClothesCommand(this, modalNavigationStore);
+            ICommand deleteClothesCommand = new DeleteClothesCommand(modalNavigationStore);
+            ICommand clearClothesListCommand = new ClearClothesListCommand(modalNavigationStore);
 
             ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore,
                                                                                      categoryStore,
@@ -39,8 +43,10 @@ namespace DVS.ViewModels.Views
                                           clothesStore,
                                           openAddEditCategoriesCommand,
                                           openAddEditSeasonsCommand,
-                                          AddClothesCommand,
-                                          closeModalCommand);
+                                          addClothesCommand,
+                                          editClothesCommand,
+                                          deleteClothesCommand,
+                                          clearClothesListCommand);
         }
     }
 }

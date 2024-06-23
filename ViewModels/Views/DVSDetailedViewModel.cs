@@ -54,7 +54,8 @@ namespace DVS.ViewModels.Views
                                                   selectedSeasonStore,
                                                   selectedClothesStore,
                                                   selectedEmployeeClothesStore,
-                                                  clothesStore);
+                                                  clothesStore,
+                                                  employeeStore);
 
             PlusCommand = new PlusCommand(selectedClothesStore,
                                           selectedEmployeeClothesStore,
