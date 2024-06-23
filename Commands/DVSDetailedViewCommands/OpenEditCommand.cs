@@ -1,7 +1,7 @@
 ﻿using DVS.Stores;
 using DVS.ViewModels.Views;
 
-namespace DVS.Commands.DVSViewCommands
+namespace DVS.Commands.DVSDetailedViewCommands
 {
     public class OpenEditCommand : CommandBase
     {
@@ -41,7 +41,7 @@ namespace DVS.Commands.DVSViewCommands
         {
             if(i%2 == 0)
             {
-                AddClothesViewModel addClothesViewModel = new(_modalNavigationStore,
+                AddEditClothesViewModel addClothesViewModel = new(_modalNavigationStore,
                                                                _categoryStore,
                                                                _seasonStore,
                                                                _selectedCategoryStore,
@@ -52,11 +52,11 @@ namespace DVS.Commands.DVSViewCommands
             }
             else
             {
-                AddEmployeeViewModel addEmployeeViewModel = new(_clothesStore,
+                AddEditEmployeeViewModel addEditEmployeeViewModel = new(_clothesStore,
                                                                 _employeeStore,
                                                                 _modalNavigationStore);
 
-                _modalNavigationStore.CurrentViewModel = addEmployeeViewModel;
+                _modalNavigationStore.CurrentViewModel = addEditEmployeeViewModel;
             }
 
             i++;

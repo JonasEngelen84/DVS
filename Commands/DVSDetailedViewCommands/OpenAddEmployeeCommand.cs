@@ -1,8 +1,7 @@
 ﻿using DVS.Stores;
-using DVS.ViewModels;
 using DVS.ViewModels.Views;
 
-namespace DVS.Commands.DVSViewCommands
+namespace DVS.Commands.DVSDetailedViewCommands
 {
     public class OpenAddEmployeeCommand : CommandBase
     {
@@ -21,9 +20,14 @@ namespace DVS.Commands.DVSViewCommands
 
         public override void Execute(object parameter)
         {
-            AddEmployeeViewModel addEmployeeViewModel = new(_clothesStore,
+            AddEditEmployeeViewModel addEmployeeViewModel = new(_clothesStore,
                                                             _employeeStore,
                                                             _modalNavigationStore);
+
+            addEmployeeViewModel.AddEditEmployeeFormViewModel.ID = "ID";
+            addEmployeeViewModel.AddEditEmployeeFormViewModel.Lastname = "Nachname";
+            addEmployeeViewModel.AddEditEmployeeFormViewModel.Firstname = "Vorname";
+            addEmployeeViewModel.AddEditEmployeeFormViewModel.Comment = "Kommentar";
 
             _modalNavigationStore.CurrentViewModel = addEmployeeViewModel;
         }

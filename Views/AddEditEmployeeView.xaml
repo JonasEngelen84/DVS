@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="DVS.Views.AddEditEmployeeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:DVS.Components.Forms"
+             mc:Ignorable="d">
+    
+    <Border Background="#FFDEDEDE">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Title & CloseButton -->
+            <Border Grid.Row="0"
+                    Background="#FFBFBFBF">
+                <Grid>
+                    <TextBlock Text="Mitarbeiter"
+                               FontSize="28"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="13 0 0 0" />
+
+                    <!-- Close Button -->
+                    <Button HorizontalAlignment="Right"
+                            Style="{StaticResource TitleBarButtonStyle}"
+                            Command="{Binding CloseModalCommand}">
+                        <Image Source="/Resources/Images/Close.png"
+                               Height="18"
+                               Width="18"
+                               HorizontalAlignment="Center" />
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- AddEditEmployeeForm_Component -->
+            <components:AddEditEmployeeForm Grid.Row="1"
+                                            Margin="15 10 15 15"
+                                            DataContext="{Binding AddEditEmployeeFormViewModel}" />
+        </Grid>
+    </Border>
+</UserControl>

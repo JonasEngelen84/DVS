@@ -6,17 +6,17 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Views
 {
-    public class AddClothesViewModel : ViewModelBase
+    public class AddEditClothesViewModel : ViewModelBase
     {
-        public AddClothesFormViewModel AddClothesFormViewModel { get; }
+        public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
         public ICommand CloseModalCommand { get; }
 
-        public AddClothesViewModel(ModalNavigationStore modalNavigationStore,
-                                   CategoryStore categoryStore,
-                                   SeasonStore seasonStore,
-                                   SelectedCategoryStore selectedCategoryStore,
-                                   SelectedSeasonStore selectedSeasonStore,
-                                   ClothesStore clothesStore)
+        public AddEditClothesViewModel(ModalNavigationStore modalNavigationStore,
+                                       CategoryStore categoryStore,
+                                       SeasonStore seasonStore,
+                                       SelectedCategoryStore selectedCategoryStore,
+                                       SelectedSeasonStore selectedSeasonStore,
+                                       ClothesStore clothesStore)
         {
             CloseModalCommand = new CloseModalCommand(modalNavigationStore);
             ICommand addClothesCommand = new AddClothesCommand(this, clothesStore, modalNavigationStore);
@@ -38,15 +38,15 @@ namespace DVS.ViewModels.Views
                                                                                selectedSeasonStore,
                                                                                clothesStore);
 
-            AddClothesFormViewModel = new(categoryStore,
-                                          seasonStore,
-                                          clothesStore,
-                                          openAddEditCategoriesCommand,
-                                          openAddEditSeasonsCommand,
-                                          addClothesCommand,
-                                          editClothesCommand,
-                                          deleteClothesCommand,
-                                          clearClothesListCommand);
+            AddEditClothesFormViewModel = new(categoryStore,
+                                              seasonStore,
+                                              clothesStore,
+                                              openAddEditCategoriesCommand,
+                                              openAddEditSeasonsCommand,
+                                              addClothesCommand,
+                                              editClothesCommand,
+                                              deleteClothesCommand,
+                                              clearClothesListCommand);
         }
     }
 }

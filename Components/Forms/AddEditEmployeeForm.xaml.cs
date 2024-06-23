@@ -6,9 +6,9 @@ using DVS.ViewModels.Forms;
 
 namespace DVS.Components.Forms
 {
-    public partial class AddEmployeeForm : UserControl
+    public partial class AddEditEmployeeForm : UserControl
     {
-        public AddEmployeeForm()
+        public AddEditEmployeeForm()
         {
             InitializeComponent();
         }
@@ -56,7 +56,7 @@ namespace DVS.Components.Forms
             if (e.Data.GetDataPresent(typeof(DetailedClothesListingItemModel)))
             {
                 var droppedItem = e.Data.GetData(typeof(DetailedClothesListingItemModel)) as DetailedClothesListingItemModel;
-                var viewModel = DataContext as AddEmployeeFormViewModel;
+                var viewModel = DataContext as AddEditEmployeeFormViewModel;
                 viewModel?.AddClothesToEmployee(droppedItem);
             }
         }
@@ -66,7 +66,7 @@ namespace DVS.Components.Forms
             if (e.Data.GetDataPresent(typeof(DetailedClothesListingItemModel)))
             {
                 var droppedItem = e.Data.GetData(typeof(DetailedClothesListingItemModel)) as DetailedClothesListingItemModel;
-                var viewModel = DataContext as AddEmployeeFormViewModel;
+                var viewModel = DataContext as AddEditEmployeeFormViewModel;
                 viewModel?.RemoveClothesFromEmployee(droppedItem);
             }
         }

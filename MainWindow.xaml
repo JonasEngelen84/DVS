@@ -22,12 +22,12 @@
 
     <!-- Modal DataTypes -->
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vms:AddClothesViewModel}">
-            <views:AddClothesView />
+        <DataTemplate DataType="{x:Type vms:AddEditClothesViewModel}">
+            <views:AddEditClothesView />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type vms:AddEmployeeViewModel}">
-            <views:AddEmployeeView />
+        <DataTemplate DataType="{x:Type vms:AddEditEmployeeViewModel}">
+            <views:AddEditEmployeeView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type vms:AddEditCategoryViewModel}">

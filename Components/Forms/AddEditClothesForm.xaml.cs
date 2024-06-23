@@ -2,9 +2,9 @@
 
 namespace DVS.Components.Forms
 {
-    public partial class AddClothesForm : UserControl
+    public partial class AddEditClothesForm : UserControl
     {
-        public AddClothesForm()
+        public AddEditClothesForm()
         {
             InitializeComponent();
         }

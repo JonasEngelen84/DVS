@@ -1,6 +1,6 @@
 ﻿using DVS.Stores;
 
-namespace DVS.Commands.DVSViewCommands
+namespace DVS.Commands.DVSDetailedViewCommands
 {
     public class PlusCommand : CommandBase
     {

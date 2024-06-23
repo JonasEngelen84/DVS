@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
-    public class AddClothesFormViewModel : ViewModelBase
+    public class AddEditClothesFormViewModel : ViewModelBase
     {
         private string _iD;
         public string ID
@@ -150,7 +150,7 @@ namespace DVS.ViewModels.Forms
         public ICommand ClearClothesListCommand { get; }
 
 
-        public AddClothesFormViewModel(CategoryStore categoryStore,
+        public AddEditClothesFormViewModel(CategoryStore categoryStore,
                                        SeasonStore seasonStore,
                                        ClothesStore clothesStore,
                                        ICommand openAddEditCategoriesCommand,
@@ -172,11 +172,6 @@ namespace DVS.ViewModels.Forms
 
             _categories = [];
             _seasons = [];
-
-            //TODO: in Commands festlegen
-            _iD = "ID";
-            _name = "Name";
-            _comment = "Kommentar";
 
             LoadCategories();
             LoadSeasons();

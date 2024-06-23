@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DVS.Components.AddEditEmployee_EmployeeClothesList"
+﻿<UserControl x:Class="DVS.Components.NewEmployeeClothesList"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
               FontSize="10"
               Foreground="Black"
               Background="WhiteSmoke"
-              ItemsSource="{Binding EmployeeClothes}"
+              ItemsSource="{Binding NewEmployeeClothes}"
               SelectedItem="{Binding SelectedEmployeeClothesItem, Mode=TwoWay}">
         <ListView.View>
             <GridView>

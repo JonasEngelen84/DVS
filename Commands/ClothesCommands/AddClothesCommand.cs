@@ -6,18 +6,18 @@ using DVS.ViewModels.Views;
 
 namespace DVS.Commands.ClothesCommands
 {
-    public class AddClothesCommand(AddClothesViewModel addClothesViewModel,
+    public class AddClothesCommand(AddEditClothesViewModel addClothesViewModel,
                                    ClothesStore clothesStore,
                                    ModalNavigationStore modalNavigationStore)
                                    : AsyncCommandBase
     {
-        private readonly AddClothesViewModel _addClothesViewModel = addClothesViewModel;
+        private readonly AddEditClothesViewModel _addClothesViewModel = addClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
         public override async Task ExecuteAsync(object parameter)
         {
-            AddClothesFormViewModel addClothesFormViewModel = _addClothesViewModel.AddClothesFormViewModel;
+            AddEditClothesFormViewModel addClothesFormViewModel = _addClothesViewModel.AddEditClothesFormViewModel;
 
             addClothesFormViewModel.ErrorMessage = null;
             addClothesFormViewModel.IsSubmitting = true;

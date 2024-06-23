@@ -1,19 +1,20 @@
 ﻿using DVS.Models;
 using DVS.Stores;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
-    public class AddEmployeeFormViewModel : ViewModelBase
+    public class AddEditEmployeeFormViewModel : ViewModelBase
     {
         private string _iD;
-        public string Id
+        public string ID
         {
             get => _iD;
             set
             {
                 _iD = value;
-                OnPropertyChanged(nameof(Id));
+                OnPropertyChanged(nameof(ID));
             }
         }
 
@@ -84,26 +85,36 @@ namespace DVS.ViewModels.Forms
         //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
+        private readonly ObservableCollection<DetailedClothesListingItemModel> _newEmployeeClothes = [];
+        public IEnumerable<DetailedClothesListingItemModel> NewEmployeeClothes => _newEmployeeClothes;
+
         public DVSClothesListingViewModel DVSClothesListingViewModel { get; }
-        public AddEditEmployee_EmployeeClothesListViewModel AddEditEmployee_EmployeeClothesListViewModel { get; }
 
         public ICommand AddEmployeeCommand { get; }
-        public ICommand CancelEmployeeCommand { get; }
+        public ICommand EditEmployeeCommand { get; }
+        public ICommand ClearEmployeeClothesListCommand { get; }
+        public ICommand DeleteEmployeeCommand { get; }
 
-        public AddEmployeeFormViewModel(ClothesStore clothesStore,
+        public AddEditEmployeeFormViewModel(ClothesStore clothesStore,
                                         ICommand addEmployeeCommand,
-                                        ICommand cancelEmployeeCommand)
+                                        ICommand editEmployeeCommand,
+                                        ICommand clearEmployeeClothesListCommand,
+                                        ICommand deleteEmployeeCommand)
         {
             DVSClothesListingViewModel = new(clothesStore);
-            AddEditEmployee_EmployeeClothesListViewModel = new();
+
+            _newEmployeeClothes = [new DetailedClothesListingItemModel("951",
+                                                                       "Test",
+                                                                       "Schuhe",
+                                                                       "Winter",
+                                                                       "46",
+                                                                       1,
+                                                                       "Testweise")];
 
             AddEmployeeCommand = addEmployeeCommand;
-            CancelEmployeeCommand = cancelEmployeeCommand;
-
-            _iD = "ID";
-            _lastname = "Nachname";
-            _firstname = "Vorname";
-            _comment = "Kommentar";
+            EditEmployeeCommand = editEmployeeCommand;
+            ClearEmployeeClothesListCommand = clearEmployeeClothesListCommand;
+            DeleteEmployeeCommand = deleteEmployeeCommand;
         }
 
 
@@ -111,7 +122,12 @@ namespace DVS.ViewModels.Forms
         {
             if (clothes != null)
             {
-                AddEditEmployee_EmployeeClothesListViewModel.AddClothes(clothes);
+                if (clothes != null && !_newEmployeeClothes.Contains(clothes))
+                {
+                    _newEmployeeClothes.Add(clothes);
+                    OnPropertyChanged(nameof(NewEmployeeClothes));
+                }
+
                 DVSClothesListingViewModel.RemoveClothes(clothes);
             }
         }
@@ -120,7 +136,12 @@ namespace DVS.ViewModels.Forms
         {
             if (clothes != null)
             {
-                AddEditEmployee_EmployeeClothesListViewModel.RemoveClothes(clothes);
+                if (clothes != null && _newEmployeeClothes.Contains(clothes))
+                {
+                    _newEmployeeClothes.Remove(clothes);
+                    OnPropertyChanged(nameof(NewEmployeeClothes));
+                }
+
                 DVSClothesListingViewModel.AddClothes(clothes);
             }
         }

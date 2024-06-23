@@ -1,7 +1,7 @@
 ﻿using DVS.Stores;
 using DVS.ViewModels.Views;
 
-namespace DVS.Commands.DVSViewCommands
+namespace DVS.Commands.DVSDetailedViewCommands
 {
     public class OpenAddClothesCommand : CommandBase
     {
@@ -29,14 +29,18 @@ namespace DVS.Commands.DVSViewCommands
 
         public override void Execute(object parameter)
         {
-            AddClothesViewModel addClothesViewModel = new(_modalNavigationStore,
+            AddEditClothesViewModel addEditClothesViewModel = new(_modalNavigationStore,
                                                           _categoryStore,
                                                           _seasonStore,
                                                           _selectedCategoryStore,
                                                           _selectedSeasonStore,
                                                           _clothesStore);
 
-            _modalNavigationStore.CurrentViewModel = addClothesViewModel;
+            addEditClothesViewModel.AddEditClothesFormViewModel.ID = "ID";
+            addEditClothesViewModel.AddEditClothesFormViewModel.Name = "Name";
+            addEditClothesViewModel.AddEditClothesFormViewModel.Comment = "Kommentar";
+
+            _modalNavigationStore.CurrentViewModel = addEditClothesViewModel;
         }
     }
 }

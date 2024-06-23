@@ -1,4 +1,4 @@
-﻿using DVS.Commands.DVSViewCommands;
+﻿using DVS.Commands.DVSDetailedViewCommands;
 using DVS.Stores;
 using System.Windows.Input;
 

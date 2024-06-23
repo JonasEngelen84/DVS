@@ -7,7 +7,7 @@ namespace DVS.Commands.EmployeeCommands
     {
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public EditEmployeeCommand(EditEmployeeViewModel editEmployeeViewModel, ModalNavigationStore modalNavigationStore)
+        public EditEmployeeCommand(AddEditEmployeeViewModel addEmployeeViewModel, ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
         }

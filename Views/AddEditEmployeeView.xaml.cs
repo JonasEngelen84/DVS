@@ -2,9 +2,9 @@
 
 namespace DVS.Views
 {
-    public partial class AddEmployeeView : UserControl
+    public partial class AddEditEmployeeView : UserControl
     {
-        public AddEmployeeView()
+        public AddEditEmployeeView()
         {
             InitializeComponent();
         }

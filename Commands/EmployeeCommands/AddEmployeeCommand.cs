@@ -6,26 +6,28 @@ using DVS.ViewModels.Views;
 
 namespace DVS.Commands.EmployeeCommands
 {
-    public class AddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel,
-                                    EmployeeStore employeeStore)
+    public class AddEmployeeCommand(AddEditEmployeeViewModel addEmployeeViewModel,
+                                    EmployeeStore employeeStore,
+                                    ModalNavigationStore modalNavigationStore)
                                     : AsyncCommandBase
     {
-        private readonly AddEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
+        private readonly AddEditEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
+        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEmployeeFormViewModel addEmployeeFormViewModel = _addEmployeeViewModel.AddEmployeeFormViewModel;
+            AddEditEmployeeFormViewModel addEmployeeFormViewModel = _addEmployeeViewModel.AddEditEmployeeFormViewModel;
 
             addEmployeeFormViewModel.ErrorMessage = null;
             addEmployeeFormViewModel.IsSubmitting = true;
 
-            EmployeeModel employee = new(addEmployeeFormViewModel.Id,
+            EmployeeModel employee = new(addEmployeeFormViewModel.ID,
                                          addEmployeeFormViewModel.Firstname,
                                          addEmployeeFormViewModel.Lastname,
                                          addEmployeeFormViewModel.Comment);
 
-            foreach (DetailedClothesListingItemModel clothes in _addEmployeeViewModel.AddEmployeeFormViewModel.AddEditEmployee_EmployeeClothesListViewModel.EmployeeClothes)
+            foreach (DetailedClothesListingItemModel clothes in _addEmployeeViewModel.AddEditEmployeeFormViewModel.NewEmployeeClothes)
             {
                 employee.Clothes.Add(clothes);
             }
@@ -41,6 +43,7 @@ namespace DVS.Commands.EmployeeCommands
             finally
             {
                 addEmployeeFormViewModel.IsSubmitting = false;
+                _modalNavigationStore.Close();
             }
         }
     }

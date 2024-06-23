@@ -1,12 +1,12 @@
 ﻿using DVS.Stores;
 
-namespace DVS.Commands.DVSViewCommands
+namespace DVS.Commands.DVSDetailedViewCommands
 {
-    public class OpenFilterClothesListCommand : CommandBase
+    public class OpenFilterEmployeeListCommand : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public OpenFilterClothesListCommand(ModalNavigationStore modalNavigationStore)
+        public OpenFilterEmployeeListCommand(ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
         }
