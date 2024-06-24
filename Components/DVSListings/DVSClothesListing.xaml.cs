@@ -2,7 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DVS.Components
+namespace DVS.Components.DVSListings
+
 {
     /// <summary>
     /// Interaktionslogik für DVSClothesListing.xaml

@@ -1,8 +1,4 @@
-﻿using DVS.Models;
-using DVS.Stores;
-using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using System.Windows;
+﻿using DVS.Stores;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
@@ -112,8 +108,5 @@ namespace DVS.ViewModels.Forms
             ClearEmployeeClothesListCommand = clearEmployeeClothesListCommand;
             DeleteEmployeeCommand = deleteEmployeeCommand;
         }
-
-
-        
     }
 }

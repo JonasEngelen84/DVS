@@ -29,7 +29,6 @@
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
         
-
         <Label Content="Bekleidung hinzufügen:"
                FontSize="14"
                FontWeight="Bold"
@@ -39,13 +38,29 @@
         <StackPanel>
 
             <!-- NewEmployeeClothesList -->
-            <components:NewEmployeeClothesList Margin="0 0 0 5"
-                                               Foreground="Black"
-                                               Background="WhiteSmoke"/>
+            <components:AddEditEmployeClothesList Margin="0 0 0 5"
+                                                  Foreground="Black"
+                                                  Background="WhiteSmoke"
+                                                  DataContext="{Binding NewEmployeeClothes}"
+                                                  IncomingClothesItem="{Binding IncomingDetailedClothesListingItemModel}"
+                                                  RemovedClothesItem="{Binding RemovedDetailedClothesListingItemModel}"
+                                                  TargetClothesItem="{Binding TargetClothesListingItemModel}"
+                                                  ClothesItemDropCommand="{Binding ClothesItemReceivedCommand}"
+                                                  ClothesItemRemovedCommand="{Binding ClothesItemRemovedCommand}" />
+                                                  <!--InsertedClothesItem="{Binding InsertedClothesItemViewModel}"
+                                                  ClothesItemInsertedCommand="{Binding ClothesItemInsertedCommand}"-->
 
             <!-- AvailableClothesList -->
-            <components:AvailableClothesList Foreground="Black"
-                                             Background="WhiteSmoke"/>
+            <components:AddEditEmployeClothesList Foreground="Black"
+                                                  Background="WhiteSmoke"
+                                                  DataContext="{Binding AvailableClothes}"
+                                                  IncomingClothesItem="{Binding IncomingClothesItemViewModel}"
+                                                  RemovedClothesItem="{Binding RemovedClothesItemViewModel}"
+                                                  TargetClothesItem="{Binding TargetClothesItemViewModel}"
+                                                  ClothesItemDropCommand="{Binding ClothesItemReceivedCommand}"
+                                                  ClothesItemRemovedCommand="{Binding ClothesItemRemovedCommand}" />
+                                                  <!--InsertedClothesItem="{Binding InsertedClothesItemViewModel}"
+                                                  ClothesItemInsertedCommand="{Binding ClothesItemInsertedCommand}"-->
         </StackPanel>
 
         <!-- Button -->

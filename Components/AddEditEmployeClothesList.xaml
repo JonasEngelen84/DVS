@@ -1,17 +1,28 @@
-﻿<UserControl x:Class="DVS.Components.AvailableClothesList"
+﻿<UserControl x:Class="DVS.Components.AddEditEmployeClothesList"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             DataContext="{Binding AvailableClothes}">
-    
-    <ListView Height="120"
+             x:Name="root">
+
+    <ListView x:Name="lvItems"
+              Height="120"
               FontSize="10"
               Foreground="Black"
               Background="WhiteSmoke"
               ItemsSource="{Binding DetailedClothesListingItemCollection}"
-              SelectedItem="{Binding SelectedClothesItem, Mode=TwoWay}">
+              AllowDrop="True"
+              DragLeave="ClothesItemList_DragLeave"
+              DragOver="ClothesItemList_DragOver">
+
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <EventSetter Event="MouseMove" Handler="ClothesItem_MouseMove" />
+                <!--<EventSetter Event="DragOver" Handler="ClothesItem_DragOver" />-->
+            </Style>
+        </ListView.ItemContainerStyle>
+
         <ListView.View>
             <GridView>
                 <GridViewColumn Header="ID"

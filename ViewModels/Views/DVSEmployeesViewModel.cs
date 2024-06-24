@@ -1,5 +1,4 @@
-﻿using DVS.Components;
-using DVS.Stores;
+﻿using DVS.Stores;
 
 namespace DVS.ViewModels.Views
 {
