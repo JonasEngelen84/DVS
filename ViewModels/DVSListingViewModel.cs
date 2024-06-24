@@ -33,8 +33,7 @@ namespace DVS.ViewModels
             _employeeListingItemCollection = [];
             _detailedEmployeeListingItemCollection = [];
 
-            ClothesStore_ClothesLoaded();
-            EmployeeStore_EmployeesLoaded();
+            
 
             _clothesStore.ClothesLoaded += ClothesStore_ClothesLoaded;
             _clothesStore.ClothesAdded += ClothesStore_ClothesAdded;
@@ -42,7 +41,11 @@ namespace DVS.ViewModels
             _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
             _employeeStore.EmployeesLoaded += EmployeeStore_EmployeesLoaded;
         }
-
+        public void Load()
+        {
+            ClothesStore_ClothesLoaded();
+            EmployeeStore_EmployeesLoaded();
+        }
 
         protected override void Dispose()
         {
@@ -59,17 +62,10 @@ namespace DVS.ViewModels
         {
             _clothesListingItemCollection.Clear();
             _detailedClothesListingItemCollection.Clear();
-            _employeeListingItemCollection.Clear();
-            _detailedEmployeeListingItemCollection.Clear();
 
             foreach (ClothesModel clothes in _clothesStore.Clothes)
             {
                 ClothesStore_ClothesAdded(clothes);
-            }
-            
-            foreach (EmployeeModel employee in _employeeStore.Employees)
-            {
-                EmployeeStore_EmployeeAdded(employee);
             }
         }
 
@@ -80,13 +76,8 @@ namespace DVS.ViewModels
 
             foreach (ClothesSizeModel size in clothes.Sizes)
             {
-                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemModel(clothes.ID,
-                                                                                              clothes.Name,
-                                                                                              clothes.Categorie,
-                                                                                              clothes.Season,
-                                                                                              size.Size,
-                                                                                              size.Quantity,
-                                                                                              clothes.Comment));
+                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemModel(
+                    clothes.ID, clothes.Name, clothes.Categorie, clothes.Season, size.Size, size.Quantity, clothes.Comment));
             }
         }
 

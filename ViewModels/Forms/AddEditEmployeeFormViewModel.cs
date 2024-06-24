@@ -87,10 +87,8 @@ namespace DVS.ViewModels.Forms
         //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
-        private readonly ObservableCollection<DetailedClothesListingItemModel> _newEmployeeClothes = [];
-        public IEnumerable<DetailedClothesListingItemModel> NewEmployeeClothes => _newEmployeeClothes;
-
         public DVSListingViewModel AvailableClothes { get; }
+        public DVSListingViewModel NewEmployeeClothes { get; }
 
         public ICommand AddEmployeeCommand { get; }
         public ICommand EditEmployeeCommand { get; }
@@ -99,12 +97,15 @@ namespace DVS.ViewModels.Forms
 
 
         public AddEditEmployeeFormViewModel(DVSListingViewModel availableClothes,
+                                            ClothesStore clothesStore,
+                                            EmployeeStore employeeStore,
                                             ICommand addEmployeeCommand,
                                             ICommand editEmployeeCommand,
                                             ICommand clearEmployeeClothesListCommand,
                                             ICommand deleteEmployeeCommand)
         {
             AvailableClothes = availableClothes;
+            NewEmployeeClothes = new DVSListingViewModel( clothesStore, employeeStore);
 
             AddEmployeeCommand = addEmployeeCommand;
             EditEmployeeCommand = editEmployeeCommand;

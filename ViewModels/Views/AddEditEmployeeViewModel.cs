@@ -29,6 +29,8 @@ namespace DVS.ViewModels.Views
                                                                  modalNavigationStore);
 
             AddEditEmployeeFormViewModel = new AddEditEmployeeFormViewModel(dVSListingViewModel,
+                                                                            clothesStore,
+                                                                            employeeStore,
                                                                             addEmployeeCommand,
                                                                             editEmployeeCommand,
                                                                             clearEmployeeClothesListCommand,

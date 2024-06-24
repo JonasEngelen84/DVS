@@ -1,17 +1,20 @@
-﻿using DVS.Stores;
+﻿using DVS.Components;
+using DVS.Stores;
 
 namespace DVS.ViewModels.Views
 {
     public class DVSEmployeesViewModel : ViewModelBase
     {
-        public DVSListingViewModel DVSClothesListing { get; }
-        public DVSListingViewModel DVSEmployeesListing { get; }
+        public DVSListingViewModel DVSClothesListingViewModel { get; }
+        public DVSListingViewModel DVSEmployeesListingViewModel { get; }
 
         public DVSEmployeesViewModel(EmployeeStore employeeStore,
                                      ClothesStore clothesStore)
         {
-            DVSClothesListing = new(clothesStore, employeeStore);
-            DVSEmployeesListing = new(clothesStore, employeeStore);
+            DVSClothesListingViewModel = new(clothesStore, employeeStore);
+            DVSClothesListingViewModel.Load();
+            DVSEmployeesListingViewModel = new(clothesStore, employeeStore);
+            DVSEmployeesListingViewModel.Load();
         }
 
         

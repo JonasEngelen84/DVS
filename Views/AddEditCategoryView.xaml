@@ -25,8 +25,7 @@
 
             <!-- AddEditCategorieForm -->
             <components:AddEditCategoryForm Grid.Row="1"
-                                            Margin="15 10 15 15"
-                                            DataContext="{Binding AddEditCategoryFormViewModel}" />
+                                            Margin="15 10 15 15"/>
         </Grid>
     </Border>
 </UserControl>

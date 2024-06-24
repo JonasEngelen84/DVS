@@ -1,5 +1,4 @@
 ﻿using DVS.Commands.DVSDetailedViewCommands;
-using DVS.Components;
 using DVS.Stores;
 using System.Windows.Input;
 
@@ -7,8 +6,8 @@ namespace DVS.ViewModels.Views
 {
     public class DVSDetailedViewModel : ViewModelBase
     {
-        public DVSListingViewModel DVSClothesListing { get; }
-        public DVSListingViewModel DVSEmployeesListing { get; }
+        public DVSListingViewModel DVSClothesListingViewModel { get; }
+        public DVSListingViewModel DVSEmployeesListingViewModel { get; }
 
         public ICommand OpenFilterClothesListCommand { get; }
         public ICommand OpenFilterEmployeeListCommand { get; }
@@ -29,14 +28,16 @@ namespace DVS.ViewModels.Views
                                     SelectedClothesStore selectedClothesStore,
                                     SelectedEmployeeClothesStore selectedEmployeeClothesStore)
         {
-            DVSClothesListing = new(clothesStore, employeeStore);
-            DVSEmployeesListing = new(clothesStore, employeeStore);
+            DVSClothesListingViewModel = new(clothesStore, employeeStore);
+            DVSClothesListingViewModel.Load();
+            DVSEmployeesListingViewModel = new(clothesStore, employeeStore);
+            DVSEmployeesListingViewModel.Load();
 
             SaveCommand = new SaveCommand(modalNavigationStore);
             OpenFilterClothesListCommand = new OpenFilterClothesListCommand(modalNavigationStore);
             OpenFilterEmployeeListCommand = new OpenFilterEmployeeListCommand(modalNavigationStore);
 
-            OpenAddEmployeeCommand = new OpenAddEmployeeCommand(DVSClothesListing,
+            OpenAddEmployeeCommand = new OpenAddEmployeeCommand(DVSClothesListingViewModel,
                                                                 clothesStore,
                                                                 employeeStore,
                                                                 modalNavigationStore);
@@ -48,7 +49,7 @@ namespace DVS.ViewModels.Views
                                                               selectedSeasonStore,
                                                               clothesStore);
 
-            OpenEditCommand = new OpenEditCommand(DVSClothesListing,
+            OpenEditCommand = new OpenEditCommand(DVSClothesListingViewModel,
                                                   modalNavigationStore,
                                                   categoryStore,
                                                   seasonStore,
