@@ -34,26 +34,18 @@
                FontWeight="Bold"
                Margin="-4 0 0 0" />
 
-        <!-- Drag clothes to employee clothesList -->
+        <!-- ClothesLists -->
         <StackPanel>
 
-            <!-- TODO: NewEmployeeClothesList DataContext setzen??? -->
+            <!-- NewEmployeeClothesList -->
             <components:NewEmployeeClothesList Margin="0 0 0 5"
                                                Foreground="Black"
-                                               Background="WhiteSmoke"
-                                               AllowDrop="True"
-                                               Drop="EmployeeClothesList_Drop"
-                                               DragOver="EmployeeClothesList_DragOver"
-                                               PreviewMouseLeftButtonDown="EmployeeClothesList_PreviewMouseLeftButtonDown" />
+                                               Background="WhiteSmoke"/>
 
             <!-- AvailableClothesList -->
             <components:AvailableClothesList Foreground="Black"
                                              Background="WhiteSmoke"
-                                             AllowDrop="True"
-                                             Drop="AvailableClothesList_Drop"
-                                             DragOver="AvailableClothesList_DragOver"
-                                             PreviewMouseLeftButtonDown="AvailableClothesList_PreviewMouseLeftButtonDown"
-                                             DataContext="{Binding DVSClothesListingViewModel}" />
+                                             DataContext="{Binding AvailableClothes}"/>
         </StackPanel>
 
         <!-- Button -->

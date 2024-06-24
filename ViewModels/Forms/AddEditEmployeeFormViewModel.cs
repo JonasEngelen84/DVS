@@ -1,6 +1,8 @@
 ﻿using DVS.Models;
 using DVS.Stores;
 using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using System.Windows;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
@@ -88,28 +90,21 @@ namespace DVS.ViewModels.Forms
         private readonly ObservableCollection<DetailedClothesListingItemModel> _newEmployeeClothes = [];
         public IEnumerable<DetailedClothesListingItemModel> NewEmployeeClothes => _newEmployeeClothes;
 
-        public DVSClothesListingViewModel DVSClothesListingViewModel { get; }
+        public DVSListingViewModel AvailableClothes { get; }
 
         public ICommand AddEmployeeCommand { get; }
         public ICommand EditEmployeeCommand { get; }
         public ICommand ClearEmployeeClothesListCommand { get; }
         public ICommand DeleteEmployeeCommand { get; }
 
-        public AddEditEmployeeFormViewModel(ClothesStore clothesStore,
-                                        ICommand addEmployeeCommand,
-                                        ICommand editEmployeeCommand,
-                                        ICommand clearEmployeeClothesListCommand,
-                                        ICommand deleteEmployeeCommand)
-        {
-            DVSClothesListingViewModel = new(clothesStore);
 
-            _newEmployeeClothes = [new DetailedClothesListingItemModel("951",
-                                                                       "Test",
-                                                                       "Schuhe",
-                                                                       "Winter",
-                                                                       "46",
-                                                                       1,
-                                                                       "Testweise")];
+        public AddEditEmployeeFormViewModel(DVSListingViewModel availableClothes,
+                                            ICommand addEmployeeCommand,
+                                            ICommand editEmployeeCommand,
+                                            ICommand clearEmployeeClothesListCommand,
+                                            ICommand deleteEmployeeCommand)
+        {
+            AvailableClothes = availableClothes;
 
             AddEmployeeCommand = addEmployeeCommand;
             EditEmployeeCommand = editEmployeeCommand;
@@ -118,32 +113,6 @@ namespace DVS.ViewModels.Forms
         }
 
 
-        public void AddClothesToEmployee(DetailedClothesListingItemModel clothes)
-        {
-            if (clothes != null)
-            {
-                if (clothes != null && !_newEmployeeClothes.Contains(clothes))
-                {
-                    _newEmployeeClothes.Add(clothes);
-                    OnPropertyChanged(nameof(NewEmployeeClothes));
-                }
-
-                DVSClothesListingViewModel.RemoveClothes(clothes);
-            }
-        }
-
-        public void RemoveClothesFromEmployee(DetailedClothesListingItemModel clothes)
-        {
-            if (clothes != null)
-            {
-                if (clothes != null && _newEmployeeClothes.Contains(clothes))
-                {
-                    _newEmployeeClothes.Remove(clothes);
-                    OnPropertyChanged(nameof(NewEmployeeClothes));
-                }
-
-                DVSClothesListingViewModel.AddClothes(clothes);
-            }
-        }
+        
     }
 }

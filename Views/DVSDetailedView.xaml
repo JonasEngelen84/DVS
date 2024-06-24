@@ -86,7 +86,7 @@
 
             <components:DVSDetailedEmployeesListing Grid.Column="0"
                                                     Margin="0 3 0 0"
-                                                    DataContext="{Binding DVSEmployeesListingViewModel}" />
+                                                    DataContext="{Binding DVSEmployeesListing}" />
 
             <!-- Plus/Minus Button -->
             <Grid Grid.Column="1"
@@ -125,7 +125,7 @@
 
             <components:DVSDetailedClothesListing Grid.Column="2"
                                                   Margin="0 3 0 0"
-                                                  DataContext="{Binding DVSClothesListingViewModel}" />
+                                                  DataContext="{Binding DVSClothesListing}" />
         </Grid>
     </Grid>
 </UserControl>

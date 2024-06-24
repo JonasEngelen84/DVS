@@ -13,9 +13,10 @@ namespace DVS.ViewModels.Views
         public ICommand CloseModalCommand { get; }
 
 
-        public AddEditEmployeeViewModel(ClothesStore clothesStore,
-                                    EmployeeStore employeeStore,
-                                    ModalNavigationStore modalNavigationStore)
+        public AddEditEmployeeViewModel(DVSListingViewModel dVSListingViewModel,
+                                        ClothesStore clothesStore,
+                                        EmployeeStore employeeStore,
+                                        ModalNavigationStore modalNavigationStore)
         {
             CloseModalCommand = new CloseModalCommand(modalNavigationStore);
 
@@ -27,7 +28,7 @@ namespace DVS.ViewModels.Views
                                                                  employeeStore,
                                                                  modalNavigationStore);
 
-            AddEditEmployeeFormViewModel = new AddEditEmployeeFormViewModel(clothesStore,
+            AddEditEmployeeFormViewModel = new AddEditEmployeeFormViewModel(dVSListingViewModel,
                                                                             addEmployeeCommand,
                                                                             editEmployeeCommand,
                                                                             clearEmployeeClothesListCommand,

@@ -15,7 +15,7 @@
 
         <components:DVSEmployeesListing Grid.Column="0"
                                         Margin="0 27 0 0"
-                                        DataContext="{Binding DVSEmployeesListingViewModel}" />
+                                        DataContext="{Binding DVSEmployeesListing}" />
 
         <GridSplitter Grid.Column="1"
                       HorizontalAlignment="Center"
@@ -27,6 +27,6 @@
 
         <components:DVSClothesListing Grid.Column="2"
                                       Margin="0 27 0 0"
-                                      DataContext="{Binding DVSClothesListingViewModel}" />
+                                      DataContext="{Binding DVSClothesListing}" />
     </Grid>
 </UserControl>

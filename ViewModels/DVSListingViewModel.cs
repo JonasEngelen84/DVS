@@ -5,9 +5,16 @@ using System.Collections.ObjectModel;
 
 namespace DVS.ViewModels
 {
-    public class DVSEmployeesListingViewModel : ViewModelBase
+    public class DVSListingViewModel : ViewModelBase
     {
+        private readonly ClothesStore _clothesStore;
         private readonly EmployeeStore _employeeStore;
+
+        private readonly ObservableCollection<ClothesListingItemViewModel> _clothesListingItemCollection;
+        public IEnumerable<ClothesListingItemViewModel> ClothesListingItemCollection => _clothesListingItemCollection;
+
+        private readonly ObservableCollection<DetailedClothesListingItemModel> _detailedClothesListingItemCollection;
+        public IEnumerable<DetailedClothesListingItemModel> DetailedClothesListingItemCollection => _detailedClothesListingItemCollection;
 
         private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeListingItemCollection;
         public IEnumerable<EmployeeListingItemViewModel> EmployeeListingItemCollection => _employeeListingItemCollection;
@@ -15,13 +22,23 @@ namespace DVS.ViewModels
         private readonly ObservableCollection<DetailedEmployeeListingItemModel> _detailedEmployeeListingItemCollection;
         public IEnumerable<DetailedEmployeeListingItemModel> DetailedEmployeeListingItemCollection => _detailedEmployeeListingItemCollection;
 
-        public DVSEmployeesListingViewModel(EmployeeStore employeeStore)
+
+        public DVSListingViewModel(ClothesStore clothesStore, EmployeeStore employeeStore)
         {
+            _clothesStore = clothesStore;
             _employeeStore = employeeStore;
+
+            _clothesListingItemCollection = [];
+            _detailedClothesListingItemCollection = [];
             _employeeListingItemCollection = [];
             _detailedEmployeeListingItemCollection = [];
 
+            ClothesStore_ClothesLoaded();
             EmployeeStore_EmployeesLoaded();
+
+            _clothesStore.ClothesLoaded += ClothesStore_ClothesLoaded;
+            _clothesStore.ClothesAdded += ClothesStore_ClothesAdded;
+
             _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
             _employeeStore.EmployeesLoaded += EmployeeStore_EmployeesLoaded;
         }
@@ -29,10 +46,53 @@ namespace DVS.ViewModels
 
         protected override void Dispose()
         {
+            _clothesStore.ClothesLoaded -= ClothesStore_ClothesLoaded;
+            _clothesStore.ClothesAdded -= ClothesStore_ClothesAdded;
+
             _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
             _employeeStore.EmployeesLoaded -= EmployeeStore_EmployeesLoaded;
 
             base.Dispose();
+        }
+
+        public void ClothesStore_ClothesLoaded()
+        {
+            _clothesListingItemCollection.Clear();
+            _detailedClothesListingItemCollection.Clear();
+            _employeeListingItemCollection.Clear();
+            _detailedEmployeeListingItemCollection.Clear();
+
+            foreach (ClothesModel clothes in _clothesStore.Clothes)
+            {
+                ClothesStore_ClothesAdded(clothes);
+            }
+            
+            foreach (EmployeeModel employee in _employeeStore.Employees)
+            {
+                EmployeeStore_EmployeeAdded(employee);
+            }
+        }
+
+        private void ClothesStore_ClothesAdded(ClothesModel clothes)
+        {
+            ClothesListingItemViewModel item = new(clothes);
+            _clothesListingItemCollection.Add(item);
+
+            foreach (ClothesSizeModel size in clothes.Sizes)
+            {
+                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemModel(clothes.ID,
+                                                                                              clothes.Name,
+                                                                                              clothes.Categorie,
+                                                                                              clothes.Season,
+                                                                                              size.Size,
+                                                                                              size.Quantity,
+                                                                                              clothes.Comment));
+            }
+        }
+
+        private void ClotheStore_ClothesEdit(ClothesModel clothes)
+        {
+
         }
 
         public void EmployeeStore_EmployeesLoaded()
