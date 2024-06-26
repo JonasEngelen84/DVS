@@ -11,7 +11,7 @@ namespace DVS.ViewModels.ListViewItems
         public string ID => Employee.ID;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
-        public string Comment => Employee.Comment;
+        public string? Comment => Employee.Comment;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -62,20 +62,8 @@ namespace DVS.ViewModels.ListViewItems
         public EmployeeListingItemViewModel(EmployeeModel employee)
         {
             Employee = employee;
-
             EditCommand = new OpenEditEmployeeCommand();
             DeleteCommand = new DeleteEmployeeCommand();
-        }
-
-
-        private void EditEmployee()
-        {
-            // Implementiere die Bearbeitungslogik
-        }
-
-        private void DeleteEmployee()
-        {
-            // Implementiere die Löschlogik
         }
     }
 }

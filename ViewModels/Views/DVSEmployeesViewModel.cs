@@ -11,9 +11,7 @@ namespace DVS.ViewModels.Views
                                      ClothesStore clothesStore)
         {
             DVSClothesListingViewModel = new(clothesStore, employeeStore);
-            DVSClothesListingViewModel.Load();
             DVSEmployeesListingViewModel = new(clothesStore, employeeStore);
-            DVSEmployeesListingViewModel.Load();
         }
 
         

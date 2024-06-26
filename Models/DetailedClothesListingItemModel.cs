@@ -100,13 +100,9 @@
             }
         }
 
-        public DetailedClothesListingItemModel(string iD,
-                                          string name,
-                                          string categorie,
-                                          string season,
-                                          string size,
-                                          int quantity,
-                                          string? comment)
+        public DetailedClothesListingItemModel(
+            string iD, string name, string categorie,
+            string season, string size, int quantity, string? comment)
         {
             ID = iD;
             Name = name;

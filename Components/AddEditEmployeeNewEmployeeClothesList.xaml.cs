@@ -57,26 +57,6 @@ namespace DVS.Components
             set { SetValue(TargetClothesItemProperty, value); }
         }
 
-        //public static readonly DependencyProperty ClothesItemInsertedCommandProperty =
-        //    DependencyProperty.Register("ClothesItemInsertedCommand", typeof(ICommand), typeof(AddEditEmployeeNewEmployeeClothesList),
-        //        new PropertyMetadata(null));
-
-        //public ICommand ClothesItemInsertedCommand
-        //{
-        //    get { return (ICommand)GetValue(ClothesItemInsertedCommandProperty); }
-        //    set { SetValue(ClothesItemInsertedCommandProperty, value); }
-        //}
-
-        //public static readonly DependencyProperty InsertedClothesItemProperty =
-        //    DependencyProperty.Register("InsertedClothesItem", typeof(object), typeof(AddEditEmployeeNewEmployeeClothesList),
-        //        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
-        //public object InsertedClothesItem
-        //{
-        //    get { return GetValue(InsertedClothesItemProperty); }
-        //    set { SetValue(InsertedClothesItemProperty, value); }
-        //}
-
 
         public AddEditEmployeeNewEmployeeClothesList()
         {
@@ -102,20 +82,6 @@ namespace DVS.Components
             }
         }
 
-        //private void ClothesItemList_DragLeave(object sender, DragEventArgs e)
-        //{
-        //    HitTestResult result = VisualTreeHelper.HitTest(lvItems, e.GetPosition(lvItems));
-
-        //    if (result == null)
-        //    {
-        //        if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
-        //        {
-        //            RemovedClothesItem = e.Data.GetData(DataFormats.Serializable);
-        //            ClothesItemRemovedCommand?.Execute(null);
-        //        }
-        //    }
-        //}
-
         private void ClothesItemList_Drop(object sender, DragEventArgs e)
         {
             DetailedClothesListingItemModel? ClothesItem = e.Data.GetData(DataFormats.Serializable)
@@ -140,19 +106,5 @@ namespace DVS.Components
                 ClothesItemDropCommand?.Execute("AddEditEmployeeNewEmployeeClothesList");
             }
         }
-
-        //private void ClothesItem_DragOver(object sender, DragEventArgs e)
-        //{
-        //    if (ClothesItemInsertedCommand?.CanExecute(null) ?? false)
-        //    {
-        //        if (sender is FrameworkElement element)
-        //        {
-        //            TargetClothesItem = element.DataContext;
-        //            InsertedClothesItem = e.Data.GetData(DataFormats.Serializable);
-
-        //            ClothesItemInsertedCommand?.Execute(null);
-        //        }
-        //    }
-        //}
     }
 }

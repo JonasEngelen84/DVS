@@ -69,14 +69,6 @@ namespace DVS.ViewModels.ListViewItems
         }
 
 
-        private void EditEmployee()
-        {
-            
-        }
-
-        private void DeleteEmployee()
-        {
-            
-        }
+        
     }
 }

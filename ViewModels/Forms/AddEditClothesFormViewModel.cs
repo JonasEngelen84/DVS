@@ -1,4 +1,5 @@
-﻿using DVS.Stores;
+﻿using DVS.Models;
+using DVS.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -108,35 +109,35 @@ namespace DVS.ViewModels.Forms
         public IEnumerable<string> Seasons => _seasons;
 
         //TODO: Sizes in Stores implementieren
-        private readonly ObservableCollection<SizeOption> _availableSizesEU =
+        private readonly ObservableCollection<ClothesSizeModel> _availableSizesEU =
         [
-            new SizeOption { Size = "44" },
-            new SizeOption { Size = "46" },
-            new SizeOption { Size = "48" },
-            new SizeOption { Size = "50" },
-            new SizeOption { Size = "52" },
-            new SizeOption { Size = "54" },
-            new SizeOption { Size = "56" },
-            new SizeOption { Size = "58" },
-            new SizeOption { Size = "60" },
-            new SizeOption { Size = "62" }
+            new ClothesSizeModel { Size = "44" },
+            new ClothesSizeModel { Size = "46" },
+            new ClothesSizeModel { Size = "48" },
+            new ClothesSizeModel { Size = "50" },
+            new ClothesSizeModel { Size = "52" },
+            new ClothesSizeModel { Size = "54" },
+            new ClothesSizeModel { Size = "56" },
+            new ClothesSizeModel { Size = "58" },
+            new ClothesSizeModel { Size = "60" },
+            new ClothesSizeModel { Size = "62" }
         ];
-        public ObservableCollection<SizeOption> AvailableSizesEU => _availableSizesEU;
+        public ObservableCollection<ClothesSizeModel> AvailableSizesEU => _availableSizesEU;
 
-        private readonly ObservableCollection<SizeOption> _availableSizesUS =
+        private readonly ObservableCollection<ClothesSizeModel> _availableSizesUS =
         [
-            new SizeOption { Size = "XS" },
-            new SizeOption { Size = "S" },
-            new SizeOption { Size = "M" },
-            new SizeOption { Size = "L" },
-            new SizeOption { Size = "XL" },
-            new SizeOption { Size = "XLL" },
-            new SizeOption { Size = "3XL" },
-            new SizeOption { Size = "4XL" },
-            new SizeOption { Size = "5XL" },
-            new SizeOption { Size = "6XL" }
+            new ClothesSizeModel { Size = "XS" },
+            new ClothesSizeModel { Size = "S" },
+            new ClothesSizeModel { Size = "M" },
+            new ClothesSizeModel { Size = "L" },
+            new ClothesSizeModel { Size = "XL" },
+            new ClothesSizeModel { Size = "XLL" },
+            new ClothesSizeModel { Size = "3XL" },
+            new ClothesSizeModel { Size = "4XL" },
+            new ClothesSizeModel { Size = "5XL" },
+            new ClothesSizeModel { Size = "6XL" }
         ];
-        public ObservableCollection<SizeOption> AvailableSizesUS => _availableSizesUS;
+        public ObservableCollection<ClothesSizeModel> AvailableSizesUS => _availableSizesUS;
 
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
@@ -151,14 +152,14 @@ namespace DVS.ViewModels.Forms
 
 
         public AddEditClothesFormViewModel(CategoryStore categoryStore,
-                                       SeasonStore seasonStore,
-                                       ClothesStore clothesStore,
-                                       ICommand openAddEditCategoriesCommand,
-                                       ICommand openAddEditSeasonsCommand,
-                                       ICommand addClothesCommand,
-                                       ICommand editClothesCommand,
-                                       ICommand deleteClothesCommand,
-                                       ICommand clearClothesListCommand)
+                                           SeasonStore seasonStore,
+                                           ClothesStore clothesStore,
+                                           ICommand openAddEditCategoriesCommand,
+                                           ICommand openAddEditSeasonsCommand,
+                                           ICommand addClothesCommand,
+                                           ICommand editClothesCommand,
+                                           ICommand deleteClothesCommand,
+                                           ICommand clearClothesListCommand)
         {
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;

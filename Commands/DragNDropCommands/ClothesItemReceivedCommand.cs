@@ -1,23 +1,19 @@
-﻿using DVS.Components;
-using DVS.ViewModels;
+﻿using DVS.ViewModels;
 
 namespace DVS.Commands.DragNDropCommands
 {
-    public class ClothesItemReceivedCommand : CommandBase
+    public class ClothesItemReceivedCommand(DVSListingViewModel dVSListingViewModel) : CommandBase
     {
-        private readonly DVSListingViewModel _dVSListingViewModel;
-
-        public ClothesItemReceivedCommand(DVSListingViewModel dVSListingViewModel)
-        {
-            _dVSListingViewModel = dVSListingViewModel;
-        }
+        private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
 
         public override void Execute(object parameter)
         {
-            if (parameter.Equals("AddEditEmployeClothesList"))
-                _dVSListingViewModel.AddClothesItemToDetailedClothesListingItemCollection(_dVSListingViewModel.IncomingClothesListingItemModel);
+            if (parameter.Equals("AddEditEmployeAvailableClothesList"))
+                _dVSListingViewModel.AddClothesItemToDetailedClothesListingItemCollection(
+                    _dVSListingViewModel.IncomingClothesListingItemModel);
             else if (parameter.Equals("AddEditEmployeeNewEmployeeClothesList"))
-                _dVSListingViewModel.AddClothesItemToNewEmployeeListingItemCollection(_dVSListingViewModel.IncomingClothesListingItemModel);
+                _dVSListingViewModel.AddClothesItemToNewEmployeeListingItemCollection(
+                    _dVSListingViewModel.IncomingClothesListingItemModel);
         }
     }
 }

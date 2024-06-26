@@ -1,15 +1,14 @@
-﻿using System.Windows;
+﻿using DVS.Models;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using DVS.Models;
 
 namespace DVS.Components
 {
-    public partial class AddEditEmployeClothesList : UserControl
+    public partial class AddEditEmployeAvailableClothesList : UserControl
     {
         public static readonly DependencyProperty IncomingClothesItemProperty =
-            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployeClothesList),
+            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployeAvailableClothesList),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object IncomingClothesItem
@@ -19,7 +18,7 @@ namespace DVS.Components
         }
 
         public static readonly DependencyProperty RemovedClothesItemProperty =
-            DependencyProperty.Register("RemovedClothesItem", typeof(object), typeof(AddEditEmployeClothesList),
+            DependencyProperty.Register("RemovedClothesItem", typeof(object), typeof(AddEditEmployeAvailableClothesList),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object RemovedClothesItem
@@ -29,7 +28,7 @@ namespace DVS.Components
         }
 
         public static readonly DependencyProperty ClothesItemDropCommandProperty =
-            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployeClothesList),
+            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployeAvailableClothesList),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemDropCommand
@@ -39,7 +38,7 @@ namespace DVS.Components
         }
 
         public static readonly DependencyProperty ClothesItemRemovedCommandProperty =
-            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployeClothesList),
+            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployeAvailableClothesList),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemRemovedCommand
@@ -49,7 +48,7 @@ namespace DVS.Components
         }
 
         public static readonly DependencyProperty TargetClothesItemProperty =
-            DependencyProperty.Register("TargetClothesItem", typeof(object), typeof(AddEditEmployeClothesList),
+            DependencyProperty.Register("TargetClothesItem", typeof(object), typeof(AddEditEmployeAvailableClothesList),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object TargetClothesItem
@@ -58,28 +57,8 @@ namespace DVS.Components
             set { SetValue(TargetClothesItemProperty, value); }
         }
 
-        //public static readonly DependencyProperty ClothesItemInsertedCommandProperty =
-        //    DependencyProperty.Register("ClothesItemInsertedCommand", typeof(ICommand), typeof(AddEditEmployeClothesList),
-        //        new PropertyMetadata(null));
 
-        //public ICommand ClothesItemInsertedCommand
-        //{
-        //    get { return (ICommand)GetValue(ClothesItemInsertedCommandProperty); }
-        //    set { SetValue(ClothesItemInsertedCommandProperty, value); }
-        //}
-
-        //public static readonly DependencyProperty InsertedClothesItemProperty =
-        //    DependencyProperty.Register("InsertedClothesItem", typeof(object), typeof(AddEditEmployeClothesList),
-        //        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
-        //public object InsertedClothesItem
-        //{
-        //    get { return GetValue(InsertedClothesItemProperty); }
-        //    set { SetValue(InsertedClothesItemProperty, value); }
-        //}
-
-
-        public AddEditEmployeClothesList()
+        public AddEditEmployeAvailableClothesList()
         {
             InitializeComponent();
         }
@@ -103,31 +82,14 @@ namespace DVS.Components
             }
         }
 
-        //private void ClothesItemList_DragLeave(object sender, DragEventArgs e)
-        //{
-        //    HitTestResult result = VisualTreeHelper.HitTest(lvItems, e.GetPosition(lvItems));
-
-        //    if (result == null)
-        //    {
-        //        if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
-        //        {
-        //            RemovedClothesItem = e.Data.GetData(DataFormats.Serializable);
-        //            ClothesItemRemovedCommand?.Execute(null);
-        //        }
-        //    }
-        //}
-
         private void ClothesItemList_Drop(object sender, DragEventArgs e)
         {
-            DetailedClothesListingItemModel? ClothesItem = e.Data.GetData(DataFormats.Serializable)
-                                                           as DetailedClothesListingItemModel;
-            
-            if (ClothesItem != null)
+            if (e.Data.GetData(DataFormats.Serializable) is DetailedClothesListingItemModel ClothesItem)
             {
                 if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {
                     RemovedClothesItem = e.Data.GetData(DataFormats.Serializable);
-                    ClothesItemRemovedCommand?.Execute("AddEditEmployeClothesList");
+                    ClothesItemRemovedCommand?.Execute("AddEditEmployeAvailableClothesList");
                     AddClothesItem(ClothesItem);
                 }
             }
@@ -138,22 +100,8 @@ namespace DVS.Components
             if (ClothesItemDropCommand?.CanExecute(null) ?? false)
             {
                 IncomingClothesItem = ClothesItem;
-                ClothesItemDropCommand?.Execute("AddEditEmployeClothesList");
+                ClothesItemDropCommand?.Execute("AddEditEmployeAvailableClothesList");
             }
         }
-
-        //private void ClothesItem_DragOver(object sender, DragEventArgs e)
-        //{
-        //    if (ClothesItemInsertedCommand?.CanExecute(null) ?? false)
-        //    {
-        //        if (sender is FrameworkElement element)
-        //        {
-        //            TargetClothesItem = element.DataContext;
-        //            InsertedClothesItem = e.Data.GetData(DataFormats.Serializable);
-
-        //            ClothesItemInsertedCommand?.Execute(null);
-        //        }
-        //    }
-        //}
     }
 }

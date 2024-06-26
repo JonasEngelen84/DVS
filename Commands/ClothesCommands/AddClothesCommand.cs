@@ -1,6 +1,5 @@
 ﻿using DVS.Models;
 using DVS.Stores;
-using DVS.ViewModels;
 using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
 
@@ -22,21 +21,21 @@ namespace DVS.Commands.ClothesCommands
             addClothesFormViewModel.ErrorMessage = null;
             addClothesFormViewModel.IsSubmitting = true;
 
-            // Alle ausgewählten Größen in eine ZwischenListe speichern.
-            // Diese wird der GrößenListe (Size) des ClothesModel hinzugefügt.
-            var selectedSizes = addClothesFormViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-            ? addClothesFormViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-            : addClothesFormViewModel.AvailableSizesEU.Where(size => size.IsSelected);
-
             ClothesModel clothes = new(addClothesFormViewModel.ID,
                                        addClothesFormViewModel.Name,
                                        addClothesFormViewModel.Category,
                                        addClothesFormViewModel.Season,
                                        addClothesFormViewModel.Comment);
 
-            foreach (SizeOption size in selectedSizes)
+            // Alle ausgewählten Größen in eine ZwischenListe speichern.
+            // Diese wird der GrößenListe (Size) des ClothesModel hinzugefügt.
+            var selectedSizes = addClothesFormViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                ? addClothesFormViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                : addClothesFormViewModel.AvailableSizesEU.Where(size => size.IsSelected);
+
+            foreach (ClothesSizeModel sizeModel in selectedSizes)
             {
-                clothes.Sizes.Add(new ClothesSizeModel(size.Size, size.Quantity, size.Comment));
+                clothes.Sizes.Add(sizeModel);
             }
 
             try

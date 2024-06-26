@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DVS.Components.AddEditEmployeeNewEmployeeClothesList"
+﻿<UserControl x:Class="DVS.Components.AddEditEmployeAvailableClothesList"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,7 +11,7 @@
               Background="WhiteSmoke"
               AllowDrop="True"
               Drop="ClothesItemList_Drop"
-              ItemsSource="{Binding NewEmployeeListingItemCollection}">
+              ItemsSource="{Binding DetailedClothesListingItemCollection}">
 
         <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
