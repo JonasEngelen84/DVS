@@ -27,7 +27,7 @@ namespace DVS.Commands.EmployeeCommands
                                          addEmployeeFormViewModel.Lastname,
                                          addEmployeeFormViewModel.Comment);
 
-            foreach (DetailedClothesListingItemModel clothes in _addEmployeeViewModel.AddEditEmployeeFormViewModel.NewEmployeeClothes.DetailedClothesListingItemCollection)
+            foreach (DetailedClothesListingItemModel clothes in _addEmployeeViewModel.AddEditEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
             {
                 employee.Clothes.Add(clothes);
             }

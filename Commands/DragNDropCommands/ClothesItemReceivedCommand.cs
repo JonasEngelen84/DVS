@@ -1,4 +1,5 @@
-﻿using DVS.ViewModels;
+﻿using DVS.Components;
+using DVS.ViewModels;
 
 namespace DVS.Commands.DragNDropCommands
 {
@@ -13,7 +14,10 @@ namespace DVS.Commands.DragNDropCommands
 
         public override void Execute(object parameter)
         {
-            _dVSListingViewModel.AddClothesItem(_dVSListingViewModel.IncomingClothesListingItemModel);
+            if (parameter.Equals("AddEditEmployeClothesList"))
+                _dVSListingViewModel.AddClothesItemToDetailedClothesListingItemCollection(_dVSListingViewModel.IncomingClothesListingItemModel);
+            else if (parameter.Equals("AddEditEmployeeNewEmployeeClothesList"))
+                _dVSListingViewModel.AddClothesItemToNewEmployeeListingItemCollection(_dVSListingViewModel.IncomingClothesListingItemModel);
         }
     }
 }

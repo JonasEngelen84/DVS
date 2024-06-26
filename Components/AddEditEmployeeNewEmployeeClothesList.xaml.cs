@@ -1,15 +1,14 @@
-﻿using System.Windows;
+﻿using DVS.Models;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using DVS.Models;
 
 namespace DVS.Components
 {
-    public partial class AddEditEmployeClothesList : UserControl
+    public partial class AddEditEmployeeNewEmployeeClothesList : UserControl
     {
         public static readonly DependencyProperty IncomingClothesItemProperty =
-            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployeClothesList),
+            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployeeNewEmployeeClothesList),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object IncomingClothesItem
@@ -19,7 +18,7 @@ namespace DVS.Components
         }
 
         public static readonly DependencyProperty RemovedClothesItemProperty =
-            DependencyProperty.Register("RemovedClothesItem", typeof(object), typeof(AddEditEmployeClothesList),
+            DependencyProperty.Register("RemovedClothesItem", typeof(object), typeof(AddEditEmployeeNewEmployeeClothesList),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object RemovedClothesItem
@@ -29,7 +28,7 @@ namespace DVS.Components
         }
 
         public static readonly DependencyProperty ClothesItemDropCommandProperty =
-            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployeClothesList),
+            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployeeNewEmployeeClothesList),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemDropCommand
@@ -39,7 +38,7 @@ namespace DVS.Components
         }
 
         public static readonly DependencyProperty ClothesItemRemovedCommandProperty =
-            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployeClothesList),
+            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployeeNewEmployeeClothesList),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemRemovedCommand
@@ -49,7 +48,7 @@ namespace DVS.Components
         }
 
         public static readonly DependencyProperty TargetClothesItemProperty =
-            DependencyProperty.Register("TargetClothesItem", typeof(object), typeof(AddEditEmployeClothesList),
+            DependencyProperty.Register("TargetClothesItem", typeof(object), typeof(AddEditEmployeeNewEmployeeClothesList),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object TargetClothesItem
@@ -59,7 +58,7 @@ namespace DVS.Components
         }
 
         //public static readonly DependencyProperty ClothesItemInsertedCommandProperty =
-        //    DependencyProperty.Register("ClothesItemInsertedCommand", typeof(ICommand), typeof(AddEditEmployeClothesList),
+        //    DependencyProperty.Register("ClothesItemInsertedCommand", typeof(ICommand), typeof(AddEditEmployeeNewEmployeeClothesList),
         //        new PropertyMetadata(null));
 
         //public ICommand ClothesItemInsertedCommand
@@ -69,7 +68,7 @@ namespace DVS.Components
         //}
 
         //public static readonly DependencyProperty InsertedClothesItemProperty =
-        //    DependencyProperty.Register("InsertedClothesItem", typeof(object), typeof(AddEditEmployeClothesList),
+        //    DependencyProperty.Register("InsertedClothesItem", typeof(object), typeof(AddEditEmployeeNewEmployeeClothesList),
         //        new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         //public object InsertedClothesItem
@@ -79,7 +78,7 @@ namespace DVS.Components
         //}
 
 
-        public AddEditEmployeClothesList()
+        public AddEditEmployeeNewEmployeeClothesList()
         {
             InitializeComponent();
         }
@@ -121,13 +120,13 @@ namespace DVS.Components
         {
             DetailedClothesListingItemModel? ClothesItem = e.Data.GetData(DataFormats.Serializable)
                                                            as DetailedClothesListingItemModel;
-            
+
             if (ClothesItem != null)
             {
                 if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {
                     RemovedClothesItem = e.Data.GetData(DataFormats.Serializable);
-                    ClothesItemRemovedCommand?.Execute("AddEditEmployeClothesList");
+                    ClothesItemRemovedCommand?.Execute("AddEditEmployeeNewEmployeeClothesList");
                     AddClothesItem(ClothesItem);
                 }
             }
@@ -138,7 +137,7 @@ namespace DVS.Components
             if (ClothesItemDropCommand?.CanExecute(null) ?? false)
             {
                 IncomingClothesItem = ClothesItem;
-                ClothesItemDropCommand?.Execute("AddEditEmployeClothesList");
+                ClothesItemDropCommand?.Execute("AddEditEmployeeNewEmployeeClothesList");
             }
         }
 

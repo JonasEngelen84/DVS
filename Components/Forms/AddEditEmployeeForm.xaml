@@ -38,22 +38,22 @@
         <StackPanel>
 
             <!-- NewEmployeeClothesList -->
-            <components:AddEditEmployeClothesList Margin="0 0 0 5"
-                                                  Foreground="Black"
-                                                  Background="WhiteSmoke"
-                                                  DataContext="{Binding NewEmployeeClothes}"
-                                                  IncomingClothesItem="{Binding IncomingClothesListingItemModel}"
-                                                  RemovedClothesItem="{Binding RemovedClothesListingItemModel}"
-                                                  TargetClothesItem="{Binding TargetClothesListingItemModel}"
-                                                  ClothesItemDropCommand="{Binding ClothesItemReceivedCommand}"
-                                                  ClothesItemRemovedCommand="{Binding ClothesItemRemovedCommand}" />
-                                                  <!--InsertedClothesItem="{Binding InsertedClothesItemViewModel}"
-                                                  ClothesItemInsertedCommand="{Binding ClothesItemInsertedCommand}"-->
+            <components:AddEditEmployeeNewEmployeeClothesList Margin="0 0 0 5"
+                                                              Foreground="Black"
+                                                              Background="WhiteSmoke"
+                                                              DataContext="{Binding DVSListingViewModel}"
+                                                              IncomingClothesItem="{Binding IncomingClothesListingItemModel}"
+                                                              RemovedClothesItem="{Binding RemovedClothesListingItemModel}"
+                                                              TargetClothesItem="{Binding TargetClothesListingItemModel}"
+                                                              ClothesItemDropCommand="{Binding ClothesItemReceivedCommand}"
+                                                              ClothesItemRemovedCommand="{Binding ClothesItemRemovedCommand}" />
+                                                              <!--InsertedClothesItem="{Binding InsertedClothesItemViewModel}"
+                                                              ClothesItemInsertedCommand="{Binding ClothesItemInsertedCommand}"-->
 
             <!-- AvailableClothesList -->
             <components:AddEditEmployeClothesList Foreground="Black"
                                                   Background="WhiteSmoke"
-                                                  DataContext="{Binding AvailableClothes}"
+                                                  DataContext="{Binding DVSListingViewModel}"
                                                   IncomingClothesItem="{Binding IncomingClothesListingItemModel}"
                                                   RemovedClothesItem="{Binding RemovedClothesListingItemModel}"
                                                   TargetClothesItem="{Binding TargetClothesListingItemModel}"

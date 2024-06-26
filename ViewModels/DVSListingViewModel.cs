@@ -20,6 +20,9 @@ namespace DVS.ViewModels
 
         private readonly ObservableCollection<DetailedEmployeeListingItemModel> _detailedEmployeeListingItemCollection;
         public IEnumerable<DetailedEmployeeListingItemModel> DetailedEmployeeListingItemCollection => _detailedEmployeeListingItemCollection;
+        
+        private readonly ObservableCollection<DetailedClothesListingItemModel> _newEmployeeListingItemCollection;
+        public IEnumerable<DetailedClothesListingItemModel> NewEmployeeListingItemCollection => _newEmployeeListingItemCollection;
 
         private DetailedClothesListingItemModel _incomingClothesListingItemModel;
         public DetailedClothesListingItemModel IncomingClothesListingItemModel
@@ -91,6 +94,7 @@ namespace DVS.ViewModels
             _detailedClothesListingItemCollection = [];
             _employeeListingItemCollection = [];
             _detailedEmployeeListingItemCollection = [];
+            _newEmployeeListingItemCollection = [];
 
             _clothesStore = clothesStore;
             _employeeStore = employeeStore;
@@ -106,25 +110,73 @@ namespace DVS.ViewModels
             _employeeStore.EmployeesLoaded += EmployeeStore_EmployeesLoaded;
         }
 
-        // Drag n Drop
-        public void AddClothesItem(DetailedClothesListingItemModel item)
+        public void AddClothesItemToNewEmployeeListingItemCollection(DetailedClothesListingItemModel item)
         {
-            DetailedClothesListingItemModel newItem = new(
-                item.ID, item.Name, item.Categorie, item.Season, item.Size, 1, item.ID);
+            if (item == null || _newEmployeeListingItemCollection.Contains(item))
+            {
+                return;
+            }
 
-            if (!_detailedClothesListingItemCollection.Contains(newItem))
-                _detailedClothesListingItemCollection.Add(newItem);
+            var existingItem = _newEmployeeListingItemCollection
+                .FirstOrDefault(modelItem => modelItem.ID == item.ID && modelItem.Size == item.Size);
+
+            if (existingItem != null)
+            {
+                existingItem.Quantity++;
+            }
             else
             {
-                int currentIndex = _detailedClothesListingItemCollection.IndexOf(item);
-                DetailedClothesListingItemModel foundItem = _detailedClothesListingItemCollection[currentIndex];
-                foundItem.Quantity++;
+                DetailedClothesListingItemModel newItem = new(
+                item.ID, item.Name, item.Categorie, item.Season, item.Size, 1, null);
+
+                _newEmployeeListingItemCollection.Add(newItem);
+            }
+        }
+        
+        public void AddClothesItemToDetailedClothesListingItemCollection(DetailedClothesListingItemModel item)
+        {
+            if (item == null || _detailedClothesListingItemCollection.Contains(item))
+            {
+                return;
+            }
+
+            var existingItem = _detailedClothesListingItemCollection
+                .FirstOrDefault(modelItem => modelItem.ID == item.ID && modelItem.Size == item.Size);
+
+            if (existingItem != null)
+            {
+                existingItem.Quantity++;
+            }
+            else
+            {
+                DetailedClothesListingItemModel newItem = new(
+                item.ID, item.Name, item.Categorie, item.Season, item.Size, 1, null);
+
+                _detailedClothesListingItemCollection.Add(newItem);
             }
         }
 
-        // Drag n Drop
-        public void RemoveClothesItem(DetailedClothesListingItemModel item)
+        public void RemoveClothesItemFromNewEmployeeListingItemCollection(DetailedClothesListingItemModel item)
         {
+            if (item == null || !_newEmployeeListingItemCollection.Contains(item))
+            {
+                return;
+            }
+
+            if (item.Quantity > 1)
+                item.Quantity--;
+            else
+                _newEmployeeListingItemCollection.Remove(item);
+        }
+
+        public void RemoveClothesItemFromDetailedClothesListingItemCollection(DetailedClothesListingItemModel item)
+        {
+            if (item == null || !_detailedClothesListingItemCollection.Contains(item))
+            {
+                // Das Element ist nicht in der Liste, nichts tun
+                return;
+            }
+
             if (item.Quantity > 1)
                 item.Quantity--;
             else

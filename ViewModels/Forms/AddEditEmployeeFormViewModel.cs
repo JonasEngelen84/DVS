@@ -83,8 +83,7 @@ namespace DVS.ViewModels.Forms
         //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
-        public DVSListingViewModel AvailableClothes { get; }
-        public DVSListingViewModel NewEmployeeClothes { get; }
+        public DVSListingViewModel DVSListingViewModel { get; }
 
         public ICommand AddEmployeeCommand { get; }
         public ICommand EditEmployeeCommand { get; }
@@ -92,7 +91,7 @@ namespace DVS.ViewModels.Forms
         public ICommand DeleteEmployeeCommand { get; }
 
 
-        public AddEditEmployeeFormViewModel(DVSListingViewModel availableClothes,
+        public AddEditEmployeeFormViewModel(DVSListingViewModel dVSListingViewModel,
                                             ClothesStore clothesStore,
                                             EmployeeStore employeeStore,
                                             ICommand addEmployeeCommand,
@@ -100,8 +99,7 @@ namespace DVS.ViewModels.Forms
                                             ICommand clearEmployeeClothesListCommand,
                                             ICommand deleteEmployeeCommand)
         {
-            AvailableClothes = availableClothes;
-            NewEmployeeClothes = new DVSListingViewModel( clothesStore, employeeStore);
+            DVSListingViewModel = dVSListingViewModel;
 
             AddEmployeeCommand = addEmployeeCommand;
             EditEmployeeCommand = editEmployeeCommand;
