@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using DVS.Models;
 
 namespace DVS.Components
 {
@@ -102,10 +103,34 @@ namespace DVS.Components
             }
         }
 
-        private void ClothesItemList_DragOver(object sender, DragEventArgs e)
+        //private void ClothesItemList_DragLeave(object sender, DragEventArgs e)
+        //{
+        //    HitTestResult result = VisualTreeHelper.HitTest(lvItems, e.GetPosition(lvItems));
+
+        //    if (result == null)
+        //    {
+        //        if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
+        //        {
+        //            RemovedClothesItem = e.Data.GetData(DataFormats.Serializable);
+        //            ClothesItemRemovedCommand?.Execute(null);
+        //        }
+        //    }
+        //}
+
+        private void ClothesItemList_Drop(object sender, DragEventArgs e)
         {
-            object ClothesItem = e.Data.GetData(DataFormats.Serializable);
-            AddClothesItem(ClothesItem);
+            DetailedClothesListingItemModel? ClothesItem = e.Data.GetData(DataFormats.Serializable)
+                                                           as DetailedClothesListingItemModel;
+            
+            if (ClothesItem != null)
+            {
+                if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
+                {
+                    RemovedClothesItem = e.Data.GetData(DataFormats.Serializable);
+                    ClothesItemRemovedCommand?.Execute(null);
+                    AddClothesItem(ClothesItem);
+                }
+            }
         }
 
         private void AddClothesItem(object ClothesItem)
@@ -114,20 +139,6 @@ namespace DVS.Components
             {
                 IncomingClothesItem = ClothesItem;
                 ClothesItemDropCommand?.Execute(null);
-            }
-        }
-
-        private void ClothesItemList_DragLeave(object sender, DragEventArgs e)
-        {
-            HitTestResult result = VisualTreeHelper.HitTest(lvItems, e.GetPosition(lvItems));
-
-            if (result == null)
-            {
-                if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
-                {
-                    RemovedClothesItem = e.Data.GetData(DataFormats.Serializable);
-                    ClothesItemRemovedCommand?.Execute(null);
-                }
             }
         }
 

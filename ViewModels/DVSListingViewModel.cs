@@ -21,31 +21,31 @@ namespace DVS.ViewModels
         private readonly ObservableCollection<DetailedEmployeeListingItemModel> _detailedEmployeeListingItemCollection;
         public IEnumerable<DetailedEmployeeListingItemModel> DetailedEmployeeListingItemCollection => _detailedEmployeeListingItemCollection;
 
-        private DetailedClothesListingItemModel _incomingDetailedClothesListingItemModel;
-        public DetailedClothesListingItemModel IncomingDetailedClothesListingItemModel
+        private DetailedClothesListingItemModel _incomingClothesListingItemModel;
+        public DetailedClothesListingItemModel IncomingClothesListingItemModel
         {
             get
             {
-                return _incomingDetailedClothesListingItemModel;
+                return _incomingClothesListingItemModel;
             }
             set
             {
-                _incomingDetailedClothesListingItemModel = value;
-                OnPropertyChanged(nameof(IncomingDetailedClothesListingItemModel));
+                _incomingClothesListingItemModel = value;
+                OnPropertyChanged(nameof(IncomingClothesListingItemModel));
             }
         }
 
-        private DetailedClothesListingItemModel _removedDetailedClothesListingItemModel;
-        public DetailedClothesListingItemModel RemovedDetailedClothesListingItemModel
+        private DetailedClothesListingItemModel _removedClothesListingItemModel;
+        public DetailedClothesListingItemModel RemovedClothesListingItemModel
         {
             get
             {
-                return _removedDetailedClothesListingItemModel;
+                return _removedClothesListingItemModel;
             }
             set
             {
-                _removedDetailedClothesListingItemModel = value;
-                OnPropertyChanged(nameof(RemovedDetailedClothesListingItemModel));
+                _removedClothesListingItemModel = value;
+                OnPropertyChanged(nameof(RemovedClothesListingItemModel));
             }
         }
 
@@ -109,23 +109,44 @@ namespace DVS.ViewModels
         // Drag n Drop
         public void AddClothesItem(DetailedClothesListingItemModel item)
         {
-            if (!_detailedClothesListingItemCollection.Contains(item))
+            DetailedClothesListingItemModel newItem = new(
+                item.ID, item.Name, item.Categorie, item.Season, item.Size, 1, item.ID);
+
+            if (!_detailedClothesListingItemCollection.Contains(newItem))
+                _detailedClothesListingItemCollection.Add(newItem);
+            else
             {
-                _detailedClothesListingItemCollection.Add(item);
-                //item.Quantity = 1;
+                int currentIndex = _detailedClothesListingItemCollection.IndexOf(item);
+                DetailedClothesListingItemModel foundItem = _detailedClothesListingItemCollection[currentIndex];
+                foundItem.Quantity++;
             }
-            //else
-            //    item.Quantity += 1;
         }
 
         // Drag n Drop
         public void RemoveClothesItem(DetailedClothesListingItemModel item)
         {
-            //if (item.Quantity > 1)
-            //    item.Quantity -= 1;
-            //else
+            if (item.Quantity > 1)
+                item.Quantity--;
+            else
                 _detailedClothesListingItemCollection.Remove(item);
         }
+
+        //public void InsertClothesItem(DetailedClothesListingItemModel insertedClothesItem,
+        //                              DetailedClothesListingItemModel targetClothesItem)
+        //{
+        //    if (insertedClothesItem == targetClothesItem)
+        //    {
+        //        return;
+        //    }
+
+        //    int oldIndex = _detailedClothesListingItemCollection.IndexOf(insertedClothesItem);
+        //    int nextIndex = _detailedClothesListingItemCollection.IndexOf(targetClothesItem);
+
+        //    if (oldIndex != -1 && nextIndex != -1)
+        //    {
+        //        _detailedClothesListingItemCollection.Move(oldIndex, nextIndex);
+        //    }
+        //}
 
         public void Load()
         {
@@ -230,22 +251,5 @@ namespace DVS.ViewModels
         {
 
         }
-
-        //public void InsertClothesItem(DetailedClothesListingItemModel insertedClothesItem,
-        //                              DetailedClothesListingItemModel targetClothesItem)
-        //{
-        //    if (insertedClothesItem == targetClothesItem)
-        //    {
-        //        return;
-        //    }
-
-        //    int oldIndex = _detailedClothesListingItemCollection.IndexOf(insertedClothesItem);
-        //    int nextIndex = _detailedClothesListingItemCollection.IndexOf(targetClothesItem);
-
-        //    if (oldIndex != -1 && nextIndex != -1)
-        //    {
-        //        _detailedClothesListingItemCollection.Move(oldIndex, nextIndex);
-        //    }
-        //}
     }
 }

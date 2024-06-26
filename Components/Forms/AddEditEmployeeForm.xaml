@@ -42,8 +42,8 @@
                                                   Foreground="Black"
                                                   Background="WhiteSmoke"
                                                   DataContext="{Binding NewEmployeeClothes}"
-                                                  IncomingClothesItem="{Binding IncomingDetailedClothesListingItemModel}"
-                                                  RemovedClothesItem="{Binding RemovedDetailedClothesListingItemModel}"
+                                                  IncomingClothesItem="{Binding IncomingClothesListingItemModel}"
+                                                  RemovedClothesItem="{Binding RemovedClothesListingItemModel}"
                                                   TargetClothesItem="{Binding TargetClothesListingItemModel}"
                                                   ClothesItemDropCommand="{Binding ClothesItemReceivedCommand}"
                                                   ClothesItemRemovedCommand="{Binding ClothesItemRemovedCommand}" />
@@ -54,9 +54,9 @@
             <components:AddEditEmployeClothesList Foreground="Black"
                                                   Background="WhiteSmoke"
                                                   DataContext="{Binding AvailableClothes}"
-                                                  IncomingClothesItem="{Binding IncomingClothesItemViewModel}"
-                                                  RemovedClothesItem="{Binding RemovedClothesItemViewModel}"
-                                                  TargetClothesItem="{Binding TargetClothesItemViewModel}"
+                                                  IncomingClothesItem="{Binding IncomingClothesListingItemModel}"
+                                                  RemovedClothesItem="{Binding RemovedClothesListingItemModel}"
+                                                  TargetClothesItem="{Binding TargetClothesListingItemModel}"
                                                   ClothesItemDropCommand="{Binding ClothesItemReceivedCommand}"
                                                   ClothesItemRemovedCommand="{Binding ClothesItemRemovedCommand}" />
                                                   <!--InsertedClothesItem="{Binding InsertedClothesItemViewModel}"

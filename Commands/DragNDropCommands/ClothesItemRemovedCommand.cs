@@ -13,7 +13,7 @@ namespace DVS.Commands.DragNDropCommands
 
         public override void Execute(object parameter)
         {
-            _dVSListingViewModel.RemoveClothesItem(_dVSListingViewModel.RemovedDetailedClothesListingItemModel);
+            _dVSListingViewModel.RemoveClothesItem(_dVSListingViewModel.RemovedClothesListingItemModel);
         }
     }
 }
