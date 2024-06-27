@@ -1,7 +1,8 @@
-﻿namespace DVS.Models
+﻿namespace DVS.ViewModels
 {
-    public class ClothesSizeModel : ModelBase
+    public class ClothesSizeModel : ViewModelBase
     {
+        //TODO: string Size in string? ändern??
         public string Size { get; set; }
 
         private int _quantity;
@@ -10,11 +11,8 @@
             get => _quantity;
             set
             {
-                if (_quantity != value)
-                {
-                    _quantity = value;
-                    OnPropertyChanged(nameof(Quantity));
-                }
+                _quantity = value;
+                OnPropertyChanged(nameof(Quantity));
             }
         }
 
@@ -24,11 +22,8 @@
             get => _comment;
             set
             {
-                if (_comment != value)
-                {
-                    _comment = value;
-                    OnPropertyChanged(nameof(Comment));
-                }
+                _comment = value;
+                OnPropertyChanged(nameof(Comment));
             }
         }
 

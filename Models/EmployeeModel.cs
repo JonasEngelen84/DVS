@@ -9,6 +9,6 @@ namespace DVS.Models
         public string Firstname { get; set; } = firstname;
         public string? Comment { get; set; } = comment;
 
-        public List<DetailedClothesListingItemModel> Clothes { get; set; } = [];
+        public List<DetailedClothesListingItemViewModel> Clothes { get; set; } = [];
     }
 }

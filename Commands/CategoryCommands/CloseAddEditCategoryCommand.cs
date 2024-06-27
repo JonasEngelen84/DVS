@@ -1,5 +1,4 @@
 ﻿using DVS.Stores;
-using DVS.ViewModels;
 using DVS.ViewModels.Views;
 
 namespace DVS.Commands.CategoryCommands
@@ -31,12 +30,9 @@ namespace DVS.Commands.CategoryCommands
 
         public override void Execute(object parameter)
         {
-            AddEditClothesViewModel addClothesViewModel = new(_modalNavigationStore,
-                                                          _categoryStore,
-                                                          _seasonStore,
-                                                          _selectedCategoryStore,
-                                                          _selectedSeasonStore,
-                                                          _clothesStore);
+            AddEditClothesViewModel addClothesViewModel = new(
+                _modalNavigationStore, _categoryStore, _seasonStore,
+                _selectedCategoryStore, _selectedSeasonStore, _clothesStore);
 
             _modalNavigationStore.CurrentViewModel = addClothesViewModel;
         }

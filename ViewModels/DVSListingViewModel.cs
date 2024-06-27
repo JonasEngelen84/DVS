@@ -9,8 +9,26 @@ namespace DVS.ViewModels
 {
     public class DVSListingViewModel : ViewModelBase
     {
-        private DetailedClothesListingItemModel _incomingClothesListingItemModel;
-        public DetailedClothesListingItemModel IncomingClothesListingItemModel
+        private readonly ClothesStore _clothesStore;
+        private readonly EmployeeStore _employeeStore;
+
+        private readonly ObservableCollection<ClothesListingItemViewModel> _clothesListingItemCollection;
+        public IEnumerable<ClothesListingItemViewModel> ClothesListingItemCollection => _clothesListingItemCollection;
+
+        private readonly ObservableCollection<DetailedClothesListingItemViewModel> _detailedClothesListingItemCollection;
+        public IEnumerable<DetailedClothesListingItemViewModel> DetailedClothesListingItemCollection => _detailedClothesListingItemCollection;
+
+        private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeListingItemCollection;
+        public IEnumerable<EmployeeListingItemViewModel> EmployeeListingItemCollection => _employeeListingItemCollection;
+
+        private readonly ObservableCollection<DetailedEmployeeListingItemViewModel> _detailedEmployeeListingItemCollection;
+        public IEnumerable<DetailedEmployeeListingItemViewModel> DetailedEmployeeListingItemCollection => _detailedEmployeeListingItemCollection;
+        
+        private readonly ObservableCollection<DetailedClothesListingItemViewModel> _newEmployeeListingItemCollection;
+        public IEnumerable<DetailedClothesListingItemViewModel> NewEmployeeListingItemCollection => _newEmployeeListingItemCollection;
+
+        private DetailedClothesListingItemViewModel _incomingClothesListingItemModel;
+        public DetailedClothesListingItemViewModel IncomingClothesListingItemModel
         {
             get
             {
@@ -23,8 +41,8 @@ namespace DVS.ViewModels
             }
         }
 
-        private DetailedClothesListingItemModel _removedClothesListingItemModel;
-        public DetailedClothesListingItemModel RemovedClothesListingItemModel
+        private DetailedClothesListingItemViewModel _removedClothesListingItemModel;
+        public DetailedClothesListingItemViewModel RemovedClothesListingItemModel
         {
             get
             {
@@ -36,24 +54,6 @@ namespace DVS.ViewModels
                 OnPropertyChanged(nameof(RemovedClothesListingItemModel));
             }
         }
-
-        private readonly ObservableCollection<ClothesListingItemViewModel> _clothesListingItemCollection;
-        public IEnumerable<ClothesListingItemViewModel> ClothesListingItemCollection => _clothesListingItemCollection;
-
-        private readonly ObservableCollection<DetailedClothesListingItemModel> _detailedClothesListingItemCollection;
-        public IEnumerable<DetailedClothesListingItemModel> DetailedClothesListingItemCollection => _detailedClothesListingItemCollection;
-
-        private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeListingItemCollection;
-        public IEnumerable<EmployeeListingItemViewModel> EmployeeListingItemCollection => _employeeListingItemCollection;
-
-        private readonly ObservableCollection<DetailedEmployeeListingItemModel> _detailedEmployeeListingItemCollection;
-        public IEnumerable<DetailedEmployeeListingItemModel> DetailedEmployeeListingItemCollection => _detailedEmployeeListingItemCollection;
-        
-        private readonly ObservableCollection<DetailedClothesListingItemModel> _newEmployeeListingItemCollection;
-        public IEnumerable<DetailedClothesListingItemModel> NewEmployeeListingItemCollection => _newEmployeeListingItemCollection;
-
-        private readonly ClothesStore _clothesStore;
-        private readonly EmployeeStore _employeeStore;
 
         public ICommand ClothesItemReceivedCommand { get; }
         public ICommand ClothesItemRemovedCommand { get; }
@@ -83,7 +83,8 @@ namespace DVS.ViewModels
             _employeeStore.EmployeesLoaded += EmployeeStore_EmployeesLoaded;
         }
 
-        public void AddClothesItemToNewEmployeeListingItemCollection(DetailedClothesListingItemModel item)
+
+        public void AddClothesItemToNewEmployeeListingItemCollection(DetailedClothesListingItemViewModel item)
         {
             if (item == null || _newEmployeeListingItemCollection.Contains(item))
             {
@@ -99,14 +100,14 @@ namespace DVS.ViewModels
             }
             else
             {
-                DetailedClothesListingItemModel newItem = new(
+                DetailedClothesListingItemViewModel newItem = new(
                 item.ID, item.Name, item.Categorie, item.Season, item.Size, 1, null);
 
                 _newEmployeeListingItemCollection.Add(newItem);
             }
         }
         
-        public void AddClothesItemToDetailedClothesListingItemCollection(DetailedClothesListingItemModel item)
+        public void AddClothesItemToDetailedClothesListingItemCollection(DetailedClothesListingItemViewModel item)
         {
             if (item == null || _detailedClothesListingItemCollection.Contains(item))
             {
@@ -122,14 +123,14 @@ namespace DVS.ViewModels
             }
             else
             {
-                DetailedClothesListingItemModel newItem = new(
+                DetailedClothesListingItemViewModel newItem = new(
                 item.ID, item.Name, item.Categorie, item.Season, item.Size, 1, null);
 
                 _detailedClothesListingItemCollection.Add(newItem);
             }
         }
 
-        public void RemoveClothesItemFromNewEmployeeListingItemCollection(DetailedClothesListingItemModel item)
+        public void RemoveClothesItemFromNewEmployeeListingItemCollection(DetailedClothesListingItemViewModel item)
         {
             if (item == null || !_newEmployeeListingItemCollection.Contains(item))
             {
@@ -142,7 +143,7 @@ namespace DVS.ViewModels
                 _newEmployeeListingItemCollection.Remove(item);
         }
 
-        public void RemoveClothesItemFromDetailedClothesListingItemCollection(DetailedClothesListingItemModel item)
+        public void RemoveClothesItemFromDetailedClothesListingItemCollection(DetailedClothesListingItemViewModel item)
         {
             if (item == null || !_detailedClothesListingItemCollection.Contains(item))
             {
@@ -154,17 +155,6 @@ namespace DVS.ViewModels
                 item.Quantity--;
             else
                 _detailedClothesListingItemCollection.Remove(item);
-        }
-
-        protected override void Dispose()
-        {
-            _clothesStore.ClothesLoaded -= ClothesStore_ClothesLoaded;
-            _clothesStore.ClothesAdded -= ClothesStore_ClothesAdded;
-
-            _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
-            _employeeStore.EmployeesLoaded -= EmployeeStore_EmployeesLoaded;
-
-            base.Dispose();
         }
 
         public void ClothesStore_ClothesLoaded()
@@ -180,15 +170,27 @@ namespace DVS.ViewModels
 
         private void ClothesStore_ClothesAdded(ClothesModel clothes)
         {
-            ClothesListingItemViewModel item = new(clothes);
-            _clothesListingItemCollection.Add(item);
+            string ID = clothes.ID;
+            string Name = clothes.Name;
+            string Categorie = clothes.Categorie;
+            string Season = clothes.Season;
 
-            foreach (ClothesSizeModel size in clothes.Sizes)
+            if (clothes.Sizes.Count == 0)
             {
-                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemModel(
-                    clothes.ID, clothes.Name, clothes.Categorie,
-                    clothes.Season, size.Size, size.Quantity, clothes.Comment));
+                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemViewModel(
+                    ID, Name, Categorie, Season, null, null, null));
             }
+            else
+            {
+                foreach (ClothesSizeModel size in clothes.Sizes)
+                {
+                    _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemViewModel(
+                        ID, Name, Categorie, Season, size.Size, size.Quantity, size.Comment));
+
+                }
+            }
+
+            _clothesListingItemCollection.Add(new ClothesListingItemViewModel(clothes));
         }
 
         private void ClotheStore_ClothesEdit(ClothesModel clothes)
@@ -209,49 +211,43 @@ namespace DVS.ViewModels
 
         public void EmployeeStore_EmployeeAdded(EmployeeModel employee)
         {
-            EmployeeListingItemViewModel item = new(employee);
-            _employeeListingItemCollection.Add(item);
+            string employeeID = employee.ID;
+            string employeeLastname = employee.Lastname;
+            string employeeFirstname = employee.Firstname;
 
-            //TODO: Employee_Added verbessern
             if (employee.Clothes.Count == 0)
             {
-                string employeeID = employee.ID;
-                string employeeLastname = employee.Lastname;
-                string employeeFirstname = employee.Firstname;
-                string? clothesID = null;
-                string? clothesName = null;
-                string? clothesSize = null;
-                int? clothesQuantity = null;
-                string? clothesComment = null;
-
-                _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemModel(
-                    employeeID, employeeLastname, employeeFirstname, clothesID,
-                    clothesName, clothesSize, clothesQuantity, clothesComment));
+                _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemViewModel(
+                    employeeID, employeeLastname, employeeFirstname, null, null, null, null, null));
             }
             else
             {
-                foreach (DetailedClothesListingItemModel clothes in employee.Clothes)
+                foreach (DetailedClothesListingItemViewModel clothes in employee.Clothes)
                 {
-                    string employeeID = employee.ID;
-                    string employeeLastname = employee.Lastname;
-                    string employeeFirstname = employee.Firstname;
-                    string clothesID = clothes.ID;
-                    string clothesName = clothes.Name;
-                    string clothesSize = clothes.Size;
-                    int clothesQuantity = clothes.Quantity;
-                    string? clothesComment = clothes.Comment;
-
-                    _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemModel(
-                        employeeID, employeeLastname, employeeFirstname, clothesID,
-                        clothesName, clothesSize, clothesQuantity, clothesComment));
+                    _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemViewModel(
+                        employeeID, employeeLastname, employeeFirstname, clothes.ID,
+                        clothes.Name, clothes.Size, clothes.Quantity, clothes.Comment));
                 }
-
             }
+
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee));
+            _newEmployeeListingItemCollection.Clear();
         }
 
         private void EmployeeStore_EmployeeEdit(ClothesModel clothes)
         {
 
+        }
+
+        protected override void Dispose()
+        {
+            _clothesStore.ClothesLoaded -= ClothesStore_ClothesLoaded;
+            _clothesStore.ClothesAdded -= ClothesStore_ClothesAdded;
+
+            _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
+            _employeeStore.EmployeesLoaded -= EmployeeStore_EmployeesLoaded;
+
+            base.Dispose();
         }
     }
 }

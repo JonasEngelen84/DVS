@@ -16,11 +16,24 @@
             <!-- Title -->
             <Border Grid.Row="0"
                     Background="#FFBFBFBF">
-                <TextBlock Text="Saison bearbeiten"
-                           FontSize="28"
-                           FontWeight="SemiBold"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center" />
+                <Grid>
+                    <TextBlock Text="Saison"
+                               FontSize="28"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="13 0 0 0" />
+
+                    <!-- Close Button -->
+                    <Button HorizontalAlignment="Right"
+                            Style="{StaticResource TitleBarButtonStyle}"
+                            Command="{Binding CloseAddSeasonCommand}">
+                        <Image Source="/Resources/Images/Close.png"
+                               Height="18"
+                               Width="18"
+                               HorizontalAlignment="Center" />
+                    </Button>
+                </Grid>
             </Border>
 
             <!-- AddEditSeasonForm -->

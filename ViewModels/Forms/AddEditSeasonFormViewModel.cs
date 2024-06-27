@@ -67,7 +67,7 @@ namespace DVS.ViewModels.Forms
         private readonly SeasonStore _seasonStore;
         private readonly SelectedSeasonStore _selectedSeasonStore;
 
-        //TODO: Dispose Collections?
+        //TODO: Refresh Collection
         private readonly ObservableCollection<string> _seasons;
         private readonly CollectionViewSource _seasonCollectionViewSource;
         public IEnumerable<string> Seasons => _seasonCollectionViewSource.View.Cast<string>();
@@ -76,15 +76,13 @@ namespace DVS.ViewModels.Forms
         public ICommand EditSeasonCommand { get; }
         public ICommand DeleteSeasonCommand { get; }
         public ICommand ClearSeasonListCommand { get; }
-        public ICommand CloseAddSeasonCommand { get; } 
 
         public AddEditSeasonFormViewModel(SeasonStore seasonStore,
                                           SelectedSeasonStore selectedSeasonStore,
                                           ICommand addSeasonCommand,
                                           ICommand editSeasonCommand,
                                           ICommand deleteSeasonCommand,
-                                          ICommand clearSeasonListCommand,
-                                          ICommand closeAddSeasonCommand)
+                                          ICommand clearSeasonListCommand)
         {
             _seasonStore = seasonStore;
             _selectedSeasonStore = selectedSeasonStore;
@@ -92,7 +90,6 @@ namespace DVS.ViewModels.Forms
             EditSeasonCommand = editSeasonCommand;
             DeleteSeasonCommand = deleteSeasonCommand;
             ClearSeasonListCommand = clearSeasonListCommand;
-            CloseAddSeasonCommand = closeAddSeasonCommand;
 
             EditSeason = "Saison wählen";
 
@@ -101,13 +98,13 @@ namespace DVS.ViewModels.Forms
             _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
 
             SeasonStore_SeasonsLoaded();
-            //_seasonStore.SeasonsLoaded += SeasonStore_SeasonsLoaded;
+            _seasonStore.SeasonsLoaded += SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonsAdded += SeasonStore_SeasonAdded;
         }
 
         protected override void Dispose()
         {
-            //_seasonStore.SeasonsLoaded -= SeasonStore_SeasonsLoaded;
+            _seasonStore.SeasonsLoaded -= SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonsAdded -= SeasonStore_SeasonAdded;
 
             base.Dispose();

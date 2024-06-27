@@ -10,22 +10,26 @@
     <StackPanel>
 
         <!-- ID -->
-        <TextBox Margin="0 0 0 5"
+        <TextBox Width="252"
+                 Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" />
 
         <!-- Lastname -->
-        <TextBox Margin="0 0 0 5"
+        <TextBox Width="252"
+                 Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" />
 
         <!-- Firstname -->
-        <TextBox Margin="0 0 0 5"
+        <TextBox Width="252"
+                 Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" />
 
         <!-- Comment -->
-        <TextBox Margin="0 0 0 5"
+        <TextBox Width="252"
+                 Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
         

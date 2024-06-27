@@ -1,4 +1,5 @@
 ﻿using DVS.Models;
+using DVS.ViewModels;
 using System.Collections.ObjectModel;
 
 namespace DVS.Stores

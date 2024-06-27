@@ -6,12 +6,64 @@ namespace DVS.ViewModels.ListViewItems
 {
     public class EmployeeListingItemViewModel : ViewModelBase
     {
-        public EmployeeModel Employee { get; private set; }
+        private EmployeeModel _employee;
+        public EmployeeModel Employee 
+        {
+            get =>  _employee;
+            set
+            {
+                _employee = value;
+                OnPropertyChanged(nameof(Employee));
+                ID = Employee?.ID;
+                Lastname = Employee?.Lastname;
+                Firstname = Employee?.Firstname;
+                Comment = Employee?.Comment;
+            }
+        }
 
-        public string ID => Employee.ID;
-        public string Lastname => Employee.Lastname;
-        public string Firstname => Employee.Firstname;
-        public string? Comment => Employee.Comment;
+        private string _iD;
+        public string ID
+        {
+            get => _iD;
+            set
+            {
+                _iD = value;
+                OnPropertyChanged(nameof(ID));
+            }
+        }
+
+        private string _lastname;
+        public string Lastname
+        {
+            get => _lastname;
+            set
+            {
+                _lastname = value;
+                OnPropertyChanged(nameof(Lastname));
+            }
+        }
+        
+        private string _firstname;
+        public string Firstname
+        {
+            get => _firstname;
+            set
+            {
+                _firstname = value;
+                OnPropertyChanged(nameof(Firstname));
+            }
+        }
+
+        private string _comment;
+        public string Comment
+        {
+            get => _comment;
+            set
+            {
+                _comment = value;
+                OnPropertyChanged(nameof(Comment));
+            }
+        }
 
         private bool _isDeleting;
         public bool IsDeleting

@@ -6,13 +6,79 @@ namespace DVS.ViewModels.ListViewItems
 {
     public class ClothesListingItemViewModel : ViewModelBase
     {
-        public ClothesModel Clothes { get; private set; }
+        private ClothesModel _clothes;
+        public ClothesModel Clothes
+        {
+            get => _clothes;
+            set
+            {
+                if (_clothes != value)
+                {
+                    _clothes = value;
+                    OnPropertyChanged(nameof(Clothes));
+                    ID = _clothes?.ID;
+                    Name = _clothes?.Name;
+                    Categorie = _clothes?.Categorie;
+                    Season = _clothes?.Season;
+                    Comment = _clothes?.Comment;
+                }
+            }
+        }
 
-        public string ID => Clothes.ID;
-        public string Name => Clothes.Name;
-        public string Categorie => Clothes.Categorie;
-        public string Season => Clothes.Season;
-        public string? Comment => Clothes.Comment;
+        private string _iD;
+        public string ID
+        {
+            get => _iD;
+            set
+            {
+                _iD = value;
+                OnPropertyChanged(nameof(ID));
+            }
+        }
+
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+
+        private string _categorie;
+        public string Categorie
+        {
+            get => _categorie;
+            set
+            {
+                _categorie = value;
+                OnPropertyChanged(nameof(Categorie));
+            }
+        }
+
+        private string _season;
+        public string Season
+        {
+            get => _season;
+            set
+            {
+                _season = value;
+                OnPropertyChanged(nameof(Season));
+            }
+        }
+
+        private string _comment;
+        public string Comment
+        {
+            get => _comment;
+            set
+            {
+                _comment = value;
+                OnPropertyChanged(nameof(Comment));
+            }
+        }
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -67,8 +133,5 @@ namespace DVS.ViewModels.ListViewItems
             EditCommand = new OpenEditEmployeeCommand();
             DeleteCommand = new DeleteEmployeeCommand();
         }
-
-
-        
     }
 }

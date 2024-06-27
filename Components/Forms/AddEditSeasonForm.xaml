@@ -9,7 +9,8 @@
     <StackPanel>
         <!-- Add Season-->
         <StackPanel Orientation="Horizontal">
-            <TextBox Style="{StaticResource TextBoxStyle}"
+            <TextBox Width="165"
+                     Style="{StaticResource TextBoxStyle}"
                      Text="{Binding AddNewSeason}"/>
             <Button Content="ERSTELLEN"
                     Margin="5 0 0 0"
@@ -20,7 +21,8 @@
         <!-- Edit Season-->
         <StackPanel Orientation="Horizontal"
                     Margin="0 10 0 20">
-            <TextBox Style="{StaticResource TextBoxStyle}" 
+            <TextBox Width="165"
+                     Style="{StaticResource TextBoxStyle}" 
                      Text="{Binding EditSeason}" />
             <Button Content="BEARBEITEN"
                     Margin="5 0 0 0"
@@ -58,17 +60,13 @@
             <!-- Button -->
             <StackPanel Grid.Column="1">
                 <Button Content="LÖSCHEN"
-                        Margin="5 0 0 0"
+                        Margin="5 1 0 0"
                         Style="{StaticResource ModalButtonStyle}"
                         Command="{Binding DeleteSeasonCommand}" />
                 <Button Content="LEEREN"
                         Margin="5 5 0 0"
                         Style="{StaticResource ModalButtonStyle}"
                         Command="{Binding ClearSeasonListCommand}" />
-                <Button Content="BEENDEN"
-                        Margin="5 129 0 0"
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding CloseAddSeasonCommand}" />
             </StackPanel>
         </Grid>
     </StackPanel>

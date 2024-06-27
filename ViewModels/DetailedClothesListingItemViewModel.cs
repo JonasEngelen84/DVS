@@ -1,14 +1,11 @@
-﻿namespace DVS.Models
+﻿namespace DVS.ViewModels
 {
-    public class DetailedClothesListingItemModel : ModelBase
+    public class DetailedClothesListingItemViewModel : ViewModelBase
     {
         private string _iD;
         public string ID
         {
-            get
-            {
-                return _iD;
-            }
+            get => _iD;
             set
             {
                 _iD = value;
@@ -19,10 +16,7 @@
         private string _name;
         public string Name
         {
-            get
-            {
-                return _name;
-            }
+            get => _name;
             set
             {
                 _name = value;
@@ -33,10 +27,7 @@
         private string _categorie;
         public string Categorie
         {
-            get
-            {
-                return _categorie;
-            }
+            get => _categorie;
             set
             {
                 _categorie = value;
@@ -47,10 +38,7 @@
         private string _season;
         public string Season
         {
-            get
-            {
-                return _season;
-            }
+            get => _season;
             set
             {
                 _season = value;
@@ -58,13 +46,10 @@
             }
         }
 
-        private string _size;
-        public string Size
+        private string? _size;
+        public string? Size
         {
-            get
-            {
-                return _size;
-            }
+            get => _size;
             set
             {
                 _size = value;
@@ -72,13 +57,10 @@
             }
         }
 
-        private int _quantity;
-        public int Quantity
+        private int? _quantity;
+        public int? Quantity
         {
-            get
-            {
-                return _quantity;
-            }
+            get => _quantity;
             set
             {
                 _quantity = value;
@@ -89,10 +71,7 @@
         private string? _comment;
         public string? Comment
         {
-            get
-            {
-                return _comment;
-            }
+            get => _comment;
             set
             {
                 _comment = value;
@@ -100,9 +79,34 @@
             }
         }
 
-        public DetailedClothesListingItemModel(
+        private bool _isDeleting;
+        public bool IsDeleting
+        {
+            get => _isDeleting;
+            set
+            {
+                _isDeleting = value;
+                OnPropertyChanged(nameof(IsDeleting));
+            }
+        }
+
+        private string _errorMessage;
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                OnPropertyChanged(nameof(ErrorMessage));
+                OnPropertyChanged(nameof(HasErrorMessage));
+            }
+        }
+
+        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+
+        public DetailedClothesListingItemViewModel(
             string iD, string name, string categorie,
-            string season, string size, int quantity, string? comment)
+            string season, string ?size, int? quantity, string? comment)
         {
             ID = iD;
             Name = name;

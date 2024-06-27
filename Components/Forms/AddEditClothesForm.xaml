@@ -9,17 +9,20 @@
     <StackPanel>
 
         <!-- Id -->
-        <TextBox Margin="0 0 0 5"
+        <TextBox Width="252"
+                 Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding ID}" />
 
         <!-- Name -->
-        <TextBox Margin="0 0 0 5"
+        <TextBox Width="252"
+                 Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Name}" />
 
         <!-- Comment -->
-        <TextBox Margin="0 0 0 5"
+        <TextBox Width="252"
+                 Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Comment}" />
         
@@ -76,7 +79,7 @@
             <Label Content="Größe (us):"
                    FontSize="14"
                    FontWeight="Bold"
-                   Margin="39 0 0 -2" />
+                   Margin="42 0 0 -2" />
         </StackPanel>
 
         <!-- Size Checkboxes -->

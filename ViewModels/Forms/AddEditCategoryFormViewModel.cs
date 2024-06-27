@@ -64,7 +64,6 @@ namespace DVS.ViewModels.Forms
 
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
-        //TODO: Dispose Collections?
         private readonly ObservableCollection<string> _categories;
         private readonly CollectionViewSource _categoryCollectionViewSource;
         public IEnumerable<string> Categories => _categoryCollectionViewSource.View.Cast<string>();
@@ -76,7 +75,6 @@ namespace DVS.ViewModels.Forms
         public ICommand EditCategoryCommand { get; }
         public ICommand DeleteCategoryCommand { get; }
         public ICommand ClearCategoryListCommand { get; }
-        public ICommand CloseAddEditCategoryCommand { get; } 
 
 
         public AddEditCategoryFormViewModel(CategoryStore categoryStore,
@@ -84,8 +82,7 @@ namespace DVS.ViewModels.Forms
                                             ICommand addCategoryCommand,
                                             ICommand editCategoryCommand,
                                             ICommand deleteCategoryCommand,
-                                            ICommand clearCategoryListCommand,
-                                            ICommand closeAddEditCategoryCommand)
+                                            ICommand clearCategoryListCommand)
         {
             _categoryStore = categoryStore;
             _selectedCategoryStore = selectedCategoryStore;
@@ -93,7 +90,6 @@ namespace DVS.ViewModels.Forms
             EditCategoryCommand = editCategoryCommand;
             DeleteCategoryCommand = deleteCategoryCommand;
             ClearCategoryListCommand = clearCategoryListCommand;
-            CloseAddEditCategoryCommand = closeAddEditCategoryCommand;
 
             EditCategory = "Kategorie wählen";
 
@@ -102,14 +98,14 @@ namespace DVS.ViewModels.Forms
             _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
 
             CategoryStore_CategoriesLoaded();
-            //_categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
+            _categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded += CategoryStore_CategoryAdded;
         }
 
 
         protected override void Dispose()
         {
-            //_categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
+            _categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded -= CategoryStore_CategoryAdded;
 
             base.Dispose();

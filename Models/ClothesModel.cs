@@ -1,4 +1,6 @@
-﻿namespace DVS.Models
+﻿using DVS.ViewModels;
+
+namespace DVS.Models
 {
     public class ClothesModel(string id, string name, string categorie, string season, string? comment)
     {
