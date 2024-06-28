@@ -115,6 +115,7 @@
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
+
         public DetailedEmployeeListingItemViewModel(
             string iD, string lastname, string firstname, string? clothesID,
             string? clothesName, string? size, int? quantity, string? comment)

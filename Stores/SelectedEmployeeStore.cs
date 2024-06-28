@@ -9,10 +9,7 @@ namespace DVS.Stores
         private EmployeeModel _selectedEmployee;
         public EmployeeModel SelectedEmployee
         {
-            get
-            {
-                return _selectedEmployee;
-            }
+            get => _selectedEmployee;
             set
             {
                 _selectedEmployee = value;
@@ -22,6 +19,7 @@ namespace DVS.Stores
 
         public event Action SelectedEmployeeChanged;
 
+
         public SelectedEmployeeStore(EmployeeStore employeeStore)
         {
             _employeeStore = employeeStore;
@@ -29,6 +27,7 @@ namespace DVS.Stores
             _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
             _employeeStore.EmployeeUpdated += EmployeeStore_EmployeeUpdated;
         }
+
 
         private void EmployeeStore_EmployeeAdded(EmployeeModel employee)
         {

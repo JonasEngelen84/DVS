@@ -151,15 +151,10 @@ namespace DVS.ViewModels.Forms
         public ICommand ClearClothesListCommand { get; }
 
 
-        public AddEditClothesFormViewModel(CategoryStore categoryStore,
-                                           SeasonStore seasonStore,
-                                           ClothesStore clothesStore,
-                                           ICommand openAddEditCategoriesCommand,
-                                           ICommand openAddEditSeasonsCommand,
-                                           ICommand addClothesCommand,
-                                           ICommand editClothesCommand,
-                                           ICommand deleteClothesCommand,
-                                           ICommand clearClothesListCommand)
+        public AddEditClothesFormViewModel(
+            CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore,
+            ICommand openAddEditCategoriesCommand, ICommand openAddEditSeasonsCommand, ICommand addClothesCommand,
+            ICommand editClothesCommand, ICommand deleteClothesCommand, ICommand clearClothesListCommand)
         {
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;

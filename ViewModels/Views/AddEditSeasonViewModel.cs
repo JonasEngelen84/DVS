@@ -10,31 +10,23 @@ namespace DVS.ViewModels.Views
         public AddEditSeasonFormViewModel AddEditSeasonFormViewModel { get; }
         public ICommand CloseAddSeasonCommand { get; }
 
-        public AddEditSeasonViewModel(ModalNavigationStore modalNavigationStore,
-                                      CategoryStore categoryStore,
-                                      SeasonStore seasonStore,
-                                      SelectedCategoryStore selectedCategoryStore,
-                                      SelectedSeasonStore selectedSeasonStore,
-                                      ClothesStore clothesStore)
+        public AddEditSeasonViewModel(
+            ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
+            SeasonStore seasonStore, SelectedCategoryStore selectedCategoryStore,
+            SelectedSeasonStore selectedSeasonStore, ClothesStore clothesStore)
         {
             ICommand addSeasonCommand = new AddSeasonCommand(this, seasonStore);
             ICommand editSeasonCommand = new EditSeasonCommand(this, modalNavigationStore);
             ICommand deleteSeasonCommand = new DeleteSeasonCommand(this, modalNavigationStore);
             ICommand clearSeasonListCommand = new ClearSeasonListCommand(this, modalNavigationStore);
-            AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(seasonStore,
-                                                                        selectedSeasonStore,
-                                                                        addSeasonCommand,
-                                                                        editSeasonCommand,
-                                                                        deleteSeasonCommand,
-                                                                        clearSeasonListCommand);
 
-            CloseAddSeasonCommand = new CloseAddEditSeasonCommand(modalNavigationStore,
-                                                                  categoryStore,
-                                                                  seasonStore,
-                                                                  selectedCategoryStore,
-                                                                  selectedSeasonStore,
-                                                                  clothesStore);
+            AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(
+                seasonStore, selectedSeasonStore, addSeasonCommand, 
+               editSeasonCommand, deleteSeasonCommand, clearSeasonListCommand);
 
+            CloseAddSeasonCommand = new CloseAddEditSeasonCommand(
+                modalNavigationStore, categoryStore, seasonStore,
+                selectedCategoryStore, selectedSeasonStore, clothesStore);
         }
     }
 }

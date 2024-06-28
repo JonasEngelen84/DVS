@@ -11,6 +11,7 @@ namespace DVS.Commands.DragNDropCommands
             if (parameter.Equals("AddEditEmployeAvailableClothesList"))
                 _dVSListingViewModel.AddClothesItemToDetailedClothesListingItemCollection(
                     _dVSListingViewModel.IncomingClothesListingItemModel);
+
             else if (parameter.Equals("AddEditEmployeeNewEmployeeClothesList"))
                 _dVSListingViewModel.AddClothesItemToNewEmployeeListingItemCollection(
                     _dVSListingViewModel.IncomingClothesListingItemModel);

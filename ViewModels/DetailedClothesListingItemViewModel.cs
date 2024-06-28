@@ -104,9 +104,10 @@
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
+
         public DetailedClothesListingItemViewModel(
-            string iD, string name, string categorie,
-            string season, string ?size, int? quantity, string? comment)
+            string iD, string name, string categorie, string season,
+            string ?size, int? quantity, string? comment)
         {
             ID = iD;
             Name = name;

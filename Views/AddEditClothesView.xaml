@@ -6,7 +6,6 @@
              xmlns:components="clr-namespace:DVS.Components.Forms"
              mc:Ignorable="d">
 
-    <!-- Background -->
     <Border Background="#FFDEDEDE">
         <Grid>
             <Grid.RowDefinitions>
@@ -14,10 +13,11 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <!-- Title & CloseButton -->
+            <!-- TitleBar -->
             <Border Grid.Row="0"
                     Background="#FFBFBFBF">
                 <Grid>
+                    <!-- Title -->
                     <TextBlock Text="Bekleidung"
                                FontSize="28"
                                FontWeight="SemiBold"
@@ -37,7 +37,6 @@
                 </Grid>
             </Border>
 
-            <!-- AddClothesForm_Component -->
             <components:AddEditClothesForm Grid.Row="1"
                                            Margin="15 10 15 15"/>
         </Grid>

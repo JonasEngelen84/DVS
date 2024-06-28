@@ -62,6 +62,7 @@ namespace DVS.ViewModels.Forms
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
+        //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
         private readonly SeasonStore _seasonStore;
@@ -77,12 +78,10 @@ namespace DVS.ViewModels.Forms
         public ICommand DeleteSeasonCommand { get; }
         public ICommand ClearSeasonListCommand { get; }
 
-        public AddEditSeasonFormViewModel(SeasonStore seasonStore,
-                                          SelectedSeasonStore selectedSeasonStore,
-                                          ICommand addSeasonCommand,
-                                          ICommand editSeasonCommand,
-                                          ICommand deleteSeasonCommand,
-                                          ICommand clearSeasonListCommand)
+
+        public AddEditSeasonFormViewModel(
+            SeasonStore seasonStore, SelectedSeasonStore selectedSeasonStore, ICommand addSeasonCommand,
+            ICommand editSeasonCommand, ICommand deleteSeasonCommand, ICommand clearSeasonListCommand)
         {
             _seasonStore = seasonStore;
             _selectedSeasonStore = selectedSeasonStore;
@@ -101,6 +100,7 @@ namespace DVS.ViewModels.Forms
             _seasonStore.SeasonsLoaded += SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonsAdded += SeasonStore_SeasonAdded;
         }
+
 
         protected override void Dispose()
         {

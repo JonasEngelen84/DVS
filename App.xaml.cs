@@ -5,10 +5,6 @@ using System.Windows;
 
 namespace DVS
 {
-    /// <summary>
-    /// App.xaml.cs wird genutzt um Konfigurationenen, bei Programmstart, festzulegen.
-    /// In App.xaml werden zB. Dictionaries implementiert, welche im gesamten code genutzt weden können.
-    /// </summary>
     public partial class App : Application
     {
         private readonly CategoryStore _categoryStore;
@@ -35,18 +31,12 @@ namespace DVS
             _selectedEmployeeClothesStore = new();
             _modalNavigationStore = new();
 
-            _dVSEmployeesViewModel = new(_employeeStore,
-                                         _clothesStore);
+            _dVSEmployeesViewModel = new(_employeeStore, _clothesStore);
 
-            _dVSDetailedViewModel = new(_modalNavigationStore,
-                                        _categoryStore,
-                                        _seasonStore,
-                                        _selectedCategoryStore,
-                                        _selectedSeasonStore,
-                                        _clothesStore,
-                                        _employeeStore,
-                                        _selectedClothesStore,
-                                        _selectedEmployeeClothesStore);
+            _dVSDetailedViewModel = new(
+                _modalNavigationStore, _categoryStore, _seasonStore,
+                _selectedCategoryStore, _selectedSeasonStore, _clothesStore,
+                _employeeStore, _selectedClothesStore, _selectedEmployeeClothesStore);
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -54,9 +44,8 @@ namespace DVS
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_dVSEmployeesViewModel,
-                                                _dVSDetailedViewModel,
-                                                _modalNavigationStore)
+                DataContext = new MainViewModel(
+                    _dVSEmployeesViewModel, _dVSDetailedViewModel, _modalNavigationStore)
             };
 
             MainWindow.Show();

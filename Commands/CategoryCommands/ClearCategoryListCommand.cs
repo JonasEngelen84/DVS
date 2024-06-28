@@ -7,7 +7,8 @@ namespace DVS.Commands.CategoryCommands
     {
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public ClearCategoryListCommand(AddEditCategoryViewModel addEditCategorieViewModel, ModalNavigationStore modalNavigationStore)
+        public ClearCategoryListCommand(AddEditCategoryViewModel addEditCategorieViewModel,
+            ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
         }

@@ -24,29 +24,17 @@ namespace DVS.ViewModels.Views
             ICommand deleteClothesCommand = new DeleteClothesCommand(modalNavigationStore);
             ICommand clearClothesListCommand = new ClearClothesListCommand(modalNavigationStore);
 
-            ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(modalNavigationStore,
-                                                                                     categoryStore,
-                                                                                     seasonStore,
-                                                                                     selectedCategoryStore,
-                                                                                     selectedSeasonStore,
-                                                                                     clothesStore);
+            ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(
+                modalNavigationStore, categoryStore, seasonStore,
+                selectedCategoryStore, selectedSeasonStore, clothesStore);
 
-            ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(modalNavigationStore,
-                                                                               categoryStore,
-                                                                               seasonStore,
-                                                                               selectedCategoryStore,
-                                                                               selectedSeasonStore,
-                                                                               clothesStore);
+            ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(
+                modalNavigationStore, categoryStore, seasonStore,
+                selectedCategoryStore, selectedSeasonStore, clothesStore);
 
-            AddEditClothesFormViewModel = new(categoryStore,
-                                              seasonStore,
-                                              clothesStore,
-                                              openAddEditCategoriesCommand,
-                                              openAddEditSeasonsCommand,
-                                              addClothesCommand,
-                                              editClothesCommand,
-                                              deleteClothesCommand,
-                                              clearClothesListCommand);
+            AddEditClothesFormViewModel = new(
+                categoryStore, seasonStore, clothesStore, openAddEditCategoriesCommand, openAddEditSeasonsCommand,
+                addClothesCommand, editClothesCommand, deleteClothesCommand, clearClothesListCommand);
         }
     }
 }

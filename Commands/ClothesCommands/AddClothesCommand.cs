@@ -22,11 +22,9 @@ namespace DVS.Commands.ClothesCommands
             addClothesFormViewModel.ErrorMessage = null;
             addClothesFormViewModel.IsSubmitting = true;
 
-            ClothesModel clothes = new(addClothesFormViewModel.ID,
-                                       addClothesFormViewModel.Name,
-                                       addClothesFormViewModel.Category,
-                                       addClothesFormViewModel.Season,
-                                       addClothesFormViewModel.Comment);
+            ClothesModel clothes = new(
+                addClothesFormViewModel.ID, addClothesFormViewModel.Name, addClothesFormViewModel.Category,
+                addClothesFormViewModel.Season, addClothesFormViewModel.Comment);
 
             // Alle ausgewählten Größen in eine ZwischenListe speichern.
             // Diese wird der GrößenListe (Size) des ClothesModel hinzugefügt.

@@ -9,6 +9,7 @@
             set
             {
                 _selectedCategory = value;
+                SelectedClothesModelChanged?.Invoke();
             }
         }
 
@@ -21,5 +22,7 @@
                 _editedCategory = value;
             }
         }
+
+        public event Action SelectedClothesModelChanged;
     }
 }

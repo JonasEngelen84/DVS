@@ -7,7 +7,8 @@ namespace DVS.Commands.ClothesCommands
     {
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public EditClothesCommand(AddEditClothesViewModel addClothesViewModel, ModalNavigationStore modalNavigationStore)
+        public EditClothesCommand(AddEditClothesViewModel addClothesViewModel,
+            ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
         }

@@ -8,7 +8,8 @@ namespace DVS.Commands.SeasonCommands
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
 
-        public DeleteSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, ModalNavigationStore modalNavigationStore)
+        public DeleteSeasonCommand(
+            AddEditSeasonViewModel addEditSeasonViewModel, ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
         }

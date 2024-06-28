@@ -11,10 +11,9 @@ namespace DVS.Commands.DVSDetailedViewCommands
         private readonly EmployeeStore _employeeStore;
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public OpenAddEmployeeCommand(DVSListingViewModel dVSListingViewModel,
-                                      ClothesStore clothesStore,
-                                      EmployeeStore employeeStore,
-                                      ModalNavigationStore modalNavigationStore)
+        public OpenAddEmployeeCommand(
+            DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore,
+            EmployeeStore employeeStore, ModalNavigationStore modalNavigationStore)
         {
             _dVSListingViewModel = dVSListingViewModel;
             _clothesStore = clothesStore;
@@ -24,10 +23,8 @@ namespace DVS.Commands.DVSDetailedViewCommands
 
         public override void Execute(object parameter)
         {
-            AddEditEmployeeViewModel addEmployeeViewModel = new(_dVSListingViewModel,
-                                                                _clothesStore,
-                                                                _employeeStore,
-                                                                _modalNavigationStore);
+            AddEditEmployeeViewModel addEmployeeViewModel = new(
+                _dVSListingViewModel, _clothesStore, _employeeStore, _modalNavigationStore);
 
             addEmployeeViewModel.AddEditEmployeeFormViewModel.ID = "ID";
             addEmployeeViewModel.AddEditEmployeeFormViewModel.Lastname = "Nachname";

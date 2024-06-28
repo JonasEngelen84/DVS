@@ -13,12 +13,14 @@ namespace DVS.Stores
         public event Action SeasonsLoaded;
         public event Action<string> SeasonsAdded;
 
+
         public SeasonStore()
         {
             _seasons = ["Saisonlos", "Sommer", "Winter"];
             _seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
             _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
         }
+
 
         public async Task Load()
         {

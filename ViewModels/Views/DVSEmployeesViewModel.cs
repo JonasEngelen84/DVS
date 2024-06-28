@@ -7,13 +7,11 @@ namespace DVS.ViewModels.Views
         public DVSListingViewModel DVSClothesListingViewModel { get; }
         public DVSListingViewModel DVSEmployeesListingViewModel { get; }
 
-        public DVSEmployeesViewModel(EmployeeStore employeeStore,
-                                     ClothesStore clothesStore)
+        public DVSEmployeesViewModel(EmployeeStore employeeStore, ClothesStore clothesStore)
         {
             DVSClothesListingViewModel = new(clothesStore, employeeStore);
             DVSEmployeesListingViewModel = new(clothesStore, employeeStore);
         }
 
-        
     }
 }

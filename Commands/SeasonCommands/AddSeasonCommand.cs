@@ -21,7 +21,8 @@ namespace DVS.Commands.SeasonCommands
             }
             catch (Exception)
             {
-                addEditSeasonFormViewModel.ErrorMessage = "Erstellen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                addEditSeasonFormViewModel.ErrorMessage =
+                    "Erstellen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
             }
             finally
             {

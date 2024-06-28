@@ -18,15 +18,12 @@ namespace DVS.ViewModels.Views
         public ICommand PlusCommand { get; }
         public ICommand MinusCommand { get; }
 
-        public DVSDetailedViewModel(ModalNavigationStore modalNavigationStore,
-                                    CategoryStore categoryStore,
-                                    SeasonStore seasonStore,
-                                    SelectedCategoryStore selectedCategoryStore,
-                                    SelectedSeasonStore selectedSeasonStore,
-                                    ClothesStore clothesStore,
-                                    EmployeeStore employeeStore,
-                                    SelectedClothesStore selectedClothesStore,
-                                    SelectedEmployeeClothesStore selectedEmployeeClothesStore)
+        public DVSDetailedViewModel(
+            ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
+            SeasonStore seasonStore, SelectedCategoryStore selectedCategoryStore,
+            SelectedSeasonStore selectedSeasonStore, ClothesStore clothesStore,
+            EmployeeStore employeeStore, SelectedClothesStore selectedClothesStore,
+            SelectedEmployeeClothesStore selectedEmployeeClothesStore)
         {
             DVSDetailedClothesListingView = new(clothesStore, employeeStore);
             DVSDetailedEmployeesListingView = new(clothesStore, employeeStore);
@@ -34,37 +31,22 @@ namespace DVS.ViewModels.Views
             SaveCommand = new SaveCommand(modalNavigationStore);
             OpenFilterClothesListCommand = new OpenFilterClothesListCommand(modalNavigationStore);
             OpenFilterEmployeeListCommand = new OpenFilterEmployeeListCommand(modalNavigationStore);
+            PlusCommand = new PlusCommand(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);
+            MinusCommand = new MinusCommand(selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);
 
-            OpenAddEmployeeCommand = new OpenAddEmployeeCommand(DVSDetailedClothesListingView,
-                                                                clothesStore,
-                                                                employeeStore,
-                                                                modalNavigationStore);
+            OpenAddEmployeeCommand = new OpenAddEmployeeCommand(
+                DVSDetailedClothesListingView, clothesStore, employeeStore, modalNavigationStore);
 
-            OpenAddClothesCommand = new OpenAddClothesCommand(modalNavigationStore,
-                                                              categoryStore,
-                                                              seasonStore,
-                                                              selectedCategoryStore,
-                                                              selectedSeasonStore,
-                                                              clothesStore);
+            OpenAddClothesCommand = new OpenAddClothesCommand(
+                modalNavigationStore, categoryStore, seasonStore,
+                selectedCategoryStore, selectedSeasonStore, clothesStore);
 
-            OpenEditCommand = new OpenEditCommand(DVSDetailedClothesListingView,
-                                                  modalNavigationStore,
-                                                  categoryStore,
-                                                  seasonStore,
-                                                  selectedCategoryStore,
-                                                  selectedSeasonStore,
-                                                  selectedClothesStore,
-                                                  selectedEmployeeClothesStore,
-                                                  clothesStore,
-                                                  employeeStore);
+            OpenEditCommand = new OpenEditCommand(
+                DVSDetailedClothesListingView, modalNavigationStore, categoryStore,
+                seasonStore, selectedCategoryStore, selectedSeasonStore, selectedClothesStore,
+                selectedEmployeeClothesStore, clothesStore, employeeStore);
 
-            PlusCommand = new PlusCommand(selectedClothesStore,
-                                          selectedEmployeeClothesStore,
-                                          modalNavigationStore);
 
-            MinusCommand = new MinusCommand(selectedClothesStore,
-                                            selectedEmployeeClothesStore,
-                                            modalNavigationStore);
         }
     }
 }

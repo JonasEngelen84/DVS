@@ -6,10 +6,9 @@ using DVS.ViewModels.Views;
 
 namespace DVS.Commands.EmployeeCommands
 {
-    public class AddEmployeeCommand(AddEditEmployeeViewModel addEmployeeViewModel,
-                                    EmployeeStore employeeStore,
-                                    ModalNavigationStore modalNavigationStore)
-                                    : AsyncCommandBase
+    public class AddEmployeeCommand(
+        AddEditEmployeeViewModel addEmployeeViewModel, EmployeeStore employeeStore,
+        ModalNavigationStore modalNavigationStore) : AsyncCommandBase
     {
         private readonly AddEditEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
@@ -22,12 +21,12 @@ namespace DVS.Commands.EmployeeCommands
             addEmployeeFormViewModel.ErrorMessage = null;
             addEmployeeFormViewModel.IsSubmitting = true;
 
-            EmployeeModel employee = new(addEmployeeFormViewModel.ID,
-                                         addEmployeeFormViewModel.Firstname,
-                                         addEmployeeFormViewModel.Lastname,
-                                         addEmployeeFormViewModel.Comment);
+            EmployeeModel employee = new(
+                addEmployeeFormViewModel.ID, addEmployeeFormViewModel.Firstname,
+                addEmployeeFormViewModel.Lastname, addEmployeeFormViewModel.Comment);
 
-            foreach (DetailedClothesListingItemViewModel clothes in _addEmployeeViewModel.AddEditEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
+            foreach (DetailedClothesListingItemViewModel clothes in
+                _addEmployeeViewModel.AddEditEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
             {
                 employee.Clothes.Add(clothes);
             }
@@ -38,7 +37,8 @@ namespace DVS.Commands.EmployeeCommands
             }
             catch (Exception)
             {
-                addEmployeeFormViewModel.ErrorMessage = "Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                addEmployeeFormViewModel.ErrorMessage =
+                    "Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
             }
             finally
             {

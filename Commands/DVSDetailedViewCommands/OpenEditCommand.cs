@@ -17,16 +17,11 @@ namespace DVS.Commands.DVSDetailedViewCommands
         private readonly SelectedCategoryStore _selectedCategoryStore;
         private readonly SelectedSeasonStore _selectedSeasonStore;
 
-        public OpenEditCommand(DVSListingViewModel dVSListingViewModel,
-                               ModalNavigationStore modalNavigationStore,
-                               CategoryStore categoryStore,
-                               SeasonStore seasonStore,
-                               SelectedCategoryStore selectedCategoryStore,
-                               SelectedSeasonStore selectedSeasonStore,
-                               SelectedClothesStore selectedClothesStore,
-                               SelectedEmployeeClothesStore selectedEmployeeClothesStore,
-                               ClothesStore clothesStore,
-                               EmployeeStore employeeStore)
+        public OpenEditCommand(
+            DVSListingViewModel dVSListingViewModel, ModalNavigationStore modalNavigationStore,
+            CategoryStore categoryStore, SeasonStore seasonStore, SelectedCategoryStore selectedCategoryStore,
+            SelectedSeasonStore selectedSeasonStore, SelectedClothesStore selectedClothesStore,
+            SelectedEmployeeClothesStore selectedEmployeeClothesStore, ClothesStore clothesStore, EmployeeStore employeeStore)
         {
             _selectedClothesStore = selectedClothesStore;
             _selectedEmployeeClothesStore = selectedEmployeeClothesStore;
@@ -45,19 +40,14 @@ namespace DVS.Commands.DVSDetailedViewCommands
         {
             if(i%2 == 0)
             {
-                _modalNavigationStore.CurrentViewModel = new AddEditClothesViewModel(_modalNavigationStore,
-                                                                                     _categoryStore,
-                                                                                     _seasonStore,
-                                                                                     _selectedCategoryStore,
-                                                                                     _selectedSeasonStore,
-                                                                                     _clothesStore);
+                _modalNavigationStore.CurrentViewModel = new AddEditClothesViewModel(
+                    _modalNavigationStore, _categoryStore, _seasonStore,
+                    _selectedCategoryStore, _selectedSeasonStore, _clothesStore);
             }
             else
             {
-                _modalNavigationStore.CurrentViewModel = new AddEditEmployeeViewModel(_dVSListingViewModel,
-                                                                                      _clothesStore,
-                                                                                      _employeeStore,
-                                                                                      _modalNavigationStore);
+                _modalNavigationStore.CurrentViewModel = new AddEditEmployeeViewModel(
+                    _dVSListingViewModel, _clothesStore, _employeeStore, _modalNavigationStore);
             }
 
             i++;

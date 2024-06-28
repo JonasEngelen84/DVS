@@ -91,16 +91,12 @@ namespace DVS.ViewModels.Forms
         public ICommand DeleteEmployeeCommand { get; }
 
 
-        public AddEditEmployeeFormViewModel(DVSListingViewModel dVSListingViewModel,
-                                            ClothesStore clothesStore,
-                                            EmployeeStore employeeStore,
-                                            ICommand addEmployeeCommand,
-                                            ICommand editEmployeeCommand,
-                                            ICommand clearEmployeeClothesListCommand,
-                                            ICommand deleteEmployeeCommand)
+        public AddEditEmployeeFormViewModel(
+            DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore,
+            EmployeeStore employeeStore, ICommand addEmployeeCommand, ICommand editEmployeeCommand,
+            ICommand clearEmployeeClothesListCommand, ICommand deleteEmployeeCommand)
         {
             DVSListingViewModel = dVSListingViewModel;
-
             AddEmployeeCommand = addEmployeeCommand;
             EditEmployeeCommand = editEmployeeCommand;
             ClearEmployeeClothesListCommand = clearEmployeeClothesListCommand;

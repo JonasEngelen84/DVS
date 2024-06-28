@@ -13,12 +13,14 @@ namespace DVS.Stores
         public event Action CategoriesLoaded;
         public event Action<string> CategoryAdded;
 
+
         public CategoryStore()
         {
             _categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];
             _categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
             _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
         }
+
 
         public async Task Load()
         {

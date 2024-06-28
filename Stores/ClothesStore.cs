@@ -12,6 +12,7 @@ namespace DVS.Stores
         public event Action ClothesLoaded;
         public event Action<ClothesModel> ClothesAdded;
 
+
         public ClothesStore()
         {
             _clothes =
@@ -57,6 +58,7 @@ namespace DVS.Stores
                 }
             ];
         }
+
 
         public async Task Load()
         {

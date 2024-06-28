@@ -19,22 +19,14 @@ namespace DVS.ViewModels.Views
                                         ModalNavigationStore modalNavigationStore)
         {
             CloseModalCommand = new CloseModalCommand(modalNavigationStore);
-
             ICommand editEmployeeCommand = new EditEmployeeCommand(this, modalNavigationStore);
             ICommand clearEmployeeClothesListCommand = new ClearEmployeeClothesListCommand(modalNavigationStore);
             ICommand deleteEmployeeCommand = new DeleteEmployeeCommand();
+            ICommand addEmployeeCommand = new AddEmployeeCommand(this, employeeStore, modalNavigationStore);
 
-            ICommand addEmployeeCommand = new AddEmployeeCommand(this,
-                                                                 employeeStore,
-                                                                 modalNavigationStore);
-
-            AddEditEmployeeFormViewModel = new AddEditEmployeeFormViewModel(dVSListingViewModel,
-                                                                            clothesStore,
-                                                                            employeeStore,
-                                                                            addEmployeeCommand,
-                                                                            editEmployeeCommand,
-                                                                            clearEmployeeClothesListCommand,
-                                                                            deleteEmployeeCommand);
+            AddEditEmployeeFormViewModel = new AddEditEmployeeFormViewModel(
+                dVSListingViewModel, clothesStore, employeeStore, addEmployeeCommand,
+                editEmployeeCommand, clearEmployeeClothesListCommand, deleteEmployeeCommand);
         }
     }
 }

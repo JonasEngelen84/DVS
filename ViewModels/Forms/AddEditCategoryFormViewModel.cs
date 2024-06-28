@@ -62,6 +62,7 @@ namespace DVS.ViewModels.Forms
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
+        //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
         private readonly ObservableCollection<string> _categories;
@@ -77,12 +78,10 @@ namespace DVS.ViewModels.Forms
         public ICommand ClearCategoryListCommand { get; }
 
 
-        public AddEditCategoryFormViewModel(CategoryStore categoryStore,
-                                            SelectedCategoryStore selectedCategoryStore,
-                                            ICommand addCategoryCommand,
-                                            ICommand editCategoryCommand,
-                                            ICommand deleteCategoryCommand,
-                                            ICommand clearCategoryListCommand)
+        public AddEditCategoryFormViewModel(
+            CategoryStore categoryStore, SelectedCategoryStore selectedCategoryStore,
+            ICommand addCategoryCommand, ICommand editCategoryCommand,
+            ICommand deleteCategoryCommand, ICommand clearCategoryListCommand)
         {
             _categoryStore = categoryStore;
             _selectedCategoryStore = selectedCategoryStore;
@@ -102,14 +101,6 @@ namespace DVS.ViewModels.Forms
             _categoryStore.CategoryAdded += CategoryStore_CategoryAdded;
         }
 
-
-        protected override void Dispose()
-        {
-            _categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
-            _categoryStore.CategoryAdded -= CategoryStore_CategoryAdded;
-
-            base.Dispose();
-        }
 
         private void CategoryStore_CategoriesLoaded()
         {
@@ -137,6 +128,14 @@ namespace DVS.ViewModels.Forms
             _categoryCollectionViewSource.View.Refresh();
             AddNewCategory = null;
             OnPropertyChanged(nameof(Categories));
+        }
+
+        protected override void Dispose()
+        {
+            _categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
+            _categoryStore.CategoryAdded -= CategoryStore_CategoryAdded;
+
+            base.Dispose();
         }
     }
 }

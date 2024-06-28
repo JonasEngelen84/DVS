@@ -7,10 +7,7 @@ namespace DVS.Stores
         private EmployeeModel _selectedEmployeeClothes;
         public EmployeeModel SelectedEmployeeClothes
         {
-            get
-            {
-                return _selectedEmployeeClothes;
-            }
+            get => _selectedEmployeeClothes;
             set
             {
                 _selectedEmployeeClothes = value;

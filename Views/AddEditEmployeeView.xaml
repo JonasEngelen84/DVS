@@ -13,10 +13,11 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <!-- Title & CloseButton -->
+            <!-- TitleBar -->
             <Border Grid.Row="0"
                     Background="#FFBFBFBF">
                 <Grid>
+                    <!-- Title -->
                     <TextBlock Text="Mitarbeiter"
                                FontSize="28"
                                FontWeight="SemiBold"
@@ -36,7 +37,6 @@
                 </Grid>
             </Border>
 
-            <!-- AddEditEmployeeForm_Component -->
             <components:AddEditEmployeeForm Grid.Row="1"
                                             Margin="15 10 15 15"/>
         </Grid>

@@ -38,19 +38,19 @@ namespace DVS.ViewModels
             _modalNavigationStore.CurrentViewModelChanged += ModalNavigationStore_CurrentViewModelChanged;
         }
 
-        
-        protected override void Dispose()
-        {
-            _modalNavigationStore.CurrentViewModelChanged -= ModalNavigationStore_CurrentViewModelChanged;
-
-            base.Dispose();
-        }
 
         // Aktualisieren des Modal-ViewModel.
         private void ModalNavigationStore_CurrentViewModelChanged()
         {
             OnPropertyChanged(nameof(CurrentModalViewModel));
             OnPropertyChanged(nameof(IsModalOpen));
+        }
+        
+        protected override void Dispose()
+        {
+            _modalNavigationStore.CurrentViewModelChanged -= ModalNavigationStore_CurrentViewModelChanged;
+
+            base.Dispose();
         }
     }
 }

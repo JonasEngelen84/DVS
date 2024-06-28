@@ -13,6 +13,7 @@ namespace DVS.Stores
         public event Action<EmployeeModel> EmployeeAdded;
         public event Action<EmployeeModel> EmployeeUpdated;
 
+
         public EmployeeStore()
         {
             _employees =
@@ -82,6 +83,7 @@ namespace DVS.Stores
 
             ];
         }
+
 
         public async Task Load()
         {

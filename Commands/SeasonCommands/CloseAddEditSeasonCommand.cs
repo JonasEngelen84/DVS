@@ -12,12 +12,10 @@ namespace DVS.Commands.SeasonCommands
         private readonly SelectedSeasonStore _selectedSeasonStore;
         private readonly ClothesStore _clothesStore;
 
-        public CloseAddEditSeasonCommand(ModalNavigationStore modalNavigationStore,
-                                         CategoryStore categoryStore,
-                                         SeasonStore seasonStore,
-                                         SelectedCategoryStore selectedCategoryStore,
-                                         SelectedSeasonStore selectedSeasonStore,
-                                         ClothesStore clothesStore)
+        public CloseAddEditSeasonCommand(
+            ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
+            SeasonStore seasonStore, SelectedCategoryStore selectedCategoryStore,
+            SelectedSeasonStore selectedSeasonStore, ClothesStore clothesStore)
         {
             _modalNavigationStore = modalNavigationStore;
             _categoryStore = categoryStore;

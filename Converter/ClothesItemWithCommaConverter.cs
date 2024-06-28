@@ -16,6 +16,7 @@ namespace DVS.Converter
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            //TODO: throw new NotImplementedException(); aus ConvertBack entfernen
             throw new NotImplementedException();
         }
     }
