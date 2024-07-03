@@ -1,4 +1,5 @@
-﻿using DVS.Stores;
+﻿using DVS.Models;
+using DVS.Stores;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
@@ -8,26 +9,29 @@ namespace DVS.ViewModels.Forms
 {
     public class AddEditCategoryFormViewModel : ViewModelBase
     {
-        private string? _addNewCategory;
-        public string? AddNewCategory
+        private CategoryModel? _addNewCategory;
+        public CategoryModel? AddNewCategory
         {
             get => _addNewCategory;
             set
             {
                 _addNewCategory = value;
                 OnPropertyChanged(nameof(AddNewCategory));
+                OnPropertyChanged(nameof(CanAdd));
             }
         }
         
-        private string? _editCategory;
-        public string? EditCategory
+        private CategoryModel? _editCategory;
+        public CategoryModel? EditCategory
         {
-            get => _editCategory;
+            get => _editCategory?.Name;
             set
             {
                 _selectedCategoryStore.SelectedCategory = value;
-                _editCategory = value;
+                _editCategory.Name = value;
                 OnPropertyChanged(nameof(EditCategory));
+                OnPropertyChanged(nameof(CanEdit));
+                OnPropertyChanged(nameof(CanDelete));
             }
         }
 
@@ -60,14 +64,22 @@ namespace DVS.ViewModels.Forms
             }
         }
 
+        public bool CanAdd =>
+            !string.IsNullOrEmpty(AddNewCategory.Name) &&
+            !AddNewCategory.Name.Equals("Neue Kategorie");
+
+        public bool CanEdit =>
+            !string.IsNullOrEmpty(EditCategory.Name) &&
+            !EditCategory.Name.Equals("Kategorie wählen") &&
+            _selectedCategoryStore.SelectedCategory != EditCategory;
+
+        public bool CanDelete => _selectedCategoryStore.SelectedCategory != null;
+        public bool CanDeleteAll => _categories != null;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        //TODO: CanSubmit
-        //public bool CanSubmit => !string.IsNullOrEmpty(Username);
-
-        private readonly ObservableCollection<string> _categories;
+        private readonly ObservableCollection<CategoryModel> _categories;
         private readonly CollectionViewSource _categoryCollectionViewSource;
-        public IEnumerable<string> Categories => _categoryCollectionViewSource.View.Cast<string>();
+        public IEnumerable<CategoryModel> Categories => _categoryCollectionViewSource.View.Cast<CategoryModel>();
         
         private readonly CategoryStore _categoryStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
@@ -90,11 +102,14 @@ namespace DVS.ViewModels.Forms
             DeleteCategoryCommand = deleteCategoryCommand;
             ClearCategoryListCommand = clearCategoryListCommand;
 
-            EditCategory = "Kategorie wählen";
+            AddNewCategory = new CategoryModel("Neue Kategorie");
+            EditCategory = new CategoryModel("Kategorie wählen");
+
+            _selectedCategoryStore.SelectedCategory = null;
 
             _categories = [];
             _categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
-            _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
+            _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(CategoryModel.Name), ListSortDirection.Ascending));
 
             CategoryStore_CategoriesLoaded();
             _categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
@@ -106,13 +121,13 @@ namespace DVS.ViewModels.Forms
         {
             _categories.Clear();
 
-            foreach (string category in _categoryStore.Categories)
+            foreach (CategoryModel category in _categoryStore.Categories)
             {
-                AddCategory(category);
+                _categories.Add(category);
             }
         }
 
-        private void CategoryStore_CategoryAdded(string category)
+        private void CategoryStore_CategoryAdded(CategoryModel category)
         {
             AddCategory(category);
         }
@@ -122,9 +137,9 @@ namespace DVS.ViewModels.Forms
 
         }
         
-        private void AddCategory(string categorie)
+        private void AddCategory(CategoryModel categoryModel)
         {
-            _categories.Add(categorie);
+            _categories.Add(categoryModel);
             _categoryCollectionViewSource.View.Refresh();
             AddNewCategory = null;
             OnPropertyChanged(nameof(Categories));

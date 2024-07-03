@@ -90,6 +90,7 @@ namespace DVS.ViewModels.Forms
             DeleteSeasonCommand = deleteSeasonCommand;
             ClearSeasonListCommand = clearSeasonListCommand;
 
+            AddNewSeason = "Neue Saison";
             EditSeason = "Saison wählen";
 
             _seasons = [];
@@ -116,7 +117,7 @@ namespace DVS.ViewModels.Forms
 
             foreach (string season in _seasonStore.Seasons)
             {
-                AddSeason(season);
+                _seasons.Add(season);
             }
         }
 

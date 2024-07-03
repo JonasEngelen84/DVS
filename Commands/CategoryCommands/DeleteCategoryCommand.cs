@@ -3,21 +3,19 @@ using DVS.ViewModels.Views;
 
 namespace DVS.Commands.CategoryCommands
 {
-    public class DeleteCategoryCommand : CommandBase
+    public class DeleteCategoryCommand : AsyncCommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
 
         public DeleteCategoryCommand(AddEditCategoryViewModel addEditCategorieViewModel,
-            ModalNavigationStore modalNavigationStore, SelectedCategoryStore selectedCategoryStore)
+            SelectedCategoryStore selectedCategoryStore)
         {
-            _modalNavigationStore = modalNavigationStore;
             _selectedCategoryStore = selectedCategoryStore;
         }
 
-        public override void Execute(object parameter)
+        public override Task ExecuteAsync(object parameter)
         {
-            _modalNavigationStore.Close();
+            throw new NotImplementedException();
         }
     }
 }

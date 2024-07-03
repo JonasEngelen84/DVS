@@ -11,11 +11,12 @@
         <StackPanel Orientation="Horizontal">
             <TextBox Width="165"
                      Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding AddNewCategory}" />
+                     Text="{Binding AddNewCategory.Name, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="ERSTELLEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding AddCategoryCommand}" />
+                    Command="{Binding AddCategoryCommand}"
+                    IsEnabled="{Binding CanAdd}" />
         </StackPanel>
 
         <!-- Edit Category and Edit-Button-->
@@ -23,11 +24,12 @@
                     Margin="0 10 0 20">
             <TextBox Width="165"
                      Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding EditCategory}" />
+                     Text="{Binding EditCategory, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="BEARBEITEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding EditCategoryCommand}" />
+                    Command="{Binding EditCategoryCommand}"
+                    IsEnabled="{Binding CanEdit}" />
         </StackPanel>
 
         <Grid>
@@ -52,7 +54,13 @@
                               Foreground="Black"
                               Background="WhiteSmoke"
                               ItemsSource="{Binding Categories}"
-                              SelectedItem="{Binding EditCategory}"/>
+                              SelectedItem="{Binding EditCategory}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
             </Border>
 
@@ -61,11 +69,13 @@
                 <Button Content="LÖSCHEN"
                         Margin="5 1 0 0"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding DeleteCategoryCommand}" />
+                        Command="{Binding DeleteCategoryCommand}"
+                        IsEnabled="{Binding CanDelete}" />
                 <Button Content="LEEREN"
                         Margin="5 5 0 0"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding ClearCategoryListCommand}" />
+                        Command="{Binding ClearCategoryListCommand}"
+                        IsEnabled="{Binding CanDeleteAll}" />
             </StackPanel>
         </Grid>
     </StackPanel>

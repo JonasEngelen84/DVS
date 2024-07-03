@@ -1,25 +1,27 @@
-﻿namespace DVS.Stores
+﻿using DVS.Models;
+
+namespace DVS.Stores
 {
     public class SelectedCategoryStore
     {
-        private string _selectedCategory;
-        public string SelectedCategory
+        private CategoryModel _selectedCategory;
+        public CategoryModel SelectedCategory
         {
             get => _selectedCategory;
             set
             {
                 _selectedCategory = value;
-                SelectedClothesModelChanged?.Invoke();
             }
         }
 
-        private string _editedCategory;
-        public string EditedCategory
+        private CategoryModel _editedCategory;
+        public CategoryModel EditedCategory
         {
             get => _editedCategory;
             set
             {
                 _editedCategory = value;
+                SelectedClothesModelChanged?.Invoke();
             }
         }
 

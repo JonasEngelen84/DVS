@@ -102,8 +102,8 @@ namespace DVS.ViewModels.Forms
         //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
-        private readonly ObservableCollection<string> _categories;
-        public IEnumerable<string> Categories => _categories;
+        private readonly ObservableCollection<CategoryModel> _categories;
+        public IEnumerable<CategoryModel> Categories => _categories;
 
         private readonly ObservableCollection<string> _seasons;
         public IEnumerable<string> Seasons => _seasons;
@@ -169,26 +169,37 @@ namespace DVS.ViewModels.Forms
             _categories = [];
             _seasons = [];
 
-            LoadCategories();
-            LoadSeasons();
+            CategoryStore_LoadCategories();
+            SeasonStore_LoadSeasons();
+
+            _categoryStore.CategoriesLoaded += CategoryStore_LoadCategories;
+            _seasonStore.SeasonsLoaded += SeasonStore_LoadSeasons;
 
         }
 
 
-        private void LoadCategories()
+        private void CategoryStore_LoadCategories()
         {
-            foreach (string category in _categoryStore.Categories)
+            foreach (CategoryModel category in _categoryStore.Categories)
             {
+                _categories.Clear();
                 _categories.Add(category);
             }
         }
 
-        private void LoadSeasons()
+        private void SeasonStore_LoadSeasons()
         {
             foreach (string season in _seasonStore.Seasons)
             {
+                _seasons.Clear();
                 _seasons.Add(season);
             }
+        }
+
+        public void Dispose()
+        {
+            _categoryStore.CategoriesLoaded -= CategoryStore_LoadCategories;
+            _seasonStore.SeasonsLoaded -= SeasonStore_LoadSeasons;
         }
     }
 }

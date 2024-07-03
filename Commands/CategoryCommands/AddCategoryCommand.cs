@@ -1,4 +1,5 @@
-﻿using DVS.Stores;
+﻿using DVS.Models;
+using DVS.Stores;
 using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
 
@@ -18,7 +19,7 @@ namespace DVS.Commands.CategoryCommands
             addEditCategoryFormViewModel.ErrorMessage = null;
             addEditCategoryFormViewModel.IsSubmitting = true;
 
-            string newCategory = addEditCategoryFormViewModel.AddNewCategory;
+            CategoryModel newCategory = addEditCategoryFormViewModel.AddNewCategory;
 
             try
             {

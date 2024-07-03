@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using DVS.Models;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 
@@ -6,19 +7,19 @@ namespace DVS.Stores
 {
     public class CategoryStore
     {
-        private readonly ObservableCollection<string> _categories;
+        private readonly ObservableCollection<CategoryModel> _categories;
         private readonly CollectionViewSource _categoryCollectionViewSource;
-        public IEnumerable<string> Categories => _categoryCollectionViewSource.View.Cast<string>();
+        public IEnumerable<CategoryModel> Categories => _categoryCollectionViewSource.View.Cast<CategoryModel>();
 
         public event Action CategoriesLoaded;
-        public event Action<string> CategoryAdded;
+        public event Action<CategoryModel> CategoryAdded;
 
 
         public CategoryStore()
         {
-            _categories = ["Hose", "Pullover", "Shirt", "Jacke", "Kopfbedeckung"];
+            _categories = [ new("Pullover"),  new("Shirt"), new("Jacke"), new("Kopfbedeckung"), new("Hose") ];
             _categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
-            _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
+            _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(CategoryModel.Name), ListSortDirection.Ascending));
         }
 
 
@@ -27,7 +28,7 @@ namespace DVS.Stores
             CategoriesLoaded?.Invoke();
         }
 
-        public async Task Add(string category)
+        public async Task Add(CategoryModel category)
         {
             _categories.Add(category);
             CategoryAdded?.Invoke(category);
