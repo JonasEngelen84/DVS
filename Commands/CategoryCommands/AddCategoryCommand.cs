@@ -19,7 +19,7 @@ namespace DVS.Commands.CategoryCommands
             addEditCategoryFormViewModel.ErrorMessage = null;
             addEditCategoryFormViewModel.IsSubmitting = true;
 
-            CategoryModel newCategory = addEditCategoryFormViewModel.AddNewCategory;
+            CategoryModel newCategory = new(addEditCategoryFormViewModel.AddNewCategory);
 
             try
             {

@@ -19,7 +19,7 @@ namespace DVS.ViewModels.Views
             ClothesStore clothesStore)
         {
             ICommand addCategoryCommand = new AddCategoryCommand(this, categoryStore);
-            ICommand editCategoryCommand = new EditCategoryCommand(this, modalNavigationStore, selectedCategoryStore);
+            ICommand editCategoryCommand = new EditCategoryCommand(this, selectedCategoryStore, categoryStore);
             ICommand deleteCategoryCommand = new DeleteCategoryCommand(this, selectedCategoryStore);
             ICommand clearCategoryListCommand = new ClearCategoryListCommand(this, modalNavigationStore);
 

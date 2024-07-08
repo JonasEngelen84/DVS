@@ -14,17 +14,17 @@ namespace DVS.Stores
             }
         }
 
-        private CategoryModel _editedCategory;
-        public CategoryModel EditedCategory
+        private string _editedCategory;
+        public string EditedCategory
         {
             get => _editedCategory;
             set
             {
                 _editedCategory = value;
-                SelectedClothesModelChanged?.Invoke();
+                //SelectedClothesModelChanged?.Invoke();
             }
         }
 
-        public event Action SelectedClothesModelChanged;
+        //public event Action SelectedClothesModelChanged;
     }
 }

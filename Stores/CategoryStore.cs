@@ -1,30 +1,26 @@
 ﻿using DVS.Models;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Data;
 
 namespace DVS.Stores
 {
     public class CategoryStore
     {
-        private readonly ObservableCollection<CategoryModel> _categories;
-        private readonly CollectionViewSource _categoryCollectionViewSource;
-        public IEnumerable<CategoryModel> Categories => _categoryCollectionViewSource.View.Cast<CategoryModel>();
+        private readonly List<CategoryModel> _categories;
+        public IEnumerable<CategoryModel> Categories => _categories;
 
         public event Action CategoriesLoaded;
         public event Action<CategoryModel> CategoryAdded;
+        public event Action<CategoryModel, string> CategoryEdited;
 
 
         public CategoryStore()
         {
             _categories = [ new("Pullover"),  new("Shirt"), new("Jacke"), new("Kopfbedeckung"), new("Hose") ];
-            _categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
-            _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(CategoryModel.Name), ListSortDirection.Ascending));
         }
 
 
         public async Task Load()
         {
+            _categories.Clear();
             CategoriesLoaded?.Invoke();
         }
 
@@ -32,6 +28,21 @@ namespace DVS.Stores
         {
             _categories.Add(category);
             CategoryAdded?.Invoke(category);
+        }
+
+        public async Task Update(CategoryModel oldCategory, string editedCategory)
+        {
+            var categoryToUpdate = _categories.FirstOrDefault(y => y.Name == oldCategory.Name);
+
+            if (categoryToUpdate != null)
+            {
+                CategoryEdited.Invoke(oldCategory, editedCategory);
+                categoryToUpdate.Name = editedCategory;
+            }
+            else
+            {
+                throw new InvalidOperationException("Umbenennen der Kategorie nicht möglich.");
+            }
         }
     }
 }

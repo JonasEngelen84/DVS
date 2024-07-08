@@ -37,8 +37,7 @@ namespace DVS.Commands.EmployeeCommands
             }
             catch (Exception)
             {
-                addEmployeeFormViewModel.ErrorMessage =
-                    "Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                addEmployeeFormViewModel.ErrorMessage = "Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
             }
             finally
             {

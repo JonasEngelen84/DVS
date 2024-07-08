@@ -16,7 +16,7 @@ namespace DVS.Stores
 
         public SeasonStore()
         {
-            _seasons = ["Saisonlos", "Sommer", "Winter"];
+            _seasons = [];
             _seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
             _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
         }

@@ -9,8 +9,8 @@ namespace DVS.ViewModels.Forms
 {
     public class AddEditCategoryFormViewModel : ViewModelBase
     {
-        private CategoryModel? _addNewCategory;
-        public CategoryModel? AddNewCategory
+        private string _addNewCategory;
+        public string AddNewCategory
         {
             get => _addNewCategory;
             set
@@ -21,16 +21,29 @@ namespace DVS.ViewModels.Forms
             }
         }
         
-        private CategoryModel? _editCategory;
-        public CategoryModel? EditCategory
+        private string _editCategory;
+        public string EditCategory
         {
-            get => _editCategory?.Name;
+            get => _editCategory;
             set
             {
-                _selectedCategoryStore.SelectedCategory = value;
-                _editCategory.Name = value;
+                _editCategory = value;
+                _selectedCategoryStore.EditedCategory = value;
                 OnPropertyChanged(nameof(EditCategory));
                 OnPropertyChanged(nameof(CanEdit));
+            }
+        }
+        
+        private CategoryModel _selectedCategory;
+        public CategoryModel SelectedCategory
+        {
+            get => _selectedCategory;
+            set
+            {
+                _selectedCategory = value;
+                _selectedCategoryStore.SelectedCategory = value;
+                EditCategory = new(value.Name);
+                OnPropertyChanged(nameof(SelectedCategory));
                 OnPropertyChanged(nameof(CanDelete));
             }
         }
@@ -65,22 +78,22 @@ namespace DVS.ViewModels.Forms
         }
 
         public bool CanAdd =>
-            !string.IsNullOrEmpty(AddNewCategory.Name) &&
-            !AddNewCategory.Name.Equals("Neue Kategorie");
+            !string.IsNullOrEmpty(AddNewCategory) &&
+            !AddNewCategory.Equals("Neue Kategorie");
 
         public bool CanEdit =>
-            !string.IsNullOrEmpty(EditCategory.Name) &&
-            !EditCategory.Name.Equals("Kategorie wählen") &&
-            _selectedCategoryStore.SelectedCategory != EditCategory;
+            !string.IsNullOrEmpty(EditCategory) &&
+            !SelectedCategory.Name.Equals("Kategorie wählen") &&
+            !SelectedCategory.Name.Equals(EditCategory);
 
-        public bool CanDelete => _selectedCategoryStore.SelectedCategory != null;
+        public bool CanDelete => !SelectedCategory.Name.Equals("Kategorie wählen");
         public bool CanDeleteAll => _categories != null;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
         private readonly ObservableCollection<CategoryModel> _categories;
         private readonly CollectionViewSource _categoryCollectionViewSource;
-        public IEnumerable<CategoryModel> Categories => _categoryCollectionViewSource.View.Cast<CategoryModel>();
-        
+        public ICollectionView Categories => _categoryCollectionViewSource.View;
+
         private readonly CategoryStore _categoryStore;
         private readonly SelectedCategoryStore _selectedCategoryStore;
 
@@ -102,10 +115,9 @@ namespace DVS.ViewModels.Forms
             DeleteCategoryCommand = deleteCategoryCommand;
             ClearCategoryListCommand = clearCategoryListCommand;
 
-            AddNewCategory = new CategoryModel("Neue Kategorie");
-            EditCategory = new CategoryModel("Kategorie wählen");
-
-            _selectedCategoryStore.SelectedCategory = null;
+            AddNewCategory = "Neue Kategorie";
+            EditCategory = "Kategorie wählen";
+            SelectedCategory = new("Kategorie wählen");
 
             _categories = [];
             _categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
@@ -114,6 +126,7 @@ namespace DVS.ViewModels.Forms
             CategoryStore_CategoriesLoaded();
             _categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded += CategoryStore_CategoryAdded;
+            _categoryStore.CategoryEdited += CategoryStore_CategoryEdited;
         }
 
 
@@ -132,16 +145,28 @@ namespace DVS.ViewModels.Forms
             AddCategory(category);
         }
 
-        private void Edit_Category()
+        private void CategoryStore_CategoryEdited(CategoryModel oldCategory, string editedCategory)
         {
+            var categoryToUpdate = _categories.FirstOrDefault(y => y.Name == oldCategory.Name);
 
+            if (categoryToUpdate != null)
+            {
+                categoryToUpdate.Name = editedCategory;
+                _categoryCollectionViewSource.View.Refresh();
+                EditCategory = "Kategorie wählen";
+                SelectedCategory = new("Kategorie wählen");
+            }
+            else
+            {
+                throw new InvalidOperationException("Umbenennen der Kategorie nicht möglich.");
+            }
         }
         
-        private void AddCategory(CategoryModel categoryModel)
+        private void AddCategory(CategoryModel newCategory)
         {
-            _categories.Add(categoryModel);
+            _categories.Add(newCategory);
             _categoryCollectionViewSource.View.Refresh();
-            AddNewCategory = null;
+            AddNewCategory = "Neue Kategorie";
             OnPropertyChanged(nameof(Categories));
         }
 
@@ -149,6 +174,7 @@ namespace DVS.ViewModels.Forms
         {
             _categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded -= CategoryStore_CategoryAdded;
+            _categoryStore.CategoryEdited -= CategoryStore_CategoryEdited;
 
             base.Dispose();
         }

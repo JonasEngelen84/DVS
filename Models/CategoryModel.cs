@@ -1,12 +1,16 @@
 ﻿namespace DVS.Models
 {
-    public class CategoryModel
+    public class CategoryModel(string name) : ModelBase
     {
-        public string Name { get; set; }
-
-        public CategoryModel(string name)
+        private string _name = name;
+        public string Name
         {
-            Name = name;
+            get => _name;
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(Name));
+            }
         }
     }
 }

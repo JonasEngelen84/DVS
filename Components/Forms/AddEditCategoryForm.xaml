@@ -11,7 +11,7 @@
         <StackPanel Orientation="Horizontal">
             <TextBox Width="165"
                      Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding AddNewCategory.Name, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding AddNewCategory, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="ERSTELLEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
@@ -54,7 +54,7 @@
                               Foreground="Black"
                               Background="WhiteSmoke"
                               ItemsSource="{Binding Categories}"
-                              SelectedItem="{Binding EditCategory}">
+                              SelectedItem="{Binding SelectedCategory}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}" />
