@@ -19,13 +19,13 @@
                                 DisplayMemberBinding="{Binding ID}" />
                 <GridViewColumn Header="Kategorie"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding Categorie}" />
+                                DisplayMemberBinding="{Binding Category.Name}" />
                 <GridViewColumn Header="Name"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Name}" />
                 <GridViewColumn Header="Saison"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding Season}" />
+                                DisplayMemberBinding="{Binding Season.Name}" />
                 <GridViewColumn Header="Größe"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Size}" />

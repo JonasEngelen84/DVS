@@ -17,20 +17,20 @@ namespace DVS.Commands.ClothesCommands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditClothesFormViewModel addClothesFormViewModel = _addClothesViewModel.AddEditClothesFormViewModel;
+            AddEditClothesFormViewModel addEditClothesFormViewModel = _addClothesViewModel.AddEditClothesFormViewModel;
 
-            addClothesFormViewModel.ErrorMessage = null;
-            addClothesFormViewModel.IsSubmitting = true;
+            addEditClothesFormViewModel.ErrorMessage = null;
+            addEditClothesFormViewModel.IsSubmitting = true;
 
             ClothesModel clothes = new(
-                addClothesFormViewModel.ID, addClothesFormViewModel.Name, addClothesFormViewModel.Category,
-                addClothesFormViewModel.Season, addClothesFormViewModel.Comment);
+                addEditClothesFormViewModel.ID, addEditClothesFormViewModel.Name, addEditClothesFormViewModel.Category,
+                addEditClothesFormViewModel.Season, addEditClothesFormViewModel.Comment);
 
             // Alle ausgewählten Größen in eine ZwischenListe speichern.
             // Diese wird der GrößenListe (Size) des ClothesModel hinzugefügt.
-            var selectedSizes = addClothesFormViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                ? addClothesFormViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                : addClothesFormViewModel.AvailableSizesEU.Where(size => size.IsSelected);
+            var selectedSizes = addEditClothesFormViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                ? addEditClothesFormViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                : addEditClothesFormViewModel.AvailableSizesEU.Where(size => size.IsSelected);
 
             foreach (ClothesSizeModel sizeModel in selectedSizes)
             {
@@ -43,11 +43,11 @@ namespace DVS.Commands.ClothesCommands
             }
             catch (Exception)
             {
-                addClothesFormViewModel.ErrorMessage = "Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                addEditClothesFormViewModel.ErrorMessage = "Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
             }
             finally
             {
-                addClothesFormViewModel.IsSubmitting = false;
+                addEditClothesFormViewModel.IsSubmitting = false;
                 _modalNavigationStore.Close();
             }
         }

@@ -1,6 +1,8 @@
 ﻿using DVS.Models;
 using DVS.Stores;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
@@ -40,8 +42,8 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string _category;
-        public string Category
+        private CategoryModel _category;
+        public CategoryModel Category
         {
             get => _category;
             set
@@ -54,8 +56,8 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        private string _season;
-        public string Season
+        private SeasonModel _season;
+        public SeasonModel Season
         {
             get => _season;
             set
@@ -103,10 +105,12 @@ namespace DVS.ViewModels.Forms
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
         private readonly ObservableCollection<CategoryModel> _categories;
-        public IEnumerable<CategoryModel> Categories => _categories;
+        private readonly CollectionViewSource _categoryCollectionViewSource;
+        public ICollectionView Categories => _categoryCollectionViewSource.View;
 
-        private readonly ObservableCollection<string> _seasons;
-        public IEnumerable<string> Seasons => _seasons;
+        private readonly ObservableCollection<SeasonModel> _seasons;
+        private readonly CollectionViewSource _seasonCollectionViewSource;
+        public ICollectionView Seasons => _seasonCollectionViewSource.View;
 
         //TODO: Sizes in Stores implementieren
         private readonly ObservableCollection<ClothesSizeModel> _availableSizesEU =
@@ -167,7 +171,12 @@ namespace DVS.ViewModels.Forms
             ClearClothesListCommand = clearClothesListCommand;
 
             _categories = [];
+            _categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
+            _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(CategoryModel.Name), ListSortDirection.Ascending));
+
             _seasons = [];
+            _seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
+            _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(SeasonModel.Name), ListSortDirection.Ascending));
 
             CategoryStore_LoadCategories();
             SeasonStore_LoadSeasons();
@@ -180,18 +189,20 @@ namespace DVS.ViewModels.Forms
 
         private void CategoryStore_LoadCategories()
         {
+            _categories.Clear();
+
             foreach (CategoryModel category in _categoryStore.Categories)
             {
-                _categories.Clear();
                 _categories.Add(category);
             }
         }
 
         private void SeasonStore_LoadSeasons()
         {
-            foreach (string season in _seasonStore.Seasons)
+            _seasons.Clear();
+
+            foreach (SeasonModel season in _seasonStore.Seasons)
             {
-                _seasons.Clear();
                 _seasons.Add(season);
             }
         }

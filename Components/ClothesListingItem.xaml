@@ -98,12 +98,12 @@
 
                 <!-- Categorie -->
                 <TextBlock Grid.Column="0"
-                           Text="{Binding Categorie, Converter={StaticResource CommaConverter}}"
+                           Text="{Binding Categorie.Name, Converter={StaticResource CommaConverter}}"
                            Margin="0 0 5 0"/>
 
                 <!-- Season -->
                 <TextBlock Grid.Column="1"
-                           Text="{Binding Season}"
+                           Text="{Binding Season.Name}"
                            HorizontalAlignment="Stretch" />
 
                 <!-- DropDownMenu -->

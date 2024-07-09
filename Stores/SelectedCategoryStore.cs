@@ -21,10 +21,7 @@ namespace DVS.Stores
             set
             {
                 _editedCategory = value;
-                //SelectedClothesModelChanged?.Invoke();
             }
         }
-
-        //public event Action SelectedClothesModelChanged;
     }
 }

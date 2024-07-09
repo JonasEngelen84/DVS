@@ -64,7 +64,7 @@
                 </Grid>
             </Border>
 
-            <!-- Button -->
+            <!-- Delete/Clear Button -->
             <StackPanel Grid.Column="1">
                 <Button Content="LÖSCHEN"
                         Margin="5 1 0 0"

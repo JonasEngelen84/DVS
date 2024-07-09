@@ -40,11 +40,14 @@ namespace DVS.ViewModels.Forms
             get => _selectedCategory;
             set
             {
-                _selectedCategory = value;
-                _selectedCategoryStore.SelectedCategory = value;
-                EditCategory = new(value.Name);
-                OnPropertyChanged(nameof(SelectedCategory));
-                OnPropertyChanged(nameof(CanDelete));
+                if (value != null)
+                {
+                    _selectedCategory = value;
+                    _selectedCategoryStore.SelectedCategory = value;
+                    EditCategory = new(value.Name);
+                    OnPropertyChanged(nameof(SelectedCategory));
+                    OnPropertyChanged(nameof(CanDelete));
+                }
             }
         }
 
@@ -87,7 +90,7 @@ namespace DVS.ViewModels.Forms
             !SelectedCategory.Name.Equals(EditCategory);
 
         public bool CanDelete => !SelectedCategory.Name.Equals("Kategorie wählen");
-        public bool CanDeleteAll => _categories != null;
+        public bool CanDeleteAll => _categories.Count > 0;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
         private readonly ObservableCollection<CategoryModel> _categories;
@@ -127,6 +130,8 @@ namespace DVS.ViewModels.Forms
             _categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded += CategoryStore_CategoryAdded;
             _categoryStore.CategoryEdited += CategoryStore_CategoryEdited;
+            _categoryStore.CategoryDeleted += CategoryStore_CategoryDeleted;
+            _categoryStore.AllCategoriesDeleted += CategoryStore_AllCategoriesDeleted;
         }
 
 
@@ -143,6 +148,7 @@ namespace DVS.ViewModels.Forms
         private void CategoryStore_CategoryAdded(CategoryModel category)
         {
             AddCategory(category);
+            OnPropertyChanged(nameof(CanDeleteAll));
         }
 
         private void CategoryStore_CategoryEdited(CategoryModel oldCategory, string editedCategory)
@@ -153,12 +159,44 @@ namespace DVS.ViewModels.Forms
             {
                 categoryToUpdate.Name = editedCategory;
                 _categoryCollectionViewSource.View.Refresh();
-                EditCategory = "Kategorie wählen";
-                SelectedCategory = new("Kategorie wählen");
+                OnPropertyChanged(nameof(CanEdit));
             }
             else
             {
                 throw new InvalidOperationException("Umbenennen der Kategorie nicht möglich.");
+            }
+        }
+
+        private void CategoryStore_CategoryDeleted(CategoryModel category)
+        {
+            var categoryToDelete = _categories.FirstOrDefault(y => y.Name == category.Name);
+
+            if (categoryToDelete != null)
+            {
+                _categories.Remove(categoryToDelete);
+                _categoryCollectionViewSource.View.Refresh();
+                SelectedCategory = new("Kategorie wählen");
+                EditCategory = SelectedCategory.Name;
+                OnPropertyChanged(nameof(CanDeleteAll));
+            }
+            else
+            {
+                throw new InvalidOperationException("Löschen der Kategorie nicht möglich.");
+            }
+        }
+        
+        private void CategoryStore_AllCategoriesDeleted()
+        {
+            if (_categories != null)
+            {
+                _categories.Clear();
+                SelectedCategory = new("Kategorie wählen");
+                EditCategory = SelectedCategory.Name;
+                OnPropertyChanged(nameof(CanDeleteAll));
+            }
+            else
+            {
+                throw new InvalidOperationException("Löschen aller Kategorien nicht möglich.");
             }
         }
         
@@ -175,6 +213,8 @@ namespace DVS.ViewModels.Forms
             _categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded -= CategoryStore_CategoryAdded;
             _categoryStore.CategoryEdited -= CategoryStore_CategoryEdited;
+            _categoryStore.CategoryDeleted -= CategoryStore_CategoryDeleted;
+            _categoryStore.AllCategoriesDeleted += CategoryStore_AllCategoriesDeleted;
 
             base.Dispose();
         }

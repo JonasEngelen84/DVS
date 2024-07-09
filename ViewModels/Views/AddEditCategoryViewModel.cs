@@ -20,8 +20,8 @@ namespace DVS.ViewModels.Views
         {
             ICommand addCategoryCommand = new AddCategoryCommand(this, categoryStore);
             ICommand editCategoryCommand = new EditCategoryCommand(this, selectedCategoryStore, categoryStore);
-            ICommand deleteCategoryCommand = new DeleteCategoryCommand(this, selectedCategoryStore);
-            ICommand clearCategoryListCommand = new ClearCategoryListCommand(this, modalNavigationStore);
+            ICommand deleteCategoryCommand = new DeleteCategoryCommand(this, selectedCategoryStore, categoryStore);
+            ICommand clearCategoryListCommand = new ClearCategoryListCommand(this, categoryStore);
 
             AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(
                 categoryStore, selectedCategoryStore, addCategoryCommand,

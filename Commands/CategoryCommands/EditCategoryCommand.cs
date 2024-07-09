@@ -2,6 +2,7 @@
 using DVS.Stores;
 using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
+using System.Windows;
 
 namespace DVS.Commands.CategoryCommands
 {
@@ -11,7 +12,8 @@ namespace DVS.Commands.CategoryCommands
         private readonly SelectedCategoryStore _selectedCategoryStore;
         private readonly CategoryStore _categoryStore;
 
-        public EditCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel,
+        public EditCategoryCommand(
+            AddEditCategoryViewModel addEditCategoryViewModel,
             SelectedCategoryStore selectedCategoryStore,
             CategoryStore categoryStore)
         {
@@ -32,7 +34,17 @@ namespace DVS.Commands.CategoryCommands
 
             try
             {
-                await _categoryStore.Update(oldCategory, editedCategory);
+                string messageBoxText = $"Die Kategorie \"{_selectedCategoryStore.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
+                    $"\"{_selectedCategoryStore.EditedCategory}\" umbenannt.\n\nUmbennen fortsetzen?";
+                string caption = "Kategorie umbenennen";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                if (dialog == MessageBoxResult.Yes)
+                {
+                    await _categoryStore.Edit(oldCategory, editedCategory);
+                }
             }
             catch (Exception)
             {

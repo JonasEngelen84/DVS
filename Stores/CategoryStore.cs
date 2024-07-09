@@ -10,6 +10,8 @@ namespace DVS.Stores
         public event Action CategoriesLoaded;
         public event Action<CategoryModel> CategoryAdded;
         public event Action<CategoryModel, string> CategoryEdited;
+        public event Action<CategoryModel> CategoryDeleted;
+        public event Action AllCategoriesDeleted;
 
 
         public CategoryStore()
@@ -25,12 +27,12 @@ namespace DVS.Stores
         }
 
         public async Task Add(CategoryModel category)
-        {
+        {//TODO: Bedingung zum Adden hinzufügen
+            CategoryAdded.Invoke(category);
             _categories.Add(category);
-            CategoryAdded?.Invoke(category);
         }
 
-        public async Task Update(CategoryModel oldCategory, string editedCategory)
+        public async Task Edit(CategoryModel oldCategory, string editedCategory)
         {
             var categoryToUpdate = _categories.FirstOrDefault(y => y.Name == oldCategory.Name);
 
@@ -42,6 +44,33 @@ namespace DVS.Stores
             else
             {
                 throw new InvalidOperationException("Umbenennen der Kategorie nicht möglich.");
+            }
+        }
+
+        public async Task Delete(CategoryModel category)
+        {
+            var categoryToDelete = _categories.FirstOrDefault(y => y.Name == category.Name);
+
+            if (categoryToDelete != null)
+            {
+                CategoryDeleted.Invoke(category);
+                _categories.Remove(categoryToDelete);
+            }
+            else
+            {
+                throw new InvalidOperationException("Löschen der Kategorie nicht möglich.");
+            }
+        }
+        public async Task ClearCategories()
+        {
+            if (_categories != null)
+            {
+                AllCategoriesDeleted.Invoke();
+                _categories.Clear();
+            }
+            else
+            {
+                throw new InvalidOperationException("Löschen aller Kategorien nicht möglich.");
             }
         }
     }

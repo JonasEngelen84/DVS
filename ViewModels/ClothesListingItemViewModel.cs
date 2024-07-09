@@ -15,12 +15,12 @@ namespace DVS.ViewModels.ListViewItems
                 if (_clothes != value)
                 {
                     _clothes = value;
-                    OnPropertyChanged(nameof(Clothes));
                     ID = _clothes?.ID;
                     Name = _clothes?.Name;
                     Categorie = _clothes?.Categorie;
                     Season = _clothes?.Season;
                     Comment = _clothes?.Comment;
+                    OnPropertyChanged(nameof(Clothes));
                 }
             }
         }
@@ -47,8 +47,8 @@ namespace DVS.ViewModels.ListViewItems
             }
         }
 
-        private string _categorie;
-        public string Categorie
+        private CategoryModel _categorie;
+        public CategoryModel Categorie
         {
             get => _categorie;
             set
@@ -58,8 +58,8 @@ namespace DVS.ViewModels.ListViewItems
             }
         }
 
-        private string _season;
-        public string Season
+        private SeasonModel _season;
+        public SeasonModel Season
         {
             get => _season;
             set

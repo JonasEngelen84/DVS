@@ -17,7 +17,7 @@ namespace DVS.Stores
         {
             _clothes =
             [
-                new ClothesModel("111", "Winterhose", "Hose", "Winter", null)
+                new ClothesModel("111", "Winterhose", new("Hose"), new("Winter"), null)
                 {
                     Sizes = [new ClothesSizeModel { Size = "S", Quantity = 15, Comment = null },
                              new ClothesSizeModel { Size = "M", Quantity = 9, Comment = null },
@@ -25,7 +25,7 @@ namespace DVS.Stores
                              new ClothesSizeModel { Size = "XL", Quantity = 5, Comment = null }]
                 },
 
-                new ClothesModel("112", "Sommershirt", "Shirt", "Sommer", null)
+                new ClothesModel("112", "Sommershirt", new("Shirt"), new("Sommer"), null)
                 {
                     Sizes = [new ClothesSizeModel { Size = "S", Quantity = 15, Comment = null },
                              new ClothesSizeModel { Size = "M", Quantity = 9, Comment = null },
@@ -33,7 +33,7 @@ namespace DVS.Stores
                              new ClothesSizeModel { Size = "XL", Quantity = 5, Comment = null }]
                 },
 
-                new ClothesModel("113", "Regenjacke", "Jacke", "Saisonlos", null)
+                new ClothesModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), null)
                 {
                     Sizes = [new ClothesSizeModel { Size = "S", Quantity = 15, Comment = null },
                              new ClothesSizeModel { Size = "M", Quantity = 9, Comment = null },
@@ -41,7 +41,7 @@ namespace DVS.Stores
                              new ClothesSizeModel { Size = "XL", Quantity = 5, Comment = null }]
                 },
 
-                new ClothesModel("114", "Wintershirt", "Shirt", "Winter", null)
+                new ClothesModel("114", "Wintershirt", new("Shirt"), new("Winter"), null)
                 {
                     Sizes = [new ClothesSizeModel { Size = "S", Quantity = 15, Comment = null },
                              new ClothesSizeModel { Size = "M", Quantity = 9, Comment = null },
@@ -49,7 +49,7 @@ namespace DVS.Stores
                              new ClothesSizeModel { Size = "XL", Quantity = 5, Comment = null }]
                 },
 
-                new ClothesModel("115", "Schuhe", "Schuhwerk", "Saisonlos", null)
+                new ClothesModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), null)
                 {
                     Sizes = [new ClothesSizeModel { Size = "44", Quantity = 15, Comment = null },
                              new ClothesSizeModel { Size = "46", Quantity = 9, Comment = null },

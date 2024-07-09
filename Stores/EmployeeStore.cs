@@ -20,67 +20,66 @@ namespace DVS.Stores
             [
                 new EmployeeModel("1324", "Engelen", "Jonas", "Vertrag läuft aus")
                 {
-                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", "Hose", "Winter", "XL", 3, "dfgdfhdhsfdghfgfsffgdsfgfdg"),
-                               new DetailedClothesListingItemViewModel("112", "Sommershirt", "Shirt", "Sommer", "L", 4, " "),
-                               new DetailedClothesListingItemViewModel("114", "Wintershirt", "Shirt", "Winter", "L", 4, " "),
-                               new DetailedClothesListingItemViewModel("113", "Regenjacke", "Jacke", "Saisonlos", "XL", 1, " "),
-                               new DetailedClothesListingItemViewModel("115", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, " ")]
+                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3, "TESTWEISE"),
+                               new DetailedClothesListingItemViewModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1, " "),
+                               new DetailedClothesListingItemViewModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1, " ")]
                 },
 
                 new EmployeeModel("1212", "Molik", "Nadine", null)
                 {
-                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", "Hose", "Winter", "XL", 3, null),
-                               new DetailedClothesListingItemViewModel("112", "Sommershirt", "Shirt", "Sommer", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("114", "Wintershirt", "Shirt", "Winter", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("113", "Regenjacke", "Jacke", "Saisonlos", "XL", 1, null),
-                               new DetailedClothesListingItemViewModel("115", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, null)]
+                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3, " "),
+                               new DetailedClothesListingItemViewModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1, " "),
+                               new DetailedClothesListingItemViewModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1, " ")]
                 },
 
                 new EmployeeModel("1112", "Yüksel", "Kemal", null)
                 {
-                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", "Hose", "Winter", "XL", 3, null),
-                               new DetailedClothesListingItemViewModel("112", "Sommershirt", "Shirt", "Sommer", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("114", "Wintershirt", "Shirt", "Winter", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("113", "Regenjacke", "Jacke", "Saisonlos", "XL", 1, null),
-                               new DetailedClothesListingItemViewModel("115", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, null)]
+                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3, " "),
+                               new DetailedClothesListingItemViewModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1, " "),
+                               new DetailedClothesListingItemViewModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1, " ")]
                 },
 
                 new EmployeeModel("1213", "Oetken", "Markus", null)
                 {
-                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", "Hose", "Winter", "XL", 3, null),
-                               new DetailedClothesListingItemViewModel("112", "Sommershirt", "Shirt", "Sommer", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("114", "Wintershirt", "Shirt", "Winter", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("113", "Regenjacke", "Jacke", "Saisonlos", "XL", 1, null),
-                               new DetailedClothesListingItemViewModel("115", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, null)]
+                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3, " "),
+                               new DetailedClothesListingItemViewModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1, " "),
+                               new DetailedClothesListingItemViewModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1, " ")]
                 },
 
                 new EmployeeModel("1231", "Nickol", "Daniel", null)
                 {
-                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", "Hose", "Winter", "XL", 3, null),
-                               new DetailedClothesListingItemViewModel("112", "Sommershirt", "Shirt", "Sommer", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("114", "Wintershirt", "Shirt", "Winter", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("113", "Regenjacke", "Jacke", "Saisonlos", "XL", 1, null),
-                               new DetailedClothesListingItemViewModel("115", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, null)]
+                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3, " "),
+                               new DetailedClothesListingItemViewModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1, " "),
+                               new DetailedClothesListingItemViewModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1, " ")]
                 },
 
                 new EmployeeModel("1132", "Yüksel", "Irfan", null)
                 {
-                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", "Hose", "Winter", "XL", 3, null),
-                               new DetailedClothesListingItemViewModel("112", "Sommershirt", "Shirt", "Sommer", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("114", "Wintershirt", "Shirt", "Winter", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("113", "Regenjacke", "Jacke", "Saisonlos", "XL", 1, null),
-                               new DetailedClothesListingItemViewModel("115", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, null)]
+                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3, " "),
+                               new DetailedClothesListingItemViewModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1, " "),
+                               new DetailedClothesListingItemViewModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1, " ")]
                 },
 
                 new EmployeeModel("1221", "Killen", "Stefan", null)
                 {
-                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", "Hose", "Winter", "XL", 3, null),
-                               new DetailedClothesListingItemViewModel("112", "Sommershirt", "Shirt", "Sommer", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("114", "Wintershirt", "Shirt", "Winter", "L", 4, null),
-                               new DetailedClothesListingItemViewModel("113", "Regenjacke", "Jacke", "Saisonlos", "XL", 1, null),
-                               new DetailedClothesListingItemViewModel("115", "Schuhe", "Schuhwerk", "Saisonlos", "45", 1, null)]
+                    Clothes = [new DetailedClothesListingItemViewModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3, " "),
+                               new DetailedClothesListingItemViewModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4, " "),
+                               new DetailedClothesListingItemViewModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1, " "),
+                               new DetailedClothesListingItemViewModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1, " ")]
                 }
-
             ];
         }
 

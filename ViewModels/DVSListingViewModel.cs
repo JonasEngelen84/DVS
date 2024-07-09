@@ -101,7 +101,7 @@ namespace DVS.ViewModels
             else
             {
                 DetailedClothesListingItemViewModel newItem = new(
-                item.ID, item.Name, item.Categorie, item.Season, item.Size, 1, null);
+                item.ID, item.Name, item.Category, item.Season, item.Size, 1, null);
 
                 _newEmployeeListingItemCollection.Add(newItem);
             }
@@ -124,7 +124,7 @@ namespace DVS.ViewModels
             else
             {
                 DetailedClothesListingItemViewModel newItem = new(
-                item.ID, item.Name, item.Categorie, item.Season, item.Size, 1, null);
+                item.ID, item.Name, item.Category, item.Season, item.Size, 1, null);
 
                 _detailedClothesListingItemCollection.Add(newItem);
             }
@@ -172,8 +172,8 @@ namespace DVS.ViewModels
         {
             string ID = clothes.ID;
             string Name = clothes.Name;
-            string Categorie = clothes.Categorie;
-            string Season = clothes.Season;
+            CategoryModel Categorie = clothes.Categorie;
+            SeasonModel Season = clothes.Season;
 
             if (clothes.Sizes.Count == 0)
             {

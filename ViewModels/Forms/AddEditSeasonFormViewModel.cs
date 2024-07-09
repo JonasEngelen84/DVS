@@ -1,4 +1,5 @@
-﻿using DVS.Stores;
+﻿using DVS.Models;
+using DVS.Stores;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
@@ -8,26 +9,45 @@ namespace DVS.ViewModels.Forms
 {
     public class AddEditSeasonFormViewModel : ViewModelBase
     {
-        private string? _addNewSeason;
-        public string? AddNewSeason
+        private string _addNewSeason;
+        public string AddNewSeason
         {
             get => _addNewSeason;
             set
             {
                 _addNewSeason = value;
                 OnPropertyChanged(nameof(AddNewSeason));
+                OnPropertyChanged(nameof(CanAdd));
             }
         }
 
-        private string? _editSeason;
-        public string? EditSeason
+        private string _editSeason;
+        public string EditSeason
         {
             get => _editSeason;
             set
             {
-                _selectedSeasonStore.SelectedSeason = value;
                 _editSeason = value;
+                _selectedSeasonStore.EditedSeason = value;
                 OnPropertyChanged(nameof(EditSeason));
+                OnPropertyChanged(nameof(CanEdit));
+            }
+        }
+
+        private SeasonModel _selectedSeason;
+        public SeasonModel SelectedSeason
+        {
+            get => _selectedSeason;
+            set
+            {
+                if (value != null)
+                {
+                    _selectedSeason = value;
+                    _selectedSeasonStore.SelectedSeason = value;
+                    EditSeason = new(value.Name);
+                    OnPropertyChanged(nameof(SelectedSeason));
+                    OnPropertyChanged(nameof(CanDelete));
+                }
             }
         }
 
@@ -60,18 +80,25 @@ namespace DVS.ViewModels.Forms
             }
         }
 
+        public bool CanAdd =>
+            !string.IsNullOrEmpty(AddNewSeason) &&
+            !AddNewSeason.Equals("Neue Saison");
+
+        public bool CanEdit =>
+            !string.IsNullOrEmpty(EditSeason) &&
+            !SelectedSeason.Name.Equals("Saison wählen") &&
+            !SelectedSeason.Name.Equals(EditSeason);
+
+        public bool CanDelete => !SelectedSeason.Name.Equals("Saison wählen");
+        public bool CanDeleteAll => _seasons.Count > 0;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        //TODO: CanSubmit
-        //public bool CanSubmit => !string.IsNullOrEmpty(Username);
+        private readonly ObservableCollection<SeasonModel> _seasons;
+        private readonly CollectionViewSource _seasonCollectionViewSource;
+        public ICollectionView Seasons => _seasonCollectionViewSource.View;
 
         private readonly SeasonStore _seasonStore;
         private readonly SelectedSeasonStore _selectedSeasonStore;
-
-        //TODO: Refresh Collection
-        private readonly ObservableCollection<string> _seasons;
-        private readonly CollectionViewSource _seasonCollectionViewSource;
-        public IEnumerable<string> Seasons => _seasonCollectionViewSource.View.Cast<string>();
 
         public ICommand AddSeasonCommand { get; }
         public ICommand EditSeasonCommand { get; }
@@ -92,51 +119,103 @@ namespace DVS.ViewModels.Forms
 
             AddNewSeason = "Neue Saison";
             EditSeason = "Saison wählen";
+            SelectedSeason = new("Saison wählen");
 
             _seasons = [];
             _seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
-            _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription("", ListSortDirection.Ascending));
+            _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(SeasonModel.Name), ListSortDirection.Ascending));
 
             SeasonStore_SeasonsLoaded();
             _seasonStore.SeasonsLoaded += SeasonStore_SeasonsLoaded;
-            _seasonStore.SeasonsAdded += SeasonStore_SeasonAdded;
+            _seasonStore.SeasonAdded += SeasonStore_SeasonAdded;
+            _seasonStore.SeasonEdited += SeasonStore_SeasonEdited;
+            _seasonStore.SeasonDeleted += SeasonStore_SeasonDeleted;
+            _seasonStore.AllSeasonsDeleted += SeasonStore_AllSeasonsDeleted;
         }
 
-
-        protected override void Dispose()
-        {
-            _seasonStore.SeasonsLoaded -= SeasonStore_SeasonsLoaded;
-            _seasonStore.SeasonsAdded -= SeasonStore_SeasonAdded;
-
-            base.Dispose();
-        }
 
         private void SeasonStore_SeasonsLoaded()
         {
             _seasons.Clear();
 
-            foreach (string season in _seasonStore.Seasons)
+            foreach (SeasonModel season in _seasonStore.Seasons)
             {
                 _seasons.Add(season);
             }
         }
 
-        private void SeasonStore_SeasonAdded(string season)
+        private void SeasonStore_SeasonAdded(SeasonModel season)
         {
             AddSeason(season);
+            OnPropertyChanged(nameof(CanDeleteAll));
         }
 
-        private void Edit_Season()
+        private void SeasonStore_SeasonEdited(SeasonModel oldSeason, string editedSeason)
         {
+            var seasonToUpdate = _seasons.FirstOrDefault(y => y.Name == oldSeason.Name);
 
+            if (seasonToUpdate != null)
+            {
+                seasonToUpdate.Name = editedSeason;
+                _seasonCollectionViewSource.View.Refresh();
+                OnPropertyChanged(nameof(CanEdit));
+            }
+            else
+            {
+                throw new InvalidOperationException("Umbenennen der Saison nicht möglich.");
+            }
         }
 
-        private void AddSeason(string season)
+        private void SeasonStore_SeasonDeleted(SeasonModel season)
+        {
+            var seasonToDelete = _seasons.FirstOrDefault(y => y.Name == season.Name);
+
+            if (seasonToDelete != null)
+            {
+                _seasons.Remove(seasonToDelete);
+                _seasonCollectionViewSource.View.Refresh();
+                SelectedSeason = new("Saison wählen");
+                EditSeason = SelectedSeason.Name;
+                OnPropertyChanged(nameof(CanDeleteAll));
+            }
+            else
+            {
+                throw new InvalidOperationException("Löschen der Saison nicht möglich.");
+            }
+        }
+
+        private void SeasonStore_AllSeasonsDeleted()
+        {
+            if (_seasons != null)
+            {
+                _seasons.Clear();
+                SelectedSeason = new("Saison wählen");
+                EditSeason = SelectedSeason.Name;
+                OnPropertyChanged(nameof(CanDeleteAll));
+            }
+            else
+            {
+                throw new InvalidOperationException("Löschen aller Kategorien nicht möglich.");
+            }
+        }
+
+        private void AddSeason(SeasonModel season)
         {
             _seasons.Add(season);
             _seasonCollectionViewSource.View.Refresh();
-            AddNewSeason = "";
+            AddNewSeason = "Neue Saison";
             OnPropertyChanged(nameof(Seasons));
+        }
+        
+        protected override void Dispose()
+        {
+            _seasonStore.SeasonsLoaded -= SeasonStore_SeasonsLoaded;
+            _seasonStore.SeasonAdded -= SeasonStore_SeasonAdded;
+            _seasonStore.SeasonEdited -= SeasonStore_SeasonEdited;
+            _seasonStore.SeasonDeleted -= SeasonStore_SeasonDeleted;
+            _seasonStore.AllSeasonsDeleted -= SeasonStore_AllSeasonsDeleted;
+
+            base.Dispose();
         }
     }
 }

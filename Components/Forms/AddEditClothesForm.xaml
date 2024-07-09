@@ -33,10 +33,16 @@
 
         <!-- Categorie ComboBox and Edit-Button  -->
         <StackPanel Orientation="Horizontal">
-            
+
             <ComboBox Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Categories}"
-                      SelectedItem="{Binding Category, Mode=TwoWay}" />
+                      SelectedItem="{Binding Category, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
             <Button Margin="5 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
@@ -55,10 +61,16 @@
         <!-- Season ComboBox and Edit-Button -->
         <StackPanel Orientation="Horizontal"
                     Margin="0 0 0 3">
-            
+
             <ComboBox Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Seasons}"
-                      SelectedItem="{Binding Season, Mode=TwoWay}" />
+                      SelectedItem="{Binding Season, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
 
             <Button Margin="5 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"

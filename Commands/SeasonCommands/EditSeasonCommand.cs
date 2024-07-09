@@ -1,22 +1,59 @@
-﻿using DVS.Stores;
+﻿using DVS.Models;
+using DVS.Stores;
+using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
+using System.Windows;
 
 namespace DVS.Commands.SeasonCommands
 {
-    public class EditSeasonCommand : CommandBase
+    public class EditSeasonCommand : AsyncCommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly SelectedCategoryStore _selectedCategoryStore;
+        private readonly AddEditSeasonViewModel _addEditSeasonViewModel;
+        private readonly SelectedSeasonStore _selectedSeasonStore;
+        private readonly SeasonStore _seasonStore;
 
         public EditSeasonCommand(
-            AddEditSeasonViewModel addEditSeasonViewModel, ModalNavigationStore modalNavigationStore)
+            AddEditSeasonViewModel addEditSeasonViewModel,
+            SelectedSeasonStore selectedSeasonStore,
+            SeasonStore seasonStore)
         {
-            _modalNavigationStore = modalNavigationStore;
+            _addEditSeasonViewModel = addEditSeasonViewModel;
+            _selectedSeasonStore = selectedSeasonStore;
+            _seasonStore = seasonStore;
         }
 
-        public override void Execute(object parameter)
+        public override async Task ExecuteAsync(object parameter)
         {
-            _modalNavigationStore.Close();
+            AddEditSeasonFormViewModel addEditSeasonFormViewModel = _addEditSeasonViewModel.AddEditSeasonFormViewModel;
+
+            addEditSeasonFormViewModel.ErrorMessage = null;
+            addEditSeasonFormViewModel.IsSubmitting = true;
+
+            SeasonModel oldSeason = _selectedSeasonStore.SelectedSeason;
+            string editedSeason = _selectedSeasonStore.EditedSeason;
+
+            try
+            {
+                string messageBoxText = $"Die Saison \"{_selectedSeasonStore.SelectedSeason.Name}\" und ihre Schnittstellen werden in" +
+                    $"\"{_selectedSeasonStore.EditedSeason}\" umbenannt.\n\nUmbennen fortsetzen?";
+                string caption = "Saison umbenennen";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                if (dialog == MessageBoxResult.Yes)
+                {
+                    await _seasonStore.Edit(oldSeason, editedSeason);
+                }
+            }
+            catch (Exception)
+            {
+                addEditSeasonFormViewModel.ErrorMessage = "Umbenennen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+            }
+            finally
+            {
+                addEditSeasonFormViewModel.IsSubmitting = false;
+            }
         }
     }
 }

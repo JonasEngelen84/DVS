@@ -1,21 +1,49 @@
 ﻿using DVS.Stores;
+using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
+using System.Windows;
 
 namespace DVS.Commands.CategoryCommands
 {
-    public class ClearCategoryListCommand : CommandBase
+    public class ClearCategoryListCommand : AsyncCommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly AddEditCategoryViewModel _addEditCategoryViewModel;
+        private readonly CategoryStore _categoryStore;
 
-        public ClearCategoryListCommand(AddEditCategoryViewModel addEditCategorieViewModel,
-            ModalNavigationStore modalNavigationStore)
+        public ClearCategoryListCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore)
         {
-            _modalNavigationStore = modalNavigationStore;
+            _addEditCategoryViewModel = addEditCategoryViewModel;
+            _categoryStore = categoryStore;
         }
 
-        public override void Execute(object parameter)
+        public override async Task ExecuteAsync(object parameter)
         {
-            _modalNavigationStore.Close();
+            AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
+
+            addEditCategoryFormViewModel.ErrorMessage = null;
+            addEditCategoryFormViewModel.IsSubmitting = true;
+
+            try
+            {
+                string messageBoxText = "Alle Kategorien und ihre Schnittstellen werden gelöscht.\nLöschen fortsetzen?";
+                string caption = "Alle Kategorien löschen";
+                MessageBoxButton button = MessageBoxButton.YesNo;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                if (dialog == MessageBoxResult.Yes)
+                {
+                    await _categoryStore.ClearCategories();
+                }
+            }
+            catch (Exception)
+            {
+                addEditCategoryFormViewModel.ErrorMessage = "Löschen aller Kategorien ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+            }
+            finally
+            {
+                addEditCategoryFormViewModel.IsSubmitting = false;
+            }
         }
     }
 }

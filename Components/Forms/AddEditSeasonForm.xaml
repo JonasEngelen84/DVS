@@ -7,30 +7,31 @@
              DataContext="{Binding AddEditSeasonFormViewModel}">
 
     <StackPanel>
-        <!-- Add Season-->
+        <!-- Add Season and Add-Button -->
         <StackPanel Orientation="Horizontal">
             <TextBox Width="165"
                      Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding AddNewSeason}"/>
+                     Text="{Binding AddNewSeason, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="ERSTELLEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding AddSeasonCommand}" />
+                    Command="{Binding AddSeasonCommand}"
+                    IsEnabled="{Binding CanAdd}" />
         </StackPanel>
 
-        <!-- Edit Season-->
+        <!-- Edit Season and Edit-Button -->
         <StackPanel Orientation="Horizontal"
                     Margin="0 10 0 20">
             <TextBox Width="165"
-                     Style="{StaticResource TextBoxStyle}" 
-                     Text="{Binding EditSeason}" />
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding EditSeason, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="BEARBEITEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding EditSeasonCommand}" />
+                    Command="{Binding EditSeasonCommand}"
+                    IsEnabled="{Binding CanEdit}" />
         </StackPanel>
 
-        <!-- Season-ListView and Button-->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -53,20 +54,28 @@
                               Foreground="Black"
                               Background="WhiteSmoke"
                               ItemsSource="{Binding Seasons}"
-                              SelectedItem="{Binding EditSeason}" />
+                              SelectedItem="{Binding SelectedSeason}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </Grid>
             </Border>
 
-            <!-- Button -->
+            <!-- Delete/Clear Button -->
             <StackPanel Grid.Column="1">
                 <Button Content="LÖSCHEN"
                         Margin="5 1 0 0"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding DeleteSeasonCommand}" />
+                        Command="{Binding DeleteSeasonCommand}"
+                        IsEnabled="{Binding CanDelete}" />
                 <Button Content="LEEREN"
                         Margin="5 5 0 0"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding ClearSeasonListCommand}" />
+                        Command="{Binding ClearSeasonListCommand}"
+                        IsEnabled="{Binding CanDeleteAll}" />
             </StackPanel>
         </Grid>
     </StackPanel>

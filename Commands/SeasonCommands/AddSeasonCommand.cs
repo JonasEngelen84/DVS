@@ -1,4 +1,5 @@
-﻿using DVS.Stores;
+﻿using DVS.Models;
+using DVS.Stores;
 using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
 
@@ -8,12 +9,16 @@ namespace DVS.Commands.SeasonCommands
                                   SeasonStore seasonStore)
                                   : CommandBase
     {
+        private readonly AddEditSeasonViewModel _addEditSeasonViewModel = addEditSeasonViewModel;
+        private readonly SeasonStore _seasonStore = seasonStore;
+
         public override async void Execute(object parameter)
         {
             AddEditSeasonFormViewModel addEditSeasonFormViewModel = addEditSeasonViewModel.AddEditSeasonFormViewModel;
             addEditSeasonFormViewModel.ErrorMessage = null;
             addEditSeasonFormViewModel.IsSubmitting = true;
-            string newSeason = addEditSeasonFormViewModel.AddNewSeason;
+
+            SeasonModel newSeason = new(addEditSeasonFormViewModel.AddNewSeason);
 
             try
             {
@@ -21,8 +26,7 @@ namespace DVS.Commands.SeasonCommands
             }
             catch (Exception)
             {
-                addEditSeasonFormViewModel.ErrorMessage =
-                    "Erstellen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                addEditSeasonFormViewModel.ErrorMessage = "Erstellen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
             }
             finally
             {

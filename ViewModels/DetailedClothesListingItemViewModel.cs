@@ -1,4 +1,6 @@
-﻿namespace DVS.ViewModels
+﻿using DVS.Models;
+
+namespace DVS.ViewModels
 {
     public class DetailedClothesListingItemViewModel : ViewModelBase
     {
@@ -24,19 +26,19 @@
             }
         }
 
-        private string _categorie;
-        public string Categorie
+        private CategoryModel _category;
+        public CategoryModel Category
         {
-            get => _categorie;
+            get => _category;
             set
             {
-                _categorie = value;
-                OnPropertyChanged(nameof(Categorie));
+                _category = value;
+                OnPropertyChanged(nameof(Category));
             }
         }
 
-        private string _season;
-        public string Season
+        private SeasonModel _season;
+        public SeasonModel Season
         {
             get => _season;
             set
@@ -106,12 +108,12 @@
 
 
         public DetailedClothesListingItemViewModel(
-            string iD, string name, string categorie, string season,
-            string ?size, int? quantity, string? comment)
+            string iD, string name, CategoryModel category, SeasonModel season,
+            string? size, int? quantity, string? comment)
         {
             ID = iD;
             Name = name;
-            Categorie = categorie;
+            Category = category;
             Season = season;
             Size = size;
             Quantity = quantity;

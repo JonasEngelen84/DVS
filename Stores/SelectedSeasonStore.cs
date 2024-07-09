@@ -1,15 +1,16 @@
-﻿namespace DVS.Stores
+﻿using DVS.Models;
+
+namespace DVS.Stores
 {
     public class SelectedSeasonStore
     {
-        private string _selectedSeason;
-        public string SelectedSeason
+        private SeasonModel _selectedSeason;
+        public SeasonModel SelectedSeason
         {
             get => _selectedSeason;
             set
             {
                 _selectedSeason = value;
-                SelectedSeasonModelChanged?.Invoke();
             }
         }
         
@@ -22,7 +23,5 @@
                 _editedSeason = value;
             }
         }
-
-        public event Action SelectedSeasonModelChanged;
     }
 }

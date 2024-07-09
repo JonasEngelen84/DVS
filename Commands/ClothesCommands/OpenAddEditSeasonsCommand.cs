@@ -29,7 +29,7 @@ namespace DVS.Commands.ClothesCommands
         {
             AddEditSeasonViewModel addEditSeasonViewModel = new(
                 _modalNavigationStore, _categoryStore, _seasonStore,
-                _selectedCategoryStore, _selectedSeasonStore, _clothesStore);
+                _selectedSeasonStore, _selectedCategoryStore, _clothesStore);
 
             _modalNavigationStore.CurrentViewModel = addEditSeasonViewModel;
         }

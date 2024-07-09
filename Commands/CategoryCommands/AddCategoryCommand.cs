@@ -15,7 +15,6 @@ namespace DVS.Commands.CategoryCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
-
             addEditCategoryFormViewModel.ErrorMessage = null;
             addEditCategoryFormViewModel.IsSubmitting = true;
 
