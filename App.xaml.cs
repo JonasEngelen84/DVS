@@ -17,7 +17,7 @@ namespace DVS
         private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly DVSDetailedViewModel _dVSDetailedViewModel;
-        private readonly DVSEmployeesViewModel _dVSEmployeesViewModel;
+        private readonly DVSHeadViewModel _dVSHeadViewModel;
 
         public App()
         {
@@ -31,7 +31,7 @@ namespace DVS
             _selectedEmployeeClothesStore = new();
             _modalNavigationStore = new();
 
-            _dVSEmployeesViewModel = new(_employeeStore, _clothesStore);
+            _dVSHeadViewModel = new(_employeeStore, _clothesStore);
 
             _dVSDetailedViewModel = new(
                 _modalNavigationStore, _categoryStore, _seasonStore,
@@ -45,7 +45,7 @@ namespace DVS
             MainWindow = new MainWindow()
             {
                 DataContext = new MainViewModel(
-                    _dVSEmployeesViewModel, _dVSDetailedViewModel, _modalNavigationStore)
+                    _dVSHeadViewModel, _dVSDetailedViewModel, _modalNavigationStore)
             };
 
             MainWindow.Show();

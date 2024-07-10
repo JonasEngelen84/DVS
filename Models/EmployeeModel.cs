@@ -1,6 +1,4 @@
-﻿using DVS.ViewModels;
-
-namespace DVS.Models
+﻿namespace DVS.Models
 {
     public class EmployeeModel(string id, string lastname, string firstname, string? comment)
     {
@@ -9,6 +7,6 @@ namespace DVS.Models
         public string Firstname { get; set; } = firstname;
         public string? Comment { get; set; } = comment;
 
-        public List<DetailedClothesListingItemViewModel> Clothes { get; set; } = [];
+        public List<DetailedClothesListingItemModel> Clothes { get; set; } = [];
     }
 }

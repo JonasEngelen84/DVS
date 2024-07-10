@@ -109,6 +109,8 @@ namespace DVS.ViewModels.ListViewItems
 
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand ClearClothesListCommand { get; set; }
+        public ICommand PrintCommand { get; set; }
 
 
         public EmployeeListingItemViewModel(EmployeeModel employee)

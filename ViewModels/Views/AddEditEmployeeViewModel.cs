@@ -1,5 +1,5 @@
 ﻿using DVS.Commands;
-using DVS.Commands.EmployeeCommands;
+using DVS.Commands.AddEditEmployeeCommands;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
 using System.Windows.Input;

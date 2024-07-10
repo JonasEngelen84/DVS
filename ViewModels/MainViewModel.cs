@@ -16,7 +16,7 @@ namespace DVS.ViewModels
     /// </summary>
     class MainViewModel : ViewModelBase
     {
-        public DVSEmployeesViewModel DVSEmployeesViewModel { get; }
+        public DVSHeadViewModel DVSHeadViewModel { get; }
         public DVSDetailedViewModel DVSDetailedViewModel { get; }
         private readonly ModalNavigationStore _modalNavigationStore;
 
@@ -27,11 +27,11 @@ namespace DVS.ViewModels
         public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
 
-        public MainViewModel(DVSEmployeesViewModel dVSEmployeesViewModel,
+        public MainViewModel(DVSHeadViewModel dVSHeadViewModel,
                              DVSDetailedViewModel dVSViewModel,
                              ModalNavigationStore modalNavigationStore)
         {
-            DVSEmployeesViewModel = dVSEmployeesViewModel;
+            DVSHeadViewModel = dVSHeadViewModel;
             DVSDetailedViewModel = dVSViewModel;
             _modalNavigationStore = modalNavigationStore;
 

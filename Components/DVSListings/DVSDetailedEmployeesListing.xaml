@@ -10,7 +10,7 @@
               Foreground="#FF212129"
               Background="WhiteSmoke"
               ItemsSource="{Binding DetailedEmployeeListingItemCollection}"
-              SelectedItem="{Binding SelectedEmployeeClothesListViewItemViewModel, Mode=TwoWay}">
+              SelectedItem="{Binding SelectedDetailedEmployeeItem}">
         <ListView.View>
             <GridView>
                 <GridViewColumn Header="Mitarbeiter ID"

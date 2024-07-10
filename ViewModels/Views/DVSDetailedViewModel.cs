@@ -42,9 +42,9 @@ namespace DVS.ViewModels.Views
                 selectedCategoryStore, selectedSeasonStore, clothesStore);
 
             OpenEditCommand = new OpenEditCommand(
-                DVSDetailedClothesListingView, modalNavigationStore, categoryStore,
-                seasonStore, selectedCategoryStore, selectedSeasonStore, selectedClothesStore,
-                selectedEmployeeClothesStore, clothesStore, employeeStore);
+                DVSDetailedClothesListingView, DVSDetailedEmployeesListingView, modalNavigationStore,
+                categoryStore, seasonStore, selectedCategoryStore, selectedSeasonStore,
+                selectedClothesStore, selectedEmployeeClothesStore, clothesStore, employeeStore);
 
 
         }

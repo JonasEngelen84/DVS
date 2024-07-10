@@ -85,7 +85,7 @@ namespace DVS.Components
 
         private void ClothesItemList_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Serializable) is DetailedClothesListingItemViewModel ClothesItem)
+            if (e.Data.GetData(DataFormats.Serializable) is DetailedClothesListingItemModel ClothesItem)
             {
                 if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {

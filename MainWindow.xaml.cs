@@ -17,12 +17,12 @@ namespace DVS
             if (DetailedView.Visibility == Visibility.Visible)
             {
                 DetailedView.Visibility = Visibility.Hidden;
-                EmployeesView.Visibility = Visibility.Visible;
+                HeadView.Visibility = Visibility.Visible;
             }
             else
             {
                 DetailedView.Visibility = Visibility.Visible;
-                EmployeesView.Visibility = Visibility.Hidden;
+                HeadView.Visibility = Visibility.Hidden;
             }
         }
 

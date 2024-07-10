@@ -131,10 +131,10 @@
                                    Grid.Row="1"
                                    Margin="0,3,0,0"/>
 
-            <views:DVSEmployeesView x:Name="EmployeesView"
-                                    Grid.Row="1"
-                                    Margin="0,3,0,0"
-                                    Visibility="Hidden"/>
+            <views:DVSHeadView x:Name="HeadView"
+                               Grid.Row="1"
+                               Margin="0,3,0,0"
+                               Visibility="Hidden"/>
 
         </Grid>
     </Border>

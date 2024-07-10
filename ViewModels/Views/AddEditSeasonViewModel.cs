@@ -1,4 +1,4 @@
-﻿using DVS.Commands.SeasonCommands;
+﻿using DVS.Commands.AddEditSeasonCommands;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
 using System.Windows.Input;
