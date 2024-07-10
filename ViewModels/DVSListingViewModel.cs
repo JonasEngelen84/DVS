@@ -9,8 +9,75 @@ namespace DVS.ViewModels
 {
     public class DVSListingViewModel : ViewModelBase
     {
-        private readonly ClothesStore _clothesStore;
-        private readonly EmployeeStore _employeeStore;
+        private DetailedClothesListingItemViewModel _selectedDetailedClothesItem;
+        public DetailedClothesListingItemViewModel SelectedDetailedClothesItem
+        {
+            get
+            {
+                return _selectedDetailedClothesItem;
+            }
+            set
+            {
+                if (_selectedDetailedClothesItem != value)
+                {
+                    _selectedDetailedClothesItem = value;
+                    SelectedDetailedEmployeeItem = null;
+                    OnPropertyChanged(nameof(SelectedDetailedClothesItem));
+                }
+            }
+        }
+
+        private DetailedEmployeeListingItemViewModel _selectedDetailedEmployeeItem;
+        public DetailedEmployeeListingItemViewModel SelectedDetailedEmployeeItem
+        {
+            get
+            {
+                return _selectedDetailedEmployeeItem;
+            }
+            set
+            {
+                if (_selectedDetailedEmployeeItem != value)
+                {
+                    _selectedDetailedEmployeeItem = value;
+                    SelectedDetailedClothesItem = null;
+                    OnPropertyChanged(nameof(SelectedDetailedEmployeeItem));
+                }
+            }
+        }
+
+        private DetailedClothesListingItemViewModel _incomingClothesListingItemModel;
+        public DetailedClothesListingItemViewModel IncomingClothesListingItemModel
+        {
+            get
+            {
+                return _incomingClothesListingItemModel;
+            }
+            set
+            {
+                if(_incomingClothesListingItemModel != value)
+                {
+                    _incomingClothesListingItemModel = value;
+                    OnPropertyChanged(nameof(IncomingClothesListingItemModel));
+                }
+            }
+        }
+
+        private DetailedClothesListingItemViewModel _removedClothesListingItemModel;
+        public DetailedClothesListingItemViewModel RemovedClothesListingItemModel
+        {
+            get
+            {
+                return _removedClothesListingItemModel;
+            }
+            set
+            {
+                if (_removedClothesListingItemModel != value)
+                {
+                    _removedClothesListingItemModel = value;
+                    OnPropertyChanged(nameof(RemovedClothesListingItemModel));
+                }
+            }
+        }
 
         private readonly ObservableCollection<ClothesListingItemViewModel> _clothesListingItemCollection;
         public IEnumerable<ClothesListingItemViewModel> ClothesListingItemCollection => _clothesListingItemCollection;
@@ -27,33 +94,8 @@ namespace DVS.ViewModels
         private readonly ObservableCollection<DetailedClothesListingItemViewModel> _newEmployeeListingItemCollection;
         public IEnumerable<DetailedClothesListingItemViewModel> NewEmployeeListingItemCollection => _newEmployeeListingItemCollection;
 
-        private DetailedClothesListingItemViewModel _incomingClothesListingItemModel;
-        public DetailedClothesListingItemViewModel IncomingClothesListingItemModel
-        {
-            get
-            {
-                return _incomingClothesListingItemModel;
-            }
-            set
-            {
-                _incomingClothesListingItemModel = value;
-                OnPropertyChanged(nameof(IncomingClothesListingItemModel));
-            }
-        }
-
-        private DetailedClothesListingItemViewModel _removedClothesListingItemModel;
-        public DetailedClothesListingItemViewModel RemovedClothesListingItemModel
-        {
-            get
-            {
-                return _removedClothesListingItemModel;
-            }
-            set
-            {
-                _removedClothesListingItemModel = value;
-                OnPropertyChanged(nameof(RemovedClothesListingItemModel));
-            }
-        }
+        private readonly ClothesStore _clothesStore;
+        private readonly EmployeeStore _employeeStore;
 
         public ICommand ClothesItemReceivedCommand { get; }
         public ICommand ClothesItemRemovedCommand { get; }

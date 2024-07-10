@@ -93,12 +93,12 @@ namespace DVS.ViewModels.Forms
         public bool CanDeleteAll => _categories.Count > 0;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
+        private readonly CategoryStore _categoryStore;
+        private readonly SelectedCategoryStore _selectedCategoryStore;
+
         private readonly ObservableCollection<CategoryModel> _categories;
         private readonly CollectionViewSource _categoryCollectionViewSource;
         public ICollectionView Categories => _categoryCollectionViewSource.View;
-
-        private readonly CategoryStore _categoryStore;
-        private readonly SelectedCategoryStore _selectedCategoryStore;
 
         public ICommand AddCategoryCommand { get; }
         public ICommand EditCategoryCommand { get; }

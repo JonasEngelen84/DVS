@@ -11,8 +11,11 @@ namespace DVS.ViewModels.Forms
             get => _iD;
             set
             {
-                _iD = value;
-                OnPropertyChanged(nameof(ID));
+                if (ID != value)
+                {
+                    _iD = value;
+                    OnPropertyChanged(nameof(ID));
+                }
             }
         }
 
@@ -22,8 +25,11 @@ namespace DVS.ViewModels.Forms
             get => _lastname;
             set
             {
-                _lastname = value;
-                OnPropertyChanged(nameof(Lastname));
+                if (_lastname != value)
+                {
+                    _lastname = value;
+                    OnPropertyChanged(nameof(Lastname));
+                }
             }
         }
 
@@ -33,8 +39,11 @@ namespace DVS.ViewModels.Forms
             get => _firstname;
             set
             {
-                _firstname = value;
-                OnPropertyChanged(nameof(Firstname));
+                if (_firstname != value)
+                {
+                    _firstname = value;
+                    OnPropertyChanged(nameof(Firstname));
+                }
             }
         }
 
@@ -44,8 +53,11 @@ namespace DVS.ViewModels.Forms
             get => _comment;
             set
             {
-                _comment = value;
-                OnPropertyChanged(nameof(Comment));
+                if (Comment != value)
+                {
+                    _comment = value;
+                    OnPropertyChanged(nameof(Comment));
+                }
             }
         }
 
@@ -58,8 +70,11 @@ namespace DVS.ViewModels.Forms
             }
             set
             {
-                _isSubmitting = value;
-                OnPropertyChanged(nameof(IsSubmitting));
+                if (_isSubmitting != value)
+                {
+                    _isSubmitting = value;
+                    OnPropertyChanged(nameof(IsSubmitting));
+                }
             }
         }
 
@@ -72,9 +87,12 @@ namespace DVS.ViewModels.Forms
             }
             set
             {
-                _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
-                OnPropertyChanged(nameof(HasErrorMessage));
+                if (_errorMessage != value)
+                {
+                    _errorMessage = value;
+                    OnPropertyChanged(nameof(ErrorMessage));
+                    OnPropertyChanged(nameof(HasErrorMessage));
+                }
             }
         }
 

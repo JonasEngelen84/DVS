@@ -35,22 +35,56 @@ namespace DVS.Commands.DVSDetailedViewCommands
             _selectedSeasonStore = selectedSeasonStore;
         }
 
-        int i = 0;
         public override void Execute(object parameter)
         {
-            if(i%2 == 0)
+            if (_dVSListingViewModel.SelectedDetailedClothesItem != null)
             {
-                _modalNavigationStore.CurrentViewModel = new AddEditClothesViewModel(
+                AddEditClothesViewModel addEditClothesViewModel = new(
                     _modalNavigationStore, _categoryStore, _seasonStore,
                     _selectedCategoryStore, _selectedSeasonStore, _clothesStore);
-            }
-            else
-            {
-                _modalNavigationStore.CurrentViewModel = new AddEditEmployeeViewModel(
-                    _dVSListingViewModel, _clothesStore, _employeeStore, _modalNavigationStore);
-            }
 
-            i++;
+                addEditClothesViewModel.AddEditClothesFormViewModel.ID =
+                    _dVSListingViewModel.SelectedDetailedClothesItem.ID;
+
+                addEditClothesViewModel.AddEditClothesFormViewModel.Name =
+                    _dVSListingViewModel.SelectedDetailedClothesItem.Name;
+                
+                addEditClothesViewModel.AddEditClothesFormViewModel.Comment =
+                    _dVSListingViewModel.SelectedDetailedClothesItem.Comment;
+                
+                addEditClothesViewModel.AddEditClothesFormViewModel.Category =
+                    _dVSListingViewModel.SelectedDetailedClothesItem.Category;
+                
+                addEditClothesViewModel.AddEditClothesFormViewModel.Season =
+                    _dVSListingViewModel.SelectedDetailedClothesItem.Season;
+
+                _modalNavigationStore.CurrentViewModel = addEditClothesViewModel;
+            }
+            else if (_dVSListingViewModel.SelectedDetailedEmployeeItem != null)
+            {
+                AddEditEmployeeViewModel addEditEmployeeViewModel = new(
+                    _dVSListingViewModel, _clothesStore, _employeeStore, _modalNavigationStore);
+
+                addEditEmployeeViewModel.AddEditEmployeeFormViewModel.ID =
+                    _dVSListingViewModel.SelectedDetailedEmployeeItem.ID;
+
+                addEditEmployeeViewModel.AddEditEmployeeFormViewModel.Lastname =
+                    _dVSListingViewModel.SelectedDetailedEmployeeItem.Lastname;
+                
+                addEditEmployeeViewModel.AddEditEmployeeFormViewModel.Firstname =
+                    _dVSListingViewModel.SelectedDetailedEmployeeItem.Firstname;
+                
+                addEditEmployeeViewModel.AddEditEmployeeFormViewModel.Comment =
+                    _dVSListingViewModel.SelectedDetailedEmployeeItem.Comment;
+                
+                addEditEmployeeViewModel.AddEditEmployeeFormViewModel.Comment =
+                    _dVSListingViewModel.SelectedDetailedEmployeeItem.Comment;
+
+                //addEditEmployeeViewModel.AddEditEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection =
+                //    _dVSListingViewModel.SelectedDetailedEmployeeItem.
+
+                _modalNavigationStore.CurrentViewModel = addEditEmployeeViewModel;
+            }
         }
     }
 }
