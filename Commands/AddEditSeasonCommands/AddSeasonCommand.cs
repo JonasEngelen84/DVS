@@ -18,7 +18,7 @@ namespace DVS.Commands.AddEditSeasonCommands
             addEditSeasonFormViewModel.ErrorMessage = null;
             addEditSeasonFormViewModel.IsSubmitting = true;
 
-            SeasonModel newSeason = new(addEditSeasonFormViewModel.AddNewSeason);
+            SeasonModel newSeason = new(Guid.NewGuid(), addEditSeasonFormViewModel.AddNewSeason);
 
             try
             {

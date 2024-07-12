@@ -1,8 +1,6 @@
-﻿using DVS.Stores;
-
-namespace DVS.Commands
+﻿namespace DVS.Commands.DVSHeadViewCommands
 {
-    class DeleteEmployeeCommand : CommandBase
+    public class DeleteEmployeeCommand : CommandBase
     {
         public DeleteEmployeeCommand()
         {

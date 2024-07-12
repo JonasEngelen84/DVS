@@ -20,9 +20,11 @@ namespace DVS.Commands.AddEditEmployeeCommands
             addEmployeeFormViewModel.ErrorMessage = null;
             addEmployeeFormViewModel.IsSubmitting = true;
 
-            EmployeeModel employee = new(
-                addEmployeeFormViewModel.ID, addEmployeeFormViewModel.Firstname,
-                addEmployeeFormViewModel.Lastname, addEmployeeFormViewModel.Comment);
+            EmployeeModel employee = new(Guid.NewGuid(),
+                                         addEmployeeFormViewModel.ID,
+                                         addEmployeeFormViewModel.Firstname,
+                                         addEmployeeFormViewModel.Lastname,
+                                         addEmployeeFormViewModel.Comment);
 
             foreach (DetailedClothesListingItemModel clothes in
                 _addEmployeeViewModel.AddEditEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)

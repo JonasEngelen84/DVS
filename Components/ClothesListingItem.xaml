@@ -204,6 +204,10 @@
                                             Content="Bearbeiten" />
                                     <Button Command="{Binding DeleteCommand}"
                                             Content="Löschen" />
+                                    <Button Command="{Binding ClearSizesCommand}"
+                                            Content="Größen löschen" />
+                                    <Button Command="{Binding PrintClothesCommand}"
+                                            Content="Drucken" />
                                 </StackPanel>
                             </Border>
                         </custom:DropdownMenu>

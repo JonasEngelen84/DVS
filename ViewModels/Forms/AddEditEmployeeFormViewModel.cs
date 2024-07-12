@@ -105,20 +105,15 @@ namespace DVS.ViewModels.Forms
 
         public ICommand AddEmployeeCommand { get; }
         public ICommand EditEmployeeCommand { get; }
-        public ICommand ClearEmployeeClothesListCommand { get; }
-        public ICommand DeleteEmployeeCommand { get; }
 
 
         public AddEditEmployeeFormViewModel(
             DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore,
-            EmployeeStore employeeStore, ICommand addEmployeeCommand, ICommand editEmployeeCommand,
-            ICommand clearEmployeeClothesListCommand, ICommand deleteEmployeeCommand)
+            EmployeeStore employeeStore, ICommand addEmployeeCommand, ICommand editEmployeeCommand)
         {
             DVSListingViewModel = dVSListingViewModel;
             AddEmployeeCommand = addEmployeeCommand;
             EditEmployeeCommand = editEmployeeCommand;
-            ClearEmployeeClothesListCommand = clearEmployeeClothesListCommand;
-            DeleteEmployeeCommand = deleteEmployeeCommand;
         }
     }
 }

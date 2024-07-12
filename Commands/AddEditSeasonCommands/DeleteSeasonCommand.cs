@@ -9,16 +9,11 @@ namespace DVS.Commands.AddEditSeasonCommands
     public class DeleteSeasonCommand : AsyncCommandBase
     {
         private readonly AddEditSeasonViewModel _addEditSeasonViewModel;
-        private readonly SelectedSeasonStore _selectedSeasonStore;
         private readonly SeasonStore _seasonStore;
 
-        public DeleteSeasonCommand(
-            AddEditSeasonViewModel addEditSeasonViewModel,
-            SelectedSeasonStore selectedSeasonStore,
-            SeasonStore seasonStore)
+        public DeleteSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, SeasonStore seasonStore)
         {
             _addEditSeasonViewModel = addEditSeasonViewModel;
-            _selectedSeasonStore = selectedSeasonStore;
             _seasonStore = seasonStore;
         }
 
@@ -26,12 +21,7 @@ namespace DVS.Commands.AddEditSeasonCommands
         {
             AddEditSeasonFormViewModel addEditSeasonFormViewModel = _addEditSeasonViewModel.AddEditSeasonFormViewModel;
 
-            addEditSeasonFormViewModel.ErrorMessage = null;
-            addEditSeasonFormViewModel.IsSubmitting = true;
-
-            SeasonModel deletedSeason = _selectedSeasonStore.SelectedSeason;
-
-            string messageBoxText = $"Die Saison \"{_selectedSeasonStore.SelectedSeason.Name}\" und ihre Schnittstellen werden gelöscht.\n\nLöschen fortsetzen?";
+            string messageBoxText = $"Die Saison \"{addEditSeasonFormViewModel.SelectedSeason.Name}\" und ihre Schnittstellen werden gelöscht.\n\nLöschen fortsetzen?";
             string caption = "Saison umbenennen";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
@@ -39,9 +29,14 @@ namespace DVS.Commands.AddEditSeasonCommands
 
             if (dialog == MessageBoxResult.Yes)
             {
+                addEditSeasonFormViewModel.ErrorMessage = null;
+                addEditSeasonFormViewModel.IsSubmitting = true;
+
+                SeasonModel season = addEditSeasonFormViewModel.SelectedSeason;
+
                 try
                 {
-                    await _seasonStore.Delete(deletedSeason);
+                    await _seasonStore.Delete(season);
                 }
                 catch (Exception)
                 {

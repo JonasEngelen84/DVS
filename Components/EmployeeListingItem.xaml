@@ -208,6 +208,10 @@
                                             Content="Bearbeiten" />
                                     <Button Command="{Binding DeleteCommand}"
                                             Content="Löschen" />
+                                    <Button Command="{Binding ClearClothesListCommand}"
+                                            Content="Kleidung löschen" />
+                                    <Button Command="{Binding PrintEmployeeCommand}"
+                                            Content="Drucken" />
                                 </StackPanel>
                             </Border>
                         </custom:DropdownMenu>

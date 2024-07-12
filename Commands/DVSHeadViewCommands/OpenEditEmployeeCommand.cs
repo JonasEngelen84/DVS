@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DVS.Commands
+namespace DVS.Commands.DVSHeadViewCommands
 {
-    class OpenEditEmployeeCommand : CommandBase
+    public class OpenEditEmployeeCommand : CommandBase
     {
         public override void Execute(object parameter)
         {

@@ -1,5 +1,6 @@
-﻿using DVS.Commands;
+﻿using DVS.Commands.DVSHeadViewCommands;
 using DVS.Models;
+using DVS.Stores;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.ListViewItems
@@ -17,7 +18,7 @@ namespace DVS.ViewModels.ListViewItems
                     _clothes = value;
                     ID = _clothes?.ID;
                     Name = _clothes?.Name;
-                    Categorie = _clothes?.Categorie;
+                    Category = _clothes?.Category;
                     Season = _clothes?.Season;
                     Comment = _clothes?.Comment;
                     OnPropertyChanged(nameof(Clothes));
@@ -31,8 +32,11 @@ namespace DVS.ViewModels.ListViewItems
             get => _iD;
             set
             {
-                _iD = value;
-                OnPropertyChanged(nameof(ID));
+                if (value != _iD)
+                {
+                    _iD = value;
+                    OnPropertyChanged(nameof(ID));
+                }
             }
         }
 
@@ -42,19 +46,25 @@ namespace DVS.ViewModels.ListViewItems
             get => _name;
             set
             {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
+                if (value != _name)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
             }
         }
 
-        private CategoryModel _categorie;
-        public CategoryModel Categorie
+        private CategoryModel _category;
+        public CategoryModel Category
         {
-            get => _categorie;
+            get => _category;
             set
             {
-                _categorie = value;
-                OnPropertyChanged(nameof(Categorie));
+                if (value != _category)
+                {
+                    _category = value;
+                    OnPropertyChanged(nameof(Category));
+                }
             }
         }
 
@@ -64,8 +74,11 @@ namespace DVS.ViewModels.ListViewItems
             get => _season;
             set
             {
-                _season = value;
-                OnPropertyChanged(nameof(Season));
+                if (_season != value)
+                {
+                    _season = value;
+                    OnPropertyChanged(nameof(Season));
+                }
             }
         }
 
@@ -75,8 +88,11 @@ namespace DVS.ViewModels.ListViewItems
             get => _comment;
             set
             {
-                _comment = value;
-                OnPropertyChanged(nameof(Comment));
+                if (value != _comment)
+                {
+                    _comment = value;
+                    OnPropertyChanged(nameof(Comment));
+                }
             }
         }
 
@@ -89,8 +105,11 @@ namespace DVS.ViewModels.ListViewItems
             }
             set
             {
-                _isDeleting = value;
-                OnPropertyChanged(nameof(IsDeleting));
+                if (value != _isDeleting)
+                {
+                    _isDeleting = value;
+                    OnPropertyChanged(nameof(IsDeleting));
+                }
             }
         }
 
@@ -103,9 +122,12 @@ namespace DVS.ViewModels.ListViewItems
             }
             set
             {
-                _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
-                OnPropertyChanged(nameof(HasErrorMessage));
+                if (value != _errorMessage)
+                {
+                    _errorMessage = value;
+                    OnPropertyChanged(nameof(ErrorMessage));
+                    OnPropertyChanged(nameof(HasErrorMessage));
+                }
             }
         }
 
@@ -115,8 +137,11 @@ namespace DVS.ViewModels.ListViewItems
             get => _isExpanded;
             set
             {
-                _isExpanded = value;
-                OnPropertyChanged(nameof(IsExpanded));
+                if (value != _isExpanded)
+                {
+                    _isExpanded = value;
+                    OnPropertyChanged(nameof(IsExpanded));
+                }
             }
         }
 
@@ -124,14 +149,27 @@ namespace DVS.ViewModels.ListViewItems
 
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand ClearSizesCommand { get; set; }
+        public ICommand PrintClothesCommand { get; set; }
 
 
-        public ClothesListingItemViewModel(ClothesModel clothes)
+        public ClothesListingItemViewModel(ClothesModel clothes,
+                                           ModalNavigationStore modalNavigationStore,
+                                           CategoryStore categoryStore,
+                                           SeasonStore seasonStore,
+                                           ClothesStore clothesStore)
         {
             Clothes = clothes;
 
-            EditCommand = new OpenEditEmployeeCommand();
-            DeleteCommand = new DeleteEmployeeCommand();
+            EditCommand = new OpenEditClothesCommand(this,
+                                                     modalNavigationStore,
+                                                     categoryStore,
+                                                     seasonStore,
+                                                     clothesStore);
+
+            DeleteCommand = new DeleteClothesCommand();
+            ClearSizesCommand = new ClearSizesCommand();
+            PrintClothesCommand = new OpenPrintClothesCommand();
         }
     }
 }

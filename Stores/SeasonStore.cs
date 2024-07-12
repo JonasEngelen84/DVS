@@ -9,14 +9,15 @@ namespace DVS.Stores
 
         public event Action SeasonsLoaded;
         public event Action<SeasonModel> SeasonAdded;
-        public event Action<SeasonModel, string> SeasonEdited;
+        public event Action<SeasonModel> SeasonEdited;
         public event Action<SeasonModel> SeasonDeleted;
         public event Action AllSeasonsDeleted;
 
 
         public SeasonStore()
         {
-            _seasons = [new("Sommer"), new("Winter"), new("Saisonlos")];
+            _seasons = [new(Guid.NewGuid(), "Sommer"), new(Guid.NewGuid(),
+                "Winter"), new(Guid.NewGuid(), "Saisonlos")];
         }
 
 
@@ -32,14 +33,14 @@ namespace DVS.Stores
             _seasons.Add(season);
         }
 
-        public async Task Edit(SeasonModel oldSeason, string editedSeason)
+        public async Task Edit(SeasonModel season)
         {
-            var seasonToUpdate = _seasons.FirstOrDefault(y => y.Name == oldSeason.Name);
+            int index = _seasons.FindIndex(y => y.GuidID == season.GuidID);
 
-            if (seasonToUpdate != null)
+            if (index > -1)
             {
-                SeasonEdited.Invoke(oldSeason, editedSeason);
-                seasonToUpdate.Name = editedSeason;
+                _seasons[index] = season;
+                SeasonEdited.Invoke(season);
             }
             else
             {
@@ -49,18 +50,19 @@ namespace DVS.Stores
 
         public async Task Delete(SeasonModel season)
         {
-            var seasonToDelete = _seasons.FirstOrDefault(y => y.Name == season.Name);
+            var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
 
             if (seasonToDelete != null)
             {
+                _seasons.Remove(season);
                 SeasonDeleted.Invoke(season);
-                _seasons.Remove(seasonToDelete);
             }
             else
             {
                 throw new InvalidOperationException("Löschen der Saison nicht möglich.");
             }
         }
+
         public async Task ClearSeasons()
         {
             if (_seasons != null)

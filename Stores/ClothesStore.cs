@@ -1,5 +1,4 @@
 ﻿using DVS.Models;
-using DVS.ViewModels;
 using System.Collections.ObjectModel;
 
 namespace DVS.Stores
@@ -11,51 +10,52 @@ namespace DVS.Stores
 
         public event Action ClothesLoaded;
         public event Action<ClothesModel> ClothesAdded;
+        public event Action<ClothesModel> ClothesEdited;
 
 
         public ClothesStore()
         {
             _clothes =
             [
-                new ClothesModel("111", "Winterhose", new("Hose"), new("Winter"), null)
-                {
-                    Sizes = [new ClothesSizeModel { Size = "S", Quantity = 15, Comment = null },
-                             new ClothesSizeModel { Size = "M", Quantity = 9, Comment = null },
-                             new ClothesSizeModel { Size = "L", Quantity = 11, Comment = null },
-                             new ClothesSizeModel { Size = "XL", Quantity = 5, Comment = null }]
-                },
+                //new ClothesModel("111", "Winterhose", new("Hose"), new("Winter"), null)
+                //{
+                //    Sizes = [new ClothesSizeModel("S") {Quantity = 15},
+                //             new ClothesSizeModel("M") {Quantity = 9 },
+                //             new ClothesSizeModel("L") {Quantity = 11},
+                //             new ClothesSizeModel("XL") {Quantity = 5}]
+                //},
 
-                new ClothesModel("112", "Sommershirt", new("Shirt"), new("Sommer"), null)
-                {
-                    Sizes = [new ClothesSizeModel { Size = "S", Quantity = 15, Comment = null },
-                             new ClothesSizeModel { Size = "M", Quantity = 9, Comment = null },
-                             new ClothesSizeModel { Size = "L", Quantity = 11, Comment = null },
-                             new ClothesSizeModel { Size = "XL", Quantity = 5, Comment = null }]
-                },
+                //new ClothesModel("112", "Sommershirt", new("Shirt"), new("Sommer"), null)
+                //{
+                //    Sizes = [new ClothesSizeModel("S") {Quantity = 15},
+                //             new ClothesSizeModel("M") {Quantity = 9 },
+                //             new ClothesSizeModel("L") {Quantity = 11},
+                //             new ClothesSizeModel("XL") { Quantity = 5 }]
+                //},
 
-                new ClothesModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), null)
-                {
-                    Sizes = [new ClothesSizeModel { Size = "S", Quantity = 15, Comment = null },
-                             new ClothesSizeModel { Size = "M", Quantity = 9, Comment = null },
-                             new ClothesSizeModel { Size = "L", Quantity = 11, Comment = null },
-                             new ClothesSizeModel { Size = "XL", Quantity = 5, Comment = null }]
-                },
+                //new ClothesModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), null)
+                //{
+                //    Sizes = [new ClothesSizeModel("S") {Quantity = 15},
+                //             new ClothesSizeModel("M") {Quantity = 9 },
+                //             new ClothesSizeModel("L") {Quantity = 11},
+                //             new ClothesSizeModel("XL") { Quantity = 5 }]
+                //},
 
-                new ClothesModel("114", "Wintershirt", new("Shirt"), new("Winter"), null)
-                {
-                    Sizes = [new ClothesSizeModel { Size = "S", Quantity = 15, Comment = null },
-                             new ClothesSizeModel { Size = "M", Quantity = 9, Comment = null },
-                             new ClothesSizeModel { Size = "L", Quantity = 11, Comment = null },
-                             new ClothesSizeModel { Size = "XL", Quantity = 5, Comment = null }]
-                },
+                //new ClothesModel("114", "Wintershirt", new("Shirt"), new("Winter"), null)
+                //{
+                //    Sizes = [new ClothesSizeModel("S") {Quantity = 15},
+                //             new ClothesSizeModel("M") {Quantity = 9 },
+                //             new ClothesSizeModel("L") {Quantity = 11},
+                //             new ClothesSizeModel("XL") { Quantity = 5 }]
+                //},
 
-                new ClothesModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), null)
-                {
-                    Sizes = [new ClothesSizeModel { Size = "44", Quantity = 15, Comment = null },
-                             new ClothesSizeModel { Size = "46", Quantity = 9, Comment = null },
-                             new ClothesSizeModel { Size = "48", Quantity = 11, Comment = null },
-                             new ClothesSizeModel { Size = "50", Quantity = 5, Comment = null }]
-                }
+                //new ClothesModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), null)
+                //{
+                //    Sizes = [new ClothesSizeModel("S") {Quantity = 15},
+                //             new ClothesSizeModel("M") {Quantity = 9 },
+                //             new ClothesSizeModel("L") {Quantity = 11},
+                //             new ClothesSizeModel("XL") { Quantity = 5 }]
+                //}
             ];
         }
 
@@ -69,6 +69,11 @@ namespace DVS.Stores
         {
             _clothes.Add(clothes);
             ClothesAdded?.Invoke(clothes);
+        }
+
+        public async Task Edit(ClothesModel clothes)
+        {
+            //int i = _clothes.FirstOrDefault
         }
     }
 }

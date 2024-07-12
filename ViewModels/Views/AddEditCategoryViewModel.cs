@@ -10,26 +10,27 @@ namespace DVS.ViewModels.Views
         public AddEditCategoryFormViewModel AddEditCategoryFormViewModel { get; }
         public ICommand CloseAddEditCategoryCommand { get; }
 
-        public AddEditCategoryViewModel(
-            ModalNavigationStore modalNavigationStore,
-            CategoryStore categoryStore,
-            SeasonStore seasonStore,
-            SelectedCategoryStore selectedCategoryStore,
-            SelectedSeasonStore selectedSeasonStore,
-            ClothesStore clothesStore)
+        public AddEditCategoryViewModel(ModalNavigationStore modalNavigationStore,
+                                        CategoryStore categoryStore,
+                                        SeasonStore seasonStore,
+                                        ClothesStore clothesStore)
         {
+
             ICommand addCategoryCommand = new AddCategoryCommand(this, categoryStore);
-            ICommand editCategoryCommand = new EditCategoryCommand(this, selectedCategoryStore, categoryStore);
-            ICommand deleteCategoryCommand = new DeleteCategoryCommand(this, selectedCategoryStore, categoryStore);
+            ICommand editCategoryCommand = new EditCategoryCommand(this, categoryStore);
+            ICommand deleteCategoryCommand = new DeleteCategoryCommand(this, categoryStore);
             ICommand clearCategoryListCommand = new ClearCategoryListCommand(this, categoryStore);
 
-            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(
-                categoryStore, selectedCategoryStore, addCategoryCommand,
-                editCategoryCommand, deleteCategoryCommand, clearCategoryListCommand);
+            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(categoryStore,
+                                                                            addCategoryCommand,
+                                                                            editCategoryCommand,
+                                                                            deleteCategoryCommand,
+                                                                            clearCategoryListCommand);
 
-            CloseAddEditCategoryCommand = new CloseAddEditCategoryCommand(
-                modalNavigationStore, categoryStore, seasonStore,
-                selectedCategoryStore, selectedSeasonStore, clothesStore);
+            CloseAddEditCategoryCommand = new CloseAddEditCategoryCommand(modalNavigationStore,
+                                                                          categoryStore,
+                                                                          seasonStore,
+                                                                          clothesStore);
         }
     }
 }

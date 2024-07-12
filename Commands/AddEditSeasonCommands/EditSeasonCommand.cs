@@ -6,34 +6,17 @@ using System.Windows;
 
 namespace DVS.Commands.AddEditSeasonCommands
 {
-    public class EditSeasonCommand : AsyncCommandBase
+    public class EditSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, SeasonStore seasonStore) : AsyncCommandBase
     {
-        private readonly AddEditSeasonViewModel _addEditSeasonViewModel;
-        private readonly SelectedSeasonStore _selectedSeasonStore;
-        private readonly SeasonStore _seasonStore;
-
-        public EditSeasonCommand(
-            AddEditSeasonViewModel addEditSeasonViewModel,
-            SelectedSeasonStore selectedSeasonStore,
-            SeasonStore seasonStore)
-        {
-            _addEditSeasonViewModel = addEditSeasonViewModel;
-            _selectedSeasonStore = selectedSeasonStore;
-            _seasonStore = seasonStore;
-        }
+        private readonly AddEditSeasonViewModel _addEditSeasonViewModel = addEditSeasonViewModel;
+        private readonly SeasonStore _seasonStore = seasonStore;
 
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditSeasonFormViewModel addEditSeasonFormViewModel = _addEditSeasonViewModel.AddEditSeasonFormViewModel;
 
-            addEditSeasonFormViewModel.ErrorMessage = null;
-            addEditSeasonFormViewModel.IsSubmitting = true;
-
-            SeasonModel oldSeason = _selectedSeasonStore.SelectedSeason;
-            string editedSeason = _selectedSeasonStore.EditedSeason;
-
-            string messageBoxText = $"Die Saison \"{_selectedSeasonStore.SelectedSeason.Name}\" und ihre Schnittstellen werden in" +
-                    $"\"{_selectedSeasonStore.EditedSeason}\" umbenannt.\n\nUmbennen fortsetzen?";
+            string messageBoxText = $"Die Saison \"{addEditSeasonFormViewModel.SelectedSeason.Name}\" und ihre Schnittstellen werden in" +
+                    $"\"{addEditSeasonFormViewModel.EditSeason}\" umbenannt.\n\nUmbennen fortsetzen?";
             string caption = "Saison umbenennen";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
@@ -41,9 +24,14 @@ namespace DVS.Commands.AddEditSeasonCommands
 
             if (dialog == MessageBoxResult.Yes)
             {
+                addEditSeasonFormViewModel.ErrorMessage = null;
+                addEditSeasonFormViewModel.IsSubmitting = true;
+
+                SeasonModel season = new(addEditSeasonFormViewModel.SelectedSeason.GuidID, addEditSeasonFormViewModel.EditSeason);
+
                 try
                 {
-                    await _seasonStore.Edit(oldSeason, editedSeason);
+                    await _seasonStore.Edit(season);
                 }
                 catch (Exception)
                 {

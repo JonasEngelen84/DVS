@@ -28,7 +28,6 @@ namespace DVS.ViewModels.Forms
             set
             {
                 _editSeason = value;
-                _selectedSeasonStore.EditedSeason = value;
                 OnPropertyChanged(nameof(EditSeason));
                 OnPropertyChanged(nameof(CanEdit));
             }
@@ -43,7 +42,6 @@ namespace DVS.ViewModels.Forms
                 if (value != null)
                 {
                     _selectedSeason = value;
-                    _selectedSeasonStore.SelectedSeason = value;
                     EditSeason = new(value.Name);
                     OnPropertyChanged(nameof(SelectedSeason));
                     OnPropertyChanged(nameof(CanDelete));
@@ -93,12 +91,11 @@ namespace DVS.ViewModels.Forms
         public bool CanDeleteAll => _seasons.Count > 0;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        private readonly ObservableCollection<SeasonModel> _seasons;
+        private readonly ObservableCollection<SeasonModel> _seasons = [];
         private readonly CollectionViewSource _seasonCollectionViewSource;
         public ICollectionView Seasons => _seasonCollectionViewSource.View;
 
         private readonly SeasonStore _seasonStore;
-        private readonly SelectedSeasonStore _selectedSeasonStore;
 
         public ICommand AddSeasonCommand { get; }
         public ICommand EditSeasonCommand { get; }
@@ -106,12 +103,13 @@ namespace DVS.ViewModels.Forms
         public ICommand ClearSeasonListCommand { get; }
 
 
-        public AddEditSeasonFormViewModel(
-            SeasonStore seasonStore, SelectedSeasonStore selectedSeasonStore, ICommand addSeasonCommand,
-            ICommand editSeasonCommand, ICommand deleteSeasonCommand, ICommand clearSeasonListCommand)
+        public AddEditSeasonFormViewModel(SeasonStore seasonStore,
+                                          ICommand addSeasonCommand,
+                                          ICommand editSeasonCommand,
+                                          ICommand deleteSeasonCommand,
+                                          ICommand clearSeasonListCommand)
         {
             _seasonStore = seasonStore;
-            _selectedSeasonStore = selectedSeasonStore;
             AddSeasonCommand = addSeasonCommand;
             EditSeasonCommand = editSeasonCommand;
             DeleteSeasonCommand = deleteSeasonCommand;
@@ -119,13 +117,13 @@ namespace DVS.ViewModels.Forms
 
             AddNewSeason = "Neue Saison";
             EditSeason = "Saison wählen";
-            SelectedSeason = new("Saison wählen");
+            SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
 
-            _seasons = [];
             _seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
             _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(SeasonModel.Name), ListSortDirection.Ascending));
 
             SeasonStore_SeasonsLoaded();
+
             _seasonStore.SeasonsLoaded += SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonAdded += SeasonStore_SeasonAdded;
             _seasonStore.SeasonEdited += SeasonStore_SeasonEdited;
@@ -150,14 +148,17 @@ namespace DVS.ViewModels.Forms
             OnPropertyChanged(nameof(CanDeleteAll));
         }
 
-        private void SeasonStore_SeasonEdited(SeasonModel oldSeason, string editedSeason)
+        private void SeasonStore_SeasonEdited(SeasonModel season)
         {
-            var seasonToUpdate = _seasons.FirstOrDefault(y => y.Name == oldSeason.Name);
+            SeasonModel seasonToUpdate = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
 
             if (seasonToUpdate != null)
             {
-                seasonToUpdate.Name = editedSeason;
+                int index = _seasons.IndexOf(seasonToUpdate);
+                _seasons[index] = season;
                 _seasonCollectionViewSource.View.Refresh();
+                SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
+                EditSeason = SelectedSeason.Name;
                 OnPropertyChanged(nameof(CanEdit));
             }
             else
@@ -168,13 +169,13 @@ namespace DVS.ViewModels.Forms
 
         private void SeasonStore_SeasonDeleted(SeasonModel season)
         {
-            var seasonToDelete = _seasons.FirstOrDefault(y => y.Name == season.Name);
+            var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
 
             if (seasonToDelete != null)
             {
                 _seasons.Remove(seasonToDelete);
                 _seasonCollectionViewSource.View.Refresh();
-                SelectedSeason = new("Saison wählen");
+                SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
                 EditSeason = SelectedSeason.Name;
                 OnPropertyChanged(nameof(CanDeleteAll));
             }
@@ -189,7 +190,7 @@ namespace DVS.ViewModels.Forms
             if (_seasons != null)
             {
                 _seasons.Clear();
-                SelectedSeason = new("Saison wählen");
+                SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
                 EditSeason = SelectedSeason.Name;
                 OnPropertyChanged(nameof(CanDeleteAll));
             }

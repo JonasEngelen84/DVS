@@ -1,9 +1,10 @@
 ﻿namespace DVS.Models
 {
-    public class ClothesSizeModel : ModelBase
+    public class ClothesSizeModel(Guid guidID, string size) : ModelBase
     {
-        //TODO: string Size in string? ändern??
-        public string Size { get; set; }
+        public Guid GuidID { get; set; } = guidID;
+
+        public string Size { get; } = size;
 
         private int _quantity;
         public int Quantity
@@ -25,14 +26,14 @@
             get => _comment;
             set
             {
-                if (_comment != value)
+                if (value != _comment)
                 {
                     _comment = value;
                     OnPropertyChanged(nameof(Comment));
                 }
             }
         }
-
+        
         private bool _isSelected;
         public bool IsSelected
         {

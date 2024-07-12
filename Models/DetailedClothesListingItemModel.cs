@@ -2,103 +2,15 @@
 {
     public class DetailedClothesListingItemModel : ModelBase
     {
-        private string _iD;
-        public string ID
-        {
-            get => _iD;
-            set
-            {
-                if (value != _iD)
-                {
-                    _iD = value;
-                    OnPropertyChanged(nameof(ID));
-                }
-            }
-        }
+        public ClothesModel ClothesModel {  get; private set; }
 
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
-        }
-
-        private CategoryModel _category;
-        public CategoryModel Category
-        {
-            get => _category;
-            set
-            {
-                if (value != _category)
-                {
-                    _category = value;
-                    OnPropertyChanged(nameof(Category));
-                }
-            }
-        }
-
-        private SeasonModel _season;
-        public SeasonModel Season
-        {
-            get => _season;
-            set
-            {
-                if (value != _season)
-                {
-                    _season = value;
-                    OnPropertyChanged(nameof(Season));
-                }
-            }
-        }
-
-        private string? _size;
-        public string? Size
-        {
-            get => _size;
-            set
-            {
-                if (value != _size)
-                {
-                    _size = value;
-                    OnPropertyChanged(nameof(Size));
-                }
-            }
-        }
-
-        private int? _quantity;
-        public int? Quantity
-        {
-            get => _quantity;
-            set
-            {
-                if(value != _quantity)
-                {
-                    _quantity = value;
-                    OnPropertyChanged(nameof(Quantity));
-                }
-            }
-        }
-
-        private string _comment;
-        public string Comment
-        {
-            get => _comment;
-            set
-            {
-                if(_comment != value)
-                {
-                    _comment = value;
-                    OnPropertyChanged(nameof(Comment));
-                }
-            }
-        }
+        public string ID => ClothesModel.ID;
+        public string Name => ClothesModel.Name;
+        public string Category => ClothesModel.Category.Name;
+        public string Season => ClothesModel.Season.Name;
+        public string Size { get; }
+        public int? Quantity => ClothesModel.Sizes.FirstOrDefault(y => y.Size == Size)?.Quantity ?? null;
+        public string? Comment => ClothesModel.Sizes.FirstOrDefault(y => y.Size == Size)?.Comment ?? null;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -132,16 +44,21 @@
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
 
-        public DetailedClothesListingItemModel(
-            string iD, string name, CategoryModel category,
-            SeasonModel season, string? size, int? quantity)
+        public DetailedClothesListingItemModel(ClothesModel clothes, string size)
         {
-            ID = iD;
-            Name = name;
-            Category = category;
-            Season = season;
+            ClothesModel = clothes;
             Size = size;
-            Quantity = quantity;
+        }
+
+        public void Edit(ClothesModel clothes)
+        {
+            ClothesModel = clothes;
+
+            OnPropertyChanged(nameof(ID));
+            OnPropertyChanged(nameof(Name));
+            OnPropertyChanged(nameof(Category));
+            OnPropertyChanged(nameof(Season));
+            OnPropertyChanged(nameof(Quantity));
         }
     }
 }

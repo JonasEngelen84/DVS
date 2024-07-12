@@ -2,6 +2,8 @@
 {
     public class DetailedEmployeeListingItemModel : ModelBase
     {
+        public ClothesModel ClothesModel { get; private set; }
+
         private string _iD;
         public string ID
         {
@@ -100,8 +102,8 @@
             }
         }
 
-        private string _comment;
-        public string Comment
+        private string? _comment;
+        public string? Comment
         {
             get => _comment;
             set
@@ -148,7 +150,7 @@
 
         public DetailedEmployeeListingItemModel(
             string iD, string lastname, string firstname, string? clothesID,
-            string? clothesName, string? size, int? quantity)
+            string? clothesName, string? size, int? quantity, string? comment)
         {
             ID = iD;
             Lastname = lastname;
@@ -157,6 +159,7 @@
             ClothesName = clothesName;
             Size = size;
             Quantity = quantity;
+            Comment = comment;
         }
     }
 }

@@ -6,34 +6,17 @@ using System.Windows;
 
 namespace DVS.Commands.AddEditCategoryCommands
 {
-    public class EditCategoryCommand : AsyncCommandBase
+    public class EditCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
     {
-        private readonly AddEditCategoryViewModel _addEditCategoryViewModel;
-        private readonly SelectedCategoryStore _selectedCategoryStore;
-        private readonly CategoryStore _categoryStore;
-
-        public EditCategoryCommand(
-            AddEditCategoryViewModel addEditCategoryViewModel,
-            SelectedCategoryStore selectedCategoryStore,
-            CategoryStore categoryStore)
-        {
-            _selectedCategoryStore = selectedCategoryStore;
-            _addEditCategoryViewModel = addEditCategoryViewModel;
-            _categoryStore = categoryStore;
-        }
+        private readonly AddEditCategoryViewModel _addEditCategoryViewModel = addEditCategoryViewModel;
+        private readonly CategoryStore _categoryStore = categoryStore;
 
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
 
-            addEditCategoryFormViewModel.ErrorMessage = null;
-            addEditCategoryFormViewModel.IsSubmitting = true;
-
-            CategoryModel oldCategory = _selectedCategoryStore.SelectedCategory;
-            string editedCategory = _selectedCategoryStore.EditedCategory;
-
-            string messageBoxText = $"Die Kategorie \"{_selectedCategoryStore.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
-                    $"\"{_selectedCategoryStore.EditedCategory}\" umbenannt.\n\nUmbennen fortsetzen?";
+            string messageBoxText = $"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
+                    $"\"{addEditCategoryFormViewModel.EditCategory}\" umbenannt.\n\nUmbennen fortsetzen?";
             string caption = "Kategorie umbenennen";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
@@ -41,9 +24,14 @@ namespace DVS.Commands.AddEditCategoryCommands
 
             if (dialog == MessageBoxResult.Yes)
             {
+                addEditCategoryFormViewModel.ErrorMessage = null;
+                addEditCategoryFormViewModel.IsSubmitting = true;
+
+                CategoryModel category = new(addEditCategoryFormViewModel.SelectedCategory.GuidID, addEditCategoryFormViewModel.EditCategory);
+
                 try
                 {
-                    await _categoryStore.Edit(oldCategory, editedCategory);
+                    await _categoryStore.Edit(category);
                 }
                 catch (Exception)
                 {

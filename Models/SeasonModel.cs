@@ -1,16 +1,8 @@
 ﻿namespace DVS.Models
 {
-    public class SeasonModel(string name) : ModelBase
+    public class SeasonModel(Guid guidID, string name)
     {
-        private string _name = name;
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
+        public Guid GuidID { get; set; } = guidID;
+        public string Name { get; set; } = name;
     }
 }

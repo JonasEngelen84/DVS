@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace DVS.Commands.DVSHeadViewCommands
 {
-    class OpenPrintEmployeeCommand
+    public class OpenPrintEmployeeCommand : AsyncCommandBase
     {
+        public override Task ExecuteAsync(object parameter)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

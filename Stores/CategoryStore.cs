@@ -9,14 +9,15 @@ namespace DVS.Stores
 
         public event Action CategoriesLoaded;
         public event Action<CategoryModel> CategoryAdded;
-        public event Action<CategoryModel, string> CategoryEdited;
+        public event Action<CategoryModel> CategoryEdited;
         public event Action<CategoryModel> CategoryDeleted;
         public event Action AllCategoriesDeleted;
 
 
         public CategoryStore()
         {
-            _categories = [ new("Pullover"),  new("Shirt"), new("Jacke"), new("Kopfbedeckung"), new("Hose") ];
+            _categories = [new(Guid.NewGuid(), "Pullover"),  new(Guid.NewGuid(), "Shirt"),
+                new(Guid.NewGuid(), "Jacke"), new(Guid.NewGuid(), "Kopfbedeckung"), new(Guid.NewGuid(), "Hose") ];
         }
 
 
@@ -32,14 +33,14 @@ namespace DVS.Stores
             _categories.Add(category);
         }
 
-        public async Task Edit(CategoryModel oldCategory, string editedCategory)
+        public async Task Edit(CategoryModel category)
         {
-            var categoryToUpdate = _categories.FirstOrDefault(y => y.Name == oldCategory.Name);
+            int index = _categories.FindIndex(y => y.GuidID == category.GuidID);
 
-            if (categoryToUpdate != null)
+            if (index > -1)
             {
-                CategoryEdited.Invoke(oldCategory, editedCategory);
-                categoryToUpdate.Name = editedCategory;
+                //_categories[currentIndex] = category;
+                CategoryEdited.Invoke(category);
             }
             else
             {
@@ -49,18 +50,19 @@ namespace DVS.Stores
 
         public async Task Delete(CategoryModel category)
         {
-            var categoryToDelete = _categories.FirstOrDefault(y => y.Name == category.Name);
+            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
 
             if (categoryToDelete != null)
             {
+                _categories.Remove(category);
                 CategoryDeleted.Invoke(category);
-                _categories.Remove(categoryToDelete);
             }
             else
             {
                 throw new InvalidOperationException("Löschen der Kategorie nicht möglich.");
             }
         }
+
         public async Task ClearCategories()
         {
             if (_categories != null)

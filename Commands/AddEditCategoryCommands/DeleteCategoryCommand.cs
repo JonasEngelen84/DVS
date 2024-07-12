@@ -9,15 +9,10 @@ namespace DVS.Commands.AddEditCategoryCommands
     public class DeleteCategoryCommand : AsyncCommandBase
     {
         private readonly AddEditCategoryViewModel _addEditCategoryViewModel;
-        private readonly SelectedCategoryStore _selectedCategoryStore;
         private readonly CategoryStore _categoryStore;
 
-        public DeleteCategoryCommand(
-            AddEditCategoryViewModel addEditCategoryViewModel,
-            SelectedCategoryStore selectedCategoryStore,
-            CategoryStore categoryStore)
+        public DeleteCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore)
         {
-            _selectedCategoryStore = selectedCategoryStore;
             _addEditCategoryViewModel = addEditCategoryViewModel;
             _categoryStore = categoryStore;
         }
@@ -26,12 +21,7 @@ namespace DVS.Commands.AddEditCategoryCommands
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
 
-            addEditCategoryFormViewModel.ErrorMessage = null;
-            addEditCategoryFormViewModel.IsSubmitting = true;
-
-            CategoryModel deletedCategorie = _selectedCategoryStore.SelectedCategory;
-
-            string messageBoxText = $"Die Kategorie \"{_selectedCategoryStore.SelectedCategory.Name}\" und ihre Schnittstellen werden gelöscht.\n\nLöschen fortsetzen?";
+            string messageBoxText = $"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden gelöscht.\n\nLöschen fortsetzen?";
             string caption = "Kategorie löschen";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
@@ -39,6 +29,11 @@ namespace DVS.Commands.AddEditCategoryCommands
 
             if (dialog == MessageBoxResult.Yes)
             {
+                CategoryModel deletedCategorie = addEditCategoryFormViewModel.SelectedCategory;
+
+                addEditCategoryFormViewModel.ErrorMessage = null;
+                addEditCategoryFormViewModel.IsSubmitting = true;
+
                 try
                 {
                     await _categoryStore.Delete(deletedCategorie);

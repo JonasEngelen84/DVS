@@ -1,4 +1,4 @@
-﻿using DVS.Commands;
+﻿using DVS.Commands.DVSHeadViewCommands;
 using DVS.Models;
 using System.Windows.Input;
 
@@ -27,8 +27,11 @@ namespace DVS.ViewModels.ListViewItems
             get => _iD;
             set
             {
-                _iD = value;
-                OnPropertyChanged(nameof(ID));
+                if (value != _iD)
+                {
+                    _iD = value;
+                    OnPropertyChanged(nameof(ID));
+                }
             }
         }
 
@@ -38,8 +41,11 @@ namespace DVS.ViewModels.ListViewItems
             get => _lastname;
             set
             {
-                _lastname = value;
-                OnPropertyChanged(nameof(Lastname));
+                if (_lastname != value)
+                {
+                    _lastname = value;
+                    OnPropertyChanged(nameof(Lastname));
+                }
             }
         }
         
@@ -49,8 +55,11 @@ namespace DVS.ViewModels.ListViewItems
             get => _firstname;
             set
             {
-                _firstname = value;
-                OnPropertyChanged(nameof(Firstname));
+                if (_firstname != value)
+                {
+                    _firstname = value;
+                    OnPropertyChanged(nameof(Firstname));
+                }
             }
         }
 
@@ -60,8 +69,11 @@ namespace DVS.ViewModels.ListViewItems
             get => _comment;
             set
             {
-                _comment = value;
-                OnPropertyChanged(nameof(Comment));
+                if (value != _comment)
+                {
+                    _comment = value;
+                    OnPropertyChanged(nameof(Comment));
+                }
             }
         }
 
@@ -74,8 +86,11 @@ namespace DVS.ViewModels.ListViewItems
             }
             set
             {
-                _isDeleting = value;
-                OnPropertyChanged(nameof(IsDeleting));
+                if (value != _isDeleting)
+                {
+                    _isDeleting = value;
+                    OnPropertyChanged(nameof(IsDeleting));
+                }
             }
         }
 
@@ -88,9 +103,12 @@ namespace DVS.ViewModels.ListViewItems
             }
             set
             {
-                _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
-                OnPropertyChanged(nameof(HasErrorMessage));
+                if (value != _errorMessage)
+                {
+                    _errorMessage = value;
+                    OnPropertyChanged(nameof(ErrorMessage));
+                    OnPropertyChanged(nameof(HasErrorMessage));
+                }
             }
         }
 
@@ -100,8 +118,11 @@ namespace DVS.ViewModels.ListViewItems
             get => _isExpanded;
             set
             {
-                _isExpanded = value;
-                OnPropertyChanged(nameof(IsExpanded));
+                if (value != _isExpanded)
+                {
+                    _isExpanded = value;
+                    OnPropertyChanged(nameof(IsExpanded));
+                }
             }
         }
 
@@ -110,14 +131,17 @@ namespace DVS.ViewModels.ListViewItems
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand ClearClothesListCommand { get; set; }
-        public ICommand PrintCommand { get; set; }
+        public ICommand PrintEmployeeCommand { get; set; }
 
 
         public EmployeeListingItemViewModel(EmployeeModel employee)
         {
             Employee = employee;
+
             EditCommand = new OpenEditEmployeeCommand();
             DeleteCommand = new DeleteEmployeeCommand();
+            ClearClothesListCommand = new ClearEmployeeClothesListCommand();
+            PrintEmployeeCommand = new OpenPrintEmployeeCommand();
         }
     }
 }

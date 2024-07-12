@@ -61,32 +61,17 @@
                                                            ClothesItemRemovedCommand="{Binding ClothesItemRemovedCommand}" />
         </StackPanel>
 
-        <!-- Button -->
-        <StackPanel Margin="0 20 0 0">
-
-            <StackPanel Orientation="Horizontal">
-                <Button Content="ERSTELLEN"
-                        Margin="35 0 35 10 "
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding AddEmployeeCommand}" />
-
-                <Button Content="BEARBEITEN"
-                        Margin="0 0 0 10 "
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding EditEmployeeCommand}" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <Button Content="LEEREN"
-                        Margin="35 0 35 0 "
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding ClearEmployeeClothesListCommand}" />
-
-                <Button Content="LÖSCHEN"
-                        Margin="0 0 0 0 "
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding DeleteEmployeeCommand}" />
-            </StackPanel>
-        </StackPanel>
+        <!-- Add/Edit Button -->
+        <Grid>
+            <Button Content="BEARBEITEN"
+                    Margin="0 20 0 0 "
+                    Style="{StaticResource ModalButtonStyle}"
+                    Command="{Binding EditEmployeeCommand}" />
+            
+            <Button Content="ERSTELLEN"
+                    Margin="0 20 0 0 "
+                    Style="{StaticResource ModalButtonStyle}"
+                    Command="{Binding AddEmployeeCommand}" />
+        </Grid>
     </StackPanel>
 </UserControl>

@@ -15,8 +15,11 @@ namespace DVS.ViewModels.Forms
             get => _iD;
             set
             {
-                _iD = value;
-                OnPropertyChanged(nameof(ID));
+                if (_iD != value)
+                {
+                    _iD = value;
+                    OnPropertyChanged(nameof(ID));
+                }
             }
         }
 
@@ -26,19 +29,25 @@ namespace DVS.ViewModels.Forms
             get => _name;
             set
             {
-                _name = value;
-                OnPropertyChanged(nameof(Name));
+                if (value != _name)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
             }
         }
 
-        private string? _comment;
-        public string? Comment
+        private string _comment;
+        public string Comment
         {
             get => _comment;
             set
             {
-                _comment = value;
-                OnPropertyChanged(nameof(Comment));
+                if (value != _comment)
+                {
+                    _comment = value;
+                    OnPropertyChanged(nameof(Comment));
+                }
             }
         }
 
@@ -79,8 +88,11 @@ namespace DVS.ViewModels.Forms
             }
             set
             {
-                _isSubmitting = value;
-                OnPropertyChanged(nameof(IsSubmitting));
+                if (value != _isSubmitting)
+                {
+                    _isSubmitting = value;
+                    OnPropertyChanged(nameof(IsSubmitting));
+                }
             }
         }
 
@@ -93,9 +105,12 @@ namespace DVS.ViewModels.Forms
             }
             set
             {
-                _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
-                OnPropertyChanged(nameof(HasErrorMessage));
+                if (value != _errorMessage)
+                {
+                    _errorMessage = value;
+                    OnPropertyChanged(nameof(ErrorMessage));
+                    OnPropertyChanged(nameof(HasErrorMessage));
+                }
             }
         }
 
@@ -113,35 +128,57 @@ namespace DVS.ViewModels.Forms
         public ICollectionView Seasons => _seasonCollectionViewSource.View;
 
         //TODO: Sizes in Stores implementieren
-        private readonly ObservableCollection<ClothesSizeModel> _availableSizesEU =
+        private  ObservableCollection<ClothesSizeModel> _availableSizesEU =
         [
-            new ClothesSizeModel { Size = "44" },
-            new ClothesSizeModel { Size = "46" },
-            new ClothesSizeModel { Size = "48" },
-            new ClothesSizeModel { Size = "50" },
-            new ClothesSizeModel { Size = "52" },
-            new ClothesSizeModel { Size = "54" },
-            new ClothesSizeModel { Size = "56" },
-            new ClothesSizeModel { Size = "58" },
-            new ClothesSizeModel { Size = "60" },
-            new ClothesSizeModel { Size = "62" }
+            new ClothesSizeModel(Guid.NewGuid(), "44"),
+            new ClothesSizeModel(Guid.NewGuid(), "46"),
+            new ClothesSizeModel(Guid.NewGuid(), "48"),
+            new ClothesSizeModel(Guid.NewGuid(), "50"),
+            new ClothesSizeModel(Guid.NewGuid(), "52"),
+            new ClothesSizeModel(Guid.NewGuid(), "54"),
+            new ClothesSizeModel(Guid.NewGuid(), "56"),
+            new ClothesSizeModel(Guid.NewGuid(), "58"),
+            new ClothesSizeModel(Guid.NewGuid(), "60"),
+            new ClothesSizeModel(Guid.NewGuid(), "62"),
         ];
-        public ObservableCollection<ClothesSizeModel> AvailableSizesEU => _availableSizesEU;
+        public ObservableCollection<ClothesSizeModel> AvailableSizesEU
+        {
+            get => _availableSizesEU;
+            set
+            {
+                if (_availableSizesEU != value)
+                {
+                    _availableSizesEU = value;
+                    OnPropertyChanged(nameof(AvailableSizesEU));
+                }
+            }
+        }
 
-        private readonly ObservableCollection<ClothesSizeModel> _availableSizesUS =
+        private  ObservableCollection<ClothesSizeModel> _availableSizesUS =
         [
-            new ClothesSizeModel { Size = "XS" },
-            new ClothesSizeModel { Size = "S" },
-            new ClothesSizeModel { Size = "M" },
-            new ClothesSizeModel { Size = "L" },
-            new ClothesSizeModel { Size = "XL" },
-            new ClothesSizeModel { Size = "XLL" },
-            new ClothesSizeModel { Size = "3XL" },
-            new ClothesSizeModel { Size = "4XL" },
-            new ClothesSizeModel { Size = "5XL" },
-            new ClothesSizeModel { Size = "6XL" }
+            new ClothesSizeModel(Guid.NewGuid(), "XS"),
+            new ClothesSizeModel(Guid.NewGuid(), "S"),
+            new ClothesSizeModel(Guid.NewGuid(), "M"),
+            new ClothesSizeModel(Guid.NewGuid(), "L"),
+            new ClothesSizeModel(Guid.NewGuid(), "XL"),
+            new ClothesSizeModel(Guid.NewGuid(), "XLL"),
+            new ClothesSizeModel(Guid.NewGuid(), "3XL"),
+            new ClothesSizeModel(Guid.NewGuid(), "4XL"),
+            new ClothesSizeModel(Guid.NewGuid(), "5XL"),
+            new ClothesSizeModel(Guid.NewGuid(), "6XL")
         ];
-        public ObservableCollection<ClothesSizeModel> AvailableSizesUS => _availableSizesUS;
+        public ObservableCollection<ClothesSizeModel> AvailableSizesUS
+        {
+            get => _availableSizesUS;
+            set
+            {
+                if (_availableSizesEU != value)
+                {
+                    _availableSizesUS = value;
+                    OnPropertyChanged(nameof(AvailableSizesUS));
+                }
+            }
+        }
 
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
@@ -151,14 +188,15 @@ namespace DVS.ViewModels.Forms
         public ICommand OpenAddEditSeasonsCommand { get; }
         public ICommand AddClothesCommand { get; }
         public ICommand EditClothesCommand { get; }
-        public ICommand DeleteClothesCommand { get; }
-        public ICommand ClearClothesListCommand { get; }
 
 
-        public AddEditClothesFormViewModel(
-            CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore,
-            ICommand openAddEditCategoriesCommand, ICommand openAddEditSeasonsCommand, ICommand addClothesCommand,
-            ICommand editClothesCommand, ICommand deleteClothesCommand, ICommand clearClothesListCommand)
+        public AddEditClothesFormViewModel(CategoryStore categoryStore,
+                                           SeasonStore seasonStore,
+                                           ClothesStore clothesStore,
+                                           ICommand openAddEditCategoriesCommand,
+                                           ICommand openAddEditSeasonsCommand,
+                                           ICommand addClothesCommand,
+                                           ICommand editClothesCommand)
         {
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
@@ -167,8 +205,6 @@ namespace DVS.ViewModels.Forms
             OpenAddEditSeasonsCommand = openAddEditSeasonsCommand;
             AddClothesCommand = addClothesCommand;
             EditClothesCommand = editClothesCommand;
-            DeleteClothesCommand = deleteClothesCommand;
-            ClearClothesListCommand = clearClothesListCommand;
 
             _categories = [];
             _categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
@@ -186,6 +222,26 @@ namespace DVS.ViewModels.Forms
 
         }
 
+
+        public void LoadSizes(ClothesModel clothesModel)
+        {
+            foreach (var size in clothesModel.Sizes)
+            {
+                var matchingSizeEU = _availableSizesEU.FirstOrDefault(s => s.Size == size.Size);
+                if (matchingSizeEU != null)
+                {
+                    matchingSizeEU.IsSelected = true;
+                    matchingSizeEU.Quantity = size.Quantity;
+                }
+
+                var matchingSizeUS = _availableSizesUS.FirstOrDefault(s => s.Size == size.Size);
+                if (matchingSizeUS != null)
+                {
+                    matchingSizeUS.IsSelected = true;
+                    matchingSizeUS.Quantity = size.Quantity;
+                }
+            }
+        }
 
         private void CategoryStore_LoadCategories()
         {

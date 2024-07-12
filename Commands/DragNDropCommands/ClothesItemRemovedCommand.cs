@@ -13,7 +13,7 @@ namespace DVS.Commands.DragNDropCommands
                     _dVSListingViewModel.RemovedClothesListingItemModel);
 
             else if (parameter.Equals("AddEditEmployeeNewEmployeeClothesList"))
-                _dVSListingViewModel.RemoveClothesItemFromDetailedClothesListingItemCollection(
+                _dVSListingViewModel.RemoveClothesItemFromDetailedClothesListingItemCollectionAsync(
                     _dVSListingViewModel.RemovedClothesListingItemModel);
         }
     }

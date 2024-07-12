@@ -12,20 +12,20 @@
         <TextBox Width="252"
                  Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding ID}" />
+                 Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" />
 
         <!-- Name -->
         <TextBox Width="252"
                  Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding Name}" />
+                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
         <!-- Comment -->
         <TextBox Width="252"
                  Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding Comment}" />
-        
+                 Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
+
         <Label Content="Kategorie:"
                FontSize="14"
                FontWeight="Bold"
@@ -36,13 +36,8 @@
 
             <ComboBox Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Categories}"
-                      SelectedItem="{Binding Category, Mode=TwoWay}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+                      SelectedItem="{Binding Category, Mode=TwoWay}"
+                      DisplayMemberPath="Name" />
 
             <Button Margin="5 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
@@ -64,13 +59,8 @@
 
             <ComboBox Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Seasons}"
-                      SelectedItem="{Binding Season, Mode=TwoWay}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+                      SelectedItem="{Binding Season, Mode=TwoWay}"
+                      DisplayMemberPath="Name" />
 
             <Button Margin="5 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
@@ -81,6 +71,7 @@
             </Button>
         </StackPanel>
 
+        <!-- Label Größe eu/us -->
         <StackPanel Orientation="Horizontal">
             
             <Label Content="Größe (eu):"
@@ -150,33 +141,17 @@
             </Border>
         </StackPanel>
 
-        <!-- Button -->
-        <StackPanel Margin="0 20 0 0">
-
-            <StackPanel Orientation="Horizontal">
-                <Button Content="ERSTELLEN"
-                        Margin="35 0 35 10 "
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding AddClothesCommand}" />
-
-                <Button Content="BEARBEITEN"
-                        Margin="0 0 0 10 "
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding EditClothesCommand}" />
-            </StackPanel>
-
-            <StackPanel Orientation="Horizontal">
-                <Button Content="LEEREN"
-                        Margin="35 0 35 0 "
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding ClearClothesListCommand}" />
-                
-                <Button Content="LÖSCHEN"
-                        Margin="0 0 0 0 "
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding DeleteClothesCommand}" />
-            </StackPanel>
-        </StackPanel>
-
+        <!-- Add/Edit Button -->
+        <Grid>
+            <Button Content="BEARBEITEN"
+                    Margin="0 20 0 0 "
+                    Style="{StaticResource ModalButtonStyle}"
+                    Command="{Binding EditClothesCommand}" />
+            
+            <Button Content="ERSTELLEN"
+                    Margin="0 20 0 0 "
+                    Style="{StaticResource ModalButtonStyle}"
+                    Command="{Binding AddClothesCommand}" />
+        </Grid>
     </StackPanel>
 </UserControl>

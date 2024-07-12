@@ -64,9 +64,9 @@
                     </MenuItem>
 
                     <!-- Edit -->
-                    <MenuItem Header="BEARBEITEN"
+                    <MenuItem Header="KOMMENT"
                               Style="{StaticResource MainMenuItem}"
-                              Command="{Binding OpenEditCommand}">
+                              Command="{Binding OpenCommentCommand}">
                     </MenuItem>
 
                     <!-- Save -->
