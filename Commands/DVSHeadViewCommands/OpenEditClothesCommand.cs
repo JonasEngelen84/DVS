@@ -28,7 +28,7 @@ namespace DVS.Commands.DVSHeadViewCommands
         
         public override void Execute(object parameter)
         {
-            AddEditClothesViewModel addEditClothesViewModel = new(_modalNavigationStore,
+            AddClothesViewModel addEditClothesViewModel = new(_modalNavigationStore,
                                                                   _categoryStore,
                                                                   _seasonStore,
                                                                   _clothesStore);

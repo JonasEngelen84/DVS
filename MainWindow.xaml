@@ -22,12 +22,20 @@
 
     <!-- Modal DataTypes -->
     <Window.Resources>
-        <DataTemplate DataType="{x:Type vms:AddEditClothesViewModel}">
-            <views:AddEditClothesView />
+        <DataTemplate DataType="{x:Type vms:AddClothesViewModel}">
+            <views:AddClothesView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type vms:EditClothesViewModel}">
+            <views:EditClothesView />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type vms:AddEditEmployeeViewModel}">
-            <views:AddEditEmployeeView />
+        <DataTemplate DataType="{x:Type vms:AddEmployeeViewModel}">
+            <views:AddEmployeeView />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type vms:EditEmployeeViewModel}">
+            <views:EditEmployeeView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type vms:AddEditCategoryViewModel}">
@@ -96,29 +104,32 @@
                                 HorizontalAlignment="Right">
                         <!-- Minimize Button -->
                         <Button Style="{StaticResource TitleBarButtonStyle}"
+                                Width="40"
                                 Click="MinimizeAppClick">
                             <Image Source="/Resources/Images/Minimize.png"
-                                   Height="16"
-                                   Width="16"
+                                   Height="18"
+                                   Width="18"
                                    HorizontalAlignment="Center" />
                         </Button>
 
                         <!-- Maximize Button -->
                         <Button Style="{StaticResource TitleBarButtonStyle}"
+                                Width="40"
                                 Click="MaximizeAppClick">
                             <Image x:Name="MaximizePNG"
                                    Source="/Resources/Images/Maximize.png"
-                                   Height="14"
-                                   Width="14"
+                                   Height="15"
+                                   Width="15"
                                    HorizontalAlignment="Center" />
                         </Button>
 
                         <!-- Close Button -->
                         <Button Style="{StaticResource TitleBarButtonStyle}"
+                                Width="40"
                                 Click="CloseAppClick">
                             <Image Source="/Resources/Images/Close.png"
-                                   Height="18"
-                                   Width="18"
+                                   Height="20"
+                                   Width="20"
                                    HorizontalAlignment="Center" />
                         </Button>
                     </StackPanel>

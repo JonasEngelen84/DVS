@@ -119,11 +119,11 @@ namespace DVS.ViewModels.Forms
         //TODO: CanSubmit
         //public bool CanSubmit => !string.IsNullOrEmpty(Username);
 
-        private readonly ObservableCollection<CategoryModel> _categories;
+        private readonly ObservableCollection<CategoryModel> _categories = [];
         private readonly CollectionViewSource _categoryCollectionViewSource;
         public ICollectionView Categories => _categoryCollectionViewSource.View;
 
-        private readonly ObservableCollection<SeasonModel> _seasons;
+        private readonly ObservableCollection<SeasonModel> _seasons = [];
         private readonly CollectionViewSource _seasonCollectionViewSource;
         public ICollectionView Seasons => _seasonCollectionViewSource.View;
 
@@ -186,31 +186,22 @@ namespace DVS.ViewModels.Forms
 
         public ICommand OpenAddEditCategoriesCommand { get; }
         public ICommand OpenAddEditSeasonsCommand { get; }
-        public ICommand AddClothesCommand { get; }
-        public ICommand EditClothesCommand { get; }
+        public ICommand SubmitCommand { get; }
 
 
-        public AddEditClothesFormViewModel(CategoryStore categoryStore,
-                                           SeasonStore seasonStore,
-                                           ClothesStore clothesStore,
-                                           ICommand openAddEditCategoriesCommand,
-                                           ICommand openAddEditSeasonsCommand,
-                                           ICommand addClothesCommand,
-                                           ICommand editClothesCommand)
+        public AddEditClothesFormViewModel(CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore,
+            ICommand openAddEditCategoriesCommand, ICommand openAddEditSeasonsCommand, ICommand submitCommand)
         {
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
             _clothesStore = clothesStore;
             OpenAddEditCategoriesCommand = openAddEditCategoriesCommand;
             OpenAddEditSeasonsCommand = openAddEditSeasonsCommand;
-            AddClothesCommand = addClothesCommand;
-            EditClothesCommand = editClothesCommand;
+            SubmitCommand = submitCommand;
 
-            _categories = [];
             _categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
             _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(CategoryModel.Name), ListSortDirection.Ascending));
 
-            _seasons = [];
             _seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
             _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(SeasonModel.Name), ListSortDirection.Ascending));
 

@@ -26,12 +26,13 @@
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
 
+        <!-- Label-Categorie -->
         <Label Content="Kategorie:"
                FontSize="14"
                FontWeight="Bold"
                Margin="-6 0 0 -4" />
 
-        <!-- Categorie ComboBox and Edit-Button  -->
+        <!-- ComboBox-Categorie and Button-Edit  -->
         <StackPanel Orientation="Horizontal">
 
             <ComboBox Style="{StaticResource ComboBoxStyle}"
@@ -48,12 +49,13 @@
             </Button>
         </StackPanel>
 
+        <!-- Label-Season -->
         <Label Content="Saison:"
                FontSize="14"
                FontWeight="Bold"
                Margin="-5.5 0 0 -4" />
 
-        <!-- Season ComboBox and Edit-Button -->
+        <!-- ComboBox-Season and Button-Edit -->
         <StackPanel Orientation="Horizontal"
                     Margin="0 0 0 3">
 
@@ -71,7 +73,7 @@
             </Button>
         </StackPanel>
 
-        <!-- Label Größe eu/us -->
+        <!-- Size eu/us-Labels -->
         <StackPanel Orientation="Horizontal">
             
             <Label Content="Größe (eu):"
@@ -85,7 +87,7 @@
                    Margin="42 0 0 -2" />
         </StackPanel>
 
-        <!-- Size Checkboxes -->
+        <!-- Checkboxes-Size -->
         <StackPanel Orientation="Horizontal">
 
             <!-- SizeListEU -->
@@ -141,17 +143,10 @@
             </Border>
         </StackPanel>
 
-        <!-- Add/Edit Button -->
-        <Grid>
-            <Button Content="BEARBEITEN"
-                    Margin="0 20 0 0 "
-                    Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding EditClothesCommand}" />
-            
-            <Button Content="ERSTELLEN"
-                    Margin="0 20 0 0 "
-                    Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding AddClothesCommand}" />
-        </Grid>
+        <!-- Button-Bestätigen -->
+        <Button Content="BESTÄTIGEN"
+                Margin="0 20 0 0 "
+                Style="{StaticResource ModalButtonStyle}"
+                Command="{Binding SubmitCommand}" />
     </StackPanel>
 </UserControl>

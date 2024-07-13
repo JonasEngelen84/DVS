@@ -5,12 +5,12 @@ using DVS.ViewModels.Views;
 
 namespace DVS.Commands.DVSHeadViewCommands
 {
-    public class OpenAddClothesCommand(AddEditClothesViewModel addClothesViewModel,
+    public class OpenAddClothesCommand(AddClothesViewModel addClothesViewModel,
                                        ClothesStore clothesStore,
                                        ModalNavigationStore modalNavigationStore)
                                        : AsyncCommandBase
     {
-        private readonly AddEditClothesViewModel _addClothesViewModel = addClothesViewModel;
+        private readonly AddClothesViewModel _addClothesViewModel = addClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 

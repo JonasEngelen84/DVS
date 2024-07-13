@@ -2,9 +2,9 @@
 
 namespace DVS.Views
 {
-    public partial class AddEditClothesView : UserControl
+    public partial class AddClothesView : UserControl
     {
-        public AddEditClothesView()
+        public AddClothesView()
         {
             InitializeComponent();
         }

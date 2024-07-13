@@ -5,11 +5,10 @@ using DVS.ViewModels.Views;
 
 namespace DVS.Commands.AddEditEmployeeCommands
 {
-    public class AddEmployeeCommand(
-        AddEditEmployeeViewModel addEmployeeViewModel, EmployeeStore employeeStore,
+    public class AddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel, EmployeeStore employeeStore,
         ModalNavigationStore modalNavigationStore) : AsyncCommandBase
     {
-        private readonly AddEditEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
+        private readonly AddEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 

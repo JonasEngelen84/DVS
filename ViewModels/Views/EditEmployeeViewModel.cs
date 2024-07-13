@@ -6,26 +6,21 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Views
 {
-    public class AddEditEmployeeViewModel : ViewModelBase
+    public class EditEmployeeViewModel : ViewModelBase
     {
         public AddEditEmployeeFormViewModel AddEditEmployeeFormViewModel { get; }
-
         public ICommand CloseModalCommand { get; }
 
 
-        public AddEditEmployeeViewModel(DVSListingViewModel dVSListingViewModel,
-                                        ClothesStore clothesStore,
-                                        EmployeeStore employeeStore,
-                                        ModalNavigationStore modalNavigationStore)
+        public EditEmployeeViewModel(DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore,
+            EmployeeStore employeeStore, ModalNavigationStore modalNavigationStore)
         {
-            CloseModalCommand = new CloseModalCommand(modalNavigationStore);
             ICommand editEmployeeCommand = new EditEmployeeCommand(this, modalNavigationStore);
-            ICommand addEmployeeCommand = new AddEmployeeCommand(this, employeeStore, modalNavigationStore);
+            CloseModalCommand = new CloseModalCommand(modalNavigationStore);
 
             AddEditEmployeeFormViewModel = new(dVSListingViewModel,
                                                clothesStore,
                                                employeeStore,
-                                               addEmployeeCommand,
                                                editEmployeeCommand);
         }
     }

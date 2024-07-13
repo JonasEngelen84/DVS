@@ -103,17 +103,14 @@ namespace DVS.ViewModels.Forms
 
         public DVSListingViewModel DVSListingViewModel { get; }
 
-        public ICommand AddEmployeeCommand { get; }
-        public ICommand EditEmployeeCommand { get; }
+        public ICommand SubmitCommand { get; }
 
 
-        public AddEditEmployeeFormViewModel(
-            DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore,
-            EmployeeStore employeeStore, ICommand addEmployeeCommand, ICommand editEmployeeCommand)
+        public AddEditEmployeeFormViewModel(DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore,
+            EmployeeStore employeeStore, ICommand submitCommand)
         {
             DVSListingViewModel = dVSListingViewModel;
-            AddEmployeeCommand = addEmployeeCommand;
-            EditEmployeeCommand = editEmployeeCommand;
+            SubmitCommand = submitCommand;
         }
     }
 }

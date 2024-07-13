@@ -23,7 +23,7 @@ namespace DVS.Commands.AddEditSeasonCommands
 
         public override void Execute(object parameter)
         {
-            AddEditClothesViewModel addClothesViewModel = new(_modalNavigationStore,
+            AddClothesViewModel addClothesViewModel = new(_modalNavigationStore,
                                                               _categoryStore,
                                                               _seasonStore,
                                                               _clothesStore);

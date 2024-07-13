@@ -5,12 +5,12 @@ using DVS.ViewModels.Views;
 
 namespace DVS.Commands.AddEditClothesCommands
 {
-    public class AddClothesCommand(AddEditClothesViewModel addClothesViewModel,
+    public class AddClothesCommand(AddClothesViewModel addClothesViewModel,
                                    ClothesStore clothesStore,
                                    ModalNavigationStore modalNavigationStore)
                                    : AsyncCommandBase
     {
-        private readonly AddEditClothesViewModel _addClothesViewModel = addClothesViewModel;
+        private readonly AddClothesViewModel _addClothesViewModel = addClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 

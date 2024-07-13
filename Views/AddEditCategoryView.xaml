@@ -27,11 +27,12 @@
 
                     <!-- Close Button -->
                     <Button HorizontalAlignment="Right"
+                            Width="45"
                             Style="{StaticResource TitleBarButtonStyle}"
                             Command="{Binding CloseAddEditCategoryCommand}">
                         <Image Source="/Resources/Images/Close.png"
-                               Height="18"
-                               Width="18"
+                               Height="20"
+                               Width="20"
                                HorizontalAlignment="Center" />
                     </Button>
                 </Grid>

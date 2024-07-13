@@ -39,7 +39,7 @@ namespace DVS.Stores
 
             if (index > -1)
             {
-                //_categories[currentIndex] = category;
+                _categories[index] = category;
                 CategoryEdited.Invoke(category);
             }
             else

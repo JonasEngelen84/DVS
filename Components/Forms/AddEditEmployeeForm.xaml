@@ -32,7 +32,8 @@
                  Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
-        
+
+        <!-- Label-Bekleidung hinzufügen -->
         <Label Content="Bekleidung hinzufügen:"
                FontSize="14"
                FontWeight="Bold"
@@ -61,17 +62,10 @@
                                                            ClothesItemRemovedCommand="{Binding ClothesItemRemovedCommand}" />
         </StackPanel>
 
-        <!-- Add/Edit Button -->
-        <Grid>
-            <Button Content="BEARBEITEN"
-                    Margin="0 20 0 0 "
-                    Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding EditEmployeeCommand}" />
-            
-            <Button Content="ERSTELLEN"
-                    Margin="0 20 0 0 "
-                    Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding AddEmployeeCommand}" />
-        </Grid>
+        <!-- Button-Bestätigen -->
+        <Button Content="BESTÄTIGEN"
+                Margin="0 20 0 0 "
+                Style="{StaticResource ModalButtonStyle}"
+                Command="{Binding SubmitCommand}" />
     </StackPanel>
 </UserControl>

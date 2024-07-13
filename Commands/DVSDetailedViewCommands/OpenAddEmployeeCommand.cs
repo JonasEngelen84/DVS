@@ -23,7 +23,7 @@ namespace DVS.Commands.DVSDetailedViewCommands
 
         public override void Execute(object parameter)
         {
-            AddEditEmployeeViewModel addEmployeeViewModel = new(
+            AddEmployeeViewModel addEmployeeViewModel = new(
                 _dVSListingViewModel, _clothesStore, _employeeStore, _modalNavigationStore);
 
             addEmployeeViewModel.AddEditEmployeeFormViewModel.ID = "ID";
