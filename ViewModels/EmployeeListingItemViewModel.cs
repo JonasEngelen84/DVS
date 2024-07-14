@@ -1,5 +1,6 @@
 ﻿using DVS.Commands.DVSHeadViewCommands;
 using DVS.Models;
+using DVS.Stores;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.ListViewItems
@@ -13,11 +14,11 @@ namespace DVS.ViewModels.ListViewItems
             set
             {
                 _employee = value;
-                OnPropertyChanged(nameof(Employee));
                 ID = Employee?.ID;
                 Lastname = Employee?.Lastname;
                 Firstname = Employee?.Firstname;
                 Comment = Employee?.Comment;
+                OnPropertyChanged(nameof(Employee));
             }
         }
 
@@ -128,20 +129,22 @@ namespace DVS.ViewModels.ListViewItems
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        public ICommand EditCommand { get; set; }
+        public ICommand OpenEditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand ClearClothesListCommand { get; set; }
         public ICommand PrintEmployeeCommand { get; set; }
 
 
-        public EmployeeListingItemViewModel(EmployeeModel employee)
+        public EmployeeListingItemViewModel(EmployeeModel employee,
+            DVSListingViewModel dVSListingViewModel, ModalNavigationStore modalNavigationStore)
         {
             Employee = employee;
 
-            EditCommand = new OpenEditEmployeeCommand();
             DeleteCommand = new DeleteEmployeeCommand();
             ClearClothesListCommand = new ClearEmployeeClothesListCommand();
             PrintEmployeeCommand = new OpenPrintEmployeeCommand();
+            OpenEditCommand = new OpenEditEmployeeCommand(
+                dVSListingViewModel, employee, modalNavigationStore);
         }
     }
 }

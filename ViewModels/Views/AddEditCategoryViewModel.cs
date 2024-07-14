@@ -1,4 +1,5 @@
 ﻿using DVS.Commands.AddEditCategoryCommands;
+using DVS.Models;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
 using System.Windows.Input;
@@ -10,10 +11,8 @@ namespace DVS.ViewModels.Views
         public AddEditCategoryFormViewModel AddEditCategoryFormViewModel { get; }
         public ICommand CloseAddEditCategoryCommand { get; }
 
-        public AddEditCategoryViewModel(ModalNavigationStore modalNavigationStore,
-                                        CategoryStore categoryStore,
-                                        SeasonStore seasonStore,
-                                        ClothesStore clothesStore)
+        public AddEditCategoryViewModel(ClothesModel clothes, ModalNavigationStore modalNavigationStore,
+            CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
         {
 
             ICommand addCategoryCommand = new AddCategoryCommand(this, categoryStore);
@@ -22,15 +21,10 @@ namespace DVS.ViewModels.Views
             ICommand clearCategoryListCommand = new ClearCategoryListCommand(this, categoryStore);
 
             AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(categoryStore,
-                                                                            addCategoryCommand,
-                                                                            editCategoryCommand,
-                                                                            deleteCategoryCommand,
-                                                                            clearCategoryListCommand);
+                addCategoryCommand, editCategoryCommand, deleteCategoryCommand, clearCategoryListCommand);
 
-            CloseAddEditCategoryCommand = new CloseAddEditCategoryCommand(modalNavigationStore,
-                                                                          categoryStore,
-                                                                          seasonStore,
-                                                                          clothesStore);
+            CloseAddEditCategoryCommand = new CloseAddEditCategoryCommand(
+                clothes, modalNavigationStore, categoryStore, seasonStore, clothesStore);
         }
     }
 }

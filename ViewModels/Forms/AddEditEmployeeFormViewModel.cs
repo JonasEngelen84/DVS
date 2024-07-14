@@ -1,10 +1,12 @@
-﻿using DVS.Stores;
+﻿using DVS.Models;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
     public class AddEditEmployeeFormViewModel : ViewModelBase
     {
+        private EmployeeModel? Employee {  get; }
+
         private string _iD;
         public string ID
         {
@@ -15,6 +17,7 @@ namespace DVS.ViewModels.Forms
                 {
                     _iD = value;
                     OnPropertyChanged(nameof(ID));
+                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -29,6 +32,7 @@ namespace DVS.ViewModels.Forms
                 {
                     _lastname = value;
                     OnPropertyChanged(nameof(Lastname));
+                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -43,12 +47,13 @@ namespace DVS.ViewModels.Forms
                 {
                     _firstname = value;
                     OnPropertyChanged(nameof(Firstname));
+                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
 
-        private string? _comment;
-        public string? Comment
+        private string _comment;
+        public string Comment
         {
             get => _comment;
             set
@@ -98,17 +103,39 @@ namespace DVS.ViewModels.Forms
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        //TODO: CanSubmit
-        //public bool CanSubmit => !string.IsNullOrEmpty(Username);
+        public bool CanSubmit
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ID) || ID == "ID" ||
+                    string.IsNullOrEmpty(Lastname) || Lastname == "Nachname" ||
+                    string.IsNullOrEmpty(Firstname) || Firstname == "Vorname")
+                {
+                    return false;
+                }
+
+                if (Employee != null)
+                {
+                    if (ID == Employee.ID &&
+                        Lastname == Employee.Lastname &&
+                        Firstname == Employee.Firstname)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+        }
 
         public DVSListingViewModel DVSListingViewModel { get; }
 
         public ICommand SubmitCommand { get; }
 
 
-        public AddEditEmployeeFormViewModel(DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore,
-            EmployeeStore employeeStore, ICommand submitCommand)
+        public AddEditEmployeeFormViewModel(EmployeeModel? employee, DVSListingViewModel dVSListingViewModel, ICommand submitCommand)
         {
+            Employee = employee;
             DVSListingViewModel = dVSListingViewModel;
             SubmitCommand = submitCommand;
         }

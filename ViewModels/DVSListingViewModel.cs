@@ -103,11 +103,8 @@ namespace DVS.ViewModels
         public ICommand ClothesItemRemovedCommand { get; }
 
 
-        public DVSListingViewModel(ClothesStore clothesStore,
-                                   EmployeeStore employeeStore,
-                                   ModalNavigationStore modalNavigationStore,
-                                   CategoryStore categoryStore,
-                                   SeasonStore seasonStore)
+        public DVSListingViewModel(ClothesStore clothesStore, EmployeeStore employeeStore,
+            ModalNavigationStore modalNavigationStore, CategoryStore categoryStore, SeasonStore seasonStore)
         {
             _clothesStore = clothesStore;
             _employeeStore = employeeStore;
@@ -257,11 +254,7 @@ namespace DVS.ViewModels
                 }
             }
 
-            _clothesListingItemCollection.Add(new ClothesListingItemViewModel(clothes,
-                                                                              _modalNavigationStore,
-                                                                              _categoryStore,
-                                                                              _seasonStore,
-                                                                              _clothesStore));
+            _clothesListingItemCollection.Add(new ClothesListingItemViewModel(clothes, _modalNavigationStore, _categoryStore, _seasonStore, _clothesStore));
         }
 
         private void ClothesStore_ClothesEdited(ClothesModel clothes)
@@ -301,7 +294,9 @@ namespace DVS.ViewModels
                 }
             }
 
-            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(employee));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(
+                employee, this, _modalNavigationStore));
+
             _newEmployeeListingItemCollection.Clear();
         }
 

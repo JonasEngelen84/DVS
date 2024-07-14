@@ -18,51 +18,36 @@ namespace DVS.ViewModels.Views
         public ICommand PlusCommand { get; }
         public ICommand MinusCommand { get; }
 
-        public DVSDetailedViewModel(ModalNavigationStore modalNavigationStore,
-                                    CategoryStore categoryStore,
-                                    SeasonStore seasonStore,
-                                    ClothesStore clothesStore,
-                                    EmployeeStore employeeStore,
-                                    SelectedClothesStore selectedClothesStore,
-                                    SelectedEmployeeClothesStore selectedEmployeeClothesStore)
+        public DVSDetailedViewModel(ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
+            SeasonStore seasonStore, ClothesStore clothesStore, EmployeeStore employeeStore,
+            SelectedClothesStore selectedClothesStore, SelectedEmployeeClothesStore selectedEmployeeClothesStore)
         {
-            DVSDetailedClothesListingView = new(clothesStore,
-                                                employeeStore,
-                                                modalNavigationStore,
-                                                categoryStore,
-                                                seasonStore);
+            DVSDetailedClothesListingView = new(
+                clothesStore, employeeStore, modalNavigationStore, categoryStore, seasonStore);
 
-            DVSDetailedEmployeesListingView = new(clothesStore,
-                                                  employeeStore,
-                                                  modalNavigationStore,
-                                                  categoryStore,
-                                                  seasonStore);
+            DVSDetailedEmployeesListingView = new(
+                clothesStore, employeeStore, modalNavigationStore, categoryStore, seasonStore);
 
             SaveCommand = new SaveCommand(modalNavigationStore);
+
             OpenFilterClothesListCommand = new OpenFilterClothesListCommand(modalNavigationStore);
+
             OpenFilterEmployeeListCommand = new OpenFilterEmployeeListCommand(modalNavigationStore);
 
-            PlusCommand = new PlusCommand(selectedClothesStore,
-                                          selectedEmployeeClothesStore,
-                                          modalNavigationStore);
+            PlusCommand = new PlusCommand(
+                selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);
 
-            MinusCommand = new MinusCommand(selectedClothesStore,
-                                            selectedEmployeeClothesStore,
-                                            modalNavigationStore);
+            MinusCommand = new MinusCommand(
+                selectedClothesStore, selectedEmployeeClothesStore, modalNavigationStore);
 
-            OpenAddEmployeeCommand = new OpenAddEmployeeCommand(DVSDetailedClothesListingView,
-                                                                clothesStore,
-                                                                employeeStore,
-                                                                modalNavigationStore);
+            OpenAddEmployeeCommand = new OpenAddEmployeeCommand(
+                DVSDetailedClothesListingView, employeeStore, modalNavigationStore);
 
-            OpenAddClothesCommand = new OpenAddClothesCommand(modalNavigationStore,
-                                                              categoryStore,
-                                                              seasonStore,
-                                                              clothesStore);
+            OpenAddClothesCommand = new OpenAddClothesCommand(
+                modalNavigationStore, categoryStore, seasonStore, clothesStore);
 
-            OpenCommentCommand = new OpenCommentCommand(DVSDetailedClothesListingView,
-                                                        DVSDetailedEmployeesListingView,
-                                                        modalNavigationStore);
+            OpenCommentCommand = new OpenCommentCommand(
+                DVSDetailedClothesListingView, DVSDetailedEmployeesListingView, modalNavigationStore);
 
 
         }

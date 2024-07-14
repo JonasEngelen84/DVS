@@ -204,7 +204,7 @@
                                         </Style>
                                     </StackPanel.Resources>
 
-                                    <Button Command="{Binding EditCommand}"
+                                    <Button Command="{Binding OpenEditCommand}"
                                             Content="Bearbeiten" />
                                     <Button Command="{Binding DeleteCommand}"
                                             Content="Löschen" />

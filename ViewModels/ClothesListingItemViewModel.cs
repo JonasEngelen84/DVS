@@ -147,7 +147,7 @@ namespace DVS.ViewModels.ListViewItems
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        public ICommand EditCommand { get; set; }
+        public ICommand OpenEditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand ClearSizesCommand { get; set; }
         public ICommand PrintClothesCommand { get; set; }
@@ -161,11 +161,11 @@ namespace DVS.ViewModels.ListViewItems
         {
             Clothes = clothes;
 
-            EditCommand = new OpenEditClothesCommand(this,
-                                                     modalNavigationStore,
-                                                     categoryStore,
-                                                     seasonStore,
-                                                     clothesStore);
+            OpenEditCommand = new OpenEditClothesCommand(clothes,
+                                                         modalNavigationStore,
+                                                         categoryStore,
+                                                         seasonStore,
+                                                         clothesStore);
 
             DeleteCommand = new DeleteClothesCommand();
             ClearSizesCommand = new ClearSizesCommand();

@@ -28,18 +28,10 @@ namespace DVS
             _modalNavigationStore = new();
 
             _dVSHeadViewModel = new(_clothesStore,
-                                    _employeeStore,
-                                    _modalNavigationStore,
-                                    _categoryStore,
-                                    _seasonStore);
+                _employeeStore, _modalNavigationStore, _categoryStore, _seasonStore);
 
-            _dVSDetailedViewModel = new(_modalNavigationStore,
-                                        _categoryStore,
-                                        _seasonStore,
-                                        _clothesStore,
-                                        _employeeStore,
-                                        _selectedClothesStore,
-                                        _selectedEmployeeClothesStore);
+            _dVSDetailedViewModel = new(_modalNavigationStore, _categoryStore, _seasonStore,
+                _clothesStore, _employeeStore, _selectedClothesStore, _selectedEmployeeClothesStore);
         }
 
         protected override void OnStartup(StartupEventArgs e)

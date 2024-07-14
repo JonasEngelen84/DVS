@@ -18,68 +18,68 @@ namespace DVS.Stores
         {
             _employees =
             [
-                //new EmployeeModel("1324", "Engelen", "Jonas", "Vertrag läuft aus")
-                //{
-                //    Clothes = [new DetailedClothesListingItemModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3),
-                //               new DetailedClothesListingItemModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4),
-                //               new DetailedClothesListingItemModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4),
-                //               new DetailedClothesListingItemModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1),
-                //               new DetailedClothesListingItemModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1)]
-                //},
+                new EmployeeModel(Guid.NewGuid(), "1324", "Engelen", "Jonas", "Vertrag läuft aus")
+                {
+                    Clothes = [new DetailedClothesListingItemModel(new(Guid.NewGuid(), "115", "Schuhe", new(Guid.NewGuid(), "Schuhwerk"), new(Guid.NewGuid(), "Saisonlos"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "113", "Regenjacke", new(Guid.NewGuid(), "Jacke"), new(Guid.NewGuid(), "Saisonlos"), null), "50"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "112", "Sommershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Sommer"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "114", "Wintershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Winter"), null), "44"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "111", "Winterhose", new(Guid.NewGuid(), "Hose"), new(Guid.NewGuid(), "Winter"), null), "45")]
+                },
 
-                //new EmployeeModel("1212", "Molik", "Nadine", null)
-                //{
-                //    Clothes = [new DetailedClothesListingItemModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3),
-                //               new DetailedClothesListingItemModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4),
-                //               new DetailedClothesListingItemModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4),
-                //               new DetailedClothesListingItemModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1),
-                //               new DetailedClothesListingItemModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1)]
-                //},
+                new EmployeeModel(Guid.NewGuid(), "1212", "Molik", "Nadine", null)
+                {
+                    Clothes = [new DetailedClothesListingItemModel(new(Guid.NewGuid(), "115", "Schuhe", new(Guid.NewGuid(), "Schuhwerk"), new(Guid.NewGuid(), "Saisonlos"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "113", "Regenjacke", new(Guid.NewGuid(), "Jacke"), new(Guid.NewGuid(), "Saisonlos"), null), "50"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "112", "Sommershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Sommer"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "114", "Wintershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Winter"), null), "44"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "111", "Winterhose", new(Guid.NewGuid(), "Hose"), new(Guid.NewGuid(), "Winter"), null), "45")]
+                },
 
-                //new EmployeeModel("1112", "Yüksel", "Kemal", null)
-                //{
-                //    Clothes = [new DetailedClothesListingItemModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3),
-                //               new DetailedClothesListingItemModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4),
-                //               new DetailedClothesListingItemModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4),
-                //               new DetailedClothesListingItemModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1),
-                //               new DetailedClothesListingItemModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1)]
-                //},
+                new EmployeeModel(Guid.NewGuid(), "1112", "Yüksel", "Kemal", null)
+                {
+                    Clothes = [new DetailedClothesListingItemModel(new(Guid.NewGuid(), "115", "Schuhe", new(Guid.NewGuid(), "Schuhwerk"), new(Guid.NewGuid(), "Saisonlos"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "113", "Regenjacke", new(Guid.NewGuid(), "Jacke"), new(Guid.NewGuid(), "Saisonlos"), null), "50"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "112", "Sommershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Sommer"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "114", "Wintershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Winter"), null), "44"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "111", "Winterhose", new(Guid.NewGuid(), "Hose"), new(Guid.NewGuid(), "Winter"), null), "45")]
+                },
 
-                //new EmployeeModel("1213", "Oetken", "Markus", null)
-                //{
-                //    Clothes = [new DetailedClothesListingItemModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3),
-                //               new DetailedClothesListingItemModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4),
-                //               new DetailedClothesListingItemModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4),
-                //               new DetailedClothesListingItemModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1),
-                //               new DetailedClothesListingItemModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1)]
-                //},
+                new EmployeeModel(Guid.NewGuid(), "1213", "Oetken", "Markus", null)
+                {
+                    Clothes = [new DetailedClothesListingItemModel(new(Guid.NewGuid(), "115", "Schuhe", new(Guid.NewGuid(), "Schuhwerk"), new(Guid.NewGuid(), "Saisonlos"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "113", "Regenjacke", new(Guid.NewGuid(), "Jacke"), new(Guid.NewGuid(), "Saisonlos"), null), "50"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "112", "Sommershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Sommer"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "114", "Wintershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Winter"), null), "44"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "111", "Winterhose", new(Guid.NewGuid(), "Hose"), new(Guid.NewGuid(), "Winter"), null), "45")]
+                },
 
-                //new EmployeeModel("1231", "Nickol", "Daniel", null)
-                //{
-                //    Clothes = [new DetailedClothesListingItemModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3),
-                //               new DetailedClothesListingItemModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4),
-                //               new DetailedClothesListingItemModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4),
-                //               new DetailedClothesListingItemModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1),
-                //               new DetailedClothesListingItemModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1)]
-                //},
+                new EmployeeModel(Guid.NewGuid(), "1231", "Nickol", "Daniel", null)
+                {
+                    Clothes = [new DetailedClothesListingItemModel(new(Guid.NewGuid(), "115", "Schuhe", new(Guid.NewGuid(), "Schuhwerk"), new(Guid.NewGuid(), "Saisonlos"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "113", "Regenjacke", new(Guid.NewGuid(), "Jacke"), new(Guid.NewGuid(), "Saisonlos"), null), "50"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "112", "Sommershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Sommer"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "114", "Wintershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Winter"), null), "44"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "111", "Winterhose", new(Guid.NewGuid(), "Hose"), new(Guid.NewGuid(), "Winter"), null), "45")]
+                },
 
-                //new EmployeeModel("1132", "Yüksel", "Irfan", null)
-                //{
-                //    Clothes = [new DetailedClothesListingItemModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3),
-                //               new DetailedClothesListingItemModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4),
-                //               new DetailedClothesListingItemModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4),
-                //               new DetailedClothesListingItemModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1),
-                //               new DetailedClothesListingItemModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1)]
-                //},
+                new EmployeeModel(Guid.NewGuid(), "1132", "Yüksel", "Irfan", null)
+                {
+                    Clothes = [new DetailedClothesListingItemModel(new(Guid.NewGuid(), "115", "Schuhe", new(Guid.NewGuid(), "Schuhwerk"), new(Guid.NewGuid(), "Saisonlos"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "113", "Regenjacke", new(Guid.NewGuid(), "Jacke"), new(Guid.NewGuid(), "Saisonlos"), null), "50"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "112", "Sommershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Sommer"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "114", "Wintershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Winter"), null), "44"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "111", "Winterhose", new(Guid.NewGuid(), "Hose"), new(Guid.NewGuid(), "Winter"), null), "45")]
+                },
 
-                //new EmployeeModel("1221", "Killen", "Stefan", null)
-                //{
-                //    Clothes = [new DetailedClothesListingItemModel("111", "Winterhose", new("Hose"), new("Winter"), "XL", 3),
-                //               new DetailedClothesListingItemModel("112", "Sommershirt", new("Shirt"), new("Sommer"), "L", 4),
-                //               new DetailedClothesListingItemModel("114", "Wintershirt", new("Shirt"), new("Winter"), "L", 4),
-                //               new DetailedClothesListingItemModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), "XL", 1),
-                //               new DetailedClothesListingItemModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), "45", 1)]
-                //}
+                new EmployeeModel(Guid.NewGuid(), "1221", "Killen", "Stefan", null)
+                {
+                    Clothes = [new DetailedClothesListingItemModel(new(Guid.NewGuid(), "115", "Schuhe", new(Guid.NewGuid(), "Schuhwerk"), new(Guid.NewGuid(), "Saisonlos"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "113", "Regenjacke", new(Guid.NewGuid(), "Jacke"), new(Guid.NewGuid(), "Saisonlos"), null), "50"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "112", "Sommershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Sommer"), null), "52"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "114", "Wintershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Winter"), null), "44"),
+                        new DetailedClothesListingItemModel(new(Guid.NewGuid(), "111", "Winterhose", new(Guid.NewGuid(), "Hose"), new(Guid.NewGuid(), "Winter"), null), "45")]
+                }
             ];
         }
 

@@ -19,6 +19,7 @@ namespace DVS.ViewModels.Forms
                 {
                     _iD = value;
                     OnPropertyChanged(nameof(ID));
+                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -33,6 +34,7 @@ namespace DVS.ViewModels.Forms
                 {
                     _name = value;
                     OnPropertyChanged(nameof(Name));
+                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -60,7 +62,7 @@ namespace DVS.ViewModels.Forms
                 if (_category != value)
                 {
                     _category = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -74,7 +76,7 @@ namespace DVS.ViewModels.Forms
                 if (_season != value)
                 {
                     _season = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -116,8 +118,12 @@ namespace DVS.ViewModels.Forms
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        //TODO: CanSubmit
-        //public bool CanSubmit => !string.IsNullOrEmpty(Username);
+        public bool CanSubmit => !string.IsNullOrEmpty(ID) &&
+                                 ID != "ID" &&
+                                 !string.IsNullOrEmpty(Name) &&
+                                 Name != "Name" &&
+                                 Category != null &&
+                                 Season != null;
 
         private readonly ObservableCollection<CategoryModel> _categories = [];
         private readonly CollectionViewSource _categoryCollectionViewSource;

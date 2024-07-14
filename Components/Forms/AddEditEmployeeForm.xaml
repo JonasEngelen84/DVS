@@ -66,6 +66,7 @@
         <Button Content="BESTÄTIGEN"
                 Margin="0 20 0 0 "
                 Style="{StaticResource ModalButtonStyle}"
-                Command="{Binding SubmitCommand}" />
+                Command="{Binding SubmitCommand}" 
+                IsEnabled="{Binding CanSubmit}"/>
     </StackPanel>
 </UserControl>

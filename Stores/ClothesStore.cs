@@ -17,45 +17,45 @@ namespace DVS.Stores
         {
             _clothes =
             [
-                //new ClothesModel("111", "Winterhose", new("Hose"), new("Winter"), null)
-                //{
-                //    Sizes = [new ClothesSizeModel("S") {Quantity = 15},
-                //             new ClothesSizeModel("M") {Quantity = 9 },
-                //             new ClothesSizeModel("L") {Quantity = 11},
-                //             new ClothesSizeModel("XL") {Quantity = 5}]
-                //},
+                new ClothesModel(Guid.NewGuid(), "111", "Winterhose", new(Guid.NewGuid(), "Hose"), new(Guid.NewGuid(), "Winter"), null)
+                {
+                    Sizes = [new ClothesSizeModel(Guid.NewGuid(), "S") { Quantity = 15 },
+                        new ClothesSizeModel(Guid.NewGuid(), "M") { Quantity = 9 },
+                        new ClothesSizeModel(Guid.NewGuid(), "L") { Quantity = 11 },
+                        new ClothesSizeModel(Guid.NewGuid(), "XL") { Quantity = 5 }]
+                },
 
-                //new ClothesModel("112", "Sommershirt", new("Shirt"), new("Sommer"), null)
-                //{
-                //    Sizes = [new ClothesSizeModel("S") {Quantity = 15},
-                //             new ClothesSizeModel("M") {Quantity = 9 },
-                //             new ClothesSizeModel("L") {Quantity = 11},
-                //             new ClothesSizeModel("XL") { Quantity = 5 }]
-                //},
+                new ClothesModel(Guid.NewGuid(), "112", "Sommershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Sommer"), null)
+                {
+                    Sizes = [new ClothesSizeModel(Guid.NewGuid(), "S") { Quantity = 15 },
+                        new ClothesSizeModel(Guid.NewGuid(), "M") { Quantity = 9 },
+                        new ClothesSizeModel(Guid.NewGuid(), "L") { Quantity = 11 },
+                        new ClothesSizeModel(Guid.NewGuid(), "XL") { Quantity = 5 }]
+                },
 
-                //new ClothesModel("113", "Regenjacke", new("Jacke"), new("Saisonlos"), null)
-                //{
-                //    Sizes = [new ClothesSizeModel("S") {Quantity = 15},
-                //             new ClothesSizeModel("M") {Quantity = 9 },
-                //             new ClothesSizeModel("L") {Quantity = 11},
-                //             new ClothesSizeModel("XL") { Quantity = 5 }]
-                //},
+                new ClothesModel(Guid.NewGuid(), "113", "Regenjacke", new(Guid.NewGuid(), "Jacke"), new(Guid.NewGuid(), "Saisonlos"), null)
+                {
+                    Sizes = [new ClothesSizeModel(Guid.NewGuid(), "S") { Quantity = 15 },
+                        new ClothesSizeModel(Guid.NewGuid(), "M") { Quantity = 9 },
+                        new ClothesSizeModel(Guid.NewGuid(), "L") { Quantity = 11 },
+                        new ClothesSizeModel(Guid.NewGuid(), "XL") { Quantity = 5 }]
+                },
 
-                //new ClothesModel("114", "Wintershirt", new("Shirt"), new("Winter"), null)
-                //{
-                //    Sizes = [new ClothesSizeModel("S") {Quantity = 15},
-                //             new ClothesSizeModel("M") {Quantity = 9 },
-                //             new ClothesSizeModel("L") {Quantity = 11},
-                //             new ClothesSizeModel("XL") { Quantity = 5 }]
-                //},
+                new ClothesModel(Guid.NewGuid(), "114", "Wintershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Winter"), null)
+                {
+                    Sizes = [new ClothesSizeModel(Guid.NewGuid(), "S") { Quantity = 15 },
+                        new ClothesSizeModel(Guid.NewGuid(), "M") { Quantity = 9 },
+                        new ClothesSizeModel(Guid.NewGuid(), "L") { Quantity = 11 },
+                        new ClothesSizeModel(Guid.NewGuid(), "XL") { Quantity = 5 }]
+                },
 
-                //new ClothesModel("115", "Schuhe", new("Schuhwerk"), new("Saisonlos"), null)
-                //{
-                //    Sizes = [new ClothesSizeModel("S") {Quantity = 15},
-                //             new ClothesSizeModel("M") {Quantity = 9 },
-                //             new ClothesSizeModel("L") {Quantity = 11},
-                //             new ClothesSizeModel("XL") { Quantity = 5 }]
-                //}
+                new ClothesModel(Guid.NewGuid(), "115", "Schuhe", new(Guid.NewGuid(), "Schuhwerk"), new(Guid.NewGuid(), "Saisonlos"), null)
+                {
+                    Sizes = [new ClothesSizeModel(Guid.NewGuid(), "S") { Quantity = 15 },
+                        new ClothesSizeModel(Guid.NewGuid(), "M") { Quantity = 9 },
+                        new ClothesSizeModel(Guid.NewGuid(), "L") { Quantity = 11 },
+                        new ClothesSizeModel(Guid.NewGuid(), "XL") { Quantity = 5 }]
+                }
             ];
         }
 
