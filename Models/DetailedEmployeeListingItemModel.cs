@@ -2,119 +2,20 @@
 {
     public class DetailedEmployeeListingItemModel : ModelBase
     {
-        public ClothesModel ClothesModel { get; private set; }
+        public EmployeeModel Employee { get; private set; }
+        public string ID => Employee.ID;
+        public string Lastname => Employee.Lastname;
+        public string Firstname => Employee.Firstname;
+        public Guid? ClothesGuidID { get; }
+        public string ClothesID => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID)?.ID ?? null;
+        public string ClothesName => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID)?.Name ?? null;
+        public string Size { get; }
 
-        private string _iD;
-        public string ID
-        {
-            get => _iD;
-            set
-            {
-                if (_iD != value)
-                {
-                    _iD = value;
-                    OnPropertyChanged(nameof(ID));
-                }
-            }
-        }
+        public int? Quantity => Employee.Clothes.FirstOrDefault(c => c.GuidID == ClothesGuidID)?.Sizes
+            .FirstOrDefault(s => s.Size == Size)?.Quantity ?? null;
 
-        private string _lastname;
-        public string Lastname
-        {
-            get => _lastname;
-            set
-            {
-                if (_lastname != value)
-                {
-                    _lastname = value;
-                    OnPropertyChanged(nameof(Lastname));
-                }
-            }
-        }
-
-        private string _firstname;
-        public string Firstname
-        {
-            get => _firstname;
-            set
-            {
-                if (value != _firstname)
-                {
-                    _firstname = value;
-                    OnPropertyChanged(nameof(Firstname));
-                }
-            }
-        }
-
-        private string? _clothesID;
-        public string? ClothesID
-        {
-            get => _clothesID;
-            set
-            {
-                if (value != _clothesID)
-                {
-                    _clothesID = value;
-                    OnPropertyChanged(nameof(ClothesID));
-                }
-            }
-        }
-
-        private string? _clothesName;
-        public string? ClothesName
-        {
-            get => _clothesName;
-            set
-            {
-                if(value != _clothesName)
-                {
-                    _clothesName = value;
-                    OnPropertyChanged(nameof(ClothesName));
-                }
-            }
-        }
-
-        private string? _size;
-        public string? Size
-        {
-            get => _size;
-            set
-            {
-                if (_size != value)
-                {
-                    _size = value;
-                    OnPropertyChanged(nameof(Size));
-                }
-            }
-        }
-
-        private int? _quantity;
-        public int? Quantity
-        {
-            get => _quantity;
-            set
-            {
-                if (_quantity != value)
-                {
-                    _quantity = value;
-                    OnPropertyChanged(nameof(Quantity));
-                }
-            }
-        }
-
-        private string? _comment;
-        public string? Comment
-        {
-            get => _comment;
-            set
-            {
-                if(_comment != value)
-                {
-                    _comment = value;
-                    OnPropertyChanged(nameof(Comment));
-                }
-            }
-        }
+        public string Comment => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID).Sizes
+            .FirstOrDefault(s => s.Size == Size)?.Comment ?? null;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -131,6 +32,7 @@
         }
 
         private string _errorMessage;
+
         public string ErrorMessage
         {
             get => _errorMessage;
@@ -148,18 +50,11 @@
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
 
-        public DetailedEmployeeListingItemModel(
-            string iD, string lastname, string firstname, string? clothesID,
-            string? clothesName, string? size, int? quantity, string? comment)
+        public DetailedEmployeeListingItemModel(EmployeeModel employee, Guid? clothesGuidID, string size)
         {
-            ID = iD;
-            Lastname = lastname;
-            Firstname = firstname;
-            ClothesID = clothesID;
-            ClothesName = clothesName;
+            Employee = employee;
+            ClothesGuidID = clothesGuidID;
             Size = size;
-            Quantity = quantity;
-            Comment = comment;
         }
     }
 }

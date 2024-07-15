@@ -11,8 +11,8 @@ namespace DVS.ViewModels.Views
         public AddEditCategoryFormViewModel AddEditCategoryFormViewModel { get; }
         public ICommand CloseAddEditCategoryCommand { get; }
 
-        public AddEditCategoryViewModel(ClothesModel clothes, ModalNavigationStore modalNavigationStore,
-            CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
+        public AddEditCategoryViewModel(ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
+            AddClothesViewModel addClothesViewModel, EditClothesViewModel editClothesViewModel)
         {
 
             ICommand addCategoryCommand = new AddCategoryCommand(this, categoryStore);
@@ -24,7 +24,7 @@ namespace DVS.ViewModels.Views
                 addCategoryCommand, editCategoryCommand, deleteCategoryCommand, clearCategoryListCommand);
 
             CloseAddEditCategoryCommand = new CloseAddEditCategoryCommand(
-                clothes, modalNavigationStore, categoryStore, seasonStore, clothesStore);
+                modalNavigationStore, addClothesViewModel, editClothesViewModel);
         }
     }
 }

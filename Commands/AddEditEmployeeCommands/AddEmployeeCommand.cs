@@ -25,10 +25,26 @@ namespace DVS.Commands.AddEditEmployeeCommands
                                          addEmployeeFormViewModel.Lastname,
                                          addEmployeeFormViewModel.Comment);
 
-            foreach (DetailedClothesListingItemModel clothes in
+            foreach (DetailedClothesListingItemModel item in
                 _addEmployeeViewModel.AddEditEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
             {
-                employee.Clothes.Add(clothes);
+                ClothesModel existingClothes = employee.Clothes.FirstOrDefault(clothes => clothes.GuidID == item.Clothes.GuidID);
+
+                if (existingClothes != null)
+                {
+                    ClothesSizeModel existingSize = existingClothes.Sizes.FirstOrDefault(size => size.Size == item.Size);
+
+                    if (existingSize != null)
+                    {
+                        existingClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
+                    }
+                }
+                else
+                {
+                    ClothesModel newClothes = new(item.Clothes.GuidID, item.ID, item.Name, item.Clothes.Category, item.Clothes.Season, null);
+                    newClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
+                    employee.Clothes.Add(newClothes);
+                }
             }
 
             try

@@ -36,7 +36,7 @@
         <StackPanel Orientation="Horizontal">
 
             <ComboBox Style="{StaticResource ComboBoxStyle}"
-                      ItemsSource="{Binding Categories}"
+                      ItemsSource="{Binding AddEditListingViewModel.Categories}"
                       SelectedItem="{Binding Category, Mode=TwoWay}"
                       DisplayMemberPath="Name" />
 
@@ -60,7 +60,7 @@
                     Margin="0 0 0 3">
 
             <ComboBox Style="{StaticResource ComboBoxStyle}"
-                      ItemsSource="{Binding Seasons}"
+                      ItemsSource="{Binding AddEditListingViewModel.Seasons}"
                       SelectedItem="{Binding Season, Mode=TwoWay}"
                       DisplayMemberPath="Name" />
 
@@ -73,7 +73,7 @@
             </Button>
         </StackPanel>
 
-        <!-- Size eu/us-Labels -->
+        <!-- Labels-Size eu/us -->
         <StackPanel Orientation="Horizontal">
             
             <Label Content="Größe (eu):"
@@ -98,7 +98,7 @@
 
                 <ScrollViewer>
                     <StackPanel>
-                        <ItemsControl ItemsSource="{Binding AvailableSizesEU}">
+                        <ItemsControl ItemsSource="{Binding AddEditListingViewModel.AvailableSizesEU}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -123,7 +123,7 @@
 
                 <ScrollViewer>
                     <StackPanel>
-                        <ItemsControl ItemsSource="{Binding AvailableSizesUS}">
+                        <ItemsControl ItemsSource="{Binding AddEditListingViewModel.AvailableSizesUS}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

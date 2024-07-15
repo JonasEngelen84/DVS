@@ -28,7 +28,7 @@ namespace DVS.Stores
         }
 
         public async Task Add(CategoryModel category)
-        {//TODO: Bedingung zum Adden hinzufügen
+        {
             CategoryAdded.Invoke(category);
             _categories.Add(category);
         }

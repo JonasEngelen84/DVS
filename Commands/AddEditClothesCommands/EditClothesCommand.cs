@@ -7,12 +7,14 @@ namespace DVS.Commands.AddEditClothesCommands
 {
     public class EditClothesCommand(EditClothesViewModel addEditClothesViewModel,
                                     ClothesStore clothesStore,
-                                    ModalNavigationStore modalNavigationStore)
+                                    ModalNavigationStore modalNavigationStore,
+                                    Guid ID)
                                     : AsyncCommandBase
     {
         private readonly EditClothesViewModel _editClothesViewModel = addEditClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
+        private readonly Guid _guidID = ID;
 
         public override async Task ExecuteAsync(object parameter)
         {
@@ -21,7 +23,7 @@ namespace DVS.Commands.AddEditClothesCommands
             addEditClothesFormViewModel.ErrorMessage = null;
             addEditClothesFormViewModel.IsSubmitting = true;
 
-            ClothesModel clothes = new(Guid.NewGuid(),
+            ClothesModel clothes = new(_guidID,
                                        addEditClothesFormViewModel.ID,
                                        addEditClothesFormViewModel.Name,
                                        addEditClothesFormViewModel.Category,
@@ -30,9 +32,9 @@ namespace DVS.Commands.AddEditClothesCommands
 
             // Alle ausgewählten Größen in eine ZwischenListe speichern.
             // Diese wird der GrößenListe (Size) des ClothesModel hinzugefügt.
-            var selectedSizes = addEditClothesFormViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                ? addEditClothesFormViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                : addEditClothesFormViewModel.AvailableSizesEU.Where(size => size.IsSelected);
+            var selectedSizes = addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
 
             foreach (ClothesSizeModel sizeModel in selectedSizes)
             {

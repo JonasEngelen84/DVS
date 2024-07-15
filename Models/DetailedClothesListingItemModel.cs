@@ -2,15 +2,14 @@
 {
     public class DetailedClothesListingItemModel : ModelBase
     {
-        public ClothesModel ClothesModel {  get; private set; }
-
-        public string ID => ClothesModel.ID;
-        public string Name => ClothesModel.Name;
-        public string Category => ClothesModel.Category.Name;
-        public string Season => ClothesModel.Season.Name;
+        public ClothesModel Clothes {  get; private set; }
+        public string ID => Clothes.ID;
+        public string Name => Clothes.Name;
+        public string Category => Clothes.Category.Name;
+        public string Season => Clothes.Season.Name;
         public string Size { get; }
-        public int? Quantity => ClothesModel.Sizes.FirstOrDefault(y => y.Size == Size)?.Quantity ?? null;
-        public string? Comment => ClothesModel.Sizes.FirstOrDefault(y => y.Size == Size)?.Comment ?? null;
+        public int? Quantity => Clothes.Sizes.FirstOrDefault(y => y.Size == Size)?.Quantity ?? null;
+        public string Comment => Clothes.Sizes.FirstOrDefault(y => y.Size == Size)?.Comment ?? null;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -46,19 +45,20 @@
 
         public DetailedClothesListingItemModel(ClothesModel clothes, string size)
         {
-            ClothesModel = clothes;
+            Clothes = clothes;
             Size = size;
         }
 
         public void Edit(ClothesModel clothes)
         {
-            ClothesModel = clothes;
+            Clothes = clothes;
 
             OnPropertyChanged(nameof(ID));
             OnPropertyChanged(nameof(Name));
             OnPropertyChanged(nameof(Category));
             OnPropertyChanged(nameof(Season));
             OnPropertyChanged(nameof(Quantity));
+            OnPropertyChanged(nameof(Comment));
         }
     }
 }

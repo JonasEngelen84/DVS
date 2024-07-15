@@ -7,94 +7,12 @@ namespace DVS.ViewModels.ListViewItems
 {
     public class ClothesListingItemViewModel : ViewModelBase
     {
-        private ClothesModel _clothes;
-        public ClothesModel Clothes
-        {
-            get => _clothes;
-            set
-            {
-                if (_clothes != value)
-                {
-                    _clothes = value;
-                    ID = _clothes?.ID;
-                    Name = _clothes?.Name;
-                    Category = _clothes?.Category;
-                    Season = _clothes?.Season;
-                    Comment = _clothes?.Comment;
-                    OnPropertyChanged(nameof(Clothes));
-                }
-            }
-        }
-
-        private string _iD;
-        public string ID
-        {
-            get => _iD;
-            set
-            {
-                if (value != _iD)
-                {
-                    _iD = value;
-                    OnPropertyChanged(nameof(ID));
-                }
-            }
-        }
-
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                if (value != _name)
-                {
-                    _name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
-        }
-
-        private CategoryModel _category;
-        public CategoryModel Category
-        {
-            get => _category;
-            set
-            {
-                if (value != _category)
-                {
-                    _category = value;
-                    OnPropertyChanged(nameof(Category));
-                }
-            }
-        }
-
-        private SeasonModel _season;
-        public SeasonModel Season
-        {
-            get => _season;
-            set
-            {
-                if (_season != value)
-                {
-                    _season = value;
-                    OnPropertyChanged(nameof(Season));
-                }
-            }
-        }
-
-        private string _comment;
-        public string Comment
-        {
-            get => _comment;
-            set
-            {
-                if (value != _comment)
-                {
-                    _comment = value;
-                    OnPropertyChanged(nameof(Comment));
-                }
-            }
-        }
+        public ClothesModel Clothes { get; private set; }
+        public string ID => Clothes.ID;
+        public string Name => Clothes.Name;
+        public CategoryModel Category => Clothes.Category;
+        public SeasonModel Season => Clothes.Season;
+        public string Comment => Clothes.Comment;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -153,23 +71,28 @@ namespace DVS.ViewModels.ListViewItems
         public ICommand PrintClothesCommand { get; set; }
 
 
-        public ClothesListingItemViewModel(ClothesModel clothes,
-                                           ModalNavigationStore modalNavigationStore,
-                                           CategoryStore categoryStore,
-                                           SeasonStore seasonStore,
-                                           ClothesStore clothesStore)
+        public ClothesListingItemViewModel(ClothesModel clothes,ModalNavigationStore modalNavigationStore,
+            CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
         {
             Clothes = clothes;
 
-            OpenEditCommand = new OpenEditClothesCommand(clothes,
-                                                         modalNavigationStore,
-                                                         categoryStore,
-                                                         seasonStore,
-                                                         clothesStore);
+            OpenEditCommand = new OpenEditClothesCommand(
+                clothes, modalNavigationStore, categoryStore, seasonStore, clothesStore);
 
             DeleteCommand = new DeleteClothesCommand();
             ClearSizesCommand = new ClearSizesCommand();
             PrintClothesCommand = new OpenPrintClothesCommand();
+        }
+
+        public void Edit(ClothesModel clothes)
+        {
+            Clothes = clothes;
+
+            OnPropertyChanged(nameof(ID));
+            OnPropertyChanged(nameof(Name));
+            OnPropertyChanged(nameof(Category));
+            OnPropertyChanged(nameof(Season));
+            OnPropertyChanged(nameof(Comment));
         }
     }
 }

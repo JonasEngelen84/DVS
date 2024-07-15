@@ -29,7 +29,7 @@ namespace DVS.Commands.DVSHeadViewCommands
             foreach (DetailedClothesListingItemModel clothes in
                 _addEmployeeViewModel.AddEditEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
             {
-                employee.Clothes.Add(clothes);
+                //employee.Clothes.Add(clothes);
             }
 
             try

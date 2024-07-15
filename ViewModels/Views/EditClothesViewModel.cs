@@ -9,7 +9,6 @@ namespace DVS.ViewModels.Views
 {
     public class EditClothesViewModel : ViewModelBase
     {
-        private readonly ClothesModel _clothes;
         public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
         public ICommand CloseModalCommand { get; }
 
@@ -17,25 +16,22 @@ namespace DVS.ViewModels.Views
         public EditClothesViewModel(ClothesModel clothes, ModalNavigationStore modalNavigationStore,
             CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
         {
-            _clothes = clothes;
-
-            ICommand editClothesCommand = new EditClothesCommand(this, clothesStore , modalNavigationStore);
+            ICommand editClothesCommand = new EditClothesCommand(this, clothesStore , modalNavigationStore, clothes.GuidID);
 
             ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(
-                clothes, modalNavigationStore, categoryStore, seasonStore, clothesStore);
+                modalNavigationStore, categoryStore, null, this);
 
             ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(
-                clothes, modalNavigationStore, categoryStore, seasonStore, clothesStore);
+                modalNavigationStore, seasonStore, null, this);
 
             CloseModalCommand = new CloseModalCommand(modalNavigationStore);
 
-            AddEditClothesFormViewModel = new(categoryStore, seasonStore,
-                clothesStore, openAddEditCategoriesCommand, openAddEditSeasonsCommand, editClothesCommand)
+            AddEditClothesFormViewModel = new(clothes, editClothesCommand, openAddEditCategoriesCommand,
+                openAddEditSeasonsCommand, categoryStore, seasonStore)
             {
-                ID = _clothes.ID, Name = _clothes.Name, Comment = _clothes.Comment,
-                Category = _clothes.Category, Season = _clothes.Season
+                ID = clothes.ID, Name = clothes.Name, Comment = clothes.Comment,
+                Category = clothes.Category, Season = clothes.Season,
             };
-            AddEditClothesFormViewModel.LoadSizes(_clothes);
         }
     }
 }

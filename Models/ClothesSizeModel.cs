@@ -1,13 +1,11 @@
 ﻿namespace DVS.Models
 {
-    public class ClothesSizeModel(Guid guidID, string size) : ModelBase
+    public class ClothesSizeModel(string size) : ModelBase
     {
-        public Guid GuidID { get; set; } = guidID;
-
         public string Size { get; } = size;
 
-        private int _quantity;
-        public int Quantity
+        private int? _quantity;
+        public int? Quantity
         {
             get => _quantity;
             set
@@ -20,8 +18,8 @@
             }
         }
 
-        private string? _comment;
-        public string? Comment
+        private string _comment;
+        public string Comment
         {
             get => _comment;
             set

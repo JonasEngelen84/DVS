@@ -7,20 +7,7 @@ namespace DVS.ViewModels.ListViewItems
 {
     public class EmployeeListingItemViewModel : ViewModelBase
     {
-        private EmployeeModel _employee;
-        public EmployeeModel Employee 
-        {
-            get =>  _employee;
-            set
-            {
-                _employee = value;
-                ID = Employee?.ID;
-                Lastname = Employee?.Lastname;
-                Firstname = Employee?.Firstname;
-                Comment = Employee?.Comment;
-                OnPropertyChanged(nameof(Employee));
-            }
-        }
+        public EmployeeModel Employee { get; private set; }
 
         private string _iD;
         public string ID

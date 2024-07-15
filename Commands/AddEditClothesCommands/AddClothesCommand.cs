@@ -30,9 +30,9 @@ namespace DVS.Commands.AddEditClothesCommands
 
             // Alle ausgewählten Größen in eine ZwischenListe speichern.
             // Diese wird der GrößenListe (Size) des ClothesModel hinzugefügt.
-            var selectedSizes = addEditClothesFormViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                ? addEditClothesFormViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                : addEditClothesFormViewModel.AvailableSizesEU.Where(size => size.IsSelected);
+            var selectedSizes = addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
 
             foreach (ClothesSizeModel sizeModel in selectedSizes)
             {
