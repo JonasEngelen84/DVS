@@ -9,62 +9,11 @@ namespace DVS.ViewModels.ListViewItems
     {
         public EmployeeModel Employee { get; private set; }
 
-        private string _iD;
-        public string ID
-        {
-            get => _iD;
-            set
-            {
-                if (value != _iD)
-                {
-                    _iD = value;
-                    OnPropertyChanged(nameof(ID));
-                }
-            }
-        }
-
-        private string _lastname;
-        public string Lastname
-        {
-            get => _lastname;
-            set
-            {
-                if (_lastname != value)
-                {
-                    _lastname = value;
-                    OnPropertyChanged(nameof(Lastname));
-                }
-            }
-        }
+        public string ID => Employee.ID;
+        public string Lastname => Employee.Lastname;
+        public string Firstname => Employee.Firstname;
+        public string? Comment => Employee.Comment;
         
-        private string _firstname;
-        public string Firstname
-        {
-            get => _firstname;
-            set
-            {
-                if (_firstname != value)
-                {
-                    _firstname = value;
-                    OnPropertyChanged(nameof(Firstname));
-                }
-            }
-        }
-
-        private string _comment;
-        public string Comment
-        {
-            get => _comment;
-            set
-            {
-                if (value != _comment)
-                {
-                    _comment = value;
-                    OnPropertyChanged(nameof(Comment));
-                }
-            }
-        }
-
         private bool _isDeleting;
         public bool IsDeleting
         {
@@ -132,6 +81,16 @@ namespace DVS.ViewModels.ListViewItems
             PrintEmployeeCommand = new OpenPrintEmployeeCommand();
             OpenEditCommand = new OpenEditEmployeeCommand(
                 dVSListingViewModel, employee, modalNavigationStore);
+        }
+
+        public void Edit(EmployeeModel employee)
+        {
+            Employee = employee;
+
+            OnPropertyChanged(nameof(ID));
+            OnPropertyChanged(nameof(Lastname));
+            OnPropertyChanged(nameof(Firstname));
+            OnPropertyChanged(nameof(Comment));
         }
     }
 }

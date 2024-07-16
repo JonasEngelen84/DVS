@@ -8,11 +8,12 @@ namespace DVS.ViewModels.ListViewItems
     public class ClothesListingItemViewModel : ViewModelBase
     {
         public ClothesModel Clothes { get; private set; }
+
         public string ID => Clothes.ID;
         public string Name => Clothes.Name;
         public CategoryModel Category => Clothes.Category;
         public SeasonModel Season => Clothes.Season;
-        public string Comment => Clothes.Comment;
+        public string? Comment => Clothes.Comment;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -83,6 +84,7 @@ namespace DVS.ViewModels.ListViewItems
             ClearSizesCommand = new ClearSizesCommand();
             PrintClothesCommand = new OpenPrintClothesCommand();
         }
+
 
         public void Edit(ClothesModel clothes)
         {

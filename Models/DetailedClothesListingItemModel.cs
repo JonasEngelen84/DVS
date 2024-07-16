@@ -3,6 +3,7 @@
     public class DetailedClothesListingItemModel : ModelBase
     {
         public ClothesModel Clothes {  get; private set; }
+
         public string ID => Clothes.ID;
         public string Name => Clothes.Name;
         public string Category => Clothes.Category.Name;
@@ -48,6 +49,7 @@
             Clothes = clothes;
             Size = size;
         }
+
 
         public void Edit(ClothesModel clothes)
         {

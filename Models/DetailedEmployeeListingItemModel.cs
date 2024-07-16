@@ -1,8 +1,11 @@
-﻿namespace DVS.Models
+﻿using System.Xml.Linq;
+
+namespace DVS.Models
 {
     public class DetailedEmployeeListingItemModel : ModelBase
     {
         public EmployeeModel Employee { get; private set; }
+
         public string ID => Employee.ID;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
@@ -55,6 +58,20 @@
             Employee = employee;
             ClothesGuidID = clothesGuidID;
             Size = size;
+        }
+
+
+        public void Edit(EmployeeModel employee)
+        {
+            Employee = employee;
+
+            OnPropertyChanged(nameof(ID));
+            OnPropertyChanged(nameof(Lastname));
+            OnPropertyChanged(nameof(Firstname));
+            OnPropertyChanged(nameof(ClothesID));
+            OnPropertyChanged(nameof(ClothesName));
+            OnPropertyChanged(nameof(Quantity));
+            OnPropertyChanged(nameof(Comment));
         }
     }
 }
