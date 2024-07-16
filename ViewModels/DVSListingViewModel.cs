@@ -229,7 +229,7 @@ namespace DVS.ViewModels
             }
         }
 
-        public void ClothesStore_ClothesLoaded()
+        private void ClothesStore_ClothesLoaded()
         {
             _clothesListingItemCollection.Clear();
             _detailedClothesListingItemCollection.Clear();
@@ -287,7 +287,7 @@ namespace DVS.ViewModels
 
         }
 
-        public void EmployeeStore_EmployeesLoaded()
+        private void EmployeeStore_EmployeesLoaded()
         {
             _employeeListingItemCollection.Clear();
             _detailedEmployeeListingItemCollection.Clear();
@@ -298,7 +298,7 @@ namespace DVS.ViewModels
             }
         }
 
-        public void EmployeeStore_EmployeeAdded(EmployeeModel employee)
+        private void EmployeeStore_EmployeeAdded(EmployeeModel employee)
         {
             if (employee.Clothes.Count == 0)
             {

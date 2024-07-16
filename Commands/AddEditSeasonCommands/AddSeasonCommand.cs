@@ -5,16 +5,14 @@ using DVS.ViewModels.Views;
 
 namespace DVS.Commands.AddEditSeasonCommands
 {
-    public class AddSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel,
-                                  SeasonStore seasonStore)
-                                  : CommandBase
+    public class AddSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, SeasonStore seasonStore) : AsyncCommandBase
     {
         private readonly AddEditSeasonViewModel _addEditSeasonViewModel = addEditSeasonViewModel;
         private readonly SeasonStore _seasonStore = seasonStore;
 
-        public override async void Execute(object parameter)
+        public override async Task ExecuteAsync(object parameter)
         {
-            AddEditSeasonFormViewModel addEditSeasonFormViewModel = addEditSeasonViewModel.AddEditSeasonFormViewModel;
+            AddEditSeasonFormViewModel addEditSeasonFormViewModel = _addEditSeasonViewModel.AddEditSeasonFormViewModel;
             addEditSeasonFormViewModel.ErrorMessage = null;
             addEditSeasonFormViewModel.IsSubmitting = true;
 
@@ -22,7 +20,7 @@ namespace DVS.Commands.AddEditSeasonCommands
 
             try
             {
-                await seasonStore.Add(newSeason);
+                await _seasonStore.Add(newSeason, addEditSeasonFormViewModel);
             }
             catch (Exception)
             {

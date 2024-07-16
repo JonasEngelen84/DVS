@@ -53,7 +53,7 @@
                               FontSize="14"
                               Foreground="Black"
                               Background="WhiteSmoke"
-                              ItemsSource="{Binding Categories}"
+                              ItemsSource="{Binding AddEditListingViewModel.Categories}"
                               SelectedItem="{Binding SelectedCategory}">
                         <ListView.ItemTemplate>
                             <DataTemplate>

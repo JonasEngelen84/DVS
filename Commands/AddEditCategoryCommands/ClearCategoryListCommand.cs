@@ -5,16 +5,10 @@ using System.Windows;
 
 namespace DVS.Commands.AddEditCategoryCommands
 {
-    public class ClearCategoryListCommand : AsyncCommandBase
+    public class ClearCategoryListCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
     {
-        private readonly AddEditCategoryViewModel _addEditCategoryViewModel;
-        private readonly CategoryStore _categoryStore;
-
-        public ClearCategoryListCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore)
-        {
-            _addEditCategoryViewModel = addEditCategoryViewModel;
-            _categoryStore = categoryStore;
-        }
+        private readonly AddEditCategoryViewModel _addEditCategoryViewModel = addEditCategoryViewModel;
+        private readonly CategoryStore _categoryStore = categoryStore;
 
         public override async Task ExecuteAsync(object parameter)
         {
@@ -33,7 +27,7 @@ namespace DVS.Commands.AddEditCategoryCommands
             {
                 try
                 {
-                    await _categoryStore.ClearCategories();
+                    await _categoryStore.ClearCategories(addEditCategoryFormViewModel);
                 }
                 catch (Exception)
                 {

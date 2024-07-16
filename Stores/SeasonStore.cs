@@ -1,4 +1,5 @@
 ﻿using DVS.Models;
+using DVS.ViewModels.Forms;
 
 namespace DVS.Stores
 {
@@ -8,10 +9,10 @@ namespace DVS.Stores
         public IEnumerable<SeasonModel> Seasons => _seasons;
 
         public event Action SeasonsLoaded;
-        public event Action<SeasonModel> SeasonAdded;
-        public event Action<SeasonModel> SeasonEdited;
-        public event Action<SeasonModel> SeasonDeleted;
-        public event Action AllSeasonsDeleted;
+        public event Action<SeasonModel, AddEditSeasonFormViewModel> SeasonAdded;
+        public event Action<SeasonModel, AddEditSeasonFormViewModel> SeasonEdited;
+        public event Action<SeasonModel, AddEditSeasonFormViewModel> SeasonDeleted;
+        public event Action<AddEditSeasonFormViewModel> AllSeasonsDeleted;
 
 
         public SeasonStore()
@@ -27,20 +28,20 @@ namespace DVS.Stores
             SeasonsLoaded?.Invoke();
         }
 
-        public async Task Add(SeasonModel season)
-        {//TODO: Bedingung zum Adden hinzufügen
-            SeasonAdded.Invoke(season);
+        public async Task Add(SeasonModel season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        {
             _seasons.Add(season);
+            SeasonAdded.Invoke(season, addEditSeasonFormViewModel);
         }
 
-        public async Task Edit(SeasonModel season)
+        public async Task Edit(SeasonModel season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             int index = _seasons.FindIndex(y => y.GuidID == season.GuidID);
 
             if (index > -1)
             {
                 _seasons[index] = season;
-                SeasonEdited.Invoke(season);
+                SeasonEdited.Invoke(season, addEditSeasonFormViewModel);
             }
             else
             {
@@ -48,14 +49,14 @@ namespace DVS.Stores
             }
         }
 
-        public async Task Delete(SeasonModel season)
+        public async Task Delete(SeasonModel season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
 
             if (seasonToDelete != null)
             {
                 _seasons.Remove(season);
-                SeasonDeleted.Invoke(season);
+                SeasonDeleted.Invoke(season, addEditSeasonFormViewModel);
             }
             else
             {
@@ -63,12 +64,12 @@ namespace DVS.Stores
             }
         }
 
-        public async Task ClearSeasons()
+        public async Task ClearSeasons(AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             if (_seasons != null)
             {
-                AllSeasonsDeleted.Invoke();
                 _seasons.Clear();
+                AllSeasonsDeleted.Invoke(addEditSeasonFormViewModel);
             }
             else
             {

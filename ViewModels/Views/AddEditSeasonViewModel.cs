@@ -9,21 +9,30 @@ namespace DVS.ViewModels.Views
     public class AddEditSeasonViewModel : ViewModelBase
     {
         public AddEditSeasonFormViewModel AddEditSeasonFormViewModel { get; }
+        public AddEditListingViewModel AddEditListingViewModel { get; }
         public ICommand CloseAddSeasonCommand { get; }
 
-        public AddEditSeasonViewModel(ModalNavigationStore modalNavigationStore, SeasonStore seasonStore,
-            AddClothesViewModel addClothesViewModel, EditClothesViewModel editClothesViewModel)
+        public AddEditSeasonViewModel(ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
+            SeasonStore seasonStore, ClothesModel clothes, AddClothesViewModel addClothesViewModel,
+            EditClothesViewModel editClothesViewModel)
         {
             ICommand addSeasonCommand = new AddSeasonCommand(this, seasonStore);
             ICommand editSeasonCommand = new EditSeasonCommand(this, seasonStore);
             ICommand deleteSeasonCommand = new DeleteSeasonCommand(this, seasonStore);
             ICommand clearSeasonListCommand = new ClearSeasonListCommand(this, seasonStore);
 
-            AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(seasonStore,
-                addSeasonCommand, editSeasonCommand, deleteSeasonCommand, clearSeasonListCommand);
+            AddEditListingViewModel = new(clothes, categoryStore, seasonStore);
 
             CloseAddSeasonCommand = new CloseAddEditSeasonCommand(
                 modalNavigationStore, addClothesViewModel, editClothesViewModel);
+
+            AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(addSeasonCommand,
+                editSeasonCommand, deleteSeasonCommand, clearSeasonListCommand, AddEditListingViewModel)
+            {
+                AddNewSeason = "Neue Saison",
+                EditSeason = "Saison wählen",
+                SelectedSeason = new(null, "Saison wählen")
+            };
         }
     }
 }

@@ -14,8 +14,6 @@ namespace DVS.Commands.AddEditSeasonCommands
         {
             _modalNavigationStore.CurrentViewModel =
                 _addClothesViewModel != null ? _addClothesViewModel : _editClothesViewModel;
-
-
         }
     }
 }

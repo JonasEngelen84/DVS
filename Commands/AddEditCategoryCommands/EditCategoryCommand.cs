@@ -31,7 +31,7 @@ namespace DVS.Commands.AddEditCategoryCommands
 
                 try
                 {
-                    await _categoryStore.Edit(category);
+                    await _categoryStore.Edit(category, addEditCategoryFormViewModel);
                 }
                 catch (Exception)
                 {

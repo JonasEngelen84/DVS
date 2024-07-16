@@ -10,6 +10,7 @@ namespace DVS.ViewModels.Views
     public class EditClothesViewModel : ViewModelBase
     {
         public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
+        public AddEditListingViewModel AddEditListingViewModel { get; }
         public ICommand CloseModalCommand { get; }
 
 
@@ -19,15 +20,17 @@ namespace DVS.ViewModels.Views
             ICommand editClothesCommand = new EditClothesCommand(this, clothesStore , modalNavigationStore, clothes.GuidID);
 
             ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(
-                modalNavigationStore, categoryStore, null, this);
+                modalNavigationStore, categoryStore, seasonStore, clothes, null, this);
 
             ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(
-                modalNavigationStore, seasonStore, null, this);
+                modalNavigationStore, categoryStore, seasonStore, clothes, null, this);
+
+            AddEditListingViewModel = new(clothes, categoryStore, seasonStore);
 
             CloseModalCommand = new CloseModalCommand(modalNavigationStore);
 
-            AddEditClothesFormViewModel = new(clothes, editClothesCommand, openAddEditCategoriesCommand,
-                openAddEditSeasonsCommand, categoryStore, seasonStore)
+            AddEditClothesFormViewModel = new(clothes, editClothesCommand,
+                openAddEditCategoriesCommand, openAddEditSeasonsCommand, AddEditListingViewModel)
             {
                 ID = clothes.ID, Name = clothes.Name, Comment = clothes.Comment,
                 Category = clothes.Category, Season = clothes.Season,

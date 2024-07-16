@@ -1,5 +1,4 @@
 ﻿using DVS.Models;
-using DVS.Stores;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
@@ -151,11 +150,10 @@ namespace DVS.ViewModels.Forms
         public ICommand SubmitCommand { get; }
 
 
-        public AddEditClothesFormViewModel(ClothesModel clothes, ICommand submitCommand,
-            ICommand openAddEditCategoriesCommand, ICommand openAddEditSeasonsCommand,
-            CategoryStore categoryStore, SeasonStore seasonStore)
+        public AddEditClothesFormViewModel(ClothesModel clothes, ICommand submitCommand, ICommand openAddEditCategoriesCommand,
+            ICommand openAddEditSeasonsCommand, AddEditListingViewModel addEditListingViewModel)
         {
-            AddEditListingViewModel = new(clothes, categoryStore, seasonStore);
+            AddEditListingViewModel = addEditListingViewModel;
             Clothes = clothes;
             OpenAddEditCategoriesCommand = openAddEditCategoriesCommand;
             OpenAddEditSeasonsCommand = openAddEditSeasonsCommand;

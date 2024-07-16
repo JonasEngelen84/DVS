@@ -9,7 +9,7 @@
         public string Season => Clothes.Season.Name;
         public string Size { get; }
         public int? Quantity => Clothes.Sizes.FirstOrDefault(y => y.Size == Size)?.Quantity ?? null;
-        public string Comment => Clothes.Sizes.FirstOrDefault(y => y.Size == Size)?.Comment ?? null;
+        public string? Comment => Clothes.Sizes.FirstOrDefault(y => y.Size == Size)?.Comment ?? null;
 
         private bool _isDeleting;
         public bool IsDeleting

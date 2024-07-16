@@ -1,14 +1,12 @@
 ﻿using DVS.Models;
-using DVS.Stores;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
     public class AddEditSeasonFormViewModel : ViewModelBase
     {
+        private AddEditListingViewModel AddEditListingViewModel { get; }
+
         private string _addNewSeason;
         public string AddNewSeason
         {
@@ -64,6 +62,7 @@ namespace DVS.ViewModels.Forms
         }
 
         private string _errorMessage;
+
         public string ErrorMessage
         {
             get
@@ -88,14 +87,8 @@ namespace DVS.ViewModels.Forms
             !SelectedSeason.Name.Equals(EditSeason);
 
         public bool CanDelete => !SelectedSeason.Name.Equals("Saison wählen");
-        public bool CanDeleteAll => _seasons.Count > 0;
+        public bool CanDeleteAll => !AddEditListingViewModel.Seasons.IsEmpty;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
-
-        private readonly ObservableCollection<SeasonModel> _seasons = [];
-        private readonly CollectionViewSource _seasonCollectionViewSource;
-        public ICollectionView Seasons => _seasonCollectionViewSource.View;
-
-        private readonly SeasonStore _seasonStore;
 
         public ICommand AddSeasonCommand { get; }
         public ICommand EditSeasonCommand { get; }
@@ -103,120 +96,14 @@ namespace DVS.ViewModels.Forms
         public ICommand ClearSeasonListCommand { get; }
 
 
-        public AddEditSeasonFormViewModel(SeasonStore seasonStore,
-                                          ICommand addSeasonCommand,
-                                          ICommand editSeasonCommand,
-                                          ICommand deleteSeasonCommand,
-                                          ICommand clearSeasonListCommand)
+        public AddEditSeasonFormViewModel(ICommand addSeasonCommand, ICommand editSeasonCommand, ICommand deleteSeasonCommand,
+            ICommand clearSeasonListCommand, AddEditListingViewModel addEditListingViewModel)
         {
-            _seasonStore = seasonStore;
+            AddEditListingViewModel = addEditListingViewModel;
             AddSeasonCommand = addSeasonCommand;
             EditSeasonCommand = editSeasonCommand;
             DeleteSeasonCommand = deleteSeasonCommand;
             ClearSeasonListCommand = clearSeasonListCommand;
-
-            AddNewSeason = "Neue Saison";
-            EditSeason = "Saison wählen";
-            SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
-
-            _seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
-            _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(SeasonModel.Name), ListSortDirection.Ascending));
-
-            SeasonStore_SeasonsLoaded();
-
-            _seasonStore.SeasonsLoaded += SeasonStore_SeasonsLoaded;
-            _seasonStore.SeasonAdded += SeasonStore_SeasonAdded;
-            _seasonStore.SeasonEdited += SeasonStore_SeasonEdited;
-            _seasonStore.SeasonDeleted += SeasonStore_SeasonDeleted;
-            _seasonStore.AllSeasonsDeleted += SeasonStore_AllSeasonsDeleted;
-        }
-
-
-        private void SeasonStore_SeasonsLoaded()
-        {
-            _seasons.Clear();
-
-            foreach (SeasonModel season in _seasonStore.Seasons)
-            {
-                _seasons.Add(season);
-            }
-        }
-
-        private void SeasonStore_SeasonAdded(SeasonModel season)
-        {
-            AddSeason(season);
-            OnPropertyChanged(nameof(CanDeleteAll));
-        }
-
-        private void SeasonStore_SeasonEdited(SeasonModel season)
-        {
-            SeasonModel seasonToUpdate = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
-
-            if (seasonToUpdate != null)
-            {
-                int index = _seasons.IndexOf(seasonToUpdate);
-                _seasons[index] = season;
-                _seasonCollectionViewSource.View.Refresh();
-                SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
-                EditSeason = SelectedSeason.Name;
-                OnPropertyChanged(nameof(CanEdit));
-            }
-            else
-            {
-                throw new InvalidOperationException("Umbenennen der Saison nicht möglich.");
-            }
-        }
-
-        private void SeasonStore_SeasonDeleted(SeasonModel season)
-        {
-            var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
-
-            if (seasonToDelete != null)
-            {
-                _seasons.Remove(seasonToDelete);
-                _seasonCollectionViewSource.View.Refresh();
-                SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
-                EditSeason = SelectedSeason.Name;
-                OnPropertyChanged(nameof(CanDeleteAll));
-            }
-            else
-            {
-                throw new InvalidOperationException("Löschen der Saison nicht möglich.");
-            }
-        }
-
-        private void SeasonStore_AllSeasonsDeleted()
-        {
-            if (_seasons != null)
-            {
-                _seasons.Clear();
-                SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
-                EditSeason = SelectedSeason.Name;
-                OnPropertyChanged(nameof(CanDeleteAll));
-            }
-            else
-            {
-                throw new InvalidOperationException("Löschen aller Kategorien nicht möglich.");
-            }
-        }
-
-        private void AddSeason(SeasonModel season)
-        {
-            _seasons.Add(season);
-            _seasonCollectionViewSource.View.Refresh();
-            AddNewSeason = "Neue Saison";
-            OnPropertyChanged(nameof(Seasons));
-        }
-        
-        protected override void Dispose()
-        {
-            _seasonStore.SeasonsLoaded -= SeasonStore_SeasonsLoaded;
-            _seasonStore.SeasonAdded -= SeasonStore_SeasonAdded;
-            _seasonStore.SeasonEdited -= SeasonStore_SeasonEdited;
-            _seasonStore.SeasonDeleted -= SeasonStore_SeasonDeleted;
-            _seasonStore.AllSeasonsDeleted -= SeasonStore_AllSeasonsDeleted;
-
-            base.Dispose();
         }
     }
 }

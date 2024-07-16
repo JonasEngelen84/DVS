@@ -31,7 +31,7 @@ namespace DVS.Commands.AddEditSeasonCommands
 
                 try
                 {
-                    await _seasonStore.Edit(season);
+                    await _seasonStore.Edit(season, addEditSeasonFormViewModel);
                 }
                 catch (Exception)
                 {

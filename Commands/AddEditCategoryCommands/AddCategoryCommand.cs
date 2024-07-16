@@ -5,9 +5,7 @@ using DVS.ViewModels.Views;
 
 namespace DVS.Commands.AddEditCategoryCommands
 {
-    public class AddCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel,
-                                    CategoryStore categoryStore)
-                                    : AsyncCommandBase
+    public class AddCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
     {
         private readonly AddEditCategoryViewModel _addEditCategoryViewModel = addEditCategoryViewModel;
         private readonly CategoryStore _categoryStore = categoryStore;
@@ -22,7 +20,7 @@ namespace DVS.Commands.AddEditCategoryCommands
 
             try
             {
-                await _categoryStore.Add(newCategory);
+                await _categoryStore.Add(newCategory, addEditCategoryFormViewModel);
             }
             catch (Exception)
             {

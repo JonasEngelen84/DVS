@@ -7,14 +7,14 @@
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
         public Guid? ClothesGuidID { get; }
-        public string ClothesID => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID)?.ID ?? null;
-        public string ClothesName => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID)?.Name ?? null;
+        public string? ClothesID => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID)?.ID ?? null;
+        public string? ClothesName => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID)?.Name ?? null;
         public string Size { get; }
 
         public int? Quantity => Employee.Clothes.FirstOrDefault(c => c.GuidID == ClothesGuidID)?.Sizes
             .FirstOrDefault(s => s.Size == Size)?.Quantity ?? null;
 
-        public string Comment => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID).Sizes
+        public string? Comment => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID).Sizes
             .FirstOrDefault(s => s.Size == Size)?.Comment ?? null;
 
         private bool _isDeleting;

@@ -1,4 +1,5 @@
 ﻿using DVS.Models;
+using DVS.ViewModels.Forms;
 
 namespace DVS.Stores
 {
@@ -8,10 +9,10 @@ namespace DVS.Stores
         public IEnumerable<CategoryModel> Categories => _categories;
 
         public event Action CategoriesLoaded;
-        public event Action<CategoryModel> CategoryAdded;
-        public event Action<CategoryModel> CategoryEdited;
-        public event Action<CategoryModel> CategoryDeleted;
-        public event Action AllCategoriesDeleted;
+        public event Action<CategoryModel, AddEditCategoryFormViewModel> CategoryAdded;
+        public event Action<CategoryModel, AddEditCategoryFormViewModel> CategoryEdited;
+        public event Action<CategoryModel, AddEditCategoryFormViewModel> CategoryDeleted;
+        public event Action<AddEditCategoryFormViewModel> AllCategoriesDeleted;
 
 
         public CategoryStore()
@@ -27,20 +28,20 @@ namespace DVS.Stores
             CategoriesLoaded?.Invoke();
         }
 
-        public async Task Add(CategoryModel category)
+        public async Task Add(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            CategoryAdded.Invoke(category);
             _categories.Add(category);
+            CategoryAdded.Invoke(category, addEditCategoryFormViewModel);
         }
 
-        public async Task Edit(CategoryModel category)
+        public async Task Edit(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             int index = _categories.FindIndex(y => y.GuidID == category.GuidID);
 
             if (index > -1)
             {
                 _categories[index] = category;
-                CategoryEdited.Invoke(category);
+                CategoryEdited.Invoke(category, addEditCategoryFormViewModel);
             }
             else
             {
@@ -48,14 +49,14 @@ namespace DVS.Stores
             }
         }
 
-        public async Task Delete(CategoryModel category)
+        public async Task Delete(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
 
             if (categoryToDelete != null)
             {
                 _categories.Remove(category);
-                CategoryDeleted.Invoke(category);
+                CategoryDeleted.Invoke(category, addEditCategoryFormViewModel);
             }
             else
             {
@@ -63,12 +64,12 @@ namespace DVS.Stores
             }
         }
 
-        public async Task ClearCategories()
+        public async Task ClearCategories(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             if (_categories != null)
             {
-                AllCategoriesDeleted.Invoke();
                 _categories.Clear();
+                AllCategoriesDeleted.Invoke(addEditCategoryFormViewModel);
             }
             else
             {

@@ -9,10 +9,12 @@ namespace DVS.ViewModels.Views
     public class AddEditCategoryViewModel : ViewModelBase
     {
         public AddEditCategoryFormViewModel AddEditCategoryFormViewModel { get; }
+        public AddEditListingViewModel AddEditListingViewModel { get; }
         public ICommand CloseAddEditCategoryCommand { get; }
 
         public AddEditCategoryViewModel(ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
-            AddClothesViewModel addClothesViewModel, EditClothesViewModel editClothesViewModel)
+            SeasonStore seasonStore, ClothesModel clothes, AddClothesViewModel addClothesViewModel,
+            EditClothesViewModel editClothesViewModel)
         {
 
             ICommand addCategoryCommand = new AddCategoryCommand(this, categoryStore);
@@ -20,11 +22,18 @@ namespace DVS.ViewModels.Views
             ICommand deleteCategoryCommand = new DeleteCategoryCommand(this, categoryStore);
             ICommand clearCategoryListCommand = new ClearCategoryListCommand(this, categoryStore);
 
-            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(categoryStore,
-                addCategoryCommand, editCategoryCommand, deleteCategoryCommand, clearCategoryListCommand);
-
+            AddEditListingViewModel = new(clothes, categoryStore, seasonStore);
+                
             CloseAddEditCategoryCommand = new CloseAddEditCategoryCommand(
                 modalNavigationStore, addClothesViewModel, editClothesViewModel);
+
+            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(addCategoryCommand,
+                editCategoryCommand, deleteCategoryCommand, clearCategoryListCommand, AddEditListingViewModel)
+            {
+                AddNewCategory = "Neue Kategorie",
+                EditCategory = "Kategorie wählen",
+                SelectedCategory = new(null, "Kategorie wählen")
+            };
         }
     }
 }

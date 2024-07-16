@@ -6,16 +6,10 @@ using System.Windows;
 
 namespace DVS.Commands.AddEditSeasonCommands
 {
-    public class DeleteSeasonCommand : AsyncCommandBase
+    public class DeleteSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, SeasonStore seasonStore) : AsyncCommandBase
     {
-        private readonly AddEditSeasonViewModel _addEditSeasonViewModel;
-        private readonly SeasonStore _seasonStore;
-
-        public DeleteSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, SeasonStore seasonStore)
-        {
-            _addEditSeasonViewModel = addEditSeasonViewModel;
-            _seasonStore = seasonStore;
-        }
+        private readonly AddEditSeasonViewModel _addEditSeasonViewModel = addEditSeasonViewModel;
+        private readonly SeasonStore _seasonStore = seasonStore;
 
         public override async Task ExecuteAsync(object parameter)
         {
@@ -36,7 +30,7 @@ namespace DVS.Commands.AddEditSeasonCommands
 
                 try
                 {
-                    await _seasonStore.Delete(season);
+                    await _seasonStore.Delete(season, addEditSeasonFormViewModel);
                 }
                 catch (Exception)
                 {
