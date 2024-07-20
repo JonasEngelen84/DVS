@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             DataContext="{Binding DVSDetailedEmployeesListingView}">
+             DataContext="{Binding DVSDetailedClothesListingView}">
     
     <ListView FontSize="12"
               Foreground="#FF212129"

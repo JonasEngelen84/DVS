@@ -192,10 +192,10 @@ namespace DVS.ViewModels
         
         public void AddClothesItemToNewEmployeeListingItemCollection(DetailedClothesListingItemModel item)
         {
-            if (item == null || _newEmployeeListingItemCollection.Contains(item))
+            if (item == null || item.Quantity == 0)
             {
                 return;
-            }
+            } 
 
             var existingItem = _newEmployeeListingItemCollection
                 .FirstOrDefault(modelItem => modelItem.ID == item.ID && modelItem.Size == item.Size);
@@ -331,21 +331,6 @@ namespace DVS.ViewModels
 
         private void EmployeeStore_EmployeeAdded(EmployeeModel employee)
         {
-            if (employee.Clothes.Count == 0)
-            {
-                _detailedEmployeeListingItemCollection.Add(new(employee, null, null));
-            }
-            else
-            {
-                foreach (ClothesModel clothes in employee.Clothes)
-                {
-                    foreach (ClothesSizeModel size in clothes.Sizes)
-                    {
-                        _detailedEmployeeListingItemCollection.Add(new(employee, clothes.GuidID, size.Size));
-                    }
-                }
-            }
-
             _employeeListingItemCollection.Add(new(employee, this, _modalNavigationStore, _employeeStore));
             _newEmployeeListingItemCollection.Clear();
         }
@@ -366,9 +351,6 @@ namespace DVS.ViewModels
                     }
                 }
             }
-
-            _employeeListingItemCollection.Add(new(employee, this, _modalNavigationStore, _employeeStore));
-            _newEmployeeListingItemCollection.Clear();
         }
 
         private void EmployeeStore_EmployeeUpdated(EmployeeModel employee)

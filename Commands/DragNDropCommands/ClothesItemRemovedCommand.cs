@@ -15,8 +15,7 @@ namespace DVS.Commands.DragNDropCommands
         {
             if (parameter.Equals("AddEditEmployeAvailableClothesList"))
                 _dVSListingViewModel.RemoveClothesItemFromNewEmployeeListingItemCollection();
-
-            else if (parameter.Equals("AddEditEmployeeNewEmployeeClothesList"))
+            else
             {
                 ClothesModel clothesToEdit = new(
                     _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.GuidID,
@@ -25,6 +24,7 @@ namespace DVS.Commands.DragNDropCommands
                     _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Category,
                     _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Season,
                     _dVSListingViewModel.RemovedClothesListingItemModel.Comment);
+                clothesToEdit.Sizes = _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Sizes;
 
                 _dVSListingViewModel.RemovedClothesListingItemModel.ErrorMessage = null;
 
@@ -35,29 +35,27 @@ namespace DVS.Commands.DragNDropCommands
                     MessageBoxButton button = MessageBoxButton.OK;
                     MessageBoxImage icon = MessageBoxImage.Warning;
                     _ = MessageBox.Show(messageBoxText, caption, button, icon);
+                    return;
                 }
                 else if (_dVSListingViewModel.RemovedClothesListingItemModel.Quantity <= 3)
                 {
-                    string messageBoxText = $"ACHTUNG!\n\nVon dieser Bekleidung sind nur noch  {_dVSListingViewModel.RemovedClothesListingItemModel.Quantity-1}  Stück vorhanden!";
+                    string messageBoxText = $"ACHTUNG!\n\nVon dieser Bekleidung sind nur noch" +
+                        $"  {_dVSListingViewModel.RemovedClothesListingItemModel.Quantity}  Stück vorhanden!";
                     string caption = "Bekleidung entfernen";
                     MessageBoxButton button = MessageBoxButton.OK;
                     MessageBoxImage icon = MessageBoxImage.Warning;
                     _ = MessageBox.Show(messageBoxText, caption, button, icon);
 
-                    clothesToEdit.Sizes.Add(new(_dVSListingViewModel.RemovedClothesListingItemModel.Size)
-                    {
-                        Quantity = _dVSListingViewModel.RemovedClothesListingItemModel.Quantity - 1,
-                        IsSelected = true
-                    });
-                        
+                    ClothesSizeModel sizeToEdit = clothesToEdit.Sizes.FirstOrDefault(
+                        y => y.Size == _dVSListingViewModel.RemovedClothesListingItemModel.Size);
+                    sizeToEdit.Quantity -= 1;
+
                 }
                 else
                 {
-                    clothesToEdit.Sizes.Add(new(_dVSListingViewModel.RemovedClothesListingItemModel.Size)
-                    {
-                        Quantity = _dVSListingViewModel.RemovedClothesListingItemModel.Quantity - 1,
-                        IsSelected = true
-                    });
+                    ClothesSizeModel sizeToEdit = clothesToEdit.Sizes.FirstOrDefault(
+                        y => y.Size == _dVSListingViewModel.RemovedClothesListingItemModel.Size);
+                    sizeToEdit.Quantity -= 1;
                 }
                     
                 try
