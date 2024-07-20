@@ -60,7 +60,7 @@
         <!-- Clothes sizes and quantity -->
         <ItemsControl Grid.Row="1"
                       Padding="15 0 15 0"
-                      ItemsSource="{Binding Clothes.Sizes}"
+                      ItemsSource="{Binding Sizes}"
                       Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
@@ -68,13 +68,19 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0"
-                                   Text="{Binding Size}" />
+                                   Text="{Binding Clothes.ID}" />
                         <TextBlock Grid.Column="1"
-                                   Text="{Binding Quantity}" />
+                                   Text="{Binding Clothes.Name}" />
                         <TextBlock Grid.Column="2"
+                                   Text="{Binding Size}" />
+                        <TextBlock Grid.Column="3"
+                                   Text="{Binding Quantity}" />
+                        <TextBlock Grid.Column="4"
                                    Text="{Binding Comment}" />
                     </Grid>
                 </DataTemplate>
@@ -98,7 +104,7 @@
 
                 <!-- Categorie -->
                 <TextBlock Grid.Column="0"
-                           Text="{Binding Categorie.Name, Converter={StaticResource CommaConverter}}"
+                           Text="{Binding Category.Name, Converter={StaticResource CommaConverter}}"
                            Margin="0 0 5 0"/>
 
                 <!-- Season -->

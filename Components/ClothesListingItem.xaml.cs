@@ -3,9 +3,6 @@ using System.Windows.Controls;
 
 namespace DVS.Components
 {
-    /// <summary>
-    /// Interaktionslogik für ClothesListingItem.xaml
-    /// </summary>
     public partial class ClothesListingItem : UserControl
     {
         public ClothesListingItem()

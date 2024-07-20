@@ -1,5 +1,4 @@
 ﻿using DVS.Models;
-using System.Collections.ObjectModel;
 
 namespace DVS.Stores
 {
@@ -11,6 +10,9 @@ namespace DVS.Stores
         public event Action EmployeesLoaded;
         public event Action<EmployeeModel> EmployeeAdded;
         public event Action<EmployeeModel> EmployeeUpdated;
+        public event Action<EmployeeModel> EmployeeEdited;
+        public event Action<EmployeeModel> EmployeeDeleted;
+        public event Action AllEmployeesDeleted;
 
 
         public EmployeeStore()
@@ -92,6 +94,21 @@ namespace DVS.Stores
         {
             _employees.Add(employee);
             EmployeeAdded?.Invoke(employee);
+        }
+
+        public async Task Edit(EmployeeModel employee)
+        {
+            
+        }
+
+        public async Task Delete(EmployeeModel employee)
+        {
+            
+        }
+
+        public async Task DeleteAll(EmployeeModel employee)
+        {
+            
         }
     }
 }

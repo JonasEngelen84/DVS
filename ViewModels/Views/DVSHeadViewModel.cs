@@ -5,16 +5,16 @@ namespace DVS.ViewModels.Views
     public class DVSHeadViewModel : ViewModelBase
     {
         public DVSListingViewModel DVSClothesListingViewModel { get; }
-        public DVSListingViewModel DVSEmployeeListingViewModel { get; }
+        //public DVSListingViewModel DVSEmployeeListingViewModel { get; }
 
-        public DVSHeadViewModel(ClothesStore clothesStore, EmployeeStore employeeStore,
-            ModalNavigationStore modalNavigationStore, CategoryStore categoryStore, SeasonStore seasonStore)
+        public DVSHeadViewModel(DVSListingViewModel dVSListingViewModel)
         {
-            DVSClothesListingViewModel = new(
-                clothesStore, employeeStore, modalNavigationStore, categoryStore, seasonStore);
+            DVSClothesListingViewModel = dVSListingViewModel;
+            //DVSClothesListingViewModel = new(
+            //    clothesStore, employeeStore, modalNavigationStore, categoryStore, seasonStore);
 
-            DVSEmployeeListingViewModel = new(
-                clothesStore, employeeStore, modalNavigationStore, categoryStore, seasonStore);
+            //DVSEmployeeListingViewModel = new(
+            //    clothesStore, employeeStore, modalNavigationStore, categoryStore, seasonStore);
         }
 
     }

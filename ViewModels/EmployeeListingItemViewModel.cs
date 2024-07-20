@@ -1,6 +1,7 @@
 ﻿using DVS.Commands.DVSHeadViewCommands;
 using DVS.Models;
 using DVS.Stores;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.ListViewItems
@@ -8,12 +9,12 @@ namespace DVS.ViewModels.ListViewItems
     public class EmployeeListingItemViewModel : ViewModelBase
     {
         public EmployeeModel Employee { get; private set; }
-
         public string ID => Employee.ID;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
         public string? Comment => Employee.Comment;
-        
+        public ObservableCollection<ClothesModel> Clothes => Employee.Clothes;
+
         private bool _isDeleting;
         public bool IsDeleting
         {
@@ -91,6 +92,7 @@ namespace DVS.ViewModels.ListViewItems
             OnPropertyChanged(nameof(Lastname));
             OnPropertyChanged(nameof(Firstname));
             OnPropertyChanged(nameof(Comment));
+            OnPropertyChanged(nameof(Clothes));
         }
     }
 }

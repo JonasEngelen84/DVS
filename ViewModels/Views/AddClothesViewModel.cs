@@ -15,17 +15,16 @@ namespace DVS.ViewModels.Views
         public AddClothesViewModel(ModalNavigationStore modalNavigationStore,
             CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
         {
+            AddEditListingViewModel = new(null, categoryStore, seasonStore);
+            CloseModalCommand = new CloseModalCommand(modalNavigationStore);
+
             ICommand addClothesCommand = new AddClothesCommand(this, clothesStore , modalNavigationStore);
 
             ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(
-                modalNavigationStore, categoryStore, seasonStore, null, this, null);
+                modalNavigationStore, categoryStore, seasonStore, null, this, null, AddEditListingViewModel);
 
             ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(
-                modalNavigationStore, categoryStore, seasonStore, null, this, null);
-
-            AddEditListingViewModel = new(null, categoryStore, seasonStore);
-
-            CloseModalCommand = new CloseModalCommand(modalNavigationStore);
+                modalNavigationStore, categoryStore, seasonStore, null, this, null, AddEditListingViewModel);
 
             AddEditClothesFormViewModel = new(null, addClothesCommand,
                 openAddEditCategoriesCommand, openAddEditSeasonsCommand, AddEditListingViewModel)

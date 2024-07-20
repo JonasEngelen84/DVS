@@ -54,12 +54,8 @@
                               Foreground="Black"
                               Background="WhiteSmoke"
                               ItemsSource="{Binding AddEditListingViewModel.Seasons}"
-                              SelectedItem="{Binding SelectedSeason}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
+                              SelectedItem="{Binding SelectedSeason}"
+                              DisplayMemberPath="Name">
                     </ListView>
                 </Grid>
             </Border>

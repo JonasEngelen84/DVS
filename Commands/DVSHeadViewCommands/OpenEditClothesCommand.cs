@@ -1,13 +1,15 @@
 ﻿using DVS.Models;
 using DVS.Stores;
+using DVS.ViewModels.ListViewItems;
 using DVS.ViewModels.Views;
 
 namespace DVS.Commands.DVSHeadViewCommands
 {
-    public class OpenEditClothesCommand(ClothesModel clothes, ModalNavigationStore modalNavigationStore,
-        CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore) : CommandBase
+    public class OpenEditClothesCommand(ClothesListingItemViewModel clothesListingItemViewModel,
+        ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
+        SeasonStore seasonStore, ClothesStore clothesStore) : CommandBase
     {
-        private readonly ClothesModel _clothes = clothes;
+        private readonly ClothesListingItemViewModel _clothesListingItemViewModel = clothesListingItemViewModel;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly CategoryStore _categoryStore = categoryStore;
@@ -15,6 +17,8 @@ namespace DVS.Commands.DVSHeadViewCommands
 
         public override void Execute(object parameter)
         {
+            ClothesModel _clothes = _clothesListingItemViewModel.Clothes;
+
             EditClothesViewModel EditClothesViewModel = new(
                 _clothes, _modalNavigationStore, _categoryStore, _seasonStore, _clothesStore);
 

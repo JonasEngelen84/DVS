@@ -1,6 +1,6 @@
 ﻿
 using DVS.Models;
-
+//TODO: EditClothesDragNDropCommand löschen
 namespace DVS.Commands.DragNDropCommands
 {
     public class EditClothesDragNDropCommand(DetailedClothesListingItemModel item, int i) : AsyncCommandBase

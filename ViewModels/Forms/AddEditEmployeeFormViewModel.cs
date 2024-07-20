@@ -3,9 +3,12 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
-    public class AddEditEmployeeFormViewModel : ViewModelBase
+    public class AddEditEmployeeFormViewModel(EmployeeModel? employee, DVSListingViewModel
+        dVSListingViewModel, ICommand submitCommand) : ViewModelBase
     {
-        private EmployeeModel? Employee {  get; }
+        public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
+        private EmployeeModel? Employee { get; } = employee;
+        public ICommand SubmitCommand { get; } = submitCommand;
 
         private string _iD;
         public string ID
@@ -101,8 +104,6 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
-
         public bool CanSubmit
         {
             get
@@ -128,16 +129,6 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        public DVSListingViewModel DVSListingViewModel { get; }
-
-        public ICommand SubmitCommand { get; }
-
-
-        public AddEditEmployeeFormViewModel(EmployeeModel? employee, DVSListingViewModel dVSListingViewModel, ICommand submitCommand)
-        {
-            Employee = employee;
-            DVSListingViewModel = dVSListingViewModel;
-            SubmitCommand = submitCommand;
-        }
+        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DVS.Commands.DVSHeadViewCommands;
 using DVS.Models;
 using DVS.Stores;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.ListViewItems
@@ -8,12 +9,12 @@ namespace DVS.ViewModels.ListViewItems
     public class ClothesListingItemViewModel : ViewModelBase
     {
         public ClothesModel Clothes { get; private set; }
-
         public string ID => Clothes.ID;
         public string Name => Clothes.Name;
         public CategoryModel Category => Clothes.Category;
         public SeasonModel Season => Clothes.Season;
         public string? Comment => Clothes.Comment;
+        public ObservableCollection<ClothesSizeModel> Sizes => Clothes.Sizes;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -76,17 +77,14 @@ namespace DVS.ViewModels.ListViewItems
             CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
         {
             Clothes = clothes;
-
-            OpenEditCommand = new OpenEditClothesCommand(
-                clothes, modalNavigationStore, categoryStore, seasonStore, clothesStore);
-
-            DeleteCommand = new DeleteClothesCommand();
+            DeleteCommand = new DeleteClothesCommand(this, clothesStore);
             ClearSizesCommand = new ClearSizesCommand();
             PrintClothesCommand = new OpenPrintClothesCommand();
+            OpenEditCommand = new OpenEditClothesCommand(this, modalNavigationStore, categoryStore, seasonStore, clothesStore);
         }
 
 
-        public void Edit(ClothesModel clothes)
+        public void Update(ClothesModel clothes)
         {
             Clothes = clothes;
 
@@ -95,6 +93,7 @@ namespace DVS.ViewModels.ListViewItems
             OnPropertyChanged(nameof(Category));
             OnPropertyChanged(nameof(Season));
             OnPropertyChanged(nameof(Comment));
+            OnPropertyChanged(nameof(Sizes));
         }
     }
 }

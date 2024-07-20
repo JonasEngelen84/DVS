@@ -3,10 +3,15 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
-    public class AddEditClothesFormViewModel : ViewModelBase
+    public class AddEditClothesFormViewModel(ClothesModel? clothes, ICommand submitCommand,
+        ICommand openAddEditCategoriesCommand, ICommand openAddEditSeasonsCommand,
+        AddEditListingViewModel addEditListingViewModel) : ViewModelBase
     {
-        public AddEditListingViewModel AddEditListingViewModel { get; }
-        private ClothesModel? Clothes { get; }
+        public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
+        private ClothesModel? Clothes { get; } = clothes;
+        public ICommand OpenAddEditCategoriesCommand { get; } = openAddEditCategoriesCommand;
+        public ICommand OpenAddEditSeasonsCommand { get; } = openAddEditSeasonsCommand;
+        public ICommand SubmitCommand { get; } = submitCommand;
 
         private string _iD;
         public string ID
@@ -115,8 +120,6 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
-
         public bool CanSubmit
         {
             get
@@ -145,19 +148,6 @@ namespace DVS.ViewModels.Forms
             }
         }
 
-        public ICommand OpenAddEditCategoriesCommand { get; }
-        public ICommand OpenAddEditSeasonsCommand { get; }
-        public ICommand SubmitCommand { get; }
-
-
-        public AddEditClothesFormViewModel(ClothesModel clothes, ICommand submitCommand, ICommand openAddEditCategoriesCommand,
-            ICommand openAddEditSeasonsCommand, AddEditListingViewModel addEditListingViewModel)
-        {
-            AddEditListingViewModel = addEditListingViewModel;
-            Clothes = clothes;
-            OpenAddEditCategoriesCommand = openAddEditCategoriesCommand;
-            OpenAddEditSeasonsCommand = openAddEditSeasonsCommand;
-            SubmitCommand = submitCommand;
-        }
+        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace DVS.Models
+﻿using System.Collections.ObjectModel;
+
+namespace DVS.Models
 {
     public class ClothesModel(Guid guidID, string id, string name, CategoryModel category, SeasonModel season, string? comment)
     {
@@ -10,6 +12,6 @@
         public SeasonModel Season { get; set; } = season;
         public string? Comment { get; set; } = comment;
 
-        public List<ClothesSizeModel> Sizes { get; set; } = [];
+        public ObservableCollection<ClothesSizeModel> Sizes { get; set; } = [];
     }
 }

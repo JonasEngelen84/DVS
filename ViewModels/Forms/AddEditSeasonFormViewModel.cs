@@ -3,9 +3,15 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
-    public class AddEditSeasonFormViewModel : ViewModelBase
+    public class AddEditSeasonFormViewModel(ICommand addSeasonCommand, ICommand editSeasonCommand,
+        ICommand deleteSeasonCommand, ICommand clearSeasonListCommand,
+        AddEditListingViewModel addEditListingViewModel) : ViewModelBase
     {
-        private AddEditListingViewModel AddEditListingViewModel { get; }
+        public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
+        public ICommand AddSeasonCommand { get; } = addSeasonCommand;
+        public ICommand EditSeasonCommand { get; } = editSeasonCommand;
+        public ICommand DeleteSeasonCommand { get; } = deleteSeasonCommand;
+        public ICommand ClearSeasonListCommand { get; } = clearSeasonListCommand;
 
         private string _addNewSeason;
         public string AddNewSeason
@@ -62,7 +68,6 @@ namespace DVS.ViewModels.Forms
         }
 
         private string _errorMessage;
-
         public string ErrorMessage
         {
             get
@@ -89,21 +94,5 @@ namespace DVS.ViewModels.Forms
         public bool CanDelete => !SelectedSeason.Name.Equals("Saison wählen");
         public bool CanDeleteAll => !AddEditListingViewModel.Seasons.IsEmpty;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
-
-        public ICommand AddSeasonCommand { get; }
-        public ICommand EditSeasonCommand { get; }
-        public ICommand DeleteSeasonCommand { get; }
-        public ICommand ClearSeasonListCommand { get; }
-
-
-        public AddEditSeasonFormViewModel(ICommand addSeasonCommand, ICommand editSeasonCommand, ICommand deleteSeasonCommand,
-            ICommand clearSeasonListCommand, AddEditListingViewModel addEditListingViewModel)
-        {
-            AddEditListingViewModel = addEditListingViewModel;
-            AddSeasonCommand = addSeasonCommand;
-            EditSeasonCommand = editSeasonCommand;
-            DeleteSeasonCommand = deleteSeasonCommand;
-            ClearSeasonListCommand = clearSeasonListCommand;
-        }
     }
 }

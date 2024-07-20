@@ -14,6 +14,7 @@ namespace DVS
         private readonly SelectedClothesStore _selectedClothesStore;
         private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly DVSListingViewModel _dVSListingViewModel;
         private readonly DVSDetailedViewModel _dVSDetailedViewModel;
         private readonly DVSHeadViewModel _dVSHeadViewModel;
 
@@ -26,12 +27,12 @@ namespace DVS
             _selectedClothesStore = new();
             _selectedEmployeeClothesStore = new();
             _modalNavigationStore = new();
+            _dVSListingViewModel = new(_clothesStore, _employeeStore, _modalNavigationStore, _categoryStore, _seasonStore);
 
-            _dVSHeadViewModel = new(_clothesStore,
-                _employeeStore, _modalNavigationStore, _categoryStore, _seasonStore);
-
-            _dVSDetailedViewModel = new(_modalNavigationStore, _categoryStore, _seasonStore,
+            _dVSDetailedViewModel = new(_dVSListingViewModel, _modalNavigationStore, _categoryStore, _seasonStore,
                 _clothesStore, _employeeStore, _selectedClothesStore, _selectedEmployeeClothesStore);
+
+            _dVSHeadViewModel = new(_dVSListingViewModel);
         }
 
         protected override void OnStartup(StartupEventArgs e)

@@ -11,11 +11,9 @@ namespace DVS.Commands.DVSDetailedViewCommands
         private readonly DVSListingViewModel _dVSDetailedEmployeesListingView;
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public OpenCommentCommand(DVSListingViewModel dVSDetailedClothesListingView,
-                                  DVSListingViewModel dVSDetailedEmployeesListingView,
+        public OpenCommentCommand(DVSListingViewModel dVSDetailedEmployeesListingView,
                                   ModalNavigationStore modalNavigationStore)
         {
-            _dVSDetailedClothesListingView = dVSDetailedClothesListingView;
             _dVSDetailedEmployeesListingView = dVSDetailedEmployeesListingView;
             _modalNavigationStore = modalNavigationStore;
         }

@@ -277,9 +277,9 @@ namespace DVS.ViewModels
             OnPropertyChanged(nameof(Categories));
         }
 
-        private void AddSeason(SeasonModel season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        private void AddSeason(SeasonModel newSeason, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
-            _seasons.Add(season);
+            _seasons.Add(newSeason);
             _seasonCollectionViewSource.View.Refresh();
             addEditSeasonFormViewModel.AddNewSeason = "Neue Saison";
             OnPropertyChanged(nameof(Seasons));

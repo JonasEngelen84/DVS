@@ -1,5 +1,4 @@
-﻿using DVS.Models;
-using DVS.Stores;
+﻿using DVS.Stores;
 using DVS.ViewModels.Views;
 
 namespace DVS.Commands.DVSDetailedViewCommands

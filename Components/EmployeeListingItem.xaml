@@ -58,7 +58,7 @@
         <!-- Employee ClothesList -->
         <ItemsControl Grid.Row="1"
                       Padding="10 0 10 0"
-                      ItemsSource="{Binding Employee.Clothes}"
+                      ItemsSource="{Binding Clothes}"
                       Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>

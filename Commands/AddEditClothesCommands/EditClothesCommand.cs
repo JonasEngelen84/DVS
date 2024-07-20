@@ -2,57 +2,65 @@
 using DVS.Stores;
 using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
+using System.Windows;
 
 namespace DVS.Commands.AddEditClothesCommands
 {
-    public class EditClothesCommand(EditClothesViewModel addEditClothesViewModel,
-                                    ClothesStore clothesStore,
-                                    ModalNavigationStore modalNavigationStore,
-                                    Guid ID)
-                                    : AsyncCommandBase
+    public class EditClothesCommand(EditClothesViewModel editClothesViewModel, ClothesStore clothesStore,
+        ModalNavigationStore modalNavigationStore, Guid ID) : AsyncCommandBase
     {
-        private readonly EditClothesViewModel _editClothesViewModel = addEditClothesViewModel;
+        private readonly EditClothesViewModel _editClothesViewModel = editClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         private readonly Guid _guidID = ID;
 
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditClothesFormViewModel addEditClothesFormViewModel = _editClothesViewModel.AddEditClothesFormViewModel;
+            string messageBoxText = "Bekleidung bearbeiten?";
+            string caption = "Bekleidung bearbeiten";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
 
-            addEditClothesFormViewModel.ErrorMessage = null;
-            addEditClothesFormViewModel.IsSubmitting = true;
-
-            ClothesModel clothes = new(_guidID,
-                                       addEditClothesFormViewModel.ID,
-                                       addEditClothesFormViewModel.Name,
-                                       addEditClothesFormViewModel.Category,
-                                       addEditClothesFormViewModel.Season,
-                                       addEditClothesFormViewModel.Comment) ;
-
-            // Alle ausgewählten Größen in eine ZwischenListe speichern.
-            // Diese wird der GrößenListe (Size) des ClothesModel hinzugefügt.
-            var selectedSizes = addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
-
-            foreach (ClothesSizeModel sizeModel in selectedSizes)
+            if (dialog == MessageBoxResult.Yes)
             {
-                clothes.Sizes.Add(sizeModel);
-            }
+                AddEditClothesFormViewModel addEditClothesFormViewModel = _editClothesViewModel.AddEditClothesFormViewModel;
 
-            try
-            {
-                await _clothesStore.Edit(clothes);
-            }
-            catch (Exception)
-            {
-                addEditClothesFormViewModel.ErrorMessage = "Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-            }
-            finally
-            {
-                addEditClothesFormViewModel.IsSubmitting = false;
-                _modalNavigationStore.Close();
+                addEditClothesFormViewModel.ErrorMessage = null;
+                addEditClothesFormViewModel.IsSubmitting = true;
+
+                ClothesModel clothesToEdit = new(_guidID,
+                                           addEditClothesFormViewModel.ID,
+                                           addEditClothesFormViewModel.Name,
+                                           addEditClothesFormViewModel.Category,
+                                           addEditClothesFormViewModel.Season,
+                                           addEditClothesFormViewModel.Comment);
+
+                // Alle ausgewählten Größen in eine ZwischenListe speichern.
+                // Diese wird der GrößenListe (Size) des ClothesModel hinzugefügt.
+                var selectedSizes = addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                    ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                    : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
+
+                foreach (ClothesSizeModel sizeModel in selectedSizes)
+                {
+                    clothesToEdit.Sizes.Add(sizeModel);
+                }
+
+                try
+                {
+                    await _clothesStore.Update(clothesToEdit);
+                }
+                catch (Exception)
+                {
+                    addEditClothesFormViewModel.ErrorMessage =
+                        "Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                }
+                finally
+                {
+                    addEditClothesFormViewModel.IsSubmitting = false;
+                    _modalNavigationStore.Close();
+                }
             }
         }
     }

@@ -1,8 +1,10 @@
-﻿using DVS.ViewModels;
+﻿using DVS.Stores;
+using DVS.ViewModels;
 
 namespace DVS.Commands.DragNDropCommands
 {
-    public class ClothesItemReceivedCommand(DVSListingViewModel dVSListingViewModel) : CommandBase
+    public class ClothesItemReceivedCommand(
+        DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore) : CommandBase
     {
         private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
 

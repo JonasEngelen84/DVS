@@ -1,14 +1,13 @@
 ﻿namespace DVS.Models
 {
-    public class DetailedClothesListingItemModel : ModelBase
+    public class DetailedClothesListingItemModel(ClothesModel clothes, string size) : ModelBase
     {
-        public ClothesModel Clothes {  get; private set; }
-
+        public ClothesModel Clothes { get; private set; } = clothes;
         public string ID => Clothes.ID;
         public string Name => Clothes.Name;
         public string Category => Clothes.Category.Name;
         public string Season => Clothes.Season.Name;
-        public string Size { get; }
+        public string Size { get; } = size;
         public int? Quantity => Clothes.Sizes.FirstOrDefault(y => y.Size == Size)?.Quantity ?? null;
         public string? Comment => Clothes.Sizes.FirstOrDefault(y => y.Size == Size)?.Comment ?? null;
 
@@ -43,15 +42,7 @@
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-
-        public DetailedClothesListingItemModel(ClothesModel clothes, string size)
-        {
-            Clothes = clothes;
-            Size = size;
-        }
-
-
-        public void Edit(ClothesModel clothes)
+        public void Update(ClothesModel clothes)
         {
             Clothes = clothes;
 

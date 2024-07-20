@@ -3,9 +3,15 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms
 {
-    public class AddEditCategoryFormViewModel : ViewModelBase
+    public class AddEditCategoryFormViewModel(ICommand addCategoryCommand, ICommand editCategoryCommand,
+        ICommand deleteCategoryCommand, ICommand clearCategoryListCommand,
+        AddEditListingViewModel addEditListingViewModel) : ViewModelBase
     {
-        private AddEditListingViewModel AddEditListingViewModel { get; }
+        public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
+        public ICommand AddCategoryCommand { get; } = addCategoryCommand;
+        public ICommand EditCategoryCommand { get; } = editCategoryCommand;
+        public ICommand DeleteCategoryCommand { get; } = deleteCategoryCommand;
+        public ICommand ClearCategoryListCommand { get; } = clearCategoryListCommand;
 
         private string _addNewCategory;
         public string AddNewCategory
@@ -88,21 +94,5 @@ namespace DVS.ViewModels.Forms
         public bool CanDelete => !SelectedCategory.Name.Equals("Kategorie wählen");
         public bool CanDeleteAll => !AddEditListingViewModel.Categories.IsEmpty;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
-
-        public ICommand AddCategoryCommand { get; }
-        public ICommand EditCategoryCommand { get; }
-        public ICommand DeleteCategoryCommand { get; }
-        public ICommand ClearCategoryListCommand { get; }
-
-
-        public AddEditCategoryFormViewModel(ICommand addCategoryCommand, ICommand editCategoryCommand,
-            ICommand deleteCategoryCommand, ICommand clearCategoryListCommand, AddEditListingViewModel addEditListingViewModel)
-        {
-            AddEditListingViewModel = addEditListingViewModel;
-            AddCategoryCommand = addCategoryCommand;
-            EditCategoryCommand = editCategoryCommand;
-            DeleteCategoryCommand = deleteCategoryCommand;
-            ClearCategoryListCommand = clearCategoryListCommand;
-        }
     }
 }

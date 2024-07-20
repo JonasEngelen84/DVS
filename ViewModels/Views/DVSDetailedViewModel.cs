@@ -7,7 +7,7 @@ namespace DVS.ViewModels.Views
     public class DVSDetailedViewModel : ViewModelBase
     {
         public DVSListingViewModel DVSDetailedClothesListingView { get; }
-        public DVSListingViewModel DVSDetailedEmployeesListingView { get; }
+        //public DVSListingViewModel DVSDetailedEmployeesListingView { get; }
 
         public ICommand OpenFilterClothesListCommand { get; }
         public ICommand OpenFilterEmployeeListCommand { get; }
@@ -18,15 +18,14 @@ namespace DVS.ViewModels.Views
         public ICommand PlusCommand { get; }
         public ICommand MinusCommand { get; }
 
-        public DVSDetailedViewModel(ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
-            SeasonStore seasonStore, ClothesStore clothesStore, EmployeeStore employeeStore,
+        public DVSDetailedViewModel(DVSListingViewModel dVSListingViewModel, ModalNavigationStore modalNavigationStore,
+            CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore, EmployeeStore employeeStore,
             SelectedClothesStore selectedClothesStore, SelectedEmployeeClothesStore selectedEmployeeClothesStore)
         {
-            DVSDetailedClothesListingView = new(
-                clothesStore, employeeStore, modalNavigationStore, categoryStore, seasonStore);
+            DVSDetailedClothesListingView = dVSListingViewModel;
 
-            DVSDetailedEmployeesListingView = new(
-                clothesStore, employeeStore, modalNavigationStore, categoryStore, seasonStore);
+            //DVSDetailedEmployeesListingView = new(
+            //    clothesStore, employeeStore, modalNavigationStore, categoryStore, seasonStore);
 
             SaveCommand = new SaveCommand(modalNavigationStore);
 
@@ -47,7 +46,7 @@ namespace DVS.ViewModels.Views
                 modalNavigationStore, categoryStore, seasonStore, clothesStore);
 
             OpenCommentCommand = new OpenCommentCommand(
-                DVSDetailedClothesListingView, DVSDetailedEmployeesListingView, modalNavigationStore);
+                DVSDetailedClothesListingView, modalNavigationStore);
 
 
         }

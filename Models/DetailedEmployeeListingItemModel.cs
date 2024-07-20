@@ -5,7 +5,7 @@ namespace DVS.Models
     public class DetailedEmployeeListingItemModel : ModelBase
     {
         public EmployeeModel Employee { get; private set; }
-
+        public Guid GuidID => Employee.GuidID;
         public string ID => Employee.ID;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
@@ -35,7 +35,6 @@ namespace DVS.Models
         }
 
         private string _errorMessage;
-
         public string ErrorMessage
         {
             get => _errorMessage;

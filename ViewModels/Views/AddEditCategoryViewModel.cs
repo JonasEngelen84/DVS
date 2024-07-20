@@ -14,9 +14,8 @@ namespace DVS.ViewModels.Views
 
         public AddEditCategoryViewModel(ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
             SeasonStore seasonStore, ClothesModel clothes, AddClothesViewModel addClothesViewModel,
-            EditClothesViewModel editClothesViewModel)
+            EditClothesViewModel editClothesViewModel, AddEditListingViewModel addEditListingViewModel)
         {
-
             ICommand addCategoryCommand = new AddCategoryCommand(this, categoryStore);
             ICommand editCategoryCommand = new EditCategoryCommand(this, categoryStore);
             ICommand deleteCategoryCommand = new DeleteCategoryCommand(this, categoryStore);
@@ -28,7 +27,7 @@ namespace DVS.ViewModels.Views
                 modalNavigationStore, addClothesViewModel, editClothesViewModel);
 
             AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(addCategoryCommand,
-                editCategoryCommand, deleteCategoryCommand, clearCategoryListCommand, AddEditListingViewModel)
+                editCategoryCommand, deleteCategoryCommand, clearCategoryListCommand, addEditListingViewModel)
             {
                 AddNewCategory = "Neue Kategorie",
                 EditCategory = "Kategorie wählen",
