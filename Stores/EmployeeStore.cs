@@ -1,4 +1,5 @@
 ﻿using DVS.Models;
+using System;
 
 namespace DVS.Stores
 {
@@ -9,10 +10,10 @@ namespace DVS.Stores
 
         public event Action EmployeesLoaded;
         public event Action<EmployeeModel> EmployeeAdded;
+        public event Action<EmployeeModel> DetailedEmployeeItemAdded;
         public event Action<EmployeeModel> EmployeeUpdated;
-        public event Action<EmployeeModel> EmployeeEdited;
-        public event Action<EmployeeModel> EmployeeDeleted;
-        public event Action AllEmployeesDeleted;
+        public event Action<EmployeeModel> DetailedEmployeeItemUpdated;
+        public event Action<Guid> EmployeeDeleted;
 
 
         public EmployeeStore()
@@ -94,21 +95,30 @@ namespace DVS.Stores
         {
             _employees.Add(employee);
             EmployeeAdded?.Invoke(employee);
+            DetailedEmployeeItemAdded?.Invoke(employee);
         }
 
-        public async Task Edit(EmployeeModel employee)
+        public async Task Update(EmployeeModel employee)
         {
-            
+            int index = _employees.FindIndex(y => y.GuidID == employee.GuidID);
+
+            if (index != -1)
+            {
+                _employees[index] = employee;
+            }
+            else
+            {
+                _employees.Add(employee);
+            }
+
+            EmployeeUpdated.Invoke(employee);
+            DetailedEmployeeItemUpdated.Invoke(employee);
         }
 
-        public async Task Delete(EmployeeModel employee)
+        public async Task Delete(Guid guidID)
         {
-            
-        }
-
-        public async Task DeleteAll(EmployeeModel employee)
-        {
-            
+            _employees.RemoveAll(y => y.GuidID == guidID);
+            EmployeeDeleted?.Invoke(guidID);
         }
     }
 }

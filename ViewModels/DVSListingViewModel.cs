@@ -3,8 +3,6 @@ using DVS.Models;
 using DVS.Stores;
 using DVS.ViewModels.ListViewItems;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
 using System.Windows.Input;
 
 namespace DVS.ViewModels
@@ -126,9 +124,11 @@ namespace DVS.ViewModels
             _clothesStore.DetailedClothesItemUpdated += ClothesStore_DetailedClothesItemUpdated;
             _clothesStore.ClothesDeleted += ClothesStore_ClothesDeleted;
 
-            _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
             _employeeStore.EmployeesLoaded += EmployeeStore_EmployeesLoaded;
-            _employeeStore.EmployeeEdited += EmployeeStore_EmployeeEdited;
+            _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
+            _employeeStore.DetailedEmployeeItemAdded += EmployeeStore_DetailedEmployeeItemAdded;
+            _employeeStore.EmployeeUpdated += EmployeeStore_EmployeeUpdated;
+            _employeeStore.DetailedEmployeeItemUpdated += EmployeeStore_DetailedEmployeeItemUpdated;
             _employeeStore.EmployeeDeleted += EmployeeStore_EmployeeDeleted;
         }
 
@@ -234,6 +234,8 @@ namespace DVS.ViewModels
                 size.Quantity--;
             }
         }
+
+
 
         private void ClothesStore_ClothesLoaded()
         {
@@ -344,16 +346,47 @@ namespace DVS.ViewModels
                 }
             }
 
-            _employeeListingItemCollection.Add(new(employee, this, _modalNavigationStore));
+            _employeeListingItemCollection.Add(new(employee, this, _modalNavigationStore, _employeeStore));
+            _newEmployeeListingItemCollection.Clear();
+        }
+        
+        private void EmployeeStore_DetailedEmployeeItemAdded(EmployeeModel employee)
+        {
+            if (employee.Clothes.Count == 0)
+            {
+                _detailedEmployeeListingItemCollection.Add(new(employee, null, null));
+            }
+            else
+            {
+                foreach (ClothesModel clothes in employee.Clothes)
+                {
+                    foreach (ClothesSizeModel size in clothes.Sizes)
+                    {
+                        _detailedEmployeeListingItemCollection.Add(new(employee, clothes.GuidID, size.Size));
+                    }
+                }
+            }
+
+            _employeeListingItemCollection.Add(new(employee, this, _modalNavigationStore, _employeeStore));
             _newEmployeeListingItemCollection.Clear();
         }
 
-        private void EmployeeStore_EmployeeEdited(EmployeeModel employee)
+        private void EmployeeStore_EmployeeUpdated(EmployeeModel employee)
+        {
+            
+        }
+        
+        private void EmployeeStore_DetailedEmployeeItemUpdated(EmployeeModel employee)
         {
             
         }
 
-        private void EmployeeStore_EmployeeDeleted(EmployeeModel employee)
+        private void EmployeeStore_EmployeeDeleted(Guid guidID)
+        {
+            
+        }
+        
+        private void DetailedEmployeeItemDeleted(EmployeeModel employee)
         {
             
         }
@@ -367,9 +400,12 @@ namespace DVS.ViewModels
             _clothesStore.DetailedClothesItemUpdated -= ClothesStore_DetailedClothesItemUpdated;
             _clothesStore.ClothesDeleted -= ClothesStore_ClothesDeleted;
 
-            _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
             _employeeStore.EmployeesLoaded -= EmployeeStore_EmployeesLoaded;
-            _employeeStore.EmployeeEdited -= EmployeeStore_EmployeeEdited;
+            _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
+            _employeeStore.DetailedEmployeeItemAdded -= EmployeeStore_DetailedEmployeeItemAdded;
+            _employeeStore.EmployeeUpdated -= EmployeeStore_EmployeeUpdated;
+            _employeeStore.DetailedEmployeeItemUpdated -= EmployeeStore_DetailedEmployeeItemUpdated;
+            _employeeStore.EmployeeDeleted += EmployeeStore_EmployeeDeleted;
 
             base.Dispose();
         }

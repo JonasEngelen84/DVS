@@ -9,25 +9,22 @@ namespace DVS.ViewModels.Views
 {
     public class EditEmployeeViewModel : ViewModelBase
     {
-        private EmployeeModel Employee { get; }
         public AddEditEmployeeFormViewModel AddEditEmployeeFormViewModel { get; }
         public ICommand CloseModalCommand { get; }
 
 
-        public EditEmployeeViewModel(EmployeeModel employee,
-            DVSListingViewModel dVSListingViewModel, ModalNavigationStore modalNavigationStore)
+        public EditEmployeeViewModel(EmployeeModel employee, EmployeeStore employeeStore,
+            ModalNavigationStore modalNavigationStore, DVSListingViewModel dVSListingViewModel)
         {
-            Employee = employee;
-            ICommand editEmployeeCommand = new EditEmployeeCommand(this, modalNavigationStore);
+            ICommand editEmployeeCommand = new EditEmployeeCommand(this, employeeStore, modalNavigationStore, employee.GuidID);
             CloseModalCommand = new CloseModalCommand(modalNavigationStore);
 
-            AddEditEmployeeFormViewModel = new(
-                employee, dVSListingViewModel, editEmployeeCommand)
+            AddEditEmployeeFormViewModel = new(employee, dVSListingViewModel, editEmployeeCommand)
             {
-                ID = Employee.ID,
-                Lastname = Employee.Lastname,
-                Firstname = Employee.Firstname,
-                Comment = Employee.Comment
+                ID = employee.ID,
+                Lastname = employee.Lastname,
+                Firstname = employee.Firstname,
+                Comment = employee.Comment
             };
         }
     }

@@ -22,17 +22,17 @@ namespace DVS.ViewModels.Views
             ICommand clearCategoryListCommand = new ClearCategoryListCommand(this, categoryStore);
 
             AddEditListingViewModel = new(clothes, categoryStore, seasonStore);
-                
+
             CloseAddEditCategoryCommand = new CloseAddEditCategoryCommand(
                 modalNavigationStore, addClothesViewModel, editClothesViewModel);
 
-            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(addCategoryCommand,
-                editCategoryCommand, deleteCategoryCommand, clearCategoryListCommand, addEditListingViewModel)
-            {
-                AddNewCategory = "Neue Kategorie",
-                EditCategory = "Kategorie wählen",
-                SelectedCategory = new(null, "Kategorie wählen")
-            };
+            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(addCategoryCommand, editCategoryCommand,
+                                                deleteCategoryCommand, clearCategoryListCommand, addEditListingViewModel)
+                                           {
+                                               AddNewCategory = "Neue Kategorie",
+                                               EditCategory = "Kategorie wählen",
+                                               SelectedCategory = new(null, "Kategorie wählen")
+                                           };
         }
     }
 }

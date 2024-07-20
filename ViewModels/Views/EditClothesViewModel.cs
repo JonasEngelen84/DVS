@@ -31,8 +31,11 @@ namespace DVS.ViewModels.Views
             AddEditClothesFormViewModel = new(clothes, editClothesCommand,
                 openAddEditCategoriesCommand, openAddEditSeasonsCommand, AddEditListingViewModel)
             {
-                ID = clothes.ID, Name = clothes.Name, Comment = clothes.Comment,
-                Category = clothes.Category, Season = clothes.Season,
+                ID = clothes.ID,
+                Name = clothes.Name,
+                Category = clothes.Category,
+                Season = clothes.Season,
+                Comment = clothes.Comment
             };
         }
     }

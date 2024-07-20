@@ -73,14 +73,14 @@ namespace DVS.ViewModels.ListViewItems
         public ICommand PrintClothesCommand { get; set; }
 
 
-        public ClothesListingItemViewModel(ClothesModel clothes,ModalNavigationStore modalNavigationStore,
+        public ClothesListingItemViewModel(ClothesModel clothes, ModalNavigationStore modalNavigationStore,
             CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
         {
             Clothes = clothes;
-            DeleteCommand = new DeleteClothesCommand(this, clothesStore);
-            ClearSizesCommand = new ClearSizesCommand();
-            PrintClothesCommand = new OpenPrintClothesCommand();
             OpenEditCommand = new OpenEditClothesCommand(this, modalNavigationStore, categoryStore, seasonStore, clothesStore);
+            DeleteCommand = new DeleteClothesCommand(this, clothesStore);
+            ClearSizesCommand = new ClearSizesCommand(this, clothesStore);
+            PrintClothesCommand = new OpenPrintClothesCommand();
         }
 
 

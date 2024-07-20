@@ -7,12 +7,12 @@ using System.Windows;
 namespace DVS.Commands.AddEditClothesCommands
 {
     public class EditClothesCommand(EditClothesViewModel editClothesViewModel, ClothesStore clothesStore,
-        ModalNavigationStore modalNavigationStore, Guid ID) : AsyncCommandBase
+        ModalNavigationStore modalNavigationStore, Guid guidID) : AsyncCommandBase
     {
         private readonly EditClothesViewModel _editClothesViewModel = editClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
-        private readonly Guid _guidID = ID;
+        private readonly Guid _guidID = guidID;
 
         public override async Task ExecuteAsync(object parameter)
         {

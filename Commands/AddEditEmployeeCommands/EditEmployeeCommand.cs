@@ -1,17 +1,77 @@
-﻿using DVS.Stores;
+﻿using DVS.Models;
+using DVS.Stores;
+using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
+using System.Windows;
 
 namespace DVS.Commands.AddEditEmployeeCommands
 {
-    public class EditEmployeeCommand : CommandBase
+    public class EditEmployeeCommand(EditEmployeeViewModel editEmployeeViewModel, EmployeeStore employeeStore,
+        ModalNavigationStore modalNavigationStore, Guid guiID) : AsyncCommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly EditEmployeeViewModel _editEmployeeViewModel = editEmployeeViewModel;
+        private readonly EmployeeStore _employeeStore = employeeStore;
+        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
+        private readonly Guid _guidID = guiID;
 
-        public EditEmployeeCommand(EditEmployeeViewModel editEmployeeViewModel,ModalNavigationStore modalNavigationStore)
+        public override async Task ExecuteAsync(object parameter)
         {
-            _modalNavigationStore = modalNavigationStore;
+            string messageBoxText = "Mitarbeiter bearbeiten?";
+            string caption = "Mitarbeiter bearbeiten";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+            if (dialog == MessageBoxResult.Yes)
+            {
+                AddEditEmployeeFormViewModel editEmployeeFormViewModel = _editEmployeeViewModel.AddEditEmployeeFormViewModel;
+
+                editEmployeeFormViewModel.ErrorMessage = null;
+                editEmployeeFormViewModel.IsSubmitting = true;
+
+                EmployeeModel employeeToEdit = new(_guidID,
+                                                   editEmployeeFormViewModel.ID,
+                                                   editEmployeeFormViewModel.Lastname,
+                                                   editEmployeeFormViewModel.Firstname,
+                                                   editEmployeeFormViewModel.Comment);
+
+                foreach (DetailedClothesListingItemModel item in
+                _editEmployeeViewModel.AddEditEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
+                {
+                    ClothesModel existingClothes = employeeToEdit.Clothes.FirstOrDefault(clothes => clothes.GuidID == item.Clothes.GuidID);
+
+                    if (existingClothes != null)
+                    {
+                        ClothesSizeModel existingSize = existingClothes.Sizes.FirstOrDefault(size => size.Size == item.Size);
+
+                        if (existingSize != null)
+                        {
+                            existingClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
+                        }
+                    }
+                    else
+                    {
+                        ClothesModel newClothes = new(item.Clothes.GuidID, item.ID, item.Name, item.Clothes.Category, item.Clothes.Season, null);
+                        newClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
+                        employeeToEdit.Clothes.Add(newClothes);
+                    }
+                }
+
+                try
+                {
+                    await _employeeStore.Update(employeeToEdit);
+                }
+                catch (Exception)
+                {
+                    editEmployeeFormViewModel.ErrorMessage = "Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                }
+                finally
+                {
+                    editEmployeeFormViewModel.IsSubmitting = false;
+                    _modalNavigationStore.Close();
+                }
+            }
         }
 
-        public override void Execute(object parameter) => _modalNavigationStore.Close();
     }
 }
