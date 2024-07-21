@@ -17,7 +17,7 @@ namespace DVS.Models
         public int? Quantity => Employee.Clothes.FirstOrDefault(c => c.GuidID == ClothesGuidID)?.Sizes
             .FirstOrDefault(s => s.Size == Size)?.Quantity ?? null;
 
-        public string? Comment => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID).Sizes
+        public string? Comment => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID)?.Sizes
             .FirstOrDefault(s => s.Size == Size)?.Comment ?? null;
 
         private bool _isDeleting;

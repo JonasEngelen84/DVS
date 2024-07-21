@@ -23,8 +23,13 @@ namespace DVS.Commands.DragNDropCommands
                     _dVSListingViewModel.RemovedClothesListingItemModel.Name,
                     _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Category,
                     _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Season,
-                    _dVSListingViewModel.RemovedClothesListingItemModel.Comment);
-                clothesToEdit.Sizes = _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Sizes;
+                    _dVSListingViewModel.RemovedClothesListingItemModel.Comment)
+                {
+                    Sizes = _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Sizes
+                };
+
+                ClothesSizeModel? sizeToEdit = clothesToEdit.Sizes.
+                    FirstOrDefault(y => y.Size == _dVSListingViewModel.RemovedClothesListingItemModel.Size);
 
                 _dVSListingViewModel.RemovedClothesListingItemModel.ErrorMessage = null;
 
@@ -39,23 +44,25 @@ namespace DVS.Commands.DragNDropCommands
                 }
                 else if (_dVSListingViewModel.RemovedClothesListingItemModel.Quantity <= 3)
                 {
-                    string messageBoxText = $"ACHTUNG!\n\nVon dieser Bekleidung sind nur noch" +
-                        $"  {_dVSListingViewModel.RemovedClothesListingItemModel.Quantity}  Stück vorhanden!";
+                    string messageBoxText = $"ACHTUNG!\n\nNach dieser Transaktion sind nur noch" +
+                        $"  {_dVSListingViewModel.RemovedClothesListingItemModel.Quantity-1}  Stück" +
+                        $" dieser Bekleidung vorhanden!";
                     string caption = "Bekleidung entfernen";
                     MessageBoxButton button = MessageBoxButton.OK;
                     MessageBoxImage icon = MessageBoxImage.Warning;
                     _ = MessageBox.Show(messageBoxText, caption, button, icon);
 
-                    ClothesSizeModel sizeToEdit = clothesToEdit.Sizes.FirstOrDefault(
-                        y => y.Size == _dVSListingViewModel.RemovedClothesListingItemModel.Size);
-                    sizeToEdit.Quantity -= 1;
-
+                    if (sizeToEdit != null)
+                    {
+                        sizeToEdit.Quantity -= 1;
+                    }                    
                 }
                 else
                 {
-                    ClothesSizeModel sizeToEdit = clothesToEdit.Sizes.FirstOrDefault(
-                        y => y.Size == _dVSListingViewModel.RemovedClothesListingItemModel.Size);
-                    sizeToEdit.Quantity -= 1;
+                    if (sizeToEdit != null)
+                    {
+                        sizeToEdit.Quantity -= 1;
+                    }
                 }
                     
                 try

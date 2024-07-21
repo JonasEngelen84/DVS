@@ -89,8 +89,8 @@ namespace DVS.Components
                 if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {
                     RemovedClothesItem = e.Data.GetData(DataFormats.Serializable);
-                    ClothesItemRemovedCommand?.Execute("AddEditEmployeAvailableClothesList");
                     AddClothesItem(ClothesItem);
+                    ClothesItemRemovedCommand?.Execute("AddEditEmployeAvailableClothesList");
                 }
             }
         }

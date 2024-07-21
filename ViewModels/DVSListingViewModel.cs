@@ -133,24 +133,24 @@ namespace DVS.ViewModels
         }
 
 
-        public async Task AddClothesItemToDetailedClothesListingItemCollection(DetailedClothesListingItemModel item)
-        {
-            if (item == null || _detailedClothesListingItemCollection.Contains(item))
-            {
-                return;
-            }
+        //public async Task AddClothesItemToDetailedClothesListingItemCollection(DetailedClothesListingItemModel item)
+        //{
+        //    if (item == null || _detailedClothesListingItemCollection.Contains(item))
+        //    {
+        //        return;
+        //    }
 
-            var existingItem = _detailedClothesListingItemCollection
-                .FirstOrDefault(modelItem => modelItem.Clothes.GuidID == item.Clothes.GuidID);
+        //    var existingItem = _detailedClothesListingItemCollection
+        //        .FirstOrDefault(modelItem => modelItem.Clothes.GuidID == item.Clothes.GuidID);
 
-            if (existingItem != null)
-            {
-                var size = item.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size == item.Size);
-                size.Quantity++;
+        //    if (existingItem != null)
+        //    {
+        //        var size = item.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size == item.Size);
+        //        size.Quantity++;
 
-                await _clothesStore.Update(item.Clothes);
-            }
-        }
+        //        await _clothesStore.Update(item.Clothes);
+        //    }
+        //}
 
         //public async Task RemoveClothesItemFromDetailedClothesListingItemCollectionAsync()
         //{
@@ -190,33 +190,37 @@ namespace DVS.ViewModels
 
         //}
         
-        public void AddClothesItemToNewEmployeeListingItemCollection(DetailedClothesListingItemModel item)
+        public void AddClothesItemToNewEmployeeListingItemCollection()
         {
-            if (item == null || item.Quantity == 0)
+            if (IncomingClothesListingItemModel == null || IncomingClothesListingItemModel.Quantity == 0)
             {
                 return;
-            } 
+            }
 
-            var existingItem = _newEmployeeListingItemCollection
-                .FirstOrDefault(modelItem => modelItem.ID == item.ID && modelItem.Size == item.Size);
+            DetailedClothesListingItemModel? existingItem = _newEmployeeListingItemCollection
+                .FirstOrDefault(modelItem => modelItem.ID == IncomingClothesListingItemModel.ID
+                && modelItem.Size == IncomingClothesListingItemModel.Size);
+
+            ClothesModel clothes = new(IncomingClothesListingItemModel.Clothes.GuidID,
+                                       IncomingClothesListingItemModel.Clothes.ID,
+                                       IncomingClothesListingItemModel.Clothes.Name,
+                                       IncomingClothesListingItemModel.Clothes.Category,
+                                       IncomingClothesListingItemModel.Clothes.Season,
+                                       null);
 
             if (existingItem == null)
             {
-                ClothesModel clothes = new(item.Clothes.GuidID, item.Clothes.ID, item.Clothes.Name,
-                                           item.Clothes.Category, item.Clothes.Season, null)
-                                       {
-                                           Sizes = [new ClothesSizeModel(item.Size) { Quantity = 1 }]
-                                       };
-
-                DetailedClothesListingItemModel newItem = new(clothes, item.Size);
+                clothes.Sizes.Add(new (IncomingClothesListingItemModel.Size) { Quantity = 1 });
+                DetailedClothesListingItemModel newItem = new(clothes, IncomingClothesListingItemModel.Size);
                 _newEmployeeListingItemCollection.Add(newItem);
             }
             else
             {
-                var size = existingItem.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size == item.Size);
+                clothes.Sizes = existingItem.Clothes.Sizes;
+                var size = existingItem.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size == IncomingClothesListingItemModel.Size);
                 size.Quantity++;
+                existingItem.Update(clothes);
             }
-            
         }
 
         public void RemoveClothesItemFromNewEmployeeListingItemCollection()
@@ -230,8 +234,23 @@ namespace DVS.ViewModels
                 _newEmployeeListingItemCollection.Remove(RemovedClothesListingItemModel);
             else
             {
-                var size = RemovedClothesListingItemModel.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size == RemovedClothesListingItemModel.Size);
+                DetailedClothesListingItemModel? existingItem = _newEmployeeListingItemCollection
+                .FirstOrDefault(modelItem => modelItem.ID == IncomingClothesListingItemModel.ID
+                && modelItem.Size == IncomingClothesListingItemModel.Size);
+
+                ClothesModel clothes = new(IncomingClothesListingItemModel.Clothes.GuidID,
+                                           IncomingClothesListingItemModel.Clothes.ID,
+                                           IncomingClothesListingItemModel.Clothes.Name,
+                                           IncomingClothesListingItemModel.Clothes.Category,
+                                           IncomingClothesListingItemModel.Clothes.Season,
+                                           null)
+                {
+                    Sizes = existingItem.Clothes.Sizes
+                };
+
+                var size = existingItem.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size == IncomingClothesListingItemModel.Size);
                 size.Quantity--;
+                existingItem.Update(clothes);
             }
         }
 
