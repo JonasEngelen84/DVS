@@ -255,7 +255,6 @@ namespace DVS.ViewModels
         }
 
 
-
         private void ClothesStore_ClothesLoaded()
         {
             _clothesListingItemCollection.Clear();
@@ -336,7 +335,6 @@ namespace DVS.ViewModels
         }
         
 
-
         private void EmployeeStore_EmployeesLoaded()
         {
             _employeeListingItemCollection.Clear();
@@ -391,6 +389,7 @@ namespace DVS.ViewModels
         {
             
         }
+
 
         protected override void Dispose()
         {

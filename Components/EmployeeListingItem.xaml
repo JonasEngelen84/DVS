@@ -62,30 +62,49 @@
                       Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid >
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0"
-                                   Text="{Binding ID}" />
-                        <TextBlock Grid.Column="1"
-                                   Text="{Binding Categorie.Name}" />
-                        <TextBlock Grid.Column="2"
-                                   Text="{Binding Name}" />
-                        <TextBlock Grid.Column="3"
-                                   Text="{Binding Season.Name}" />
-                        <TextBlock Grid.Column="4"
-                                   Text="{Binding Size}" />
-                        <TextBlock Grid.Column="5"
-                                   Text="{Binding Quantity}" />
-                        <TextBlock Grid.Column="6"
-                                   Text="{Binding Comment}" />
+
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0"
+                                       Text="{Binding ID}" />
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding Category.Name}" />
+                            <TextBlock Grid.Column="2"
+                                       Text="{Binding Name}" />
+                            <TextBlock Grid.Column="3"
+                                       Text="{Binding Season.Name}" />
+                        </Grid>
+
+                        <ItemsControl Grid.Column="1"
+                                      ItemsSource="{Binding Sizes}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0"
+                                                   Text="{Binding Size}" />
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding Quantity}" />
+                                        <TextBlock Grid.Column="2"
+                                                   Text="{Binding Comment}" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

@@ -47,28 +47,22 @@ namespace DVS.Components
             set { SetValue(ClothesItemRemovedCommandProperty, value); }
         }
 
-        public static readonly DependencyProperty TargetClothesItemProperty =
-            DependencyProperty.Register("TargetClothesItem", typeof(object), typeof(AddEditEmployeeNewEmployeeClothesList),
-                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
-        public object TargetClothesItem
-        {
-            get { return GetValue(TargetClothesItemProperty); }
-            set { SetValue(TargetClothesItemProperty, value); }
-        }
-
 
         public AddEditEmployeeNewEmployeeClothesList()
         {
             InitializeComponent();
         }
 
-
+        //TODO: canMove ausbessern
+        private bool canMove = true;
         private void ClothesItem_MouseMove(object sender, MouseEventArgs e)
         {
+            canMove = true;
+
             if (e.LeftButton == MouseButtonState.Pressed &&
                 sender is FrameworkElement frameworkElement)
             {
+                canMove = false;
                 object ClothesItem = frameworkElement.DataContext;
 
                 DragDropEffects dragDropResult = DragDrop.DoDragDrop(frameworkElement,
@@ -84,15 +78,19 @@ namespace DVS.Components
 
         private void ClothesItemList_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Serializable) is DetailedClothesListingItemModel ClothesItem)
+            if (canMove)
             {
-                if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
+                if (e.Data.GetData(DataFormats.Serializable) is DetailedClothesListingItemModel ClothesItem)
                 {
-                    RemovedClothesItem = e.Data.GetData(DataFormats.Serializable);
-                    AddClothesItem(ClothesItem);
-                    ClothesItemRemovedCommand?.Execute("AddEditEmployeeNewEmployeeClothesList");
+                    if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
+                    {
+                        RemovedClothesItem = e.Data.GetData(DataFormats.Serializable);
+                        AddClothesItem(ClothesItem);
+                        ClothesItemRemovedCommand?.Execute("AddEditEmployeeNewEmployeeClothesList");
+                    }
                 }
             }
+            canMove = true;
         }
 
         private void AddClothesItem(object ClothesItem)
