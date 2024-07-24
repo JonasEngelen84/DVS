@@ -26,6 +26,8 @@ namespace DVS.ViewModels.Views
                 Firstname = employee.Firstname,
                 Comment = employee.Comment
             };
+
+            dVSListingViewModel.LoadNewEmployeeListingItemCollection(employee);
         }
     }
 }

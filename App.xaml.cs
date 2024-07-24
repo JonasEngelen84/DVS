@@ -12,7 +12,6 @@ namespace DVS
         private readonly ClothesStore _clothesStore;
         private readonly EmployeeStore _employeeStore;
         private readonly SelectedClothesStore _selectedClothesStore;
-        private readonly SelectedEmployeeClothesStore _selectedEmployeeClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly DVSListingViewModel _dVSListingViewModel;
         private readonly DVSDetailedViewModel _dVSDetailedViewModel;
@@ -25,12 +24,11 @@ namespace DVS
             _clothesStore = new();
             _employeeStore = new();
             _selectedClothesStore = new();
-            _selectedEmployeeClothesStore = new();
             _modalNavigationStore = new();
             _dVSListingViewModel = new(_clothesStore, _employeeStore, _modalNavigationStore, _categoryStore, _seasonStore);
 
             _dVSDetailedViewModel = new(_dVSListingViewModel, _modalNavigationStore, _categoryStore, _seasonStore,
-                _clothesStore, _employeeStore, _selectedClothesStore, _selectedEmployeeClothesStore);
+                _clothesStore, _employeeStore, _selectedClothesStore);
 
             _dVSHeadViewModel = new(_dVSListingViewModel);
         }

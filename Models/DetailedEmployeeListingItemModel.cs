@@ -60,7 +60,7 @@ namespace DVS.Models
         }
 
 
-        public void Edit(EmployeeModel employee)
+        public void Update(EmployeeModel employee)
         {
             Employee = employee;
 

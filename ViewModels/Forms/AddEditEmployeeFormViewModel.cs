@@ -105,7 +105,7 @@ namespace DVS.ViewModels.Forms
         }
 
         public bool CanSubmit
-        {
+        {//TODO: canSubmitEmployee auf true setzen wenn Kleidungsliste verändert wird
             get
             {
                 if (string.IsNullOrEmpty(ID) || ID == "ID" ||

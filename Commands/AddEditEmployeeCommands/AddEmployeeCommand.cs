@@ -32,12 +32,7 @@ namespace DVS.Commands.AddEditEmployeeCommands
 
                 if (existingClothes != null)
                 {
-                    ClothesSizeModel existingSize = existingClothes.Sizes.FirstOrDefault(size => size.Size == item.Size);
-
-                    if (existingSize != null)
-                    {
-                        existingClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
-                    }
+                    existingClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
                 }
                 else
                 {

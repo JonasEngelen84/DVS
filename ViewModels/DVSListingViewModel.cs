@@ -133,63 +133,18 @@ namespace DVS.ViewModels
         }
 
 
-        //public async Task AddClothesItemToDetailedClothesListingItemCollection(DetailedClothesListingItemModel item)
-        //{
-        //    if (item == null || _detailedClothesListingItemCollection.Contains(item))
-        //    {
-        //        return;
-        //    }
+        public void LoadNewEmployeeListingItemCollection(EmployeeModel employee)
+        {
+            foreach (ClothesModel clothes in employee.Clothes)
+            {
+                foreach (ClothesSizeModel size in clothes.Sizes)
+                {
+                    _newEmployeeListingItemCollection.Add(new(clothes, size.Size));
 
-        //    var existingItem = _detailedClothesListingItemCollection
-        //        .FirstOrDefault(modelItem => modelItem.Clothes.GuidID == item.Clothes.GuidID);
+                }
+            }
+        }
 
-        //    if (existingItem != null)
-        //    {
-        //        var size = item.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size == item.Size);
-        //        size.Quantity++;
-
-        //        await _clothesStore.Update(item.Clothes);
-        //    }
-        //}
-
-        //public async Task RemoveClothesItemFromDetailedClothesListingItemCollectionAsync()
-        //{
-        //    if (item == null || !_detailedClothesListingItemCollection.Contains(item))
-        //    {
-        //        return;
-        //    }
-
-        //    if (item.Quantity == 0)
-        //    {
-        //        string messageBoxText = "Diese Bekleidung ist nicht verfügbar!";
-        //        string caption = "Bekleidung entfernen";
-        //        MessageBoxButton button = MessageBoxButton.OK;
-        //        MessageBoxImage icon = MessageBoxImage.Warning;
-        //        _ = MessageBox.Show(messageBoxText, caption, button, icon);
-        //    }
-        //    else if (item.Quantity <= 3)
-        //    {
-        //        string messageBoxText = $"ACHTUNG!\n\nVon dieser Bekleidung sind nur noch  {item.Quantity}  Stück vorhanden!";
-        //        string caption = "Bekleidung entfernen";
-        //        MessageBoxButton button = MessageBoxButton.OK;
-        //        MessageBoxImage icon = MessageBoxImage.Warning;
-        //        _ = MessageBox.Show(messageBoxText, caption, button, icon);
-
-        //        var size = item.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size == item.Size);
-        //        size.Quantity--;
-
-        //        await _clothesStore.Edit(item.Clothes);
-        //    }
-        //    else
-        //    {
-        //        var size = item.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size == item.Size);
-        //        //size.Quantity--;
-
-        //        await _clothesStore.Edit(item.Clothes);
-        //    }
-
-        //}
-        
         public void AddClothesItemToNewEmployeeListingItemCollection()
         {
             if (IncomingClothesListingItemModel == null || IncomingClothesListingItemModel.Quantity == 0)
@@ -303,6 +258,7 @@ namespace DVS.ViewModels
 
             if (itemsToUpdate.Count != clothes.Sizes.Count)
             {
+                //TODO: UpdateDetailedClothes verbessern
                 DetailedClothesItemDeleted(itemsToUpdate);
                 ClothesStore_DetailedClothesItemAdded(clothes);
             }
@@ -372,22 +328,52 @@ namespace DVS.ViewModels
 
         private void EmployeeStore_EmployeeUpdated(EmployeeModel employee)
         {
-            
+            EmployeeListingItemViewModel? ItemToUpdate = _employeeListingItemCollection
+                .FirstOrDefault(y => y.Employee.GuidID == employee.GuidID);
+
+            ItemToUpdate.Update(employee);
+            _newEmployeeListingItemCollection.Clear();
         }
         
         private void EmployeeStore_DetailedEmployeeItemUpdated(EmployeeModel employee)
         {
-            
+            List<DetailedEmployeeListingItemModel> itemsToUpdate = _detailedEmployeeListingItemCollection
+                .Where(y => y.Employee.GuidID == employee.GuidID).ToList();
+
+            if (itemsToUpdate.Count != employee.Clothes.Count)
+            {
+                //TODO: UpdateDetailedEmployee verbessern
+                DetailedEmployeeItemDeleted(itemsToUpdate);
+                EmployeeStore_DetailedEmployeeItemAdded(employee);
+            }
+            else
+            {
+                foreach (DetailedEmployeeListingItemModel detailedEmployeeItem in itemsToUpdate)
+                {
+                    detailedEmployeeItem.Update(employee);
+                }
+            }
+
+            _newEmployeeListingItemCollection.Clear();
         }
 
         private void EmployeeStore_EmployeeDeleted(Guid guidID)
         {
-            
+            EmployeeListingItemViewModel? ItemToDelete = _employeeListingItemCollection
+                .FirstOrDefault(y => y.Employee.GuidID == guidID);
+            _employeeListingItemCollection.Remove(ItemToDelete);
+
+            List<DetailedEmployeeListingItemModel> itemsToDelete = _detailedEmployeeListingItemCollection
+                .Where(y => y.Employee.GuidID == guidID).ToList();
+            DetailedEmployeeItemDeleted(itemsToDelete);
         }
         
-        private void DetailedEmployeeItemDeleted(EmployeeModel employee)
+        private void DetailedEmployeeItemDeleted(List<DetailedEmployeeListingItemModel> itemsToDelete)
         {
-            
+            foreach (DetailedEmployeeListingItemModel item in itemsToDelete)
+            {
+                _detailedEmployeeListingItemCollection.Remove(item);
+            }
         }
 
 

@@ -121,7 +121,7 @@ namespace DVS.ViewModels.Forms
         }
 
         public bool CanSubmit
-        {
+        {//TODO: canSubmitClothes auf true setzen wenn Größenliste verändert wird
             get
             {
                 if (string.IsNullOrEmpty(ID) || ID == "ID" ||

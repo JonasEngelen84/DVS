@@ -17,48 +17,7 @@ namespace DVS.Stores
 
         public ClothesStore()
         {
-            //_clothes =
-            //[
-            //    new(Guid.NewGuid(), "111", "Winterhose", new(Guid.NewGuid(), "Hose"), new(Guid.NewGuid(), "Winter"), null)
-            //    {
-            //        Sizes = [new ClothesSizeModel("S") { Quantity = 15, IsSelected = true },
-            //            new ClothesSizeModel("M") { Quantity = 9, IsSelected = true },
-            //            new ClothesSizeModel("L") { Quantity = 11, IsSelected = true },
-            //            new ClothesSizeModel("XL") { Quantity = 5, IsSelected = true }]
-            //    },
-
-            //    new(Guid.NewGuid(), "112", "Sommershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Sommer"), null)
-            //    {
-            //        Sizes = [new ClothesSizeModel("S") { Quantity = 15, IsSelected = true },
-            //            new ClothesSizeModel("M") { Quantity = 9, IsSelected = true },
-            //            new ClothesSizeModel("L") { Quantity = 11, IsSelected = true },
-            //            new ClothesSizeModel("XL") { Quantity = 5, IsSelected = true }]
-            //    },
-
-            //    new(Guid.NewGuid(), "113", "Regenjacke", new(Guid.NewGuid(), "Jacke"), new(Guid.NewGuid(), "Saisonlos"), null)
-            //    {
-            //        Sizes = [new ClothesSizeModel("S") { Quantity = 15, IsSelected = true },
-            //            new ClothesSizeModel("M") { Quantity = 9, IsSelected = true },
-            //            new ClothesSizeModel("L") { Quantity = 11, IsSelected = true },
-            //            new ClothesSizeModel("XL") { Quantity = 5, IsSelected = true }]
-            //    },
-
-            //    new(Guid.NewGuid(), "114", "Wintershirt", new(Guid.NewGuid(), "Shirt"), new(Guid.NewGuid(), "Winter"), null)
-            //    {
-            //        Sizes = [new ClothesSizeModel("S") { Quantity = 15, IsSelected = true },
-            //            new ClothesSizeModel("M") { Quantity = 9, IsSelected = true },
-            //            new ClothesSizeModel("L") { Quantity = 11, IsSelected = true },
-            //            new ClothesSizeModel("XL") { Quantity = 5, IsSelected = true }]
-            //    },
-
-            //    new(Guid.NewGuid(), "115", "Schuhe", new(Guid.NewGuid(), "Schuhwerk"), new(Guid.NewGuid(), "Saisonlos"), null)
-            //    {
-            //        Sizes = [new ClothesSizeModel("S") { Quantity = 15, IsSelected = true },
-            //            new ClothesSizeModel("M") { Quantity = 9, IsSelected = true },
-            //            new ClothesSizeModel("L") { Quantity = 11, IsSelected = true },
-            //            new ClothesSizeModel("XL") { Quantity = 5, IsSelected = true }]
-            //    }
-            //];
+            
         }
 
 

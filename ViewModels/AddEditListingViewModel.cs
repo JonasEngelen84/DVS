@@ -133,15 +133,6 @@ namespace DVS.ViewModels
             }
         }
 
-        private void CategoryStore_CategoriesLoaded()
-        {
-            _categories.Clear();
-
-            foreach (CategoryModel category in _categoryStore.Categories)
-            {
-                _categories.Add(category);
-            }
-        }
 
         private void SeasonStore_SeasonsLoaded()
         {
@@ -153,35 +144,10 @@ namespace DVS.ViewModels
             }
         }
 
-        private void CategoryStore_CategoryAdded(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            AddCategory(category, addEditCategoryFormViewModel);
-            OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
-        }
-
         private void SeasonStore_SeasonAdded(SeasonModel season,  AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             AddSeason(season, addEditSeasonFormViewModel);
             OnPropertyChanged(nameof(addEditSeasonFormViewModel.CanDeleteAll));
-        }
-
-        private void CategoryStore_CategoryEdited(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            CategoryModel categoryToUpdate = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
-
-            if (categoryToUpdate != null)
-            {
-                int index = _categories.IndexOf(categoryToUpdate);
-                _categories[index] = category;
-                _categoryCollectionViewSource.View.Refresh();
-                addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
-                addEditCategoryFormViewModel.EditCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
-                OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanEdit));
-            }
-            else
-            {
-                throw new InvalidOperationException("Umbenennen der Kategorie nicht möglich.");
-            }
         }
 
         private void SeasonStore_SeasonEdited(SeasonModel season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
@@ -203,24 +169,6 @@ namespace DVS.ViewModels
             }
         }
 
-        private void CategoryStore_CategoryDeleted(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
-
-            if (categoryToDelete != null)
-            {
-                _categories.Remove(categoryToDelete);
-                _categoryCollectionViewSource.View.Refresh();
-                addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
-                addEditCategoryFormViewModel.EditCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
-                OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
-            }
-            else
-            {
-                throw new InvalidOperationException("Löschen der Kategorie nicht möglich.");
-            }
-        }
-
         private void SeasonStore_SeasonDeleted(SeasonModel season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
@@ -239,21 +187,6 @@ namespace DVS.ViewModels
             }
         }
 
-        private void CategoryStore_AllCategoriesDeleted(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            if (_categories != null)
-            {
-                _categories.Clear();
-                addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
-                addEditCategoryFormViewModel.EditCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
-                OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
-            }
-            else
-            {
-                throw new InvalidOperationException("Löschen aller Kategorien nicht möglich.");
-            }
-        }
-
         private void SeasonStore_AllSeasonsDeleted(AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             if (_seasons != null)
@@ -269,6 +202,83 @@ namespace DVS.ViewModels
             }
         }
 
+        private void AddSeason(SeasonModel newSeason, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        {
+            _seasons.Add(newSeason);
+            _seasonCollectionViewSource.View.Refresh();
+            addEditSeasonFormViewModel.AddNewSeason = "Neue Saison";
+            OnPropertyChanged(nameof(Seasons));
+        }
+
+
+        private void CategoryStore_CategoriesLoaded()
+        {
+            _categories.Clear();
+
+            foreach (CategoryModel category in _categoryStore.Categories)
+            {
+                _categories.Add(category);
+            }
+        }
+
+        private void CategoryStore_CategoryAdded(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        {
+            AddCategory(category, addEditCategoryFormViewModel);
+            OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
+        }
+
+        private void CategoryStore_CategoryEdited(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        {
+            CategoryModel categoryToUpdate = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
+
+            if (categoryToUpdate != null)
+            {
+                int index = _categories.IndexOf(categoryToUpdate);
+                _categories[index] = category;
+                _categoryCollectionViewSource.View.Refresh();
+                addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
+                addEditCategoryFormViewModel.EditCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
+                OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanEdit));
+            }
+            else
+            {
+                throw new InvalidOperationException("Umbenennen der Kategorie nicht möglich.");
+            }
+        }
+
+        private void CategoryStore_CategoryDeleted(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        {
+            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
+
+            if (categoryToDelete != null)
+            {
+                _categories.Remove(categoryToDelete);
+                _categoryCollectionViewSource.View.Refresh();
+                addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
+                addEditCategoryFormViewModel.EditCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
+                OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
+            }
+            else
+            {
+                throw new InvalidOperationException("Löschen der Kategorie nicht möglich.");
+            }
+        }
+
+        private void CategoryStore_AllCategoriesDeleted(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        {
+            if (_categories != null)
+            {
+                _categories.Clear();
+                addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
+                addEditCategoryFormViewModel.EditCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
+                OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
+            }
+            else
+            {
+                throw new InvalidOperationException("Löschen aller Kategorien nicht möglich.");
+            }
+        }
+
         private void AddCategory(CategoryModel newCategory, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             _categories.Add(newCategory);
@@ -277,13 +287,6 @@ namespace DVS.ViewModels
             OnPropertyChanged(nameof(Categories));
         }
 
-        private void AddSeason(SeasonModel newSeason, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
-        {
-            _seasons.Add(newSeason);
-            _seasonCollectionViewSource.View.Refresh();
-            addEditSeasonFormViewModel.AddNewSeason = "Neue Saison";
-            OnPropertyChanged(nameof(Seasons));
-        }
 
         protected override void Dispose()
         {

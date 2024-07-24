@@ -1,21 +1,7 @@
-﻿using DVS.Stores;
-
-namespace DVS.ViewModels.Views
+﻿namespace DVS.ViewModels.Views
 {
-    public class DVSHeadViewModel : ViewModelBase
+    public class DVSHeadViewModel(DVSListingViewModel dVSListingViewModel) : ViewModelBase
     {
-        public DVSListingViewModel DVSClothesListingViewModel { get; }
-        //public DVSListingViewModel DVSEmployeeListingViewModel { get; }
-
-        public DVSHeadViewModel(DVSListingViewModel dVSListingViewModel)
-        {
-            DVSClothesListingViewModel = dVSListingViewModel;
-            //DVSClothesListingViewModel = new(
-            //    clothesStore, employeeStore, modalNavigationStore, categoryStore, seasonStore);
-
-            //DVSEmployeeListingViewModel = new(
-            //    clothesStore, employeeStore, modalNavigationStore, categoryStore, seasonStore);
-        }
-
+        public DVSListingViewModel DVSClothesListingViewModel { get; } = dVSListingViewModel;
     }
 }
