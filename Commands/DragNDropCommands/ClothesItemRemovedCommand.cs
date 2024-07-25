@@ -67,7 +67,7 @@ namespace DVS.Commands.DragNDropCommands
                     
                 try
                 {
-                    await _clothesStore.Update(clothesToEdit);
+                    await _clothesStore.DragNDropUpdate(clothesToEdit);
                 }
                 catch (Exception)
                 {

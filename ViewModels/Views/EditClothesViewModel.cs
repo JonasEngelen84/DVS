@@ -11,14 +11,14 @@ namespace DVS.ViewModels.Views
     {
         public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
         public AddEditListingViewModel AddEditListingViewModel { get; }
-        public ICommand CloseModalCommand { get; }
+        public ICommand CloseAddEditClothes { get; }
 
 
         public EditClothesViewModel(ClothesModel clothes, ModalNavigationStore modalNavigationStore,
             CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
         {
             AddEditListingViewModel = new(clothes, categoryStore, seasonStore);
-            CloseModalCommand = new CloseModalCommand(modalNavigationStore);
+            CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
             ICommand editClothesCommand = new EditClothesCommand(this, clothesStore , modalNavigationStore, clothes.GuidID);
 

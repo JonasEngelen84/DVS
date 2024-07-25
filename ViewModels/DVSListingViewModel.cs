@@ -304,7 +304,7 @@ namespace DVS.ViewModels
 
         private void EmployeeStore_EmployeeAdded(EmployeeModel employee)
         {
-            _employeeListingItemCollection.Add(new(employee, this, _modalNavigationStore, _employeeStore));
+            _employeeListingItemCollection.Add(new(employee, this, _modalNavigationStore, _employeeStore, _clothesStore));
             _newEmployeeListingItemCollection.Clear();
         }
         

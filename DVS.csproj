@@ -12,6 +12,9 @@
     <None Remove="Close.png" />
     <None Remove="Maximize.png" />
     <None Remove="Normalize.png" />
+    <None Remove="Resources\Images\Add Employee.png" />
+    <None Remove="Resources\Images\Add Shirt.png" />
+    <None Remove="Resources\Images\AddEmployee.png" />
     <None Remove="Resources\Images\Close.png" />
     <None Remove="Resources\Images\DVS Icon.png" />
     <None Remove="Resources\Images\Edit.gif" />
@@ -31,6 +34,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\Add Employee.png" />
+    <Resource Include="Resources\Images\Add Shirt.png" />
     <Resource Include="Resources\Images\Close.png" />
     <Resource Include="Resources\Images\DVS Icon.png" />
     <Resource Include="Resources\Images\Edit.png" />

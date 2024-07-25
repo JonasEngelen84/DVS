@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DVS.Components"
              mc:Ignorable="d"
-             DataContext="{Binding DVSClothesListingViewModel}">
+             DataContext="{Binding DVSListingViewModel}">
     
     <Border BorderBrush="#1c1c1c"
             BorderThickness="1"

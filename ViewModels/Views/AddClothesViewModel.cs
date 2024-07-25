@@ -1,5 +1,4 @@
-﻿using DVS.Commands;
-using DVS.Commands.AddEditClothesCommands;
+﻿using DVS.Commands.AddEditClothesCommands;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
 using System.Windows.Input;
@@ -10,13 +9,13 @@ namespace DVS.ViewModels.Views
     {
         public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
         public AddEditListingViewModel AddEditListingViewModel { get; }
-        public ICommand CloseModalCommand { get; }
+        public ICommand CloseAddEditClothes { get; }
 
         public AddClothesViewModel(ModalNavigationStore modalNavigationStore,
             CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
         {
             AddEditListingViewModel = new(null, categoryStore, seasonStore);
-            CloseModalCommand = new CloseModalCommand(modalNavigationStore);
+            CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
             ICommand addClothesCommand = new AddClothesCommand(this, clothesStore , modalNavigationStore);
 

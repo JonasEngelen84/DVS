@@ -8,24 +8,54 @@
              DataContext="{Binding DVSHeadViewModel}">
     
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
 
-        <components:DVSEmployeesListing Grid.Column="0"
-                                        Margin="0 27 0 0"/>
+        <!--AddEmployee/AddClothes Button & Images-->
+        <Grid Grid.Row="0">
+            
+            <!--AddEmployee Button & Image-->
+            <Button Margin="5 0 0 0"
+                    HorizontalAlignment="Left"
+                    Style="{StaticResource EditComboBoxButtonStyle}"
+                    Command="{Binding OpenAddEmployee}">
+                <Image x:Name="addEmployeeButton"
+                       Source="/Resources/Images/Add Employee.png"
+                       HorizontalAlignment="Center" />
+            </Button>
 
-        <GridSplitter Grid.Column="1"
-                      HorizontalAlignment="Center"
-                      Width="5"
-                      Margin="0,0,0,0"
-                      Cursor="SizeWE"
-                      Background="#524E4F">
-        </GridSplitter>
+            <!--AddClothes Button & Image-->
+            <Button Margin="5 0 0 0"
+                    HorizontalAlignment="Right"
+                    Style="{StaticResource EditComboBoxButtonStyle}"
+                    Command="{Binding OpenAddClothes}">
+                <Image x:Name="addClothesButton"
+                       Source="/Resources/Images/Add Shirt.png"
+                       HorizontalAlignment="Center" />
+            </Button>
+        </Grid>
 
-        <components:DVSClothesListing Grid.Column="2"
-                                      Margin="0 27 0 0"/>
+        <!--Components & GridSplitter-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <components:DVSEmployeesListing Grid.Column="0"/>
+
+            <GridSplitter Grid.Column="1"
+                          HorizontalAlignment="Center"
+                          Width="5"
+                          Margin="0,0,0,0"
+                          Cursor="SizeWE"
+                          Background="#524E4F">
+            </GridSplitter>
+
+            <components:DVSClothesListing Grid.Column="2" />
+        </Grid>
     </Grid>
 </UserControl>

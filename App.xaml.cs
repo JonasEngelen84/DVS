@@ -25,12 +25,27 @@ namespace DVS
             _employeeStore = new();
             _selectedClothesStore = new();
             _modalNavigationStore = new();
-            _dVSListingViewModel = new(_clothesStore, _employeeStore, _modalNavigationStore, _categoryStore, _seasonStore);
 
-            _dVSDetailedViewModel = new(_dVSListingViewModel, _modalNavigationStore, _categoryStore, _seasonStore,
-                _clothesStore, _employeeStore, _selectedClothesStore);
+            _dVSListingViewModel = new(_clothesStore,
+                                       _employeeStore,
+                                       _modalNavigationStore,
+                                       _categoryStore,
+                                       _seasonStore);
 
-            _dVSHeadViewModel = new(_dVSListingViewModel);
+            _dVSDetailedViewModel = new(_dVSListingViewModel,
+                                        _modalNavigationStore,
+                                        _categoryStore,
+                                        _seasonStore,
+                                        _clothesStore,
+                                        _employeeStore,
+                                        _selectedClothesStore);
+
+            _dVSHeadViewModel = new(_dVSListingViewModel,
+                                    _modalNavigationStore,
+                                    _categoryStore,
+                                    _seasonStore,
+                                    _clothesStore,
+                                    _employeeStore);
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -38,8 +53,9 @@ namespace DVS
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(
-                    _dVSHeadViewModel, _dVSDetailedViewModel, _modalNavigationStore)
+                DataContext = new MainViewModel(_dVSHeadViewModel,
+                                                _dVSDetailedViewModel,
+                                                _modalNavigationStore)
             };
 
             MainWindow.Show();

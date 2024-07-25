@@ -73,10 +73,10 @@ namespace DVS.ViewModels.ListViewItems
 
 
         public EmployeeListingItemViewModel(EmployeeModel employee, DVSListingViewModel dVSListingViewModel,
-            ModalNavigationStore modalNavigationStore, EmployeeStore employeeStore)
+            ModalNavigationStore modalNavigationStore, EmployeeStore employeeStore, ClothesStore clothesStore)
         {
             Employee = employee;
-            OpenEditCommand = new OpenEditEmployeeCommand(this, modalNavigationStore, employeeStore, dVSListingViewModel);
+            OpenEditCommand = new OpenEditEmployeeCommand(this, modalNavigationStore, employeeStore, clothesStore, dVSListingViewModel);
             DeleteCommand = new DeleteEmployeeCommand(this, employeeStore);
             ClearClothesListCommand = new ClearEmployeeClothesListCommand(this, employeeStore);
             PrintEmployeeCommand = new OpenPrintEmployeeCommand();

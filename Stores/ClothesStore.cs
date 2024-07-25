@@ -55,5 +55,11 @@ namespace DVS.Stores
             _clothes.RemoveAll(y => y.GuidID == guidID);
             ClothesDeleted?.Invoke(guidID);
         }
+        
+        public async Task DragNDropUpdate(ClothesModel clothes)
+        {            
+            ClothesUpdated.Invoke(clothes);
+            DetailedClothesItemUpdated.Invoke(clothes);
+        }
     }
 }

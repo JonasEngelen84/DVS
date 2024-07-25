@@ -1,5 +1,4 @@
-﻿using DVS.Commands;
-using DVS.Commands.AddEditEmployeeCommands;
+﻿using DVS.Commands.AddEditEmployeeCommands;
 using DVS.Models;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
@@ -10,14 +9,14 @@ namespace DVS.ViewModels.Views
     public class EditEmployeeViewModel : ViewModelBase
     {
         public AddEditEmployeeFormViewModel AddEditEmployeeFormViewModel { get; }
-        public ICommand CloseModalCommand { get; }
+        public ICommand CloseAddEditEmployee { get; }
 
 
-        public EditEmployeeViewModel(EmployeeModel employee, EmployeeStore employeeStore,
+        public EditEmployeeViewModel(EmployeeModel employee, EmployeeStore employeeStore, ClothesStore clothesStore,
             ModalNavigationStore modalNavigationStore, DVSListingViewModel dVSListingViewModel)
         {
             ICommand editEmployeeCommand = new EditEmployeeCommand(this, employeeStore, modalNavigationStore, employee.GuidID);
-            CloseModalCommand = new CloseModalCommand(modalNavigationStore);
+            CloseAddEditEmployee = new CloseAddEditEmployeeCommand(clothesStore, modalNavigationStore);
 
             AddEditEmployeeFormViewModel = new(employee, dVSListingViewModel, editEmployeeCommand)
             {
