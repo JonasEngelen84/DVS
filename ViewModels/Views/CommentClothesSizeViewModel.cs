@@ -16,7 +16,7 @@ namespace DVS.ViewModels.Views
             ICommand SubmitComment = new SubmitCommentClothesSizeCommand(this, clothesStore, modalNavigationStore);
             CloseComment = new CloseCommentCommand(modalNavigationStore);
 
-            CommentClothesSizeFormViewModel = new(selectedDetailedClothesItemStore, SubmitComment);
+            //CommentClothesSizeFormViewModel = new(selectedDetailedClothesItemStore, SubmitComment);
         }
     }
 }

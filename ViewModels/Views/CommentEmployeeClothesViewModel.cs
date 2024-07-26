@@ -16,7 +16,7 @@ namespace DVS.ViewModels.Views
             ICommand SubmitComment = new SubmitCommentEmployeeClothesCommand(this, employeeStore, modalNavigationStore);
             CloseComment = new CloseCommentCommand(modalNavigationStore);
 
-            CommentEmployeeClothesFormViewModel = new(selectedDetailedEmployeeClothesItemStore, SubmitComment);
+            //CommentEmployeeClothesFormViewModel = new(selectedDetailedEmployeeClothesItemStore, SubmitComment);
         }
     }
 }
