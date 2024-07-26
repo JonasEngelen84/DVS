@@ -7,10 +7,8 @@ namespace DVS.Stores
         private DetailedClothesListingItemModel _selectedDetailedClothesItem;
         public DetailedClothesListingItemModel SelectedDetailedClothesItem
         {
-            get
-            {
-                return _selectedDetailedClothesItem;
-            }
+            get =>_selectedDetailedClothesItem;
+
             set
             {
                 _selectedDetailedClothesItem = value;
@@ -18,6 +16,6 @@ namespace DVS.Stores
             }
         }
 
-        public event Action SelectedDetailedClothesChanged;
+        public event Action? SelectedDetailedClothesChanged;
     }
 }

@@ -2,11 +2,46 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DVS.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:components="clr-namespace:DVS.Components.Forms"
+             mc:Ignorable="d">
+    <Border Background="#FFDEDEDE">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <!-- TitleBar -->
+            <Border Grid.Row="0"
+                    Background="#FFBFBFBF">
+                <StackPanel>
+                    <Grid>
+                        <!-- Title -->
+                        <TextBlock Text="Kommentieren"
+                                   FontSize="28"
+                                   FontWeight="SemiBold"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Margin="13 -10 0 0" />
+
+                        <!-- Button-Close -->
+                        <Button HorizontalAlignment="Right"
+                                Width="50"
+                                Height="50"
+                                Style="{StaticResource TitleBarButtonStyle}"
+                                Command="{Binding CloseComment}">
+                            <Image Source="/Resources/Images/Close.png"
+                                   Height="25"
+                                   Width="25"
+                                   HorizontalAlignment="Center" />
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <components:CommentEmployeeClothesForm Grid.Row="1"
+                                                   Margin="15 10 15 15" />
+        </Grid>
+    </Border>
 </UserControl>

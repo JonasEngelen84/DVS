@@ -7,10 +7,8 @@ namespace DVS.Stores
         private DetailedEmployeeListingItemModel _selectedDetailedEmployeeItem;
         public DetailedEmployeeListingItemModel SelectedDetailedEmployeeItem
         {
-            get
-            {
-                return _selectedDetailedEmployeeItem;
-            }
+            get => _selectedDetailedEmployeeItem;
+
             set
             {
                 _selectedDetailedEmployeeItem = value;
@@ -18,6 +16,6 @@ namespace DVS.Stores
             }
         }
 
-        public event Action SelectedDetailedEmployeeItemChanged;
+        public event Action? SelectedDetailedEmployeeItemChanged;
     }
 }

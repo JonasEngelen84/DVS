@@ -58,25 +58,47 @@ namespace DVS.ViewModels
             }
         }
 
+        public DetailedClothesListingItemModel SelectedDetailedClothesItem
+        {
+            get => _detailedClothesListingItemCollection
+                    .FirstOrDefault(y => y.Clothes.ID == _selectedDetailedClothesItemStore.SelectedDetailedClothesItem.ID);
+            
+            set => _selectedDetailedClothesItemStore.SelectedDetailedClothesItem = value;
+        }
+        
+        public DetailedEmployeeListingItemModel SelectedDetailedEmployeeClothesItem
+        {
+            get => _detailedEmployeeListingItemCollection
+                    .FirstOrDefault(y => y.Employee.ID == _selectedDetailedClothesItemStore.SelectedDetailedClothesItem.ID);
+            
+            set => _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem = value;
+        }
+
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly ClothesStore _clothesStore;
         private readonly EmployeeStore _employeeStore;
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
+        private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore;
+        private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore;
 
         public ICommand ClothesItemReceivedCommand { get; }
         public ICommand ClothesItemRemovedCommand { get; }
 
 
         public DVSListingViewModel(ClothesStore clothesStore, EmployeeStore employeeStore,
-            ModalNavigationStore modalNavigationStore, CategoryStore categoryStore, SeasonStore seasonStore)
+                                   ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
+                                   SeasonStore seasonStore,
+                                   SelectedDetailedClothesItemStore selectedDetailedClothesItemStore,
+                                   SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore)
         {
             _clothesStore = clothesStore;
             _employeeStore = employeeStore;
             _modalNavigationStore = modalNavigationStore;
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
-
+            _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
+            _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
             ClothesItemReceivedCommand = new ClothesItemReceivedCommand(this, _clothesStore);
             ClothesItemRemovedCommand = new ClothesItemRemovedCommand(this, _clothesStore);
 

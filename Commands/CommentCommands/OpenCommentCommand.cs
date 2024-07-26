@@ -1,48 +1,43 @@
 ﻿using DVS.Stores;
-using DVS.ViewModels;
 using DVS.ViewModels.Views;
 using System.Windows;
 
 namespace DVS.Commands.CommentCommands
 {
-    public class OpenCommentCommand : CommandBase
+    public class OpenCommentCommand(SelectedDetailedClothesItemStore selectedDetailedClothesItemStore,
+                              SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore,
+                              ModalNavigationStore modalNavigationStore, ClothesStore clothesStore, EmployeeStore employeeStore) : CommandBase
     {
-        private readonly DVSListingViewModel _dVSDetailedClothesListingView;
-        private readonly DVSListingViewModel _dVSDetailedEmployeesListingView;
-        private readonly ModalNavigationStore _modalNavigationStore;
-
-        public OpenCommentCommand(DVSListingViewModel dVSDetailedEmployeesListingView,
-                                  ModalNavigationStore modalNavigationStore)
-        {
-            _dVSDetailedEmployeesListingView = dVSDetailedEmployeesListingView;
-            _modalNavigationStore = modalNavigationStore;
-        }
+        private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
+        private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
+        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
+        private readonly ClothesStore _clothesStore = clothesStore;
+        private readonly EmployeeStore _employeeStore = employeeStore;
 
         public override void Execute(object parameter)
         {
-            //    AddEditCommentViewModel addEditCommentViewModel = new();
+            if (_selectedDetailedClothesItemStore.SelectedDetailedClothesItem != null)
+            {
+                CommentClothesSizeViewModel commentClothesSizeViewModel = new(
+                    _modalNavigationStore, _clothesStore, _selectedDetailedClothesItemStore);
 
-            //    if (_dVSListingViewModel.SelectedDetailedEmployeeItem != null)
-            //    {
+                _modalNavigationStore.CurrentViewModel = commentClothesSizeViewModel;
+            }
+            else if (_selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem != null)
+            {
+                CommentEmployeeClothesViewModel commentEmployeeClothesViewModel = new(
+                    _modalNavigationStore, _employeeStore, _selectedDetailedEmployeeClothesItemStore);
 
-
-            //        _dVSListingViewModel.SelectedDetailedEmployeeItem = null;
-            //        _modalNavigationStore.CurrentViewModel = AddEditCommentViewModel;
-            //    }
-            //    else if (_dVSListingViewModel.SelectedDetailedClothesItem != null)
-            //    {
-
-
-            //        _dVSListingViewModel.SelectedDetailedClothesItem = null;
-            //        _modalNavigationStore.CurrentViewModel = AddEditCommentViewModel;
-            //    }
-            //    else
-            //    {
-            //        string messageBoxText = $"Es wurde kein Objekt ausgwählt!";
-            //        MessageBoxButton button = MessageBoxButton.OK;
-            //        MessageBoxImage icon = MessageBoxImage.Warning;
-            //        _ = MessageBox.Show(messageBoxText, null, button, icon);
-            //    }
+                _modalNavigationStore.CurrentViewModel = commentEmployeeClothesViewModel;
+            }
+            else
+            {
+                string messageBoxText = "Es wurde kein Element ausgewählt!\nBitte erst das gewünschte Element auswählen.";
+                string caption = "Kommentar bearbeiten";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                _ = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
         }
     }
 }
