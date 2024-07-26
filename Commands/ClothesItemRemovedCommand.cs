@@ -3,7 +3,7 @@ using DVS.Stores;
 using DVS.ViewModels;
 using System.Windows;
 
-namespace DVS.Commands.DragNDropCommands
+namespace DVS.Commands
 {
     public class ClothesItemRemovedCommand(
         DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore) : AsyncCommandBase
@@ -45,7 +45,7 @@ namespace DVS.Commands.DragNDropCommands
                 else if (_dVSListingViewModel.RemovedClothesListingItemModel.Quantity <= 3)
                 {
                     string messageBoxText = $"ACHTUNG!\n\nNach dieser Transaktion sind nur noch" +
-                        $"  {_dVSListingViewModel.RemovedClothesListingItemModel.Quantity-1}  Stück" +
+                        $"  {_dVSListingViewModel.RemovedClothesListingItemModel.Quantity - 1}  Stück" +
                         $" dieser Bekleidung vorhanden!";
                     string caption = "Bekleidung entfernen";
                     MessageBoxButton button = MessageBoxButton.OK;
@@ -55,7 +55,7 @@ namespace DVS.Commands.DragNDropCommands
                     if (sizeToEdit != null)
                     {
                         sizeToEdit.Quantity -= 1;
-                    }                    
+                    }
                 }
                 else
                 {
@@ -64,7 +64,7 @@ namespace DVS.Commands.DragNDropCommands
                         sizeToEdit.Quantity -= 1;
                     }
                 }
-                    
+
                 try
                 {
                     await _clothesStore.DragNDropUpdate(clothesToEdit);

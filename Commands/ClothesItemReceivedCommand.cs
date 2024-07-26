@@ -2,7 +2,7 @@
 using DVS.Stores;
 using DVS.ViewModels;
 
-namespace DVS.Commands.DragNDropCommands
+namespace DVS.Commands
 {
     public class ClothesItemReceivedCommand(
         DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore) : AsyncCommandBase

@@ -223,13 +223,13 @@
                                         </Style>
                                     </StackPanel.Resources>
 
-                                    <Button Command="{Binding OpenEditCommand}"
+                                    <Button Command="{Binding OpenEditEmployee}"
                                             Content="Bearbeiten" />
-                                    <Button Command="{Binding DeleteCommand}"
+                                    <Button Command="{Binding DeleteEmployee}"
                                             Content="Löschen" />
-                                    <Button Command="{Binding ClearClothesListCommand}"
+                                    <Button Command="{Binding ClearEmpoyeeClothesList}"
                                             Content="Kleidung löschen" />
-                                    <Button Command="{Binding PrintEmployeeCommand}"
+                                    <Button Command="{Binding PrintEmployee}"
                                             Content="Drucken" />
                                 </StackPanel>
                             </Border>

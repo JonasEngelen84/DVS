@@ -160,7 +160,7 @@ namespace DVS.ViewModels
                 _seasons[index] = season;
                 _seasonCollectionViewSource.View.Refresh();
                 addEditSeasonFormViewModel.SelectedSeason = new(null, "Saison wählen");
-                addEditSeasonFormViewModel.EditSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
+                addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
                 OnPropertyChanged(nameof(addEditSeasonFormViewModel.CanEdit));
             }
             else
@@ -178,7 +178,7 @@ namespace DVS.ViewModels
                 _seasons.Remove(seasonToDelete);
                 _seasonCollectionViewSource.View.Refresh();
                 addEditSeasonFormViewModel.SelectedSeason = new(null, "Saison wählen");
-                addEditSeasonFormViewModel.EditSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
+                addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
                 //OnPropertyChanged(nameof(_addEditSeasonFormViewModel.CanDeleteAll));
             }
             else
@@ -193,7 +193,7 @@ namespace DVS.ViewModels
             {
                 _seasons.Clear();
                 addEditSeasonFormViewModel.SelectedSeason = new(null, "Saison wählen");
-                addEditSeasonFormViewModel.EditSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
+                addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
                 //OnPropertyChanged(nameof(_addEditSeasonFormViewModel.CanDeleteAll));
             }
             else
@@ -237,7 +237,7 @@ namespace DVS.ViewModels
                 _categories[index] = category;
                 _categoryCollectionViewSource.View.Refresh();
                 addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
-                addEditCategoryFormViewModel.EditCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
+                addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
                 OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanEdit));
             }
             else
@@ -255,7 +255,7 @@ namespace DVS.ViewModels
                 _categories.Remove(categoryToDelete);
                 _categoryCollectionViewSource.View.Refresh();
                 addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
-                addEditCategoryFormViewModel.EditCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
+                addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
                 OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
             }
             else
@@ -270,7 +270,7 @@ namespace DVS.ViewModels
             {
                 _categories.Clear();
                 addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
-                addEditCategoryFormViewModel.EditCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
+                addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
                 OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
             }
             else

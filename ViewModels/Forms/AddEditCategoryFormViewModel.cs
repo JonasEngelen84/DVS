@@ -8,10 +8,10 @@ namespace DVS.ViewModels.Forms
         AddEditListingViewModel addEditListingViewModel) : ViewModelBase
     {
         public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
-        public ICommand AddCategoryCommand { get; } = addCategoryCommand;
-        public ICommand EditCategoryCommand { get; } = editCategoryCommand;
-        public ICommand DeleteCategoryCommand { get; } = deleteCategoryCommand;
-        public ICommand ClearCategoryListCommand { get; } = clearCategoryListCommand;
+        public ICommand AddCategory { get; } = addCategoryCommand;
+        public ICommand EditCategory { get; } = editCategoryCommand;
+        public ICommand DeleteCategory { get; } = deleteCategoryCommand;
+        public ICommand ClearCategoryList { get; } = clearCategoryListCommand;
 
         private string _addNewCategory;
         public string AddNewCategory
@@ -25,14 +25,14 @@ namespace DVS.ViewModels.Forms
             }
         }
         
-        private string _editCategory;
-        public string EditCategory
+        private string _editSelectedCategory;
+        public string EditSelectedCategory
         {
-            get => _editCategory;
+            get => _editSelectedCategory;
             set
             {
-                _editCategory = value;
-                OnPropertyChanged(nameof(EditCategory));
+                _editSelectedCategory = value;
+                OnPropertyChanged(nameof(EditSelectedCategory));
                 OnPropertyChanged(nameof(CanEdit));
             }
         }
@@ -46,7 +46,7 @@ namespace DVS.ViewModels.Forms
                 if (value != null)
                 {
                     _selectedCategory = value;
-                    EditCategory = new(value.Name);
+                    EditSelectedCategory = new(value.Name);
                     OnPropertyChanged(nameof(SelectedCategory));
                     OnPropertyChanged(nameof(CanDelete));
                 }
@@ -87,9 +87,9 @@ namespace DVS.ViewModels.Forms
             !AddNewCategory.Equals("Neue Kategorie");
 
         public bool CanEdit =>
-            !string.IsNullOrEmpty(EditCategory) &&
+            !string.IsNullOrEmpty(EditSelectedCategory) &&
             !SelectedCategory.Name.Equals("Kategorie wählen") &&
-            !SelectedCategory.Name.Equals(EditCategory);
+            !SelectedCategory.Name.Equals(EditSelectedCategory);
 
         public bool CanDelete => !SelectedCategory.Name.Equals("Kategorie wählen");
         public bool CanDeleteAll => !AddEditListingViewModel.Categories.IsEmpty;

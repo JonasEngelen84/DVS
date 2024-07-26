@@ -1,12 +1,12 @@
 ﻿using DVS.Stores;
 
-namespace DVS.Commands.DVSDetailedViewCommands
+namespace DVS.Commands
 {
-    public class SaveCommand : CommandBase
+    public class PlusCommand : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public SaveCommand(ModalNavigationStore modalNavigationStore)
+        public PlusCommand(ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
         }

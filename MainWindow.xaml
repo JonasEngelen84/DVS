@@ -45,6 +45,14 @@
         <DataTemplate DataType="{x:Type vms:AddEditSeasonViewModel}">
             <views:AddEditSeasonView />
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vms:CommentClothesSizeViewModel}">
+            <views:CommentClothesSize />
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type vms:CommentEmployeeClothesViewModel}">
+            <views:CommentEmployeeClothesSize />
+        </DataTemplate>
     </Window.Resources>
 
     <!--Background-->
@@ -140,12 +148,12 @@
 
             <views:DVSDetailedView x:Name="DetailedView"
                                    Grid.Row="1"
-                                   Margin="0,3,0,0"/>
+                                   Margin="0,3,0,0"
+                                   Visibility="Hidden" />
 
             <views:DVSHeadView x:Name="HeadView"
                                Grid.Row="1"
-                               Margin="0,3,0,0"
-                               Visibility="Hidden"/>
+                               Margin="0,3,0,0"/>
 
         </Grid>
     </Border>

@@ -3,7 +3,7 @@ using DVS.Stores;
 using DVS.ViewModels.ListViewItems;
 using System.Windows;
 
-namespace DVS.Commands.DVSHeadViewCommands
+namespace DVS.Commands.AddEditClothesCommands
 {
     public class ClearSizesCommand(ClothesListingItemViewModel clothesListingItemViewModel,
         ClothesStore clothesStore) : AsyncCommandBase

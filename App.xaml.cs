@@ -11,7 +11,6 @@ namespace DVS
         private readonly SeasonStore _seasonStore;
         private readonly ClothesStore _clothesStore;
         private readonly EmployeeStore _employeeStore;
-        private readonly SelectedClothesStore _selectedClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly DVSListingViewModel _dVSListingViewModel;
         private readonly DVSDetailedViewModel _dVSDetailedViewModel;
@@ -23,7 +22,6 @@ namespace DVS
             _seasonStore = new();
             _clothesStore = new();
             _employeeStore = new();
-            _selectedClothesStore = new();
             _modalNavigationStore = new();
 
             _dVSListingViewModel = new(_clothesStore,
@@ -37,8 +35,7 @@ namespace DVS
                                         _categoryStore,
                                         _seasonStore,
                                         _clothesStore,
-                                        _employeeStore,
-                                        _selectedClothesStore);
+                                        _employeeStore);
 
             _dVSHeadViewModel = new(_dVSListingViewModel,
                                     _modalNavigationStore,

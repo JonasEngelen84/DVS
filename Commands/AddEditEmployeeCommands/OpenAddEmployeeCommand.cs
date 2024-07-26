@@ -2,7 +2,7 @@
 using DVS.ViewModels;
 using DVS.ViewModels.Views;
 
-namespace DVS.Commands.DVSDetailedViewCommands
+namespace DVS.Commands.AddEditEmployeeCommands
 {
     public class OpenAddEmployeeCommand(DVSListingViewModel dVSListingViewModel,
         EmployeeStore employeeStore, ClothesStore clothesStore, ModalNavigationStore modalNavigationStore) : CommandBase

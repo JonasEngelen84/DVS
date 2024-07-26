@@ -1,6 +1,6 @@
 ﻿using DVS.Stores;
 
-namespace DVS.Commands.DVSDetailedViewCommands
+namespace DVS.Commands.AddEditClothesCommands
 {
     public class OpenFilterClothesListCommand : CommandBase
     {
@@ -13,7 +13,7 @@ namespace DVS.Commands.DVSDetailedViewCommands
 
         public override void Execute(object parameter)
         {
-            
+
         }
     }
 }

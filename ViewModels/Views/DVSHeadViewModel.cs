@@ -1,4 +1,5 @@
-﻿using DVS.Commands.DVSDetailedViewCommands;
+﻿using DVS.Commands.AddEditClothesCommands;
+using DVS.Commands.AddEditEmployeeCommands;
 using DVS.Stores;
 using System.Windows.Input;
 
@@ -9,11 +10,15 @@ namespace DVS.ViewModels.Views
                                   CategoryStore categoryStore,
                                   SeasonStore seasonStore,
                                   ClothesStore clothesStore,
-                                  EmployeeStore employeeStore) : ViewModelBase
+                                  EmployeeStore employeeStore)
+                                  : ViewModelBase
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
 
-        public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(dVSListingViewModel, employeeStore, clothesStore, modalNavigationStore);
-        public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(modalNavigationStore, categoryStore, seasonStore, clothesStore);
+        public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(
+            dVSListingViewModel, employeeStore, clothesStore, modalNavigationStore);
+
+        public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(
+            modalNavigationStore, categoryStore, seasonStore, clothesStore);
     }
 }

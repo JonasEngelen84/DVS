@@ -1,5 +1,6 @@
-﻿using DVS.Commands;
+﻿using DVS.Commands.AddEditCategoryCommands;
 using DVS.Commands.AddEditClothesCommands;
+using DVS.Commands.AddEditSeasonCommands;
 using DVS.Models;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
@@ -20,16 +21,16 @@ namespace DVS.ViewModels.Views
             AddEditListingViewModel = new(clothes, categoryStore, seasonStore);
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
-            ICommand editClothesCommand = new EditClothesCommand(this, clothesStore , modalNavigationStore, clothes.GuidID);
+            ICommand editClothes = new EditClothesCommand(this, clothesStore , modalNavigationStore, clothes.GuidID);
 
-            ICommand openAddEditCategoriesCommand = new OpenAddEditCategoriesCommand(
+            ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(
                 modalNavigationStore, categoryStore, seasonStore, clothes, null, this, AddEditListingViewModel);
 
-            ICommand openAddEditSeasonsCommand = new OpenAddEditSeasonsCommand(
+            ICommand openAddEditSeasons = new OpenAddEditSeasonsCommand(
                 modalNavigationStore, categoryStore, seasonStore, clothes, null, this, AddEditListingViewModel);
 
-            AddEditClothesFormViewModel = new(clothes, editClothesCommand,
-                openAddEditCategoriesCommand, openAddEditSeasonsCommand, AddEditListingViewModel)
+            AddEditClothesFormViewModel = new(clothes, editClothes,
+                openAddEditCategories, openAddEditSeasons, AddEditListingViewModel)
             {
                 ID = clothes.ID,
                 Name = clothes.Name,

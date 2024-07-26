@@ -1,4 +1,4 @@
-﻿using DVS.Commands.DVSHeadViewCommands;
+﻿using DVS.Commands.AddEditEmployeeCommands;
 using DVS.Models;
 using DVS.Stores;
 using System.Collections.ObjectModel;
@@ -66,20 +66,20 @@ namespace DVS.ViewModels.ListViewItems
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        public ICommand OpenEditCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
-        public ICommand ClearClothesListCommand { get; set; }
-        public ICommand PrintEmployeeCommand { get; set; }
+        public ICommand OpenEditEmployee { get; set; }
+        public ICommand DeleteEmployee { get; set; }
+        public ICommand ClearEmpoyeeClothesList { get; set; }
+        public ICommand PrintEmployee { get; set; }
 
 
         public EmployeeListingItemViewModel(EmployeeModel employee, DVSListingViewModel dVSListingViewModel,
             ModalNavigationStore modalNavigationStore, EmployeeStore employeeStore, ClothesStore clothesStore)
         {
             Employee = employee;
-            OpenEditCommand = new OpenEditEmployeeCommand(this, modalNavigationStore, employeeStore, clothesStore, dVSListingViewModel);
-            DeleteCommand = new DeleteEmployeeCommand(this, employeeStore);
-            ClearClothesListCommand = new ClearEmployeeClothesListCommand(this, employeeStore);
-            PrintEmployeeCommand = new OpenPrintEmployeeCommand();
+            OpenEditEmployee = new OpenEditEmployeeCommand(this, modalNavigationStore, employeeStore, clothesStore, dVSListingViewModel);
+            DeleteEmployee = new DeleteEmployeeCommand(this, employeeStore);
+            ClearEmpoyeeClothesList = new ClearEmployeeClothesListCommand(this, employeeStore);
+            PrintEmployee = new OpenPrintEmployeeCommand();
         }
 
         public void Update(EmployeeModel employee)

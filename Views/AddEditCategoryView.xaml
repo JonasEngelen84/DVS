@@ -29,7 +29,7 @@
                     <Button HorizontalAlignment="Right"
                             Width="45"
                             Style="{StaticResource TitleBarButtonStyle}"
-                            Command="{Binding CloseAddEditCategoryCommand}">
+                            Command="{Binding CloseAddEditCategory}">
                         <Image Source="/Resources/Images/Close.png"
                                Height="20"
                                Width="20"

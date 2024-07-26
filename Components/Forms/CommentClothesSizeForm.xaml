@@ -23,25 +23,25 @@
                    Margin="10 0 0 0" />
 
             <!-- Category -->
-            <Label Content="{Binding Category.Name}"
+            <Label Content="{Binding Category}"
                    FontSize="14"
                    FontWeight="Bold"
                    Margin="0 0 0 0" />
 
             <!-- Season -->
-            <Label Content="{Binding Season.Name}"
+            <Label Content="{Binding Season}"
                    FontSize="14"
                    FontWeight="Bold"
                    Margin="10 0 0 0" />
 
             <!-- Size -->
-            <Label Content="{Binding Size.Name}"
+            <Label Content="{Binding Size}"
                    FontSize="14"
                    FontWeight="Bold"
                    Margin="10 0 0 0" />
 
             <!-- Quantity -->
-            <Label Content="{Binding Size.Quantity}"
+            <Label Content="{Binding Quantity}"
                    FontSize="14"
                    FontWeight="Bold"
                    Margin="10 0 0 0" />
@@ -50,6 +50,6 @@
         <!-- Comment -->
         <TextBox Margin="10 0 0 0"
                  Width="300"
-                 Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
     </StackPanel>
 </UserControl>

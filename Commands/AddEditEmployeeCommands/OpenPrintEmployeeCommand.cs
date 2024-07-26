@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DVS.Commands.DVSHeadViewCommands
+namespace DVS.Commands.AddEditEmployeeCommands
 {
     public class OpenPrintEmployeeCommand : AsyncCommandBase
     {

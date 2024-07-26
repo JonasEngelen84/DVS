@@ -15,7 +15,7 @@
 
         <!-- Menu -->
         <Border Height="25"
-                Width="308"
+                Width="342"
                 Background="#363435"
                 BorderBrush="#363435"
                 BorderThickness="2"
@@ -23,10 +23,10 @@
                 HorizontalAlignment="Left"
                 CornerRadius="10">
 
-            <Grid HorizontalAlignment="Center"
-                  Width="302">
+            <Grid HorizontalAlignment="Left"
+                  Width="340">
                 <Menu Height="18"
-                      Width="305"
+                      Width="340"
                       Background="#363435"
                       HorizontalAlignment="Left"
                       Margin="4,0,0,0">
@@ -36,13 +36,13 @@
                               Style="{StaticResource MenuItemWithDropDown}">
                         <MenuItem Header="Mitarbeiter"
                                   Style="{StaticResource SubMenuItem}"
-                                  Command="{Binding OpenFilterEmployeeCommand}">
+                                  Command="{Binding OpenFilterEmployee}">
 
                         </MenuItem>
 
                         <MenuItem Header="Bekleidung"
                                   Style="{StaticResource SubMenuItem}"
-                                  Command="{Binding OpenFilterClothesCommand}">
+                                  Command="{Binding OpenFilterClothes}">
 
                         </MenuItem>
                     </MenuItem>
@@ -52,27 +52,28 @@
                               Style="{StaticResource MenuItemWithDropDown}">
                         <MenuItem Header="Mitarbeiter"
                                   Style="{StaticResource SubMenuItem}"
-                                  Command="{Binding OpenAddEmployeeCommand}">
+                                  Command="{Binding OpenAddEmployee}">
 
                         </MenuItem>
 
                         <MenuItem Header="Bekleidung"
                                   Style="{StaticResource SubMenuItem}"
-                                  Command="{Binding OpenAddClothesCommand}">
+                                  Command="{Binding OpenAddClothes}">
 
                         </MenuItem>
                     </MenuItem>
 
                     <!-- Edit -->
-                    <MenuItem Header="KOMMENT"
+                    <MenuItem Header="BEARBEITEN"
                               Style="{StaticResource MainMenuItem}"
-                              Command="{Binding OpenCommentCommand}">
+                              Command="{Binding OpenEditDetailedItemCommand}">
                     </MenuItem>
 
-                    <!-- Save -->
-                    <MenuItem Header="SPEICHERN"
+                    <!-- Comment -->
+                    <MenuItem Header="KOMMENTIEREN"
+                              Width="115"
                               Style="{StaticResource MainMenuItem}"
-                              Command="{Binding SaveCommand}">
+                              Command="{Binding OpenComment}">
                     </MenuItem>
                 </Menu>
             </Grid>
@@ -98,7 +99,7 @@
 
                 <!-- Plus -->
                 <Button Grid.Row="0"
-                        Command="{Binding PlusCommand}"
+                        Command="{Binding Plus}"
                         Style="{StaticResource CircleButtonStyle}">
                     <Image Source="/Resources/Images/Plus.png"
                            Height="14"
@@ -107,7 +108,7 @@
 
                 <!-- Minus -->
                 <Button Grid.Row="1"
-                        Command="{Binding MinusCommand}"
+                        Command="{Binding Minus}"
                         Style="{StaticResource CircleButtonStyle}">
                     <Image Source="/Resources/Images/Minus.png"
                            Height="13"

@@ -1,4 +1,4 @@
-﻿using DVS.Commands.DVSHeadViewCommands;
+﻿using DVS.Commands.AddEditClothesCommands;
 using DVS.Models;
 using DVS.Stores;
 using System.Collections.ObjectModel;
@@ -67,20 +67,20 @@ namespace DVS.ViewModels.ListViewItems
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        public ICommand OpenEditCommand { get; set; }
-        public ICommand DeleteCommand { get; set; }
-        public ICommand ClearSizesCommand { get; set; }
-        public ICommand PrintClothesCommand { get; set; }
+        public ICommand OpenEditClothes { get; set; }
+        public ICommand DeleteClothes { get; set; }
+        public ICommand ClearClothesSizes { get; set; }
+        public ICommand PrintClothes { get; set; }
 
 
         public ClothesListingItemViewModel(ClothesModel clothes, ModalNavigationStore modalNavigationStore,
             CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
         {
             Clothes = clothes;
-            OpenEditCommand = new OpenEditClothesCommand(this, modalNavigationStore, categoryStore, seasonStore, clothesStore);
-            DeleteCommand = new DeleteClothesCommand(this, clothesStore);
-            ClearSizesCommand = new ClearSizesCommand(this, clothesStore);
-            PrintClothesCommand = new OpenPrintClothesCommand();
+            OpenEditClothes = new OpenEditClothesCommand(this, modalNavigationStore, categoryStore, seasonStore, clothesStore);
+            DeleteClothes = new DeleteClothesCommand(this, clothesStore);
+            ClearClothesSizes = new ClearSizesCommand(this, clothesStore);
+            PrintClothes = new OpenPrintClothesCommand();
         }
 
 

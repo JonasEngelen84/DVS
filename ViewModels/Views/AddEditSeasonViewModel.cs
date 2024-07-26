@@ -10,27 +10,27 @@ namespace DVS.ViewModels.Views
     {
         public AddEditSeasonFormViewModel AddEditSeasonFormViewModel { get; }
         public AddEditListingViewModel AddEditListingViewModel { get; }
-        public ICommand CloseAddSeasonCommand { get; }
+        public ICommand CloseAddSeason { get; }
 
         public AddEditSeasonViewModel(ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
             SeasonStore seasonStore, ClothesModel clothes, AddClothesViewModel addClothesViewModel,
             EditClothesViewModel editClothesViewModel, AddEditListingViewModel addEditListingViewModel)
         {
-            ICommand addSeasonCommand = new AddSeasonCommand(this, seasonStore);
-            ICommand editSeasonCommand = new EditSeasonCommand(this, seasonStore);
-            ICommand deleteSeasonCommand = new DeleteSeasonCommand(this, seasonStore);
-            ICommand clearSeasonListCommand = new ClearSeasonListCommand(this, seasonStore);
+            ICommand addSeason = new AddSeasonCommand(this, seasonStore);
+            ICommand editSeason = new EditSeasonCommand(this, seasonStore);
+            ICommand deleteSeason = new DeleteSeasonCommand(this, seasonStore);
+            ICommand clearSeasonList = new ClearSeasonListCommand(this, seasonStore);
 
             AddEditListingViewModel = new(clothes, categoryStore, seasonStore);
 
-            CloseAddSeasonCommand = new CloseAddEditSeasonCommand(
+            CloseAddSeason = new CloseAddEditSeasonCommand(
                 modalNavigationStore, addClothesViewModel, editClothesViewModel);
 
-            AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(addSeasonCommand,
-                editSeasonCommand, deleteSeasonCommand, clearSeasonListCommand, addEditListingViewModel)
+            AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(addSeason,
+                editSeason, deleteSeason, clearSeasonList, addEditListingViewModel)
             {
                 AddNewSeason = "Neue Saison",
-                EditSeason = "Saison wählen",
+                EditSelectedSeason = "Saison wählen",
                 SelectedSeason = new(null, "Saison wählen")
             };
         }

@@ -3,7 +3,7 @@ using DVS.Stores;
 using DVS.ViewModels.ListViewItems;
 using DVS.ViewModels.Views;
 
-namespace DVS.Commands.DVSHeadViewCommands
+namespace DVS.Commands.AddEditClothesCommands
 {
     public class OpenEditClothesCommand(ClothesListingItemViewModel clothesListingItemViewModel,
         ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,

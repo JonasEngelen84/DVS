@@ -1,16 +1,13 @@
 ﻿using DVS.Stores;
 
-namespace DVS.Commands.DVSDetailedViewCommands
+namespace DVS.Commands
 {
     public class MinusCommand : CommandBase
     {
-        private readonly SelectedClothesStore _selectedClothesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        public MinusCommand(SelectedClothesStore selectedClothesStore,
-            ModalNavigationStore modalNavigationStore)
+        public MinusCommand(ModalNavigationStore modalNavigationStore)
         {
-            _selectedClothesStore = selectedClothesStore;
             _modalNavigationStore = modalNavigationStore;
         }
 

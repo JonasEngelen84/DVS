@@ -9,9 +9,9 @@ namespace DVS.ViewModels.Forms
     {
         public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
         private ClothesModel? Clothes { get; } = clothes;
-        public ICommand OpenAddEditCategoriesCommand { get; } = openAddEditCategoriesCommand;
-        public ICommand OpenAddEditSeasonsCommand { get; } = openAddEditSeasonsCommand;
-        public ICommand SubmitCommand { get; } = submitCommand;
+        public ICommand OpenAddEditCategories { get; } = openAddEditCategoriesCommand;
+        public ICommand OpenAddEditSeasons { get; } = openAddEditSeasonsCommand;
+        public ICommand SubmitClothes { get; } = submitCommand;
 
         private string _iD;
         public string ID

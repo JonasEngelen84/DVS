@@ -8,7 +8,7 @@ namespace DVS.ViewModels.Forms
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
         private EmployeeModel? Employee { get; } = employee;
-        public ICommand SubmitCommand { get; } = submitCommand;
+        public ICommand SubmitEmployee { get; } = submitCommand;
 
         private string _iD;
         public string ID

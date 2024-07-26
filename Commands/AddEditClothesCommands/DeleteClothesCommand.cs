@@ -3,7 +3,7 @@ using DVS.Stores;
 using DVS.ViewModels.ListViewItems;
 using System.Windows;
 
-namespace DVS.Commands.DVSHeadViewCommands
+namespace DVS.Commands.AddEditClothesCommands
 {
     public class DeleteClothesCommand(ClothesListingItemViewModel clothesListingItemViewModel,
         ClothesStore clothesStore) : AsyncCommandBase
@@ -20,7 +20,7 @@ namespace DVS.Commands.DVSHeadViewCommands
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
-            
+
             if (dialog == MessageBoxResult.Yes)
             {
                 _clothesListingItemViewModel.ErrorMessage = null;

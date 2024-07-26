@@ -15,7 +15,7 @@
             <Button Content="ERSTELLEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding AddSeasonCommand}"
+                    Command="{Binding AddSeason}"
                     IsEnabled="{Binding CanAdd}" />
         </StackPanel>
 
@@ -24,11 +24,11 @@
                     Margin="0 10 0 20">
             <TextBox Width="165"
                      Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding EditSeason, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding EditSelectedSeason, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="BEARBEITEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding EditSeasonCommand}"
+                    Command="{Binding EditSeason}"
                     IsEnabled="{Binding CanEdit}" />
         </StackPanel>
 
@@ -65,12 +65,12 @@
                 <Button Content="LÖSCHEN"
                         Margin="5 1 0 0"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding DeleteSeasonCommand}"
+                        Command="{Binding DeleteSeason}"
                         IsEnabled="{Binding CanDelete}" />
                 <Button Content="LEEREN"
                         Margin="5 5 0 0"
                         Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding ClearSeasonListCommand}"
+                        Command="{Binding ClearSeasonList}"
                         IsEnabled="{Binding CanDeleteAll}" />
             </StackPanel>
         </Grid>

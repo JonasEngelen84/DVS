@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DVS.Commands.DVSHeadViewCommands
+namespace DVS.Commands
 {
-    public class OpenPrintClothesCommand : AsyncCommandBase
+    public class OpenEditDetailedItemCommand : CommandBase
     {
-        public override Task ExecuteAsync(object parameter)
+        public override void Execute(object parameter)
         {
             throw new NotImplementedException();
         }

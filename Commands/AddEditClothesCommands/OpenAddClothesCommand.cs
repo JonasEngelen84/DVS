@@ -1,7 +1,7 @@
 ﻿using DVS.Stores;
 using DVS.ViewModels.Views;
 
-namespace DVS.Commands.DVSDetailedViewCommands
+namespace DVS.Commands.AddEditClothesCommands
 {
     public class OpenAddClothesCommand(ModalNavigationStore modalNavigationStore,
         CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore) : CommandBase

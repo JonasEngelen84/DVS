@@ -10,29 +10,29 @@ namespace DVS.ViewModels.Views
     {
         public AddEditCategoryFormViewModel AddEditCategoryFormViewModel { get; }
         public AddEditListingViewModel AddEditListingViewModel { get; }
-        public ICommand CloseAddEditCategoryCommand { get; }
+        public ICommand CloseAddEditCategory { get; }
 
         public AddEditCategoryViewModel(ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
             SeasonStore seasonStore, ClothesModel clothes, AddClothesViewModel addClothesViewModel,
             EditClothesViewModel editClothesViewModel, AddEditListingViewModel addEditListingViewModel)
         {
-            ICommand addCategoryCommand = new AddCategoryCommand(this, categoryStore);
-            ICommand editCategoryCommand = new EditCategoryCommand(this, categoryStore);
-            ICommand deleteCategoryCommand = new DeleteCategoryCommand(this, categoryStore);
-            ICommand clearCategoryListCommand = new ClearCategoryListCommand(this, categoryStore);
+            ICommand addCategory = new AddCategoryCommand(this, categoryStore);
+            ICommand editCategory = new EditCategoryCommand(this, categoryStore);
+            ICommand deleteCategory = new DeleteCategoryCommand(this, categoryStore);
+            ICommand clearCategoryList = new ClearCategoryListCommand(this, categoryStore);
 
             AddEditListingViewModel = new(clothes, categoryStore, seasonStore);
 
-            CloseAddEditCategoryCommand = new CloseAddEditCategoryCommand(
+            CloseAddEditCategory = new CloseAddEditCategoryCommand(
                 modalNavigationStore, addClothesViewModel, editClothesViewModel);
 
-            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(addCategoryCommand, editCategoryCommand,
-                                                deleteCategoryCommand, clearCategoryListCommand, addEditListingViewModel)
-                                           {
-                                               AddNewCategory = "Neue Kategorie",
-                                               EditCategory = "Kategorie wählen",
-                                               SelectedCategory = new(null, "Kategorie wählen")
-                                           };
+            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(addCategory,
+                editCategory, deleteCategory, clearCategoryList, addEditListingViewModel)
+            {
+                AddNewCategory = "Neue Kategorie",
+                EditSelectedCategory = "Kategorie wählen",
+                SelectedCategory = new(null, "Kategorie wählen")
+            };
         }
     }
 }

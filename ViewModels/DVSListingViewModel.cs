@@ -1,4 +1,4 @@
-﻿using DVS.Commands.DragNDropCommands;
+﻿using DVS.Commands;
 using DVS.Models;
 using DVS.Stores;
 using DVS.ViewModels.ListViewItems;
@@ -9,39 +9,20 @@ namespace DVS.ViewModels
 {
     public class DVSListingViewModel : ViewModelBase
     {
-        private DetailedClothesListingItemModel _selectedDetailedClothesItem;
-        public DetailedClothesListingItemModel SelectedDetailedClothesItem
-        {
-            get
-            {
-                return _selectedDetailedClothesItem;
-            }
-            set
-            {
-                if (_selectedDetailedClothesItem != value)
-                {
-                    _selectedDetailedClothesItem = value;
-                    OnPropertyChanged(nameof(SelectedDetailedClothesItem));
-                }
-            }
-        }
+        private readonly ObservableCollection<ClothesListingItemViewModel> _clothesListingItemCollection = [];
+        public IEnumerable<ClothesListingItemViewModel> ClothesListingItemCollection => _clothesListingItemCollection;
 
-        private DetailedEmployeeListingItemModel _selectedDetailedEmployeeItem;
-        public DetailedEmployeeListingItemModel SelectedDetailedEmployeeItem
-        {
-            get
-            {
-                return _selectedDetailedEmployeeItem;
-            }
-            set
-            {
-                if (_selectedDetailedEmployeeItem != value)
-                {
-                    _selectedDetailedEmployeeItem = value;
-                    OnPropertyChanged(nameof(SelectedDetailedEmployeeItem));
-                }
-            }
-        }
+        private readonly ObservableCollection<DetailedClothesListingItemModel> _detailedClothesListingItemCollection = [];
+        public IEnumerable<DetailedClothesListingItemModel> DetailedClothesListingItemCollection => _detailedClothesListingItemCollection;
+
+        private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeListingItemCollection = [];
+        public IEnumerable<EmployeeListingItemViewModel> EmployeeListingItemCollection => _employeeListingItemCollection;
+
+        private readonly ObservableCollection<DetailedEmployeeListingItemModel> _detailedEmployeeListingItemCollection = [];
+        public IEnumerable<DetailedEmployeeListingItemModel> DetailedEmployeeListingItemCollection => _detailedEmployeeListingItemCollection;
+        
+        private readonly ObservableCollection<DetailedClothesListingItemModel> _newEmployeeListingItemCollection = [];
+        public IEnumerable<DetailedClothesListingItemModel> NewEmployeeListingItemCollection => _newEmployeeListingItemCollection;
 
         private DetailedClothesListingItemModel _incomingClothesListingItemModel;
         public DetailedClothesListingItemModel IncomingClothesListingItemModel
@@ -77,24 +58,9 @@ namespace DVS.ViewModels
             }
         }
 
-        private readonly ObservableCollection<ClothesListingItemViewModel> _clothesListingItemCollection = [];
-        public IEnumerable<ClothesListingItemViewModel> ClothesListingItemCollection => _clothesListingItemCollection;
-
-        private readonly ObservableCollection<DetailedClothesListingItemModel> _detailedClothesListingItemCollection = [];
-        public IEnumerable<DetailedClothesListingItemModel> DetailedClothesListingItemCollection => _detailedClothesListingItemCollection;
-
-        private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeListingItemCollection = [];
-        public IEnumerable<EmployeeListingItemViewModel> EmployeeListingItemCollection => _employeeListingItemCollection;
-
-        private readonly ObservableCollection<DetailedEmployeeListingItemModel> _detailedEmployeeListingItemCollection = [];
-        public IEnumerable<DetailedEmployeeListingItemModel> DetailedEmployeeListingItemCollection => _detailedEmployeeListingItemCollection;
-        
-        private readonly ObservableCollection<DetailedClothesListingItemModel> _newEmployeeListingItemCollection = [];
-        public IEnumerable<DetailedClothesListingItemModel> NewEmployeeListingItemCollection => _newEmployeeListingItemCollection;
-
+        private readonly ModalNavigationStore _modalNavigationStore;
         private readonly ClothesStore _clothesStore;
         private readonly EmployeeStore _employeeStore;
-        private readonly ModalNavigationStore _modalNavigationStore;
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
 

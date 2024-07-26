@@ -3,9 +3,9 @@ using DVS.Stores;
 using DVS.ViewModels.ListViewItems;
 using System.Windows;
 
-namespace DVS.Commands.DVSHeadViewCommands
+namespace DVS.Commands.AddEditEmployeeCommands
 {
-    public class DeleteEmployeeCommand(EmployeeListingItemViewModel employeeListingItemViewModel,
+    public class ClearEmployeeClothesListCommand(EmployeeListingItemViewModel employeeListingItemViewModel,
         EmployeeStore employeeStore) : AsyncCommandBase
     {
         private readonly EmployeeListingItemViewModel _employeeListingItemViewModel = employeeListingItemViewModel;
@@ -13,9 +13,10 @@ namespace DVS.Commands.DVSHeadViewCommands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            string messageBoxText = $"Der Mitarbeiter  {_employeeListingItemViewModel.Lastname}, {_employeeListingItemViewModel.Firstname}  " +
+            string messageBoxText = $"Die gesamte Kleidungsliste des Mitarbeiters  " +
+                $"{_employeeListingItemViewModel.Lastname}, {_employeeListingItemViewModel.Firstname}  " +
                 $"wird gelöscht!\n\nLöschen fortsetzen?";
-            string caption = "Mitarbeiter löschen";
+            string caption = "Kleidungsliste löschen";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
@@ -26,14 +27,16 @@ namespace DVS.Commands.DVSHeadViewCommands
                 _employeeListingItemViewModel.IsDeleting = true;
 
                 EmployeeModel employee = _employeeListingItemViewModel.Employee;
+                employee.Clothes.Clear();
 
                 try
                 {
-                    await _employeeStore.Delete(employee.GuidID);
+                    await _employeeStore.Update(employee);
                 }
                 catch (Exception)
                 {
-                    _employeeListingItemViewModel.ErrorMessage = "Löschen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    _employeeListingItemViewModel.ErrorMessage =
+                        "Löschen der Kleidungsliste ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
                 }
                 finally
                 {

@@ -42,7 +42,7 @@
 
             <Button Margin="5 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
-                    Command="{Binding OpenAddEditCategoriesCommand}">
+                    Command="{Binding OpenAddEditCategories}">
                 <Image x:Name="categorieEditButton"
                        Source="/Resources/Images/Edit.png"
                        HorizontalAlignment="Center" />
@@ -66,7 +66,7 @@
 
             <Button Margin="5 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
-                    Command="{Binding OpenAddEditSeasonsCommand}">
+                    Command="{Binding OpenAddEditSeasons}">
                 <Image x:Name="seasonEditButton"
                        Source="/Resources/Images/Edit.png"
                        HorizontalAlignment="Center" />
@@ -145,9 +145,10 @@
 
         <!-- Button-Bestätigen -->
         <Button Content="BESTÄTIGEN"
+                Width="175"
                 Margin="0 20 0 0 "
                 Style="{StaticResource ModalButtonStyle}"
-                Command="{Binding SubmitCommand}" 
+                Command="{Binding SubmitClothes}" 
                 IsEnabled="{Binding CanSubmit}"/>
     </StackPanel>
 </UserControl>
