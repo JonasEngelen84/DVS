@@ -30,6 +30,7 @@ namespace DVS.ViewModels.Forms
             {
                 _comment = value;
                 OnPropertyChanged(nameof(Comment));
+                OnPropertyChanged(nameof(CanSubmit));
             }
         }
 
@@ -69,6 +70,7 @@ namespace DVS.ViewModels.Forms
 
         public ICommand SubmitComment { get; }
 
+
         public CommentClothesSizeFormViewModel(ICommand submitComment,
             SelectedDetailedClothesItemStore selectedDetailedClothesItemStore)
         {
@@ -89,6 +91,7 @@ namespace DVS.ViewModels.Forms
             OnPropertyChanged(nameof(Quantity));
             OnPropertyChanged(nameof(Comment));
         }
+
 
         protected override void Dispose()
         {

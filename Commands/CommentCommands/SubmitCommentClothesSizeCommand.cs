@@ -25,7 +25,7 @@ namespace DVS.Commands.CommentCommands
                                              commentClothesSizeFormViewModel.Name,
                                              commentClothesSizeFormViewModel.Clothes.Category,
                                              commentClothesSizeFormViewModel.Clothes.Season,
-                                             commentClothesSizeFormViewModel.Comment)
+                                             commentClothesSizeFormViewModel.Clothes.Comment)
             {
                 Sizes = commentClothesSizeFormViewModel.Clothes.Sizes
             };

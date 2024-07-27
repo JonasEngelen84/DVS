@@ -3,73 +3,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:DVS.Components.Forms"
-             mc:Ignorable="d">
-    <Grid>
-        <StackPanel>
+             mc:Ignorable="d"
+             DataContext="{Binding CommentEmployeeClothesFormViewModel}">
 
-            <!-- Item Details -->
-            <StackPanel >
+    <StackPanel>
 
-                <!-- Employee ID -->
-                <Label Content="{Binding EmployeeID}"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Margin="0 10 0 0" />
+        <!-- Employee ID -->
+        <Label Content="{Binding EmployeeID}"
+               FontSize="14"
+               FontWeight="Medium"
+               Margin="0 2.5 0 0" />
 
-                <!-- Employee Lastname -->
-                <Label Content="{Binding EmployeeLastname}"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Margin="0 10 0 0" />
+        <!-- Employee Lastname -->
+        <Label Content="{Binding EmployeeLastname}"
+               FontSize="14"
+               FontWeight="Medium"
+               Margin="0 2.5 0 0" />
 
-                <!-- Employee Firstname -->
-                <Label Content="testtttttt"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Margin="0 10 0 0" />
+        <!-- Employee Firstname -->
+        <Label Content="{Binding EmployeeFirstname}"
+               FontSize="14"
+               FontWeight="Medium"
+               Margin="0 2.5 0 0" />
 
-                <!-- Clothes ID -->
-                <Label Content="{Binding ClothesID}"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Margin="0 10 0 0" />
+        <!-- Clothes ID -->
+        <Label Content="{Binding ClothesID}"
+               FontSize="14"
+               FontWeight="Medium"
+               Margin="0 2.5 0 0" />
 
-                <!-- Clothes Name -->
-                <Label Content="{Binding ClothesName}"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Margin="0 10 0 0" />
+        <!-- Clothes Name -->
+        <Label Content="{Binding ClothesName}"
+               FontSize="14"
+               FontWeight="Medium"
+               Margin="0 2.5 0 0" />
 
-                <!-- Category -->
-                <Label Content="{Binding Category.Name}"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Margin="0 10 0 0" />
+        <!-- Category -->
+        <Label Content="{Binding Category.Name}"
+               FontSize="14"
+               FontWeight="Medium"
+               Margin="0 2.5 0 0" />
 
-                <!-- Season -->
-                <Label Content="{Binding Season.Name}"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Margin="0 10 0 0" />
+        <!-- Season -->
+        <Label Content="{Binding Season.Name}"
+               FontSize="14"
+               FontWeight="Medium"
+               Margin="0 2.5 0 0" />
 
-                <!-- Size -->
-                <Label Content="{Binding Size.Name}"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Margin="0 10 0 0" />
+        <!-- Size -->
+        <Label Content="{Binding Size.Name}"
+               FontSize="14"
+               FontWeight="Medium"
+               Margin="0 2.5 0 0" />
 
-                <!-- Quantity -->
-                <Label Content="{Binding Size.Quantity}"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       Margin="0 10 0 0" />
-            </StackPanel>
+        <!-- Quantity -->
+        <Label Content="{Binding Size.Quantity}"
+               FontSize="14"
+               FontWeight="Medium"
+               Margin="0 2.5 0 0" />
 
-            <!-- Comment -->
-            <TextBox Margin="0 0 0 0"
-                     Width="300"
-                     Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
-        </StackPanel>
-    </Grid>
+        <!-- Comment -->
+        <TextBox Width="300"
+                 Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
+
+        <!-- Button-Bestätigen -->
+        <Button Content="BESTÄTIGEN"
+                Width="175"
+                Margin="0 20 0 0 "
+                Style="{StaticResource ModalButtonStyle}"
+                Command="{Binding SubmitComment}"
+                IsEnabled="{Binding CanSubmit}" />
+    </StackPanel>
 </UserControl>

@@ -24,7 +24,7 @@ namespace DVS.Commands.CommentCommands
                                                commentEmployeeClothesFormViewModel.EmployeeID,
                                                commentEmployeeClothesFormViewModel.EmployeeLastname,
                                                commentEmployeeClothesFormViewModel.EmployeeFirstname,
-                                               commentEmployeeClothesFormViewModel.Comment)
+                                               commentEmployeeClothesFormViewModel.Employee.Comment)
             {
                 Clothes = commentEmployeeClothesFormViewModel.Employee.Clothes
             };

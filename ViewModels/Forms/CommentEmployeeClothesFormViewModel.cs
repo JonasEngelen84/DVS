@@ -12,7 +12,7 @@ namespace DVS.ViewModels.Forms
 
         public bool HasSelectedDetailedEmployeeListingItem => SelectedDetailedEmployeeItem != null;
         public EmployeeModel Employee => SelectedDetailedEmployeeItem.Employee;
-        public string EmployeeID => SelectedDetailedEmployeeItem.ID;
+        public string EmployeeID => SelectedDetailedEmployeeItem.Employee.ID;
         public string EmployeeLastname => SelectedDetailedEmployeeItem.Lastname;
         public string EmployeeFirstname => SelectedDetailedEmployeeItem.Firstname;
         public string? ClothesID => SelectedDetailedEmployeeItem.ClothesID;
@@ -31,6 +31,7 @@ namespace DVS.ViewModels.Forms
             {
                 _comment = value;
                 OnPropertyChanged(nameof(Comment));
+                OnPropertyChanged(nameof(CanSubmit));
             }
         }
 
@@ -65,9 +66,11 @@ namespace DVS.ViewModels.Forms
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        public bool CanSubmit => !string.IsNullOrEmpty(Comment);
+        public bool CanSubmit => !string.IsNullOrEmpty(Comment)
+            || Comment != Employee.Clothes?.FirstOrDefault(s => s.ID == ClothesID).Sizes.FirstOrDefault(y => y.Size == Size).Comment;
 
         public ICommand SubmitComment { get; }
+
 
         public CommentEmployeeClothesFormViewModel(ICommand submitComment,
             SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore)
@@ -77,6 +80,7 @@ namespace DVS.ViewModels.Forms
 
             _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItemChanged += SelectedDetailedEmployeeClothesItemStore_SelectedDetailedEmployeeItemChanged;
         }
+
 
         private void SelectedDetailedEmployeeClothesItemStore_SelectedDetailedEmployeeItemChanged()
         {
