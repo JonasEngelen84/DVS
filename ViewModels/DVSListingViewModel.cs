@@ -12,20 +12,20 @@ namespace DVS.ViewModels
         private readonly ObservableCollection<ClothesListingItemViewModel> _clothesListingItemCollection = [];
         public IEnumerable<ClothesListingItemViewModel> ClothesListingItemCollection => _clothesListingItemCollection;
 
-        private readonly ObservableCollection<DetailedClothesListingItemModel> _detailedClothesListingItemCollection = [];
-        public IEnumerable<DetailedClothesListingItemModel> DetailedClothesListingItemCollection => _detailedClothesListingItemCollection;
+        private readonly ObservableCollection<DetailedClothesListingItemViewModel> _detailedClothesListingItemCollection = [];
+        public IEnumerable<DetailedClothesListingItemViewModel> DetailedClothesListingItemCollection => _detailedClothesListingItemCollection;
 
         private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeListingItemCollection = [];
         public IEnumerable<EmployeeListingItemViewModel> EmployeeListingItemCollection => _employeeListingItemCollection;
 
-        private readonly ObservableCollection<DetailedEmployeeListingItemModel> _detailedEmployeeListingItemCollection = [];
-        public IEnumerable<DetailedEmployeeListingItemModel> DetailedEmployeeListingItemCollection => _detailedEmployeeListingItemCollection;
+        private readonly ObservableCollection<DetailedEmployeeListingItemViewModel> _detailedEmployeeListingItemCollection = [];
+        public IEnumerable<DetailedEmployeeListingItemViewModel> DetailedEmployeeListingItemCollection => _detailedEmployeeListingItemCollection;
         
-        private readonly ObservableCollection<DetailedClothesListingItemModel> _newEmployeeListingItemCollection = [];
-        public IEnumerable<DetailedClothesListingItemModel> NewEmployeeListingItemCollection => _newEmployeeListingItemCollection;
+        private readonly ObservableCollection<DetailedClothesListingItemViewModel> _newEmployeeListingItemCollection = [];
+        public IEnumerable<DetailedClothesListingItemViewModel> NewEmployeeListingItemCollection => _newEmployeeListingItemCollection;
 
-        private DetailedClothesListingItemModel _incomingClothesListingItemModel;
-        public DetailedClothesListingItemModel IncomingClothesListingItemModel
+        private DetailedClothesListingItemViewModel _incomingClothesListingItemModel;
+        public DetailedClothesListingItemViewModel IncomingClothesListingItemModel
         {
             get
             {
@@ -41,8 +41,8 @@ namespace DVS.ViewModels
             }
         }
 
-        private DetailedClothesListingItemModel _removedClothesListingItemModel;
-        public DetailedClothesListingItemModel RemovedClothesListingItemModel
+        private DetailedClothesListingItemViewModel _removedClothesListingItemModel;
+        public DetailedClothesListingItemViewModel RemovedClothesListingItemModel
         {
             get
             {
@@ -58,7 +58,7 @@ namespace DVS.ViewModels
             }
         }
 
-        public DetailedClothesListingItemModel SelectedDetailedClothesItem
+        public DetailedClothesListingItemViewModel SelectedDetailedClothesItem
         {
             get => _detailedClothesListingItemCollection
                     .FirstOrDefault(y => y.Clothes.ID == _selectedDetailedClothesItemStore.SelectedDetailedClothesItem.ID);
@@ -66,10 +66,10 @@ namespace DVS.ViewModels
             set => _selectedDetailedClothesItemStore.SelectedDetailedClothesItem = value;
         }
         
-        public DetailedEmployeeListingItemModel SelectedDetailedEmployeeClothesItem
+        public DetailedEmployeeListingItemViewModel SelectedDetailedEmployeeClothesItem
         {
             get => _detailedEmployeeListingItemCollection
-                    .FirstOrDefault(y => y.Employee.ID == _selectedDetailedClothesItemStore.SelectedDetailedClothesItem.ID);
+                    .FirstOrDefault(y => y.Employee.ID == _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem.ID);
             
             set => _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem = value;
         }
@@ -125,7 +125,7 @@ namespace DVS.ViewModels
         {
             foreach (ClothesModel clothes in employee.Clothes)
             {
-                foreach (ClothesSizeModel size in clothes.Sizes)
+                foreach (ClothesSizeViewModel size in clothes.Sizes)
                 {
                     _newEmployeeListingItemCollection.Add(new(clothes, size.Size));
 
@@ -140,7 +140,7 @@ namespace DVS.ViewModels
                 return;
             }
 
-            DetailedClothesListingItemModel? existingItem = _newEmployeeListingItemCollection
+            DetailedClothesListingItemViewModel? existingItem = _newEmployeeListingItemCollection
                 .FirstOrDefault(modelItem => modelItem.ID == IncomingClothesListingItemModel.ID
                 && modelItem.Size == IncomingClothesListingItemModel.Size);
 
@@ -154,7 +154,7 @@ namespace DVS.ViewModels
             if (existingItem == null)
             {
                 clothes.Sizes.Add(new (IncomingClothesListingItemModel.Size) { Quantity = 1 });
-                DetailedClothesListingItemModel newItem = new(clothes, IncomingClothesListingItemModel.Size);
+                DetailedClothesListingItemViewModel newItem = new(clothes, IncomingClothesListingItemModel.Size);
                 _newEmployeeListingItemCollection.Add(newItem);
             }
             else
@@ -177,7 +177,7 @@ namespace DVS.ViewModels
                 _newEmployeeListingItemCollection.Remove(RemovedClothesListingItemModel);
             else
             {
-                DetailedClothesListingItemModel? existingItem = _newEmployeeListingItemCollection
+                DetailedClothesListingItemViewModel? existingItem = _newEmployeeListingItemCollection
                 .FirstOrDefault(modelItem => modelItem.ID == IncomingClothesListingItemModel.ID
                 && modelItem.Size == IncomingClothesListingItemModel.Size);
 
@@ -220,13 +220,13 @@ namespace DVS.ViewModels
         {
             if (clothes.Sizes.Count == 0)
             {
-                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemModel(clothes, null));
+                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemViewModel(clothes, null));
             }
             else
             {
-                foreach (ClothesSizeModel size in clothes.Sizes)
+                foreach (ClothesSizeViewModel size in clothes.Sizes)
                 {
-                    _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemModel(clothes, size.Size));
+                    _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemViewModel(clothes, size.Size));
                 }
             }
         }
@@ -241,7 +241,7 @@ namespace DVS.ViewModels
         
         private void ClothesStore_DetailedClothesItemUpdated(ClothesModel clothes)
         {
-            List<DetailedClothesListingItemModel> itemsToUpdate = _detailedClothesListingItemCollection
+            List<DetailedClothesListingItemViewModel> itemsToUpdate = _detailedClothesListingItemCollection
                 .Where(y => y.Clothes.GuidID == clothes.GuidID).ToList();
 
             if (itemsToUpdate.Count != clothes.Sizes.Count)
@@ -252,7 +252,7 @@ namespace DVS.ViewModels
             }
             else
             {
-                foreach (DetailedClothesListingItemModel detailedClothesItem in itemsToUpdate)
+                foreach (DetailedClothesListingItemViewModel detailedClothesItem in itemsToUpdate)
                 {
                     detailedClothesItem.Update(clothes);
                 }
@@ -265,14 +265,14 @@ namespace DVS.ViewModels
                 .FirstOrDefault(y => y.Clothes.GuidID == guidID);
             _clothesListingItemCollection.Remove(ItemToDelete);
 
-            List<DetailedClothesListingItemModel> itemsToDelete = _detailedClothesListingItemCollection
+            List<DetailedClothesListingItemViewModel> itemsToDelete = _detailedClothesListingItemCollection
                 .Where(y => y.Clothes.GuidID == guidID).ToList();
             DetailedClothesItemDeleted(itemsToDelete);
         }
         
-        private void DetailedClothesItemDeleted(List<DetailedClothesListingItemModel> itemsToDelete)
+        private void DetailedClothesItemDeleted(List<DetailedClothesListingItemViewModel> itemsToDelete)
         {
-            foreach (DetailedClothesListingItemModel item in itemsToDelete)
+            foreach (DetailedClothesListingItemViewModel item in itemsToDelete)
             {
                 _detailedClothesListingItemCollection.Remove(item);
             }
@@ -306,7 +306,7 @@ namespace DVS.ViewModels
             {
                 foreach (ClothesModel clothes in employee.Clothes)
                 {
-                    foreach (ClothesSizeModel size in clothes.Sizes)
+                    foreach (ClothesSizeViewModel size in clothes.Sizes)
                     {
                         _detailedEmployeeListingItemCollection.Add(new(employee, clothes.GuidID, size.Size));
                     }
@@ -325,7 +325,7 @@ namespace DVS.ViewModels
         
         private void EmployeeStore_DetailedEmployeeItemUpdated(EmployeeModel employee)
         {
-            List<DetailedEmployeeListingItemModel> itemsToUpdate = _detailedEmployeeListingItemCollection
+            List<DetailedEmployeeListingItemViewModel> itemsToUpdate = _detailedEmployeeListingItemCollection
                 .Where(y => y.Employee.GuidID == employee.GuidID).ToList();
 
             if (itemsToUpdate.Count != employee.Clothes.Count)
@@ -336,7 +336,7 @@ namespace DVS.ViewModels
             }
             else
             {
-                foreach (DetailedEmployeeListingItemModel detailedEmployeeItem in itemsToUpdate)
+                foreach (DetailedEmployeeListingItemViewModel detailedEmployeeItem in itemsToUpdate)
                 {
                     detailedEmployeeItem.Update(employee);
                 }
@@ -351,14 +351,14 @@ namespace DVS.ViewModels
                 .FirstOrDefault(y => y.Employee.GuidID == guidID);
             _employeeListingItemCollection.Remove(ItemToDelete);
 
-            List<DetailedEmployeeListingItemModel> itemsToDelete = _detailedEmployeeListingItemCollection
+            List<DetailedEmployeeListingItemViewModel> itemsToDelete = _detailedEmployeeListingItemCollection
                 .Where(y => y.Employee.GuidID == guidID).ToList();
             DetailedEmployeeItemDeleted(itemsToDelete);
         }
         
-        private void DetailedEmployeeItemDeleted(List<DetailedEmployeeListingItemModel> itemsToDelete)
+        private void DetailedEmployeeItemDeleted(List<DetailedEmployeeListingItemViewModel> itemsToDelete)
         {
-            foreach (DetailedEmployeeListingItemModel item in itemsToDelete)
+            foreach (DetailedEmployeeListingItemViewModel item in itemsToDelete)
             {
                 _detailedEmployeeListingItemCollection.Remove(item);
             }

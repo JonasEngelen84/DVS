@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using DVS.ViewModels;
 
 namespace DVS.Models
 {
@@ -12,6 +13,6 @@ namespace DVS.Models
         public SeasonModel Season { get; set; } = season;
         public string? Comment { get; set; } = comment;
 
-        public ObservableCollection<ClothesSizeModel> Sizes { get; set; } = [];
+        public ObservableCollection<ClothesSizeViewModel> Sizes { get; set; } = [];
     }
 }

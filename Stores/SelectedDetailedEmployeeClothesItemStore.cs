@@ -1,11 +1,11 @@
-﻿using DVS.Models;
+﻿using DVS.ViewModels;
 
 namespace DVS.Stores
 {
     public class SelectedDetailedEmployeeClothesItemStore
     {
-        private DetailedEmployeeListingItemModel _selectedDetailedEmployeeItem;
-        public DetailedEmployeeListingItemModel SelectedDetailedEmployeeItem
+        private DetailedEmployeeListingItemViewModel _selectedDetailedEmployeeItem;
+        public DetailedEmployeeListingItemViewModel SelectedDetailedEmployeeItem
         {
             get => _selectedDetailedEmployeeItem;
 

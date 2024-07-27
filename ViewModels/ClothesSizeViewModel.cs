@@ -1,6 +1,6 @@
-﻿namespace DVS.Models
+﻿namespace DVS.ViewModels
 {
-    public class ClothesSizeModel(string size) : ModelBase
+    public class ClothesSizeViewModel(string size) : ViewModelBase
     {
         public string Size { get; } = size;
 
@@ -31,7 +31,7 @@
                 }
             }
         }
-        
+
         private bool _isSelected;
         public bool IsSelected
         {

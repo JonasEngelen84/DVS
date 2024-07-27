@@ -13,10 +13,13 @@ namespace DVS.ViewModels.Views
         public CommentEmployeeClothesViewModel(ModalNavigationStore modalNavigationStore, EmployeeStore employeeStore,
             SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore)
         {
-            ICommand SubmitComment = new SubmitCommentEmployeeClothesCommand(this, employeeStore, modalNavigationStore);
+            ICommand submitComment = new SubmitCommentEmployeeClothesCommand(this, employeeStore, modalNavigationStore);
             CloseComment = new CloseCommentCommand(modalNavigationStore);
 
-            //CommentEmployeeClothesFormViewModel = new(selectedDetailedEmployeeClothesItemStore, SubmitComment);
+            CommentEmployeeClothesFormViewModel = new(submitComment, selectedDetailedEmployeeClothesItemStore)
+            {
+                Comment = selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem.Comment
+            };
         }
     }
 }

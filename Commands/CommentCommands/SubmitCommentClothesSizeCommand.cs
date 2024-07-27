@@ -1,5 +1,6 @@
 ﻿using DVS.Models;
 using DVS.Stores;
+using DVS.ViewModels;
 using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
 
@@ -29,7 +30,7 @@ namespace DVS.Commands.CommentCommands
                 Sizes = commentClothesSizeFormViewModel.Clothes.Sizes
             };
 
-            ClothesSizeModel existingItem = clothesToEdit.Sizes.FirstOrDefault(s => s.Size == commentClothesSizeFormViewModel.Size);
+            ClothesSizeViewModel existingItem = clothesToEdit.Sizes.FirstOrDefault(s => s.Size == commentClothesSizeFormViewModel.Size);
 
             if (existingItem == null)
             {

@@ -14,7 +14,7 @@ namespace DVS.ViewModels.ListViewItems
         public CategoryModel Category => Clothes.Category;
         public SeasonModel Season => Clothes.Season;
         public string? Comment => Clothes.Comment;
-        public ObservableCollection<ClothesSizeModel> Sizes => Clothes.Sizes;
+        public ObservableCollection<ClothesSizeViewModel> Sizes => Clothes.Sizes;
 
         private bool _isDeleting;
         public bool IsDeleting

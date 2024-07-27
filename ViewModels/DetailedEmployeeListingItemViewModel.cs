@@ -1,8 +1,8 @@
-﻿using System.Xml.Linq;
+﻿using DVS.Models;
 
-namespace DVS.Models
+namespace DVS.ViewModels
 {
-    public class DetailedEmployeeListingItemModel : ModelBase
+    public class DetailedEmployeeListingItemViewModel : ViewModelBase
     {
         public EmployeeModel Employee { get; private set; }
         public Guid GuidID => Employee.GuidID;
@@ -52,7 +52,7 @@ namespace DVS.Models
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
 
-        public DetailedEmployeeListingItemModel(EmployeeModel employee, Guid? clothesGuidID, string size)
+        public DetailedEmployeeListingItemViewModel(EmployeeModel employee, Guid? clothesGuidID, string size)
         {
             Employee = employee;
             ClothesGuidID = clothesGuidID;

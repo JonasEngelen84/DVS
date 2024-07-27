@@ -16,7 +16,7 @@ namespace DVS.Commands
                 _dVSListingViewModel.AddClothesItemToNewEmployeeListingItemCollection();
             else
             {
-                DetailedClothesListingItemModel? existingItem = _dVSListingViewModel.DetailedClothesListingItemCollection
+                DetailedClothesListingItemViewModel? existingItem = _dVSListingViewModel.DetailedClothesListingItemCollection
                 .FirstOrDefault(modelItem => modelItem.ID == _dVSListingViewModel.IncomingClothesListingItemModel.ID
                 && modelItem.Size == _dVSListingViewModel.IncomingClothesListingItemModel.Size);
 

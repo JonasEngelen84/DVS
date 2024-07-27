@@ -29,7 +29,7 @@ namespace DVS.Commands.CommentCommands
                 Clothes = commentEmployeeClothesFormViewModel.Employee.Clothes
             };
 
-            ClothesSizeModel? existingItem = employeeToEdit.Clothes
+            ClothesSizeViewModel? existingItem = employeeToEdit.Clothes
                 .FirstOrDefault(s => s.ID == commentEmployeeClothesFormViewModel.ClothesID)?.Sizes
                 .FirstOrDefault(s => s.Size == commentEmployeeClothesFormViewModel.Size);
 

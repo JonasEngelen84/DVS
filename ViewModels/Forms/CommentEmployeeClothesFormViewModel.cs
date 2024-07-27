@@ -1,5 +1,4 @@
-﻿using DVS.Commands.CommentCommands;
-using DVS.Models;
+﻿using DVS.Models;
 using DVS.Stores;
 using System.Windows.Input;
 
@@ -9,7 +8,7 @@ namespace DVS.ViewModels.Forms
     {
         private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore;
 
-        private DetailedEmployeeListingItemModel SelectedDetailedEmployeeItem => _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem;
+        private DetailedEmployeeListingItemViewModel SelectedDetailedEmployeeItem => _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem;
 
         public bool HasSelectedDetailedEmployeeListingItem => SelectedDetailedEmployeeItem != null;
         public EmployeeModel Employee => SelectedDetailedEmployeeItem.Employee;
@@ -70,8 +69,8 @@ namespace DVS.ViewModels.Forms
 
         public ICommand SubmitComment { get; }
 
-        public CommentEmployeeClothesFormViewModel(SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore,
-            SubmitCommentClothesSizeCommand submitComment)
+        public CommentEmployeeClothesFormViewModel(ICommand submitComment,
+            SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore)
         {
             _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
             SubmitComment = submitComment;

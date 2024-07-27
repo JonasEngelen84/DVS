@@ -1,5 +1,6 @@
 ﻿using DVS.Models;
 using DVS.Stores;
+using DVS.ViewModels;
 using DVS.ViewModels.Forms;
 using DVS.ViewModels.Views;
 
@@ -34,7 +35,7 @@ namespace DVS.Commands.AddEditClothesCommands
                 ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
                 : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
 
-            foreach (ClothesSizeModel sizeModel in selectedSizes)
+            foreach (ClothesSizeViewModel sizeModel in selectedSizes)
             {
                 clothes.Sizes.Add(sizeModel);
             }
@@ -45,7 +46,8 @@ namespace DVS.Commands.AddEditClothesCommands
             }
             catch (Exception)
             {
-                addEditClothesFormViewModel.ErrorMessage = "Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                addEditClothesFormViewModel.ErrorMessage =
+                    "Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
             }
             finally
             {

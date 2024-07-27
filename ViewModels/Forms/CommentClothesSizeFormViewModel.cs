@@ -1,5 +1,4 @@
-﻿using DVS.Commands.CommentCommands;
-using DVS.Models;
+﻿using DVS.Models;
 using DVS.Stores;
 using System.Windows.Input;
 
@@ -9,7 +8,7 @@ namespace DVS.ViewModels.Forms
     {
         private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore;
 
-        private DetailedClothesListingItemModel SelectedDetailedClothesItem => _selectedDetailedClothesItemStore.SelectedDetailedClothesItem;
+        private DetailedClothesListingItemViewModel SelectedDetailedClothesItem => _selectedDetailedClothesItemStore.SelectedDetailedClothesItem;
 
         public bool HasSelectedDetailedClothesListingItem => SelectedDetailedClothesItem != null;
         public ClothesModel Clothes => SelectedDetailedClothesItem.Clothes;
@@ -65,12 +64,13 @@ namespace DVS.ViewModels.Forms
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        public bool CanSubmit => !string.IsNullOrEmpty(Comment);
+        public bool CanSubmit => !string.IsNullOrEmpty(Comment)
+            || Comment != Clothes.Sizes?.FirstOrDefault(s => s.Size == Size).Comment;
 
         public ICommand SubmitComment { get; }
 
-        public CommentClothesSizeFormViewModel(SelectedDetailedClothesItemStore selectedDetailedClothesItemStore,
-            SubmitCommentClothesSizeCommand submitComment)
+        public CommentClothesSizeFormViewModel(ICommand submitComment,
+            SelectedDetailedClothesItemStore selectedDetailedClothesItemStore)
         {
             _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
             SubmitComment = submitComment;

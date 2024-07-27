@@ -1,6 +1,8 @@
-﻿namespace DVS.Models
+﻿using DVS.Models;
+
+namespace DVS.ViewModels
 {
-    public class DetailedClothesListingItemModel(ClothesModel clothes, string size) : ModelBase
+    public class DetailedClothesListingItemViewModel(ClothesModel clothes, string size) : ViewModelBase
     {
         public ClothesModel Clothes { get; private set; } = clothes;
         public string ID => Clothes.ID;

@@ -28,7 +28,7 @@ namespace DVS.Commands
                     Sizes = _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Sizes
                 };
 
-                ClothesSizeModel? sizeToEdit = clothesToEdit.Sizes.
+                ClothesSizeViewModel? sizeToEdit = clothesToEdit.Sizes.
                     FirstOrDefault(y => y.Size == _dVSListingViewModel.RemovedClothesListingItemModel.Size);
 
                 _dVSListingViewModel.RemovedClothesListingItemModel.ErrorMessage = null;

@@ -9,65 +9,65 @@
         <StackPanel>
 
             <!-- Item Details -->
-            <StackPanel Orientation="Horizontal">
+            <StackPanel >
 
                 <!-- Employee ID -->
                 <Label Content="{Binding EmployeeID}"
                        FontSize="14"
                        FontWeight="Bold"
-                       Margin="0 0 0 0" />
+                       Margin="0 10 0 0" />
 
                 <!-- Employee Lastname -->
                 <Label Content="{Binding EmployeeLastname}"
                        FontSize="14"
                        FontWeight="Bold"
-                       Margin="0 0 0 0" />
+                       Margin="0 10 0 0" />
 
                 <!-- Employee Firstname -->
-                <Label Content="{Binding EmployeeFirstname}"
+                <Label Content="testtttttt"
                        FontSize="14"
                        FontWeight="Bold"
-                       Margin="0 0 0 0" />
+                       Margin="0 10 0 0" />
 
                 <!-- Clothes ID -->
                 <Label Content="{Binding ClothesID}"
                        FontSize="14"
                        FontWeight="Bold"
-                       Margin="0 0 0 0" />
+                       Margin="0 10 0 0" />
 
                 <!-- Clothes Name -->
                 <Label Content="{Binding ClothesName}"
                        FontSize="14"
                        FontWeight="Bold"
-                       Margin="10 0 0 0" />
+                       Margin="0 10 0 0" />
 
                 <!-- Category -->
                 <Label Content="{Binding Category.Name}"
                        FontSize="14"
                        FontWeight="Bold"
-                       Margin="0 0 0 0" />
+                       Margin="0 10 0 0" />
 
                 <!-- Season -->
                 <Label Content="{Binding Season.Name}"
                        FontSize="14"
                        FontWeight="Bold"
-                       Margin="10 0 0 0" />
+                       Margin="0 10 0 0" />
 
                 <!-- Size -->
                 <Label Content="{Binding Size.Name}"
                        FontSize="14"
                        FontWeight="Bold"
-                       Margin="10 0 0 0" />
+                       Margin="0 10 0 0" />
 
                 <!-- Quantity -->
                 <Label Content="{Binding Size.Quantity}"
                        FontSize="14"
                        FontWeight="Bold"
-                       Margin="10 0 0 0" />
+                       Margin="0 10 0 0" />
             </StackPanel>
 
             <!-- Comment -->
-            <TextBox Margin="10 0 0 0"
+            <TextBox Margin="0 0 0 0"
                      Width="300"
                      Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
