@@ -198,6 +198,8 @@ namespace DVS.ViewModels
         {
             _clothesListingItemCollection.Clear();
             _detailedClothesListingItemCollection.Clear();
+            //TODO: _newEmployeeListingItemCollection über anderen weg bei abbruch Add/Edit Employee löschen
+            _newEmployeeListingItemCollection.Clear();
 
             foreach (ClothesModel clothes in _clothesStore.Clothes)
             {
