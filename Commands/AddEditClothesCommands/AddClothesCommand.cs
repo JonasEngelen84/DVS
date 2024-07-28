@@ -1,4 +1,4 @@
-﻿using DVS.Models;
+﻿using DVS.Domain.Models;
 using DVS.Stores;
 using DVS.ViewModels;
 using DVS.ViewModels.Forms;
@@ -35,7 +35,7 @@ namespace DVS.Commands.AddEditClothesCommands
                 ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
                 : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
 
-            foreach (ClothesSizeViewModel sizeModel in selectedSizes)
+            foreach (ClothesSizeModel sizeModel in selectedSizes)
             {
                 clothes.Sizes.Add(sizeModel);
             }

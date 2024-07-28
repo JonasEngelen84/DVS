@@ -1,7 +1,7 @@
 ﻿using DVS.Commands.AddEditCategoryCommands;
 using DVS.Commands.AddEditClothesCommands;
 using DVS.Commands.AddEditSeasonCommands;
-using DVS.Models;
+using DVS.Domain.Models;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
 using System.Windows.Input;

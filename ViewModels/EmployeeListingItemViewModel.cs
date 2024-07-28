@@ -1,5 +1,5 @@
 ﻿using DVS.Commands.AddEditEmployeeCommands;
-using DVS.Models;
+using DVS.Domain.Models;
 using DVS.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;

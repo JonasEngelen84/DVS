@@ -1,4 +1,4 @@
-﻿using DVS.Models;
+﻿using DVS.Domain.Models;
 
 namespace DVS.Stores
 {

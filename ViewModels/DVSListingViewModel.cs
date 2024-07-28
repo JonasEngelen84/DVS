@@ -1,5 +1,5 @@
 ﻿using DVS.Commands;
-using DVS.Models;
+using DVS.Domain.Models;
 using DVS.Stores;
 using DVS.ViewModels.ListViewItems;
 using System.Collections.ObjectModel;
@@ -128,7 +128,7 @@ namespace DVS.ViewModels
         {
             foreach (ClothesModel clothes in employee.Clothes)
             {
-                foreach (ClothesSizeViewModel size in clothes.Sizes)
+                foreach (ClothesSizeModel size in clothes.Sizes)
                 {
                     _newEmployeeListingItemCollection.Add(new(clothes, size.Size));
 
@@ -225,7 +225,7 @@ namespace DVS.ViewModels
             }
             else
             {
-                foreach (ClothesSizeViewModel size in clothes.Sizes)
+                foreach (ClothesSizeModel size in clothes.Sizes)
                 {
                     DetailedClothesItemAdded(new DetailedClothesListingItemViewModel(clothes, size.Size));
                 }
@@ -352,7 +352,7 @@ namespace DVS.ViewModels
             {
                 foreach (ClothesModel clothes in employee.Clothes)
                 {
-                    foreach (ClothesSizeViewModel size in clothes.Sizes)
+                    foreach (ClothesSizeModel size in clothes.Sizes)
                     {
                         DetailedEmployeeItemAdded(new DetailedEmployeeListingItemViewModel(employee, clothes.GuidID, size.Size));
                     }

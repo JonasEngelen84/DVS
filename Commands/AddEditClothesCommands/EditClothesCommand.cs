@@ -1,4 +1,4 @@
-﻿using DVS.Models;
+﻿using DVS.Domain.Models;
 using DVS.Stores;
 using DVS.ViewModels;
 using DVS.ViewModels.Forms;
@@ -44,7 +44,7 @@ namespace DVS.Commands.AddEditClothesCommands
                     : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
 
                 //TODO: Kommentare von DetailedItems werden entfernt bei einem update
-                foreach (ClothesSizeViewModel sizeModel in selectedSizes)
+                foreach (ClothesSizeModel sizeModel in selectedSizes)
                 {
                     clothesToEdit.Sizes.Add(sizeModel);
                 }

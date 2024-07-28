@@ -1,4 +1,4 @@
-﻿using DVS.Models;
+﻿using DVS.Domain.Models;
 using DVS.Stores;
 using DVS.ViewModels;
 using DVS.ViewModels.Forms;

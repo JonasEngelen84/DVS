@@ -1,4 +1,4 @@
-﻿using DVS.Models;
+﻿using DVS.Domain.Models;
 using DVS.Stores;
 using DVS.ViewModels;
 using System.Windows;
@@ -28,7 +28,7 @@ namespace DVS.Commands
                     Sizes = _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Sizes
                 };
 
-                ClothesSizeViewModel? sizeToEdit = clothesToEdit.Sizes.
+                ClothesSizeModel? sizeToEdit = clothesToEdit.Sizes.
                     FirstOrDefault(y => y.Size == _dVSListingViewModel.RemovedClothesListingItemModel.Size);
 
                 _dVSListingViewModel.RemovedClothesListingItemModel.ErrorMessage = null;

@@ -1,4 +1,4 @@
-﻿using DVS.Models;
+﻿using DVS.Domain.Models;
 using DVS.Stores;
 using DVS.ViewModels.Forms;
 using System.Collections.ObjectModel;
@@ -17,8 +17,8 @@ namespace DVS.ViewModels
         private readonly CollectionViewSource _seasonCollectionViewSource;
         public ICollectionView Seasons => _seasonCollectionViewSource.View;
 
-        private ObservableCollection<ClothesSizeViewModel> _availableSizesEU;
-        public ObservableCollection<ClothesSizeViewModel> AvailableSizesEU
+        private ObservableCollection<ClothesSizeModel> _availableSizesEU;
+        public ObservableCollection<ClothesSizeModel> AvailableSizesEU
         {
             get => _availableSizesEU;
             set
@@ -31,8 +31,8 @@ namespace DVS.ViewModels
             }
         }
 
-        private ObservableCollection<ClothesSizeViewModel> _availableSizesUS;
-        public ObservableCollection<ClothesSizeViewModel> AvailableSizesUS
+        private ObservableCollection<ClothesSizeModel> _availableSizesUS;
+        public ObservableCollection<ClothesSizeModel> AvailableSizesUS
         {
             get => _availableSizesUS;
             set
@@ -64,30 +64,30 @@ namespace DVS.ViewModels
 
             _availableSizesEU =
             [
-                new ClothesSizeViewModel("44"),
-                new ClothesSizeViewModel("46"),
-                new ClothesSizeViewModel("48"),
-                new ClothesSizeViewModel("50"),
-                new ClothesSizeViewModel("52"),
-                new ClothesSizeViewModel("54"),
-                new ClothesSizeViewModel("56"),
-                new ClothesSizeViewModel("58"),
-                new ClothesSizeViewModel("60"),
-                new ClothesSizeViewModel("62")
+                new ClothesSizeModel("44"),
+                new ClothesSizeModel("46"),
+                new ClothesSizeModel("48"),
+                new ClothesSizeModel("50"),
+                new ClothesSizeModel("52"),
+                new ClothesSizeModel("54"),
+                new ClothesSizeModel("56"),
+                new ClothesSizeModel("58"),
+                new ClothesSizeModel("60"),
+                new ClothesSizeModel("62")
             ];
 
             _availableSizesUS =
             [
-                new ClothesSizeViewModel("XS"),
-                new ClothesSizeViewModel("S"),
-                new ClothesSizeViewModel("M"),
-                new ClothesSizeViewModel("L"),
-                new ClothesSizeViewModel("XL"),
-                new ClothesSizeViewModel("XLL"),
-                new ClothesSizeViewModel("3XL"),
-                new ClothesSizeViewModel("4XL"),
-                new ClothesSizeViewModel("5XL"),
-                new ClothesSizeViewModel("6XL")
+                new ClothesSizeModel("XS"),
+                new ClothesSizeModel("S"),
+                new ClothesSizeModel("M"),
+                new ClothesSizeModel("L"),
+                new ClothesSizeModel("XL"),
+                new ClothesSizeModel("XLL"),
+                new ClothesSizeModel("3XL"),
+                new ClothesSizeModel("4XL"),
+                new ClothesSizeModel("5XL"),
+                new ClothesSizeModel("6XL")
             ];
 
             LoadSizes();

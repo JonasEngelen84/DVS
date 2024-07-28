@@ -34,6 +34,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DVS.Domain\DVS.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\Images\Add Employee.png" />
     <Resource Include="Resources\Images\Add Shirt.png" />
     <Resource Include="Resources\Images\Close.png" />

@@ -1,4 +1,4 @@
-﻿using DVS.Models;
+﻿using DVS.Domain.Models;
 using DVS.Stores;
 using DVS.ViewModels;
 using DVS.ViewModels.Forms;
@@ -33,12 +33,12 @@ namespace DVS.Commands.AddEditEmployeeCommands
 
                 if (existingClothes != null)
                 {
-                    existingClothes.Sizes.Add(new ClothesSizeViewModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
+                    existingClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
                 }
                 else
                 {
                     ClothesModel newClothes = new(item.Clothes.GuidID, item.ID, item.Name, item.Clothes.Category, item.Clothes.Season, null);
-                    newClothes.Sizes.Add(new ClothesSizeViewModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
+                    newClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
                     employee.Clothes.Add(newClothes);
                 }
             }

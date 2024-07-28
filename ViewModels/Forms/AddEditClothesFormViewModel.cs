@@ -1,4 +1,4 @@
-﻿using DVS.Models;
+﻿using DVS.Domain.Models;
 using System.Windows.Input;
 
 namespace DVS.ViewModels.Forms

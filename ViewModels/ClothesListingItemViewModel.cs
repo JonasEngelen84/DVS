@@ -1,5 +1,5 @@
 ﻿using DVS.Commands.AddEditClothesCommands;
-using DVS.Models;
+using DVS.Domain.Models;
 using DVS.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -14,7 +14,7 @@ namespace DVS.ViewModels.ListViewItems
         public CategoryModel Category => Clothes.Category;
         public SeasonModel Season => Clothes.Season;
         public string? Comment => Clothes.Comment;
-        public ObservableCollection<ClothesSizeViewModel> Sizes => Clothes.Sizes;
+        public ObservableCollection<ClothesSizeModel> Sizes => Clothes.Sizes;
 
         private bool _isDeleting;
         public bool IsDeleting
