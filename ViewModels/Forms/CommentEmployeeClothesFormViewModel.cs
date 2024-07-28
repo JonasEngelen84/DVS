@@ -65,7 +65,7 @@ namespace DVS.ViewModels.Forms
         }
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
-        //TODO: CanSubmiiComment
+        //TODO: CanSubmitComment
         public bool CanSubmit => !string.IsNullOrEmpty(Comment)
             || Comment != Employee.Clothes?.FirstOrDefault(s => s.ID == ClothesID).Sizes.FirstOrDefault(y => y.Size == Size).Comment;
 

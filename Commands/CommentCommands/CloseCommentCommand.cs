@@ -1,8 +1,10 @@
 ﻿using DVS.Stores;
+using DVS.ViewModels;
 
 namespace DVS.Commands.CommentCommands
 {
-    public class CloseCommentCommand(ModalNavigationStore modalNavigationStore) : CommandBase
+    public class CloseCommentCommand(ModalNavigationStore modalNavigationStore,
+        DVSListingViewModel dVSListingViewModel) : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 

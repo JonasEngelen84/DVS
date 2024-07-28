@@ -43,6 +43,7 @@ namespace DVS.Commands.AddEditClothesCommands
                     ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
                     : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
 
+                //TODO: Kommentare von DetailedItems werden entfernt bei einem update
                 foreach (ClothesSizeViewModel sizeModel in selectedSizes)
                 {
                     clothesToEdit.Sizes.Add(sizeModel);

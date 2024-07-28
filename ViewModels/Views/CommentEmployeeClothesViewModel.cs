@@ -11,10 +11,10 @@ namespace DVS.ViewModels.Views
         public ICommand CloseComment { get; }
 
         public CommentEmployeeClothesViewModel(ModalNavigationStore modalNavigationStore, EmployeeStore employeeStore,
-            SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore)
+            SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore, DVSListingViewModel dVSListingViewModel)
         {
             ICommand submitComment = new SubmitCommentEmployeeClothesCommand(this, employeeStore, modalNavigationStore);
-            CloseComment = new CloseCommentCommand(modalNavigationStore);
+            CloseComment = new CloseCommentCommand(modalNavigationStore, dVSListingViewModel);
 
             CommentEmployeeClothesFormViewModel = new(submitComment, selectedDetailedEmployeeClothesItemStore)
             {

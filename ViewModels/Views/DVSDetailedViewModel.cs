@@ -7,8 +7,7 @@ using System.Windows.Input;
 
 namespace DVS.ViewModels.Views
 {
-    public class DVSDetailedViewModel(DVSListingViewModel dVSListingViewModel,
-                                      ModalNavigationStore modalNavigationStore,
+    public class DVSDetailedViewModel(DVSListingViewModel dVSListingViewModel, ModalNavigationStore modalNavigationStore,
                                       CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore, EmployeeStore employeeStore,
                                       SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore,
                                       SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore) : ViewModelBase
@@ -21,12 +20,16 @@ namespace DVS.ViewModels.Views
         public ICommand Minus { get; } = new MinusCommand(modalNavigationStore);
 
         public ICommand OpenComment { get; } = new OpenCommentCommand(_selectedDetailedClothesItemStore,
-            _selectedDetailedEmployeeClothesItemStore, modalNavigationStore, clothesStore, employeeStore);
+            _selectedDetailedEmployeeClothesItemStore, modalNavigationStore, clothesStore, employeeStore, dVSListingViewModel);
 
         public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(
             modalNavigationStore, categoryStore, seasonStore, clothesStore);
 
         public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(
             dVSListingViewModel, employeeStore, clothesStore, modalNavigationStore);
+
+        public ICommand OpenEditDetailedItem { get; } = new OpenEditDetailedItemCommand(_selectedDetailedClothesItemStore,
+            _selectedDetailedEmployeeClothesItemStore, modalNavigationStore, clothesStore,
+            employeeStore, dVSListingViewModel, categoryStore, seasonStore);
     }
 }

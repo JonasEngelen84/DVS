@@ -37,6 +37,7 @@ namespace DVS.Commands.AddEditEmployeeCommands
                                                    editEmployeeFormViewModel.Comment);
                 employeeToEdit.Clothes.Clear();
 
+                //TODO: Kommentare von DetailedItems werden entfernt bei einem update
                 foreach (DetailedClothesListingItemViewModel item in
                 _editEmployeeViewModel.AddEditEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
                 {

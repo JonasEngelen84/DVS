@@ -3,7 +3,6 @@ using DVS.Models;
 using DVS.Stores;
 using DVS.ViewModels.ListViewItems;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 
 namespace DVS.ViewModels
@@ -63,16 +62,24 @@ namespace DVS.ViewModels
         {
             get => _detailedClothesListingItemCollection
                     .FirstOrDefault(y => y.Clothes.ID == _selectedDetailedClothesItemStore.SelectedDetailedClothesItem.ID);
-            
-            set => _selectedDetailedClothesItemStore.SelectedDetailedClothesItem = value;
+
+            set
+            {
+                _selectedDetailedClothesItemStore.SelectedDetailedClothesItem = value;
+                _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem = null;
+            }
         }
         
         public DetailedEmployeeListingItemViewModel SelectedDetailedEmployeeClothesItem
         {//TODO: ist beim löschen aller mitarbeiter bekleidungen auf null und wirft ex
             get => _detailedEmployeeListingItemCollection
                     .FirstOrDefault(y => y.Employee.ID == _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem.ID);
-            
-            set => _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem = value;
+
+            set
+            {
+                _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem = value;
+                _selectedDetailedClothesItemStore.SelectedDetailedClothesItem = null;
+            }
         }
 
         private readonly ModalNavigationStore _modalNavigationStore;
@@ -232,13 +239,16 @@ namespace DVS.ViewModels
          
         private void ClothesStore_ClothesUpdated(ClothesModel clothes)
         {
+            // Finden des zu bearbeitenden ClothesItem mit der passenden ClothesGuidID
             ClothesListingItemViewModel? ItemToUpdate = _clothesListingItemCollection
                 .FirstOrDefault(y => y.Clothes.GuidID == clothes.GuidID);
 
             ItemToUpdate?.Update(clothes);
 
+            // Entfernen sämtlicher Kleidungsgrößen der zu bearbeitenden Bekleidung
             if (clothes.Sizes.Count == 0)
             {
+                // Finden aller DetailedClothesItems mit der passenden ClothesGuidID
                 List<DetailedClothesListingItemViewModel> itemsToDelete = _detailedClothesListingItemCollection
                 .Where(y => y.Clothes.GuidID == clothes.GuidID)
                 .ToList();
@@ -252,12 +262,15 @@ namespace DVS.ViewModels
             }
             else
             {
+                // Speichern aller Größen der zu bearbeitenden Bekleidung 
                 var currentSizes = clothes.Sizes.Select(s => s.Size).ToHashSet();
 
+                // Finden aller DetailedClothesItems mit der passenden ClothesID
                 var detailedItems = _detailedClothesListingItemCollection
                     .Where(y => y.Clothes.GuidID == clothes.GuidID)
                     .ToList();
 
+                // Entfernen sämtlicher DetailedClothesItems, deren Größe, die zu bearbeitende Bekleidung nicht mehr beinhaltet
                 foreach (var item in detailedItems)
                 {
                     if (!currentSizes.Contains(item.Size))
@@ -266,6 +279,8 @@ namespace DVS.ViewModels
                     }
                 }
 
+                // Prüfen ob die zu bearbeitende Bekleidung neue größen hinzubekommen hat? DetailedEmployeeClothesItems hinzufügen
+                // ?? Aktualisieren der DetailedEmployeeClothesItems
                 foreach (var size in clothes.Sizes)
                 {
                     DetailedClothesListingItemViewModel? itemToUpdate = _detailedClothesListingItemCollection
@@ -352,15 +367,17 @@ namespace DVS.ViewModels
 
         private void EmployeeStore_EmployeeUpdated(EmployeeModel employee)
         {
+            // Finden des zu bearbeitenden EmployeeItem mit der passenden EmployeeGuidID
             EmployeeListingItemViewModel? ItemToUpdate = _employeeListingItemCollection
                 .FirstOrDefault(y => y.Employee.GuidID == employee.GuidID);
 
             ItemToUpdate?.Update(employee);
             _newEmployeeListingItemCollection.Clear();
 
-            // Entfernen sämtlicher Bekleidung des Mitarbeiters
+            // Entfernen sämtlicher Bekleidung des zu bearbeitenden Mitarbeiters
             if (employee.Clothes.Count == 0)
             {
+                // Finden aller DetailedEmployeeClothesItems mit der passenden EmployeeGuidID
                 List<DetailedEmployeeListingItemViewModel> itemsToDelete = _detailedEmployeeListingItemCollection
                 .Where(y => y.Employee.GuidID == employee.GuidID)
                 .ToList();
@@ -374,19 +391,19 @@ namespace DVS.ViewModels
             }
             else
             {
+                // Entfernen von DetailedEmployeeClothesItems, deren Bekleidungsgrößen nicht mehr im aktuellen EmployeeModel vorhanden sind
                 foreach (ClothesModel clothes in employee.Clothes)
                 {
-                    // Erstellen einer Liste der aktuellen Bekleidungsgrößen im EmployeeModel
+                    // Erstellen einer Liste der aktuellen Bekleidungsgrößen des Mitarbeiter
                     var currentClothesSizes = employee.Clothes
                         .SelectMany(c => c.Sizes, (c, s) => new { c.GuidID, s.Size })
                         .ToHashSet();
 
-                    // Finden der detaillierten Mitarbeiter mit der passenden GuidID
+                    // Finden der DetailedEmployeeClothesItems mit der passenden EmployeeGuidID
                     var detailedItems = _detailedEmployeeListingItemCollection
                         .Where(y => y.Employee.GuidID == employee.GuidID)
                         .ToList();
 
-                    // Entfernen von detaillierten Mitarbeitern, deren Bekleidungsgrößen nicht mehr im aktuellen EmployeeModel vorhanden sind
                     foreach (var item in detailedItems)
                     {
                         if (!currentClothesSizes.Any(cs => cs.GuidID == item.ClothesGuidID && cs.Size == item.Size))
@@ -395,8 +412,9 @@ namespace DVS.ViewModels
                         }
                     }
                 }
-                
-                // Hinzufügen oder Aktualisieren der detaillierten Mitarbeiter
+
+                // Prüfen ob dere zu bearbeitende Mitarbeiter neue Bekleidung hinzubekommen hat? DetailedEmployeeClothesItems hinzufügen
+                // ?? Aktualisieren der DetailedEmployeeClothesItems
                 foreach (var clothes in employee.Clothes)
                 {
                     foreach (var size in clothes.Sizes)

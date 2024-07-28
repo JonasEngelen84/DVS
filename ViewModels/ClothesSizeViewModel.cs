@@ -4,7 +4,7 @@
     {
         public string Size { get; } = size;
 
-        private int? _quantity;
+        private int? _quantity = 0;
         public int? Quantity
         {
             get => _quantity;
