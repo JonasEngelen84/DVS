@@ -9,9 +9,7 @@ namespace DVS.Stores
 
         public event Action EmployeesLoaded;
         public event Action<EmployeeModel> EmployeeAdded;
-        public event Action<EmployeeModel> DetailedEmployeeItemAdded;
         public event Action<EmployeeModel> EmployeeUpdated;
-        public event Action<EmployeeModel> DetailedEmployeeItemUpdated;
         public event Action<Guid> EmployeeDeleted;
 
 
@@ -30,7 +28,6 @@ namespace DVS.Stores
         {
             _employees.Add(employee);
             EmployeeAdded?.Invoke(employee);
-            DetailedEmployeeItemAdded?.Invoke(employee);
         }
 
         public async Task Update(EmployeeModel employee)
@@ -47,7 +44,6 @@ namespace DVS.Stores
             }
 
             EmployeeUpdated.Invoke(employee);
-            DetailedEmployeeItemUpdated.Invoke(employee);
         }
 
         public async Task Delete(Guid guidID)

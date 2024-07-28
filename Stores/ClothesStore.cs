@@ -9,9 +9,7 @@ namespace DVS.Stores
 
         public event Action ClothesLoaded;
         public event Action<ClothesModel> ClothesAdded;
-        public event Action<ClothesModel> DetailedClothesItemAdded;
         public event Action<ClothesModel> ClothesUpdated;
-        public event Action<ClothesModel> DetailedClothesItemUpdated;
         public event Action<Guid> ClothesDeleted;
 
 
@@ -30,7 +28,6 @@ namespace DVS.Stores
         {
             _clothes.Add(clothes);
             ClothesAdded.Invoke(clothes);
-            DetailedClothesItemAdded.Invoke(clothes);
         }
 
         public async Task Update(ClothesModel clothes)
@@ -47,7 +44,6 @@ namespace DVS.Stores
             }
 
             ClothesUpdated.Invoke(clothes);
-            DetailedClothesItemUpdated.Invoke(clothes);
         }
 
         public async Task Delete(Guid guidID)
@@ -59,7 +55,6 @@ namespace DVS.Stores
         public async Task DragNDropUpdate(ClothesModel clothes)
         {            
             ClothesUpdated.Invoke(clothes);
-            DetailedClothesItemUpdated.Invoke(clothes);
         }
     }
 }

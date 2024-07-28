@@ -3,6 +3,7 @@ using DVS.Models;
 using DVS.Stores;
 using DVS.ViewModels.ListViewItems;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace DVS.ViewModels
@@ -67,7 +68,7 @@ namespace DVS.ViewModels
         }
         
         public DetailedEmployeeListingItemViewModel SelectedDetailedEmployeeClothesItem
-        {
+        {//TODO: ist beim löschen aller mitarbeiter bekleidungen auf null und wirft ex
             get => _detailedEmployeeListingItemCollection
                     .FirstOrDefault(y => y.Employee.ID == _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem.ID);
             
@@ -87,8 +88,7 @@ namespace DVS.ViewModels
 
 
         public DVSListingViewModel(ClothesStore clothesStore, EmployeeStore employeeStore,
-                                   ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
-                                   SeasonStore seasonStore,
+                                   ModalNavigationStore modalNavigationStore, CategoryStore categoryStore, SeasonStore seasonStore,
                                    SelectedDetailedClothesItemStore selectedDetailedClothesItemStore,
                                    SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore)
         {
@@ -107,16 +107,12 @@ namespace DVS.ViewModels
 
             _clothesStore.ClothesLoaded += ClothesStore_ClothesLoaded;
             _clothesStore.ClothesAdded += ClothesStore_ClothesAdded;
-            _clothesStore.DetailedClothesItemAdded += ClothesStore_DetailedClothesItemAdded;
             _clothesStore.ClothesUpdated += ClothesStore_ClothesUpdated;
-            _clothesStore.DetailedClothesItemUpdated += ClothesStore_DetailedClothesItemUpdated;
             _clothesStore.ClothesDeleted += ClothesStore_ClothesDeleted;
 
             _employeeStore.EmployeesLoaded += EmployeeStore_EmployeesLoaded;
             _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
-            _employeeStore.DetailedEmployeeItemAdded += EmployeeStore_DetailedEmployeeItemAdded;
             _employeeStore.EmployeeUpdated += EmployeeStore_EmployeeUpdated;
-            _employeeStore.DetailedEmployeeItemUpdated += EmployeeStore_DetailedEmployeeItemUpdated;
             _employeeStore.EmployeeDeleted += EmployeeStore_EmployeeDeleted;
         }
 
@@ -206,7 +202,6 @@ namespace DVS.ViewModels
             foreach (ClothesModel clothes in _clothesStore.Clothes)
             {
                 ClothesStore_ClothesAdded(clothes);
-                ClothesStore_DetailedClothesItemAdded(clothes);
             }
         }
 
@@ -214,21 +209,23 @@ namespace DVS.ViewModels
         {
             _clothesListingItemCollection.Add(new ClothesListingItemViewModel(
                 clothes, _modalNavigationStore, _categoryStore, _seasonStore, _clothesStore));
-        }
-         
-        private void ClothesStore_DetailedClothesItemAdded(ClothesModel clothes)
-        {
+
             if (clothes.Sizes.Count == 0)
             {
-                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemViewModel(clothes, null));
+                DetailedClothesItemAdded(new DetailedClothesListingItemViewModel(clothes, null));
             }
             else
             {
                 foreach (ClothesSizeViewModel size in clothes.Sizes)
                 {
-                    _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemViewModel(clothes, size.Size));
+                    DetailedClothesItemAdded(new DetailedClothesListingItemViewModel(clothes, size.Size));
                 }
             }
+        }
+         
+        private void DetailedClothesItemAdded(DetailedClothesListingItemViewModel ItemToAdd)
+        {
+            _detailedClothesListingItemCollection.Add(ItemToAdd);
         }
          
         private void ClothesStore_ClothesUpdated(ClothesModel clothes)
@@ -236,46 +233,79 @@ namespace DVS.ViewModels
             ClothesListingItemViewModel? ItemToUpdate = _clothesListingItemCollection
                 .FirstOrDefault(y => y.Clothes.GuidID == clothes.GuidID);
 
-            ItemToUpdate.Update(clothes);
-        }
-        
-        private void ClothesStore_DetailedClothesItemUpdated(ClothesModel clothes)
-        {
-            List<DetailedClothesListingItemViewModel> itemsToUpdate = _detailedClothesListingItemCollection
-                .Where(y => y.Clothes.GuidID == clothes.GuidID).ToList();
+            ItemToUpdate?.Update(clothes);
 
-            if (itemsToUpdate.Count != clothes.Sizes.Count)
+            if (clothes.Sizes.Count == 0)
             {
-                //TODO: UpdateDetailedClothes verbessern
-                DetailedClothesItemDeleted(itemsToUpdate);
-                ClothesStore_DetailedClothesItemAdded(clothes);
+                List<DetailedClothesListingItemViewModel> itemsToDelete = _detailedClothesListingItemCollection
+                .Where(y => y.Clothes.GuidID == clothes.GuidID)
+                .ToList();
+
+                foreach (DetailedClothesListingItemViewModel item in itemsToDelete)
+                {
+                    DetailedClothesItemDeleted(item);
+                }
+
+                DetailedClothesItemAdded(new DetailedClothesListingItemViewModel(clothes, null));
             }
             else
             {
-                foreach (DetailedClothesListingItemViewModel detailedClothesItem in itemsToUpdate)
+                var currentSizes = clothes.Sizes.Select(s => s.Size).ToHashSet();
+
+                var detailedItems = _detailedClothesListingItemCollection
+                    .Where(y => y.Clothes.GuidID == clothes.GuidID)
+                    .ToList();
+
+                foreach (var item in detailedItems)
                 {
-                    detailedClothesItem.Update(clothes);
+                    if (!currentSizes.Contains(item.Size))
+                    {
+                        DetailedClothesItemDeleted(item);
+                    }
+                }
+
+                foreach (var size in clothes.Sizes)
+                {
+                    DetailedClothesListingItemViewModel? itemToUpdate = _detailedClothesListingItemCollection
+                        .FirstOrDefault(y => y.Clothes.GuidID == clothes.GuidID && y.Size == size.Size);
+
+                    if (itemToUpdate != null)
+                    {
+                        DetailedClothesItemUpdated(clothes, itemToUpdate);
+                    }
+                    else
+                    {
+                        DetailedClothesItemAdded(new DetailedClothesListingItemViewModel(clothes, size.Size));
+                    }
                 }
             }
+        }
+        
+        private void DetailedClothesItemUpdated(ClothesModel clothes, DetailedClothesListingItemViewModel ItemToUpdate)
+        {
+            ItemToUpdate.Update(clothes);
         }
 
         private void ClothesStore_ClothesDeleted(Guid guidID)
         {
             ClothesListingItemViewModel? ItemToDelete = _clothesListingItemCollection
                 .FirstOrDefault(y => y.Clothes.GuidID == guidID);
+
             _clothesListingItemCollection.Remove(ItemToDelete);
 
-            List<DetailedClothesListingItemViewModel> itemsToDelete = _detailedClothesListingItemCollection
-                .Where(y => y.Clothes.GuidID == guidID).ToList();
-            DetailedClothesItemDeleted(itemsToDelete);
+            List<DetailedClothesListingItemViewModel> ItemsToDelete = _detailedClothesListingItemCollection
+                .Where(y => y.Clothes.GuidID == guidID)
+                .ToList();
+
+            foreach (DetailedClothesListingItemViewModel item in ItemsToDelete)
+            {
+                DetailedClothesItemDeleted(item);
+            }
         }
         
-        private void DetailedClothesItemDeleted(List<DetailedClothesListingItemViewModel> itemsToDelete)
+        private void DetailedClothesItemDeleted(DetailedClothesListingItemViewModel itemToDelete)
         {
-            foreach (DetailedClothesListingItemViewModel item in itemsToDelete)
-            {
-                _detailedClothesListingItemCollection.Remove(item);
-            }
+            _detailedClothesListingItemCollection.Remove(itemToDelete);
         }
         
 
@@ -292,15 +322,14 @@ namespace DVS.ViewModels
 
         private void EmployeeStore_EmployeeAdded(EmployeeModel employee)
         {
-            _employeeListingItemCollection.Add(new(employee, this, _modalNavigationStore, _employeeStore, _clothesStore));
+            _employeeListingItemCollection.Add(new EmployeeListingItemViewModel(
+                employee, this, _modalNavigationStore, _employeeStore, _clothesStore));
+
             _newEmployeeListingItemCollection.Clear();
-        }
-        
-        private void EmployeeStore_DetailedEmployeeItemAdded(EmployeeModel employee)
-        {
+
             if (employee.Clothes.Count == 0)
             {
-                _detailedEmployeeListingItemCollection.Add(new(employee, null, null));
+                DetailedEmployeeItemAdded(new DetailedEmployeeListingItemViewModel(employee, null, null));
             }
             else
             {
@@ -308,10 +337,15 @@ namespace DVS.ViewModels
                 {
                     foreach (ClothesSizeViewModel size in clothes.Sizes)
                     {
-                        _detailedEmployeeListingItemCollection.Add(new(employee, clothes.GuidID, size.Size));
+                        DetailedEmployeeItemAdded(new DetailedEmployeeListingItemViewModel(employee, clothes.GuidID, size.Size));
                     }
                 }
             }
+        }
+        
+        private void DetailedEmployeeItemAdded(DetailedEmployeeListingItemViewModel itemToAdd)
+        {
+            _detailedEmployeeListingItemCollection.Add(itemToAdd);
         }
 
         private void EmployeeStore_EmployeeUpdated(EmployeeModel employee)
@@ -319,49 +353,95 @@ namespace DVS.ViewModels
             EmployeeListingItemViewModel? ItemToUpdate = _employeeListingItemCollection
                 .FirstOrDefault(y => y.Employee.GuidID == employee.GuidID);
 
-            ItemToUpdate.Update(employee);
+            ItemToUpdate?.Update(employee);
             _newEmployeeListingItemCollection.Clear();
-        }
-        
-        private void EmployeeStore_DetailedEmployeeItemUpdated(EmployeeModel employee)
-        {
-            List<DetailedEmployeeListingItemViewModel> itemsToUpdate = _detailedEmployeeListingItemCollection
-                .Where(y => y.Employee.GuidID == employee.GuidID).ToList();
 
-            if (itemsToUpdate.Count != employee.Clothes.Count)
+            // Entfernen sämtlicher Bekleidung des Mitarbeiters
+            if (employee.Clothes.Count == 0)
             {
-                //TODO: UpdateDetailedEmployee verbessern
-                DetailedEmployeeItemDeleted(itemsToUpdate);
-                EmployeeStore_DetailedEmployeeItemAdded(employee);
+                List<DetailedEmployeeListingItemViewModel> itemsToDelete = _detailedEmployeeListingItemCollection
+                .Where(y => y.Employee.GuidID == employee.GuidID)
+                .ToList();
+
+                foreach (DetailedEmployeeListingItemViewModel item in itemsToDelete)
+                {
+                    DetailedEmployeeItemDeleted(item);
+                }
+
+                DetailedEmployeeItemAdded(new DetailedEmployeeListingItemViewModel(employee, null, null));
             }
             else
             {
-                foreach (DetailedEmployeeListingItemViewModel detailedEmployeeItem in itemsToUpdate)
+                foreach (ClothesModel clothes in employee.Clothes)
                 {
-                    detailedEmployeeItem.Update(employee);
+                    // Erstellen einer Liste der aktuellen Bekleidungsgrößen im EmployeeModel
+                    var currentClothesSizes = employee.Clothes
+                        .SelectMany(c => c.Sizes, (c, s) => new { c.GuidID, s.Size })
+                        .ToHashSet();
+
+                    // Finden der detaillierten Mitarbeiter mit der passenden GuidID
+                    var detailedItems = _detailedEmployeeListingItemCollection
+                        .Where(y => y.Employee.GuidID == employee.GuidID)
+                        .ToList();
+
+                    // Entfernen von detaillierten Mitarbeitern, deren Bekleidungsgrößen nicht mehr im aktuellen EmployeeModel vorhanden sind
+                    foreach (var item in detailedItems)
+                    {
+                        if (!currentClothesSizes.Any(cs => cs.GuidID == item.ClothesGuidID && cs.Size == item.Size))
+                        {
+                            DetailedEmployeeItemDeleted(item);
+                        }
+                    }
+                }
+                
+                // Hinzufügen oder Aktualisieren der detaillierten Mitarbeiter
+                foreach (var clothes in employee.Clothes)
+                {
+                    foreach (var size in clothes.Sizes)
+                    {
+                        var itemToUpdate = _detailedEmployeeListingItemCollection
+                            .FirstOrDefault(y => y.Employee.GuidID == employee.GuidID
+                                                 && y.ClothesGuidID == clothes.GuidID
+                                                 && y.Size == size.Size);
+
+                        if (itemToUpdate != null)
+                        {
+                            DetailedEmployeeItemUpdated(employee, itemToUpdate);
+                        }
+                        else
+                        {
+                            DetailedEmployeeItemAdded(new DetailedEmployeeListingItemViewModel(employee, clothes.GuidID, size.Size));
+                        }
+                    }
                 }
             }
-
-            _newEmployeeListingItemCollection.Clear();
+        }
+        
+        private void DetailedEmployeeItemUpdated(EmployeeModel employee, DetailedEmployeeListingItemViewModel itemToUpdate)
+        {
+            itemToUpdate.Update(employee);
         }
 
         private void EmployeeStore_EmployeeDeleted(Guid guidID)
         {
             EmployeeListingItemViewModel? ItemToDelete = _employeeListingItemCollection
                 .FirstOrDefault(y => y.Employee.GuidID == guidID);
+
             _employeeListingItemCollection.Remove(ItemToDelete);
 
             List<DetailedEmployeeListingItemViewModel> itemsToDelete = _detailedEmployeeListingItemCollection
-                .Where(y => y.Employee.GuidID == guidID).ToList();
-            DetailedEmployeeItemDeleted(itemsToDelete);
-        }
-        
-        private void DetailedEmployeeItemDeleted(List<DetailedEmployeeListingItemViewModel> itemsToDelete)
-        {
+                .Where(y => y.Employee.GuidID == guidID)
+                .ToList();
+
             foreach (DetailedEmployeeListingItemViewModel item in itemsToDelete)
             {
-                _detailedEmployeeListingItemCollection.Remove(item);
+                DetailedEmployeeItemDeleted(item);
             }
+        }
+        
+        private void DetailedEmployeeItemDeleted(DetailedEmployeeListingItemViewModel itemToDelete)
+        {
+            _detailedEmployeeListingItemCollection.Remove(itemToDelete);
         }
 
 
@@ -369,16 +449,12 @@ namespace DVS.ViewModels
         {
             _clothesStore.ClothesLoaded -= ClothesStore_ClothesLoaded;
             _clothesStore.ClothesAdded -= ClothesStore_ClothesAdded;
-            _clothesStore.DetailedClothesItemAdded -= ClothesStore_DetailedClothesItemAdded;
             _clothesStore.ClothesUpdated -= ClothesStore_ClothesUpdated;
-            _clothesStore.DetailedClothesItemUpdated -= ClothesStore_DetailedClothesItemUpdated;
             _clothesStore.ClothesDeleted -= ClothesStore_ClothesDeleted;
 
             _employeeStore.EmployeesLoaded -= EmployeeStore_EmployeesLoaded;
             _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
-            _employeeStore.DetailedEmployeeItemAdded -= EmployeeStore_DetailedEmployeeItemAdded;
             _employeeStore.EmployeeUpdated -= EmployeeStore_EmployeeUpdated;
-            _employeeStore.DetailedEmployeeItemUpdated -= EmployeeStore_DetailedEmployeeItemUpdated;
             _employeeStore.EmployeeDeleted += EmployeeStore_EmployeeDeleted;
 
             base.Dispose();

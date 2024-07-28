@@ -53,7 +53,7 @@ namespace DVS.Components
             InitializeComponent();
         }
 
-        //TODO: canMove ausbessern
+        //TODO: canMove DRINGEND ausbessern
         private bool canMove = true;
         private void ClothesItem_MouseMove(object sender, MouseEventArgs e)
         {
