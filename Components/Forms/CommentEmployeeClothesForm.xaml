@@ -8,65 +8,19 @@
 
     <StackPanel>
 
-        <!-- Employee ID -->
-        <Label Content="{Binding EmployeeID}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
+        <Label Content="{Binding EmployeeID}" />
+        <Label Content="{Binding EmployeeLastname}" />
+        <Label Content="{Binding EmployeeFirstname}" />
+        <Label Content="{Binding ClothesID}" />
+        <Label Content="{Binding ClothesName}" />
+        <Label Content="{Binding Category.Name}" />
+        <Label Content="{Binding Season.Name}" />
+        <Label Content="{Binding Size.Name}" />
+        <Label Content="{Binding Size.Quantity}"/>
 
-        <!-- Employee Lastname -->
-        <Label Content="{Binding EmployeeLastname}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
+        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+                 Width="300" />
 
-        <!-- Employee Firstname -->
-        <Label Content="{Binding EmployeeFirstname}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Clothes ID -->
-        <Label Content="{Binding ClothesID}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Clothes Name -->
-        <Label Content="{Binding ClothesName}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Category -->
-        <Label Content="{Binding Category.Name}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Season -->
-        <Label Content="{Binding Season.Name}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Size -->
-        <Label Content="{Binding Size.Name}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Quantity -->
-        <Label Content="{Binding Size.Quantity}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Comment -->
-        <TextBox Width="300"
-                 Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
-
-        <!-- Button-Bestätigen -->
         <Button Content="BESTÄTIGEN"
                 Width="175"
                 Margin="0 20 0 0 "
