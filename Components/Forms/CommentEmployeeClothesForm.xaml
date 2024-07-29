@@ -22,7 +22,7 @@
                  Width="300" />
 
         <Button Content="BESTÄTIGEN"
-                Width="175"
+                Width="300"
                 Margin="0 20 0 0 "
                 Style="{StaticResource ModalButtonStyle}"
                 Command="{Binding SubmitComment}"
