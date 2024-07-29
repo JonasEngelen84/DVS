@@ -1,0 +1,20 @@
+﻿DVS.WPF
+1.0.0.0
+
+winexe
+C#
+.cs
+D:\Programmierung\Visual Studio\Projekte\DVS\DVS.WPF\obj\Debug\net8.0-windows\
+DVS.WPF
+none
+false
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP
+D:\Programmierung\Visual Studio\Projekte\DVS\DVS.WPF\App.xaml
+361206969103
+
+104-1017281239
+201-899296821
+Components\AddEditEmployeAvailableClothesList.xaml;Components\AddEditEmployeeNewEmployeeClothesList.xaml;Components\ClothesListingItem.xaml;Components\DVSListings\DVSClothesListing.xaml;Components\DVSListings\DVSDetailedClothesListing.xaml;Components\DVSListings\DVSDetailedEmployeesListing.xaml;Components\DVSListings\DVSEmployeesListing.xaml;Components\EmployeeListingItem.xaml;Components\Forms\AddEditCategoryForm.xaml;Components\Forms\AddEditClothesForm.xaml;Components\Forms\AddEditEmployeeForm.xaml;Components\Forms\AddEditSeasonForm.xaml;Components\Forms\CommentClothesSizeForm.xaml;Components\Forms\CommentEmployeeClothesForm.xaml;MainWindow.xaml;Resources\Dictionaries\BorderDragClothesToEmployeeListView.xaml;Resources\Dictionaries\Button\CircleButtonResourcesDictionary.xaml;Resources\Dictionaries\Button\ComboBoxButtonResourcesDictionary.xaml;Resources\Dictionaries\Button\DropDownMenuItemResourcesDictionary.xaml;Resources\Dictionaries\Button\MenuItemResourcesDictionary.xaml;Resources\Dictionaries\Button\ModalButtonResourcesDictionary.xaml;Resources\Dictionaries\Button\SubMenuItemResourcesDictionary.xaml;Resources\Dictionaries\Button\TitleButtonResourcesDictionary.xaml;Resources\Dictionaries\ComboBoxResourcesDictionary.xaml;Resources\Dictionaries\ModalTextResourcesDictionary.xaml;Resources\Dictionaries\TextBoxResourcesDictionary.xaml;Views\AddClothesView.xaml;Views\AddEditCategoryView.xaml;Views\AddEditSeasonView.xaml;Views\AddEmployeeView.xaml;Views\CommentClothesSize.xaml;Views\CommentEmployeeClothesSize.xaml;Views\DVSDetailedView.xaml;Views\DVSHeadView.xaml;Views\EditClothesView.xaml;Views\EditEmployeeView.xaml;
+
+False
+

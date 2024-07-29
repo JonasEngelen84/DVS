@@ -1,0 +1,20 @@
+﻿DVS
+
+
+winexe
+C#
+.cs
+D:\Programmierung\Visual Studio\Projekte\DVS\obj\Release\net8.0-windows\
+DVS
+none
+false
+TRACE;RELEASE;NET;NET8_0;NETCOREAPP
+D:\Programmierung\Visual Studio\Projekte\DVS\App.xaml
+15831305086
+
+39523743752
+1991313341944
+Components\ClothesListViewComponent.xaml;Components\DVSClothesForm.xaml;Components\DVSEmployeeForm.xaml;Components\EmployeesClothesListViewComponent.xaml;MainWindow.xaml;Resources\ResourcesDictionaries\CircleButtonResourcesDictionary.xaml;Resources\ResourcesDictionaries\DropDownMenuItemResourcesDictionary.xaml;Resources\ResourcesDictionaries\ListViewResourcesDictionary.xaml;Resources\ResourcesDictionaries\MenuItemResourcesDictionary.xaml;Resources\ResourcesDictionaries\ModalButtonResourcesDictionary.xaml;Resources\ResourcesDictionaries\SubMenuItemResourcesDictionary.xaml;Resources\ResourcesDictionaries\TextStyleResourcesDictionary.xaml;Views\AddClothesView.xaml;Views\AddEmployeeView.xaml;Views\DVSView.xaml;
+
+True
+

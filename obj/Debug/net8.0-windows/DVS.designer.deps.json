@@ -1,0 +1,43 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "DropdownMenu.WPF/1.0.0": {
+        "runtime": {
+          "lib/netcoreapp3.1/DropdownMenuControl.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "SimpleModal.WPF/1.0.0": {
+        "runtime": {
+          "lib/netcoreapp3.1/ModalControl.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DropdownMenu.WPF/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7S90a70go9Cko9y5Ugs3YEev+EboKs8uicIw5clxa2uTho+/pAHAx7NRq0HbAsVAKAobAqL9goAlI/elRbNsxA==",
+      "path": "dropdownmenu.wpf/1.0.0",
+      "hashPath": "dropdownmenu.wpf.1.0.0.nupkg.sha512"
+    },
+    "SimpleModal.WPF/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dtTvUl6O2peKZz2oCh5Y6mRjYL+q/Izxm6+z/Nzdpbcgxdo/qTD39stwegu/sY0uBTAYGJEy2P9X8mwpOMM+rw==",
+      "path": "simplemodal.wpf/1.0.0",
+      "hashPath": "simplemodal.wpf.1.0.0.nupkg.sha512"
+    }
+  }
+}
