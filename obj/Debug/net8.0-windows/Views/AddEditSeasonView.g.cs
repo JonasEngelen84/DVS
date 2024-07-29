@@ -53,7 +53,7 @@ namespace DVS.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DVS;component/views/addeditseasonview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DVS.WPF;component/views/addeditseasonview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\AddEditSeasonView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

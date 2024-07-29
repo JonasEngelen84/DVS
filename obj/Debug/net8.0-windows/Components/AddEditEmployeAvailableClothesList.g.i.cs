@@ -52,7 +52,7 @@ namespace DVS.Components {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DVS;component/components/addeditemployeavailableclotheslist.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DVS.WPF;component/components/addeditemployeavailableclotheslist.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Components\AddEditEmployeAvailableClothesList.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

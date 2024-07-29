@@ -61,7 +61,7 @@ namespace DVS.Components {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DVS;component/components/employeelistingitem.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DVS.WPF;component/components/employeelistingitem.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Components\EmployeeListingItem.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

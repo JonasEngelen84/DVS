@@ -60,7 +60,7 @@ namespace DVS.Components.Forms {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DVS;component/components/forms/addeditcategoryform.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DVS.WPF;component/components/forms/addeditcategoryform.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Components\Forms\AddEditCategoryForm.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -53,7 +53,7 @@ namespace DVS.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DVS;component/views/addclothesview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DVS.WPF;component/views/addclothesview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\AddClothesView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -68,7 +68,7 @@ namespace DVS.Components.Forms {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DVS;component/components/forms/addeditclothesform.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DVS.WPF;component/components/forms/addeditclothesform.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Components\Forms\AddEditClothesForm.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -84,9 +84,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Programmierung\\Visual Studio\\Projekte\\DVS\\DVS.WPF\\DVS.csproj",
-      "projectName": "DVS",
-      "projectPath": "D:\\Programmierung\\Visual Studio\\Projekte\\DVS\\DVS.WPF\\DVS.csproj",
+      "projectUniqueName": "D:\\Programmierung\\Visual Studio\\Projekte\\DVS\\DVS.WPF\\DVS.WPF.csproj",
+      "projectName": "DVS.WPF",
+      "projectPath": "D:\\Programmierung\\Visual Studio\\Projekte\\DVS\\DVS.WPF\\DVS.WPF.csproj",
       "packagesPath": "C:\\Users\\Johni\\.nuget\\packages\\",
       "outputPath": "D:\\Programmierung\\Visual Studio\\Projekte\\DVS\\DVS.WPF\\obj\\",
       "projectStyle": "PackageReference",

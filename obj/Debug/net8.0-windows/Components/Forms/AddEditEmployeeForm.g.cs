@@ -53,7 +53,7 @@ namespace DVS.Components.Forms {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DVS;component/components/forms/addeditemployeeform.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DVS.WPF;component/components/forms/addeditemployeeform.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Components\Forms\AddEditEmployeeForm.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

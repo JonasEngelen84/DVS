@@ -61,7 +61,7 @@ namespace DVS.Components.DVSListings {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DVS;component/components/dvslistings/dvsclotheslisting.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DVS.WPF;component/components/dvslistings/dvsclotheslisting.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Components\DVSListings\DVSClothesListing.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "99YcncmenvAuaXiRt/QtXlKldnpcFMaoSylZ8Tce6BCT2Bj8ChfOmCLlXiVePBFNSewiml53WjlbZyyLkCEMqA==",
+  "dgSpecHash": "MuuOUTFz7SbWdPvoLhbciLud98cvEtCk6YeIr+xzJ1cMCsCI6Lz0RPRNcrZTcPuKddOwHGzklaumAg4lu9Izvg==",
   "success": true,
-  "projectFilePath": "D:\\Programmierung\\Visual Studio\\Projekte\\DVS\\DVS.WPF\\DVS.csproj",
+  "projectFilePath": "D:\\Programmierung\\Visual Studio\\Projekte\\DVS\\DVS.WPF\\DVS.WPF.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Johni\\.nuget\\packages\\dropdownmenu.wpf\\1.0.0\\dropdownmenu.wpf.1.0.0.nupkg.sha512",
     "C:\\Users\\Johni\\.nuget\\packages\\simplemodal.wpf\\1.0.0\\simplemodal.wpf.1.0.0.nupkg.sha512"

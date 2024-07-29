@@ -53,7 +53,7 @@ namespace DVS.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/DVS;component/views/dvsdetailedview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/DVS.WPF;component/views/dvsdetailedview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\DVSDetailedView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
