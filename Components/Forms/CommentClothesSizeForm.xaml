@@ -8,49 +8,18 @@
 
     <StackPanel>
 
-        <!-- ID -->
-        <Label Content="{Binding ID}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Name -->
-        <Label Content="{Binding Name}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Category -->
-        <Label Content="{Binding Category}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Season -->
-        <Label Content="{Binding Season}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Size -->
-        <Label Content="{Binding Size}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Quantity -->
-        <Label Content="{Binding Quantity}"
-               FontSize="14"
-               FontWeight="Medium"
-               Margin="0 2.5 0 0" />
-
-        <!-- Comment -->
-        <TextBox Width="300"
-                 Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
-
-        <!-- Button-Bestätigen -->
+        <Label Content="{Binding ID}" />
+        <Label Content="{Binding Name}" />
+        <Label Content="{Binding Category}" />
+        <Label Content="{Binding Season}" />
+        <Label Content="{Binding Size}" />
+        <Label Content="{Binding Quantity}" />
+        
+        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+                 Width="300"/>
+        
         <Button Content="BESTÄTIGEN"
-                Width="175"
+                Width="300"
                 Margin="0 20 0 0 "
                 Style="{StaticResource ModalButtonStyle}"
                 Command="{Binding SubmitComment}"
