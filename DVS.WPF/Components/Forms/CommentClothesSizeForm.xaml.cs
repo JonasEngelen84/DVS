@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace DVS.Components.Forms
+namespace DVS.WPF.Components.Forms
 {
     public partial class CommentClothesSizeForm : UserControl
     {

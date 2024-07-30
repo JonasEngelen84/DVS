@@ -1,9 +1,9 @@
-﻿using DVS.Commands.AddEditEmployeeCommands;
-using DVS.Stores;
-using DVS.ViewModels.Forms;
+﻿using DVS.WPF.Commands.AddEditEmployeeCommands;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.Forms;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.Views
+namespace DVS.WPF.ViewModels.Views
 {
     public class AddEmployeeViewModel : ViewModelBase
     {

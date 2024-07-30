@@ -1,8 +1,8 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
 
-namespace DVS.Commands
+namespace DVS.WPF.Commands
 {
     public class ClothesItemReceivedCommand(
         DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore) : AsyncCommandBase

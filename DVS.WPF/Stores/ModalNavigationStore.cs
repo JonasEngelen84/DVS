@@ -1,7 +1,7 @@
 ﻿using System;
-using DVS.ViewModels;
+using DVS.WPF.ViewModels;
 
-namespace DVS.Stores
+namespace DVS.WPF.Stores
 {
     /// <summary>
     /// Klasse zur navigation der Modals:

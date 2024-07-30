@@ -1,8 +1,8 @@
-﻿using DVS.Stores;
-using DVS.ViewModels;
-using DVS.ViewModels.Views;
+﻿using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
+using DVS.WPF.ViewModels.Views;
 
-namespace DVS.Commands.AddEditEmployeeCommands
+namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
     public class OpenAddEmployeeCommand(DVSListingViewModel dVSListingViewModel,
         EmployeeStore employeeStore, ClothesStore clothesStore, ModalNavigationStore modalNavigationStore) : CommandBase

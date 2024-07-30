@@ -1,10 +1,9 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels;
-using DVS.ViewModels.Forms;
-using DVS.ViewModels.Views;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
+using DVS.WPF.ViewModels.Views;
 
-namespace DVS.Commands.AddEditSeasonCommands
+namespace DVS.WPF.Commands.AddEditSeasonCommands
 {
     public class OpenAddEditSeasonsCommand(ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,
         SeasonStore seasonStore, ClothesModel clothes, AddClothesViewModel addClothesViewModel,

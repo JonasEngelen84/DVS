@@ -1,9 +1,9 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels.ListViewItems;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.ListViewItems;
 using System.Windows;
 
-namespace DVS.Commands.AddEditClothesCommands
+namespace DVS.WPF.Commands.AddEditClothesCommands
 {
     public class ClearSizesCommand(ClothesListingItemViewModel clothesListingItemViewModel,
         ClothesStore clothesStore) : AsyncCommandBase

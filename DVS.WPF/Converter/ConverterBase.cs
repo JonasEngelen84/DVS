@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 
-namespace DVS.Converter
+namespace DVS.WPF.Converter
 {
     //TODO: Summary von ConverterBase
     public abstract class ConverterBase : IValueConverter

@@ -1,7 +1,7 @@
 ﻿using DVS.Domain.Models;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.Forms
+namespace DVS.WPF.ViewModels.Forms
 {
     public class AddEditClothesFormViewModel(ClothesModel? clothes, ICommand submitCommand,
         ICommand openAddEditCategoriesCommand, ICommand openAddEditSeasonsCommand,

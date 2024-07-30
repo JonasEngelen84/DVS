@@ -1,9 +1,9 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels.ListViewItems;
-using DVS.ViewModels.Views;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.ListViewItems;
+using DVS.WPF.ViewModels.Views;
 
-namespace DVS.Commands.AddEditClothesCommands
+namespace DVS.WPF.Commands.AddEditClothesCommands
 {
     public class OpenEditClothesCommand(ClothesListingItemViewModel clothesListingItemViewModel,
         ModalNavigationStore modalNavigationStore, CategoryStore categoryStore,

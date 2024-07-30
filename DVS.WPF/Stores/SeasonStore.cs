@@ -1,7 +1,7 @@
 ﻿using DVS.Domain.Models;
-using DVS.ViewModels.Forms;
+using DVS.WPF.ViewModels.Forms;
 
-namespace DVS.Stores
+namespace DVS.WPF.Stores
 {
     public class SeasonStore
     {

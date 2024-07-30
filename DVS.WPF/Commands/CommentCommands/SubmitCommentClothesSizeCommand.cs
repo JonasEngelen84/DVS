@@ -1,10 +1,10 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels;
-using DVS.ViewModels.Forms;
-using DVS.ViewModels.Views;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
+using DVS.WPF.ViewModels.Forms;
+using DVS.WPF.ViewModels.Views;
 
-namespace DVS.Commands.CommentCommands
+namespace DVS.WPF.Commands.CommentCommands
 {
     public class SubmitCommentClothesSizeCommand(CommentClothesSizeViewModel commentClothesSizeViewModel,
         ClothesStore clothesStore, ModalNavigationStore modalNavigationStore) : AsyncCommandBase

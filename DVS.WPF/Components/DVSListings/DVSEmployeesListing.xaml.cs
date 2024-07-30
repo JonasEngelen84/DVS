@@ -1,8 +1,8 @@
-﻿using DVS.ViewModels.ListViewItems;
+﻿using DVS.WPF.ViewModels.ListViewItems;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DVS.Components.DVSListings
+namespace DVS.WPF.Components.DVSListings
 {
     public partial class DVSEmployeesListing : UserControl
     {

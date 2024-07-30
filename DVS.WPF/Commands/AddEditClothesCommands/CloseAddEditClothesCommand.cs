@@ -1,6 +1,6 @@
-﻿using DVS.Stores;
+﻿using DVS.WPF.Stores;
 
-namespace DVS.Commands.AddEditClothesCommands
+namespace DVS.WPF.Commands.AddEditClothesCommands
 {
     public class CloseAddEditClothesCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {

@@ -1,9 +1,9 @@
-﻿using DVS.Commands.AddEditClothesCommands;
-using DVS.Commands.AddEditEmployeeCommands;
-using DVS.Stores;
+﻿using DVS.WPF.Commands.AddEditClothesCommands;
+using DVS.WPF.Commands.AddEditEmployeeCommands;
+using DVS.WPF.Stores;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.Views
+namespace DVS.WPF.ViewModels.Views
 {
     public class DVSHeadViewModel(DVSListingViewModel dVSListingViewModel,
                                   ModalNavigationStore modalNavigationStore,

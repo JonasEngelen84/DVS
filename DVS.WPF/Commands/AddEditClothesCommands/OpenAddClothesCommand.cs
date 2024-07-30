@@ -1,7 +1,7 @@
-﻿using DVS.Stores;
-using DVS.ViewModels.Views;
+﻿using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.Views;
 
-namespace DVS.Commands.AddEditClothesCommands
+namespace DVS.WPF.Commands.AddEditClothesCommands
 {
     public class OpenAddClothesCommand(ModalNavigationStore modalNavigationStore,
         CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore) : CommandBase

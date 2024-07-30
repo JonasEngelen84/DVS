@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace DVS.Converter
+namespace DVS.WPF.Converter
 {
     public class ClothesItemWithCommaConverter : ConverterBase
     {

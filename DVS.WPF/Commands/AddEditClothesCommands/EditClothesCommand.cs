@@ -1,11 +1,11 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels;
-using DVS.ViewModels.Forms;
-using DVS.ViewModels.Views;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
+using DVS.WPF.ViewModels.Forms;
+using DVS.WPF.ViewModels.Views;
 using System.Windows;
 
-namespace DVS.Commands.AddEditClothesCommands
+namespace DVS.WPF.Commands.AddEditClothesCommands
 {
     public class EditClothesCommand(EditClothesViewModel editClothesViewModel, ClothesStore clothesStore,
         ModalNavigationStore modalNavigationStore, Guid guidID) : AsyncCommandBase

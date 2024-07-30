@@ -1,10 +1,10 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels;
-using DVS.ViewModels.Forms;
-using DVS.ViewModels.Views;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
+using DVS.WPF.ViewModels.Forms;
+using DVS.WPF.ViewModels.Views;
 
-namespace DVS.Commands.AddEditEmployeeCommands
+namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
     public class AddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel, EmployeeStore employeeStore,
         ModalNavigationStore modalNavigationStore) : AsyncCommandBase

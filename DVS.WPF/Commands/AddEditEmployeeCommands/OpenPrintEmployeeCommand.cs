@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DVS.Commands.AddEditEmployeeCommands
+﻿namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
     public class OpenPrintEmployeeCommand : AsyncCommandBase
     {

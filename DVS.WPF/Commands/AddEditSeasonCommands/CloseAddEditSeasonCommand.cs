@@ -1,7 +1,7 @@
-﻿using DVS.Stores;
-using DVS.ViewModels.Views;
+﻿using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.Views;
 
-namespace DVS.Commands.AddEditSeasonCommands
+namespace DVS.WPF.Commands.AddEditSeasonCommands
 {
     public class CloseAddEditSeasonCommand(ModalNavigationStore modalNavigationStore,
         AddClothesViewModel addClothesViewModel, EditClothesViewModel editClothesViewModel) : CommandBase

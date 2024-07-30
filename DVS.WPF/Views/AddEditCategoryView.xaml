@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="DVS.Views.AddEditCategoryView"
+﻿<UserControl x:Class="DVS.WPF.Views.AddEditCategoryView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:components="clr-namespace:DVS.Components.Forms"
+             xmlns:components="clr-namespace:DVS.WPF.Components.Forms"
              mc:Ignorable="d">
     
     <Border Background="#FFDEDEDE">

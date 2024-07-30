@@ -1,9 +1,9 @@
-﻿using DVS.Stores;
-using DVS.ViewModels;
-using DVS.ViewModels.Views;
+﻿using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
+using DVS.WPF.ViewModels.Views;
 using System.Windows;
 
-namespace DVS
+namespace DVS.WPF
 {
     public partial class App : Application
     {

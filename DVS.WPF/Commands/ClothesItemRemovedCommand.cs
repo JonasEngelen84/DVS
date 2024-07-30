@@ -1,9 +1,9 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
 using System.Windows;
 
-namespace DVS.Commands
+namespace DVS.WPF.Commands
 {
     public class ClothesItemRemovedCommand(
         DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore) : AsyncCommandBase

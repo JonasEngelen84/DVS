@@ -1,4 +1,4 @@
-﻿namespace DVS.Commands
+﻿namespace DVS.WPF.Commands
 {
     //TODO: AsyncCommandBase dokumentieren
     public abstract class AsyncCommandBase : CommandBase

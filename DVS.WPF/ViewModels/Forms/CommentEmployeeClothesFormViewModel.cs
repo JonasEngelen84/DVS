@@ -1,8 +1,8 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
+using DVS.WPF.Stores;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.Forms
+namespace DVS.WPF.ViewModels.Forms
 {
     public class CommentEmployeeClothesFormViewModel : ViewModelBase
     {

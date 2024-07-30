@@ -1,6 +1,6 @@
-﻿using DVS.Stores;
+﻿using DVS.WPF.Stores;
 
-namespace DVS.Commands
+namespace DVS.WPF.Commands
 {
     public class MinusCommand : CommandBase
     {

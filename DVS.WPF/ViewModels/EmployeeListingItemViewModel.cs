@@ -1,10 +1,10 @@
-﻿using DVS.Commands.AddEditEmployeeCommands;
+﻿using DVS.WPF.Commands.AddEditEmployeeCommands;
 using DVS.Domain.Models;
-using DVS.Stores;
+using DVS.WPF.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.ListViewItems
+namespace DVS.WPF.ViewModels.ListViewItems
 {
     public class EmployeeListingItemViewModel : ViewModelBase
     {

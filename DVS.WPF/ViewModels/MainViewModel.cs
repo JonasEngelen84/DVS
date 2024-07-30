@@ -1,7 +1,7 @@
-﻿using DVS.Stores;
-using DVS.ViewModels.Views;
+﻿using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.Views;
 
-namespace DVS.ViewModels
+namespace DVS.WPF.ViewModels
 {
     /// <summary>
     /// Hauptklasse zur Implementierung der allgemeinen Betrefflickeiten der App:

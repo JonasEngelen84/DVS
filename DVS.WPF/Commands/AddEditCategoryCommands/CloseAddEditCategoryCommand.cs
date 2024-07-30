@@ -1,7 +1,7 @@
-﻿using DVS.Stores;
-using DVS.ViewModels.Views;
+﻿using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.Views;
 
-namespace DVS.Commands.AddEditCategoryCommands
+namespace DVS.WPF.Commands.AddEditCategoryCommands
 {
     public class CloseAddEditCategoryCommand(ModalNavigationStore modalNavigationStore,
         AddClothesViewModel addClothesViewModel, EditClothesViewModel editClothesViewModel) : CommandBase

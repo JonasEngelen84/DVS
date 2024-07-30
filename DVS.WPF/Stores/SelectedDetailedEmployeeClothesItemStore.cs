@@ -1,6 +1,6 @@
-﻿using DVS.ViewModels;
+﻿using DVS.WPF.ViewModels;
 
-namespace DVS.Stores
+namespace DVS.WPF.Stores
 {
     public class SelectedDetailedEmployeeClothesItemStore
     {

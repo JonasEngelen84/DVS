@@ -1,11 +1,11 @@
-﻿using DVS.Commands;
+﻿using DVS.WPF.Commands;
 using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels.ListViewItems;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.ListViewItems;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace DVS.ViewModels
+namespace DVS.WPF.ViewModels
 {
     public class DVSListingViewModel : ViewModelBase
     {

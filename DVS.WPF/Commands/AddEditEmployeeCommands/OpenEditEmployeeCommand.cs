@@ -1,10 +1,10 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels;
-using DVS.ViewModels.ListViewItems;
-using DVS.ViewModels.Views;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
+using DVS.WPF.ViewModels.ListViewItems;
+using DVS.WPF.ViewModels.Views;
 
-namespace DVS.Commands.AddEditEmployeeCommands
+namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
     public class OpenEditEmployeeCommand(EmployeeListingItemViewModel employeeListingItemViewModel,
         ModalNavigationStore modalNavigationStore, EmployeeStore employeeStore, ClothesStore clothesStore,

@@ -1,11 +1,11 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels.Forms;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.Forms;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 
-namespace DVS.ViewModels
+namespace DVS.WPF.ViewModels
 {
     public class AddEditListingViewModel : ViewModelBase
     {

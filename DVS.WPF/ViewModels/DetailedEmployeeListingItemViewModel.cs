@@ -1,6 +1,6 @@
 ﻿using DVS.Domain.Models;
 
-namespace DVS.ViewModels
+namespace DVS.WPF.ViewModels
 {
     public class DetailedEmployeeListingItemViewModel : ViewModelBase
     {

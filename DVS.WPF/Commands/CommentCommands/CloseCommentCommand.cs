@@ -1,7 +1,7 @@
-﻿using DVS.Stores;
-using DVS.ViewModels;
+﻿using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
 
-namespace DVS.Commands.CommentCommands
+namespace DVS.WPF.Commands.CommentCommands
 {
     public class CloseCommentCommand(ModalNavigationStore modalNavigationStore,
         DVSListingViewModel dVSListingViewModel) : CommandBase

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace DVS.Views
+namespace DVS.WPF.Views
 {
     public partial class AddEditSeasonView : UserControl
     {

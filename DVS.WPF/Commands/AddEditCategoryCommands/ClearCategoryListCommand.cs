@@ -1,9 +1,9 @@
-﻿using DVS.Stores;
-using DVS.ViewModels.Forms;
-using DVS.ViewModels.Views;
+﻿using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.Forms;
+using DVS.WPF.ViewModels.Views;
 using System.Windows;
 
-namespace DVS.Commands.AddEditCategoryCommands
+namespace DVS.WPF.Commands.AddEditCategoryCommands
 {
     public class ClearCategoryListCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
     {

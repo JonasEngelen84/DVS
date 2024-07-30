@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace DVS.Commands
+namespace DVS.WPF.Commands
 {
     /// <summary>
     /// Hauptklasse der Commands, welche von allen Unterklassen vererbt wird.

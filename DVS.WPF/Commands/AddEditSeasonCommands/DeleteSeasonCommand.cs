@@ -1,10 +1,10 @@
 ﻿using DVS.Domain.Models;
-using DVS.Stores;
-using DVS.ViewModels.Forms;
-using DVS.ViewModels.Views;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.Forms;
+using DVS.WPF.ViewModels.Views;
 using System.Windows;
 
-namespace DVS.Commands.AddEditSeasonCommands
+namespace DVS.WPF.Commands.AddEditSeasonCommands
 {
     public class DeleteSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, SeasonStore seasonStore) : AsyncCommandBase
     {

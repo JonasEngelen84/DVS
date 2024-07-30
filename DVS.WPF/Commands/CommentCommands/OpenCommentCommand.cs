@@ -1,9 +1,9 @@
-﻿using DVS.Stores;
-using DVS.ViewModels;
-using DVS.ViewModels.Views;
+﻿using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
+using DVS.WPF.ViewModels.Views;
 using System.Windows;
 
-namespace DVS.Commands.CommentCommands
+namespace DVS.WPF.Commands.CommentCommands
 {
     public class OpenCommentCommand(SelectedDetailedClothesItemStore selectedDetailedClothesItemStore,
                               SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore,

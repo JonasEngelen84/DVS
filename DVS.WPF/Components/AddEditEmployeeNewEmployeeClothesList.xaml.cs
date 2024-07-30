@@ -1,9 +1,9 @@
-﻿using DVS.ViewModels;
+﻿using DVS.WPF.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DVS.Components
+namespace DVS.WPF.Components
 {
     public partial class AddEditEmployeeNewEmployeeClothesList : UserControl
     {

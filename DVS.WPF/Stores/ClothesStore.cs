@@ -1,6 +1,6 @@
 ﻿using DVS.Domain.Models;
 
-namespace DVS.Stores
+namespace DVS.WPF.Stores
 {
     public class ClothesStore
     {

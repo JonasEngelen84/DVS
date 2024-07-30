@@ -1,11 +1,11 @@
-﻿using DVS.Commands;
-using DVS.Commands.AddEditClothesCommands;
-using DVS.Commands.AddEditEmployeeCommands;
-using DVS.Commands.CommentCommands;
-using DVS.Stores;
+﻿using DVS.WPF.Commands;
+using DVS.WPF.Commands.AddEditClothesCommands;
+using DVS.WPF.Commands.AddEditEmployeeCommands;
+using DVS.WPF.Commands.CommentCommands;
+using DVS.WPF.Stores;
 using System.Windows.Input;
 
-namespace DVS.ViewModels.Views
+namespace DVS.WPF.ViewModels.Views
 {
     public class DVSDetailedViewModel(DVSListingViewModel dVSListingViewModel, ModalNavigationStore modalNavigationStore,
                                       CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore, EmployeeStore employeeStore,

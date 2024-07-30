@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DVS.Components.DVSListings.DVSDetailedEmployeesListing"
+﻿<UserControl x:Class="DVS.WPF.Components.DVSListings.DVSDetailedEmployeesListing"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace DVS.Components.DVSListings
+namespace DVS.WPF.Components.DVSListings
 {
     public partial class DVSDetailedEmployeesListing : UserControl
     {

@@ -1,6 +1,6 @@
-﻿using DVS.Stores;
+﻿using DVS.WPF.Stores;
 
-namespace DVS.Commands.AddEditEmployeeCommands
+namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
     public class OpenFilterEmployeeListCommand : CommandBase
     {

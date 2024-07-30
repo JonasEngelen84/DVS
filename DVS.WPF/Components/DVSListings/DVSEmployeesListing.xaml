@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="DVS.Components.DVSListings.DVSEmployeesListing"
+﻿<UserControl x:Class="DVS.WPF.Components.DVSListings.DVSEmployeesListing"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:DVS.Components"
+             xmlns:local="clr-namespace:DVS.WPF.Components"
              mc:Ignorable="d"
              DataContext="{Binding DVSListingViewModel}">
 
