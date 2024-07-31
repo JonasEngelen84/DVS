@@ -21,8 +21,8 @@ namespace DVS.Domain.Models
             }
         }
 
-        private string _comment;
-        public string Comment
+        private string? _comment;
+        public string? Comment
         {
             get => _comment;
             set
@@ -49,7 +49,7 @@ namespace DVS.Domain.Models
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         public event NotifyCollectionChangedEventHandler? CollectionChanged;
 
         protected virtual void OnPropertyChanged(string? propertyName = null)

@@ -2,6 +2,6 @@
 {
     public interface IDeleteSeasonCommand
     {
-        Task Execute(Guid GuidID);
+        Task Execute(Guid guidID);
     }
 }
