@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DVS.Domain\DVS.Domain.csproj" />
+    <ProjectReference Include="..\DVS.EntityFramework\DVS.EntityFramework.csproj" />
   </ItemGroup>
 
   <ItemGroup>

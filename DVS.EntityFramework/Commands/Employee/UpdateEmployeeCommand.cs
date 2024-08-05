@@ -1,18 +1,16 @@
 ﻿using DVS.Domain.Commands.Employee;
 using DVS.Domain.Models;
-using DVS.EntityFramework.DbContextFactories;
-using DVS.EntityFramework.DbContexts;
 using DVS.EntityFramework.DTOs;
 
 namespace DVS.EntityFramework.Commands.Employee
 {
-    public class UpdateEmployeeCommand(EmployeeDbContextFactory employeeDbContextFactory) : IUpdateEmployeeCommand
+    public class UpdateEmployeeCommand(DVSDbContextFactory dVSDbContextFactory) : IUpdateEmployeeCommand
     {
-        private readonly EmployeeDbContextFactory _employeeDbContextFactory = employeeDbContextFactory;
+        private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
         public async Task Execute(EmployeeModel employee)
         {
-            using EmployeeDbContext context = _employeeDbContextFactory.Create();
+            using DVSDbContext context = _dVSDbContextFactory.Create();
 
             EmployeeDTO employeeDTO = new()
             {
@@ -24,7 +22,7 @@ namespace DVS.EntityFramework.Commands.Employee
                 Clothes = employee.Clothes
             };
 
-            context.EmployeeDb.Update(employeeDTO);
+            context.Employees.Update(employeeDTO);
             await context.SaveChangesAsync();
         }
     }

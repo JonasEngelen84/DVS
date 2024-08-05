@@ -1,41 +1,47 @@
-﻿using DVS.Domain.Models;
+﻿using DVS.Domain.Commands.Category;
+using DVS.Domain.Models;
+using DVS.Domain.Queries;
 using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
 {
-    public class CategoryStore
+    public class CategoryStore(IGetAllCategoriesQuery getAllCategoriesQuery,
+                               ICreateCategoryCommand createCategoryCommand,
+                               IUpdateCategoryCommand updateCategoryCommand,
+                               IDeleteCategoryCommand deleteCategoryCommand)
     {
-        private readonly List<CategoryModel> _categories;
+        private readonly List<CategoryModel> _categories = [];
         public IEnumerable<CategoryModel> Categories => _categories;
+
+        private readonly IGetAllCategoriesQuery _getAllCategoriesQuery;
+        private readonly ICreateCategoryCommand _createCategoryCommand = createCategoryCommand;
+        private readonly IUpdateCategoryCommand _updateCategoryCommand = updateCategoryCommand;
+        private readonly IDeleteCategoryCommand _deleteCategoryCommand = deleteCategoryCommand;
 
         public event Action CategoriesLoaded;
         public event Action<CategoryModel, AddEditCategoryFormViewModel> CategoryAdded;
         public event Action<CategoryModel, AddEditCategoryFormViewModel> CategoryEdited;
-        public event Action<CategoryModel, AddEditCategoryFormViewModel> CategoryDeleted;
+        public event Action<Guid, AddEditCategoryFormViewModel> CategoryDeleted;
         public event Action<AddEditCategoryFormViewModel> AllCategoriesDeleted;
-
-
-        public CategoryStore()
-        {
-            _categories = [new(Guid.NewGuid(), "Pullover"),  new(Guid.NewGuid(), "Shirt"),
-                new(Guid.NewGuid(), "Jacke"), new(Guid.NewGuid(), "Kopfbedeckung"), new(Guid.NewGuid(), "Hose") ];
-        }
-
 
         public async Task Load()
         {
+            //await _getAllCategoriesQuery.Execute();
             _categories.Clear();
             CategoriesLoaded?.Invoke();
         }
 
         public async Task Add(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
+            //await _createCategoryCommand.Execute(category);
             _categories.Add(category);
             CategoryAdded.Invoke(category, addEditCategoryFormViewModel);
         }
 
-        public async Task Edit(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Update(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
+            //await _updateCategoryCommand.Execute(category);
+
             int index = _categories.FindIndex(y => y.GuidID == category.GuidID);
 
             if (index > -1)
@@ -49,14 +55,16 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task Delete(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Delete(Guid guidID, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
+            //await _deleteCategoryCommand.Execute(guidID);
+
+            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == guidID);
 
             if (categoryToDelete != null)
             {
-                _categories.Remove(category);
-                CategoryDeleted.Invoke(category, addEditCategoryFormViewModel);
+                _categories.RemoveAll(y => y.GuidID == guidID); ;
+                CategoryDeleted.Invoke(guidID, addEditCategoryFormViewModel);
             }
             else
             {

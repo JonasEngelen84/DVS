@@ -1,24 +1,22 @@
 ﻿using DVS.Domain.Commands.Category;
-using DVS.EntityFramework.DbContextFactories;
-using DVS.EntityFramework.DbContexts;
 using DVS.EntityFramework.DTOs;
 
 namespace DVS.EntityFramework.Commands.Category
 {
-    public class DeleteCategoryCommand(CategoryDbContextFactory categoryDbContextFactory) : IDeleteCategoryCommand
+    public class DeleteCategoryCommand(DVSDbContextFactory dVSDbContextFactory) : IDeleteCategoryCommand
     {
-        private readonly CategoryDbContextFactory _categoryDbContextFactory = categoryDbContextFactory;
+        private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
         public async Task Execute(Guid guidID)
         {
-            using CategoryDbContext context = _categoryDbContextFactory.Create();
+            using DVSDbContext context = _dVSDbContextFactory.Create();
 
             CategoryDTO categoryDTO = new()
             {
                 GuidID = guidID
             };
 
-            context.CategoryDb.Remove(categoryDTO);
+            context.Categories.Remove(categoryDTO);
             await context.SaveChangesAsync();
         }
     }

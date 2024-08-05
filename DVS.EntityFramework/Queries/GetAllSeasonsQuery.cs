@@ -1,21 +1,19 @@
 ﻿using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using DVS.EntityFramework.DbContextFactories;
-using DVS.EntityFramework.DbContexts;
 using DVS.EntityFramework.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Queries
 {
-    public class GetAllSeasonsQuery(SeasonDbContextFactory seasonDbContextFactory) : IGetAllSeasonsQuery
+    public class GetAllSeasonsQuery(DVSDbContextFactory dVSDbContextFactory) : IGetAllSeasonsQuery
     {
-        private readonly SeasonDbContextFactory _seasonDbContextFactory = seasonDbContextFactory;
+        private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
         public async Task<IEnumerable<SeasonModel>> Execute()
         {
-            using SeasonDbContext context = _seasonDbContextFactory.Create();
+            using DVSDbContext context = _dVSDbContextFactory.Create();
 
-            IEnumerable<SeasonDTO> seasonDTOs = await context.SeasonDb.ToListAsync();
+            IEnumerable<SeasonDTO> seasonDTOs = await context.Seasons.ToListAsync();
 
             return seasonDTOs.Select(y => new SeasonModel(y.GuidID, y.Name));
         }

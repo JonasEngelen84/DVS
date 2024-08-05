@@ -1,18 +1,16 @@
 ﻿using DVS.Domain.Commands.Season;
 using DVS.Domain.Models;
-using DVS.EntityFramework.DbContextFactories;
-using DVS.EntityFramework.DbContexts;
 using DVS.EntityFramework.DTOs;
 
 namespace DVS.EntityFramework.Commands.Season
 {
-    public class UpdateSeasonCommand(SeasonDbContextFactory seasonDbContextFactory) : IUpdateSeasonCommand
+    public class UpdateSeasonCommand(DVSDbContextFactory dVSDbContextFactory) : IUpdateSeasonCommand
     {
-        private readonly SeasonDbContextFactory _seasonDbContextFactory = seasonDbContextFactory;
+        private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
         public async Task Execute(SeasonModel season)
         {
-            using SeasonDbContext context = _seasonDbContextFactory.Create();
+            using DVSDbContext context = _dVSDbContextFactory.Create();
 
             SeasonDTO seasonDTO = new()
             {
@@ -20,7 +18,7 @@ namespace DVS.EntityFramework.Commands.Season
                 Name = season.Name,
             };
 
-            context.SeasonDb.Update(seasonDTO);
+            context.Seasons.Update(seasonDTO);
             await context.SaveChangesAsync();
         }
     }

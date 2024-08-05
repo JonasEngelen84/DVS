@@ -1,24 +1,22 @@
 ﻿using DVS.Domain.Commands.Employee;
-using DVS.EntityFramework.DbContextFactories;
-using DVS.EntityFramework.DbContexts;
 using DVS.EntityFramework.DTOs;
 
 namespace DVS.EntityFramework.Commands.Employee
 {
-    public class DeleteEmployeeCommand(EmployeeDbContextFactory employeeDbContextFactory) : IDeleteEmployeeCommand
+    public class DeleteEmployeeCommand(DVSDbContextFactory dVSDbContextFactory) : IDeleteEmployeeCommand
     {
-        private readonly EmployeeDbContextFactory _employeeDbContextFactory = employeeDbContextFactory;
+        private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
         public async Task Execute(Guid guidID)
         {
-            using EmployeeDbContext context = _employeeDbContextFactory.Create();
+            using DVSDbContext context = _dVSDbContextFactory.Create();
 
             EmployeeDTO employeeDTO = new()
             {
                 GuidID = guidID
             };
 
-            context.EmployeeDb.Remove(employeeDTO);
+            context.Employees.Remove(employeeDTO);
             await context.SaveChangesAsync();
         }
     }

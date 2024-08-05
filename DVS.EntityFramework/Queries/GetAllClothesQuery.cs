@@ -1,21 +1,19 @@
 ﻿using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using DVS.EntityFramework.DbContextFactories;
-using DVS.EntityFramework.DbContexts;
 using DVS.EntityFramework.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Queries
 {
-    public class GetAllClothesQuery(ClothesDbContextFactory clothesDbContextFactory) : IGetAllClothesQuery
+    public class GetAllClothesQuery(DVSDbContextFactory clothesDbContextFactory) : IGetAllClothesQuery
     {
-        private readonly ClothesDbContextFactory _clothesDbContextFactory = clothesDbContextFactory;
+        private readonly DVSDbContextFactory _clothesDbContextFactory = clothesDbContextFactory;
 
         public async Task<IEnumerable<ClothesModel>> Execute()
         {
-            using ClothesDbContext context = _clothesDbContextFactory.Create();
+            using DVSDbContext context = _clothesDbContextFactory.Create();
 
-            IEnumerable<ClothesDTO> clothesDTOs = await context.ClothesDb.ToListAsync();
+            IEnumerable<ClothesDTO> clothesDTOs = await context.Clothes.ToListAsync();
 
             return clothesDTOs.Select(y => new ClothesModel(y.GuidID, y.ID, y.Name, y.Category, y.Season, y.Comment) { Sizes = y.Sizes } );
         }

@@ -31,7 +31,7 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
 
                 try
                 {
-                    await _categoryStore.Edit(category, addEditCategoryFormViewModel);
+                    await _categoryStore.Update(category, addEditCategoryFormViewModel);
                 }
                 catch (Exception)
                 {

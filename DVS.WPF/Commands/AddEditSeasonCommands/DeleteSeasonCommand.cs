@@ -26,11 +26,9 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
                 addEditSeasonFormViewModel.ErrorMessage = null;
                 addEditSeasonFormViewModel.IsSubmitting = true;
 
-                SeasonModel season = addEditSeasonFormViewModel.SelectedSeason;
-
                 try
                 {
-                    await _seasonStore.Delete(season, addEditSeasonFormViewModel);
+                    await _seasonStore.Delete((Guid)addEditSeasonFormViewModel.SelectedSeason.GuidID, addEditSeasonFormViewModel);
                 }
                 catch (Exception)
                 {

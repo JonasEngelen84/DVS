@@ -169,9 +169,9 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private void SeasonStore_SeasonDeleted(SeasonModel season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        private void SeasonStore_SeasonDeleted(Guid guidID, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
-            var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
+            var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == guidID);
 
             if (seasonToDelete != null)
             {
@@ -179,7 +179,7 @@ namespace DVS.WPF.ViewModels
                 _seasonCollectionViewSource.View.Refresh();
                 addEditSeasonFormViewModel.SelectedSeason = new(null, "Saison wählen");
                 addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
-                //OnPropertyChanged(nameof(_addEditSeasonFormViewModel.CanDeleteAll));
+                addEditSeasonFormViewModel.SeasonCollectionChanged();
             }
             else
             {
@@ -194,7 +194,7 @@ namespace DVS.WPF.ViewModels
                 _seasons.Clear();
                 addEditSeasonFormViewModel.SelectedSeason = new(null, "Saison wählen");
                 addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
-                //OnPropertyChanged(nameof(_addEditSeasonFormViewModel.CanDeleteAll));
+                addEditSeasonFormViewModel.SeasonCollectionChanged();
             }
             else
             {
@@ -207,7 +207,7 @@ namespace DVS.WPF.ViewModels
             _seasons.Add(newSeason);
             _seasonCollectionViewSource.View.Refresh();
             addEditSeasonFormViewModel.AddNewSeason = "Neue Saison";
-            OnPropertyChanged(nameof(Seasons));
+            addEditSeasonFormViewModel.SeasonCollectionChanged();
         }
 
 
@@ -246,9 +246,9 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private void CategoryStore_CategoryDeleted(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        private void CategoryStore_CategoryDeleted(Guid guidID, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
+            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == guidID);
 
             if (categoryToDelete != null)
             {
@@ -256,7 +256,7 @@ namespace DVS.WPF.ViewModels
                 _categoryCollectionViewSource.View.Refresh();
                 addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
                 addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
-                OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
+                addEditCategoryFormViewModel.CategoryCollectionChanged();
             }
             else
             {
@@ -271,7 +271,7 @@ namespace DVS.WPF.ViewModels
                 _categories.Clear();
                 addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
                 addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
-                OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
+                addEditCategoryFormViewModel.CategoryCollectionChanged();
             }
             else
             {
@@ -284,7 +284,7 @@ namespace DVS.WPF.ViewModels
             _categories.Add(newCategory);
             _categoryCollectionViewSource.View.Refresh();
             addEditCategoryFormViewModel.AddNewCategory = "Neue Kategorie";
-            OnPropertyChanged(nameof(Categories));
+            addEditCategoryFormViewModel.CategoryCollectionChanged();
         }
 
 

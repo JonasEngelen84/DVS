@@ -94,5 +94,10 @@ namespace DVS.WPF.ViewModels.Forms
         public bool CanDelete => !SelectedCategory.Name.Equals("Kategorie wählen");
         public bool CanDeleteAll => !AddEditListingViewModel.Categories.IsEmpty;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+
+        public void CategoryCollectionChanged()
+        {
+            OnPropertyChanged(nameof(CanDeleteAll));
+        }
     }
 }

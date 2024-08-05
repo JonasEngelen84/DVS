@@ -23,14 +23,12 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
 
             if (dialog == MessageBoxResult.Yes)
             {
-                CategoryModel deletedCategorie = addEditCategoryFormViewModel.SelectedCategory;
-
                 addEditCategoryFormViewModel.ErrorMessage = null;
                 addEditCategoryFormViewModel.IsSubmitting = true;
 
                 try
                 {
-                    await _categoryStore.Delete(deletedCategorie, addEditCategoryFormViewModel);
+                    await _categoryStore.Delete((Guid)addEditCategoryFormViewModel.SelectedCategory.GuidID, addEditCategoryFormViewModel);
                 }
                 catch (Exception)
                 {

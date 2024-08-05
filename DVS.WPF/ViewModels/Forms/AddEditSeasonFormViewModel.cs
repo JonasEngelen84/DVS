@@ -94,5 +94,10 @@ namespace DVS.WPF.ViewModels.Forms
         public bool CanDelete => !SelectedSeason.Name.Equals("Saison wählen");
         public bool CanDeleteAll => !AddEditListingViewModel.Seasons.IsEmpty;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+
+        public void SeasonCollectionChanged()
+        {
+            OnPropertyChanged(nameof(CanDeleteAll));
+        }
     }
 }

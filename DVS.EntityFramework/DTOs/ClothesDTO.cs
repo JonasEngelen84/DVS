@@ -6,7 +6,6 @@ namespace DVS.EntityFramework.DTOs
 {
     public class ClothesDTO
     {
-        [Key]
         public Guid GuidID { get; set; }
         public string ID { get; set; }
         public string Name { get; set; }

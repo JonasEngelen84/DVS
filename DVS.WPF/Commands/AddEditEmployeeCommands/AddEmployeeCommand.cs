@@ -38,7 +38,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 else
                 {
                     ClothesModel newClothes = new(item.Clothes.GuidID, item.ID, item.Name, item.Clothes.Category, item.Clothes.Season, null);
-                    newClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
+                    newClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity });
                     employee.Clothes.Add(newClothes);
                 }
             }
