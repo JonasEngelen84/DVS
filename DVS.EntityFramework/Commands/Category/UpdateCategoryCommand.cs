@@ -8,7 +8,7 @@ namespace DVS.EntityFramework.Commands.Category
     {
         private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
-        public async Task Execute(CategoryModel category)
+        public async Task Execute(Domain.Models.Category category)
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
 

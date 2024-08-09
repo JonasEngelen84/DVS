@@ -3,11 +3,11 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class AddEditEmployeeFormViewModel(EmployeeModel? employee, DVSListingViewModel
+    public class AddEditEmployeeFormViewModel(Employee? employee, DVSListingViewModel
         dVSListingViewModel, ICommand submitCommand) : ViewModelBase
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
-        private EmployeeModel? Employee { get; } = employee;
+        private Employee? Employee { get; } = employee;
         public ICommand SubmitEmployee { get; } = submitCommand;
 
         private string _iD;

@@ -6,13 +6,19 @@ using System.Windows;
 namespace DVS.WPF.Commands
 {
     public class OpenEditDetailedItemCommand(SelectedDetailedClothesItemStore selectedDetailedClothesItemStore,
-                              SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore,
-                              ModalNavigationStore modalNavigationStore, ClothesStore clothesStore, EmployeeStore employeeStore,
-                              DVSListingViewModel dVSListingViewModel, CategoryStore categoryStore, SeasonStore seasonStore) : CommandBase
+                                             SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore,
+                                             ModalNavigationStore modalNavigationStore,
+                                             SizeStore sizeStore,
+                                             ClothesStore clothesStore,
+                                             EmployeeStore employeeStore,
+                                             DVSListingViewModel dVSListingViewModel,
+                                             CategoryStore categoryStore,
+                                             SeasonStore seasonStore) : CommandBase
     {
         private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
         private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
+        private readonly SizeStore _sizeStore = sizeStore;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly EmployeeStore _employeeStore = employeeStore;
         private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
@@ -24,7 +30,7 @@ namespace DVS.WPF.Commands
             if (_selectedDetailedClothesItemStore.SelectedDetailedClothesItem != null)
             {
                 EditClothesViewModel EditClothesViewModel = new(_selectedDetailedClothesItemStore.SelectedDetailedClothesItem.Clothes,
-                    _modalNavigationStore, _categoryStore, _seasonStore, _clothesStore);
+                    _modalNavigationStore, _sizeStore, _categoryStore, _seasonStore, _clothesStore);
 
                 _modalNavigationStore.CurrentViewModel = EditClothesViewModel;
             }

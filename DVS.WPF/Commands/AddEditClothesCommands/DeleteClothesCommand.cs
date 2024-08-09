@@ -1,5 +1,6 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.ListViewItems;
 using System.Windows;
 
@@ -26,7 +27,15 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 _clothesListingItemViewModel.ErrorMessage = null;
                 _clothesListingItemViewModel.IsDeleting = true;
 
-                ClothesModel clothes = _clothesListingItemViewModel.Clothes;
+                Clothes clothes = _clothesListingItemViewModel.Clothes;
+
+                foreach (ClothesSize size in clothes.Sizes)
+                {
+                    size.Size.ClothesSizes.Remove(size);
+                }
+
+                clothes.Category?.Clothes.Remove(clothes);
+                clothes.Season?.Clothes.Remove(clothes);
 
                 try
                 {

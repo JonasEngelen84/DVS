@@ -30,29 +30,25 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 editEmployeeFormViewModel.ErrorMessage = null;
                 editEmployeeFormViewModel.IsSubmitting = true;
 
-                EmployeeModel employeeToEdit = new(_guidID,
-                                                   editEmployeeFormViewModel.ID,
-                                                   editEmployeeFormViewModel.Lastname,
-                                                   editEmployeeFormViewModel.Firstname,
-                                                   editEmployeeFormViewModel.Comment);
-                employeeToEdit.Clothes.Clear();
+                Employee employeeToEdit = new(_guidID,
+                                              editEmployeeFormViewModel.ID,
+                                              editEmployeeFormViewModel.Lastname,
+                                              editEmployeeFormViewModel.Firstname,
+                                              editEmployeeFormViewModel.Comment);
 
-                //TODO: Kommentare von DetailedItems werden entfernt bei einem update
-                foreach (DetailedClothesListingItemViewModel item in
-                _editEmployeeViewModel.AddEditEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
+                foreach (EmployeeClothesSize size in employeeToEdit.EmployeeClothes)
                 {
-                    ClothesModel existingClothes = employeeToEdit.Clothes.FirstOrDefault(clothes => clothes.GuidID == item.Clothes.GuidID);
+                    size.ClothesSize.EmployeeClothesSizes.Remove(size);
+                }
 
-                    if (existingClothes != null)
-                    {
-                        existingClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
-                    }
-                    else
-                    {
-                        ClothesModel newClothes = new(item.Clothes.GuidID, item.ID, item.Name, item.Clothes.Category, item.Clothes.Season, null);
-                        newClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
-                        employeeToEdit.Clothes.Add(newClothes);
-                    }
+                employeeToEdit.EmployeeClothes.Clear();
+
+                //TODO: Kommentare von DetailedItems werden entfernt bei update
+                foreach (DetailedClothesListingItemViewModel item in editEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
+                {
+                    var existingClothes = item.Clothes.Sizes.FirstOrDefault(s => s.Size.Equals(item.Clothes.Sizes));
+                    existingClothes.EmployeeClothesSizes.Add(new EmployeeClothesSize(employeeToEdit, existingClothes, (int)item.Quantity));
+                    employeeToEdit.EmployeeClothes.Add(new EmployeeClothesSize(employeeToEdit, existingClothes, (int)item.Quantity));
                 }
 
                 try

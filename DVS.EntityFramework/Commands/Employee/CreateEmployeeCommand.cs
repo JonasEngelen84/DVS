@@ -8,7 +8,7 @@ namespace DVS.EntityFramework.Commands.Employee
     {
         private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
-        public async Task Execute(EmployeeModel employee)
+        public async Task Execute(Domain.Models.Employee employee)
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
 
@@ -19,7 +19,7 @@ namespace DVS.EntityFramework.Commands.Employee
                 Lastname = employee.Lastname,
                 Firstname = employee.Firstname,
                 Comment = employee.Comment,
-                Clothes = employee.Clothes
+                Clothes = employee.EmployeeClothes
             };
 
             context.Employees.Add(employeeDTO);

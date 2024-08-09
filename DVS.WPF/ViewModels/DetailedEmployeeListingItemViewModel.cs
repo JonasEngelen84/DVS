@@ -2,24 +2,21 @@
 
 namespace DVS.WPF.ViewModels
 {
-    public class DetailedEmployeeListingItemViewModel : ViewModelBase
+    public class DetailedEmployeeListingItemViewModel(Employee employee, Guid? employeeClothesSizeGuidID) : ViewModelBase
     {
-        public EmployeeModel Employee { get; private set; }
-        public Guid GuidID => Employee.GuidID;
+        public Employee Employee { get; private set; } = employee;
         public string ID => Employee.ID;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
-        public Guid? ClothesGuidID { get; }
-        public string? ClothesID => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID)?.ID ?? null;
-        public string? ClothesName => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID)?.Name ?? null;
-        public string Size { get; }
 
-        public int? Quantity => Employee.Clothes.FirstOrDefault(c => c.GuidID == ClothesGuidID)?.Sizes
-            .FirstOrDefault(s => s.Size == Size)?.Quantity ?? null;
-
-        public string? Comment => Employee.Clothes.FirstOrDefault(s => s.GuidID == ClothesGuidID)?.Sizes
-            .FirstOrDefault(s => s.Size == Size)?.Comment ?? null;
-
+        public Guid? EmployeeClothesSizeGuidID { get; private set; } = employeeClothesSizeGuidID;
+        public Guid? ClothesGuidID => Employee.EmployeeClothes.FirstOrDefault(s => s.GuidID == EmployeeClothesSizeGuidID)?.ClothesSize.Clothes.GuidID;
+        public string? ClothesID => Employee.EmployeeClothes.FirstOrDefault(s => s.GuidID == EmployeeClothesSizeGuidID)?.ClothesSize.Clothes.ID ?? null;
+        public string? ClothesName => Employee.EmployeeClothes.FirstOrDefault(s => s.GuidID == EmployeeClothesSizeGuidID)?.ClothesSize.Clothes.Name ?? null;
+        public string? Size => Employee.EmployeeClothes.FirstOrDefault(c => c.GuidID == EmployeeClothesSizeGuidID)?.ClothesSize.Size.Size ?? null;
+        public int? Quantity => Employee.EmployeeClothes.FirstOrDefault(c => c.GuidID == EmployeeClothesSizeGuidID)?.Quantity ?? null;
+        public string? Comment => Employee.EmployeeClothes.FirstOrDefault(s => s.GuidID == EmployeeClothesSizeGuidID)?.Comment ?? null;
+                
         private bool _isDeleting;
         public bool IsDeleting
         {
@@ -51,18 +48,10 @@ namespace DVS.WPF.ViewModels
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-
-        public DetailedEmployeeListingItemViewModel(EmployeeModel employee, Guid? clothesGuidID, string size)
+        public void Update(Employee employee, Guid? employeeClothesSizeGuidID)
         {
             Employee = employee;
-            ClothesGuidID = clothesGuidID;
-            Size = size;
-        }
-
-
-        public void Update(EmployeeModel employee)
-        {
-            Employee = employee;
+            EmployeeClothesSizeGuidID = employeeClothesSizeGuidID;
 
             OnPropertyChanged(nameof(ID));
             OnPropertyChanged(nameof(Lastname));

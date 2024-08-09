@@ -25,7 +25,12 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 _employeeListingItemViewModel.ErrorMessage = null;
                 _employeeListingItemViewModel.IsDeleting = true;
 
-                EmployeeModel employee = _employeeListingItemViewModel.Employee;
+                Employee employee = _employeeListingItemViewModel.Employee;
+
+                foreach (EmployeeClothesSize size in employee.EmployeeClothes)
+                {
+                    size.ClothesSize.EmployeeClothesSizes.Remove(size);
+                }
 
                 try
                 {

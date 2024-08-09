@@ -4,6 +4,6 @@ namespace DVS.Domain.Queries
 {
     public interface IGetAllClothesQuery
     {
-        Task<IEnumerable<ClothesModel>> Execute();
+        Task<IEnumerable<Clothes>> Execute();
     }
 }

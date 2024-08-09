@@ -14,12 +14,12 @@ namespace DVS.WPF.Stores
         private readonly IUpdateEmployeeCommand _updateEmployeeCommand = updateEmployeeCommand;
         private readonly IDeleteEmployeeCommand _deleteEmployeeCommand = deleteEmployeeCommand;
 
-        private readonly List<EmployeeModel> _employees = [];
-        public IEnumerable<EmployeeModel> Employees => _employees;
+        private readonly List<Employee> _employees = [];
+        public IEnumerable<Employee> Employees => _employees;
 
         public event Action EmployeesLoaded;
-        public event Action<EmployeeModel> EmployeeAdded;
-        public event Action<EmployeeModel> EmployeeUpdated;
+        public event Action<Employee> EmployeeAdded;
+        public event Action<Employee> EmployeeUpdated;
         public event Action<Guid> EmployeeDeleted;
 
         public async Task Load()
@@ -29,7 +29,7 @@ namespace DVS.WPF.Stores
             EmployeesLoaded?.Invoke();
         }
 
-        public async Task Add(EmployeeModel employee)
+        public async Task Add(Employee employee)
         {
             //await _createEmployeeCommand.Execute(employee);
 
@@ -37,7 +37,7 @@ namespace DVS.WPF.Stores
             EmployeeAdded?.Invoke(employee);
         }
 
-        public async Task Update(EmployeeModel employee)
+        public async Task Update(Employee employee)
         {
             //await _updateEmployeeCommand.Execute(employee);
 

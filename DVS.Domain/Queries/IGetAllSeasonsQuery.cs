@@ -4,6 +4,6 @@ namespace DVS.Domain.Queries
 {
     public interface IGetAllSeasonsQuery
     {
-        Task<IEnumerable<SeasonModel>> Execute();
+        Task<IEnumerable<Season>> Execute();
     }
 }

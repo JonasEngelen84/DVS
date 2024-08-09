@@ -26,8 +26,14 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 _employeeListingItemViewModel.ErrorMessage = null;
                 _employeeListingItemViewModel.IsDeleting = true;
 
-                EmployeeModel employee = _employeeListingItemViewModel.Employee;
-                employee.Clothes.Clear();
+                Employee employee = _employeeListingItemViewModel.Employee;
+
+                foreach (EmployeeClothesSize size in employee.EmployeeClothes)
+                {
+                    size.ClothesSize.EmployeeClothesSizes.Remove(size);
+                }
+
+                employee.EmployeeClothes.Clear();
 
                 try
                 {
@@ -35,8 +41,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 }
                 catch (Exception)
                 {
-                    _employeeListingItemViewModel.ErrorMessage =
-                        "Löschen der Kleidungsliste ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    _employeeListingItemViewModel.ErrorMessage = "Löschen der Kleidungsliste ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
                 }
                 finally
                 {

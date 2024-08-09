@@ -20,12 +20,12 @@ namespace DVS.WPF.Commands
                 .FirstOrDefault(modelItem => modelItem.ID == _dVSListingViewModel.IncomingClothesListingItemModel.ID
                 && modelItem.Size == _dVSListingViewModel.IncomingClothesListingItemModel.Size);
 
-                ClothesModel clothes = new(_dVSListingViewModel.IncomingClothesListingItemModel.Clothes.GuidID,
-                                           _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.ID,
-                                           _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.Name,
-                                           _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.Category,
-                                           _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.Season,
-                                           null);
+                Clothes clothes = new(_dVSListingViewModel.IncomingClothesListingItemModel.Clothes.GuidID,
+                                      _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.ID,
+                                      _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.Name,
+                                      _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.Category,
+                                      _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.Season,
+                                      null);
 
                 _dVSListingViewModel.RemovedClothesListingItemModel.ErrorMessage = null;
 
@@ -37,7 +37,7 @@ namespace DVS.WPF.Commands
                 else
                 {
                     clothes.Sizes = existingItem.Clothes.Sizes;
-                    var size = existingItem.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size == _dVSListingViewModel.IncomingClothesListingItemModel.Size);
+                    var size = existingItem.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size.Size == _dVSListingViewModel.IncomingClothesListingItemModel.Size);
                     size.Quantity++;
 
                     try

@@ -9,13 +9,13 @@ namespace DVS.EntityFramework.Queries
     {
         private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
-        public async Task<IEnumerable<SeasonModel>> Execute()
+        public async Task<IEnumerable<Season>> Execute()
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
 
             IEnumerable<SeasonDTO> seasonDTOs = await context.Seasons.ToListAsync();
 
-            return seasonDTOs.Select(y => new SeasonModel(y.GuidID, y.Name));
+            return seasonDTOs.Select(y => new Season(y.GuidID, y.Name));
         }
     }
 }

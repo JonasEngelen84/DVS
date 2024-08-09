@@ -6,6 +6,6 @@ namespace DVS.Domain.Commands.Category
 {
     public interface ICreateCategoryCommand
     {
-        Task Execute(CategoryModel category);
+        Task Execute(Models.Category category);
     }
 }

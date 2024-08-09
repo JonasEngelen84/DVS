@@ -9,13 +9,13 @@ namespace DVS.EntityFramework.Queries
     {
         private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
-        public async Task<IEnumerable<CategoryModel>> Execute()
+        public async Task<IEnumerable<Category>> Execute()
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
 
             IEnumerable<CategoryDTO> categoryDTOs = await context.Categories.ToListAsync();
 
-            return categoryDTOs.Select(y => new CategoryModel(y.GuidID, y.Name));
+            return categoryDTOs.Select(y => new Category(y.GuidID, y.Name));
         }
     }
 }

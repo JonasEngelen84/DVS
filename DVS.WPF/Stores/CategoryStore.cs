@@ -10,8 +10,8 @@ namespace DVS.WPF.Stores
                                IUpdateCategoryCommand updateCategoryCommand,
                                IDeleteCategoryCommand deleteCategoryCommand)
     {
-        private readonly List<CategoryModel> _categories = [];
-        public IEnumerable<CategoryModel> Categories => _categories;
+        private readonly List<Category> _categories = [];
+        public IEnumerable<Category> Categories => _categories;
 
         private readonly IGetAllCategoriesQuery _getAllCategoriesQuery;
         private readonly ICreateCategoryCommand _createCategoryCommand = createCategoryCommand;
@@ -19,8 +19,8 @@ namespace DVS.WPF.Stores
         private readonly IDeleteCategoryCommand _deleteCategoryCommand = deleteCategoryCommand;
 
         public event Action CategoriesLoaded;
-        public event Action<CategoryModel, AddEditCategoryFormViewModel> CategoryAdded;
-        public event Action<CategoryModel, AddEditCategoryFormViewModel> CategoryEdited;
+        public event Action<Category, AddEditCategoryFormViewModel> CategoryAdded;
+        public event Action<Category, AddEditCategoryFormViewModel> CategoryEdited;
         public event Action<Guid, AddEditCategoryFormViewModel> CategoryDeleted;
         public event Action<AddEditCategoryFormViewModel> AllCategoriesDeleted;
 
@@ -31,14 +31,14 @@ namespace DVS.WPF.Stores
             CategoriesLoaded?.Invoke();
         }
 
-        public async Task Add(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Add(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             //await _createCategoryCommand.Execute(category);
             _categories.Add(category);
             CategoryAdded.Invoke(category, addEditCategoryFormViewModel);
         }
 
-        public async Task Update(CategoryModel category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Update(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             //await _updateCategoryCommand.Execute(category);
 

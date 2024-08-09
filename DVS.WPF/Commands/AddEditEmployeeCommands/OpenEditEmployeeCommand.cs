@@ -18,7 +18,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         public override void Execute(object parameter)
         {
-            EmployeeModel _employee = _employeeListingItemViewModel.Employee;
+            Employee _employee = _employeeListingItemViewModel.Employee;
 
             EditEmployeeViewModel EditEmployeeViewModel = new(
                 _employee, _employeeStore, _clothesStore, _modalNavigationStore, _dVSListingViewModel);

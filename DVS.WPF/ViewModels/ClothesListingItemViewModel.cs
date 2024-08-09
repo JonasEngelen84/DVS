@@ -8,13 +8,13 @@ namespace DVS.WPF.ViewModels.ListViewItems
 {
     public class ClothesListingItemViewModel : ViewModelBase
     {
-        public ClothesModel Clothes { get; private set; }
+        public Clothes Clothes { get; private set; }
         public string ID => Clothes.ID;
         public string Name => Clothes.Name;
-        public CategoryModel Category => Clothes.Category;
-        public SeasonModel Season => Clothes.Season;
+        public Category Category => Clothes.Category;
+        public Season Season => Clothes.Season;
         public string? Comment => Clothes.Comment;
-        public ObservableCollection<ClothesSizeModel> Sizes => Clothes.Sizes;
+        public ObservableCollection<ClothesSize> Sizes => Clothes.Sizes;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -73,18 +73,29 @@ namespace DVS.WPF.ViewModels.ListViewItems
         public ICommand PrintClothes { get; set; }
 
 
-        public ClothesListingItemViewModel(ClothesModel clothes, ModalNavigationStore modalNavigationStore,
-            CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
+        public ClothesListingItemViewModel(Clothes clothes,
+                                           ModalNavigationStore modalNavigationStore,
+                                           SizeStore sizeStore,
+                                           CategoryStore categoryStore,
+                                           SeasonStore seasonStore,
+                                           ClothesStore clothesStore)
         {
             Clothes = clothes;
-            OpenEditClothes = new OpenEditClothesCommand(this, modalNavigationStore, categoryStore, seasonStore, clothesStore);
+
+            OpenEditClothes = new OpenEditClothesCommand(this,
+                                                         modalNavigationStore,
+                                                         sizeStore,
+                                                         categoryStore,
+                                                         seasonStore,
+                                                         clothesStore);
+
             DeleteClothes = new DeleteClothesCommand(this, clothesStore);
             ClearClothesSizes = new ClearSizesCommand(this, clothesStore);
             PrintClothes = new OpenPrintClothesCommand();
         }
 
 
-        public void Update(ClothesModel clothes)
+        public void Update(Clothes clothes)
         {
             Clothes = clothes;
 

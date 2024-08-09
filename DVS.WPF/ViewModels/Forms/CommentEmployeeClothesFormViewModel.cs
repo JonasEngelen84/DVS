@@ -11,13 +11,14 @@ namespace DVS.WPF.ViewModels.Forms
         private DetailedEmployeeListingItemViewModel SelectedDetailedEmployeeItem => _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem;
 
         public bool HasSelectedDetailedEmployeeListingItem => SelectedDetailedEmployeeItem != null;
-        public EmployeeModel Employee => SelectedDetailedEmployeeItem.Employee;
+        public Guid? EmployeeClothesSizeGuidID => SelectedDetailedEmployeeItem.EmployeeClothesSizeGuidID;
+        public Employee Employee => SelectedDetailedEmployeeItem.Employee;
         public string EmployeeID => SelectedDetailedEmployeeItem.Employee.ID;
         public string EmployeeLastname => SelectedDetailedEmployeeItem.Lastname;
         public string EmployeeFirstname => SelectedDetailedEmployeeItem.Firstname;
         public string? ClothesID => SelectedDetailedEmployeeItem.ClothesID;
         public string? ClothesName => SelectedDetailedEmployeeItem.ClothesName;
-        public string Size => SelectedDetailedEmployeeItem.Size;
+        public string? Size => SelectedDetailedEmployeeItem.Size;
         public int? Quantity => SelectedDetailedEmployeeItem.Quantity;
 
         private string? _comment;
@@ -67,7 +68,8 @@ namespace DVS.WPF.ViewModels.Forms
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
         //TODO: CanSubmitComment
         public bool CanSubmit => !string.IsNullOrEmpty(Comment)
-            || Comment != Employee.Clothes?.FirstOrDefault(s => s.ID == ClothesID).Sizes.FirstOrDefault(y => y.Size == Size).Comment;
+            || !Comment.Equals(Employee.EmployeeClothes?
+            .FirstOrDefault(ecs => ecs.GuidID == EmployeeClothesSizeGuidID).Comment);
 
         public ICommand SubmitComment { get; }
 

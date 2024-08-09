@@ -4,6 +4,6 @@ namespace DVS.Domain.Commands.Category
 {
     public interface IUpdateCategoryCommand
     {
-        Task Execute(CategoryModel category);
+        Task Execute(Models.Category category);
     }
 }

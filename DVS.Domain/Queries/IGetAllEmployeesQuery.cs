@@ -4,6 +4,6 @@ namespace DVS.Domain.Queries
 {
     public interface IGetAllEmployeesQuery
     {
-        Task<IEnumerable<EmployeeModel>> Execute();
+        Task<IEnumerable<Employee>> Execute();
     }
 }

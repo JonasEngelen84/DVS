@@ -20,27 +20,17 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             addEmployeeFormViewModel.ErrorMessage = null;
             addEmployeeFormViewModel.IsSubmitting = true;
 
-            EmployeeModel employee = new(Guid.NewGuid(),
-                                         addEmployeeFormViewModel.ID,
-                                         addEmployeeFormViewModel.Firstname,
-                                         addEmployeeFormViewModel.Lastname,
-                                         addEmployeeFormViewModel.Comment);
+            Employee employee = new(Guid.NewGuid(),
+                                    addEmployeeFormViewModel.ID,
+                                    addEmployeeFormViewModel.Firstname,
+                                    addEmployeeFormViewModel.Lastname,
+                                    addEmployeeFormViewModel.Comment);
 
-            foreach (DetailedClothesListingItemViewModel item in
-                _addEmployeeViewModel.AddEditEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
+            foreach (DetailedClothesListingItemViewModel item in addEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
             {
-                ClothesModel existingClothes = employee.Clothes.FirstOrDefault(clothes => clothes.GuidID == item.Clothes.GuidID);
-
-                if (existingClothes != null)
-                {
-                    existingClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity, IsSelected = true });
-                }
-                else
-                {
-                    ClothesModel newClothes = new(item.Clothes.GuidID, item.ID, item.Name, item.Clothes.Category, item.Clothes.Season, null);
-                    newClothes.Sizes.Add(new ClothesSizeModel(item.Size) { Quantity = item.Quantity });
-                    employee.Clothes.Add(newClothes);
-                }
+                var existingClothes = item.Clothes.Sizes.FirstOrDefault(s => s.Size.Equals(item.Clothes.Sizes));
+                existingClothes.EmployeeClothesSizes.Add(new EmployeeClothesSize(employee, existingClothes, (int)item.Quantity));
+                employee.EmployeeClothes.Add(new EmployeeClothesSize(employee, existingClothes, (int)item.Quantity));
             }
 
             try

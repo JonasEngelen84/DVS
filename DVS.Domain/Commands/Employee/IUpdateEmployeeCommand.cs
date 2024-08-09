@@ -4,6 +4,6 @@ namespace DVS.Domain.Commands.Employee
 {
     public interface IUpdateEmployeeCommand
     {
-        Task Execute(EmployeeModel employee);
+        Task Execute(Models.Employee employee);
     }
 }

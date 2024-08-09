@@ -37,8 +37,8 @@ namespace DVS.WPF.ViewModels.Forms
             }
         }
 
-        private SeasonModel _selectedSeason;
-        public SeasonModel SelectedSeason
+        private Season _selectedSeason;
+        public Season SelectedSeason
         {
             get => _selectedSeason;
             set

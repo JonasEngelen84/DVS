@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
-using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
 
@@ -22,12 +21,12 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             addEditClothesFormViewModel.ErrorMessage = null;
             addEditClothesFormViewModel.IsSubmitting = true;
 
-            ClothesModel clothes = new(Guid.NewGuid(),
-                                       addEditClothesFormViewModel.ID,
-                                       addEditClothesFormViewModel.Name,
-                                       addEditClothesFormViewModel.Category,
-                                       addEditClothesFormViewModel.Season,
-                                       addEditClothesFormViewModel.Comment);
+            Clothes clothes = new(Guid.NewGuid(),
+                                  addEditClothesFormViewModel.ID,
+                                  addEditClothesFormViewModel.Name,
+                                  addEditClothesFormViewModel.Category,
+                                  addEditClothesFormViewModel.Season,
+                                  addEditClothesFormViewModel.Comment);
 
             // Alle ausgewählten Größen in eine ZwischenListe speichern.
             // Diese wird der GrößenListe (Size) des ClothesModel hinzugefügt.
@@ -35,10 +34,15 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
                 : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
 
-            foreach (ClothesSizeModel sizeModel in selectedSizes)
+            foreach (SizeModel size in selectedSizes)
             {
-                clothes.Sizes.Add(sizeModel);
+                ClothesSize clothesSize = new(clothes, size, size.Quantity);
+                clothes.Sizes.Add(clothesSize);
+                size.ClothesSizes.Add(clothesSize);
             }
+
+            clothes.Category?.Clothes.Add(clothes);
+            clothes.Season?.Clothes.Add(clothes);
 
             try
             {

@@ -12,7 +12,7 @@ namespace DVS.WPF.ViewModels.Views
         public ICommand CloseAddEditEmployee { get; }
 
 
-        public EditEmployeeViewModel(EmployeeModel employee, EmployeeStore employeeStore, ClothesStore clothesStore,
+        public EditEmployeeViewModel(Employee employee, EmployeeStore employeeStore, ClothesStore clothesStore,
             ModalNavigationStore modalNavigationStore, DVSListingViewModel dVSListingViewModel)
         {
             ICommand editEmployee = new EditEmployeeCommand(this, employeeStore, modalNavigationStore, employee.GuidID);

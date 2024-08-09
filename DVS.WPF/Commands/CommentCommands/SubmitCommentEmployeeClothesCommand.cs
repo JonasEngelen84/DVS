@@ -1,13 +1,14 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
-using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
 
 namespace DVS.WPF.Commands.CommentCommands
 {
     public class SubmitCommentEmployeeClothesCommand(CommentEmployeeClothesViewModel commentEmployeeClothesViewModel,
-        EmployeeStore employeeStore, ModalNavigationStore modalNavigationStore) : AsyncCommandBase
+                                                     EmployeeStore employeeStore,
+                                                     ModalNavigationStore modalNavigationStore)
+                                                     : AsyncCommandBase
     {
         private readonly CommentEmployeeClothesViewModel _commentEmployeeClothesViewModel = commentEmployeeClothesViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
@@ -20,23 +21,21 @@ namespace DVS.WPF.Commands.CommentCommands
             commentEmployeeClothesFormViewModel.ErrorMessage = null;
             commentEmployeeClothesFormViewModel.IsSubmitting = true;
 
-            EmployeeModel employeeToEdit = new(commentEmployeeClothesFormViewModel.Employee.GuidID,
-                                               commentEmployeeClothesFormViewModel.EmployeeID,
-                                               commentEmployeeClothesFormViewModel.EmployeeLastname,
-                                               commentEmployeeClothesFormViewModel.EmployeeFirstname,
-                                               commentEmployeeClothesFormViewModel.Employee.Comment)
+            Employee employeeToEdit = new(commentEmployeeClothesFormViewModel.Employee.GuidID,
+                                          commentEmployeeClothesFormViewModel.EmployeeID,
+                                          commentEmployeeClothesFormViewModel.EmployeeLastname,
+                                          commentEmployeeClothesFormViewModel.EmployeeFirstname,
+                                          commentEmployeeClothesFormViewModel.Employee.Comment)
             {
-                Clothes = commentEmployeeClothesFormViewModel.Employee.Clothes
+                EmployeeClothes = commentEmployeeClothesFormViewModel.Employee.EmployeeClothes
             };
 
-            ClothesSizeModel? existingItem = employeeToEdit.Clothes
-                .FirstOrDefault(s => s.ID == commentEmployeeClothesFormViewModel.ClothesID)?.Sizes
-                .FirstOrDefault(s => s.Size == commentEmployeeClothesFormViewModel.Size);
+            EmployeeClothesSize? existingItem = employeeToEdit.EmployeeClothes
+                .FirstOrDefault(ecs => ecs.GuidID == commentEmployeeClothesFormViewModel.EmployeeClothesSizeGuidID);
 
             if (existingItem == null)
             {
-                commentEmployeeClothesFormViewModel.ErrorMessage =
-                    "Bearbeiten des Kommentar ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                commentEmployeeClothesFormViewModel.ErrorMessage = "Bearbeiten des Kommentar ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
             }
             else
             {
@@ -48,8 +47,7 @@ namespace DVS.WPF.Commands.CommentCommands
                 }
                 catch (Exception)
                 {
-                    commentEmployeeClothesFormViewModel.ErrorMessage =
-                    "Bearbeiten des Kommentar ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    commentEmployeeClothesFormViewModel.ErrorMessage = "Bearbeiten des Kommentar ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
                 }
                 finally
                 {

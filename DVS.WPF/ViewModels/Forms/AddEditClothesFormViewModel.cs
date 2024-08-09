@@ -3,12 +3,12 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class AddEditClothesFormViewModel(ClothesModel? clothes, ICommand submitCommand,
+    public class AddEditClothesFormViewModel(Clothes? clothes, ICommand submitCommand,
         ICommand openAddEditCategoriesCommand, ICommand openAddEditSeasonsCommand,
         AddEditListingViewModel addEditListingViewModel) : ViewModelBase
     {
         public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
-        private ClothesModel? Clothes { get; } = clothes;
+        public Clothes? Clothes { get; } = clothes;
         public ICommand OpenAddEditCategories { get; } = openAddEditCategoriesCommand;
         public ICommand OpenAddEditSeasons { get; } = openAddEditSeasonsCommand;
         public ICommand SubmitClothes { get; } = submitCommand;
@@ -57,8 +57,8 @@ namespace DVS.WPF.ViewModels.Forms
             }
         }
 
-        private CategoryModel _category;
-        public CategoryModel Category
+        private Category _category;
+        public Category Category
         {
             get => _category;
             set
@@ -71,8 +71,8 @@ namespace DVS.WPF.ViewModels.Forms
             }
         }
 
-        private SeasonModel _season;
-        public SeasonModel Season
+        private Season _season;
+        public Season Season
         {
             get => _season;
             set

@@ -26,7 +26,13 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 _clothesListingItemViewModel.ErrorMessage = null;
                 _clothesListingItemViewModel.IsDeleting = true;
 
-                ClothesModel clothes = _clothesListingItemViewModel.Clothes;
+                Clothes clothes = _clothesListingItemViewModel.Clothes;
+               
+                foreach (ClothesSize size in clothes.Sizes)
+                {
+                    size.Size.ClothesSizes.Remove(size);
+                }
+
                 clothes.Sizes.Clear();
 
                 try

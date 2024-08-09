@@ -23,6 +23,7 @@ namespace DVS.WPF
         private readonly SeasonStore _seasonStore;
         private readonly ClothesStore _clothesStore;
         private readonly EmployeeStore _employeeStore;
+        private readonly SizeStore _sizeStore;
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly DVSListingViewModel _dVSListingViewModel;
         private readonly DVSDetailedViewModel _dVSDetailedViewModel;
@@ -84,11 +85,13 @@ namespace DVS.WPF
             _seasonStore = new(_getAllSeasonsQuery, _createSeasonCommand, _updateSeasonCommand, _deleteSeasonsCommand);
             _clothesStore = new(_getAllClothesQuery, _createClothesCommand, _updateClothesCommand, _deleteClothesCommand);
             _employeeStore = new(_getAllEmployeesQuery, _createEmployeeCommand, _updateEmployeeCommand, _deleteEmployeeCommand);
+            _sizeStore = new();
             _modalNavigationStore = new();
             _selectedDetailedClothesItemStore = new();
             _selectedDetailedEmployeeClothesItemStore = new();
 
-            _dVSListingViewModel = new(_clothesStore,
+            _dVSListingViewModel = new(_sizeStore, 
+                                       _clothesStore,
                                        _employeeStore,
                                        _modalNavigationStore,
                                        _categoryStore,
@@ -98,6 +101,7 @@ namespace DVS.WPF
 
             _dVSDetailedViewModel = new(_dVSListingViewModel,
                                         _modalNavigationStore,
+                                        _sizeStore,
                                         _categoryStore,
                                         _seasonStore,
                                         _clothesStore,
@@ -107,6 +111,7 @@ namespace DVS.WPF
 
             _dVSHeadViewModel = new(_dVSListingViewModel,
                                     _modalNavigationStore,
+                                    _sizeStore,
                                     _categoryStore,
                                     _seasonStore,
                                     _clothesStore,

@@ -20,7 +20,7 @@ namespace DVS.WPF.Commands.CommentCommands
             commentClothesSizeFormViewModel.ErrorMessage = null;
             commentClothesSizeFormViewModel.IsSubmitting = true;
 
-            ClothesModel clothesToEdit = new(commentClothesSizeFormViewModel.Clothes.GuidID,
+            Clothes clothesToEdit = new(commentClothesSizeFormViewModel.Clothes.GuidID,
                                              commentClothesSizeFormViewModel.ID,
                                              commentClothesSizeFormViewModel.Name,
                                              commentClothesSizeFormViewModel.Clothes.Category,
@@ -30,7 +30,7 @@ namespace DVS.WPF.Commands.CommentCommands
                 Sizes = commentClothesSizeFormViewModel.Clothes.Sizes
             };
 
-            ClothesSizeModel existingItem = clothesToEdit.Sizes.FirstOrDefault(s => s.Size == commentClothesSizeFormViewModel.Size);
+            ClothesSize existingItem = clothesToEdit.Sizes.FirstOrDefault(s => s.Size.Size == commentClothesSizeFormViewModel.Size);
 
             if (existingItem == null)
             {

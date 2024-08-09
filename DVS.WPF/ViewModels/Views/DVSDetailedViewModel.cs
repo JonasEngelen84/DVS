@@ -7,10 +7,16 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Views
 {
-    public class DVSDetailedViewModel(DVSListingViewModel dVSListingViewModel, ModalNavigationStore modalNavigationStore,
-                                      CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore, EmployeeStore employeeStore,
+    public class DVSDetailedViewModel(DVSListingViewModel dVSListingViewModel,
+                                      ModalNavigationStore modalNavigationStore,
+                                      SizeStore sizeStore,
+                                      CategoryStore categoryStore,
+                                      SeasonStore seasonStore,
+                                      ClothesStore clothesStore,
+                                      EmployeeStore employeeStore,
                                       SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore,
-                                      SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore) : ViewModelBase
+                                      SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore)
+                                      : ViewModelBase
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
 
@@ -20,16 +26,31 @@ namespace DVS.WPF.ViewModels.Views
         public ICommand Minus { get; } = new MinusCommand(modalNavigationStore);
 
         public ICommand OpenComment { get; } = new OpenCommentCommand(_selectedDetailedClothesItemStore,
-            _selectedDetailedEmployeeClothesItemStore, modalNavigationStore, clothesStore, employeeStore, dVSListingViewModel);
+                                                                      _selectedDetailedEmployeeClothesItemStore,
+                                                                      modalNavigationStore,
+                                                                      clothesStore,
+                                                                      employeeStore,
+                                                                      dVSListingViewModel);
 
-        public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(
-            modalNavigationStore, categoryStore, seasonStore, clothesStore);
+        public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(modalNavigationStore,
+                                                                            sizeStore,
+                                                                            categoryStore,
+                                                                            seasonStore,
+                                                                            clothesStore);
 
-        public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(
-            dVSListingViewModel, employeeStore, clothesStore, modalNavigationStore);
+        public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(dVSListingViewModel,
+                                                                              employeeStore,
+                                                                              clothesStore,
+                                                                              modalNavigationStore);
 
         public ICommand OpenEditDetailedItem { get; } = new OpenEditDetailedItemCommand(_selectedDetailedClothesItemStore,
-            _selectedDetailedEmployeeClothesItemStore, modalNavigationStore, clothesStore,
-            employeeStore, dVSListingViewModel, categoryStore, seasonStore);
+                                                                                        _selectedDetailedEmployeeClothesItemStore,
+                                                                                        modalNavigationStore,
+                                                                                        sizeStore,
+                                                                                        clothesStore,
+                                                                                        employeeStore,
+                                                                                        dVSListingViewModel,
+                                                                                        categoryStore,
+                                                                                        seasonStore);
     }
 }

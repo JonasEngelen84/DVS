@@ -13,19 +13,19 @@ namespace DVS.WPF.ViewModels.Views
         public AddEditListingViewModel AddEditListingViewModel { get; }
         public ICommand CloseAddEditClothes { get; }
 
-        public AddClothesViewModel(ModalNavigationStore modalNavigationStore,
+        public AddClothesViewModel(ModalNavigationStore modalNavigationStore, SizeStore sizeStore,
             CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
         {
-            AddEditListingViewModel = new(null, categoryStore, seasonStore);
+            AddEditListingViewModel = new(null, sizeStore, categoryStore, seasonStore);
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
             ICommand addClothes = new AddClothesCommand(this, clothesStore , modalNavigationStore);
 
-            ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(
-                modalNavigationStore, categoryStore, seasonStore, null, this, null, AddEditListingViewModel);
+            ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(modalNavigationStore,
+                sizeStore, categoryStore, seasonStore, null, this, null, AddEditListingViewModel);
 
-            ICommand openAddEditSeasons = new OpenAddEditSeasonsCommand(
-                modalNavigationStore, categoryStore, seasonStore, null, this, null, AddEditListingViewModel);
+            ICommand openAddEditSeasons = new OpenAddEditSeasonsCommand(modalNavigationStore,
+                sizeStore, categoryStore, seasonStore, null, this, null, AddEditListingViewModel);
 
             AddEditClothesFormViewModel = new(null, addClothes,
                 openAddEditCategories, openAddEditSeasons, AddEditListingViewModel)

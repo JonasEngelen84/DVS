@@ -6,6 +6,6 @@ namespace DVS.Domain.Queries
 {
     public interface IGetAllCategoriesQuery
     {
-        Task<IEnumerable<CategoryModel>> Execute();
+        Task<IEnumerable<Category>> Execute();
     }
 }

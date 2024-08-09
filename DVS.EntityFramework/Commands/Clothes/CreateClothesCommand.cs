@@ -8,7 +8,7 @@ namespace DVS.EntityFramework.Commands.Clothes
     {
         private readonly DVSDbContextFactory _clothesDbContextFactory = clothesDbContextFactory;
 
-        public async Task Execute(ClothesModel clothes)
+        public async Task Execute(Domain.Models.Clothes clothes)
         {
             using DVSDbContext context = _clothesDbContextFactory.Create();
 

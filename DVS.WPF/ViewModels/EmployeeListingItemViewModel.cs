@@ -8,12 +8,12 @@ namespace DVS.WPF.ViewModels.ListViewItems
 {
     public class EmployeeListingItemViewModel : ViewModelBase
     {
-        public EmployeeModel Employee { get; private set; }
+        public Employee Employee { get; private set; }
         public string ID => Employee.ID;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
         public string? Comment => Employee.Comment;
-        public ObservableCollection<ClothesModel> Clothes => Employee.Clothes;
+        public ObservableCollection<EmployeeClothesSize> Clothes => Employee.EmployeeClothes;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -72,8 +72,11 @@ namespace DVS.WPF.ViewModels.ListViewItems
         public ICommand PrintEmployee { get; set; }
 
 
-        public EmployeeListingItemViewModel(EmployeeModel employee, DVSListingViewModel dVSListingViewModel,
-            ModalNavigationStore modalNavigationStore, EmployeeStore employeeStore, ClothesStore clothesStore)
+        public EmployeeListingItemViewModel(Employee employee,
+                                            DVSListingViewModel dVSListingViewModel,
+                                            ModalNavigationStore modalNavigationStore,
+                                            EmployeeStore employeeStore,
+                                            ClothesStore clothesStore)
         {
             Employee = employee;
             OpenEditEmployee = new OpenEditEmployeeCommand(this, modalNavigationStore, employeeStore, clothesStore, dVSListingViewModel);
@@ -82,7 +85,7 @@ namespace DVS.WPF.ViewModels.ListViewItems
             PrintEmployee = new OpenPrintEmployeeCommand();
         }
 
-        public void Update(EmployeeModel employee)
+        public void Update(Employee employee)
         {
             Employee = employee;
 

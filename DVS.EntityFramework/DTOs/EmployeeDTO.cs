@@ -11,6 +11,6 @@ namespace DVS.EntityFramework.DTOs
         public string Firstname { get; set; }
         public string? Comment { get; set; }
 
-        public ObservableCollection<ClothesModel> Clothes { get; set; } = [];
+        public ObservableCollection<EmployeeClothesSize> Clothes { get; set; } = [];
     }
 }

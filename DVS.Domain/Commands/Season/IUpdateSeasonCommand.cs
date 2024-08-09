@@ -4,6 +4,6 @@ namespace DVS.Domain.Commands.Season
 {
     public interface IUpdateSeasonCommand
     {
-        Task Execute(SeasonModel season);
+        Task Execute(Models.Season season);
     }
 }

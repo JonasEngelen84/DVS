@@ -8,7 +8,7 @@ namespace DVS.EntityFramework.Commands.Season
     {
         private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
-        public async Task Execute(SeasonModel season)
+        public async Task Execute(Domain.Models.Season season)
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
 

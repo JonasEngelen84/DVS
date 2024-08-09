@@ -16,7 +16,7 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
             addEditCategoryFormViewModel.ErrorMessage = null;
             addEditCategoryFormViewModel.IsSubmitting = true;
 
-            CategoryModel newCategory = new(Guid.NewGuid(), addEditCategoryFormViewModel.AddNewCategory);
+            Category newCategory = new(Guid.NewGuid(), addEditCategoryFormViewModel.AddNewCategory);
 
             try
             {

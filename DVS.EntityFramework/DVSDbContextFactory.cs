@@ -7,6 +7,5 @@ namespace DVS.EntityFramework
         private readonly DbContextOptions _options = options;
 
         public DVSDbContext Create() => new(_options);
-
     }
 }

@@ -15,12 +15,12 @@ namespace DVS.WPF.Stores
         private readonly IUpdateSeasonCommand _updateSeasonCommand = UpdateSeasonCommand;
         private readonly IDeleteSeasonCommand _deleteSeasonCommand = DeleteSeasonCommand;
 
-        private readonly List<SeasonModel> _seasons = [];
-        public IEnumerable<SeasonModel> Seasons => _seasons;
+        private readonly List<Season> _seasons = [];
+        public IEnumerable<Season> Seasons => _seasons;
 
         public event Action SeasonsLoaded;
-        public event Action<SeasonModel, AddEditSeasonFormViewModel> SeasonAdded;
-        public event Action<SeasonModel, AddEditSeasonFormViewModel> SeasonEdited;
+        public event Action<Season, AddEditSeasonFormViewModel> SeasonAdded;
+        public event Action<Season, AddEditSeasonFormViewModel> SeasonEdited;
         public event Action<Guid, AddEditSeasonFormViewModel> SeasonDeleted;
         public event Action<AddEditSeasonFormViewModel> AllSeasonsDeleted;
 
@@ -31,14 +31,14 @@ namespace DVS.WPF.Stores
             SeasonsLoaded?.Invoke();
         }
 
-        public async Task Add(SeasonModel season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        public async Task Add(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             //await _createSeasonCommand.Execute(season);
             _seasons.Add(season);
             SeasonAdded.Invoke(season, addEditSeasonFormViewModel);
         }
 
-        public async Task Update(SeasonModel season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        public async Task Update(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             //await _updateSeasonCommand.Execute(season);
 

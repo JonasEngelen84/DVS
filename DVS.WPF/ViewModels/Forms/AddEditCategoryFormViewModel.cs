@@ -37,8 +37,8 @@ namespace DVS.WPF.ViewModels.Forms
             }
         }
         
-        private CategoryModel _selectedCategory;
-        public CategoryModel SelectedCategory
+        private Category _selectedCategory;
+        public Category SelectedCategory
         {
             get => _selectedCategory;
             set

@@ -17,7 +17,7 @@ namespace DVS.WPF.Commands
                 _dVSListingViewModel.RemoveClothesItemFromNewEmployeeListingItemCollection();
             else
             {
-                ClothesModel clothesToEdit = new(
+                Clothes clothesToEdit = new(
                     _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.GuidID,
                     _dVSListingViewModel.RemovedClothesListingItemModel.ID,
                     _dVSListingViewModel.RemovedClothesListingItemModel.Name,
@@ -28,8 +28,8 @@ namespace DVS.WPF.Commands
                     Sizes = _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Sizes
                 };
 
-                ClothesSizeModel? sizeToEdit = clothesToEdit.Sizes.
-                    FirstOrDefault(y => y.Size == _dVSListingViewModel.RemovedClothesListingItemModel.Size);
+                ClothesSize? sizeToEdit = clothesToEdit.Sizes.
+                    FirstOrDefault(y => y.Size.Size == _dVSListingViewModel.RemovedClothesListingItemModel.Size);
 
                 _dVSListingViewModel.RemovedClothesListingItemModel.ErrorMessage = null;
 

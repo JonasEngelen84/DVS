@@ -4,6 +4,6 @@ namespace DVS.Domain.Commands.Clothes
 {
     public interface IUpdateClothesCommand
     {
-        Task Execute(ClothesModel clothesModel);
+        Task Execute(Models.Clothes clothesModel);
     }
 }

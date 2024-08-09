@@ -14,12 +14,12 @@ namespace DVS.WPF.Stores
         private readonly IUpdateClothesCommand _updateClothesCommand = UpdateClothesCommand;
         private readonly IDeleteClothesCommand _deleteClothesCommand = DeleteClothesCommand;
 
-        private readonly List<ClothesModel> _clothes = [];
-        public IEnumerable<ClothesModel> Clothes => _clothes;
+        private readonly List<Clothes> _clothes = [];
+        public IEnumerable<Clothes> Clothes => _clothes;
 
         public event Action ClothesLoaded;
-        public event Action<ClothesModel> ClothesAdded;
-        public event Action<ClothesModel> ClothesUpdated;
+        public event Action<Clothes> ClothesAdded;
+        public event Action<Clothes> ClothesUpdated;
         public event Action<Guid> ClothesDeleted;
 
         public async Task Load()
@@ -28,14 +28,14 @@ namespace DVS.WPF.Stores
             ClothesLoaded.Invoke();
         }
 
-        public async Task Add(ClothesModel clothes)
+        public async Task Add(Clothes clothes)
         {
             //await _createClothesCommand.Execute(clothes);
             _clothes.Add(clothes);
             ClothesAdded.Invoke(clothes);
         }
 
-        public async Task Update(ClothesModel clothes)
+        public async Task Update(Clothes clothes)
         {
             //await _updateClothesCommand.Execute(clothes);
 
@@ -61,7 +61,7 @@ namespace DVS.WPF.Stores
             ClothesDeleted?.Invoke(guidID);
         }
         
-        public async Task DragNDropUpdate(ClothesModel clothes)
+        public async Task DragNDropUpdate(Clothes clothes)
         {           
             int index = _clothes.FindIndex(y => y.GuidID == clothes.GuidID);
 

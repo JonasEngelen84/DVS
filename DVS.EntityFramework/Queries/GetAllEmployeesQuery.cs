@@ -9,13 +9,13 @@ namespace DVS.EntityFramework.Queries
     {
         private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
-        public async Task<IEnumerable<EmployeeModel>> Execute()
+        public async Task<IEnumerable<Employee>> Execute()
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
 
             IEnumerable<EmployeeDTO> employeeDTOs = await context.Employees.ToListAsync();
 
-            return employeeDTOs.Select(y => new EmployeeModel(y.GuidID, y.ID, y.Lastname, y.Firstname, y.Comment) { Clothes = y.Clothes } );
+            return employeeDTOs.Select(y => new Employee(y.GuidID, y.ID, y.Lastname, y.Firstname, y.Comment) { EmployeeClothes = y.Clothes } );
         }
     }
 }
