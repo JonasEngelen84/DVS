@@ -29,8 +29,8 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             foreach (DetailedClothesListingItemViewModel item in addEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
             {
                 var existingClothes = item.Clothes.Sizes.FirstOrDefault(s => s.Size.Equals(item.Clothes.Sizes));
-                existingClothes.EmployeeClothesSizes.Add(new EmployeeClothesSize(employee, existingClothes, (int)item.Quantity));
-                employee.EmployeeClothes.Add(new EmployeeClothesSize(employee, existingClothes, (int)item.Quantity));
+                existingClothes.EmployeeClothesSizes.Add(new EmployeeClothesSize(Guid.NewGuid(), employee, existingClothes, (int)item.Quantity));
+                employee.EmployeeClothes.Add(new EmployeeClothesSize(Guid.NewGuid(), employee, existingClothes, (int)item.Quantity));
             }
 
             try

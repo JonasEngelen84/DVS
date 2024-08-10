@@ -51,7 +51,10 @@ namespace DVS.WPF.ViewModels
         private readonly SeasonStore _seasonStore;
 
 
-        public AddEditListingViewModel(Clothes clothes, SizeStore sizeStore, CategoryStore categoryStore, SeasonStore seasonStore)
+        public AddEditListingViewModel(Clothes clothes,
+                                       SizeStore sizeStore,
+                                       CategoryStore categoryStore,
+                                       SeasonStore seasonStore)
         {
             _clothes = clothes;
             _sizeStore = sizeStore;
@@ -64,49 +67,23 @@ namespace DVS.WPF.ViewModels
             _seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
             _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(Season.Name), ListSortDirection.Ascending));
 
-            //_availableSizesEU =
-            //[
-            //    new Size("44", true),
-            //    new Size("46", true),
-            //    new Size("48", true),
-            //    new Size("50", true),
-            //    new Size("52", true),
-            //    new Size("54", true),
-            //    new Size("56", true),
-            //    new Size("58", true),
-            //    new Size("60", true),
-            //    new Size("62", true)
-            //];
-
-            //_availableSizesUS =
-            //[
-            //    new Size("XS", false),
-            //    new Size("S", false),
-            //    new Size("M", false),
-            //    new Size("L", false),
-            //    new Size("XL", false),
-            //    new Size("XLL", false),
-            //    new Size("3XL", false),
-            //    new Size("4XL", false),
-            //    new Size("5XL", false),
-            //    new Size("6XL", false)
-            //];
-
-            //CategoryStore_CategoriesLoaded();
-            //SeasonStore_SeasonsLoaded();
+            CategoryStore_CategoriesLoaded();
+            SeasonStore_SeasonsLoaded();
             SizeSore_SizesLoaded();
 
             _categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded += CategoryStore_CategoryAdded;
-            _categoryStore.CategoryEdited += CategoryStore_CategoryEdited;
+            _categoryStore.CategoryUpdated += CategoryStore_CategoryUpdated;
             _categoryStore.CategoryDeleted += CategoryStore_CategoryDeleted;
             _categoryStore.AllCategoriesDeleted += CategoryStore_AllCategoriesDeleted;
 
             _seasonStore.SeasonsLoaded += SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonAdded += SeasonStore_SeasonAdded;
-            _seasonStore.SeasonEdited += SeasonStore_SeasonEdited;
+            _seasonStore.SeasonUpdated += SeasonStore_SeasonUpdated;
             _seasonStore.SeasonDeleted += SeasonStore_SeasonDeleted;
             _seasonStore.AllSeasonsDeleted += SeasonStore_AllSeasonsDeleted;
+
+            _sizeStore.SizesLoaded += SizeSore_SizesLoaded;
         }
 
 
@@ -121,6 +98,18 @@ namespace DVS.WPF.ViewModels
                     _availableSizesEU.Add(size);
                 else
                     _availableSizesUS.Add(size);
+            }
+
+            foreach (SizeModel size in AvailableSizesUS)
+            {
+                size.IsSelected = false;
+                size.Quantity = 0;
+            }
+
+            foreach (SizeModel size in AvailableSizesEU)
+            {
+                size.IsSelected = false;
+                size.Quantity = 0;
             }
 
             // Nur bei UpdateClothes
@@ -151,13 +140,16 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private void SeasonStore_SeasonAdded(Season season,  AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        private void SeasonStore_SeasonAdded(Season newSeason,  AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
-            AddSeason(season, addEditSeasonFormViewModel);
+            _seasons.Add(newSeason);
+            _seasonCollectionViewSource.View.Refresh();
+            addEditSeasonFormViewModel.AddNewSeason = "Neue Saison";
+            addEditSeasonFormViewModel.SeasonCollectionChanged();
             OnPropertyChanged(nameof(addEditSeasonFormViewModel.CanDeleteAll));
         }
 
-        private void SeasonStore_SeasonEdited(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        private void SeasonStore_SeasonUpdated(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             Season seasonToUpdate = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
 
@@ -166,7 +158,7 @@ namespace DVS.WPF.ViewModels
                 int index = _seasons.IndexOf(seasonToUpdate);
                 _seasons[index] = season;
                 _seasonCollectionViewSource.View.Refresh();
-                addEditSeasonFormViewModel.SelectedSeason = new(null, "Saison wählen");
+                addEditSeasonFormViewModel.SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
                 addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
                 OnPropertyChanged(nameof(addEditSeasonFormViewModel.CanEdit));
             }
@@ -184,7 +176,7 @@ namespace DVS.WPF.ViewModels
             {
                 _seasons.Remove(seasonToDelete);
                 _seasonCollectionViewSource.View.Refresh();
-                addEditSeasonFormViewModel.SelectedSeason = new(null, "Saison wählen");
+                addEditSeasonFormViewModel.SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
                 addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
                 addEditSeasonFormViewModel.SeasonCollectionChanged();
             }
@@ -199,7 +191,7 @@ namespace DVS.WPF.ViewModels
             if (_seasons != null)
             {
                 _seasons.Clear();
-                addEditSeasonFormViewModel.SelectedSeason = new(null, "Saison wählen");
+                addEditSeasonFormViewModel.SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
                 addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
                 addEditSeasonFormViewModel.SeasonCollectionChanged();
             }
@@ -209,15 +201,7 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private void AddSeason(Season newSeason, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
-        {
-            _seasons.Add(newSeason);
-            _seasonCollectionViewSource.View.Refresh();
-            addEditSeasonFormViewModel.AddNewSeason = "Neue Saison";
-            addEditSeasonFormViewModel.SeasonCollectionChanged();
-        }
-
-
+        
         private void CategoryStore_CategoriesLoaded()
         {
             _categories.Clear();
@@ -228,13 +212,16 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private void CategoryStore_CategoryAdded(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        private void CategoryStore_CategoryAdded(Category newCategory, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            AddCategory(category, addEditCategoryFormViewModel);
+            _categories.Add(newCategory);
+            _categoryCollectionViewSource.View.Refresh();
+            addEditCategoryFormViewModel.AddNewCategory = "Neue Kategorie";
+            addEditCategoryFormViewModel.CategoryCollectionChanged();
             OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
         }
 
-        private void CategoryStore_CategoryEdited(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        private void CategoryStore_CategoryUpdated(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             Category categoryToUpdate = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
 
@@ -243,7 +230,7 @@ namespace DVS.WPF.ViewModels
                 int index = _categories.IndexOf(categoryToUpdate);
                 _categories[index] = category;
                 _categoryCollectionViewSource.View.Refresh();
-                addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
+                addEditCategoryFormViewModel.SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen");
                 addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
                 OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanEdit));
             }
@@ -261,7 +248,7 @@ namespace DVS.WPF.ViewModels
             {
                 _categories.Remove(categoryToDelete);
                 _categoryCollectionViewSource.View.Refresh();
-                addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
+                addEditCategoryFormViewModel.SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen");
                 addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
                 addEditCategoryFormViewModel.CategoryCollectionChanged();
             }
@@ -276,7 +263,7 @@ namespace DVS.WPF.ViewModels
             if (_categories != null)
             {
                 _categories.Clear();
-                addEditCategoryFormViewModel.SelectedCategory = new(null, "Kategorie wählen");
+                addEditCategoryFormViewModel.SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen");
                 addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
                 addEditCategoryFormViewModel.CategoryCollectionChanged();
             }
@@ -286,28 +273,22 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private void AddCategory(Category newCategory, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            _categories.Add(newCategory);
-            _categoryCollectionViewSource.View.Refresh();
-            addEditCategoryFormViewModel.AddNewCategory = "Neue Kategorie";
-            addEditCategoryFormViewModel.CategoryCollectionChanged();
-        }
-
 
         protected override void Dispose()
         {
             _categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded -= CategoryStore_CategoryAdded;
-            _categoryStore.CategoryEdited -= CategoryStore_CategoryEdited;
+            _categoryStore.CategoryUpdated -= CategoryStore_CategoryUpdated;
             _categoryStore.CategoryDeleted -= CategoryStore_CategoryDeleted;
             _categoryStore.AllCategoriesDeleted += CategoryStore_AllCategoriesDeleted;
 
             _seasonStore.SeasonsLoaded -= SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonAdded -= SeasonStore_SeasonAdded;
-            _seasonStore.SeasonEdited -= SeasonStore_SeasonEdited;
+            _seasonStore.SeasonUpdated -= SeasonStore_SeasonUpdated;
             _seasonStore.SeasonDeleted -= SeasonStore_SeasonDeleted;
             _seasonStore.AllSeasonsDeleted -= SeasonStore_AllSeasonsDeleted;
+
+            _sizeStore.SizesLoaded -= SizeSore_SizesLoaded;
 
             base.Dispose();
         }

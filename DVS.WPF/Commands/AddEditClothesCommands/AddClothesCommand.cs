@@ -1,5 +1,6 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
 
@@ -36,7 +37,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
             foreach (SizeModel size in selectedSizes)
             {
-                ClothesSize clothesSize = new(clothes, size, size.Quantity);
+                ClothesSize clothesSize = new(Guid.NewGuid(), clothes, size, size.Quantity);
+
                 clothes.Sizes.Add(clothesSize);
                 size.ClothesSizes.Add(clothesSize);
             }

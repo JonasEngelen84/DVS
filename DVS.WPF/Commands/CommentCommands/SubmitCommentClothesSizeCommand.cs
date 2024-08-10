@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
-using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
 
@@ -21,11 +20,11 @@ namespace DVS.WPF.Commands.CommentCommands
             commentClothesSizeFormViewModel.IsSubmitting = true;
 
             Clothes clothesToEdit = new(commentClothesSizeFormViewModel.Clothes.GuidID,
-                                             commentClothesSizeFormViewModel.ID,
-                                             commentClothesSizeFormViewModel.Name,
-                                             commentClothesSizeFormViewModel.Clothes.Category,
-                                             commentClothesSizeFormViewModel.Clothes.Season,
-                                             commentClothesSizeFormViewModel.Clothes.Comment)
+                                        commentClothesSizeFormViewModel.ID,
+                                        commentClothesSizeFormViewModel.Name,
+                                        commentClothesSizeFormViewModel.Clothes.Category,
+                                        commentClothesSizeFormViewModel.Clothes.Season,
+                                        commentClothesSizeFormViewModel.Clothes.Comment)
             {
                 Sizes = commentClothesSizeFormViewModel.Clothes.Sizes
             };

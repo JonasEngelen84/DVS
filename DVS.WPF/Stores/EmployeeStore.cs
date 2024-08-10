@@ -1,6 +1,7 @@
 ﻿using DVS.Domain.Commands.Employee;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
+using DVS.EntityFramework.Queries;
 
 namespace DVS.WPF.Stores
 {
@@ -24,9 +25,24 @@ namespace DVS.WPF.Stores
 
         public async Task Load()
         {
-            //await _getAllEmployeesQuery.Execute();
+            try
+            {
+                //IEnumerable<Employee> employee = await _getAllEmployeesQuery.Execute();
 
-            EmployeesLoaded?.Invoke();
+                _employees.Clear();
+
+                //if (employee != null)
+                //{
+                //    _employees.AddRange(employee);
+                //}
+
+                EmployeesLoaded?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                //TODO: Fehlerbehandlung beim laden der aus DB
+                Console.WriteLine($"Fehler beim Laden der Mitarbeiter: {ex.Message}");
+            }
         }
 
         public async Task Add(Employee employee)

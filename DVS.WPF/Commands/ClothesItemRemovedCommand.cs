@@ -44,7 +44,7 @@ namespace DVS.WPF.Commands
                 }
                 else if (_dVSListingViewModel.RemovedClothesListingItemModel.Quantity <= 3)
                 {
-                    string messageBoxText = $"ACHTUNG!\n\nNach dieser Transaktion sind nur noch" +
+                    string messageBoxText = $"ACHTUNG!\n\nNach der Transaktion sind nur noch" +
                         $"  {_dVSListingViewModel.RemovedClothesListingItemModel.Quantity - 1}  Stück" +
                         $" dieser Bekleidung vorhanden!";
                     string caption = "Bekleidung entfernen";

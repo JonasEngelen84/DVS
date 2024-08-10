@@ -2,6 +2,7 @@
 using DVS.Domain.Queries;
 using DVS.EntityFramework.DTOs;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 
 namespace DVS.EntityFramework.Queries
 {
@@ -15,7 +16,30 @@ namespace DVS.EntityFramework.Queries
 
             IEnumerable<ClothesDTO> clothesDTOs = await context.Clothes.ToListAsync();
 
-            return clothesDTOs.Select(y => new Clothes(y.GuidID, y.ID, y.Name, y.Category, y.Season, y.Comment) { Sizes = y.Sizes } );
+            List<Clothes> clothesList = [];
+
+            foreach (var clothesDTO in clothesDTOs)
+            {
+                CategoryDTO categoryDTO = await context.Categories.FindAsync(clothesDTO.CategoryGuidID);
+                SeasonDTO seasonDTO = await context.Seasons.FindAsync(clothesDTO.SeasonGuidID);
+
+                Category category = new(categoryDTO.GuidID, categoryDTO.Name);
+                Season season = new(seasonDTO.GuidID, seasonDTO.Name);
+
+                Clothes clothes = new(clothesDTO.GuidID,
+                                      clothesDTO.ID,
+                                      clothesDTO.Name,
+                                      category,
+                                      season,
+                                      clothesDTO.Comment)
+                {
+                    Sizes = new ObservableCollection<ClothesSize>(clothesDTO.Sizes)
+                };
+
+                clothesList.Add(clothes);
+            }
+
+            return clothesList;
         }
     }
 }

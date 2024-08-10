@@ -1,6 +1,7 @@
 ﻿using DVS.Domain.Commands.Category;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
+using DVS.EntityFramework.Queries;
 using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
@@ -20,15 +21,30 @@ namespace DVS.WPF.Stores
 
         public event Action CategoriesLoaded;
         public event Action<Category, AddEditCategoryFormViewModel> CategoryAdded;
-        public event Action<Category, AddEditCategoryFormViewModel> CategoryEdited;
+        public event Action<Category, AddEditCategoryFormViewModel> CategoryUpdated;
         public event Action<Guid, AddEditCategoryFormViewModel> CategoryDeleted;
         public event Action<AddEditCategoryFormViewModel> AllCategoriesDeleted;
 
         public async Task Load()
         {
-            //await _getAllCategoriesQuery.Execute();
-            _categories.Clear();
-            CategoriesLoaded?.Invoke();
+            try
+            {
+                //IEnumerable<Category> categorie = await _getAllCategoriesQuery.Execute();
+
+                _categories.Clear();
+
+                //if (categorie != null)
+                //{
+                //    _categories.AddRange(categorie);
+                //}
+
+                CategoriesLoaded?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                //TODO: Fehlerbehandlung beim laden der aus DB
+                Console.WriteLine($"Fehler beim Laden der Kategorien: {ex.Message}");
+            }
         }
 
         public async Task Add(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
@@ -47,7 +63,7 @@ namespace DVS.WPF.Stores
             if (index > -1)
             {
                 _categories[index] = category;
-                CategoryEdited.Invoke(category, addEditCategoryFormViewModel);
+                CategoryUpdated.Invoke(category, addEditCategoryFormViewModel);
             }
             else
             {

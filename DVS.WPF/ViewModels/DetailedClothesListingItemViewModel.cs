@@ -1,9 +1,8 @@
 ﻿using DVS.Domain.Models;
-using System.Linq;
 
 namespace DVS.WPF.ViewModels
 {
-    public class DetailedClothesListingItemViewModel(Clothes clothes, Guid? clothesSizeGuidID) : ViewModelBase
+    public class DetailedClothesListingItemViewModel(Clothes clothes, ClothesSize? clothesSize) : ViewModelBase
     {
         public Clothes Clothes { get; private set; } = clothes;
         public string ID => Clothes.ID;
@@ -11,10 +10,11 @@ namespace DVS.WPF.ViewModels
         public string Category => Clothes.Category.Name;
         public string Season => Clothes.Season.Name;
 
-        public Guid? ClothesSizeGuidID { get; private set; } = clothesSizeGuidID;
-        public string? Size => Clothes.Sizes.FirstOrDefault(y => y.GuidID == ClothesSizeGuidID)?.Size.Size ?? null;
-        public int? Quantity => Clothes.Sizes.FirstOrDefault(y => y.GuidID == ClothesSizeGuidID)?.Size.Quantity ?? 0;
-        public string? Comment => Clothes.Sizes.FirstOrDefault(y => y.GuidID == ClothesSizeGuidID)?.Comment ?? null;
+        public ClothesSize? ClothesSize { get; private set; } = clothesSize;
+        public Guid? ClothesSizeGuidID => ClothesSize?.GuidID ?? null;
+        public string? Size => ClothesSize?.Size.Size ?? null;
+        public int? Quantity => ClothesSize?.Quantity ?? null;
+        public string? Comment => ClothesSize?.Comment ?? null;
 
         private bool _isDeleting;
         public bool IsDeleting
@@ -47,10 +47,10 @@ namespace DVS.WPF.ViewModels
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
-        public void Update(Clothes clothes, Guid? clothesSizeGuidID)
+        public void Update(Clothes clothes, ClothesSize? clothesSize)
         {
             Clothes = clothes;
-            ClothesSizeGuidID = clothesSizeGuidID;
+            ClothesSize = clothesSize;
 
             OnPropertyChanged(nameof(ID));
             OnPropertyChanged(nameof(Name));

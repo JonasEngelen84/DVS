@@ -61,7 +61,7 @@ namespace DVS.WPF.ViewModels
         public DetailedClothesListingItemViewModel SelectedDetailedClothesItem
         {
             get => _detailedClothesListingItemCollection
-                    .FirstOrDefault(y => y.Clothes.ID == _selectedDetailedClothesItemStore.SelectedDetailedClothesItem.ID);
+                    .FirstOrDefault(y => y.Clothes.GuidID == _selectedDetailedClothesItemStore.SelectedDetailedClothesItem.Clothes.GuidID);
 
             set
             {
@@ -73,7 +73,7 @@ namespace DVS.WPF.ViewModels
         public DetailedEmployeeListingItemViewModel SelectedDetailedEmployeeClothesItem
         {//TODO: ist beim löschen aller mitarbeiter bekleidungen auf null und wirft ex
             get => _detailedEmployeeListingItemCollection
-                    .FirstOrDefault(y => y.Employee.ID == _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem.ID);
+                    .FirstOrDefault(y => y.Employee.GuidID == _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem.Employee.GuidID);
 
             set
             {
@@ -135,7 +135,7 @@ namespace DVS.WPF.ViewModels
             foreach (EmployeeClothesSize clothes in employee.EmployeeClothes)
             {
                 _newEmployeeListingItemCollection.Add(
-                    new DetailedClothesListingItemViewModel(clothes.ClothesSize.Clothes, clothes.ClothesSizeGuidID));
+                    new DetailedClothesListingItemViewModel(clothes.ClothesSize.Clothes, clothes.ClothesSize));
             }
         }
 
@@ -159,10 +159,10 @@ namespace DVS.WPF.ViewModels
 
             if (existingItem == null)
             {
-                clothes.Sizes.Add(new(clothes, IncomingClothesListingItemModel.Clothes.Sizes
+                clothes.Sizes.Add(new(Guid.NewGuid(), clothes, IncomingClothesListingItemModel.Clothes.Sizes
                     .FirstOrDefault(y => y.GuidID == IncomingClothesListingItemModel.ClothesSizeGuidID).Size, 1));
 
-                DetailedClothesListingItemViewModel newItem = new(clothes, IncomingClothesListingItemModel.ClothesSizeGuidID);
+                DetailedClothesListingItemViewModel newItem = new(clothes, IncomingClothesListingItemModel.ClothesSize);
                 _newEmployeeListingItemCollection.Add(newItem);
             }
             else
@@ -170,7 +170,7 @@ namespace DVS.WPF.ViewModels
                 clothes.Sizes = existingItem.Clothes.Sizes;
                 var size = existingItem.Clothes.Sizes.FirstOrDefault(y => y.Size.Size == IncomingClothesListingItemModel.Size);
                 size.Quantity++;
-                existingItem.Update(clothes, IncomingClothesListingItemModel.ClothesSizeGuidID);
+                existingItem.Update(clothes, IncomingClothesListingItemModel.ClothesSize);
             }
         }
 
@@ -201,7 +201,7 @@ namespace DVS.WPF.ViewModels
 
                 var size = existingItem.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size.Size == IncomingClothesListingItemModel.Size);
                 size.Quantity--;
-                existingItem.Update(clothes, IncomingClothesListingItemModel.ClothesSizeGuidID);
+                existingItem.Update(clothes, IncomingClothesListingItemModel.ClothesSize);
             }
         }
 
@@ -226,20 +226,15 @@ namespace DVS.WPF.ViewModels
 
             if (clothes.Sizes.Count == 0)
             {
-                DetailedClothesItemAdded(new DetailedClothesListingItemViewModel(clothes, null));
+                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemViewModel(clothes, null));
             }
             else
             {
                 foreach (ClothesSize size in clothes.Sizes)
                 {
-                    DetailedClothesItemAdded(new DetailedClothesListingItemViewModel(clothes, size.GuidID));
+                    _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemViewModel(clothes, size));
                 }
             }
-        }
-         
-        private void DetailedClothesItemAdded(DetailedClothesListingItemViewModel ItemToAdd)
-        {
-            _detailedClothesListingItemCollection.Add(ItemToAdd);
         }
          
         private void ClothesStore_ClothesUpdated(Clothes clothes)
@@ -260,10 +255,10 @@ namespace DVS.WPF.ViewModels
 
                 foreach (DetailedClothesListingItemViewModel item in itemsToDelete)
                 {
-                    DetailedClothesItemDeleted(item);
+                    _detailedClothesListingItemCollection.Remove(item);
                 }
 
-                DetailedClothesItemAdded(new DetailedClothesListingItemViewModel(clothes, null));
+                _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemViewModel(clothes, null));
             }
             else
             {
@@ -280,7 +275,7 @@ namespace DVS.WPF.ViewModels
                 {
                     if (!currentSizes.Contains(item.Clothes.Sizes.FirstOrDefault(y => y.GuidID == item.ClothesSizeGuidID).Size))
                     {
-                        DetailedClothesItemDeleted(item);
+                        _detailedClothesListingItemCollection.Remove(item);
                     }
                 }
 
@@ -293,11 +288,11 @@ namespace DVS.WPF.ViewModels
 
                     if (DetailedItemToUpdate != null)
                     {
-                        DetailedItemToUpdate.Update(clothes, DetailedItemToUpdate.ClothesSizeGuidID);
+                        DetailedItemToUpdate.Update(clothes, size);
                     }
                     else
                     {
-                        DetailedClothesItemAdded(new DetailedClothesListingItemViewModel(clothes, size.GuidID));
+                        _detailedClothesListingItemCollection.Add(new DetailedClothesListingItemViewModel(clothes, size));
                     }
                 }
             }
@@ -316,13 +311,8 @@ namespace DVS.WPF.ViewModels
 
             foreach (DetailedClothesListingItemViewModel item in ItemsToDelete)
             {
-                DetailedClothesItemDeleted(item);
+                _detailedClothesListingItemCollection.Remove(item);
             }
-        }
-        
-        private void DetailedClothesItemDeleted(DetailedClothesListingItemViewModel itemToDelete)
-        {
-            _detailedClothesListingItemCollection.Remove(itemToDelete);
         }
         
 
@@ -346,22 +336,17 @@ namespace DVS.WPF.ViewModels
 
             if (employee.EmployeeClothes.Count == 0)
             {
-                DetailedEmployeeItemAdded(new DetailedEmployeeListingItemViewModel(employee, null));
+                _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemViewModel(employee, null));
             }
             else
             {
                 foreach (EmployeeClothesSize clothes in employee.EmployeeClothes)
                 {
-                    DetailedEmployeeItemAdded(new DetailedEmployeeListingItemViewModel(employee, clothes.GuidID));
+                    _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemViewModel(employee, clothes));
                 }
             }
         }
         
-        private void DetailedEmployeeItemAdded(DetailedEmployeeListingItemViewModel itemToAdd)
-        {
-            _detailedEmployeeListingItemCollection.Add(itemToAdd);
-        }
-
         private void EmployeeStore_EmployeeUpdated(Employee employee)
         {
             // Finden des zu bearbeitenden EmployeeItem mit der passenden EmployeeGuidID
@@ -381,10 +366,10 @@ namespace DVS.WPF.ViewModels
 
                 foreach (DetailedEmployeeListingItemViewModel item in itemsToDelete)
                 {
-                    DetailedEmployeeItemDeleted(item);
+                    _detailedEmployeeListingItemCollection.Remove(item);
                 }
 
-                DetailedEmployeeItemAdded(new DetailedEmployeeListingItemViewModel(employee, null));
+                _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemViewModel(employee, null));
             }
             else
             {
@@ -405,7 +390,7 @@ namespace DVS.WPF.ViewModels
                     {
                         if (!currentClothesSizes.Any(cs => cs.GuidID == item.ClothesGuidID && cs.Size == item.Size))
                         {
-                            DetailedEmployeeItemDeleted(item);
+                            _detailedEmployeeListingItemCollection.Remove(item);
                         }
                     }
                 }
@@ -421,11 +406,11 @@ namespace DVS.WPF.ViewModels
 
                     if (itemToUpdate != null)
                     {
-                        itemToUpdate.Update(employee, clothes.GuidID);
+                        itemToUpdate.Update(employee, clothes);
                     }
                     else
                     {
-                        DetailedEmployeeItemAdded(new DetailedEmployeeListingItemViewModel(employee, clothes.GuidID));
+                        _detailedEmployeeListingItemCollection.Add(new DetailedEmployeeListingItemViewModel(employee, clothes));
                     }
                 }
             }
@@ -444,13 +429,8 @@ namespace DVS.WPF.ViewModels
 
             foreach (DetailedEmployeeListingItemViewModel item in itemsToDelete)
             {
-                DetailedEmployeeItemDeleted(item);
+                _detailedEmployeeListingItemCollection.Remove(item);
             }
-        }
-        
-        private void DetailedEmployeeItemDeleted(DetailedEmployeeListingItemViewModel itemToDelete)
-        {
-            _detailedEmployeeListingItemCollection.Remove(itemToDelete);
         }
 
 

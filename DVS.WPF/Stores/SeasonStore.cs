@@ -1,6 +1,7 @@
 ﻿using DVS.Domain.Commands.Season;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
+using DVS.EntityFramework.Queries;
 using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
@@ -20,15 +21,30 @@ namespace DVS.WPF.Stores
 
         public event Action SeasonsLoaded;
         public event Action<Season, AddEditSeasonFormViewModel> SeasonAdded;
-        public event Action<Season, AddEditSeasonFormViewModel> SeasonEdited;
+        public event Action<Season, AddEditSeasonFormViewModel> SeasonUpdated;
         public event Action<Guid, AddEditSeasonFormViewModel> SeasonDeleted;
         public event Action<AddEditSeasonFormViewModel> AllSeasonsDeleted;
 
         public async Task Load()
         {
-            //await _getAllSeasonsQuery.Execute();
-            _seasons.Clear();
-            SeasonsLoaded?.Invoke();
+            try
+            {
+                //IEnumerable<Season> season = await _getAllSeasonsQuery.Execute();
+
+                _seasons.Clear();
+
+                //if (season != null)
+                //{
+                //    _seasons.AddRange(season);
+                //}
+
+                SeasonsLoaded?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                //TODO: Fehlerbehandlung beim laden der aus DB
+                Console.WriteLine($"Fehler beim Laden der Saisons: {ex.Message}");
+            }
         }
 
         public async Task Add(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
@@ -47,7 +63,7 @@ namespace DVS.WPF.Stores
             if (index > -1)
             {
                 _seasons[index] = season;
-                SeasonEdited.Invoke(season, addEditSeasonFormViewModel);
+                SeasonUpdated.Invoke(season, addEditSeasonFormViewModel);
             }
             else
             {

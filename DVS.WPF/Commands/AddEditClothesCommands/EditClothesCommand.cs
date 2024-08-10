@@ -48,13 +48,13 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 //TODO: Kommentare von DetailedItems werden entfernt bei einem update
                 foreach (SizeModel size in selectedSizes)
                 {
-                    size.ClothesSizes.Add(new ClothesSize(updatedClothes, size, size.Quantity));
-                    updatedClothes.Sizes.Add(new ClothesSize(updatedClothes, size, size.Quantity));
+                    size.ClothesSizes.Add(new ClothesSize(Guid.NewGuid(), updatedClothes, size, size.Quantity));
+                    updatedClothes.Sizes.Add(new ClothesSize(Guid.NewGuid(), updatedClothes, size, size.Quantity));
                 }
 
-                addEditClothesFormViewModel.Clothes.Category?.Clothes.Remove(addEditClothesFormViewModel.Clothes);
-                addEditClothesFormViewModel.Clothes.Season?.Clothes.Remove(addEditClothesFormViewModel.Clothes);
+                updatedClothes.Category?.Clothes.Remove(addEditClothesFormViewModel.Clothes);
                 updatedClothes.Category?.Clothes.Add(updatedClothes);
+                updatedClothes.Season?.Clothes.Remove(addEditClothesFormViewModel.Clothes);
                 updatedClothes.Season?.Clothes.Add(updatedClothes);
 
                 try

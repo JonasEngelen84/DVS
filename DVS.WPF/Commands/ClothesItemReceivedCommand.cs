@@ -37,7 +37,8 @@ namespace DVS.WPF.Commands
                 else
                 {
                     clothes.Sizes = existingItem.Clothes.Sizes;
-                    var size = existingItem.Clothes.Sizes.FirstOrDefault(modelItem => modelItem.Size.Size == _dVSListingViewModel.IncomingClothesListingItemModel.Size);
+                    var size = existingItem.Clothes.Sizes
+                        .FirstOrDefault(modelItem => modelItem.Size.Size == _dVSListingViewModel.IncomingClothesListingItemModel.Size);
                     size.Quantity++;
 
                     try

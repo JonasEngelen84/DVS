@@ -54,6 +54,7 @@ namespace DVS.WPF
         private readonly IUpdateEmployeeCommand _updateEmployeeCommand;
         private readonly IDeleteEmployeeCommand _deleteEmployeeCommand;
 
+        private readonly IGetAllSizesQuery _getAllSizesQuery;
 
         public App()
         {
@@ -81,11 +82,13 @@ namespace DVS.WPF
             _updateEmployeeCommand = new UpdateEmployeeCommand(_dVSDbContextFactory);
             _deleteEmployeeCommand = new DeleteEmployeeCommand(_dVSDbContextFactory);
 
+            _getAllSizesQuery = new GetAllSizesQuery(_dVSDbContextFactory);
+
             _categoryStore = new(_getAllCategoriesQuery, _createCategoryCommand, _updateCategoryCommand, _deleteCategoryCommand);
             _seasonStore = new(_getAllSeasonsQuery, _createSeasonCommand, _updateSeasonCommand, _deleteSeasonsCommand);
             _clothesStore = new(_getAllClothesQuery, _createClothesCommand, _updateClothesCommand, _deleteClothesCommand);
             _employeeStore = new(_getAllEmployeesQuery, _createEmployeeCommand, _updateEmployeeCommand, _deleteEmployeeCommand);
-            _sizeStore = new();
+            _sizeStore = new(_getAllSizesQuery);
             _modalNavigationStore = new();
             _selectedDetailedClothesItemStore = new();
             _selectedDetailedEmployeeClothesItemStore = new();

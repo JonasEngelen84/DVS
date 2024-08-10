@@ -24,8 +24,24 @@ namespace DVS.WPF.Stores
 
         public async Task Load()
         {
-            //await _getAllClothesQuery.Execute();
-            ClothesLoaded.Invoke();
+            try
+            {
+                //IEnumerable<Clothes> clothes = await _getAllClothesQuery.Execute();
+
+                _clothes.Clear();
+
+                //if (clothes != null)
+                //{
+                //    _clothes.AddRange(clothes);
+                //}
+
+                ClothesLoaded?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                //TODO: Fehlerbehandlung beim laden der aus DB
+                Console.WriteLine($"Fehler beim Laden der Clothes: {ex.Message}");
+            }
         }
 
         public async Task Add(Clothes clothes)
