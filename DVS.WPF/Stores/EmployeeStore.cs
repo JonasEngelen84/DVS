@@ -27,14 +27,14 @@ namespace DVS.WPF.Stores
         {
             try
             {
-                //IEnumerable<Employee> employee = await _getAllEmployeesQuery.Execute();
+                IEnumerable<Employee> employee = await _getAllEmployeesQuery.Execute();
 
                 _employees.Clear();
 
-                //if (employee != null)
-                //{
-                //    _employees.AddRange(employee);
-                //}
+                if (employee != null)
+                {
+                    _employees.AddRange(employee);
+                }
 
                 EmployeesLoaded?.Invoke();
             }

@@ -12,10 +12,7 @@ namespace DVS.WPF.Stores
             set
             {
                 _selectedDetailedClothesItem = value;
-                SelectedDetailedClothesChanged?.Invoke();
             }
         }
-
-        public event Action? SelectedDetailedClothesChanged;
     }
 }

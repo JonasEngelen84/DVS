@@ -26,14 +26,14 @@ namespace DVS.WPF.Stores
         {
             try
             {
-                //IEnumerable<Clothes> clothes = await _getAllClothesQuery.Execute();
+                IEnumerable<Clothes> clothes = await _getAllClothesQuery.Execute();
 
                 _clothes.Clear();
 
-                //if (clothes != null)
-                //{
-                //    _clothes.AddRange(clothes);
-                //}
+                if (clothes != null)
+                {
+                    _clothes.AddRange(clothes);
+                }
 
                 ClothesLoaded?.Invoke();
             }

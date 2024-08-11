@@ -29,14 +29,14 @@ namespace DVS.WPF.Commands
         {
             if (_selectedDetailedClothesItemStore.SelectedDetailedClothesItem != null)
             {
-                EditClothesViewModel EditClothesViewModel = new(_selectedDetailedClothesItemStore.SelectedDetailedClothesItem.Clothes,
+                UpdateClothesViewModel EditClothesViewModel = new(_selectedDetailedClothesItemStore.SelectedDetailedClothesItem.Clothes,
                     _modalNavigationStore, _sizeStore, _categoryStore, _seasonStore, _clothesStore);
 
                 _modalNavigationStore.CurrentViewModel = EditClothesViewModel;
             }
             else if (_selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem != null)
             {
-                EditEmployeeViewModel EditEmployeeViewModel = new(_selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem.Employee,
+                UpdateEmployeeViewModel EditEmployeeViewModel = new(_selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem.Employee,
                     _employeeStore, _clothesStore, _modalNavigationStore, _dVSListingViewModel);
 
                 _modalNavigationStore.CurrentViewModel = EditEmployeeViewModel;

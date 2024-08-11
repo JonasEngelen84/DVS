@@ -13,11 +13,11 @@ namespace DVS.WPF.ViewModels.Views
         public AddEditSeasonViewModel(ModalNavigationStore modalNavigationStore,
                                       SeasonStore seasonStore,
                                       AddClothesViewModel addClothesViewModel,
-                                      EditClothesViewModel editClothesViewModel,
+                                      UpdateClothesViewModel editClothesViewModel,
                                       AddEditListingViewModel addEditListingViewModel)
         {
             ICommand addSeason = new AddSeasonCommand(this, seasonStore);
-            ICommand editSeason = new EditSeasonCommand(this, seasonStore);
+            ICommand updateSeason = new UpdateSeasonCommand(this, seasonStore);
             ICommand deleteSeason = new DeleteSeasonCommand(this, seasonStore);
             ICommand clearSeasonList = new ClearSeasonListCommand(this, seasonStore);
 
@@ -26,13 +26,13 @@ namespace DVS.WPF.ViewModels.Views
                                                            editClothesViewModel);
 
             AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(addSeason,
-                                                                        editSeason,
+                                                                        updateSeason,
                                                                         deleteSeason,
                                                                         clearSeasonList,
                                                                         addEditListingViewModel)
             {
                 AddNewSeason = "Neue Saison",
-                EditSelectedSeason = "Saison wählen",
+                UpdateSelectedSeason = "Saison wählen",
                 SelectedSeason = new(Guid.NewGuid(), "Saison wählen")
             };
         }

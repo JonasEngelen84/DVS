@@ -36,7 +36,7 @@ namespace DVS.EntityFramework
 
             modelBuilder.Entity<EmployeeClothesSize>()
                 .HasOne(ec => ec.Employee)
-                .WithMany(e => e.EmployeeClothes)
+                .WithMany(e => e.Clothes)
                 .HasForeignKey(ec => ec.EmployeeGuidID);
 
             modelBuilder.Entity<EmployeeClothesSize>()

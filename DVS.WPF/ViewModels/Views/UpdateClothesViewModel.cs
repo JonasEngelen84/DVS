@@ -8,24 +8,24 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Views
 {
-    public class EditClothesViewModel : ViewModelBase
+    public class UpdateClothesViewModel : ViewModelBase
     {
         public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
         public AddEditListingViewModel AddEditListingViewModel { get; }
         public ICommand CloseAddEditClothes { get; }
 
 
-        public EditClothesViewModel(Clothes clothes,
-                                    ModalNavigationStore modalNavigationStore,
-                                    SizeStore sizeStore,
-                                    CategoryStore categoryStore,
-                                    SeasonStore seasonStore,
-                                    ClothesStore clothesStore)
+        public UpdateClothesViewModel(Clothes clothes,
+                                      ModalNavigationStore modalNavigationStore,
+                                      SizeStore sizeStore,
+                                      CategoryStore categoryStore,
+                                      SeasonStore seasonStore,
+                                      ClothesStore clothesStore)
         {
             AddEditListingViewModel = new(clothes, sizeStore, categoryStore, seasonStore);
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
-            ICommand editClothes = new EditClothesCommand(this, clothesStore , modalNavigationStore);
+            ICommand updateClothes = new UpdateClothesCommand(this, clothesStore , modalNavigationStore);
 
             ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(modalNavigationStore,
                                                                               categoryStore,
@@ -40,7 +40,7 @@ namespace DVS.WPF.ViewModels.Views
                                                                         AddEditListingViewModel);
 
             AddEditClothesFormViewModel = new(clothes,
-                                              editClothes,
+                                              updateClothes,
                                               openAddEditCategories,
                                               openAddEditSeasons,
                                               AddEditListingViewModel)

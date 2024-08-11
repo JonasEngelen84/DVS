@@ -3,19 +3,11 @@ using DVS.Domain.Queries;
 
 namespace DVS.WPF.Stores
 {
-    public class SizeStore
+    public class SizeStore(IGetAllSizesQuery getAllSizesQuery)
     {
-        private readonly IGetAllSizesQuery _getAllSizesQuery;
+        private readonly IGetAllSizesQuery _getAllSizesQuery = getAllSizesQuery;
 
-        private readonly List<SizeModel> _sizes;
-        public IEnumerable<SizeModel> Sizes => _sizes;
-
-
-        public SizeStore(IGetAllSizesQuery getAllSizesQuery)
-        {
-            _getAllSizesQuery = getAllSizesQuery;
-
-            _sizes =
+        private readonly List<SizeModel> _sizes =
             [
                 new SizeModel(Guid.NewGuid(), "44", true),
                 new SizeModel(Guid.NewGuid(), "46", true),
@@ -38,25 +30,20 @@ namespace DVS.WPF.Stores
                 new SizeModel(Guid.NewGuid(), "5XL", false),
                 new SizeModel(Guid.NewGuid(), "6XL", false)
             ];
-        }
-
-
-        public event Action SizesLoaded;
+        public IEnumerable<SizeModel> Sizes => _sizes;
 
         public async Task Load()
         {
             try
             {
-                //IEnumerable<SizeModel> sizes = await _getAllSizesQuery.Execute();
+                IEnumerable<SizeModel> sizes = await _getAllSizesQuery.Execute();
 
                 _sizes.Clear();
 
-                //if (sizes != null)
-                //{
-                //    _sizes.AddRange(sizes);
-                //}
-
-                SizesLoaded?.Invoke();
+                if (sizes != null)
+                {
+                    _sizes.AddRange(sizes);
+                }
             }
             catch (Exception ex)
             {

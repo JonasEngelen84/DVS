@@ -28,12 +28,12 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
                 Employee employee = _employeeListingItemViewModel.Employee;
 
-                foreach (EmployeeClothesSize size in employee.EmployeeClothes)
+                foreach (EmployeeClothesSize size in employee.Clothes)
                 {
                     size.ClothesSize.EmployeeClothesSizes.Remove(size);
                 }
 
-                employee.EmployeeClothes.Clear();
+                employee.Clothes.Clear();
 
                 try
                 {

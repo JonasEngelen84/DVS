@@ -1,7 +1,6 @@
 ﻿using DVS.Domain.Commands.Season;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using DVS.EntityFramework.Queries;
 using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
@@ -16,7 +15,7 @@ namespace DVS.WPF.Stores
         private readonly IUpdateSeasonCommand _updateSeasonCommand = UpdateSeasonCommand;
         private readonly IDeleteSeasonCommand _deleteSeasonCommand = DeleteSeasonCommand;
 
-        private readonly List<Season> _seasons = [];
+        private readonly List<Season> _seasons = [new(Guid.NewGuid(), "TestSaison")];
         public IEnumerable<Season> Seasons => _seasons;
 
         public event Action SeasonsLoaded;
@@ -29,14 +28,14 @@ namespace DVS.WPF.Stores
         {
             try
             {
-                //IEnumerable<Season> season = await _getAllSeasonsQuery.Execute();
+                IEnumerable<Season> season = await _getAllSeasonsQuery.Execute();
 
                 _seasons.Clear();
 
-                //if (season != null)
-                //{
-                //    _seasons.AddRange(season);
-                //}
+                if (season != null)
+                {
+                    _seasons.AddRange(season);
+                }
 
                 SeasonsLoaded?.Invoke();
             }
@@ -47,23 +46,23 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task Add(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        public async Task Add(Season newSeason, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             //await _createSeasonCommand.Execute(season);
-            _seasons.Add(season);
-            SeasonAdded.Invoke(season, addEditSeasonFormViewModel);
+            _seasons.Add(newSeason);
+            SeasonAdded.Invoke(newSeason, addEditSeasonFormViewModel);
         }
 
-        public async Task Update(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        public async Task Update(Season updatedSeason, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             //await _updateSeasonCommand.Execute(season);
 
-            int index = _seasons.FindIndex(y => y.GuidID == season.GuidID);
+            int index = _seasons.FindIndex(y => y.GuidID == updatedSeason.GuidID);
 
             if (index > -1)
             {
-                _seasons[index] = season;
-                SeasonUpdated.Invoke(season, addEditSeasonFormViewModel);
+                _seasons[index] = updatedSeason;
+                SeasonUpdated.Invoke(updatedSeason, addEditSeasonFormViewModel);
             }
             else
             {

@@ -2,9 +2,9 @@
 
 namespace DVS.WPF.Views
 {
-    public partial class EditEmployeeView : UserControl
+    public partial class UpdateEmployeeView : UserControl
     {
-        public EditEmployeeView()
+        public UpdateEmployeeView()
         {
             InitializeComponent();
         }

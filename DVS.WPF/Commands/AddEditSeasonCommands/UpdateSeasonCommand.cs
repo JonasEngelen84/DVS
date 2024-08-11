@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditSeasonCommands
 {
-    public class EditSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, SeasonStore seasonStore) : AsyncCommandBase
+    public class UpdateSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, SeasonStore seasonStore) : AsyncCommandBase
     {
         private readonly AddEditSeasonViewModel _addEditSeasonViewModel = addEditSeasonViewModel;
         private readonly SeasonStore _seasonStore = seasonStore;
@@ -16,7 +16,7 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
             AddEditSeasonFormViewModel addEditSeasonFormViewModel = _addEditSeasonViewModel.AddEditSeasonFormViewModel;
 
             string messageBoxText = $"Die Saison \"{addEditSeasonFormViewModel.SelectedSeason.Name}\" und ihre Schnittstellen werden in" +
-                    $"\"{addEditSeasonFormViewModel.EditSeason}\" umbenannt.\n\nUmbennen fortsetzen?";
+                    $"\"{addEditSeasonFormViewModel.UpdateSelectedSeason}\" umbenannt.\n\nUmbennen fortsetzen?";
             string caption = "Saison umbenennen";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
@@ -27,7 +27,7 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
                 addEditSeasonFormViewModel.ErrorMessage = null;
                 addEditSeasonFormViewModel.IsSubmitting = true;
 
-                Season season = new(addEditSeasonFormViewModel.SelectedSeason.GuidID, addEditSeasonFormViewModel.EditSelectedSeason);
+                Season season = new(addEditSeasonFormViewModel.SelectedSeason.GuidID, addEditSeasonFormViewModel.UpdateSelectedSeason);
 
                 try
                 {

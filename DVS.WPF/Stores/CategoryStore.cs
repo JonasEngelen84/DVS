@@ -1,7 +1,6 @@
 ﻿using DVS.Domain.Commands.Category;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using DVS.EntityFramework.Queries;
 using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
@@ -11,13 +10,13 @@ namespace DVS.WPF.Stores
                                IUpdateCategoryCommand updateCategoryCommand,
                                IDeleteCategoryCommand deleteCategoryCommand)
     {
-        private readonly List<Category> _categories = [];
-        public IEnumerable<Category> Categories => _categories;
-
         private readonly IGetAllCategoriesQuery _getAllCategoriesQuery;
         private readonly ICreateCategoryCommand _createCategoryCommand = createCategoryCommand;
         private readonly IUpdateCategoryCommand _updateCategoryCommand = updateCategoryCommand;
         private readonly IDeleteCategoryCommand _deleteCategoryCommand = deleteCategoryCommand;
+
+        private readonly List<Category> _categories = [new(Guid.NewGuid(), "TestKategorie")];
+        public IEnumerable<Category> Categories => _categories;
 
         public event Action CategoriesLoaded;
         public event Action<Category, AddEditCategoryFormViewModel> CategoryAdded;
@@ -29,14 +28,14 @@ namespace DVS.WPF.Stores
         {
             try
             {
-                //IEnumerable<Category> categorie = await _getAllCategoriesQuery.Execute();
+                IEnumerable<Category> categorie = await _getAllCategoriesQuery.Execute();
 
                 _categories.Clear();
 
-                //if (categorie != null)
-                //{
-                //    _categories.AddRange(categorie);
-                //}
+                if (categorie != null)
+                {
+                    _categories.AddRange(categorie);
+                }
 
                 CategoriesLoaded?.Invoke();
             }
@@ -47,23 +46,23 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task Add(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Add(Category newCategory, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             //await _createCategoryCommand.Execute(category);
-            _categories.Add(category);
-            CategoryAdded.Invoke(category, addEditCategoryFormViewModel);
+            _categories.Add(newCategory);
+            CategoryAdded.Invoke(newCategory, addEditCategoryFormViewModel);
         }
 
-        public async Task Update(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Update(Category updatedCategory, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             //await _updateCategoryCommand.Execute(category);
 
-            int index = _categories.FindIndex(y => y.GuidID == category.GuidID);
+            int index = _categories.FindIndex(y => y.GuidID == updatedCategory.GuidID);
 
             if (index > -1)
             {
-                _categories[index] = category;
-                CategoryUpdated.Invoke(category, addEditCategoryFormViewModel);
+                _categories[index] = updatedCategory;
+                CategoryUpdated.Invoke(updatedCategory, addEditCategoryFormViewModel);
             }
             else
             {

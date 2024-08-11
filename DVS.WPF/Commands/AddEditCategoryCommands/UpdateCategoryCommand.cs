@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditCategoryCommands
 {
-    public class EditCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
+    public class UpdateCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
     {
         private readonly AddEditCategoryViewModel _addEditCategoryViewModel = addEditCategoryViewModel;
         private readonly CategoryStore _categoryStore = categoryStore;
@@ -16,7 +16,7 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
 
             string messageBoxText = $"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
-                    $"\"{addEditCategoryFormViewModel.EditCategory}\" umbenannt.\n\nUmbennen fortsetzen?";
+                    $"\"{addEditCategoryFormViewModel.UpdateSelectedCategory}\" umbenannt.\n\nUmbennen fortsetzen?";
             string caption = "Kategorie umbenennen";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
@@ -27,11 +27,11 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
                 addEditCategoryFormViewModel.ErrorMessage = null;
                 addEditCategoryFormViewModel.IsSubmitting = true;
 
-                Category category = new(Guid.NewGuid(), addEditCategoryFormViewModel.EditSelectedCategory);
+                Category updatedCategory = new(addEditCategoryFormViewModel.SelectedCategory.GuidID, addEditCategoryFormViewModel.UpdateSelectedCategory);
 
                 try
                 {
-                    await _categoryStore.Update(category, addEditCategoryFormViewModel);
+                    await _categoryStore.Update(updatedCategory, addEditCategoryFormViewModel);
                 }
                 catch (Exception)
                 {

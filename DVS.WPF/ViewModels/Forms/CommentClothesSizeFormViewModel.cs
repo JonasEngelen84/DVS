@@ -4,18 +4,23 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class CommentClothesSizeFormViewModel : ViewModelBase
+    public class CommentClothesSizeFormViewModel(ICommand submitComment,
+                                                 SelectedDetailedClothesItemStore selectedDetailedClothesItemStore)
+                                                 : ViewModelBase
     {
-        private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore;
+        private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
 
         private DetailedClothesListingItemViewModel SelectedDetailedClothesItem => _selectedDetailedClothesItemStore.SelectedDetailedClothesItem;
 
         public bool HasSelectedDetailedClothesListingItem => SelectedDetailedClothesItem != null;
         public Clothes Clothes => SelectedDetailedClothesItem.Clothes;
+        public ClothesSize? ClothesSize => SelectedDetailedClothesItem.ClothesSize;
         public string ID => SelectedDetailedClothesItem.ID;
         public string Name => SelectedDetailedClothesItem.Name;
         public string Category => SelectedDetailedClothesItem.Category;
         public string Season => SelectedDetailedClothesItem.Season;
+
+
         public string? Size => SelectedDetailedClothesItem.Size;
         public int? Quantity => SelectedDetailedClothesItem.Quantity;
 
@@ -64,40 +69,9 @@ namespace DVS.WPF.ViewModels.Forms
         }
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
-        //TODO: CanSubmitComment
-        public bool CanSubmit => !string.IsNullOrEmpty(Comment)
-            || !Comment.Equals(Clothes.Sizes?.FirstOrDefault(s => s.Size.Size == Size).Comment);
 
-        public ICommand SubmitComment { get; }
+        public bool CanSubmit => !Comment.Equals(ClothesSize.Comment);
 
-
-        public CommentClothesSizeFormViewModel(ICommand submitComment,
-            SelectedDetailedClothesItemStore selectedDetailedClothesItemStore)
-        {
-            _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
-            SubmitComment = submitComment;
-
-            _selectedDetailedClothesItemStore.SelectedDetailedClothesChanged += SelectedDetailedClothesItemStore_SelectedDetailedClothesChanged;
-        }
-
-        private void SelectedDetailedClothesItemStore_SelectedDetailedClothesChanged()
-        {
-            OnPropertyChanged(nameof(HasSelectedDetailedClothesListingItem));
-            OnPropertyChanged(nameof(ID));
-            OnPropertyChanged(nameof(Name));
-            OnPropertyChanged(nameof(Category));
-            OnPropertyChanged(nameof(Season));
-            OnPropertyChanged(nameof(Size));
-            OnPropertyChanged(nameof(Quantity));
-            OnPropertyChanged(nameof(Comment));
-        }
-
-
-        protected override void Dispose()
-        {
-            _selectedDetailedClothesItemStore.SelectedDetailedClothesChanged -= SelectedDetailedClothesItemStore_SelectedDetailedClothesChanged;
-
-            base.Dispose();
-        }
+        public ICommand SubmitComment { get; } = submitComment;
     }
 }

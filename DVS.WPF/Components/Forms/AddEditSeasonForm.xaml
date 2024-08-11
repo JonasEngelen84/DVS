@@ -19,16 +19,16 @@
                     IsEnabled="{Binding CanAdd}" />
         </StackPanel>
 
-        <!-- Edit Season and Edit-Button -->
+        <!-- Update Season and Edit-Button -->
         <StackPanel Orientation="Horizontal"
                     Margin="0 10 0 20">
             <TextBox Width="165"
                      Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding EditSelectedSeason, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding UpdateSelectedSeason, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="BEARBEITEN"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
-                    Command="{Binding EditSeason}"
+                    Command="{Binding UpdateSeason}"
                     IsEnabled="{Binding CanEdit}" />
         </StackPanel>
 

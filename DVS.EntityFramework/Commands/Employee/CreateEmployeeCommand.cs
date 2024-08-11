@@ -19,7 +19,7 @@ namespace DVS.EntityFramework.Commands.Employee
                 Lastname = employee.Lastname,
                 Firstname = employee.Firstname,
                 Comment = employee.Comment,
-                Clothes = employee.EmployeeClothes
+                Clothes = employee.Clothes
             };
 
             context.Employees.Add(employeeDTO);

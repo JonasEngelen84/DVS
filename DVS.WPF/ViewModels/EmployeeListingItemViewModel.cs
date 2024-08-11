@@ -13,7 +13,7 @@ namespace DVS.WPF.ViewModels.ListViewItems
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
         public string? Comment => Employee.Comment;
-        public ObservableCollection<EmployeeClothesSize> Clothes => Employee.EmployeeClothes;
+        public ObservableCollection<EmployeeClothesSize> Clothes => Employee.Clothes;
 
         private bool _isDeleting;
         public bool IsDeleting

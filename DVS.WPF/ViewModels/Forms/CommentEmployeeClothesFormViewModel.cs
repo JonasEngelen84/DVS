@@ -4,9 +4,11 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class CommentEmployeeClothesFormViewModel : ViewModelBase
+    public class CommentEmployeeClothesFormViewModel(ICommand submitComment,
+                                                     SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore)
+                                                     : ViewModelBase
     {
-        private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore;
+        private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
 
         private DetailedEmployeeListingItemViewModel SelectedDetailedEmployeeItem => _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem;
 
@@ -16,6 +18,7 @@ namespace DVS.WPF.ViewModels.Forms
         public string EmployeeID => SelectedDetailedEmployeeItem.Employee.ID;
         public string EmployeeLastname => SelectedDetailedEmployeeItem.Lastname;
         public string EmployeeFirstname => SelectedDetailedEmployeeItem.Firstname;
+        public EmployeeClothesSize EmployeeClothesSize => SelectedDetailedEmployeeItem.EmployeeClothesSize;
         public string? ClothesID => SelectedDetailedEmployeeItem.ClothesID;
         public string? ClothesName => SelectedDetailedEmployeeItem.ClothesName;
         public string? Size => SelectedDetailedEmployeeItem.Size;
@@ -66,42 +69,9 @@ namespace DVS.WPF.ViewModels.Forms
         }
 
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
-        //TODO: CanSubmitComment
-        public bool CanSubmit => !string.IsNullOrEmpty(Comment)
-            || !Comment.Equals(Employee.EmployeeClothes?
-            .FirstOrDefault(ecs => ecs.GuidID == EmployeeClothesSizeGuidID).Comment);
 
-        public ICommand SubmitComment { get; }
+        public bool CanSubmit => !Comment.Equals(EmployeeClothesSize.Comment);
 
-
-        public CommentEmployeeClothesFormViewModel(ICommand submitComment,
-            SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore)
-        {
-            _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
-            SubmitComment = submitComment;
-
-            _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItemChanged += SelectedDetailedEmployeeClothesItemStore_SelectedDetailedEmployeeItemChanged;
-        }
-
-
-        private void SelectedDetailedEmployeeClothesItemStore_SelectedDetailedEmployeeItemChanged()
-        {
-            OnPropertyChanged(nameof(HasSelectedDetailedEmployeeListingItem));
-            OnPropertyChanged(nameof(EmployeeID));
-            OnPropertyChanged(nameof(EmployeeLastname));
-            OnPropertyChanged(nameof(EmployeeFirstname));
-            OnPropertyChanged(nameof(ClothesID));
-            OnPropertyChanged(nameof(ClothesName));
-            OnPropertyChanged(nameof(Size));
-            OnPropertyChanged(nameof(Quantity));
-            OnPropertyChanged(nameof(Comment));
-        }
-
-        protected override void Dispose()
-        {
-            _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItemChanged -= SelectedDetailedEmployeeClothesItemStore_SelectedDetailedEmployeeItemChanged;
-
-            base.Dispose();
-        }
+        public ICommand SubmitComment { get; } = submitComment;
     }
 }

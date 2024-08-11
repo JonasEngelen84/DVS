@@ -72,12 +72,10 @@
                             <ColumnDefinition Width="50" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0"
-                                   Text="{Binding Size.Size}" />
-                        <TextBlock Grid.Column="1"
-                                   Text="{Binding Quantity}" />
-                        <TextBlock Grid.Column="2"
-                                   Text="{Binding Comment}" />
+                        
+                        <TextBlock Grid.Column="0" Text="{Binding Size.Size}" />
+                        <TextBlock Grid.Column="1" Text="{Binding Quantity}" />
+                        <TextBlock Grid.Column="2" Text="{Binding Comment}" />
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
@@ -108,7 +106,7 @@
                            Text="{Binding Season.Name}"
                            HorizontalAlignment="Stretch" />
 
-                <!-- DropDownMenu -->
+                <!--TODO: DropDownMenu -->
                 <Grid Grid.Column="2"
                       Margin="10 0 0 0">
                     <!--<Grid>

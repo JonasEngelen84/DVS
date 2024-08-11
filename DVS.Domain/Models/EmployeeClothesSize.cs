@@ -8,6 +8,6 @@
         public Employee Employee { get; } = employee;
         public ClothesSize ClothesSize { get; } = clothesSize;
         public int Quantity { get; set; } = quantity;
-        public string? Comment { get; set; }
+        public string? Comment { get; set; } = "";
     }
 }

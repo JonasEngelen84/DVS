@@ -27,10 +27,10 @@ namespace DVS.WPF.Commands.CommentCommands
                                           commentEmployeeClothesFormViewModel.EmployeeFirstname,
                                           commentEmployeeClothesFormViewModel.Employee.Comment)
             {
-                EmployeeClothes = commentEmployeeClothesFormViewModel.Employee.EmployeeClothes
+                Clothes = commentEmployeeClothesFormViewModel.Employee.Clothes
             };
 
-            EmployeeClothesSize? existingItem = employeeToEdit.EmployeeClothes
+            EmployeeClothesSize? existingItem = employeeToEdit.Clothes
                 .FirstOrDefault(ecs => ecs.GuidID == commentEmployeeClothesFormViewModel.EmployeeClothesSizeGuidID);
 
             if (existingItem == null)

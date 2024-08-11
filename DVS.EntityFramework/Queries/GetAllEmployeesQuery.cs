@@ -15,7 +15,7 @@ namespace DVS.EntityFramework.Queries
 
             IEnumerable<EmployeeDTO> employeeDTOs = await context.Employees.ToListAsync();
 
-            return employeeDTOs.Select(y => new Employee(y.GuidID, y.ID, y.Lastname, y.Firstname, y.Comment) { EmployeeClothes = y.Clothes } );
+            return employeeDTOs.Select(y => new Employee(y.GuidID, y.ID, y.Lastname, y.Firstname, y.Comment) { Clothes = y.Clothes } );
         }
     }
 }

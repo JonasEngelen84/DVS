@@ -1,0 +1,71 @@
+﻿using DVS.Domain.Models;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
+using DVS.WPF.ViewModels.Forms;
+using DVS.WPF.ViewModels.Views;
+using System.Windows;
+
+namespace DVS.WPF.Commands.AddEditEmployeeCommands
+{
+    public class UpdateEmployeeCommand(UpdateEmployeeViewModel updateEmployeeViewModel, EmployeeStore employeeStore,
+        ModalNavigationStore modalNavigationStore, Guid guiID) : AsyncCommandBase
+    {
+        private readonly UpdateEmployeeViewModel _updateEmployeeViewModel = updateEmployeeViewModel;
+        private readonly EmployeeStore _employeeStore = employeeStore;
+        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
+        private readonly Guid _guidID = guiID;
+
+        public override async Task ExecuteAsync(object parameter)
+        {
+            string messageBoxText = "Mitarbeiter bearbeiten?";
+            string caption = "Mitarbeiter bearbeiten";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+            if (dialog == MessageBoxResult.Yes)
+            {
+                AddEditEmployeeFormViewModel updateEmployeeFormViewModel = _updateEmployeeViewModel.AddEditEmployeeFormViewModel;
+
+                updateEmployeeFormViewModel.ErrorMessage = null;
+                updateEmployeeFormViewModel.IsSubmitting = true;
+
+                Employee updatedEmployee = new(_guidID,
+                                              updateEmployeeFormViewModel.ID,
+                                              updateEmployeeFormViewModel.Lastname,
+                                              updateEmployeeFormViewModel.Firstname,
+                                              updateEmployeeFormViewModel.Comment);
+
+                foreach (EmployeeClothesSize size in updatedEmployee.Clothes)
+                {
+                    size.ClothesSize.EmployeeClothesSizes.Remove(size);
+                }
+
+                updatedEmployee.Clothes.Clear();
+
+                //TODO: Kommentare von DetailedItems werden entfernt bei update
+                foreach (DetailedClothesListingItemViewModel item in updateEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
+                {
+                    var existingClothes = item.Clothes.Sizes.FirstOrDefault(s => s.Size.Equals(item.Clothes.Sizes));
+                    existingClothes.EmployeeClothesSizes.Add(new EmployeeClothesSize(Guid.NewGuid(), updatedEmployee, existingClothes, (int)item.Quantity));
+                    updatedEmployee.Clothes.Add(new EmployeeClothesSize(Guid.NewGuid(), updatedEmployee, existingClothes, (int)item.Quantity));
+                }
+
+                try
+                {
+                    await _employeeStore.Update(updatedEmployee);
+                }
+                catch (Exception)
+                {
+                    updateEmployeeFormViewModel.ErrorMessage = "Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                }
+                finally
+                {
+                    updateEmployeeFormViewModel.IsSubmitting = false;
+                    _modalNavigationStore.Close();
+                }
+            }
+        }
+
+    }
+}

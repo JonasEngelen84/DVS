@@ -20,7 +20,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         {
             Employee _employee = _employeeListingItemViewModel.Employee;
 
-            EditEmployeeViewModel EditEmployeeViewModel = new(
+            UpdateEmployeeViewModel EditEmployeeViewModel = new(
                 _employee, _employeeStore, _clothesStore, _modalNavigationStore, _dVSListingViewModel);
 
             _modalNavigationStore.CurrentViewModel = EditEmployeeViewModel;

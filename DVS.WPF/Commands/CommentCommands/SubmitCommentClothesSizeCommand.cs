@@ -19,41 +19,33 @@ namespace DVS.WPF.Commands.CommentCommands
             commentClothesSizeFormViewModel.ErrorMessage = null;
             commentClothesSizeFormViewModel.IsSubmitting = true;
 
-            Clothes clothesToEdit = new(commentClothesSizeFormViewModel.Clothes.GuidID,
-                                        commentClothesSizeFormViewModel.ID,
-                                        commentClothesSizeFormViewModel.Name,
-                                        commentClothesSizeFormViewModel.Clothes.Category,
-                                        commentClothesSizeFormViewModel.Clothes.Season,
-                                        commentClothesSizeFormViewModel.Clothes.Comment)
+            Clothes updatedClothes = new(commentClothesSizeFormViewModel.Clothes.GuidID,
+                                         commentClothesSizeFormViewModel.ID,
+                                         commentClothesSizeFormViewModel.Name,
+                                         commentClothesSizeFormViewModel.Clothes.Category,
+                                         commentClothesSizeFormViewModel.Clothes.Season,
+                                         commentClothesSizeFormViewModel.Clothes.Comment)
             {
                 Sizes = commentClothesSizeFormViewModel.Clothes.Sizes
             };
 
-            ClothesSize existingItem = clothesToEdit.Sizes.FirstOrDefault(s => s.Size.Size == commentClothesSizeFormViewModel.Size);
+            ClothesSize existingItem = updatedClothes.Sizes.FirstOrDefault(s => s.Size.Size == commentClothesSizeFormViewModel.Size);
 
-            if (existingItem == null)
-            {
-                commentClothesSizeFormViewModel.ErrorMessage =
-                    "Bearbeiten des Kommentar ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-            }
-            else
+            try
             {
                 existingItem.Comment = commentClothesSizeFormViewModel.Comment;
 
-                try
-                {
-                    await _clothesStore.Update(clothesToEdit);
-                }
-                catch (Exception)
-                {
-                    commentClothesSizeFormViewModel.ErrorMessage =
-                    "Bearbeiten des Kommentar ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                }
-                finally
-                {
-                    commentClothesSizeFormViewModel.IsSubmitting = false;
-                    _modalNavigationStore.Close();
-                }
+                await _clothesStore.Update(updatedClothes);
+            }
+            catch (Exception)
+            {
+                commentClothesSizeFormViewModel.ErrorMessage =
+                "Bearbeiten des Kommentar ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+            }
+            finally
+            {
+                commentClothesSizeFormViewModel.IsSubmitting = false;
+                _modalNavigationStore.Close();
             }
         }
     }

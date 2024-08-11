@@ -10,6 +10,6 @@ namespace DVS.Domain.Models
         public string Firstname { get; } = firstname;
         public string? Comment { get; } = comment;
 
-        public ObservableCollection<EmployeeClothesSize> EmployeeClothes { get; set; } = [];
+        public ObservableCollection<EmployeeClothesSize> Clothes { get; set; } = [];
     }
 }

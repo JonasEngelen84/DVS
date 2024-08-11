@@ -3,13 +3,13 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class AddEditCategoryFormViewModel(ICommand addCategoryCommand, ICommand editCategoryCommand,
+    public class AddEditCategoryFormViewModel(ICommand addCategoryCommand, ICommand updateCategoryCommand,
         ICommand deleteCategoryCommand, ICommand clearCategoryListCommand,
         AddEditListingViewModel addEditListingViewModel) : ViewModelBase
     {
         public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
         public ICommand AddCategory { get; } = addCategoryCommand;
-        public ICommand EditCategory { get; } = editCategoryCommand;
+        public ICommand UpdateCategory { get; } = updateCategoryCommand;
         public ICommand DeleteCategory { get; } = deleteCategoryCommand;
         public ICommand ClearCategoryList { get; } = clearCategoryListCommand;
 
@@ -25,14 +25,14 @@ namespace DVS.WPF.ViewModels.Forms
             }
         }
         
-        private string _editSelectedCategory;
-        public string EditSelectedCategory
+        private string _updateSelectedCategory;
+        public string UpdateSelectedCategory
         {
-            get => _editSelectedCategory;
+            get => _updateSelectedCategory;
             set
             {
-                _editSelectedCategory = value;
-                OnPropertyChanged(nameof(EditSelectedCategory));
+                _updateSelectedCategory = value;
+                OnPropertyChanged(nameof(UpdateSelectedCategory));
                 OnPropertyChanged(nameof(CanEdit));
             }
         }
@@ -46,7 +46,7 @@ namespace DVS.WPF.ViewModels.Forms
                 if (value != null)
                 {
                     _selectedCategory = value;
-                    EditSelectedCategory = new(value.Name);
+                    UpdateSelectedCategory = new(value.Name);
                     OnPropertyChanged(nameof(SelectedCategory));
                     OnPropertyChanged(nameof(CanDelete));
                 }
@@ -87,9 +87,9 @@ namespace DVS.WPF.ViewModels.Forms
             !AddNewCategory.Equals("Neue Kategorie");
 
         public bool CanEdit =>
-            !string.IsNullOrEmpty(EditSelectedCategory) &&
+            !string.IsNullOrEmpty(UpdateSelectedCategory) &&
             !SelectedCategory.Name.Equals("Kategorie wählen") &&
-            !SelectedCategory.Name.Equals(EditSelectedCategory);
+            !SelectedCategory.Name.Equals(UpdateSelectedCategory);
 
         public bool CanDelete => !SelectedCategory.Name.Equals("Kategorie wählen");
         public bool CanDeleteAll => !AddEditListingViewModel.Categories.IsEmpty;

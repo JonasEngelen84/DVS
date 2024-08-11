@@ -3,13 +3,13 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class AddEditSeasonFormViewModel(ICommand addSeasonCommand, ICommand editSeasonCommand,
+    public class AddEditSeasonFormViewModel(ICommand addSeasonCommand, ICommand updateSeasonCommand,
         ICommand deleteSeasonCommand, ICommand clearSeasonListCommand,
         AddEditListingViewModel addEditListingViewModel) : ViewModelBase
     {
         public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
         public ICommand AddSeason { get; } = addSeasonCommand;
-        public ICommand EditSeason { get; } = editSeasonCommand;
+        public ICommand UpdateSeason { get; } = updateSeasonCommand;
         public ICommand DeleteSeason { get; } = deleteSeasonCommand;
         public ICommand ClearSeasonList { get; } = clearSeasonListCommand;
 
@@ -25,14 +25,14 @@ namespace DVS.WPF.ViewModels.Forms
             }
         }
 
-        private string _editSelectedSeason;
-        public string EditSelectedSeason
+        private string _updateSelectedSeason;
+        public string UpdateSelectedSeason
         {
-            get => _editSelectedSeason;
+            get => _updateSelectedSeason;
             set
             {
-                _editSelectedSeason = value;
-                OnPropertyChanged(nameof(EditSelectedSeason));
+                _updateSelectedSeason = value;
+                OnPropertyChanged(nameof(UpdateSelectedSeason));
                 OnPropertyChanged(nameof(CanEdit));
             }
         }
@@ -46,7 +46,7 @@ namespace DVS.WPF.ViewModels.Forms
                 if (value != null)
                 {
                     _selectedSeason = value;
-                    EditSelectedSeason = new(value.Name);
+                    UpdateSelectedSeason = new(value.Name);
                     OnPropertyChanged(nameof(SelectedSeason));
                     OnPropertyChanged(nameof(CanDelete));
                 }
@@ -87,9 +87,9 @@ namespace DVS.WPF.ViewModels.Forms
             !AddNewSeason.Equals("Neue Saison");
 
         public bool CanEdit =>
-            !string.IsNullOrEmpty(EditSelectedSeason) &&
+            !string.IsNullOrEmpty(UpdateSelectedSeason) &&
             !SelectedSeason.Name.Equals("Saison wählen") &&
-            !SelectedSeason.Name.Equals(EditSelectedSeason);
+            !SelectedSeason.Name.Equals(UpdateSelectedSeason);
 
         public bool CanDelete => !SelectedSeason.Name.Equals("Saison wählen");
         public bool CanDeleteAll => !AddEditListingViewModel.Seasons.IsEmpty;

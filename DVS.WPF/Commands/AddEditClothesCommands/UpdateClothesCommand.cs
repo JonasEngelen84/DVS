@@ -6,10 +6,10 @@ using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditClothesCommands
 {
-    public class EditClothesCommand(EditClothesViewModel editClothesViewModel,
+    public class UpdateClothesCommand(UpdateClothesViewModel updateClothesViewModel,
         ClothesStore clothesStore, ModalNavigationStore modalNavigationStore) : AsyncCommandBase
     {
-        private readonly EditClothesViewModel _editClothesViewModel = editClothesViewModel;
+        private readonly UpdateClothesViewModel _updateClothesViewModel = updateClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
@@ -23,24 +23,24 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
             if (dialog == MessageBoxResult.Yes)
             {
-                AddEditClothesFormViewModel addEditClothesFormViewModel = _editClothesViewModel.AddEditClothesFormViewModel;
+                AddEditClothesFormViewModel updateClothesFormViewModel = _updateClothesViewModel.AddEditClothesFormViewModel;
 
-                addEditClothesFormViewModel.ErrorMessage = null;
-                addEditClothesFormViewModel.IsSubmitting = true;
+                updateClothesFormViewModel.ErrorMessage = null;
+                updateClothesFormViewModel.IsSubmitting = true;
 
                 // Alle ausgewählten Größen in eine ZwischenListe speichern.
-                var selectedSizes = addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                    ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                    : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
+                var selectedSizes = updateClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                    ? updateClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                    : updateClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
 
-                Clothes updatedClothes = new(addEditClothesFormViewModel.Clothes.GuidID,
-                                             addEditClothesFormViewModel.ID,
-                                             addEditClothesFormViewModel.Name,
-                                             addEditClothesFormViewModel.Category,
-                                             addEditClothesFormViewModel.Season,
-                                             addEditClothesFormViewModel.Clothes.Comment);
+                Clothes updatedClothes = new(updateClothesFormViewModel.Clothes.GuidID,
+                                             updateClothesFormViewModel.ID,
+                                             updateClothesFormViewModel.Name,
+                                             updateClothesFormViewModel.Category,
+                                             updateClothesFormViewModel.Season,
+                                             updateClothesFormViewModel.Clothes.Comment);
 
-                foreach (ClothesSize size in addEditClothesFormViewModel.Clothes.Sizes)
+                foreach (ClothesSize size in updateClothesFormViewModel.Clothes.Sizes)
                 {
                     size.Size.ClothesSizes.Remove(size);
                 }
@@ -52,9 +52,9 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                     updatedClothes.Sizes.Add(new ClothesSize(Guid.NewGuid(), updatedClothes, size, size.Quantity));
                 }
 
-                updatedClothes.Category?.Clothes.Remove(addEditClothesFormViewModel.Clothes);
+                updatedClothes.Category?.Clothes.Remove(updateClothesFormViewModel.Clothes);
                 updatedClothes.Category?.Clothes.Add(updatedClothes);
-                updatedClothes.Season?.Clothes.Remove(addEditClothesFormViewModel.Clothes);
+                updatedClothes.Season?.Clothes.Remove(updateClothesFormViewModel.Clothes);
                 updatedClothes.Season?.Clothes.Add(updatedClothes);
 
                 try
@@ -63,12 +63,12 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 }
                 catch (Exception)
                 {
-                    addEditClothesFormViewModel.ErrorMessage =
+                    updateClothesFormViewModel.ErrorMessage =
                         "Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
                 }
                 finally
                 {
-                    addEditClothesFormViewModel.IsSubmitting = false;
+                    updateClothesFormViewModel.IsSubmitting = false;
                     _modalNavigationStore.Close();
                 }
             }
