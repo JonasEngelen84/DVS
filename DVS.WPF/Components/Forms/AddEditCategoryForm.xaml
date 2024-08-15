@@ -61,18 +61,13 @@
             </Border>
 
             <!-- Delete/Clear Button -->
-            <StackPanel Grid.Column="1">
-                <Button Content="LÖSCHEN"
-                        Margin="5 1 0 0"
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding DeleteCategory}"
-                        IsEnabled="{Binding CanDelete}" />
-                <Button Content="LEEREN"
-                        Margin="5 5 0 0"
-                        Style="{StaticResource ModalButtonStyle}"
-                        Command="{Binding ClearCategoryList}"
-                        IsEnabled="{Binding CanDeleteAll}" />
-            </StackPanel>
+            <Button Grid.Column="1"
+                    Content="LÖSCHEN"
+                    VerticalAlignment="Bottom"
+                    Margin="5 0 0 1"
+                    Style="{StaticResource ModalButtonStyle}"
+                    Command="{Binding DeleteCategory}"
+                    IsEnabled="{Binding CanDelete}" />
         </Grid>
     </StackPanel>
 </UserControl>

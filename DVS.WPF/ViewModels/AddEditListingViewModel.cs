@@ -75,13 +75,11 @@ namespace DVS.WPF.ViewModels
             _categoryStore.CategoryAdded += CategoryStore_CategoryAdded;
             _categoryStore.CategoryUpdated += CategoryStore_CategoryUpdated;
             _categoryStore.CategoryDeleted += CategoryStore_CategoryDeleted;
-            _categoryStore.AllCategoriesDeleted += CategoryStore_AllCategoriesDeleted;
 
             _seasonStore.SeasonsLoaded += SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonAdded += SeasonStore_SeasonAdded;
             _seasonStore.SeasonUpdated += SeasonStore_SeasonUpdated;
             _seasonStore.SeasonDeleted += SeasonStore_SeasonDeleted;
-            _seasonStore.AllSeasonsDeleted += SeasonStore_AllSeasonsDeleted;
         }
 
 
@@ -143,8 +141,6 @@ namespace DVS.WPF.ViewModels
             _seasons.Add(newSeason);
             _seasonCollectionViewSource.View.Refresh();
             addEditSeasonFormViewModel.AddNewSeason = "Neue Saison";
-            addEditSeasonFormViewModel.SeasonCollectionChanged();
-            OnPropertyChanged(nameof(addEditSeasonFormViewModel.CanDeleteAll));
         }
 
         private void SeasonStore_SeasonUpdated(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
@@ -176,26 +172,10 @@ namespace DVS.WPF.ViewModels
                 _seasonCollectionViewSource.View.Refresh();
                 addEditSeasonFormViewModel.SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
                 addEditSeasonFormViewModel.UpdateSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
-                addEditSeasonFormViewModel.SeasonCollectionChanged();
             }
             else
             {
                 throw new InvalidOperationException("Löschen der Saison nicht möglich.");
-            }
-        }
-
-        private void SeasonStore_AllSeasonsDeleted(AddEditSeasonFormViewModel addEditSeasonFormViewModel)
-        {
-            if (_seasons != null)
-            {
-                _seasons.Clear();
-                addEditSeasonFormViewModel.SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
-                addEditSeasonFormViewModel.UpdateSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
-                addEditSeasonFormViewModel.SeasonCollectionChanged();
-            }
-            else
-            {
-                throw new InvalidOperationException("Löschen aller Kategorien nicht möglich.");
             }
         }
 
@@ -215,8 +195,6 @@ namespace DVS.WPF.ViewModels
             _categories.Add(newCategory);
             _categoryCollectionViewSource.View.Refresh();
             addEditCategoryFormViewModel.AddNewCategory = "Neue Kategorie";
-            addEditCategoryFormViewModel.CategoryCollectionChanged();
-            OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanDeleteAll));
         }
 
         private void CategoryStore_CategoryUpdated(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
@@ -248,26 +226,10 @@ namespace DVS.WPF.ViewModels
                 _categoryCollectionViewSource.View.Refresh();
                 addEditCategoryFormViewModel.SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen");
                 addEditCategoryFormViewModel.UpdateSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
-                addEditCategoryFormViewModel.CategoryCollectionChanged();
             }
             else
             {
                 throw new InvalidOperationException("Löschen der Kategorie nicht möglich.");
-            }
-        }
-
-        private void CategoryStore_AllCategoriesDeleted(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            if (_categories != null)
-            {
-                _categories.Clear();
-                addEditCategoryFormViewModel.SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen");
-                addEditCategoryFormViewModel.UpdateSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
-                addEditCategoryFormViewModel.CategoryCollectionChanged();
-            }
-            else
-            {
-                throw new InvalidOperationException("Löschen aller Kategorien nicht möglich.");
             }
         }
 
@@ -278,13 +240,11 @@ namespace DVS.WPF.ViewModels
             _categoryStore.CategoryAdded -= CategoryStore_CategoryAdded;
             _categoryStore.CategoryUpdated -= CategoryStore_CategoryUpdated;
             _categoryStore.CategoryDeleted -= CategoryStore_CategoryDeleted;
-            _categoryStore.AllCategoriesDeleted += CategoryStore_AllCategoriesDeleted;
 
             _seasonStore.SeasonsLoaded -= SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonAdded -= SeasonStore_SeasonAdded;
             _seasonStore.SeasonUpdated -= SeasonStore_SeasonUpdated;
             _seasonStore.SeasonDeleted -= SeasonStore_SeasonDeleted;
-            _seasonStore.AllSeasonsDeleted -= SeasonStore_AllSeasonsDeleted;
 
             base.Dispose();
         }

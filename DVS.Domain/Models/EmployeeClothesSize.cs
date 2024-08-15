@@ -7,7 +7,7 @@
         public Guid ClothesSizeGuidID { get; } = clothesSize.GuidID;
         public Employee Employee { get; } = employee;
         public ClothesSize ClothesSize { get; } = clothesSize;
-        public int Quantity { get; set; } = quantity;
-        public string? Comment { get; set; } = "";
+        public int Quantity { get; } = quantity;
+        public string? Comment { get; } = "";
     }
 }

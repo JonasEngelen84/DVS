@@ -1,6 +1,4 @@
-﻿using DVS.Domain.Models;
-
-namespace DVS.Domain.Commands.Employee
+﻿namespace DVS.Domain.Commands.Employee
 {
     public interface ICreateEmployeeCommand
     {

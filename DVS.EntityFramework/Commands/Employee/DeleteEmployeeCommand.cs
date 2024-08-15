@@ -3,13 +3,13 @@ using DVS.EntityFramework.DTOs;
 
 namespace DVS.EntityFramework.Commands.Employee
 {
-    public class DeleteEmployeeCommand(DVSDbContextFactory dVSDbContextFactory) : IDeleteEmployeeCommand
+    public class DeleteEmployeeCommand(DVSDbContextFactory contextFactory) : IDeleteEmployeeCommand
     {
-        private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
+        private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
         public async Task Execute(Guid guidID)
         {
-            using DVSDbContext context = _dVSDbContextFactory.Create();
+            using DVSDbContext context = _contextFactory.Create();
 
             EmployeeDTO employeeDTO = new()
             {

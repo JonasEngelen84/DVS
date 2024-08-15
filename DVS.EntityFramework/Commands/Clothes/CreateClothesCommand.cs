@@ -1,16 +1,15 @@
 ﻿using DVS.Domain.Commands.Clothes;
-using DVS.Domain.Models;
 using DVS.EntityFramework.DTOs;
 
 namespace DVS.EntityFramework.Commands.Clothes
 {
-    public class CreateClothesCommand(DVSDbContextFactory clothesDbContextFactory) : ICreateClothesCommand
+    public class CreateClothesCommand(DVSDbContextFactory contextFactory) : ICreateClothesCommand
     {
-        private readonly DVSDbContextFactory _clothesDbContextFactory = clothesDbContextFactory;
+        private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
         public async Task Execute(Domain.Models.Clothes clothes)
         {
-            using DVSDbContext context = _clothesDbContextFactory.Create();
+            using DVSDbContext context = _contextFactory.Create();
 
             ClothesDTO clothesDTO = new()
             {

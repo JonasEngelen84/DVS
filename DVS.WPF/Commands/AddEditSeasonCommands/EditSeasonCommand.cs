@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditSeasonCommands
 {
-    public class UpdateSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, SeasonStore seasonStore) : AsyncCommandBase
+    public class EditSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, SeasonStore seasonStore) : AsyncCommandBase
     {
         private readonly AddEditSeasonViewModel _addEditSeasonViewModel = addEditSeasonViewModel;
         private readonly SeasonStore _seasonStore = seasonStore;

@@ -1,4 +1,6 @@
-﻿using DVS.Domain.Commands.Employee;
+﻿using DVS.Domain.Commands.ClothesSize;
+using DVS.Domain.Commands.Employee;
+using DVS.Domain.Commands.EmployeeClothesSize;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
 using DVS.EntityFramework.Queries;
@@ -8,12 +10,18 @@ namespace DVS.WPF.Stores
     public class EmployeeStore(IGetAllEmployeesQuery getAllEmployeesQuery,
                                ICreateEmployeeCommand createEmployeeCommand,
                                IUpdateEmployeeCommand updateEmployeeCommand,
-                               IDeleteEmployeeCommand deleteEmployeeCommand)
+                               IDeleteEmployeeCommand deleteEmployeeCommand,
+                               ICreateEmployeeClothesSizeCommand createEmployeeClothesSizeCommand,
+                               IUpdateEmployeeClothesSizeCommand updateEmployeeClothesSizeCommand,
+                               IDeleteEmployeeClothesSizeCommand deleteEmployeeClothesSizeCommand)
     {
         private readonly IGetAllEmployeesQuery _getAllEmployeesQuery = getAllEmployeesQuery;
         private readonly ICreateEmployeeCommand _createEmployeeCommand = createEmployeeCommand;
         private readonly IUpdateEmployeeCommand _updateEmployeeCommand = updateEmployeeCommand;
         private readonly IDeleteEmployeeCommand _deleteEmployeeCommand = deleteEmployeeCommand;
+        private readonly ICreateEmployeeClothesSizeCommand _createEmployeeClothesSizeCommand = createEmployeeClothesSizeCommand;
+        private readonly IUpdateEmployeeClothesSizeCommand _updateEmployeeClothesSizeCommand = updateEmployeeClothesSizeCommand;
+        private readonly IDeleteEmployeeClothesSizeCommand _deleteEmployeeClothesSizeCommand = deleteEmployeeClothesSizeCommand;
 
         private readonly List<Employee> _employees = [];
         public IEnumerable<Employee> Employees => _employees;
@@ -49,6 +57,11 @@ namespace DVS.WPF.Stores
         {
             //await _createEmployeeCommand.Execute(employee);
 
+            //foreach (EmployeeClothesSize employeeClothesSize in employee.Clothes)
+            //{
+            //    await _createEmployeeClothesSizeCommand.Execute(employeeClothesSize);
+            //}
+
             _employees.Add(employee);
             EmployeeAdded?.Invoke(employee);
         }
@@ -56,6 +69,11 @@ namespace DVS.WPF.Stores
         public async Task Update(Employee employee)
         {
             //await _updateEmployeeCommand.Execute(employee);
+
+            //foreach (EmployeeClothesSize employeeClothesSize in employee.Clothes)
+            //{
+            //    await _updateEmployeeClothesSizeCommand.Execute(employeeClothesSize);
+            //}
 
             int index = _employees.FindIndex(y => y.GuidID == employee.GuidID);
 
@@ -71,12 +89,17 @@ namespace DVS.WPF.Stores
             EmployeeUpdated.Invoke(employee);
         }
 
-        public async Task Delete(Guid guidID)
+        public async Task Delete(Employee employee)
         {
             //await _deleteEmployeeCommand.Execute(guidID);
 
-            _employees.RemoveAll(y => y.GuidID == guidID);
-            EmployeeDeleted?.Invoke(guidID);
+            //foreach (EmployeeClothesSize employeeClothesSize in employee.Clothes)
+            //{
+            //    await _deleteEmployeeClothesSizeCommand.Execute(employeeClothesSize);
+            //}
+
+            _employees.RemoveAll(y => y.GuidID == employee.GuidID);
+            EmployeeDeleted?.Invoke(employee.GuidID);
         }
     }
 }

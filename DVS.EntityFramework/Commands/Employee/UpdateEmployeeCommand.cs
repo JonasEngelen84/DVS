@@ -1,16 +1,15 @@
 ﻿using DVS.Domain.Commands.Employee;
-using DVS.Domain.Models;
 using DVS.EntityFramework.DTOs;
 
 namespace DVS.EntityFramework.Commands.Employee
 {
-    public class UpdateEmployeeCommand(DVSDbContextFactory dVSDbContextFactory) : IUpdateEmployeeCommand
+    public class UpdateEmployeeCommand(DVSDbContextFactory contextFactory) : IUpdateEmployeeCommand
     {
-        private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
+        private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
         public async Task Execute(Domain.Models.Employee employee)
         {
-            using DVSDbContext context = _dVSDbContextFactory.Create();
+            using DVSDbContext context = _contextFactory.Create();
 
             EmployeeDTO employeeDTO = new()
             {

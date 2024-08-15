@@ -5,8 +5,7 @@ using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditClothesCommands
 {
-    public class ClearSizesCommand(ClothesListingItemViewModel clothesListingItemViewModel,
-        ClothesStore clothesStore) : AsyncCommandBase
+    public class ClearSizesCommand(ClothesListingItemViewModel clothesListingItemViewModel, ClothesStore clothesStore) : AsyncCommandBase
     {
         private readonly ClothesListingItemViewModel _clothesListingItemViewModel = clothesListingItemViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
@@ -23,25 +22,54 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
             if (dialog == MessageBoxResult.Yes)
             {
-                _clothesListingItemViewModel.ErrorMessage = null;
                 _clothesListingItemViewModel.IsDeleting = true;
 
-                Clothes clothes = _clothesListingItemViewModel.Clothes;
-               
-                foreach (ClothesSize size in clothes.Sizes)
+                // Sämtliche ClothesSizes aus SizeModel-Liste und DB entfernen
+                foreach (ClothesSize cs in _clothesListingItemViewModel.Clothes.Sizes)
                 {
-                    size.Size.ClothesSizes.Remove(size);
+                    cs.Size.ClothesSizes.Remove(cs);
+
+                    try
+                    {
+                        await _clothesStore.DeleteClothesSize(cs.GuidID);
+                    }
+                    catch (Exception)
+                    {
+                        messageBoxText = $"Löschen der Größen ist fehlgeschlagen!";
+                        caption = " Alle Bekleidungsgrößen löschen";
+                        button = MessageBoxButton.OK;
+                        icon = MessageBoxImage.Warning;
+                        dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+                    }
                 }
 
-                clothes.Sizes.Clear();
+                Clothes updatedClothes = new(_clothesListingItemViewModel.Clothes.GuidID,
+                                             _clothesListingItemViewModel.ID,
+                                             _clothesListingItemViewModel.Name,
+                                             _clothesListingItemViewModel.Category,
+                                             _clothesListingItemViewModel.Season,
+                                             _clothesListingItemViewModel.Comment)
+                {
+                    Sizes = []
+                };
+
+                // Kategorie und Saison Listen mit der neuen Clothes-Instanz aktualisieren
+                updatedClothes.Category?.Clothes.Remove(_clothesListingItemViewModel.Clothes);
+                updatedClothes.Category?.Clothes.Add(updatedClothes);
+                updatedClothes.Season?.Clothes.Remove(_clothesListingItemViewModel.Clothes);
+                updatedClothes.Season?.Clothes.Add(updatedClothes);
 
                 try
                 {
-                    await _clothesStore.Update(clothes);
+                    await _clothesStore.Update(updatedClothes);
                 }
                 catch (Exception)
                 {
-                    _clothesListingItemViewModel.ErrorMessage = "Löschen der Größen ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    messageBoxText = $"Update der Bekleidung ist fehlgeschlagen!";
+                    caption = " Alle Bekleidungsgrößen löschen";
+                    button = MessageBoxButton.OK;
+                    icon = MessageBoxImage.Warning;
+                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
                 }
                 finally
                 {

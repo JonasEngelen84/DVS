@@ -13,13 +13,12 @@ namespace DVS.WPF.ViewModels.Views
         public AddEditCategoryViewModel(ModalNavigationStore modalNavigationStore,
                                         CategoryStore categoryStore,
                                         AddClothesViewModel addClothesViewModel,
-                                        UpdateClothesViewModel editClothesViewModel,
+                                        EditClothesViewModel editClothesViewModel,
                                         AddEditListingViewModel addEditListingViewModel)
         {
             ICommand addCategory = new AddCategoryCommand(this, categoryStore);
-            ICommand updateCategory = new UpdateCategoryCommand(this, categoryStore);
+            ICommand updateCategory = new EditCategoryCommand(this, categoryStore);
             ICommand deleteCategory = new DeleteCategoryCommand(this, categoryStore);
-            ICommand clearCategoryList = new ClearCategoryListCommand(this, categoryStore);
 
             CloseAddEditCategory = new CloseAddEditCategoryCommand(modalNavigationStore,
                                                                    addClothesViewModel,
@@ -28,7 +27,6 @@ namespace DVS.WPF.ViewModels.Views
             AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(addCategory,
                                                                             updateCategory,
                                                                             deleteCategory,
-                                                                            clearCategoryList,
                                                                             addEditListingViewModel)
             {
                 AddNewCategory = "Neue Kategorie",

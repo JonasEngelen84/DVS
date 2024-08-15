@@ -9,8 +9,8 @@ namespace DVS.Domain.Models
         public Guid SizeGuidID { get; } = size.GuidID;
         public SizeModel Size { get; } = size;
         public Clothes Clothes { get; } = clothes;
-        public int Quantity { get; set; } = quantity;
-        public string? Comment { get; set; } = "";
+        public int Quantity { get; } = quantity;
+        public string? Comment { get; } = "";
 
         public ObservableCollection<EmployeeClothesSize> EmployeeClothesSizes { get; set; } = [];
     }

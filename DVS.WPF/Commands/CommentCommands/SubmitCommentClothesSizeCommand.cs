@@ -2,11 +2,15 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
+using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace DVS.WPF.Commands.CommentCommands
 {
     public class SubmitCommentClothesSizeCommand(CommentClothesSizeViewModel commentClothesSizeViewModel,
-        ClothesStore clothesStore, ModalNavigationStore modalNavigationStore) : AsyncCommandBase
+                                                 ClothesStore clothesStore,
+                                                 ModalNavigationStore modalNavigationStore)
+                                                 : AsyncCommandBase
     {
         private readonly CommentClothesSizeViewModel _commentClothesSizeViewModel = commentClothesSizeViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
@@ -16,8 +20,12 @@ namespace DVS.WPF.Commands.CommentCommands
         {
             CommentClothesSizeFormViewModel commentClothesSizeFormViewModel = _commentClothesSizeViewModel.CommentClothesSizeFormViewModel;
 
-            commentClothesSizeFormViewModel.ErrorMessage = null;
             commentClothesSizeFormViewModel.IsSubmitting = true;
+
+            ClothesSize existingItem = commentClothesSizeFormViewModel.Clothes.Sizes
+                .FirstOrDefault(s => s.Size.Size == commentClothesSizeFormViewModel.Size);
+
+            existingItem.Comment = commentClothesSizeFormViewModel.Comment;
 
             Clothes updatedClothes = new(commentClothesSizeFormViewModel.Clothes.GuidID,
                                          commentClothesSizeFormViewModel.ID,
@@ -26,21 +34,21 @@ namespace DVS.WPF.Commands.CommentCommands
                                          commentClothesSizeFormViewModel.Clothes.Season,
                                          commentClothesSizeFormViewModel.Clothes.Comment)
             {
-                Sizes = commentClothesSizeFormViewModel.Clothes.Sizes
+                Sizes = new ObservableCollection<ClothesSize>(commentClothesSizeFormViewModel.Clothes.Sizes
+                .Select(s => new ClothesSize(s.Clothes, s.Size, s.Quantity) { Comment = s.Comment }))
             };
-
-            ClothesSize existingItem = updatedClothes.Sizes.FirstOrDefault(s => s.Size.Size == commentClothesSizeFormViewModel.Size);
-
+                        
             try
             {
-                existingItem.Comment = commentClothesSizeFormViewModel.Comment;
-
                 await _clothesStore.Update(updatedClothes);
             }
             catch (Exception)
             {
-                commentClothesSizeFormViewModel.ErrorMessage =
-                "Bearbeiten des Kommentar ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string messageBoxText = "Kommentieren der Bekleidungsgröße ist fehlgeschlagen";
+                string caption = "Bekleidungsgröße Kommentieren";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
             }
             finally
             {

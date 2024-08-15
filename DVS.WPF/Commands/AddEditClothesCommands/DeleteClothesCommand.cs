@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
-using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.ListViewItems;
 using System.Windows;
 
@@ -39,7 +38,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
                 try
                 {
-                    await _clothesStore.Delete(clothes.GuidID);
+                    await _clothesStore.Delete(clothes);
                 }
                 catch (Exception)
                 {

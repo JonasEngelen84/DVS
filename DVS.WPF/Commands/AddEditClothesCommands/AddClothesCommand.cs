@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
-using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
 
@@ -35,6 +34,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
                 : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
 
+            // ClothesSize-Instanzen den Listen von Clothes und SizeModel hinzufügen
             foreach (SizeModel size in selectedSizes)
             {
                 ClothesSize clothesSize = new(Guid.NewGuid(), clothes, size, size.Quantity);
@@ -43,6 +43,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 size.ClothesSizes.Add(clothesSize);
             }
 
+            // Erstellte Clothes-Instanz den Listen von category und saison hinzufügen
             clothes.Category?.Clothes.Add(clothes);
             clothes.Season?.Clothes.Add(clothes);
 

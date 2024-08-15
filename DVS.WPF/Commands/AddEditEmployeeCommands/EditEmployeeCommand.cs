@@ -7,10 +7,10 @@ using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
-    public class UpdateEmployeeCommand(UpdateEmployeeViewModel updateEmployeeViewModel, EmployeeStore employeeStore,
+    public class EditEmployeeCommand(EditEmployeeViewModel updateEmployeeViewModel, EmployeeStore employeeStore,
         ModalNavigationStore modalNavigationStore, Guid guiID) : AsyncCommandBase
     {
-        private readonly UpdateEmployeeViewModel _updateEmployeeViewModel = updateEmployeeViewModel;
+        private readonly EditEmployeeViewModel _updateEmployeeViewModel = updateEmployeeViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         private readonly Guid _guidID = guiID;

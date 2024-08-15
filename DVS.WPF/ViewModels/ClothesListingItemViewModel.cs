@@ -33,24 +33,6 @@ namespace DVS.WPF.ViewModels.ListViewItems
             }
         }
 
-        private string _errorMessage;
-        public string ErrorMessage
-        {
-            get
-            {
-                return _errorMessage;
-            }
-            set
-            {
-                if (value != _errorMessage)
-                {
-                    _errorMessage = value;
-                    OnPropertyChanged(nameof(ErrorMessage));
-                    OnPropertyChanged(nameof(HasErrorMessage));
-                }
-            }
-        }
-
         private bool _isExpanded;
         public bool IsExpanded
         {
@@ -64,8 +46,6 @@ namespace DVS.WPF.ViewModels.ListViewItems
                 }
             }
         }
-
-        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
         public ICommand OpenEditClothes { get; set; }
         public ICommand DeleteClothes { get; set; }

@@ -1,9 +1,9 @@
-﻿using DVS.Domain.Commands.Clothes;
+﻿using DVS.Domain.Commands.ClothesSize;
 using DVS.EntityFramework.DTOs;
 
-namespace DVS.EntityFramework.Commands.Clothes
+namespace DVS.EntityFramework.Commands.ClothesSize
 {
-    public class DeleteClothesCommand(DVSDbContextFactory contextFactory) : IDeleteClothesCommand
+    public class DeleteClothesSizeCommand(DVSDbContextFactory contextFactory) : IDeleteClothesSizeCommand
     {
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
@@ -11,12 +11,12 @@ namespace DVS.EntityFramework.Commands.Clothes
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            ClothesDTO clothesDTO = new()
+            ClothesSizeDTO clothesSizeDTO = new()
             {
                 GuidID = guidID
             };
 
-            context.Clothes.Remove(clothesDTO);
+            context.ClothesSizes.Remove(clothesSizeDTO);
             await context.SaveChangesAsync();
         }
     }

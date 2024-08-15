@@ -3,13 +3,13 @@ using DVS.EntityFramework.DTOs;
 
 namespace DVS.EntityFramework.Commands.Season
 {
-    public class DeleteSeasonCommand(DVSDbContextFactory dVSDbContextFactory) : IDeleteSeasonCommand
+    public class DeleteSeasonCommand(DVSDbContextFactory contextFactory) : IDeleteSeasonCommand
     {
-        private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
+        private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
         public async Task Execute(Guid guidID)
         {
-            using DVSDbContext context = _dVSDbContextFactory.Create();
+            using DVSDbContext context = _contextFactory.Create();
 
             SeasonDTO seasonDTO = new()
             {

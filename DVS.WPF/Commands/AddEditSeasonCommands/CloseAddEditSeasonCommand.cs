@@ -4,11 +4,11 @@ using DVS.WPF.ViewModels.Views;
 namespace DVS.WPF.Commands.AddEditSeasonCommands
 {
     public class CloseAddEditSeasonCommand(ModalNavigationStore modalNavigationStore,
-        AddClothesViewModel addClothesViewModel, UpdateClothesViewModel editClothesViewModel) : CommandBase
+        AddClothesViewModel addClothesViewModel, EditClothesViewModel editClothesViewModel) : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         private readonly AddClothesViewModel _addClothesViewModel = addClothesViewModel;
-        private readonly UpdateClothesViewModel _editClothesViewModel = editClothesViewModel;
+        private readonly EditClothesViewModel _editClothesViewModel = editClothesViewModel;
 
         public override void Execute(object parameter)
         {

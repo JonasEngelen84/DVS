@@ -24,12 +24,12 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
         {
             Clothes _clothes = _clothesListingItemViewModel.Clothes;
 
-            UpdateClothesViewModel EditClothesViewModel = new(_clothes,
-                                                            _modalNavigationStore,
-                                                            _sizeStore,
-                                                            _categoryStore,
-                                                            _seasonStore,
-                                                            _clothesStore);
+            EditClothesViewModel EditClothesViewModel = new(_clothes,
+                                                              _modalNavigationStore,
+                                                              _sizeStore,
+                                                              _categoryStore,
+                                                              _seasonStore,
+                                                              _clothesStore);
 
             _modalNavigationStore.CurrentViewModel = EditClothesViewModel;
         }

@@ -26,16 +26,16 @@
             <views:AddClothesView />
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type vms:UpdateClothesViewModel}">
-            <views:UpdateClothesView />
+        <DataTemplate DataType="{x:Type vms:EditClothesViewModel}">
+            <views:EditClothesView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type vms:AddEmployeeViewModel}">
             <views:AddEmployeeView />
         </DataTemplate>
         
-        <DataTemplate DataType="{x:Type vms:UpdateEmployeeViewModel}">
-            <views:UpdateEmployeeView />
+        <DataTemplate DataType="{x:Type vms:EditEmployeeViewModel}">
+            <views:EditEmployeeView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type vms:AddEditCategoryViewModel}">
@@ -153,10 +153,8 @@
 
             <views:DVSHeadView x:Name="HeadView"
                                Grid.Row="1"
-                               Margin="0,3,0,0"/>
+                               Margin="0,3,0,0" />
 
         </Grid>
     </Border>
-
-
 </Window>

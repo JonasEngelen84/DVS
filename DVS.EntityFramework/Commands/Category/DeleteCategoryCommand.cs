@@ -3,13 +3,13 @@ using DVS.EntityFramework.DTOs;
 
 namespace DVS.EntityFramework.Commands.Category
 {
-    public class DeleteCategoryCommand(DVSDbContextFactory dVSDbContextFactory) : IDeleteCategoryCommand
+    public class DeleteCategoryCommand(DVSDbContextFactory contextFactory) : IDeleteCategoryCommand
     {
-        private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
+        private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
         public async Task Execute(Guid guidID)
         {
-            using DVSDbContext context = _dVSDbContextFactory.Create();
+            using DVSDbContext context = _contextFactory.Create();
 
             CategoryDTO categoryDTO = new()
             {

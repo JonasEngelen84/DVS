@@ -34,7 +34,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
                 try
                 {
-                    await _employeeStore.Delete(employee.GuidID);
+                    await _employeeStore.Delete(employee);
                 }
                 catch (Exception)
                 {

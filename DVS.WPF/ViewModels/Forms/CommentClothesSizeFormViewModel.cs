@@ -14,15 +14,13 @@ namespace DVS.WPF.ViewModels.Forms
 
         public bool HasSelectedDetailedClothesListingItem => SelectedDetailedClothesItem != null;
         public Clothes Clothes => SelectedDetailedClothesItem.Clothes;
-        public ClothesSize? ClothesSize => SelectedDetailedClothesItem.ClothesSize;
+        public ClothesSize ClothesSize => SelectedDetailedClothesItem.ClothesSize;
         public string ID => SelectedDetailedClothesItem.ID;
         public string Name => SelectedDetailedClothesItem.Name;
         public string Category => SelectedDetailedClothesItem.Category;
         public string Season => SelectedDetailedClothesItem.Season;
-
-
-        public string? Size => SelectedDetailedClothesItem.Size;
-        public int? Quantity => SelectedDetailedClothesItem.Quantity;
+        public string Size => SelectedDetailedClothesItem.Size;
+        public int Quantity => (int)SelectedDetailedClothesItem.Quantity;
 
         private string? _comment;
         public string? Comment
@@ -52,23 +50,6 @@ namespace DVS.WPF.ViewModels.Forms
                 OnPropertyChanged(nameof(IsSubmitting));
             }
         }
-
-        private string _errorMessage;
-        public string ErrorMessage
-        {
-            get
-            {
-                return _errorMessage;
-            }
-            set
-            {
-                _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
-                OnPropertyChanged(nameof(HasErrorMessage));
-            }
-        }
-
-        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
 
         public bool CanSubmit => !Comment.Equals(ClothesSize.Comment);
 

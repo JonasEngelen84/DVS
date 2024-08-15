@@ -6,16 +6,16 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Views
 {
-    public class UpdateEmployeeViewModel : ViewModelBase
+    public class EditEmployeeViewModel : ViewModelBase
     {
         public AddEditEmployeeFormViewModel AddEditEmployeeFormViewModel { get; }
         public ICommand CloseAddEditEmployee { get; }
 
 
-        public UpdateEmployeeViewModel(Employee employee, EmployeeStore employeeStore, ClothesStore clothesStore,
+        public EditEmployeeViewModel(Employee employee, EmployeeStore employeeStore, ClothesStore clothesStore,
             ModalNavigationStore modalNavigationStore, DVSListingViewModel dVSListingViewModel)
         {
-            ICommand editEmployee = new UpdateEmployeeCommand(this, employeeStore, modalNavigationStore, employee.GuidID);
+            ICommand editEmployee = new EditEmployeeCommand(this, employeeStore, modalNavigationStore, employee.GuidID);
             CloseAddEditEmployee = new CloseAddEditEmployeeCommand(clothesStore, modalNavigationStore);
 
             AddEditEmployeeFormViewModel = new(employee, dVSListingViewModel, editEmployee)

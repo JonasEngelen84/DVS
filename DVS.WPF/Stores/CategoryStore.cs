@@ -15,7 +15,7 @@ namespace DVS.WPF.Stores
         private readonly IUpdateCategoryCommand _updateCategoryCommand = updateCategoryCommand;
         private readonly IDeleteCategoryCommand _deleteCategoryCommand = deleteCategoryCommand;
 
-        private readonly List<Category> _categories = [new(Guid.NewGuid(), "TestKategorie")];
+        private readonly List<Category> _categories = [new(Guid.NewGuid(), "OHNE")];
         public IEnumerable<Category> Categories => _categories;
 
         public event Action CategoriesLoaded;
@@ -84,19 +84,6 @@ namespace DVS.WPF.Stores
             else
             {
                 throw new InvalidOperationException("Löschen der Kategorie nicht möglich.");
-            }
-        }
-
-        public async Task ClearCategories(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            if (_categories != null)
-            {
-                _categories.Clear();
-                AllCategoriesDeleted.Invoke(addEditCategoryFormViewModel);
-            }
-            else
-            {
-                throw new InvalidOperationException("Löschen aller Kategorien nicht möglich.");
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditCategoryCommands
 {
-    public class UpdateCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
+    public class EditCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
     {
         private readonly AddEditCategoryViewModel _addEditCategoryViewModel = addEditCategoryViewModel;
         private readonly CategoryStore _categoryStore = categoryStore;

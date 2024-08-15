@@ -1,18 +1,25 @@
 ﻿using DVS.Domain.Commands.Clothes;
+using DVS.Domain.Commands.ClothesSize;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
 
 namespace DVS.WPF.Stores
 {
     public class ClothesStore(IGetAllClothesQuery getAllClothesQuery,
-                              ICreateClothesCommand CreateClothesCommand,
-                              IUpdateClothesCommand UpdateClothesCommand,
-                              IDeleteClothesCommand DeleteClothesCommand)
+                              ICreateClothesCommand createClothesCommand,
+                              IUpdateClothesCommand updateClothesCommand,
+                              IDeleteClothesCommand deleteClothesCommand,
+                              ICreateClothesSizeCommand createClothesSizeCommand,
+                              IUpdateClothesSizeCommand updateClothesSizeCommand,
+                              IDeleteClothesSizeCommand deleteClothesSizeCommand)
     {
         private readonly IGetAllClothesQuery _getAllClothesQuery = getAllClothesQuery;
-        private readonly ICreateClothesCommand _createClothesCommand = CreateClothesCommand;
-        private readonly IUpdateClothesCommand _updateClothesCommand = UpdateClothesCommand;
-        private readonly IDeleteClothesCommand _deleteClothesCommand = DeleteClothesCommand;
+        private readonly ICreateClothesCommand _createClothesCommand = createClothesCommand;
+        private readonly IUpdateClothesCommand _updateClothesCommand = updateClothesCommand;
+        private readonly IDeleteClothesCommand _deleteClothesCommand = deleteClothesCommand;
+        private readonly ICreateClothesSizeCommand _createClothesSizeCommand = createClothesSizeCommand;
+        private readonly IUpdateClothesSizeCommand _updateClothesSizeCommand = updateClothesSizeCommand;
+        private readonly IDeleteClothesSizeCommand _deleteClothesSizeCommand = deleteClothesSizeCommand;
 
         private readonly List<Clothes> _clothes = [];
         public IEnumerable<Clothes> Clothes => _clothes;
@@ -47,6 +54,12 @@ namespace DVS.WPF.Stores
         public async Task Add(Clothes clothes)
         {
             //await _createClothesCommand.Execute(clothes);
+
+            //foreach (var clothesSize in clothes.Sizes)
+            //{
+            //    AddClothesSize(clothesSize);
+            //}
+
             _clothes.Add(clothes);
             ClothesAdded.Invoke(clothes);
         }
@@ -54,6 +67,11 @@ namespace DVS.WPF.Stores
         public async Task Update(Clothes clothes)
         {
             //await _updateClothesCommand.Execute(clothes);
+
+            //foreach (var clothesSize in clothes.Sizes)
+            //{
+            //    UpdateClothesSize(clothesSize);
+            //}
 
             int index = _clothes.FindIndex(y => y.GuidID == clothes.GuidID);
 
@@ -69,14 +87,20 @@ namespace DVS.WPF.Stores
             ClothesUpdated.Invoke(clothes);
         }
 
-        public async Task Delete(Guid guidID)
+        public async Task Delete(Clothes clothes)
         {
-            //await _deleteClothesCommand.Execute(guidID);
+            //await _deleteClothesCommand.Execute(clothes.GuidID);
 
-            _clothes.RemoveAll(y => y.GuidID == guidID);
-            ClothesDeleted?.Invoke(guidID);
+            //foreach (var clothesSize in clothes.Sizes)
+            //{
+            //    DeleteClothesSize(clothesSize.guidID);
+            //}
+
+            _clothes.RemoveAll(y => y.GuidID == clothes.GuidID);
+            ClothesDeleted?.Invoke(clothes.GuidID);
         }
         
+
         public async Task DragNDropUpdate(Clothes clothes)
         {           
             int index = _clothes.FindIndex(y => y.GuidID == clothes.GuidID);
@@ -91,6 +115,22 @@ namespace DVS.WPF.Stores
             }
 
             ClothesUpdated.Invoke(clothes);
+        }
+
+
+        public async Task AddClothesSize(ClothesSize clothesSize)
+        {
+            //await _createClothesSizeCommand.Execute(clothesSize);
+        }
+
+        public async Task UpdateClothesSize(ClothesSize clothesSize)
+        {
+            //await _updateClothesSizeCommand.Execute(clothesSize);
+        }
+
+        public async Task DeleteClothesSize(Guid guidID)
+        {
+            //await _deleteClothesSizeCommand.Execute(guidID);
         }
     }
 }

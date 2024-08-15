@@ -3,15 +3,16 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class AddEditCategoryFormViewModel(ICommand addCategoryCommand, ICommand updateCategoryCommand,
-        ICommand deleteCategoryCommand, ICommand clearCategoryListCommand,
-        AddEditListingViewModel addEditListingViewModel) : ViewModelBase
+    public class AddEditCategoryFormViewModel(ICommand addCategoryCommand,
+                                              ICommand updateCategoryCommand,
+                                              ICommand deleteCategoryCommand,
+                                              AddEditListingViewModel addEditListingViewModel)
+                                              : ViewModelBase
     {
         public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
         public ICommand AddCategory { get; } = addCategoryCommand;
         public ICommand UpdateCategory { get; } = updateCategoryCommand;
         public ICommand DeleteCategory { get; } = deleteCategoryCommand;
-        public ICommand ClearCategoryList { get; } = clearCategoryListCommand;
 
         private string _addNewCategory;
         public string AddNewCategory
@@ -92,12 +93,6 @@ namespace DVS.WPF.ViewModels.Forms
             !SelectedCategory.Name.Equals(UpdateSelectedCategory);
 
         public bool CanDelete => !SelectedCategory.Name.Equals("Kategorie wählen");
-        public bool CanDeleteAll => !AddEditListingViewModel.Categories.IsEmpty;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
-
-        public void CategoryCollectionChanged()
-        {
-            OnPropertyChanged(nameof(CanDeleteAll));
-        }
     }
 }

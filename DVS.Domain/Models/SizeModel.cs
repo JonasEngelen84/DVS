@@ -6,9 +6,9 @@ namespace DVS.Domain.Models
     {
         public Guid GuidID { get; } = guidID;
         public string Size { get; } = size;
-        public int Quantity { get; set; } = 0;
+        public int Quantity { get; } = 0;
         public bool IsSizeSystemEU { get; } = system;
-        public bool IsSelected { get; set; } = false;
+        public bool IsSelected { get; } = false;
 
         public ObservableCollection<ClothesSize> ClothesSizes { get; set; } = [];
     }

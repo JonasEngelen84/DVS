@@ -3,15 +3,16 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class AddEditSeasonFormViewModel(ICommand addSeasonCommand, ICommand updateSeasonCommand,
-        ICommand deleteSeasonCommand, ICommand clearSeasonListCommand,
-        AddEditListingViewModel addEditListingViewModel) : ViewModelBase
+    public class AddEditSeasonFormViewModel(ICommand addSeasonCommand,
+                                            ICommand updateSeasonCommand,
+                                            ICommand deleteSeasonCommand,
+                                            AddEditListingViewModel addEditListingViewModel)
+                                            : ViewModelBase
     {
         public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
         public ICommand AddSeason { get; } = addSeasonCommand;
         public ICommand UpdateSeason { get; } = updateSeasonCommand;
         public ICommand DeleteSeason { get; } = deleteSeasonCommand;
-        public ICommand ClearSeasonList { get; } = clearSeasonListCommand;
 
         private string _addNewSeason;
         public string AddNewSeason
@@ -92,12 +93,6 @@ namespace DVS.WPF.ViewModels.Forms
             !SelectedSeason.Name.Equals(UpdateSelectedSeason);
 
         public bool CanDelete => !SelectedSeason.Name.Equals("Saison wählen");
-        public bool CanDeleteAll => !AddEditListingViewModel.Seasons.IsEmpty;
         public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
-
-        public void SeasonCollectionChanged()
-        {
-            OnPropertyChanged(nameof(CanDeleteAll));
-        }
     }
 }

@@ -7,14 +7,14 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
     public class OpenAddEditSeasonsCommand(ModalNavigationStore modalNavigationStore,
                                            SeasonStore seasonStore,
                                            AddClothesViewModel addClothesViewModel,
-                                           UpdateClothesViewModel editClothesViewModel,
+                                           EditClothesViewModel editClothesViewModel,
                                            AddEditListingViewModel addEditListingViewModel)
                                            : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         private readonly SeasonStore _seasonStore = seasonStore;
         private readonly AddClothesViewModel _addClothesViewModel = addClothesViewModel;
-        private readonly UpdateClothesViewModel _editClothesViewModel = editClothesViewModel;
+        private readonly EditClothesViewModel _editClothesViewModel = editClothesViewModel;
         private readonly AddEditListingViewModel _addEditListingViewModel = addEditListingViewModel;
 
         public override void Execute(object parameter)

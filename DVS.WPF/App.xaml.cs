@@ -1,12 +1,16 @@
 ﻿using DVS.Domain.Commands.Category;
 using DVS.Domain.Commands.Clothes;
+using DVS.Domain.Commands.ClothesSize;
 using DVS.Domain.Commands.Employee;
+using DVS.Domain.Commands.EmployeeClothesSize;
 using DVS.Domain.Commands.Season;
 using DVS.Domain.Queries;
 using DVS.EntityFramework;
 using DVS.EntityFramework.Commands.Category;
 using DVS.EntityFramework.Commands.Clothes;
+using DVS.EntityFramework.Commands.ClothesSize;
 using DVS.EntityFramework.Commands.Employee;
+using DVS.EntityFramework.Commands.EmployeeClothesSize;
 using DVS.EntityFramework.Commands.Season;
 using DVS.EntityFramework.Queries;
 using DVS.WPF.Stores;
@@ -37,7 +41,6 @@ namespace DVS.WPF
         private readonly ICreateCategoryCommand _createCategoryCommand;
         private readonly IUpdateCategoryCommand _updateCategoryCommand;
         private readonly IDeleteCategoryCommand _deleteCategoryCommand;
-        private readonly IClearCategoriesCommand _clearCategoriesCommand;
 
         private readonly IGetAllSeasonsQuery _getAllSeasonsQuery;
         private readonly ICreateSeasonCommand _createSeasonCommand;
@@ -54,6 +57,14 @@ namespace DVS.WPF
         private readonly IUpdateEmployeeCommand _updateEmployeeCommand;
         private readonly IDeleteEmployeeCommand _deleteEmployeeCommand;
 
+        private readonly ICreateClothesSizeCommand _createClothesSizeCommand;
+        private readonly IUpdateClothesSizeCommand _updateClothesSizeCommand;
+        private readonly IDeleteClothesSizeCommand _deleteClothesSizeCommand;
+
+        private readonly ICreateEmployeeClothesSizeCommand _createEmployeeClothesSizeCommand;
+        private readonly IUpdateEmployeeClothesSizeCommand _updateEmployeeClothesSizeCommand;
+        private readonly IDeleteEmployeeClothesSizeCommand _deleteEmployeeClothesSizeCommand;
+
         private readonly IGetAllSizesQuery _getAllSizesQuery;
 
         public App()
@@ -65,7 +76,6 @@ namespace DVS.WPF
             _createCategoryCommand = new CreateCategoryCommand(_dVSDbContextFactory);
             _updateCategoryCommand = new UpdateCategoryCommand(_dVSDbContextFactory);
             _deleteCategoryCommand = new DeleteCategoryCommand(_dVSDbContextFactory);
-            _clearCategoriesCommand = new ClearCategoriesCommand(_dVSDbContextFactory);
 
             _getAllSeasonsQuery = new GetAllSeasonsQuery(_dVSDbContextFactory);
             _createSeasonCommand = new CreateSeasonCommand(_dVSDbContextFactory);
@@ -82,16 +92,47 @@ namespace DVS.WPF
             _updateEmployeeCommand = new UpdateEmployeeCommand(_dVSDbContextFactory);
             _deleteEmployeeCommand = new DeleteEmployeeCommand(_dVSDbContextFactory);
 
-            _getAllSizesQuery = new GetAllSizesQuery(_dVSDbContextFactory);
+            _createClothesSizeCommand = new CreateClothesSizeCommand(_dVSDbContextFactory);
+            _updateClothesSizeCommand = new UpdateClothesSizeCommand(_dVSDbContextFactory);
+            _deleteClothesSizeCommand = new DeleteClothesSizeCommand(_dVSDbContextFactory);
 
-            _categoryStore = new(_getAllCategoriesQuery, _createCategoryCommand, _updateCategoryCommand, _deleteCategoryCommand);
-            _seasonStore = new(_getAllSeasonsQuery, _createSeasonCommand, _updateSeasonCommand, _deleteSeasonsCommand);
-            _clothesStore = new(_getAllClothesQuery, _createClothesCommand, _updateClothesCommand, _deleteClothesCommand);
-            _employeeStore = new(_getAllEmployeesQuery, _createEmployeeCommand, _updateEmployeeCommand, _deleteEmployeeCommand);
-            _sizeStore = new(_getAllSizesQuery);
+            _createEmployeeClothesSizeCommand = new CreateEmployeeClothesSizeCommand(_dVSDbContextFactory);
+            _updateEmployeeClothesSizeCommand = new UpdateEmployeeClothesSizeCommand(_dVSDbContextFactory);
+            _deleteEmployeeClothesSizeCommand = new DeleteEmployeeClothesSizeCommand(_dVSDbContextFactory);
+
+            _getAllSizesQuery = new GetAllSizesQuery(_dVSDbContextFactory);
+            
             _modalNavigationStore = new();
             _selectedDetailedClothesItemStore = new();
             _selectedDetailedEmployeeClothesItemStore = new();
+                        
+            _sizeStore = new(_getAllSizesQuery);
+
+            _categoryStore = new(_getAllCategoriesQuery,
+                                 _createCategoryCommand,
+                                 _updateCategoryCommand,
+                                 _deleteCategoryCommand);
+            
+            _seasonStore = new(_getAllSeasonsQuery,
+                               _createSeasonCommand,
+                               _updateSeasonCommand,
+                               _deleteSeasonsCommand);
+
+            _clothesStore = new(_getAllClothesQuery,
+                                _createClothesCommand,
+                                _updateClothesCommand,
+                                _deleteClothesCommand,
+                                _createClothesSizeCommand,
+                                _updateClothesSizeCommand,
+                                _deleteClothesSizeCommand);
+
+            _employeeStore = new(_getAllEmployeesQuery,
+                                 _createEmployeeCommand,
+                                 _updateEmployeeCommand,
+                                 _deleteEmployeeCommand,
+                                 _createEmployeeClothesSizeCommand,
+                                 _updateEmployeeClothesSizeCommand,
+                                 _deleteEmployeeClothesSizeCommand);
 
             _dVSListingViewModel = new(_sizeStore, 
                                        _clothesStore,
@@ -119,8 +160,8 @@ namespace DVS.WPF
                                     _seasonStore,
                                     _clothesStore,
                                     _employeeStore);
-        }
 
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
