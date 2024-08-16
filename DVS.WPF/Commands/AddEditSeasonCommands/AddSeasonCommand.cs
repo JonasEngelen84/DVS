@@ -2,6 +2,7 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
+using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditSeasonCommands
 {
@@ -13,7 +14,7 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditSeasonFormViewModel addEditSeasonFormViewModel = _addEditSeasonViewModel.AddEditSeasonFormViewModel;
-            addEditSeasonFormViewModel.ErrorMessage = null;
+            addEditSeasonFormViewModel.HasError = false;
             addEditSeasonFormViewModel.IsSubmitting = true;
 
             Season newSeason = new(Guid.NewGuid(), addEditSeasonFormViewModel.AddNewSeason);
@@ -24,7 +25,13 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
             }
             catch (Exception)
             {
-                addEditSeasonFormViewModel.ErrorMessage = "Erstellen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string messageBoxText = "Erstellen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string caption = "Saison erstellen";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                addEditSeasonFormViewModel.HasError = true;
             }
             finally
             {

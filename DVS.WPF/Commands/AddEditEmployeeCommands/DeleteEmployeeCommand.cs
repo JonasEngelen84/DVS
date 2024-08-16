@@ -22,7 +22,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
             if (dialog == MessageBoxResult.Yes)
             {
-                _employeeListingItemViewModel.ErrorMessage = null;
+                _employeeListingItemViewModel.HasError = false;
                 _employeeListingItemViewModel.IsDeleting = true;
 
                 Employee employee = _employeeListingItemViewModel.Employee;
@@ -38,7 +38,13 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 }
                 catch (Exception)
                 {
-                    _employeeListingItemViewModel.ErrorMessage = "Löschen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    messageBoxText = "Löschen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    caption = " Mitarbeiter löschen";
+                    button = MessageBoxButton.OK;
+                    icon = MessageBoxImage.Warning;
+                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                    _employeeListingItemViewModel.HasError = true;
                 }
                 finally
                 {

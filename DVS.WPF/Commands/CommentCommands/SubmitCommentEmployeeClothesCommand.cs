@@ -2,6 +2,9 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
+using System.Windows.Controls;
+using System.Windows;
+using System;
 
 namespace DVS.WPF.Commands.CommentCommands
 {
@@ -18,7 +21,7 @@ namespace DVS.WPF.Commands.CommentCommands
         {
             CommentEmployeeClothesFormViewModel commentEmployeeClothesFormViewModel = _commentEmployeeClothesViewModel.CommentEmployeeClothesFormViewModel;
             
-            commentEmployeeClothesFormViewModel.ErrorMessage = null;
+            commentEmployeeClothesFormViewModel.HasError = false;
             commentEmployeeClothesFormViewModel.IsSubmitting = true;
 
             Employee employeeToEdit = new(commentEmployeeClothesFormViewModel.Employee.GuidID,
@@ -35,7 +38,13 @@ namespace DVS.WPF.Commands.CommentCommands
 
             if (existingItem == null)
             {
-                commentEmployeeClothesFormViewModel.ErrorMessage = "Bearbeiten des Kommentar ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string messageBoxText = $"Kommentieren der Bekleidungsgröße ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string caption = " Bekleidungsgröße kommentieren";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                commentEmployeeClothesFormViewModel.HasError = true;
             }
             else
             {

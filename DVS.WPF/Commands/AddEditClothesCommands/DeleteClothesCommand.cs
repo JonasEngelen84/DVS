@@ -5,14 +5,16 @@ using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditClothesCommands
 {
-    public class DeleteClothesCommand(ClothesListingItemViewModel clothesListingItemViewModel,
-        ClothesStore clothesStore) : AsyncCommandBase
+    public class DeleteClothesCommand(ClothesListingItemViewModel clothesListingItemViewModel, ClothesStore clothesStore) : AsyncCommandBase
     {
         private readonly ClothesListingItemViewModel _clothesListingItemViewModel = clothesListingItemViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
 
         public override async Task ExecuteAsync(object parameter)
         {
+            _clothesListingItemViewModel.HasError = false;
+            _clothesListingItemViewModel.IsDeleting = true;
+
             string messageBoxText = $"Die Bekleidung  \"{_clothesListingItemViewModel.Name}\"  wird gelöscht!" +
                 $"\nDie Kleidungsstücke, dieser Bekleidung, bleiben den Mitarbeitern erhalten." +
                 $"\n\nLöschen fortsetzen?";
@@ -23,9 +25,6 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
             if (dialog == MessageBoxResult.Yes)
             {
-                _clothesListingItemViewModel.ErrorMessage = null;
-                _clothesListingItemViewModel.IsDeleting = true;
-
                 Clothes clothes = _clothesListingItemViewModel.Clothes;
 
                 foreach (ClothesSize size in clothes.Sizes)
@@ -42,7 +41,13 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 }
                 catch (Exception)
                 {
-                    _clothesListingItemViewModel.ErrorMessage = "Löschen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    messageBoxText = $"Bearbeiten der Bekleidung ist fehlgeschlagen!";
+                    caption = " Bekleidung bearbeiten";
+                    button = MessageBoxButton.OK;
+                    icon = MessageBoxImage.Warning;
+                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                    _clothesListingItemViewModel.HasError = true;
                 }
                 finally
                 {

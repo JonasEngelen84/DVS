@@ -154,7 +154,7 @@ namespace DVS.WPF.ViewModels
             if (existingItem == null)
             {
                 clothes.Sizes.Add(new ClothesSize(Guid.NewGuid(), clothes, IncomingClothesListingItemModel.Clothes.Sizes
-                    .FirstOrDefault(y => y.GuidID == IncomingClothesListingItemModel.ClothesSizeGuidID).Size, 1));
+                    .FirstOrDefault(y => y.GuidID == IncomingClothesListingItemModel.ClothesSizeGuidID).Size, 1, null));
 
                 DetailedClothesListingItemViewModel newItem = new(clothes, IncomingClothesListingItemModel.ClothesSize);
                 _newEmployeeListingItemCollection.Add(newItem);

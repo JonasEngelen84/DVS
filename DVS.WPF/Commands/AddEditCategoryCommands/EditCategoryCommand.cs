@@ -14,20 +14,19 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
+            addEditCategoryFormViewModel.HasError = false;
+            addEditCategoryFormViewModel.IsSubmitting = true;
 
             string messageBoxText = $"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
-                    $"\"{addEditCategoryFormViewModel.UpdateSelectedCategory}\" umbenannt.\n\nUmbennen fortsetzen?";
-            string caption = "Kategorie umbenennen";
+                    $"\"{addEditCategoryFormViewModel.EditSelectedCategory}\" umbenannt.\n\nUmbennen fortsetzen?";
+            string caption = "Kategorie bearbeiten";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
 
             if (dialog == MessageBoxResult.Yes)
             {
-                addEditCategoryFormViewModel.ErrorMessage = null;
-                addEditCategoryFormViewModel.IsSubmitting = true;
-
-                Category updatedCategory = new(addEditCategoryFormViewModel.SelectedCategory.GuidID, addEditCategoryFormViewModel.UpdateSelectedCategory);
+                Category updatedCategory = new(addEditCategoryFormViewModel.SelectedCategory.GuidID, addEditCategoryFormViewModel.EditSelectedCategory);
 
                 try
                 {
@@ -35,7 +34,13 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
                 }
                 catch (Exception)
                 {
-                    addEditCategoryFormViewModel.ErrorMessage = "Umbenennen der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    messageBoxText = "Bearbeiten der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    caption = "Kategorie bearbeiten";
+                    button = MessageBoxButton.OK;
+                    icon = MessageBoxImage.Warning;
+                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                    addEditCategoryFormViewModel.HasError = true;
                 }
                 finally
                 {

@@ -2,6 +2,7 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
+using DVS.WPF.ViewModels.ListViewItems;
 using DVS.WPF.ViewModels.Views;
 using System.Windows;
 
@@ -27,7 +28,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             {
                 AddEditEmployeeFormViewModel updateEmployeeFormViewModel = _updateEmployeeViewModel.AddEditEmployeeFormViewModel;
 
-                updateEmployeeFormViewModel.ErrorMessage = null;
+                updateEmployeeFormViewModel.HasError = false;
                 updateEmployeeFormViewModel.IsSubmitting = true;
 
                 Employee updatedEmployee = new(_guidID,
@@ -47,8 +48,8 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 foreach (DetailedClothesListingItemViewModel item in updateEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
                 {
                     var existingClothes = item.Clothes.Sizes.FirstOrDefault(s => s.Size.Equals(item.Clothes.Sizes));
-                    existingClothes.EmployeeClothesSizes.Add(new EmployeeClothesSize(Guid.NewGuid(), updatedEmployee, existingClothes, (int)item.Quantity));
-                    updatedEmployee.Clothes.Add(new EmployeeClothesSize(Guid.NewGuid(), updatedEmployee, existingClothes, (int)item.Quantity));
+                    existingClothes.EmployeeClothesSizes.Add(new EmployeeClothesSize(Guid.NewGuid(), updatedEmployee, existingClothes, (int)item.Quantity, item.Comment));
+                    updatedEmployee.Clothes.Add(new EmployeeClothesSize(Guid.NewGuid(), updatedEmployee, existingClothes, (int)item.Quantity, item.Comment));
                 }
 
                 try
@@ -57,7 +58,13 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 }
                 catch (Exception)
                 {
-                    updateEmployeeFormViewModel.ErrorMessage = "Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    messageBoxText = "Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    caption = " Mitarbeiter bearbeiten";
+                    button = MessageBoxButton.OK;
+                    icon = MessageBoxImage.Warning;
+                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                    updateEmployeeFormViewModel.HasError = true;
                 }
                 finally
                 {

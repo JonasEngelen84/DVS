@@ -153,7 +153,7 @@ namespace DVS.WPF.ViewModels
                 _seasons[index] = season;
                 _seasonCollectionViewSource.View.Refresh();
                 addEditSeasonFormViewModel.SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
-                addEditSeasonFormViewModel.UpdateSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
+                addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
                 OnPropertyChanged(nameof(addEditSeasonFormViewModel.CanEdit));
             }
             else
@@ -171,7 +171,7 @@ namespace DVS.WPF.ViewModels
                 _seasons.Remove(seasonToDelete);
                 _seasonCollectionViewSource.View.Refresh();
                 addEditSeasonFormViewModel.SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
-                addEditSeasonFormViewModel.UpdateSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
+                addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
             }
             else
             {
@@ -207,7 +207,7 @@ namespace DVS.WPF.ViewModels
                 _categories[index] = category;
                 _categoryCollectionViewSource.View.Refresh();
                 addEditCategoryFormViewModel.SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen");
-                addEditCategoryFormViewModel.UpdateSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
+                addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
                 OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanEdit));
             }
             else
@@ -225,7 +225,7 @@ namespace DVS.WPF.ViewModels
                 _categories.Remove(categoryToDelete);
                 _categoryCollectionViewSource.View.Refresh();
                 addEditCategoryFormViewModel.SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen");
-                addEditCategoryFormViewModel.UpdateSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
+                addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
             }
             else
             {

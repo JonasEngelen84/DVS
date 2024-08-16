@@ -16,14 +16,14 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             string messageBoxText = $"Die gesamte Kleidungsliste des Mitarbeiters  " +
                 $"{_employeeListingItemViewModel.Lastname}, {_employeeListingItemViewModel.Firstname}  " +
                 $"wird gelöscht!\n\nLöschen fortsetzen?";
-            string caption = "Kleidungsliste löschen";
+            string caption = "Alle Bekleidungen löschen";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
 
             if (dialog == MessageBoxResult.Yes)
             {
-                _employeeListingItemViewModel.ErrorMessage = null;
+                _employeeListingItemViewModel.HasError = false;
                 _employeeListingItemViewModel.IsDeleting = true;
 
                 Employee employee = _employeeListingItemViewModel.Employee;
@@ -41,7 +41,13 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 }
                 catch (Exception)
                 {
-                    _employeeListingItemViewModel.ErrorMessage = "Löschen der Kleidungsliste ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    messageBoxText = $"Löschen aller Bekleidungen ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    caption = " Alle Bekleidungen löschen";
+                    button = MessageBoxButton.OK;
+                    icon = MessageBoxImage.Warning;
+                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                    _employeeListingItemViewModel.HasError = true;
                 }
                 finally
                 {

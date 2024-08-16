@@ -14,8 +14,11 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
+            addEditCategoryFormViewModel.HasError = false;
+            addEditCategoryFormViewModel.IsDeleting = true;
 
-            string messageBoxText = $"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden gelöscht.\n\nLöschen fortsetzen?";
+            string messageBoxText = $"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}" +
+                $"\" und ihre Schnittstellen werden gelöscht.\n\nLöschen fortsetzen?";
             string caption = "Kategorie löschen";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
@@ -23,20 +26,23 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
 
             if (dialog == MessageBoxResult.Yes)
             {
-                addEditCategoryFormViewModel.ErrorMessage = null;
-                addEditCategoryFormViewModel.IsSubmitting = true;
-
                 try
                 {
                     await _categoryStore.Delete((Guid)addEditCategoryFormViewModel.SelectedCategory.GuidID, addEditCategoryFormViewModel);
                 }
                 catch (Exception)
                 {
-                    addEditCategoryFormViewModel.ErrorMessage = "Löschen der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    messageBoxText = "Löschen der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    caption = "Kategorie löschen";
+                    button = MessageBoxButton.OK;
+                    icon = MessageBoxImage.Warning;
+                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                    addEditCategoryFormViewModel.HasError = true;
                 }
                 finally
                 {
-                    addEditCategoryFormViewModel.IsSubmitting = false;
+                    addEditCategoryFormViewModel.IsDeleting = false;
                 }
             }
         }

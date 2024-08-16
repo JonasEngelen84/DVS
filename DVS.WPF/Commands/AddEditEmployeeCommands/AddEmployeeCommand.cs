@@ -3,6 +3,9 @@ using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
+using System.Windows.Controls;
+using System.Windows;
+using System;
 
 namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
@@ -17,7 +20,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         {
             AddEditEmployeeFormViewModel addEmployeeFormViewModel = _addEmployeeViewModel.AddEditEmployeeFormViewModel;
 
-            addEmployeeFormViewModel.ErrorMessage = null;
+            addEmployeeFormViewModel.HasError = false;
             addEmployeeFormViewModel.IsSubmitting = true;
 
             Employee employee = new(Guid.NewGuid(),
@@ -28,8 +31,8 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
             foreach (DetailedClothesListingItemViewModel item in addEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
             {
-                item.ClothesSize.EmployeeClothesSizes.Add(new EmployeeClothesSize(Guid.NewGuid(), employee, item.ClothesSize, (int)item.Quantity));
-                employee.Clothes.Add(new EmployeeClothesSize(Guid.NewGuid(), employee, item.ClothesSize, (int)item.Quantity));
+                item.ClothesSize.EmployeeClothesSizes.Add(new EmployeeClothesSize(Guid.NewGuid(), employee, item.ClothesSize, (int)item.Quantity, null));
+                employee.Clothes.Add(new EmployeeClothesSize(Guid.NewGuid(), employee, item.ClothesSize, (int)item.Quantity, null));
             }
 
             try
@@ -38,7 +41,13 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             }
             catch (Exception)
             {
-                addEmployeeFormViewModel.ErrorMessage = "Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string messageBoxText = "Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string caption = " Bekleidung bearbeiten";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                addEmployeeFormViewModel.HasError = true;
             }
             finally
             {

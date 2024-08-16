@@ -26,14 +26,14 @@ namespace DVS.WPF.ViewModels.Forms
             }
         }
         
-        private string _updateSelectedCategory;
-        public string UpdateSelectedCategory
+        private string _editSelectedCategory;
+        public string EditSelectedCategory
         {
-            get => _updateSelectedCategory;
+            get => _editSelectedCategory;
             set
             {
-                _updateSelectedCategory = value;
-                OnPropertyChanged(nameof(UpdateSelectedCategory));
+                _editSelectedCategory = value;
+                OnPropertyChanged(nameof(EditSelectedCategory));
                 OnPropertyChanged(nameof(CanEdit));
             }
         }
@@ -47,7 +47,7 @@ namespace DVS.WPF.ViewModels.Forms
                 if (value != null)
                 {
                     _selectedCategory = value;
-                    UpdateSelectedCategory = new(value.Name);
+                    EditSelectedCategory = new(value.Name);
                     OnPropertyChanged(nameof(SelectedCategory));
                     OnPropertyChanged(nameof(CanDelete));
                 }
@@ -67,32 +67,29 @@ namespace DVS.WPF.ViewModels.Forms
                 OnPropertyChanged(nameof(IsSubmitting));
             }
         }
-
-        private string _errorMessage;
-        public string ErrorMessage
+        
+        private bool _isDeleting;
+        public bool IsDeleting
         {
             get
             {
-                return _errorMessage;
+                return _isDeleting;
             }
             set
             {
-                _errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
-                OnPropertyChanged(nameof(HasErrorMessage));
+                _isDeleting = value;
+                OnPropertyChanged(nameof(IsDeleting));
             }
         }
 
+        public bool HasError;
         public bool CanAdd =>
             !string.IsNullOrEmpty(AddNewCategory) &&
             !AddNewCategory.Equals("Neue Kategorie");
-
         public bool CanEdit =>
-            !string.IsNullOrEmpty(UpdateSelectedCategory) &&
+            !string.IsNullOrEmpty(EditSelectedCategory) &&
             !SelectedCategory.Name.Equals("Kategorie wählen") &&
-            !SelectedCategory.Name.Equals(UpdateSelectedCategory);
-
+            !SelectedCategory.Name.Equals(EditSelectedCategory);
         public bool CanDelete => !SelectedCategory.Name.Equals("Kategorie wählen");
-        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
     }
 }

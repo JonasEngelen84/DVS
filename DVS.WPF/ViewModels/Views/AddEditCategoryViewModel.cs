@@ -30,7 +30,7 @@ namespace DVS.WPF.ViewModels.Views
                                                                             addEditListingViewModel)
             {
                 AddNewCategory = "Neue Kategorie",
-                UpdateSelectedCategory = "Kategorie wählen",
+                EditSelectedCategory = "Kategorie wählen",
                 SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen")
             };
         }

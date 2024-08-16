@@ -16,6 +16,20 @@ namespace DVS.WPF.ViewModels.ListViewItems
         public string? Comment => Clothes.Comment;
         public ObservableCollection<ClothesSize> Sizes => Clothes.Sizes;
 
+        private bool _isSubmitting;
+        public bool IsSubmitting
+        {
+            get
+            {
+                return _isSubmitting;
+            }
+            set
+            {
+                _isSubmitting = value;
+                OnPropertyChanged(nameof(IsSubmitting));
+            }
+        }
+
         private bool _isDeleting;
         public bool IsDeleting
         {
@@ -46,6 +60,8 @@ namespace DVS.WPF.ViewModels.ListViewItems
                 }
             }
         }
+
+        public bool HasError;
 
         public ICommand OpenEditClothes { get; set; }
         public ICommand DeleteClothes { get; set; }

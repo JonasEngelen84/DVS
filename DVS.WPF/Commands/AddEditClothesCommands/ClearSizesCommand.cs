@@ -12,6 +12,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
         public override async Task ExecuteAsync(object parameter)
         {
+            //TODO: HasError implementieren
+
             string messageBoxText = $"Alle Größen der Bekleidung  \"{_clothesListingItemViewModel.Name}\"  werden gelöscht!" +
                 $"\nDie Kleidungsstücke, dieser Bekleidung, bleiben den Mitarbeitern erhalten." +
                 $"\n\nLöschen fortsetzen?";
@@ -35,7 +37,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                     }
                     catch (Exception)
                     {
-                        messageBoxText = $"Löschen der Größen ist fehlgeschlagen!";
+                        messageBoxText = $"Löschen der Größen ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
                         caption = " Alle Bekleidungsgrößen löschen";
                         button = MessageBoxButton.OK;
                         icon = MessageBoxImage.Warning;
@@ -65,7 +67,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 }
                 catch (Exception)
                 {
-                    messageBoxText = $"Update der Bekleidung ist fehlgeschlagen!";
+                    messageBoxText = $"Update der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
                     caption = " Alle Bekleidungsgrößen löschen";
                     button = MessageBoxButton.OK;
                     icon = MessageBoxImage.Warning;

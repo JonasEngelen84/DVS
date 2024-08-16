@@ -15,6 +15,20 @@ namespace DVS.WPF.ViewModels.ListViewItems
         public string? Comment => Employee.Comment;
         public ObservableCollection<EmployeeClothesSize> Clothes => Employee.Clothes;
 
+        private bool _isSubmitting;
+        public bool IsSubmitting
+        {
+            get
+            {
+                return _isSubmitting;
+            }
+            set
+            {
+                _isSubmitting = value;
+                OnPropertyChanged(nameof(IsSubmitting));
+            }
+        }
+
         private bool _isDeleting;
         public bool IsDeleting
         {
@@ -28,24 +42,6 @@ namespace DVS.WPF.ViewModels.ListViewItems
                 {
                     _isDeleting = value;
                     OnPropertyChanged(nameof(IsDeleting));
-                }
-            }
-        }
-
-        private string _errorMessage;
-        public string ErrorMessage
-        {
-            get
-            {
-                return _errorMessage;
-            }
-            set
-            {
-                if (value != _errorMessage)
-                {
-                    _errorMessage = value;
-                    OnPropertyChanged(nameof(ErrorMessage));
-                    OnPropertyChanged(nameof(HasErrorMessage));
                 }
             }
         }
@@ -64,7 +60,7 @@ namespace DVS.WPF.ViewModels.ListViewItems
             }
         }
 
-        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
+        public bool HasError;
 
         public ICommand OpenEditEmployee { get; set; }
         public ICommand DeleteEmployee { get; set; }

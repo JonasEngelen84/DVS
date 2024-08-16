@@ -53,6 +53,8 @@ namespace DVS.WPF.ViewModels.Forms
 
         public bool CanSubmit => !Comment.Equals(ClothesSize.Comment);
 
+        public bool HasError;
+
         public ICommand SubmitComment { get; } = submitComment;
     }
 }

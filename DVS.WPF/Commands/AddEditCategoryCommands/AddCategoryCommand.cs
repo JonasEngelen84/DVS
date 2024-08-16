@@ -2,6 +2,7 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
+using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditCategoryCommands
 {
@@ -13,7 +14,7 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
-            addEditCategoryFormViewModel.ErrorMessage = null;
+            addEditCategoryFormViewModel.HasError = false;
             addEditCategoryFormViewModel.IsSubmitting = true;
 
             Category newCategory = new(Guid.NewGuid(), addEditCategoryFormViewModel.AddNewCategory);
@@ -24,7 +25,13 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
             }
             catch (Exception)
             {
-                addEditCategoryFormViewModel.ErrorMessage = "Erstellen der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string messageBoxText = "Erstellen der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string caption = "Kategorie erstellen";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                addEditCategoryFormViewModel.HasError = true;
             }
             finally
             {

@@ -3,9 +3,12 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class AddEditClothesFormViewModel(Clothes? clothes, ICommand submitCommand,
-        ICommand openAddEditCategoriesCommand, ICommand openAddEditSeasonsCommand,
-        AddEditListingViewModel addEditListingViewModel) : ViewModelBase
+    public class AddEditClothesFormViewModel(Clothes? clothes,
+                                             ICommand submitCommand,
+                                             ICommand openAddEditCategoriesCommand,
+                                             ICommand openAddEditSeasonsCommand,
+                                             AddEditListingViewModel addEditListingViewModel)
+                                             : ViewModelBase
     {
         public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
         public Clothes? Clothes { get; } = clothes;
@@ -102,23 +105,7 @@ namespace DVS.WPF.ViewModels.Forms
             }
         }
 
-        private string _errorMessage;
-        public string ErrorMessage
-        {
-            get
-            {
-                return _errorMessage;
-            }
-            set
-            {
-                if (value != _errorMessage)
-                {
-                    _errorMessage = value;
-                    OnPropertyChanged(nameof(ErrorMessage));
-                    OnPropertyChanged(nameof(HasErrorMessage));
-                }
-            }
-        }
+        public bool HasError;
 
         public bool CanSubmit
         {//TODO: canSubmitClothes auf true setzen wenn Größenliste verändert wird
@@ -147,7 +134,5 @@ namespace DVS.WPF.ViewModels.Forms
                 return true;
             }
         }
-
-        public bool HasErrorMessage => !string.IsNullOrEmpty(ErrorMessage);
     }
 }

@@ -30,7 +30,7 @@ namespace DVS.WPF.ViewModels.Views
                                                                         addEditListingViewModel)
             {
                 AddNewSeason = "Neue Saison",
-                UpdateSelectedSeason = "Saison wählen",
+                EditSelectedSeason = "Saison wählen",
                 SelectedSeason = new(Guid.NewGuid(), "Saison wählen")
             };
         }

@@ -2,6 +2,7 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
+using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditClothesCommands
 {
@@ -17,8 +18,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditClothesFormViewModel addEditClothesFormViewModel = _addClothesViewModel.AddEditClothesFormViewModel;
-
-            addEditClothesFormViewModel.ErrorMessage = null;
+            addEditClothesFormViewModel.HasError = false;
             addEditClothesFormViewModel.IsSubmitting = true;
 
             Clothes clothes = new(Guid.NewGuid(),
@@ -37,7 +37,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             // ClothesSize-Instanzen den Listen von Clothes und SizeModel hinzufügen
             foreach (SizeModel size in selectedSizes)
             {
-                ClothesSize clothesSize = new(Guid.NewGuid(), clothes, size, size.Quantity);
+                ClothesSize clothesSize = new(Guid.NewGuid(), clothes, size, size.Quantity, null);
 
                 clothes.Sizes.Add(clothesSize);
                 size.ClothesSizes.Add(clothesSize);
@@ -53,8 +53,13 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
             catch (Exception)
             {
-                addEditClothesFormViewModel.ErrorMessage =
-                    "Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string messageBoxText = "Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string caption = "Bekleidung erstellen";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                addEditClothesFormViewModel.HasError = true;
             }
             finally
             {

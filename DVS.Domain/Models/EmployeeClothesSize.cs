@@ -1,6 +1,6 @@
 ﻿namespace DVS.Domain.Models
 {
-    public class EmployeeClothesSize(Guid guidID, Employee employee, ClothesSize clothesSize, int quantity)
+    public class EmployeeClothesSize(Guid guidID, Employee employee, ClothesSize clothesSize, int quantity, string? comment)
     {
         public Guid GuidID { get; } = guidID;
         public Guid EmployeeGuidID { get; } = employee.GuidID;
@@ -8,6 +8,6 @@
         public Employee Employee { get; } = employee;
         public ClothesSize ClothesSize { get; } = clothesSize;
         public int Quantity { get; } = quantity;
-        public string? Comment { get; } = "";
+        public string? Comment { get; } = comment;
     }
 }

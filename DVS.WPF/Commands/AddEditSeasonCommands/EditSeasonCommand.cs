@@ -14,20 +14,19 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditSeasonFormViewModel addEditSeasonFormViewModel = _addEditSeasonViewModel.AddEditSeasonFormViewModel;
+            addEditSeasonFormViewModel.HasError = false;
+            addEditSeasonFormViewModel.IsSubmitting = true;
 
             string messageBoxText = $"Die Saison \"{addEditSeasonFormViewModel.SelectedSeason.Name}\" und ihre Schnittstellen werden in" +
-                    $"\"{addEditSeasonFormViewModel.UpdateSelectedSeason}\" umbenannt.\n\nUmbennen fortsetzen?";
-            string caption = "Saison umbenennen";
+                    $"\"{addEditSeasonFormViewModel.EditSelectedSeason}\" umbenannt.\n\nUmbennen fortsetzen?";
+            string caption = "Saison bearbeiten";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
 
             if (dialog == MessageBoxResult.Yes)
             {
-                addEditSeasonFormViewModel.ErrorMessage = null;
-                addEditSeasonFormViewModel.IsSubmitting = true;
-
-                Season season = new(addEditSeasonFormViewModel.SelectedSeason.GuidID, addEditSeasonFormViewModel.UpdateSelectedSeason);
+                Season season = new(addEditSeasonFormViewModel.SelectedSeason.GuidID, addEditSeasonFormViewModel.EditSelectedSeason);
 
                 try
                 {
@@ -35,7 +34,13 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
                 }
                 catch (Exception)
                 {
-                    addEditSeasonFormViewModel.ErrorMessage = "Umbenennen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    messageBoxText = "Bearbeiten der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    caption = "Saison bearbeiten";
+                    button = MessageBoxButton.OK;
+                    icon = MessageBoxImage.Warning;
+                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                    addEditSeasonFormViewModel.HasError = true;
                 }
                 finally
                 {

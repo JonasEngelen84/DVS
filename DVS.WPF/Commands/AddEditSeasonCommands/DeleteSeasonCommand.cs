@@ -14,29 +14,34 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditSeasonFormViewModel addEditSeasonFormViewModel = _addEditSeasonViewModel.AddEditSeasonFormViewModel;
+            addEditSeasonFormViewModel.HasError = false;
+            addEditSeasonFormViewModel.IsDeleting = true;
 
             string messageBoxText = $"Die Saison \"{addEditSeasonFormViewModel.SelectedSeason.Name}\" und ihre Schnittstellen werden gelöscht.\n\nLöschen fortsetzen?";
-            string caption = "Saison umbenennen";
+            string caption = "Saison löschen";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
 
             if (dialog == MessageBoxResult.Yes)
             {
-                addEditSeasonFormViewModel.ErrorMessage = null;
-                addEditSeasonFormViewModel.IsSubmitting = true;
-
                 try
                 {
                     await _seasonStore.Delete((Guid)addEditSeasonFormViewModel.SelectedSeason.GuidID, addEditSeasonFormViewModel);
                 }
                 catch (Exception)
                 {
-                    addEditSeasonFormViewModel.ErrorMessage = "Löschen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    messageBoxText = "Löschen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    caption = "Saison löschen";
+                    button = MessageBoxButton.OK;
+                    icon = MessageBoxImage.Warning;
+                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                    addEditSeasonFormViewModel.HasError = true;
                 }
                 finally
                 {
-                    addEditSeasonFormViewModel.IsSubmitting = false;
+                    addEditSeasonFormViewModel.IsDeleting = false;
                 }
             }
         }

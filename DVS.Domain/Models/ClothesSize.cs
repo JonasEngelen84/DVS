@@ -2,7 +2,7 @@
 
 namespace DVS.Domain.Models
 {
-    public class ClothesSize(Guid guidID, Clothes clothes, SizeModel size, int quantity)
+    public class ClothesSize(Guid guidID, Clothes clothes, SizeModel size, int quantity, string? comment)
     {
         public Guid GuidID { get; } = guidID;
         public Guid ClothesGuidID { get; } = clothes.GuidID;
@@ -10,7 +10,7 @@ namespace DVS.Domain.Models
         public SizeModel Size { get; } = size;
         public Clothes Clothes { get; } = clothes;
         public int Quantity { get; } = quantity;
-        public string? Comment { get; } = "";
+        public string? Comment { get; } = comment;
 
         public ObservableCollection<EmployeeClothesSize> EmployeeClothesSizes { get; set; } = [];
     }
