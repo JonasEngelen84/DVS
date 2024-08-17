@@ -1,4 +1,6 @@
-﻿namespace DVS.WPF.Commands
+﻿using System.Windows;
+
+namespace DVS.WPF.Commands
 {
     //TODO: AsyncCommandBase dokumentieren
     public abstract class AsyncCommandBase : CommandBase
@@ -30,7 +32,14 @@
             {
                 await ExecuteAsync(parameter);
             }
-            catch (Exception) { }
+            catch (Exception) 
+            {
+                string messageBoxText = "Bekleidung bearbeiten ist fehgeschlagen!";
+                string caption = "Bekleidung bearbeiten";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
             finally
             {
                 IsExecuting = false;

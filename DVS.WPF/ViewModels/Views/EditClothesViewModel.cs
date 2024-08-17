@@ -11,7 +11,7 @@ namespace DVS.WPF.ViewModels.Views
     public class EditClothesViewModel : ViewModelBase
     {
         public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
-        public AddEditListingViewModel AddEditListingViewModel { get; }
+        public AddEditClothesListingViewModel AddEditListingViewModel { get; }
         public ICommand CloseAddEditClothes { get; }
 
 

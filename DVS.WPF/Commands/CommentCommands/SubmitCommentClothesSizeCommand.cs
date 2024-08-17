@@ -19,14 +19,46 @@ namespace DVS.WPF.Commands.CommentCommands
         public override async Task ExecuteAsync(object parameter)
         {
             CommentClothesSizeFormViewModel commentClothesSizeFormViewModel = _commentClothesSizeViewModel.CommentClothesSizeFormViewModel;
-
+            commentClothesSizeFormViewModel.HasError = false;
             commentClothesSizeFormViewModel.IsSubmitting = true;
 
-            ClothesSize existingItem = commentClothesSizeFormViewModel.Clothes.Sizes
+            // Zu kommentierende ClothesSize speichern
+            ClothesSize clothesSizeToComment = commentClothesSizeFormViewModel.Clothes.Sizes
                 .FirstOrDefault(s => s.Size.Size == commentClothesSizeFormViewModel.Size);
+            
+            // Neues, kommentiertes, ClothesSize erstellen
+            ClothesSize commentedClothesSize = new(clothesSizeToComment.GuidID,
+                                                   clothesSizeToComment.Clothes,
+                                                   clothesSizeToComment.Size,
+                                                   clothesSizeToComment.Quantity,
+                                                   commentClothesSizeFormViewModel.Comment);
 
-            existingItem.Comment = commentClothesSizeFormViewModel.Comment;
+            // Sämtliche alten ClothesSizes aus SizeModel-Liste und DB entfernen
+            foreach (ClothesSize cs in commentClothesSizeFormViewModel.Clothes.Sizes)
+            {
+                cs.Size.ClothesSizes.Remove(cs);
 
+                try
+                {
+                    await _clothesStore.DeleteClothesSize(cs.GuidID);
+                }
+                catch (Exception)
+                {
+                    string messageBoxText = $"Kommentieren der Bekleidungsgröße ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    string caption = " Bekleidungsgröße Kommentieren";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                    commentClothesSizeFormViewModel.HasError = true;
+                }
+            }
+
+            // Altes ClothesSize entfernen und neues einfügen
+            commentClothesSizeFormViewModel.Clothes.Sizes.Remove(clothesSizeToComment);
+            commentClothesSizeFormViewModel.Clothes.Sizes.Add(commentedClothesSize);
+
+            // Neues Clothes mit neuer Größen-Liste erstellen
             Clothes updatedClothes = new(commentClothesSizeFormViewModel.Clothes.GuidID,
                                          commentClothesSizeFormViewModel.ID,
                                          commentClothesSizeFormViewModel.Name,
@@ -35,20 +67,32 @@ namespace DVS.WPF.Commands.CommentCommands
                                          commentClothesSizeFormViewModel.Clothes.Comment)
             {
                 Sizes = new ObservableCollection<ClothesSize>(commentClothesSizeFormViewModel.Clothes.Sizes
-                .Select(s => new ClothesSize(s.Clothes, s.Size, s.Quantity) { Comment = s.Comment }))
+                .Select(s => new ClothesSize(s.GuidID, s.Clothes, s.Size, s.Quantity, s.Comment)))
             };
-                        
+
+            // ClothesSizes den Size-Listen hinzufügen
+            foreach (ClothesSize size in updatedClothes.Sizes)
+            {
+                size.Size.ClothesSizes.Add(size);
+            }
+
+            // Neue Clothes-Instanz den Listen von category und saison hinzufügen
+            updatedClothes.Category?.Clothes.Add(updatedClothes);
+            updatedClothes.Season?.Clothes.Add(updatedClothes);
+
             try
             {
                 await _clothesStore.Update(updatedClothes);
             }
             catch (Exception)
             {
-                string messageBoxText = "Kommentieren der Bekleidungsgröße ist fehlgeschlagen";
+                string messageBoxText = "Kommentieren der Bekleidungsgröße ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
                 string caption = "Bekleidungsgröße Kommentieren";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                commentClothesSizeFormViewModel.HasError = true;
             }
             finally
             {

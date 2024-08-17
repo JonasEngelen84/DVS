@@ -7,7 +7,7 @@ using System.Windows.Data;
 
 namespace DVS.WPF.ViewModels
 {
-    public class AddEditListingViewModel : ViewModelBase
+    public class AddEditClothesListingViewModel : ViewModelBase
     {
         private readonly ObservableCollection<Category> _categories = [];
         private readonly CollectionViewSource _categoryCollectionViewSource;
@@ -51,7 +51,7 @@ namespace DVS.WPF.ViewModels
         private readonly SeasonStore _seasonStore;
 
 
-        public AddEditListingViewModel(Clothes clothes,
+        public AddEditClothesListingViewModel(Clothes clothes,
                                        SizeStore sizeStore,
                                        CategoryStore categoryStore,
                                        SeasonStore seasonStore)
@@ -90,38 +90,24 @@ namespace DVS.WPF.ViewModels
 
             foreach (SizeModel size in _sizeStore.Sizes)
             {
+                // Wenn eine Clothes-Instanz übergeben wurde => prüfen ob sie die aktuelle Größe beinhaltet
+                var matchingSize = _clothes?.Sizes.FirstOrDefault(s => s.Size.Size == size.Size);
+
+                if (matchingSize != null)
+                {
+                    size.IsSelected = true;
+                    size.Quantity = matchingSize.Quantity;
+                }
+                else
+                {
+                    size.IsSelected = false;
+                    size.Quantity = 0;
+                }
+
                 if (size.IsSizeSystemEU)
                     _availableSizesEU.Add(size);
                 else
                     _availableSizesUS.Add(size);
-            }
-
-            foreach (SizeModel size in AvailableSizesUS)
-            {
-                size.IsSelected = false;
-                size.Quantity = 0;
-            }
-
-            foreach (SizeModel size in AvailableSizesEU)
-            {
-                size.IsSelected = false;
-                size.Quantity = 0;
-            }
-
-            // Nur bei UpdateClothes
-            if (_clothes != null)
-            {
-                foreach (var size in _clothes.Sizes)
-                {
-                    var matchingSize = _availableSizesEU.FirstOrDefault(s => s.Size == size.Size.Size) ??
-                                       _availableSizesUS.FirstOrDefault(s => s.Size == size.Size.Size);
-
-                    if (matchingSize != null)
-                    {
-                        matchingSize.IsSelected = true;
-                        matchingSize.Quantity = size.Quantity;
-                    }
-                }
             }
         }
 

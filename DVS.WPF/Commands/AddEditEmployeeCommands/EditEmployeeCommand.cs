@@ -2,16 +2,18 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
-using DVS.WPF.ViewModels.ListViewItems;
 using DVS.WPF.ViewModels.Views;
 using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
-    public class EditEmployeeCommand(EditEmployeeViewModel updateEmployeeViewModel, EmployeeStore employeeStore,
-        ModalNavigationStore modalNavigationStore, Guid guiID) : AsyncCommandBase
+    public class EditEmployeeCommand(EditEmployeeViewModel editEmployeeViewModel,
+                                     EmployeeStore employeeStore,
+                                     ModalNavigationStore modalNavigationStore,
+                                     Guid guiID)
+                                     : AsyncCommandBase
     {
-        private readonly EditEmployeeViewModel _updateEmployeeViewModel = updateEmployeeViewModel;
+        private readonly EditEmployeeViewModel _editEmployeeViewModel = editEmployeeViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         private readonly Guid _guidID = guiID;
@@ -26,16 +28,16 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
             if (dialog == MessageBoxResult.Yes)
             {
-                AddEditEmployeeFormViewModel updateEmployeeFormViewModel = _updateEmployeeViewModel.AddEditEmployeeFormViewModel;
+                AddEditEmployeeFormViewModel editEmployeeFormViewModel = _editEmployeeViewModel.AddEditEmployeeFormViewModel;
 
-                updateEmployeeFormViewModel.HasError = false;
-                updateEmployeeFormViewModel.IsSubmitting = true;
+                editEmployeeFormViewModel.HasError = false;
+                editEmployeeFormViewModel.IsSubmitting = true;
 
                 Employee updatedEmployee = new(_guidID,
-                                              updateEmployeeFormViewModel.ID,
-                                              updateEmployeeFormViewModel.Lastname,
-                                              updateEmployeeFormViewModel.Firstname,
-                                              updateEmployeeFormViewModel.Comment);
+                                              editEmployeeFormViewModel.ID,
+                                              editEmployeeFormViewModel.Lastname,
+                                              editEmployeeFormViewModel.Firstname,
+                                              editEmployeeFormViewModel.Comment);
 
                 foreach (EmployeeClothesSize size in updatedEmployee.Clothes)
                 {
@@ -45,7 +47,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 updatedEmployee.Clothes.Clear();
 
                 //TODO: Kommentare von DetailedItems werden entfernt bei update
-                foreach (DetailedClothesListingItemViewModel item in updateEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
+                foreach (DetailedClothesListingItemViewModel item in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
                 {
                     var existingClothes = item.Clothes.Sizes.FirstOrDefault(s => s.Size.Equals(item.Clothes.Sizes));
                     existingClothes.EmployeeClothesSizes.Add(new EmployeeClothesSize(Guid.NewGuid(), updatedEmployee, existingClothes, (int)item.Quantity, item.Comment));
@@ -64,11 +66,11 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                     icon = MessageBoxImage.Warning;
                     dialog = MessageBox.Show(messageBoxText, caption, button, icon);
 
-                    updateEmployeeFormViewModel.HasError = true;
+                    editEmployeeFormViewModel.HasError = true;
                 }
                 finally
                 {
-                    updateEmployeeFormViewModel.IsSubmitting = false;
+                    editEmployeeFormViewModel.IsSubmitting = false;
                     _modalNavigationStore.Close();
                 }
             }

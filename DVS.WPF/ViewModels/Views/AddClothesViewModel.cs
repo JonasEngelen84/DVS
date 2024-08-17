@@ -10,11 +10,14 @@ namespace DVS.WPF.ViewModels.Views
     public class AddClothesViewModel : ViewModelBase
     {
         public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
-        public AddEditListingViewModel AddEditListingViewModel { get; }
+        public AddEditClothesListingViewModel AddEditListingViewModel { get; }
         public ICommand CloseAddEditClothes { get; }
 
-        public AddClothesViewModel(ModalNavigationStore modalNavigationStore, SizeStore sizeStore,
-            CategoryStore categoryStore, SeasonStore seasonStore, ClothesStore clothesStore)
+        public AddClothesViewModel(ModalNavigationStore modalNavigationStore,
+                                   SizeStore sizeStore,
+                                   CategoryStore categoryStore,
+                                   SeasonStore seasonStore,
+                                   ClothesStore clothesStore)
         {
             AddEditListingViewModel = new(null, sizeStore, categoryStore, seasonStore);
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
@@ -22,13 +25,22 @@ namespace DVS.WPF.ViewModels.Views
             ICommand addClothes = new AddClothesCommand(this, clothesStore , modalNavigationStore);
 
             ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(modalNavigationStore,
-                categoryStore, this, null, AddEditListingViewModel);
+                                                                              categoryStore,
+                                                                              this,
+                                                                              null,
+                                                                              AddEditListingViewModel);
 
             ICommand openAddEditSeasons = new OpenAddEditSeasonsCommand(modalNavigationStore,
-                seasonStore, this, null, AddEditListingViewModel);
+                                                                        seasonStore,
+                                                                        this,
+                                                                        null,
+                                                                        AddEditListingViewModel);
 
-            AddEditClothesFormViewModel = new(null, addClothes,
-                openAddEditCategories, openAddEditSeasons, AddEditListingViewModel)
+            AddEditClothesFormViewModel = new(null,
+                                              addClothes,
+                                              openAddEditCategories,
+                                              openAddEditSeasons,
+                                              AddEditListingViewModel)
             {
                 ID = "ID",
                 Name = "Name",

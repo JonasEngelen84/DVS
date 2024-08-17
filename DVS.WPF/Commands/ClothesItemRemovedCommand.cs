@@ -1,79 +1,57 @@
 ﻿using DVS.Domain.Models;
-using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
-using System.Windows;
+using System.Collections.ObjectModel;
 
 namespace DVS.WPF.Commands
 {
-    public class ClothesItemRemovedCommand(
-        DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore) : AsyncCommandBase
+    public class ClothesItemRemovedCommand(DetailedClothesListingItemViewModel selectedDetailedClothesItem,
+                                           Action<Clothes> removeItemFromAvailableSizes,
+                                           Action<Clothes> removeItemFromEmployeeClothesList)
+                                           : AsyncCommandBase
     {
-        private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
-        private readonly ClothesStore _clothesStore = clothesStore;
+        private readonly DetailedClothesListingItemViewModel _selectedDetailedClothesItem = selectedDetailedClothesItem;
+
+        public readonly Action<Clothes> _removeItemFromAvailableSizes = removeItemFromAvailableSizes;
+        public readonly Action<Clothes> _removeItemFromEmployeeClothesList = removeItemFromEmployeeClothesList;
 
         public override async Task ExecuteAsync(object parameter)
         {
-            if (parameter.Equals("AddEditEmployeAvailableClothesList"))
-                _dVSListingViewModel.RemoveClothesItemFromNewEmployeeListingItemCollection();
+            if (_selectedDetailedClothesItem == null || _selectedDetailedClothesItem.Quantity == 0)
+            {
+                return;
+            }
+
+            // Menge erhöhen der verschobenen Kleidungsgröße
+            ClothesSize editedItem = new(_selectedDetailedClothesItem.ClothesSize.GuidID,
+                                         _selectedDetailedClothesItem.Clothes,
+                                         _selectedDetailedClothesItem.ClothesSize.Size,
+                                         _selectedDetailedClothesItem.ClothesSize.Quantity + 1,
+                                         _selectedDetailedClothesItem.ClothesSize.Comment);
+
+            // Geänderte Clothes-Instanz erstellen und übergeben für späteres update in DB und ClothesStore
+            Clothes editedClothes = new(_selectedDetailedClothesItem.Clothes.GuidID,
+                                        _selectedDetailedClothesItem.Clothes.ID,
+                                        _selectedDetailedClothesItem.Clothes.Name,
+                                        _selectedDetailedClothesItem.Clothes.Category,
+                                        _selectedDetailedClothesItem.Clothes.Season,
+                                        _selectedDetailedClothesItem.Clothes.Comment)
+            {
+                Sizes = new ObservableCollection<ClothesSize>(_selectedDetailedClothesItem.Clothes.Sizes
+                    .Select(s => new ClothesSize(s.GuidID, s.Clothes, s.Size, s.Quantity, s.Comment)))
+            };
+
+            // Alte Bekleidungsgrößen entfernen und neue hinzufügen
+            ClothesSize itemToRemove = editedClothes.Sizes.FirstOrDefault(cs => cs.GuidID == editedItem.GuidID);
+            editedClothes.Sizes.Remove(itemToRemove);
+            editedClothes.Sizes.Add(editedItem);
+
+            if (parameter.Equals("EmployeeClothesList"))
+            {
+                _removeItemFromEmployeeClothesList?.Invoke(editedClothes);
+            }
             else
             {
-                Clothes clothesToEdit = new(
-                    _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.GuidID,
-                    _dVSListingViewModel.RemovedClothesListingItemModel.ID,
-                    _dVSListingViewModel.RemovedClothesListingItemModel.Name,
-                    _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Category,
-                    _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Season,
-                    _dVSListingViewModel.RemovedClothesListingItemModel.Comment)
-                {
-                    Sizes = _dVSListingViewModel.RemovedClothesListingItemModel.Clothes.Sizes
-                };
-
-                ClothesSize? sizeToEdit = clothesToEdit.Sizes.
-                    FirstOrDefault(y => y.Size.Size == _dVSListingViewModel.RemovedClothesListingItemModel.Size);
-
-                _dVSListingViewModel.RemovedClothesListingItemModel.ErrorMessage = null;
-
-                if (_dVSListingViewModel.RemovedClothesListingItemModel.Quantity == 0)
-                {
-                    string messageBoxText = "Diese Bekleidung ist nicht verfügbar!";
-                    string caption = "Bekleidung entfernen";
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Warning;
-                    _ = MessageBox.Show(messageBoxText, caption, button, icon);
-                    return;
-                }
-                else if (_dVSListingViewModel.RemovedClothesListingItemModel.Quantity <= 3)
-                {
-                    string messageBoxText = $"ACHTUNG!\n\nNach der Transaktion sind nur noch" +
-                        $"  {_dVSListingViewModel.RemovedClothesListingItemModel.Quantity - 1}  Stück" +
-                        $" dieser Bekleidung vorhanden!";
-                    string caption = "Bekleidung entfernen";
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Warning;
-                    _ = MessageBox.Show(messageBoxText, caption, button, icon);
-
-                    if (sizeToEdit != null)
-                    {
-                        sizeToEdit.Quantity -= 1;
-                    }
-                }
-                else
-                {
-                    if (sizeToEdit != null)
-                    {
-                        sizeToEdit.Quantity -= 1;
-                    }
-                }
-
-                try
-                {
-                    await _clothesStore.DragNDropUpdate(clothesToEdit);
-                }
-                catch (Exception)
-                {
-                    _dVSListingViewModel.RemovedClothesListingItemModel.ErrorMessage =
-                        "Verschieben der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                }
+                _removeItemFromAvailableSizes?.Invoke(editedClothes);
             }
         }
     }

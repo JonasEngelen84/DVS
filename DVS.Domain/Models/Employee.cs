@@ -8,7 +8,7 @@ namespace DVS.Domain.Models
         public string ID { get; } = id;
         public string Lastname { get; } = lastname;
         public string Firstname { get; } = firstname;
-        public string? Comment { get; } = comment;
+        public string? Comment { get; set; } = comment;
 
         public ObservableCollection<EmployeeClothesSize> Clothes { get; set; } = [];
     }

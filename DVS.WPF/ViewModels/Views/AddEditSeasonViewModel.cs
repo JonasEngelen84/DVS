@@ -14,7 +14,7 @@ namespace DVS.WPF.ViewModels.Views
                                       SeasonStore seasonStore,
                                       AddClothesViewModel addClothesViewModel,
                                       EditClothesViewModel editClothesViewModel,
-                                      AddEditListingViewModel addEditListingViewModel)
+                                      AddEditClothesListingViewModel addEditListingViewModel)
         {
             ICommand addSeason = new AddSeasonCommand(this, seasonStore);
             ICommand updateSeason = new EditSeasonCommand(this, seasonStore);

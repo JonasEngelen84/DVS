@@ -14,7 +14,7 @@ namespace DVS.WPF.ViewModels.Views
                                         CategoryStore categoryStore,
                                         AddClothesViewModel addClothesViewModel,
                                         EditClothesViewModel editClothesViewModel,
-                                        AddEditListingViewModel addEditListingViewModel)
+                                        AddEditClothesListingViewModel addEditListingViewModel)
         {
             ICommand addCategory = new AddCategoryCommand(this, categoryStore);
             ICommand updateCategory = new EditCategoryCommand(this, categoryStore);

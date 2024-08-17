@@ -34,7 +34,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
                 : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
 
-            // ClothesSize-Instanzen den Listen von Clothes und SizeModel hinzufügen
+            // ClothesSizes den Listen von Clothes und SizeModel hinzufügen
             foreach (SizeModel size in selectedSizes)
             {
                 ClothesSize clothesSize = new(Guid.NewGuid(), clothes, size, size.Quantity, null);

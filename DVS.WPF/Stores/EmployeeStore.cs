@@ -1,9 +1,7 @@
-﻿using DVS.Domain.Commands.ClothesSize;
-using DVS.Domain.Commands.Employee;
+﻿using DVS.Domain.Commands.Employee;
 using DVS.Domain.Commands.EmployeeClothesSize;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using DVS.EntityFramework.Queries;
 
 namespace DVS.WPF.Stores
 {
@@ -55,25 +53,24 @@ namespace DVS.WPF.Stores
 
         public async Task Add(Employee employee)
         {
+            foreach (EmployeeClothesSize employeeClothesSize in employee.Clothes)
+            {
+                AddEmployeeClothesSize(employeeClothesSize);
+            }
+
             //await _createEmployeeCommand.Execute(employee);
-
-            //foreach (EmployeeClothesSize employeeClothesSize in employee.Clothes)
-            //{
-            //    await _createEmployeeClothesSizeCommand.Execute(employeeClothesSize);
-            //}
-
             _employees.Add(employee);
             EmployeeAdded?.Invoke(employee);
         }
 
         public async Task Update(Employee employee)
         {
-            //await _updateEmployeeCommand.Execute(employee);
+            foreach (EmployeeClothesSize employeeClothesSize in employee.Clothes)
+            {
+                UpdateEmployeeClothesSize(employeeClothesSize);
+            }
 
-            //foreach (EmployeeClothesSize employeeClothesSize in employee.Clothes)
-            //{
-            //    await _updateEmployeeClothesSizeCommand.Execute(employeeClothesSize);
-            //}
+            //await _updateEmployeeCommand.Execute(employee);
 
             int index = _employees.FindIndex(y => y.GuidID == employee.GuidID);
 
@@ -91,15 +88,30 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(Employee employee)
         {
+            foreach (EmployeeClothesSize employeeClothesSize in employee.Clothes)
+            {
+                DeleteEmployeeClothesSize(employeeClothesSize.GuidID);
+            }
+
             //await _deleteEmployeeCommand.Execute(guidID);
-
-            //foreach (EmployeeClothesSize employeeClothesSize in employee.Clothes)
-            //{
-            //    await _deleteEmployeeClothesSizeCommand.Execute(employeeClothesSize);
-            //}
-
             _employees.RemoveAll(y => y.GuidID == employee.GuidID);
             EmployeeDeleted?.Invoke(employee.GuidID);
+        }
+
+
+        public async Task AddEmployeeClothesSize(EmployeeClothesSize employeeClothesSize)
+        {
+            //await _createEmployeeClothesSizeCommand.Execute(employeeClothesSize);
+        }
+
+        public async Task UpdateEmployeeClothesSize(EmployeeClothesSize employeeClothesSize)
+        {
+            //await _updateEmployeeClothesSizeCommand.Execute(employeeClothesSize);
+        }
+
+        public async Task DeleteEmployeeClothesSize(Guid guidID)
+        {
+            //await _deleteEmployeeClothesSizeCommand.Execute(guidID);
         }
     }
 }

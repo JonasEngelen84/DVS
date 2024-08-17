@@ -8,13 +8,13 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
                                               CategoryStore categoryStore,
                                               AddClothesViewModel addClothesViewModel,
                                               EditClothesViewModel editClothesViewModel,
-                                              AddEditListingViewModel addEditListingViewModel) : CommandBase
+                                              AddEditClothesListingViewModel addEditListingViewModel) : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         private readonly CategoryStore _categoryStore = categoryStore;
         private readonly AddClothesViewModel _addClothesViewModel = addClothesViewModel;
         private readonly EditClothesViewModel _editClothesViewModel = editClothesViewModel;
-        private readonly AddEditListingViewModel _addEditListingViewModel = addEditListingViewModel;
+        private readonly AddEditClothesListingViewModel _addEditListingViewModel = addEditListingViewModel;
 
         public override void Execute(object parameter)
         {

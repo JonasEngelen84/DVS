@@ -16,6 +16,8 @@ namespace DVS.WPF.ViewModels
         public int? Quantity => ClothesSize?.Quantity ?? null;
         public string? Comment => ClothesSize?.Comment ?? null;
 
+        public bool HasError;
+
         public void Update(Clothes clothes, ClothesSize? clothesSize)
         {
             Clothes = clothes;

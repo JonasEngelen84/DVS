@@ -6,10 +6,10 @@ namespace DVS.WPF.ViewModels.Forms
     public class AddEditSeasonFormViewModel(ICommand addSeasonCommand,
                                             ICommand editSeasonCommand,
                                             ICommand deleteSeasonCommand,
-                                            AddEditListingViewModel addEditListingViewModel)
+                                            AddEditClothesListingViewModel addEditListingViewModel)
                                             : ViewModelBase
     {
-        public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
+        public AddEditClothesListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
         public ICommand AddSeason { get; } = addSeasonCommand;
         public ICommand EditSeason { get; } = editSeasonCommand;
         public ICommand DeleteSeason { get; } = deleteSeasonCommand;

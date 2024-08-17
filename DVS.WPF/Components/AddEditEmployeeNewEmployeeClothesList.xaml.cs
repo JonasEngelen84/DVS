@@ -17,16 +17,6 @@ namespace DVS.WPF.Components
             set { SetValue(IncomingClothesItemProperty, value); }
         }
 
-        public static readonly DependencyProperty RemovedClothesItemProperty =
-            DependencyProperty.Register("RemovedClothesItem", typeof(object), typeof(AddEditEmployeeNewEmployeeClothesList),
-                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
-        public object RemovedClothesItem
-        {
-            get { return GetValue(RemovedClothesItemProperty); }
-            set { SetValue(RemovedClothesItemProperty, value); }
-        }
-
         public static readonly DependencyProperty ClothesItemDropCommandProperty =
             DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployeeNewEmployeeClothesList),
                 new PropertyMetadata(null));
@@ -52,6 +42,7 @@ namespace DVS.WPF.Components
         {
             InitializeComponent();
         }
+
 
         //TODO: canMove DRINGEND ausbessern
         private bool canMove = true;
@@ -84,9 +75,9 @@ namespace DVS.WPF.Components
                 {
                     if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                     {
-                        RemovedClothesItem = e.Data.GetData(DataFormats.Serializable);
+                        IncomingClothesItem = e.Data.GetData(DataFormats.Serializable);
                         AddClothesItem(ClothesItem);
-                        ClothesItemRemovedCommand?.Execute("AddEditEmployeeNewEmployeeClothesList");
+                        ClothesItemRemovedCommand?.Execute("EmployeeClothesList");
                     }
                 }
             }
@@ -98,7 +89,7 @@ namespace DVS.WPF.Components
             if (ClothesItemDropCommand?.CanExecute(null) ?? false)
             {
                 IncomingClothesItem = ClothesItem;
-                ClothesItemDropCommand?.Execute("AddEditEmployeeNewEmployeeClothesList");
+                ClothesItemDropCommand?.Execute("EmployeeClothesList");
             }
         }
     }

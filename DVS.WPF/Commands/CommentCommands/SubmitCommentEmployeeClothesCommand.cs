@@ -2,9 +2,9 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
-using System.Windows.Controls;
+using DVS.WPF.Views;
+using System.Collections.ObjectModel;
 using System.Windows;
-using System;
 
 namespace DVS.WPF.Commands.CommentCommands
 {
@@ -20,49 +20,80 @@ namespace DVS.WPF.Commands.CommentCommands
         public override async Task ExecuteAsync(object parameter)
         {
             CommentEmployeeClothesFormViewModel commentEmployeeClothesFormViewModel = _commentEmployeeClothesViewModel.CommentEmployeeClothesFormViewModel;
-            
             commentEmployeeClothesFormViewModel.HasError = false;
             commentEmployeeClothesFormViewModel.IsSubmitting = true;
 
-            Employee employeeToEdit = new(commentEmployeeClothesFormViewModel.Employee.GuidID,
+            // Zu kommentierende EmployeeClothesSize speichern
+            EmployeeClothesSize employeeClothesSizeToComment = commentEmployeeClothesFormViewModel.Employee.Clothes
+                .FirstOrDefault(ecs => ecs.GuidID == commentEmployeeClothesFormViewModel.EmployeeClothesSizeGuidID);
+
+            // Neues, kommentiertes, EmployeeClothesSize erstellen
+            EmployeeClothesSize commentedEmployeeClothesSize = new(employeeClothesSizeToComment.GuidID,
+                                                                   employeeClothesSizeToComment.Employee,
+                                                                   employeeClothesSizeToComment.ClothesSize,
+                                                                   employeeClothesSizeToComment.Quantity,
+                                                                   commentEmployeeClothesFormViewModel.Comment);
+
+            // Sämtliche alten EmployeeClothesSizes aus ClothesSize-Liste und DB entfernen
+            foreach (EmployeeClothesSize ecs in commentEmployeeClothesFormViewModel.Employee.Clothes)
+            {
+                ecs.ClothesSize.EmployeeClothesSizes.Remove(ecs);
+
+                try
+                {
+                    await _employeeStore.DeleteEmployeeClothesSize(ecs.GuidID);
+                }
+                catch (Exception)
+                {
+                    string messageBoxText = $"Kommentieren der Bekleidungsgröße ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                    string caption = " Bekleidungsgröße Kommentieren";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+
+                    commentEmployeeClothesFormViewModel.HasError = true;
+                }
+            }
+
+            // Altes EmployeeClothesSize entfernen und neues einfügen
+            commentedEmployeeClothesSize.Employee.Clothes.Remove(employeeClothesSizeToComment);
+            commentedEmployeeClothesSize.Employee.Clothes.Add(commentedEmployeeClothesSize);
+
+            // Neues Clothes mit neuer Bekleidungs-Liste erstellen
+            Employee updatedEmployee = new(commentEmployeeClothesFormViewModel.Employee.GuidID,
                                           commentEmployeeClothesFormViewModel.EmployeeID,
                                           commentEmployeeClothesFormViewModel.EmployeeLastname,
                                           commentEmployeeClothesFormViewModel.EmployeeFirstname,
                                           commentEmployeeClothesFormViewModel.Employee.Comment)
             {
-                Clothes = commentEmployeeClothesFormViewModel.Employee.Clothes
+                Clothes = new ObservableCollection<EmployeeClothesSize>(commentEmployeeClothesFormViewModel.Employee.Clothes
+                .Select(ecs => new EmployeeClothesSize(ecs.GuidID, ecs.Employee, ecs.ClothesSize, ecs.Quantity, ecs.Comment)))
             };
 
-            EmployeeClothesSize? existingItem = employeeToEdit.Clothes
-                .FirstOrDefault(ecs => ecs.GuidID == commentEmployeeClothesFormViewModel.EmployeeClothesSizeGuidID);
-
-            if (existingItem == null)
+            // EmployeeClothesSize den ClothesSize-Listen hinzufügen
+            foreach (EmployeeClothesSize ecs in updatedEmployee.Clothes)
             {
-                string messageBoxText = $"Kommentieren der Bekleidungsgröße ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                string caption = " Bekleidungsgröße kommentieren";
+                ecs.ClothesSize.EmployeeClothesSizes.Add(ecs);
+            }
+
+            try
+            {
+                await _employeeStore.Update(updatedEmployee);
+            }
+            catch (Exception)
+            {
+                string messageBoxText = "Kommentieren der Bekleidungsgröße ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
+                string caption = "Bekleidungsgröße Kommentieren";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
 
                 commentEmployeeClothesFormViewModel.HasError = true;
             }
-            else
+            finally
             {
-                existingItem.Comment = commentEmployeeClothesFormViewModel.Comment;
-
-                try
-                {
-                    await _employeeStore.Update(employeeToEdit);
-                }
-                catch (Exception)
-                {
-                    commentEmployeeClothesFormViewModel.ErrorMessage = "Bearbeiten des Kommentar ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                }
-                finally
-                {
-                    commentEmployeeClothesFormViewModel.IsSubmitting = false;
-                    _modalNavigationStore.Close();
-                }
+                commentEmployeeClothesFormViewModel.IsSubmitting = false;
+                _modalNavigationStore.Close();
             }
         }
     }

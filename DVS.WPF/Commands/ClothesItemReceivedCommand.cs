@@ -1,56 +1,57 @@
 ﻿using DVS.Domain.Models;
-using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace DVS.WPF.Commands
 {
-    public class ClothesItemReceivedCommand(
-        DVSListingViewModel dVSListingViewModel, ClothesStore clothesStore) : AsyncCommandBase
+    public class ClothesItemReceivedCommand(DetailedClothesListingItemViewModel selectedDetailedClothesItem,
+                                            Action<Clothes> addItemToAvailableSizes,
+                                            Action<Clothes> addItemToEmployeeClothesList)
+                                            : AsyncCommandBase
     {
-        private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
-        private readonly ClothesStore _clothesStore = clothesStore;
+        private readonly DetailedClothesListingItemViewModel _selectedDetailedClothesItem = selectedDetailedClothesItem;
+
+        public readonly Action<Clothes> _addItemToAvailableSizes = addItemToAvailableSizes;
+        public readonly Action<Clothes> _addItemToEmployeeClothesList = addItemToEmployeeClothesList;
 
         public override async Task ExecuteAsync(object parameter)
         {
-            if (parameter.Equals("AddEditEmployeeNewEmployeeClothesList"))
-                _dVSListingViewModel.AddClothesItemToNewEmployeeListingItemCollection();
-            else
+            if (_selectedDetailedClothesItem == null || _selectedDetailedClothesItem.Quantity == 0)
             {
-                DetailedClothesListingItemViewModel? existingItem = _dVSListingViewModel.DetailedClothesListingItemCollection
-                .FirstOrDefault(modelItem => modelItem.ID == _dVSListingViewModel.IncomingClothesListingItemModel.ID
-                && modelItem.Size == _dVSListingViewModel.IncomingClothesListingItemModel.Size);
+                return;
+            }
 
-                Clothes clothes = new(_dVSListingViewModel.IncomingClothesListingItemModel.Clothes.GuidID,
-                                      _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.ID,
-                                      _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.Name,
-                                      _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.Category,
-                                      _dVSListingViewModel.IncomingClothesListingItemModel.Clothes.Season,
-                                      null);
+            // Menge erhöhen der verschobenen Kleidungsgröße
+            ClothesSize editedItem = new(_selectedDetailedClothesItem.ClothesSize.GuidID,
+                                         _selectedDetailedClothesItem.Clothes,
+                                         _selectedDetailedClothesItem.ClothesSize.Size,
+                                         _selectedDetailedClothesItem.ClothesSize.Quantity + 1,
+                                         _selectedDetailedClothesItem.ClothesSize.Comment);
 
-                _dVSListingViewModel.RemovedClothesListingItemModel.ErrorMessage = null;
+            // Geänderte Clothes-Instanz erstellen und übergeben für späteres update in DB und ClothesStore
+            Clothes editedClothes = new(_selectedDetailedClothesItem.Clothes.GuidID,
+                                        _selectedDetailedClothesItem.Clothes.ID,
+                                        _selectedDetailedClothesItem.Clothes.Name,
+                                        _selectedDetailedClothesItem.Clothes.Category,
+                                        _selectedDetailedClothesItem.Clothes.Season,
+                                        _selectedDetailedClothesItem.Clothes.Comment)
+            {
+                Sizes = new ObservableCollection<ClothesSize>(_selectedDetailedClothesItem.Clothes.Sizes
+                    .Select(s => new ClothesSize(s.GuidID, s.Clothes, s.Size, s.Quantity, s.Comment)))
+            };
 
-                if (existingItem == null)
-                {
-                    _dVSListingViewModel.RemovedClothesListingItemModel.ErrorMessage =
-                        "Verschieben der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                }
-                else
-                {
-                    clothes.Sizes = existingItem.Clothes.Sizes;
-                    var size = existingItem.Clothes.Sizes
-                        .FirstOrDefault(modelItem => modelItem.Size.Size == _dVSListingViewModel.IncomingClothesListingItemModel.Size);
-                    size.Quantity++;
+            // Alte Bekleidungsgrößen entfernen und neue hinzufügen
+            ClothesSize itemToRemove = editedClothes.Sizes.FirstOrDefault(cs => cs.GuidID == editedItem.GuidID);
+            editedClothes.Sizes.Remove(itemToRemove);
+            editedClothes.Sizes.Add(editedItem);
 
-                    try
-                    {
-                        await _clothesStore.DragNDropUpdate(clothes);
-                    }
-                    catch (Exception)
-                    {
-                        dVSListingViewModel.RemovedClothesListingItemModel.ErrorMessage =
-                            "Verschieben der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                    }
-                }
+            if (parameter.Equals("EmployeeClothesList"))
+            {
+                _addItemToEmployeeClothesList?.Invoke(editedClothes);
+            }
+            else
+            {                        
+                _addItemToAvailableSizes?.Invoke(editedClothes);
             }
         }
     }

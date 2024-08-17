@@ -15,7 +15,7 @@ namespace DVS.WPF.ViewModels
         public string? ClothesID => EmployeeClothesSize?.ClothesSize.Clothes.ID ?? null;
         public string? ClothesName => EmployeeClothesSize?.ClothesSize.Clothes.Name ?? null;
         public string? Size => EmployeeClothesSize?.ClothesSize.Size.Size ?? null;
-        public int? Quantity => EmployeeClothesSize?.Quantity ?? 0;
+        public int? Quantity => EmployeeClothesSize?.Quantity ?? null;
         public string? Comment => EmployeeClothesSize?.Comment ?? null;
 
         public void Update(Employee employee, EmployeeClothesSize? employeeClothesSize)

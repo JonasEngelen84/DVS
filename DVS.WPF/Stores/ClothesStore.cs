@@ -53,25 +53,24 @@ namespace DVS.WPF.Stores
 
         public async Task Add(Clothes clothes)
         {
+            foreach (var clothesSize in clothes.Sizes)
+            {
+                AddClothesSize(clothesSize);
+            }
+
             //await _createClothesCommand.Execute(clothes);
-
-            //foreach (var clothesSize in clothes.Sizes)
-            //{
-            //    AddClothesSize(clothesSize);
-            //}
-
             _clothes.Add(clothes);
             ClothesAdded.Invoke(clothes);
         }
 
         public async Task Update(Clothes clothes)
         {
-            //await _updateClothesCommand.Execute(clothes);
+            foreach (var clothesSize in clothes.Sizes)
+            {
+                UpdateClothesSize(clothesSize);
+            }
 
-            //foreach (var clothesSize in clothes.Sizes)
-            //{
-            //    UpdateClothesSize(clothesSize);
-            //}
+            //await _updateClothesCommand.Execute(clothes);
 
             int index = _clothes.FindIndex(y => y.GuidID == clothes.GuidID);
 
@@ -89,32 +88,14 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(Clothes clothes)
         {
+            foreach (var clothesSize in clothes.Sizes)
+            {
+                DeleteClothesSize(clothesSize.GuidID);
+            }
+
             //await _deleteClothesCommand.Execute(clothes.GuidID);
-
-            //foreach (var clothesSize in clothes.Sizes)
-            //{
-            //    DeleteClothesSize(clothesSize.guidID);
-            //}
-
             _clothes.RemoveAll(y => y.GuidID == clothes.GuidID);
             ClothesDeleted?.Invoke(clothes.GuidID);
-        }
-        
-
-        public async Task DragNDropUpdate(Clothes clothes)
-        {           
-            int index = _clothes.FindIndex(y => y.GuidID == clothes.GuidID);
-
-            if (index != -1)
-            {
-                _clothes[index] = clothes;
-            }
-            else
-            {
-                _clothes.Add(clothes);
-            }
-
-            ClothesUpdated.Invoke(clothes);
         }
 
 

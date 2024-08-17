@@ -7,10 +7,10 @@ namespace DVS.WPF.ViewModels.Forms
                                              ICommand submitCommand,
                                              ICommand openAddEditCategoriesCommand,
                                              ICommand openAddEditSeasonsCommand,
-                                             AddEditListingViewModel addEditListingViewModel)
+                                             AddEditClothesListingViewModel addEditListingViewModel)
                                              : ViewModelBase
     {
-        public AddEditListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
+        public AddEditClothesListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
         public Clothes? Clothes { get; } = clothes;
         public ICommand OpenAddEditCategories { get; } = openAddEditCategoriesCommand;
         public ICommand OpenAddEditSeasons { get; } = openAddEditSeasonsCommand;

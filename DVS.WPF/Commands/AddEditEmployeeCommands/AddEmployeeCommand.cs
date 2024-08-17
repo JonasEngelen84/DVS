@@ -3,14 +3,14 @@ using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
-using System.Windows.Controls;
 using System.Windows;
-using System;
 
 namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
-    public class AddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel, EmployeeStore employeeStore,
-        ModalNavigationStore modalNavigationStore) : AsyncCommandBase
+    public class AddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel,
+                                    EmployeeStore employeeStore,
+                                    ModalNavigationStore modalNavigationStore)
+                                    : AsyncCommandBase
     {
         private readonly AddEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
@@ -29,7 +29,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                                     addEmployeeFormViewModel.Lastname,
                                     addEmployeeFormViewModel.Comment);
 
-            foreach (DetailedClothesListingItemViewModel item in addEmployeeFormViewModel.DVSListingViewModel.NewEmployeeListingItemCollection)
+            foreach (DetailedClothesListingItemViewModel item in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 item.ClothesSize.EmployeeClothesSizes.Add(new EmployeeClothesSize(Guid.NewGuid(), employee, item.ClothesSize, (int)item.Quantity, null));
                 employee.Clothes.Add(new EmployeeClothesSize(Guid.NewGuid(), employee, item.ClothesSize, (int)item.Quantity, null));
