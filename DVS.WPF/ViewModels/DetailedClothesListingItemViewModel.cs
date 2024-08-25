@@ -14,7 +14,7 @@ namespace DVS.WPF.ViewModels
         public Guid? ClothesSizeGuidID => ClothesSize?.GuidID ?? null;
         public string? Size => ClothesSize?.Size.Size ?? null;
         public int? Quantity => ClothesSize?.Quantity ?? null;
-        public string? Comment => ClothesSize?.Comment ?? null;
+        public string? Comment => ClothesSize?.Comment ?? "";
 
         public bool HasError;
 

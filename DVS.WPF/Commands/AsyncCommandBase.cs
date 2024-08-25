@@ -34,8 +34,8 @@ namespace DVS.WPF.Commands
             }
             catch (Exception) 
             {
-                string messageBoxText = "Bekleidung bearbeiten ist fehgeschlagen!";
-                string caption = "Bekleidung bearbeiten";
+                string messageBoxText = "Auftretender Fehler!";
+                string caption = "Error";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);

@@ -83,7 +83,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 }
                 catch (Exception)
                 {
-                    //ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung bearbeiten");
+                    ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", "Bekleidung bearbeiten");
                     editClothesFormViewModel.HasError = true;
                 }
             }
@@ -131,21 +131,6 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                             ecs.Comment)))
                 }));
 
-            foreach (ClothesSize cs in updatedClothes.Sizes)
-            {
-                cs.Size.ClothesSizes.Add(cs);
-
-                try
-                {
-                    await _clothesStore.UpdateClothesSize(cs);
-                }
-                catch (Exception)
-                {
-                    //ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", "Bekleidung bearbeiten");
-                    editClothesFormViewModel.HasError = true;
-                }
-            }
-
             updatedClothes.Category?.Clothes.Remove(editClothesFormViewModel.Clothes);
             updatedClothes.Category?.Clothes.Add(updatedClothes);
             updatedClothes.Season?.Clothes.Remove(editClothesFormViewModel.Clothes);
@@ -157,9 +142,16 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
             catch (Exception)
             {
-                //ShowErrorMessageBox("Update der Bekleidung ist fehlgeschlagen!", "Bekleidung bearbeiten");
+                ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", "Bekleidung bearbeiten");
                 editClothesFormViewModel.HasError = true;
             }
+        }
+
+        private void ShowErrorMessageBox(string message, string title)
+        {
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBox.Show(message, title, button, icon);
         }
     }
 }
