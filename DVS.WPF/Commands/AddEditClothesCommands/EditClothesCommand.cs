@@ -15,7 +15,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
         private readonly EditClothesViewModel _editClothesViewModel = editClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
-
+        //teeeeeeeeeeeeeest
         public override async Task ExecuteAsync(object parameter)
         {
             if (ConfirmEditClothes())
