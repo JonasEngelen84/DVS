@@ -4,6 +4,7 @@ using DVS.Domain.Commands.ClothesSize;
 using DVS.Domain.Commands.Employee;
 using DVS.Domain.Commands.EmployeeClothesSize;
 using DVS.Domain.Commands.Season;
+using DVS.Domain.Commands.Size;
 using DVS.Domain.Queries;
 using DVS.EntityFramework;
 using DVS.EntityFramework.Commands.Category;
@@ -12,6 +13,7 @@ using DVS.EntityFramework.Commands.ClothesSize;
 using DVS.EntityFramework.Commands.Employee;
 using DVS.EntityFramework.Commands.EmployeeClothesSize;
 using DVS.EntityFramework.Commands.Season;
+using DVS.EntityFramework.Commands.Size;
 using DVS.EntityFramework.Queries;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
@@ -66,6 +68,7 @@ namespace DVS.WPF
         private readonly IDeleteEmployeeClothesSizeCommand _deleteEmployeeClothesSizeCommand;
 
         private readonly IGetAllSizesQuery _getAllSizesQuery;
+        private readonly IUpdateSizeCommand _updateSizeCommand;
 
         public App()
         {
@@ -101,12 +104,13 @@ namespace DVS.WPF
             _deleteEmployeeClothesSizeCommand = new DeleteEmployeeClothesSizeCommand(_dVSDbContextFactory);
 
             _getAllSizesQuery = new GetAllSizesQuery(_dVSDbContextFactory);
-            
+            _updateSizeCommand = new UpdateSizeCommand(_dVSDbContextFactory);
+
             _modalNavigationStore = new();
             _selectedDetailedClothesItemStore = new();
             _selectedDetailedEmployeeClothesItemStore = new();
                         
-            _sizeStore = new(_getAllSizesQuery);
+            _sizeStore = new(_getAllSizesQuery, _updateSizeCommand);
 
             _categoryStore = new(_getAllCategoriesQuery,
                                  _createCategoryCommand,

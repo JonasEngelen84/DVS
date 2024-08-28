@@ -1,11 +1,13 @@
-﻿using DVS.Domain.Models;
+﻿using DVS.Domain.Commands.Size;
+using DVS.Domain.Models;
 using DVS.Domain.Queries;
 
 namespace DVS.WPF.Stores
 {
-    public class SizeStore(IGetAllSizesQuery getAllSizesQuery)
+    public class SizeStore(IGetAllSizesQuery getAllSizesQuery, IUpdateSizeCommand updateSizeCommand)
     {
         private readonly IGetAllSizesQuery _getAllSizesQuery = getAllSizesQuery;
+        private readonly IUpdateSizeCommand _updateSizeCommand = updateSizeCommand;
 
         private readonly List<SizeModel> _sizes =
             [
@@ -47,8 +49,24 @@ namespace DVS.WPF.Stores
             }
             catch (Exception ex)
             {
-                //TODO: Fehlerbehandlung beim laden der aus DB
+                //TODO: Fehlerbehandlung beim laden der Größen aus DB
                 Console.WriteLine($"Fehler beim Laden der Größen: {ex.Message}");
+            }
+        }
+
+        public async Task Update(SizeModel size)
+        {
+            //await _updateSizeCommand.Execute(size);
+
+            int index = _sizes.FindIndex(y => y.GuidID == size.GuidID);
+
+            if (index != -1)
+            {
+                _sizes[index] = size;
+            }
+            else
+            {
+                _sizes.Add(size);
             }
         }
     }

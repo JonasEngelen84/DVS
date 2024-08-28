@@ -53,7 +53,7 @@ namespace DVS.WPF.Stores
             CategoryAdded.Invoke(newCategory, addEditCategoryFormViewModel);
         }
 
-        public async Task Update(Category updatedCategory, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Update(Category updatedCategory, AddEditCategoryFormViewModel? addEditCategoryFormViewModel)
         {
             //await _updateCategoryCommand.Execute(category);
 
@@ -62,7 +62,7 @@ namespace DVS.WPF.Stores
             if (index > -1)
             {
                 _categories[index] = updatedCategory;
-                CategoryUpdated.Invoke(updatedCategory, addEditCategoryFormViewModel);
+                CategoryUpdated.Invoke(updatedCategory, addEditCategoryFormViewModel != null ? addEditCategoryFormViewModel : null);
             }
             else
             {

@@ -129,7 +129,7 @@ namespace DVS.WPF.ViewModels
             addEditSeasonFormViewModel.AddNewSeason = "Neue Saison";
         }
 
-        private void SeasonStore_SeasonUpdated(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        private void SeasonStore_SeasonUpdated(Season season, AddEditSeasonFormViewModel? addEditSeasonFormViewModel)
         {
             Season seasonToUpdate = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
 
@@ -138,9 +138,13 @@ namespace DVS.WPF.ViewModels
                 int index = _seasons.IndexOf(seasonToUpdate);
                 _seasons[index] = season;
                 _seasonCollectionViewSource.View.Refresh();
-                addEditSeasonFormViewModel.SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
-                addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
-                OnPropertyChanged(nameof(addEditSeasonFormViewModel.CanEdit));
+
+                if (addEditSeasonFormViewModel != null)
+                {
+                    addEditSeasonFormViewModel.SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
+                    addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
+                    OnPropertyChanged(nameof(addEditSeasonFormViewModel.CanEdit));
+                }
             }
             else
             {
@@ -183,7 +187,7 @@ namespace DVS.WPF.ViewModels
             addEditCategoryFormViewModel.AddNewCategory = "Neue Kategorie";
         }
 
-        private void CategoryStore_CategoryUpdated(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        private void CategoryStore_CategoryUpdated(Category category, AddEditCategoryFormViewModel? addEditCategoryFormViewModel)
         {
             Category categoryToUpdate = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
 
@@ -192,9 +196,13 @@ namespace DVS.WPF.ViewModels
                 int index = _categories.IndexOf(categoryToUpdate);
                 _categories[index] = category;
                 _categoryCollectionViewSource.View.Refresh();
-                addEditCategoryFormViewModel.SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen");
-                addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
-                OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanEdit));
+
+                if (addEditCategoryFormViewModel != null)
+                {
+                    addEditCategoryFormViewModel.SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen");
+                    addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
+                    OnPropertyChanged(nameof(addEditCategoryFormViewModel.CanEdit));
+                }
             }
             else
             {

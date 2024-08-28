@@ -53,7 +53,7 @@ namespace DVS.WPF.Stores
             SeasonAdded.Invoke(newSeason, addEditSeasonFormViewModel);
         }
 
-        public async Task Update(Season updatedSeason, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        public async Task Update(Season updatedSeason, AddEditSeasonFormViewModel? addEditSeasonFormViewModel)
         {
             //await _updateSeasonCommand.Execute(season);
 
@@ -62,7 +62,7 @@ namespace DVS.WPF.Stores
             if (index > -1)
             {
                 _seasons[index] = updatedSeason;
-                SeasonUpdated.Invoke(updatedSeason, addEditSeasonFormViewModel);
+                SeasonUpdated.Invoke(updatedSeason, addEditSeasonFormViewModel != null ? addEditSeasonFormViewModel : null);
             }
             else
             {

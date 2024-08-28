@@ -9,13 +9,19 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 {
     public class EditClothesCommand(EditClothesViewModel editClothesViewModel,
                                     ClothesStore clothesStore,
+                                    SizeStore sizeStore,
+                                    CategoryStore categoryStore,
+                                    SeasonStore seasonStore,
                                     ModalNavigationStore modalNavigationStore) 
                                     : AsyncCommandBase
     {
         private readonly EditClothesViewModel _editClothesViewModel = editClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
+        private readonly SizeStore _sizeStore = sizeStore;
+        private readonly CategoryStore _categoryStore = categoryStore;
+        private readonly SeasonStore _seasonStore = seasonStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
-        //teeeeeeeeeeeeeest
+        
         public override async Task ExecuteAsync(object parameter)
         {
             if (ConfirmEditClothes())
@@ -41,13 +47,13 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             editClothesFormViewModel.IsSubmitting = true;
 
             var selectedSizes = GetSelectedSizes(editClothesFormViewModel);
-            var clothesSizesToRemove = IdentifySizesToRemove(editClothesFormViewModel, selectedSizes);
+            var clothesSizesToRemove = IdentifyRemovedSizes(editClothesFormViewModel, selectedSizes);
 
-            await RemoveOldSizesAsync(editClothesFormViewModel, clothesSizesToRemove);
+            await RemoveRemovedSizesAsync(editClothesFormViewModel, clothesSizesToRemove);
 
             Clothes updatedClothes = CreateUpdatedClothesInstance(editClothesFormViewModel);
             
-            AddNewSizes(editClothesFormViewModel, selectedSizes, updatedClothes);
+            AddClothesSizesAsync(editClothesFormViewModel, selectedSizes, updatedClothes);
 
             await UpdateSizesAndClothesAsync(editClothesFormViewModel, updatedClothes);
 
@@ -63,22 +69,23 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 .ToList();
         }
 
-        private List<ClothesSize> IdentifySizesToRemove(AddEditClothesFormViewModel editClothesFormViewModel, List<SizeModel> selectedSizes)
+        private List<ClothesSize> IdentifyRemovedSizes(AddEditClothesFormViewModel editClothesFormViewModel, List<SizeModel> selectedSizes)
         {
             return editClothesFormViewModel.Clothes.Sizes
                 .Where(cs => selectedSizes.All(y => y.GuidID != cs.SizeGuidID))
                 .ToList();
         }
 
-        private async Task RemoveOldSizesAsync(AddEditClothesFormViewModel editClothesFormViewModel, List<ClothesSize> clothesSizesToRemove)
+        private async Task RemoveRemovedSizesAsync(AddEditClothesFormViewModel editClothesFormViewModel, List<ClothesSize> clothesSizesToRemove)
         {
-            foreach (var cs in clothesSizesToRemove)
+            foreach (ClothesSize cs in clothesSizesToRemove)
             {
                 cs.Size.ClothesSizes.Remove(cs);
                 editClothesFormViewModel.Clothes.Sizes.Remove(cs);
 
                 try
                 {
+                    await _sizeStore.Update(cs.Size);
                     await _clothesStore.DeleteClothesSize(cs.GuidID);
                 }
                 catch (Exception)
@@ -101,41 +108,69 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             );
         }
 
-        private void AddNewSizes(AddEditClothesFormViewModel editClothesFormViewModel, List<SizeModel> selectedSizes, Clothes updatedClothes)
+        private async Task AddClothesSizesAsync(AddEditClothesFormViewModel editClothesFormViewModel, List<SizeModel> selectedSizes, Clothes updatedClothes)
         {
             foreach (SizeModel size in selectedSizes)
             {
-                ClothesSize? itemToUpdate = editClothesFormViewModel.Clothes.Sizes.FirstOrDefault(y => y.SizeGuidID == size.GuidID);
+                ClothesSize existingClothesSize = editClothesFormViewModel.Clothes.Sizes.FirstOrDefault(cs => cs.Size.GuidID == size.GuidID);
+                SizeModel existingSize = existingClothesSize?.Size;
+                ClothesSize newClothesSize;
 
-                if (itemToUpdate == null)
+                if (existingClothesSize != null)
                 {
-                    ClothesSize newClothesSize = new(Guid.NewGuid(), updatedClothes, size, size.Quantity, null);
-                    updatedClothes.Sizes.Add(newClothesSize);
-                    size.ClothesSizes.Add(newClothesSize);
-                }
-            }
-        }
-
-        private async Task UpdateSizesAndClothesAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes)
-        {
-            updatedClothes.Sizes = new ObservableCollection<ClothesSize>(
-                editClothesFormViewModel.Clothes.Sizes.Select(cs => new ClothesSize(
-                    cs.GuidID, updatedClothes, cs.Size, cs.Quantity, cs.Comment)
-                {
-                    EmployeeClothesSizes = new ObservableCollection<EmployeeClothesSize>(
-                        cs.EmployeeClothesSizes.Select(ecs => new EmployeeClothesSize(
+                    newClothesSize = new(existingSize.GuidID, updatedClothes, size, size.Quantity, existingClothesSize.Comment)
+                    {
+                        EmployeeClothesSizes = new ObservableCollection<EmployeeClothesSize>(
+                        existingClothesSize.EmployeeClothesSizes.Select(ecs => new EmployeeClothesSize(
                             ecs.GuidID,
                             ecs.Employee,
                             editClothesFormViewModel.Clothes.Sizes.FirstOrDefault(s => s.Size == ecs.ClothesSize.Size),
                             ecs.Quantity,
                             ecs.Comment)))
-                }));
+                    };
 
-            updatedClothes.Category?.Clothes.Remove(editClothesFormViewModel.Clothes);
-            updatedClothes.Category?.Clothes.Add(updatedClothes);
-            updatedClothes.Season?.Clothes.Remove(editClothesFormViewModel.Clothes);
-            updatedClothes.Season?.Clothes.Add(updatedClothes);
+                    updatedClothes.Sizes.Add(newClothesSize);
+                    size.ClothesSizes.Add(newClothesSize);
 
+                    try
+                    {
+                        await _sizeStore.Update(size);
+                        await _clothesStore.UpdateClothesSize(newClothesSize);
+                    }
+                    catch (Exception)
+                    {
+                        ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", "Bekleidung bearbeiten");
+                        editClothesFormViewModel.HasError = true;
+                    }
+                }
+                else
+                {
+                    newClothesSize = new(Guid.NewGuid(), updatedClothes, size, size.Quantity, "");
+
+                    updatedClothes.Sizes.Add(newClothesSize);
+                    size.ClothesSizes.Add(newClothesSize);
+
+                    try
+                    {
+                        await _sizeStore.Update(size);
+                        await _clothesStore.AddClothesSize(newClothesSize);
+                    }
+                    catch (Exception)
+                    {
+                        ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", "Bekleidung bearbeiten");
+                        editClothesFormViewModel.HasError = true;
+                    }
+                }
+
+                updatedClothes.Category?.Clothes.Remove(editClothesFormViewModel.Clothes);
+                updatedClothes.Category?.Clothes.Add(updatedClothes);
+                updatedClothes.Season?.Clothes.Remove(editClothesFormViewModel.Clothes);
+                updatedClothes.Season?.Clothes.Add(updatedClothes);
+            }
+        }
+
+        private async Task UpdateSizesAndClothesAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes)
+        {            
             try
             {
                 await _clothesStore.Update(updatedClothes);

@@ -1,5 +1,4 @@
 ﻿using DVS.Domain.Commands.Season;
-using DVS.Domain.Models;
 using DVS.EntityFramework.DTOs;
 
 namespace DVS.EntityFramework.Commands.Season

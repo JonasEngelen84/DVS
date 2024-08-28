@@ -46,8 +46,8 @@ namespace DVS.WPF.Stores
             }
             catch (Exception ex)
             {
-                //TODO: Fehlerbehandlung beim laden der aus DB
-                Console.WriteLine($"Fehler beim Laden der Clothes: {ex.Message}");
+                //TODO: Fehlerbehandlung beim laden der Bekleidung aus DB
+                Console.WriteLine($"Fehler beim Laden der Bekleidung: {ex.Message}");
             }
         }
 
