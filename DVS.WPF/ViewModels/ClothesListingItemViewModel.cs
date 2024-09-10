@@ -74,7 +74,11 @@ namespace DVS.WPF.ViewModels.ListViewItems
                                            SizeStore sizeStore,
                                            CategoryStore categoryStore,
                                            SeasonStore seasonStore,
-                                           ClothesStore clothesStore)
+                                           ClothesStore clothesStore,
+                                           ClothesSizeStore clothesSizeStore,
+                                           EmployeeClothesSizesStore employeeClothesSizesStore,
+                                           EmployeeStore employeeStore,
+                                           DVSListingViewModel dVSListingViewModel)
         {
             Clothes = clothes;
 
@@ -83,13 +87,32 @@ namespace DVS.WPF.ViewModels.ListViewItems
                                                          sizeStore,
                                                          categoryStore,
                                                          seasonStore,
-                                                         clothesStore);
+                                                         clothesStore,
+                                                         clothesSizeStore,
+                                                         employeeClothesSizesStore,
+                                                         employeeStore,
+                                                         dVSListingViewModel);
 
-            DeleteClothes = new DeleteClothesCommand(this, clothesStore);
-            ClearClothesSizes = new ClearSizesCommand(this, clothesStore);
+            DeleteClothes = new DeleteClothesCommand(this,
+                                                     sizeStore,
+                                                     clothesStore,
+                                                     categoryStore,
+                                                     seasonStore,
+                                                     clothesSizeStore,
+                                                     employeeClothesSizesStore,
+                                                     employeeStore);
+
+            ClearClothesSizes = new ClearSizesCommand(this,
+                                                      sizeStore,
+                                                      clothesStore,
+                                                      categoryStore,
+                                                      seasonStore,
+                                                      clothesSizeStore,
+                                                      employeeClothesSizesStore,
+                                                      employeeStore);
+
             PrintClothes = new OpenPrintClothesCommand();
         }
-
 
         public void Update(Clothes clothes)
         {

@@ -10,10 +10,15 @@ namespace DVS.WPF.ViewModels.Views
         public CommentClothesSizeFormViewModel CommentClothesSizeFormViewModel { get; }
         public ICommand CloseComment { get; }
 
-        public CommentClothesSizeViewModel(ModalNavigationStore modalNavigationStore, ClothesStore clothesStore,
-            SelectedDetailedClothesItemStore selectedDetailedClothesItemStore, DVSListingViewModel dVSListingViewModel)
+        public CommentClothesSizeViewModel(ModalNavigationStore modalNavigationStore,
+                                           ClothesStore clothesStore,
+                                           CategoryStore categoryStore,
+                                           SeasonStore seasonStore,
+                                           ClothesSizeStore clothesSizeStore,
+                                           SelectedDetailedClothesItemStore selectedDetailedClothesItemStore,
+                                           DVSListingViewModel dVSListingViewModel)
         {
-            ICommand submitComment = new SubmitCommentClothesSizeCommand(this, clothesStore, modalNavigationStore);
+            ICommand submitComment = new SubmitCommentClothesSizeCommand(this, clothesStore, categoryStore, seasonStore, clothesSizeStore, modalNavigationStore);
             CloseComment = new CloseCommentCommand(modalNavigationStore, dVSListingViewModel);
 
             CommentClothesSizeFormViewModel = new(submitComment, selectedDetailedClothesItemStore)

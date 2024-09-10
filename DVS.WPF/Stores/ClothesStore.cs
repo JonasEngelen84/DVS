@@ -1,5 +1,4 @@
 ﻿using DVS.Domain.Commands.Clothes;
-using DVS.Domain.Commands.ClothesSize;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
 
@@ -8,18 +7,12 @@ namespace DVS.WPF.Stores
     public class ClothesStore(IGetAllClothesQuery getAllClothesQuery,
                               ICreateClothesCommand createClothesCommand,
                               IUpdateClothesCommand updateClothesCommand,
-                              IDeleteClothesCommand deleteClothesCommand,
-                              ICreateClothesSizeCommand createClothesSizeCommand,
-                              IUpdateClothesSizeCommand updateClothesSizeCommand,
-                              IDeleteClothesSizeCommand deleteClothesSizeCommand)
+                              IDeleteClothesCommand deleteClothesCommand)
     {
         private readonly IGetAllClothesQuery _getAllClothesQuery = getAllClothesQuery;
         private readonly ICreateClothesCommand _createClothesCommand = createClothesCommand;
         private readonly IUpdateClothesCommand _updateClothesCommand = updateClothesCommand;
         private readonly IDeleteClothesCommand _deleteClothesCommand = deleteClothesCommand;
-        private readonly ICreateClothesSizeCommand _createClothesSizeCommand = createClothesSizeCommand;
-        private readonly IUpdateClothesSizeCommand _updateClothesSizeCommand = updateClothesSizeCommand;
-        private readonly IDeleteClothesSizeCommand _deleteClothesSizeCommand = deleteClothesSizeCommand;
 
         private readonly List<Clothes> _clothes = [];
         public IEnumerable<Clothes> Clothes => _clothes;
@@ -53,11 +46,6 @@ namespace DVS.WPF.Stores
 
         public async Task Add(Clothes clothes)
         {
-            foreach (var clothesSize in clothes.Sizes)
-            {
-                AddClothesSize(clothesSize);
-            }
-
             //await _createClothesCommand.Execute(clothes);
             _clothes.Add(clothes);
             ClothesAdded.Invoke(clothes);
@@ -65,11 +53,6 @@ namespace DVS.WPF.Stores
 
         public async Task Update(Clothes clothes)
         {
-            foreach (var clothesSize in clothes.Sizes)
-            {
-                UpdateClothesSize(clothesSize);
-            }
-
             //await _updateClothesCommand.Execute(clothes);
 
             int index = _clothes.FindIndex(y => y.GuidID == clothes.GuidID);
@@ -88,30 +71,9 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(Clothes clothes)
         {
-            foreach (var clothesSize in clothes.Sizes)
-            {
-                DeleteClothesSize(clothesSize.GuidID);
-            }
-
             //await _deleteClothesCommand.Execute(clothes.GuidID);
             _clothes.RemoveAll(y => y.GuidID == clothes.GuidID);
             ClothesDeleted?.Invoke(clothes.GuidID);
-        }
-
-
-        public async Task AddClothesSize(ClothesSize clothesSize)
-        {
-            //await _createClothesSizeCommand.Execute(clothesSize);
-        }
-
-        public async Task UpdateClothesSize(ClothesSize clothesSize)
-        {
-            //await _updateClothesSizeCommand.Execute(clothesSize);
-        }
-
-        public async Task DeleteClothesSize(Guid guidID)
-        {
-            //await _deleteClothesSizeCommand.Execute(guidID);
         }
     }
 }

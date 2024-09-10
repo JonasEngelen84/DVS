@@ -45,15 +45,15 @@ namespace DVS.WPF.Components
 
 
         //TODO: canMove DRINGEND ausbessern
-        private bool canMove = true;
+        //private bool canMove = true;
         private void ClothesItem_MouseMove(object sender, MouseEventArgs e)
         {
-            canMove = true;
+            //canMove = true;
 
             if (e.LeftButton == MouseButtonState.Pressed &&
                 sender is FrameworkElement frameworkElement)
             {
-                canMove = false;
+                //canMove = false;
                 object ClothesItem = frameworkElement.DataContext;
 
                 DragDropEffects dragDropResult = DragDrop.DoDragDrop(frameworkElement,
@@ -69,19 +69,20 @@ namespace DVS.WPF.Components
 
         private void ClothesItemList_Drop(object sender, DragEventArgs e)
         {
-            if (canMove)
+            if (e.Data.GetData(DataFormats.Serializable) is DetailedClothesListingItemViewModel ClothesItem)
             {
-                if (e.Data.GetData(DataFormats.Serializable) is DetailedClothesListingItemViewModel ClothesItem)
+                if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {
-                    if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
-                    {
-                        IncomingClothesItem = e.Data.GetData(DataFormats.Serializable);
-                        AddClothesItem(ClothesItem);
-                        ClothesItemRemovedCommand?.Execute("EmployeeClothesList");
-                    }
+                    IncomingClothesItem = e.Data.GetData(DataFormats.Serializable);
+                    AddClothesItem(ClothesItem);
+                    ClothesItemRemovedCommand?.Execute(null);
                 }
             }
-            canMove = true;
+            //if (canMove)
+            //{
+
+            //}
+            //canMove = true;
         }
 
         private void AddClothesItem(object ClothesItem)
@@ -89,7 +90,7 @@ namespace DVS.WPF.Components
             if (ClothesItemDropCommand?.CanExecute(null) ?? false)
             {
                 IncomingClothesItem = ClothesItem;
-                ClothesItemDropCommand?.Execute("EmployeeClothesList");
+                ClothesItemDropCommand?.Execute(null);
             }
         }
     }

@@ -5,17 +5,16 @@ using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
 {
-    public class CategoryStore(IGetAllCategoriesQuery getAllCategoriesQuery,
-                               ICreateCategoryCommand createCategoryCommand,
-                               IUpdateCategoryCommand updateCategoryCommand,
-                               IDeleteCategoryCommand deleteCategoryCommand)
+    public class CategoryStore
     {
+        public Category Categoryless { get; }
+        
         private readonly IGetAllCategoriesQuery _getAllCategoriesQuery;
-        private readonly ICreateCategoryCommand _createCategoryCommand = createCategoryCommand;
-        private readonly IUpdateCategoryCommand _updateCategoryCommand = updateCategoryCommand;
-        private readonly IDeleteCategoryCommand _deleteCategoryCommand = deleteCategoryCommand;
+        private readonly ICreateCategoryCommand _createCategoryCommand;
+        private readonly IUpdateCategoryCommand _updateCategoryCommand;
+        private readonly IDeleteCategoryCommand _deleteCategoryCommand;
 
-        private readonly List<Category> _categories = [new(Guid.NewGuid(), "OHNE")];
+        private readonly List<Category> _categories = [new(Guid.NewGuid(), "Kategorielos")];
         public IEnumerable<Category> Categories => _categories;
 
         public event Action CategoriesLoaded;
@@ -23,6 +22,18 @@ namespace DVS.WPF.Stores
         public event Action<Category, AddEditCategoryFormViewModel> CategoryUpdated;
         public event Action<Guid, AddEditCategoryFormViewModel> CategoryDeleted;
         public event Action<AddEditCategoryFormViewModel> AllCategoriesDeleted;
+
+        public CategoryStore(IGetAllCategoriesQuery getAllCategoriesQuery,
+                             ICreateCategoryCommand createCategoryCommand,
+                             IUpdateCategoryCommand updateCategoryCommand,
+                             IDeleteCategoryCommand deleteCategoryCommand)
+        {
+            Categoryless =_categories.FirstOrDefault(cat => cat.Name.Equals("Kategorielos"));
+
+            _createCategoryCommand = createCategoryCommand;
+            _updateCategoryCommand = updateCategoryCommand;
+            _deleteCategoryCommand = deleteCategoryCommand;
+        }
 
         public async Task Load()
         {

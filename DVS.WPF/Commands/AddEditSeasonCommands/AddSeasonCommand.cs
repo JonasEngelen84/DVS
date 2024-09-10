@@ -25,11 +25,7 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
             }
             catch (Exception)
             {
-                string messageBoxText = "Erstellen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                string caption = "Saison erstellen";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+                ShowErrorMessageBox("Erstellen der Saison ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Saison erstellen");
 
                 addEditSeasonFormViewModel.HasError = true;
             }
@@ -37,6 +33,13 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
             {
                 addEditSeasonFormViewModel.IsSubmitting = false;
             }
+        }
+
+        private void ShowErrorMessageBox(string message, string title)
+        {
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBox.Show(message, title, button, icon);
         }
     }
 }

@@ -30,12 +30,15 @@ namespace DVS.WPF
         private readonly ClothesStore _clothesStore;
         private readonly EmployeeStore _employeeStore;
         private readonly SizeStore _sizeStore;
+        private readonly ClothesSizeStore _clothesSizeStore;
+        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore;
         private readonly ModalNavigationStore _modalNavigationStore;
         private readonly DVSListingViewModel _dVSListingViewModel;
         private readonly DVSDetailedViewModel _dVSDetailedViewModel;
         private readonly DVSHeadViewModel _dVSHeadViewModel;
         private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore;
         private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore;
+        private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel;
 
         private readonly DVSDbContextFactory _dVSDbContextFactory;
 
@@ -59,10 +62,12 @@ namespace DVS.WPF
         private readonly IUpdateEmployeeCommand _updateEmployeeCommand;
         private readonly IDeleteEmployeeCommand _deleteEmployeeCommand;
 
+        private readonly IGetAllClothesSizesQuery _getAllClothesSizesQuery;
         private readonly ICreateClothesSizeCommand _createClothesSizeCommand;
         private readonly IUpdateClothesSizeCommand _updateClothesSizeCommand;
         private readonly IDeleteClothesSizeCommand _deleteClothesSizeCommand;
 
+        private readonly IGetAllEmployeeClothesSizesQuery _getAllEmployeeClothesSizesQuery;
         private readonly ICreateEmployeeClothesSizeCommand _createEmployeeClothesSizeCommand;
         private readonly IUpdateEmployeeClothesSizeCommand _updateEmployeeClothesSizeCommand;
         private readonly IDeleteEmployeeClothesSizeCommand _deleteEmployeeClothesSizeCommand;
@@ -95,10 +100,12 @@ namespace DVS.WPF
             _updateEmployeeCommand = new UpdateEmployeeCommand(_dVSDbContextFactory);
             _deleteEmployeeCommand = new DeleteEmployeeCommand(_dVSDbContextFactory);
 
+            _getAllClothesSizesQuery = new GetAllClothesSizesQuery(_dVSDbContextFactory);
             _createClothesSizeCommand = new CreateClothesSizeCommand(_dVSDbContextFactory);
             _updateClothesSizeCommand = new UpdateClothesSizeCommand(_dVSDbContextFactory);
             _deleteClothesSizeCommand = new DeleteClothesSizeCommand(_dVSDbContextFactory);
 
+            _getAllEmployeeClothesSizesQuery = new GetAllEmployeeClothesSizesQuery(_dVSDbContextFactory);
             _createEmployeeClothesSizeCommand = new CreateEmployeeClothesSizeCommand(_dVSDbContextFactory);
             _updateEmployeeClothesSizeCommand = new UpdateEmployeeClothesSizeCommand(_dVSDbContextFactory);
             _deleteEmployeeClothesSizeCommand = new DeleteEmployeeClothesSizeCommand(_dVSDbContextFactory);
@@ -125,18 +132,24 @@ namespace DVS.WPF
             _clothesStore = new(_getAllClothesQuery,
                                 _createClothesCommand,
                                 _updateClothesCommand,
-                                _deleteClothesCommand,
-                                _createClothesSizeCommand,
-                                _updateClothesSizeCommand,
-                                _deleteClothesSizeCommand);
+                                _deleteClothesCommand);
+
+            _clothesSizeStore = new(_getAllClothesSizesQuery,
+                                    _createClothesSizeCommand,
+                                    _updateClothesSizeCommand,
+                                    _deleteClothesSizeCommand);
+
+            _employeeClothesSizesStore = new(_getAllEmployeeClothesSizesQuery,
+                                             _createEmployeeClothesSizeCommand,
+                                             _updateEmployeeClothesSizeCommand,
+                                             _deleteEmployeeClothesSizeCommand);
 
             _employeeStore = new(_getAllEmployeesQuery,
                                  _createEmployeeCommand,
                                  _updateEmployeeCommand,
-                                 _deleteEmployeeCommand,
-                                 _createEmployeeClothesSizeCommand,
-                                 _updateEmployeeClothesSizeCommand,
-                                 _deleteEmployeeClothesSizeCommand);
+                                 _deleteEmployeeCommand);
+
+            _addEditEmployeeListingViewModel = new(_clothesStore);
 
             _dVSListingViewModel = new(_sizeStore, 
                                        _clothesStore,
@@ -144,8 +157,11 @@ namespace DVS.WPF
                                        _modalNavigationStore,
                                        _categoryStore,
                                        _seasonStore,
+                                       _clothesSizeStore,
+                                       _employeeClothesSizesStore,
                                        _selectedDetailedClothesItemStore,
-                                       _selectedDetailedEmployeeClothesItemStore);
+                                       _selectedDetailedEmployeeClothesItemStore,
+                                       _addEditEmployeeListingViewModel);
 
             _dVSDetailedViewModel = new(_dVSListingViewModel,
                                         _modalNavigationStore,
@@ -153,18 +169,23 @@ namespace DVS.WPF
                                         _categoryStore,
                                         _seasonStore,
                                         _clothesStore,
+                                        _clothesSizeStore,
+                                        _employeeClothesSizesStore,
                                         _employeeStore,
                                         _selectedDetailedClothesItemStore,
-                                        _selectedDetailedEmployeeClothesItemStore);
+                                        _selectedDetailedEmployeeClothesItemStore,
+                                        _addEditEmployeeListingViewModel);
 
             _dVSHeadViewModel = new(_dVSListingViewModel,
+                                    _addEditEmployeeListingViewModel,
                                     _modalNavigationStore,
                                     _sizeStore,
                                     _categoryStore,
                                     _seasonStore,
                                     _clothesStore,
+                                    _clothesSizeStore,
+                                    _employeeClothesSizesStore,
                                     _employeeStore);
-
         }
 
         protected override void OnStartup(StartupEventArgs e)

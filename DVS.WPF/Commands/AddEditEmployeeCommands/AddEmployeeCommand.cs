@@ -9,11 +9,22 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
     public class AddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel,
                                     EmployeeStore employeeStore,
+                                    ClothesStore clothesStore,
+                                    SizeStore sizeStore,
+                                    CategoryStore categoryStore,
+                                    SeasonStore seasonStore,
+                                    ClothesSizeStore clothesSizeStore,
+                                    EmployeeClothesSizesStore employeeClothesSizesStore,
                                     ModalNavigationStore modalNavigationStore)
                                     : AsyncCommandBase
     {
         private readonly AddEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
+        private readonly SizeStore _sizeStore = sizeStore;
+        private readonly CategoryStore _categoryStore = categoryStore;
+        private readonly SeasonStore _seasonStore = seasonStore;
+        private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
+        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore = employeeClothesSizesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
         public override async Task ExecuteAsync(object parameter)

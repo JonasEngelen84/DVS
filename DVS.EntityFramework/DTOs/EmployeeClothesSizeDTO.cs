@@ -6,6 +6,6 @@
         public Guid EmployeeGuidID { get; set; }
         public Guid ClothesSizeGuidID { get; set; }
         public int Quantity { get; set; }
-        public string? Comment { get; set; }
+        public string Comment { get; set; }
     }
 }

@@ -14,18 +14,12 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
-            addEditCategoryFormViewModel.HasError = false;
-            addEditCategoryFormViewModel.IsSubmitting = true;
 
-            string messageBoxText = $"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
-                    $"\"{addEditCategoryFormViewModel.EditSelectedCategory}\" umbenannt.\n\nUmbennen fortsetzen?";
-            string caption = "Kategorie bearbeiten";
-            MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
-
-            if (dialog == MessageBoxResult.Yes)
+            if (ConfirmEditCategory(addEditCategoryFormViewModel))
             {
+                addEditCategoryFormViewModel.HasError = false;
+                addEditCategoryFormViewModel.IsSubmitting = true;
+
                 Category updatedCategory = new(addEditCategoryFormViewModel.SelectedCategory.GuidID, addEditCategoryFormViewModel.EditSelectedCategory);
 
                 try
@@ -34,11 +28,7 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
                 }
                 catch (Exception)
                 {
-                    messageBoxText = "Bearbeiten der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                    caption = "Kategorie bearbeiten";
-                    button = MessageBoxButton.OK;
-                    icon = MessageBoxImage.Warning;
-                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+                    ShowErrorMessageBox("Umbenennen der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Kategorie umbenennen");
 
                     addEditCategoryFormViewModel.HasError = true;
                 }
@@ -47,6 +37,24 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
                     addEditCategoryFormViewModel.IsSubmitting = false;
                 }
             }
+        }
+
+        private bool ConfirmEditCategory(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        {
+            string messageBoxText = $"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
+                    $"\"{addEditCategoryFormViewModel.EditSelectedCategory}\" umbenannt.\n\nUmbennen fortsetzen?";
+            string caption = "Kategorie umbenennen";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+            return dialog == MessageBoxResult.Yes;
+        }
+
+        private void ShowErrorMessageBox(string message, string title)
+        {
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBox.Show(message, title, button, icon);
         }
     }
 }

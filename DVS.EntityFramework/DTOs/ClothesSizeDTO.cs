@@ -9,7 +9,7 @@ namespace DVS.EntityFramework.DTOs
         public Guid ClothesGuidID { get; set; }
         public Guid SizeGuidID { get; set; }
         public int Quantity { get; set; }
-        public string? Comment { get; set; }
+        public string Comment { get; set; }
 
         public ObservableCollection<EmployeeClothesSize> EmployeeClothesSizes { get; set; } = [];
     }

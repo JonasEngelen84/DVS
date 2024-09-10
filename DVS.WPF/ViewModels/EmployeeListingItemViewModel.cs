@@ -71,14 +71,21 @@ namespace DVS.WPF.ViewModels.ListViewItems
         public EmployeeListingItemViewModel(Employee employee,
                                             DVSListingViewModel dVSListingViewModel,
                                             ModalNavigationStore modalNavigationStore,
+                                            AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
                                             EmployeeStore employeeStore,
                                             ClothesStore clothesStore)
         {
             Employee = employee;
-            OpenEditEmployee = new OpenEditEmployeeCommand(this, modalNavigationStore, employeeStore, clothesStore, dVSListingViewModel);
             DeleteEmployee = new DeleteEmployeeCommand(this, employeeStore);
             ClearEmpoyeeClothesList = new ClearEmployeeClothesListCommand(this, employeeStore);
             PrintEmployee = new OpenPrintEmployeeCommand();
+
+            OpenEditEmployee = new OpenEditEmployeeCommand(this,
+                                                           modalNavigationStore,
+                                                           employeeStore,
+                                                           clothesStore,
+                                                           dVSListingViewModel,
+                                                           addEditEmployeeListingViewModel);
         }
 
         public void Update(Employee employee)

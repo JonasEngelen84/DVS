@@ -1,7 +1,6 @@
 ﻿using DVS.Domain.Models;
-using DVS.WPF.Commands;
+using DVS.WPF.Commands.DragNDropCommands;
 using DVS.WPF.Stores;
-using DVS.WPF.ViewModels.Forms;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -31,29 +30,28 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        public List<Clothes> EditedClothesSizesList { get; } = [];
+        public List<Clothes> EditedClothesList { get; } = [];
 
         private readonly ClothesStore _clothesStore;
 
-        public ICommand ClothesItemReceivedCommand { get; }
-        public ICommand ClothesItemRemovedCommand { get; }
+        public ICommand ClothesItemReceivedNewEmployeeClothesListCommand { get; }
+        public ICommand ClothesItemRemovedNewEmployeeClothesListCommand { get; }
+        public ICommand ClothesItemReceivedAvailableClothesListCommand { get; }
+        public ICommand ClothesItemRemovedAvailableClothesListCommand { get; }
 
 
-        public AddEditEmployeeListingViewModel(DVSListingViewModel dVSListingViewModel,
-                                               ClothesStore clothesStore,
-                                               Employee? employee)
+        public AddEditEmployeeListingViewModel(ClothesStore clothesStore)
         {
             _clothesStore = clothesStore;
 
-            ClothesItemReceivedCommand = new ClothesItemReceivedCommand(SelectedDetailedClothesItem, AddItemToAvailableSizes, AddItemToEmployeeClothesList);
-            ClothesItemRemovedCommand = new ClothesItemRemovedCommand(SelectedDetailedClothesItem, RemoveItemFromAvailableSizes, RemoveItemFromEmployeeClothesList);
-
-            LoadAvailableSizes();
-            LoadEmployeeClothes(employee);
+            ClothesItemReceivedNewEmployeeClothesListCommand = new ClothesItemReceivedNewEmployeeClothesListCommand(this, AddItemToEmployeeClothesList);
+            ClothesItemRemovedNewEmployeeClothesListCommand = new ClothesItemRemovedNewEmployeeClothesListCommand(this, RemoveItemFromEmployeeClothesList);
+            ClothesItemReceivedAvailableClothesListCommand = new ClothesItemReceivedAvailableClothesListCommand(this, AddItemToAvailableSizes);
+            ClothesItemRemovedAvailableClothesListCommand = new ClothesItemRemovedAvailableClothesListCommand(this, RemoveItemFromAvailableSizes);
         }
 
 
-        private void LoadAvailableSizes()
+        public void LoadAvailableSizes()
         {
             _availableClothesSizes.Clear();
 
@@ -73,46 +71,12 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private void AddItemToAvailableSizes(Clothes clothes)
-        {
-            // Item in _availableClothesSizes updaten
-            DetailedClothesListingItemViewModel? ItemToUpdate = _availableClothesSizes
-                        .FirstOrDefault(y => y.Clothes.GuidID == clothes.GuidID
-                        && y.Size == _selectedDetailedClothesItem.Size);
+        private void AddItemToAvailableSizes(DetailedClothesListingItemViewModel detailedClothesItem) => _availableClothesSizes.Add(detailedClothesItem);
 
-            ItemToUpdate.Update(clothes, ItemToUpdate.ClothesSize);
-
-            // Geänderte Clothes-Instanz speichern/ersetzen.
-            // Wird später an DVSListingViewModel übergeben für update DB und ClothesStore
-            if (EditedClothesSizesList.Contains(clothes))
-            {
-                EditedClothesSizesList.Remove(clothes);
-            }
-            else
-                EditedClothesSizesList.Add(clothes);
-        }
-
-        private void RemoveItemFromAvailableSizes(Clothes clothes)
-        {
-            // Item in _availableClothesSizes updaten
-            DetailedClothesListingItemViewModel? ItemToUpdate = _availableClothesSizes
-                        .FirstOrDefault(y => y.Clothes.GuidID == clothes.GuidID
-                        && y.Size == _selectedDetailedClothesItem.Size);
-
-            ItemToUpdate.Update(clothes, ItemToUpdate.ClothesSize);
-
-            // Geänderte Clothes-Instanz speichern/ersetzen.
-            // Wird später an DVSListingViewModel übergeben für update DB und ClothesStore
-            if (EditedClothesSizesList.Contains(clothes))
-            {
-                EditedClothesSizesList.Remove(clothes);
-            }
-            else
-                EditedClothesSizesList.Add(clothes);
-        }
+        private void RemoveItemFromAvailableSizes(DetailedClothesListingItemViewModel detailedClothesItem) => _availableClothesSizes.Remove(detailedClothesItem);
 
 
-        private void LoadEmployeeClothes(Employee? employee)
+        public void LoadEmployeeClothes(Employee employee)
         {
             _employeeClothesList.Clear();
 
@@ -125,24 +89,8 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private void AddItemToEmployeeClothesList(Clothes clothes)
-        {
-            // Item in _employeeClothesList updaten
-            DetailedClothesListingItemViewModel? ItemToUpdate = _employeeClothesList
-                        .FirstOrDefault(y => y.Clothes.GuidID == clothes.GuidID
-                        && y.Size == _selectedDetailedClothesItem.Size);
+        private void AddItemToEmployeeClothesList(DetailedClothesListingItemViewModel detailedClothesItem) => _employeeClothesList.Add(detailedClothesItem);
 
-            ItemToUpdate.Update(clothes, ItemToUpdate.ClothesSize);
-        }
-
-        private void RemoveItemFromEmployeeClothesList(Clothes clothes)
-        {
-            // Item in _employeeClothesList updaten
-            DetailedClothesListingItemViewModel? ItemToUpdate = _employeeClothesList
-                        .FirstOrDefault(y => y.Clothes.GuidID == clothes.GuidID
-                        && y.Size == _selectedDetailedClothesItem.Size);
-
-            ItemToUpdate.Update(clothes, ItemToUpdate.ClothesSize);
-        }
+        private void RemoveItemFromEmployeeClothesList(DetailedClothesListingItemViewModel detailedClothesItem) => _employeeClothesList.Remove(detailedClothesItem);
     }
 }

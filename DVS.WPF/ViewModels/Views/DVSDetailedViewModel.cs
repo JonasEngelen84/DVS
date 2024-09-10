@@ -13,9 +13,12 @@ namespace DVS.WPF.ViewModels.Views
                                       CategoryStore categoryStore,
                                       SeasonStore seasonStore,
                                       ClothesStore clothesStore,
+                                      ClothesSizeStore clothesSizeStore,
+                                      EmployeeClothesSizesStore employeeClothesSizesStore,
                                       EmployeeStore employeeStore,
                                       SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore,
-                                      SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore)
+                                      SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore,
+                                      AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
                                       : ViewModelBase
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
@@ -29,28 +32,45 @@ namespace DVS.WPF.ViewModels.Views
                                                                       _selectedDetailedEmployeeClothesItemStore,
                                                                       modalNavigationStore,
                                                                       clothesStore,
+                                                                      categoryStore,
+                                                                      seasonStore,
                                                                       employeeStore,
+                                                                      clothesSizeStore,
+                                                                      employeeClothesSizesStore,
                                                                       dVSListingViewModel);
 
         public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(modalNavigationStore,
                                                                             sizeStore,
                                                                             categoryStore,
                                                                             seasonStore,
-                                                                            clothesStore);
+                                                                            clothesStore,
+                                                                            clothesSizeStore,
+                                                                            employeeClothesSizesStore,
+                                                                            employeeStore,
+                                                                            dVSListingViewModel);
 
         public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(dVSListingViewModel,
+                                                                              addEditEmployeeListingViewModel,
                                                                               employeeStore,
                                                                               clothesStore,
+                                                                              sizeStore,
+                                                                              categoryStore,
+                                                                              seasonStore,
+                                                                              clothesSizeStore,
+                                                                              employeeClothesSizesStore,
                                                                               modalNavigationStore);
 
         public ICommand OpenEditDetailedItem { get; } = new OpenEditDetailedItemCommand(_selectedDetailedClothesItemStore,
                                                                                         _selectedDetailedEmployeeClothesItemStore,
                                                                                         modalNavigationStore,
+                                                                                        addEditEmployeeListingViewModel,
                                                                                         sizeStore,
                                                                                         clothesStore,
                                                                                         employeeStore,
                                                                                         dVSListingViewModel,
                                                                                         categoryStore,
+                                                                                        clothesSizeStore,
+                                                                                        employeeClothesSizesStore,
                                                                                         seasonStore);
     }
 }

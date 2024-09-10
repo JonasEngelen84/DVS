@@ -4,14 +4,14 @@ using System.Windows.Input;
 namespace DVS.WPF.ViewModels.Forms
 {
     public class AddEditCategoryFormViewModel(ICommand addCategoryCommand,
-                                              ICommand updateCategoryCommand,
+                                              ICommand editCategoryCommand,
                                               ICommand deleteCategoryCommand,
                                               AddEditClothesListingViewModel addEditListingViewModel)
                                               : ViewModelBase
     {
         public AddEditClothesListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
         public ICommand AddCategory { get; } = addCategoryCommand;
-        public ICommand UpdateCategory { get; } = updateCategoryCommand;
+        public ICommand EditCategory { get; } = editCategoryCommand;
         public ICommand DeleteCategory { get; } = deleteCategoryCommand;
 
         private string _addNewCategory;
@@ -83,13 +83,16 @@ namespace DVS.WPF.ViewModels.Forms
         }
 
         public bool HasError;
+
         public bool CanAdd =>
             !string.IsNullOrEmpty(AddNewCategory) &&
             !AddNewCategory.Equals("Neue Kategorie");
+
         public bool CanEdit =>
             !string.IsNullOrEmpty(EditSelectedCategory) &&
             !SelectedCategory.Name.Equals("Kategorie wählen") &&
             !SelectedCategory.Name.Equals(EditSelectedCategory);
+
         public bool CanDelete => !SelectedCategory.Name.Equals("Kategorie wählen");
     }
 }

@@ -10,7 +10,7 @@ namespace DVS.EntityFramework.DTOs
         public Guid SeasonGuidID { get; set; }
         public string ID { get; set; }
         public string Name { get; set; }
-        public string? Comment { get; set; }
+        public string Comment { get; set; }
 
         public ObservableCollection<ClothesSize> Sizes { get; set; } = [];
     }

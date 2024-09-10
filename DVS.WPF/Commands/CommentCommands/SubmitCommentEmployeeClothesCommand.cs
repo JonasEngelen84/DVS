@@ -10,11 +10,13 @@ namespace DVS.WPF.Commands.CommentCommands
 {
     public class SubmitCommentEmployeeClothesCommand(CommentEmployeeClothesViewModel commentEmployeeClothesViewModel,
                                                      EmployeeStore employeeStore,
+                                                     EmployeeClothesSizesStore employeeClothesSizesStore,
                                                      ModalNavigationStore modalNavigationStore)
                                                      : AsyncCommandBase
     {
         private readonly CommentEmployeeClothesViewModel _commentEmployeeClothesViewModel = commentEmployeeClothesViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
+        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore = employeeClothesSizesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
         public override async Task ExecuteAsync(object parameter)
@@ -41,7 +43,7 @@ namespace DVS.WPF.Commands.CommentCommands
 
                 try
                 {
-                    await _employeeStore.DeleteEmployeeClothesSize(ecs.GuidID);
+                    await _employeeClothesSizesStore.Delete(ecs.GuidID);
                 }
                 catch (Exception)
                 {

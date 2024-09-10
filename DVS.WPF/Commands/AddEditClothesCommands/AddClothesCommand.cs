@@ -11,6 +11,9 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                                    SizeStore sizeStore,
                                    CategoryStore categoryStore,
                                    SeasonStore seasonStore,
+                                   ClothesSizeStore clothesSizeStore,
+                                   EmployeeClothesSizesStore employeeClothesSizesStore,
+                                   EmployeeStore employeeStore,
                                    ModalNavigationStore modalNavigationStore)
                                    : AsyncCommandBase
     {
@@ -19,33 +22,57 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
         private readonly SizeStore _sizeStore = sizeStore;
         private readonly CategoryStore _categoryStore = categoryStore;
         private readonly SeasonStore _seasonStore = seasonStore;
+        private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
+        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore = employeeClothesSizesStore;
+        private readonly EmployeeStore _employeeStore = employeeStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditClothesFormViewModel addEditClothesFormViewModel = _addClothesViewModel.AddEditClothesFormViewModel;
-            addEditClothesFormViewModel.HasError = false;
-            addEditClothesFormViewModel.IsSubmitting = true;
+            AddEditClothesFormViewModel addClothesFormViewModel = _addClothesViewModel.AddEditClothesFormViewModel;
+            addClothesFormViewModel.HasError = false;
+            addClothesFormViewModel.IsSubmitting = true;
 
-            Clothes clothes = new(Guid.NewGuid(),
-                                  addEditClothesFormViewModel.ID,
-                                  addEditClothesFormViewModel.Name,
-                                  addEditClothesFormViewModel.Category,
-                                  addEditClothesFormViewModel.Season,
-                                  addEditClothesFormViewModel.Comment);
+            var selectedSizes = GetSelectedSizes(addClothesFormViewModel);
 
-            // Alle ausgewählten Größen in eine ZwischenListe speichern.
-            // Diese wird der GrößenListe (Size) des ClothesModel hinzugefügt.
-            var selectedSizes = addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                ? addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                : addEditClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected);
+            Clothes newClothes = CreateNewClothesInstance(addClothesFormViewModel);
 
-            // ClothesSizes den Listen von Clothes und SizeModel hinzufügen und Size-DB updaten
+            AddClothesSizesAsync(addClothesFormViewModel, selectedSizes, newClothes);
+
+            UpdateCategoryAndSeasonCollectionsAsync(addClothesFormViewModel, newClothes);
+
+            UpdateClothesAsync(addClothesFormViewModel, newClothes);
+
+            addClothesFormViewModel.IsSubmitting = false;
+
+            _modalNavigationStore.Close();
+        }
+
+        private List<SizeModel> GetSelectedSizes(AddEditClothesFormViewModel addClothesFormViewModel)
+        {
+            return (addClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                    ? addClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                    : addClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
+                    .ToList();
+        }
+
+        private Clothes CreateNewClothesInstance(AddEditClothesFormViewModel addClothesFormViewModel)
+        {
+            return new Clothes(Guid.NewGuid(),
+                               addClothesFormViewModel.ID,
+                               addClothesFormViewModel.Name,
+                               addClothesFormViewModel.Category,
+                               addClothesFormViewModel.Season,
+                               addClothesFormViewModel.Comment);
+        }
+
+        private async Task AddClothesSizesAsync(AddEditClothesFormViewModel addClothesFormViewModel, List<SizeModel> selectedSizes, Clothes newClothes)
+        {
             foreach (SizeModel size in selectedSizes)
             {
-                ClothesSize clothesSize = new(Guid.NewGuid(), clothes, size, size.Quantity, null);
+                ClothesSize clothesSize = new(Guid.NewGuid(), newClothes, size, size.Quantity, null);
 
-                clothes.Sizes.Add(clothesSize);
+                newClothes.Sizes.Add(clothesSize);
                 size.ClothesSizes.Add(clothesSize);
 
                 try
@@ -54,39 +81,50 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 }
                 catch (Exception)
                 {
-                    string messageBoxText = "Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                    string caption = "Bekleidung erstellen";
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Warning;
-                    MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+                    ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung erstellen");
+
+                    addClothesFormViewModel.HasError = true;
                 }
             }
+        }
 
-            // Erstellte Clothes-Instanz den Listen von category und season hinzufügen
-            clothes.Category?.Clothes.Add(clothes);
-            clothes.Season?.Clothes.Add(clothes);
+        private async Task UpdateCategoryAndSeasonCollectionsAsync(AddEditClothesFormViewModel addClothesFormViewModel, Clothes newClothes)
+        {
+            newClothes.Category?.Clothes.Add(newClothes);
+            newClothes.Season?.Clothes.Add(newClothes);
 
             try
             {
-                await _categoryStore.Update(clothes.Category, null);
-                await _seasonStore.Update(clothes.Season, null);
-                await _clothesStore.Add(clothes);
+                await _categoryStore.Update(newClothes.Category, null);
+                await _seasonStore.Update(newClothes.Season, null);
             }
             catch (Exception)
             {
-                string messageBoxText = "Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                string caption = "Bekleidung erstellen";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+                ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung erstellen");
 
-                addEditClothesFormViewModel.HasError = true;
+                addClothesFormViewModel.HasError = true;
             }
-            finally
+        }
+
+        private async Task UpdateClothesAsync(AddEditClothesFormViewModel addClothesFormViewModel, Clothes newClothes)
+        {
+            try
             {
-                addEditClothesFormViewModel.IsSubmitting = false;
-                _modalNavigationStore.Close();
+                await _clothesStore.Add(newClothes);
             }
+            catch (Exception)
+            {
+                ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung erstellen");
+
+                addClothesFormViewModel.HasError = true;
+            }
+        }
+
+        private void ShowErrorMessageBox(string message, string title)
+        {
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBox.Show(message, title, button, icon);
         }
     }
 }

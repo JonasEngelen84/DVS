@@ -5,10 +5,10 @@ using System.Windows.Input;
 
 namespace DVS.WPF.Components
 {
-    public partial class AddEditEmployeAvailableClothesList : UserControl
+    public partial class AddEditEmployeeAvailableClothesList : UserControl
     {
         public static readonly DependencyProperty IncomingClothesItemProperty =
-            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployeAvailableClothesList),
+            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployeeAvailableClothesList),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object IncomingClothesItem
@@ -18,7 +18,7 @@ namespace DVS.WPF.Components
         }
 
         public static readonly DependencyProperty ClothesItemDropCommandProperty =
-            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployeAvailableClothesList),
+            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployeeAvailableClothesList),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemDropCommand
@@ -28,7 +28,7 @@ namespace DVS.WPF.Components
         }
 
         public static readonly DependencyProperty ClothesItemRemovedCommandProperty =
-            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployeAvailableClothesList),
+            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployeeAvailableClothesList),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemRemovedCommand
@@ -38,22 +38,22 @@ namespace DVS.WPF.Components
         }
 
 
-        public AddEditEmployeAvailableClothesList()
+        public AddEditEmployeeAvailableClothesList()
         {
             InitializeComponent();
         }
 
 
         //TODO: canMove DRINGEND optimieren
-        private bool canMove = true;
+        //private bool canMove = true;
         private void ClothesItem_MouseMove(object sender, MouseEventArgs e)
         {
-            canMove = true;
+            //canMove = true;
 
             if (e.LeftButton == MouseButtonState.Pressed &&
                 sender is FrameworkElement frameworkElement)
             {
-                canMove = false;
+                //canMove = false;
                 object ClothesItem = frameworkElement.DataContext;
 
                 DragDropEffects dragDropResult = DragDrop.DoDragDrop(frameworkElement,
@@ -69,19 +69,20 @@ namespace DVS.WPF.Components
         
         private void ClothesItemList_Drop(object sender, DragEventArgs e)
         {
-            if (canMove)
+            if (e.Data.GetData(DataFormats.Serializable) is DetailedClothesListingItemViewModel ClothesItem)
             {
-                if (e.Data.GetData(DataFormats.Serializable) is DetailedClothesListingItemViewModel ClothesItem)
+                if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {
-                    if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
-                    {
-                        IncomingClothesItem = e.Data.GetData(DataFormats.Serializable);
-                        AddClothesItem(ClothesItem);
-                        ClothesItemRemovedCommand?.Execute("AvailableClothesSizes");
-                    }
+                    IncomingClothesItem = e.Data.GetData(DataFormats.Serializable);
+                    AddClothesItem(ClothesItem);
+                    ClothesItemRemovedCommand?.Execute(null);
                 }
             }
-            canMove = true;
+            //if (canMove)
+            //{
+
+            //}
+            //canMove = true;
         }
 
         private void AddClothesItem(object ClothesItem)
@@ -89,7 +90,7 @@ namespace DVS.WPF.Components
             if (ClothesItemDropCommand?.CanExecute(null) ?? false)
             {
                 IncomingClothesItem = ClothesItem;
-                ClothesItemDropCommand?.Execute("AvailableClothesSizes");
+                ClothesItemDropCommand?.Execute(null);
             }
         }
     }

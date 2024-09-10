@@ -15,7 +15,7 @@ namespace DVS.WPF.Stores
         private readonly IUpdateSeasonCommand _updateSeasonCommand = UpdateSeasonCommand;
         private readonly IDeleteSeasonCommand _deleteSeasonCommand = DeleteSeasonCommand;
 
-        private readonly List<Season> _seasons = [new(Guid.NewGuid(), "OHNE")];
+        private readonly List<Season> _seasons = [new(Guid.NewGuid(), "Saisonlos")];
         public IEnumerable<Season> Seasons => _seasons;
 
         public event Action SeasonsLoaded;

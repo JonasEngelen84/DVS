@@ -21,9 +21,9 @@ namespace DVS.EntityFramework.Queries
             foreach (var clothesDTO in clothesDTOs)
             {
                 CategoryDTO categoryDTO = await context.Categories.FindAsync(clothesDTO.CategoryGuidID);
-                SeasonDTO seasonDTO = await context.Seasons.FindAsync(clothesDTO.SeasonGuidID);
-
                 Category category = new(categoryDTO.GuidID, categoryDTO.Name);
+
+                SeasonDTO seasonDTO = await context.Seasons.FindAsync(clothesDTO.SeasonGuidID);
                 Season season = new(seasonDTO.GuidID, seasonDTO.Name);
 
                 Clothes clothes = new(clothesDTO.GuidID,

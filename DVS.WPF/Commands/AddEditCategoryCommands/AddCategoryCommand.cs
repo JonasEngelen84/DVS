@@ -25,11 +25,7 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
             }
             catch (Exception)
             {
-                string messageBoxText = "Erstellen der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                string caption = "Kategorie erstellen";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+                ShowErrorMessageBox("Erstellen der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Kategorie erstellen");
 
                 addEditCategoryFormViewModel.HasError = true;
             }
@@ -37,6 +33,13 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
             {
                 addEditCategoryFormViewModel.IsSubmitting = false;
             }
+        }
+
+        private void ShowErrorMessageBox(string message, string title)
+        {
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBox.Show(message, title, button, icon);
         }
     }
 }

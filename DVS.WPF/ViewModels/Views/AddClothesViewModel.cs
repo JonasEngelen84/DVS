@@ -17,9 +17,14 @@ namespace DVS.WPF.ViewModels.Views
                                    SizeStore sizeStore,
                                    CategoryStore categoryStore,
                                    SeasonStore seasonStore,
-                                   ClothesStore clothesStore)
+                                   ClothesStore clothesStore,
+                                   ClothesSizeStore clothesSizeStore,
+                                   EmployeeClothesSizesStore employeeClothesSizesStore,
+                                   EmployeeStore employeeStore,
+                                   DVSListingViewModel dVSListingViewModel)
         {
             AddEditListingViewModel = new(null, sizeStore, categoryStore, seasonStore);
+
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
             ICommand addClothes = new AddClothesCommand(this,
@@ -27,16 +32,32 @@ namespace DVS.WPF.ViewModels.Views
                                                         sizeStore,
                                                         categoryStore,
                                                         seasonStore,
+                                                        clothesSizeStore,
+                                                        employeeClothesSizesStore,
+                                                        employeeStore,
                                                         modalNavigationStore);
 
             ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(modalNavigationStore,
                                                                               categoryStore,
+                                                                              seasonStore,
+                                                                              sizeStore,
+                                                                              clothesStore,
+                                                                              clothesSizeStore,
+                                                                              employeeClothesSizesStore,
+                                                                              employeeStore,
                                                                               this,
                                                                               null,
-                                                                              AddEditListingViewModel);
+                                                                              AddEditListingViewModel,
+                                                                              dVSListingViewModel);
 
             ICommand openAddEditSeasons = new OpenAddEditSeasonsCommand(modalNavigationStore,
+                                                                        sizeStore,
+                                                                        categoryStore,
                                                                         seasonStore,
+                                                                        clothesStore,
+                                                                        clothesSizeStore,
+                                                                        employeeClothesSizesStore,
+                                                                        employeeStore,
                                                                         this,
                                                                         null,
                                                                         AddEditListingViewModel);
