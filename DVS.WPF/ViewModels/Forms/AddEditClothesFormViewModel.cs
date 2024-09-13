@@ -11,10 +11,12 @@ namespace DVS.WPF.ViewModels.Forms
                                              : ViewModelBase
     {
         public AddEditClothesListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
-        public Clothes? Clothes { get; } = clothes;
+
         public ICommand OpenAddEditCategories { get; } = openAddEditCategoriesCommand;
         public ICommand OpenAddEditSeasons { get; } = openAddEditSeasonsCommand;
         public ICommand SubmitClothes { get; } = submitCommand;
+
+        public Clothes? Clothes { get; } = clothes;
 
         private string _iD;
         public string ID

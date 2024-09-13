@@ -2,7 +2,6 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
-using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditSeasonCommands
 {
@@ -23,7 +22,8 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
         {
             AddEditSeasonFormViewModel addEditSeasonFormViewModel = _addEditSeasonViewModel.AddEditSeasonFormViewModel;
 
-            if (ConfirmEditSeason(addEditSeasonFormViewModel))
+            if (Confirm($"Die Saison \"{addEditSeasonFormViewModel.SelectedSeason.Name}\" und ihre Schnittstellen werden in" +
+                    $"\"{addEditSeasonFormViewModel.EditSelectedSeason}\" umbenannt.\n\nUmbennen fortsetzen?", "Saison umbenennen"))
             {
                 addEditSeasonFormViewModel.HasError = false;
                 addEditSeasonFormViewModel.IsSubmitting = true;
@@ -45,24 +45,6 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
                     addEditSeasonFormViewModel.IsSubmitting = false;
                 }
             }
-        }
-
-        private bool ConfirmEditSeason(AddEditSeasonFormViewModel addEditSeasonFormViewModel)
-        {
-            string messageBoxText = $"Die Saison \"{addEditSeasonFormViewModel.SelectedSeason.Name}\" und ihre Schnittstellen werden in" +
-                    $"\"{addEditSeasonFormViewModel.EditSelectedSeason}\" umbenannt.\n\nUmbennen fortsetzen?";
-            string caption = "Saison umbenennen";
-            MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
-            return dialog == MessageBoxResult.Yes;
-        }
-
-        private void ShowErrorMessageBox(string message, string title)
-        {
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show(message, title, button, icon);
         }
     }
 }

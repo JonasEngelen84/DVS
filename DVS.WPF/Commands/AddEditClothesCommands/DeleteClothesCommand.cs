@@ -1,7 +1,6 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.ListViewItems;
-using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditClothesCommands
 {
@@ -22,34 +21,19 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            if (ConfirmDeleteClothes())
-            {
-                await ProcessDeleteClothesAsync();
-            }
-        }
-
-        private bool ConfirmDeleteClothes()
-        {
-            string messageBoxText = $"Die Bekleidung  \"{_clothesListingItemViewModel.Name}\"  wird gelöscht!" +
+            if (Confirm($"Die Bekleidung  \"{_clothesListingItemViewModel.Name}\"  wird gelöscht!" +
                 $"\nDie Kleidungsstücke, dieser Bekleidung, bleiben den Mitarbeitern erhalten." +
-                $"\n\nLöschen fortsetzen?";
-            string caption = "Bekleidung löschen";
-            MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
-            return dialog == MessageBoxResult.Yes;
-        }
+                $"\n\nLöschen fortsetzen?", "Bekleidung löschen"))
+            {
+                _clothesListingItemViewModel.HasError = false;
+                _clothesListingItemViewModel.IsDeleting = true;
 
-        private async Task ProcessDeleteClothesAsync()
-        {
-            _clothesListingItemViewModel.HasError = false;
-            _clothesListingItemViewModel.IsDeleting = true;
+                DeleteClothesSizes();
 
-            DeleteClothesSizes();
+                await UpdateCategoryAndSeasonAsync();
 
-            await UpdateCategoryAndSeasonAsync();
-
-            await DeleteClothesAsync();
+                await DeleteClothesAsync();
+            }
         }
 
         private void DeleteClothesSizes()
@@ -94,13 +78,6 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             {
                 _clothesListingItemViewModel.IsDeleting = false;
             }
-        }
-
-        private void ShowErrorMessageBox(string message, string title)
-        {
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show(message, title, button, icon);
         }
     }
 }

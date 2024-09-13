@@ -1,7 +1,6 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.ListViewItems;
-using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditClothesCommands
 {
@@ -26,34 +25,19 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            if (ConfirmClearSizes())
-            {
-                await ProcessClearSizesAsync();
-            }
-        }
-
-        private bool ConfirmClearSizes()
-        {
-            string messageBoxText = $"Alle Größen der Bekleidung  \"{_clothesListingItemViewModel.Name}\"  werden gelöscht!" +
+            if (Confirm($"Alle Größen der Bekleidung  \"{_clothesListingItemViewModel.Name}\"  werden gelöscht!" +
                 $"\nDie Kleidungsstücke, dieser Bekleidung, bleiben den Mitarbeitern erhalten." +
-                $"\n\nLöschen fortsetzen?";
-            string caption = "Alle Bekleidungsgrößen löschen";
-            MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
-            return dialog == MessageBoxResult.Yes;
-        }
+                $"\n\nLöschen fortsetzen?", "Alle Bekleidungsgrößen löschen"))
+            {
+                _clothesListingItemViewModel.IsDeleting = true;
+                _clothesListingItemViewModel.HasError = false;
 
-        private async Task ProcessClearSizesAsync()
-        {
-            _clothesListingItemViewModel.IsDeleting = true;
-            _clothesListingItemViewModel.HasError = false;
+                Clothes updatedClothes = CreateUpdatedClothesInstance();
 
-            Clothes updatedClothes = CreateUpdatedClothesInstance();
+                await DeleteClothesSizesAsync();
 
-            await DeleteClothesSizesAsync();
-
-            await UpdateClothesAsync(updatedClothes);
+                await UpdateClothesAsync(updatedClothes);
+            }
         }
 
         private Clothes CreateUpdatedClothesInstance()
@@ -124,13 +108,6 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             {
                 _clothesListingItemViewModel.IsDeleting = false;
             }
-        }
-
-        private void ShowErrorMessageBox(string message, string title)
-        {
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show(message, title, button, icon);
         }
     }
 }

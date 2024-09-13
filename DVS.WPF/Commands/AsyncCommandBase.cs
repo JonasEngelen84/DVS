@@ -34,11 +34,7 @@ namespace DVS.WPF.Commands
             }
             catch (Exception) 
             {
-                string messageBoxText = "Auftretender Fehler!";
-                string caption = "Error";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+                ShowErrorMessageBox("Auftretender Fehler!", "Error");
             }
             finally
             {
@@ -47,5 +43,20 @@ namespace DVS.WPF.Commands
         }
 
         public abstract Task ExecuteAsync(object parameter);
+
+        public static bool Confirm(string text, string title)
+        {
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult dialog = MessageBox.Show(text, title, button, icon);
+            return dialog == MessageBoxResult.Yes;
+        }
+
+        public void ShowErrorMessageBox(string message, string title)
+        {
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBox.Show(message, title, button, icon);
+        }
     }
 }

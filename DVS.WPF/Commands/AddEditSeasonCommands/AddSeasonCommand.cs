@@ -34,12 +34,5 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
                 addEditSeasonFormViewModel.IsSubmitting = false;
             }
         }
-
-        private void ShowErrorMessageBox(string message, string title)
-        {
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show(message, title, button, icon);
-        }
     }
 }

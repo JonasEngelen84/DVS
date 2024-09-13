@@ -221,7 +221,12 @@ namespace DVS.WPF.ViewModels
                                                                                 _modalNavigationStore,
                                                                                 _addEditEmployeeListingViewModel,
                                                                                 _employeeStore,
-                                                                                _clothesStore));
+                                                                                _clothesStore,
+                                                                                _sizeStore,
+                                                                                _categoryStore,
+                                                                                _seasonStore,
+                                                                                _clothesSizeStore,
+                                                                                _employeeClothesSizesStore));
 
             if (newEmployee.Clothes.Count == 0)
             {

@@ -4,7 +4,6 @@ using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditCategoryCommands
 {
@@ -33,37 +32,22 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
 
-            if (ConfirmDeleteCategory(addEditCategoryFormViewModel))
+            if (Confirm($"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\"" +
+                $"wird gelöscht, und ihre Schnittstellen werden auf \"Kategorielos\" gesetzt.\n\nLöschen fortsetzen?", "Kategorie löschen"))
             {
-                await ProcessDeleteCateory(addEditCategoryFormViewModel);
+                addEditCategoryFormViewModel.HasError = false;
+                addEditCategoryFormViewModel.IsDeleting = true;
+
+                var clothesToEdit = GetClothesToEdit(addEditCategoryFormViewModel, _dVSListingViewModel);
+                var editedClothes = EditClothes(clothesToEdit);
+                var clothesSizesToEdit = GetClothesSizesToEdit(addEditCategoryFormViewModel);
+                var editedClothesSizes = EditClothesSizes(clothesSizesToEdit, editedClothes);
+                var employeeClothesSizesToEdit = GetEmployeeClothesSizeToEdit(addEditCategoryFormViewModel, _dVSListingViewModel);
+                var editedEmployeeClothesSize = EditEmployeeClothesSizes(employeeClothesSizesToEdit, editedClothesSizes);
+
+                await UpdateClothesAsync(editedClothes, addEditCategoryFormViewModel);
+                await DeleteCategory(addEditCategoryFormViewModel);
             }
-        }
-
-        private bool ConfirmDeleteCategory(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            string messageBoxText = $"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\"" +
-                $"wird gelöscht, und ihre Schnittstellen werden auf \"Kategorielos\" gesetzt.\n\nLöschen fortsetzen?";
-            string caption = "Kategorie löschen";
-            MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
-            return dialog == MessageBoxResult.Yes;
-        }
-
-        private async Task ProcessDeleteCateory(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            addEditCategoryFormViewModel.HasError = false;
-            addEditCategoryFormViewModel.IsDeleting = true;
-
-            var clothesToEdit = GetClothesToEdit(addEditCategoryFormViewModel, _dVSListingViewModel);
-            var editedClothes = EditClothes(clothesToEdit);
-            var clothesSizesToEdit = GetClothesSizesToEdit(addEditCategoryFormViewModel);
-            var editedClothesSizes =  EditClothesSizes(clothesSizesToEdit, editedClothes);
-            var employeeClothesSizesToEdit = GetEmployeeClothesSizeToEdit(addEditCategoryFormViewModel, _dVSListingViewModel);
-            var editedEmployeeClothesSize = EditEmployeeClothesSizes(employeeClothesSizesToEdit, editedClothesSizes);
-
-            await UpdateClothesAsync(editedClothes, addEditCategoryFormViewModel);
-            await DeleteCategory(addEditCategoryFormViewModel);
         }
 
         private List<Clothes> GetClothesToEdit(AddEditCategoryFormViewModel addEditCategoryFormViewModel, DVSListingViewModel dVSListingViewModel)
@@ -302,13 +286,6 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
             {
                 addEditCategoryFormViewModel.IsDeleting = false;
             }
-        }
-
-        private void ShowErrorMessageBox(string message, string title)
-        {
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show(message, title, button, icon);
         }
     }
 }

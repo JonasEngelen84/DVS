@@ -2,7 +2,6 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
-using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditClothesCommands
 {
@@ -118,13 +117,6 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
                 addClothesFormViewModel.HasError = true;
             }
-        }
-
-        private void ShowErrorMessageBox(string message, string title)
-        {
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show(message, title, button, icon);
         }
     }
 }

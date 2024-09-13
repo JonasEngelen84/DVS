@@ -44,17 +44,17 @@ namespace DVS.WPF.Components
         }
 
 
-        //TODO: canMove DRINGEND optimieren
-        //private bool canMove = true;
+        //private bool _canMove;
+
         private void ClothesItem_MouseMove(object sender, MouseEventArgs e)
         {
-            //canMove = true;
+            //_canMove = true;
 
-            if (e.LeftButton == MouseButtonState.Pressed &&
-                sender is FrameworkElement frameworkElement)
+            if (e.LeftButton == MouseButtonState.Pressed && sender is FrameworkElement frameworkElement)
             {
-                //canMove = false;
                 object ClothesItem = frameworkElement.DataContext;
+
+                //_canMove = false;
 
                 DragDropEffects dragDropResult = DragDrop.DoDragDrop(frameworkElement,
                     new DataObject(DataFormats.Serializable, ClothesItem),
@@ -71,18 +71,22 @@ namespace DVS.WPF.Components
         {
             if (e.Data.GetData(DataFormats.Serializable) is DetailedClothesListingItemViewModel ClothesItem)
             {
+                //var sourceList = e.Source as ListView;
+
                 if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {
                     IncomingClothesItem = e.Data.GetData(DataFormats.Serializable);
                     AddClothesItem(ClothesItem);
                     ClothesItemRemovedCommand?.Execute(null);
                 }
-            }
-            //if (canMove)
-            //{
 
-            //}
-            //canMove = true;
+                //if (_canMove)
+                //{
+
+                //}
+
+                //_canMove = true;
+            }
         }
 
         private void AddClothesItem(object ClothesItem)

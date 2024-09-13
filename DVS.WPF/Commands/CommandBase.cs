@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Windows;
+using System.Windows.Input;
 
 namespace DVS.WPF.Commands
 {
@@ -41,5 +42,13 @@ namespace DVS.WPF.Commands
 
         // Wird aufgerufen, wenn sich die Bedingungen geändert haben, die bestimmen, ob der Befehl ausgeführt werden kann.
         protected virtual void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, new EventArgs());
+
+
+        public void ShowErrorMessageBox(string message, string title)
+        {
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBox.Show(message, title, button, icon);
+        }
     }
 }

@@ -47,7 +47,13 @@ namespace DVS.WPF.ViewModels
             ClothesItemReceivedNewEmployeeClothesListCommand = new ClothesItemReceivedNewEmployeeClothesListCommand(this, AddItemToEmployeeClothesList);
             ClothesItemRemovedNewEmployeeClothesListCommand = new ClothesItemRemovedNewEmployeeClothesListCommand(this, RemoveItemFromEmployeeClothesList);
             ClothesItemReceivedAvailableClothesListCommand = new ClothesItemReceivedAvailableClothesListCommand(this, AddItemToAvailableSizes);
-            ClothesItemRemovedAvailableClothesListCommand = new ClothesItemRemovedAvailableClothesListCommand(this, RemoveItemFromAvailableSizes);
+            ClothesItemRemovedAvailableClothesListCommand = new ClothesItemRemovedAvailableClothesListCommand(this);
+        }
+
+
+        public void ClearEditedClothesList()
+        {
+            EditedClothesList.Clear();
         }
 
 
@@ -73,10 +79,8 @@ namespace DVS.WPF.ViewModels
 
         private void AddItemToAvailableSizes(DetailedClothesListingItemViewModel detailedClothesItem) => _availableClothesSizes.Add(detailedClothesItem);
 
-        private void RemoveItemFromAvailableSizes(DetailedClothesListingItemViewModel detailedClothesItem) => _availableClothesSizes.Remove(detailedClothesItem);
 
-
-        public void LoadEmployeeClothes(Employee employee)
+        public void LoadEmployeeClothes(Employee? employee)
         {
             _employeeClothesList.Clear();
 
@@ -91,6 +95,14 @@ namespace DVS.WPF.ViewModels
 
         private void AddItemToEmployeeClothesList(DetailedClothesListingItemViewModel detailedClothesItem) => _employeeClothesList.Add(detailedClothesItem);
 
-        private void RemoveItemFromEmployeeClothesList(DetailedClothesListingItemViewModel detailedClothesItem) => _employeeClothesList.Remove(detailedClothesItem);
+        private void RemoveItemFromEmployeeClothesList(DetailedClothesListingItemViewModel detailedClothesItem)
+        {
+            var itemToRemove = _employeeClothesList.FirstOrDefault(dclivm => dclivm.ClothesSizeGuidID == detailedClothesItem.ClothesSizeGuidID);
+
+            if (itemToRemove != null)
+            {
+                _employeeClothesList.Remove(itemToRemove);
+            }
+        }
     }
 }

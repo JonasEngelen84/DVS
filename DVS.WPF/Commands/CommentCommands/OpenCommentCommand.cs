@@ -1,7 +1,6 @@
 ﻿using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Views;
-using System.Windows;
 
 namespace DVS.WPF.Commands.CommentCommands
 {
@@ -14,7 +13,8 @@ namespace DVS.WPF.Commands.CommentCommands
                                     EmployeeStore employeeStore,
                                     ClothesSizeStore clothesSizeStore,
                                     EmployeeClothesSizesStore employeeClothesSizesStore,
-                                    DVSListingViewModel dVSListingViewModel) : CommandBase
+                                    DVSListingViewModel dVSListingViewModel)
+                                    : CommandBase
     {
         private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
         private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
@@ -53,11 +53,7 @@ namespace DVS.WPF.Commands.CommentCommands
             }
             else
             {
-                string messageBoxText = "Bitte das gewünschte Element auswählen.";
-                string caption = "Kommentieren";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                _ = MessageBox.Show(messageBoxText, caption, button, icon);
+                ShowErrorMessageBox("Bitte das gewünschte Element auswählen.", "Kommentieren");
             }
         }
     }

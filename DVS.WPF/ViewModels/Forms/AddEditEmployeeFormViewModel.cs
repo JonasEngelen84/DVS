@@ -9,8 +9,10 @@ namespace DVS.WPF.ViewModels.Forms
                                               : ViewModelBase
     {
         public AddEditEmployeeListingViewModel AddEditEmployeeListingViewModel { get; } = addEditEmployeeListingViewModel;
-        private Employee? Employee { get; } = employee;
+
         public ICommand SubmitEmployee { get; } = submitCommand;
+
+        public Employee? Employee { get; } = employee;
 
         private string _iD;
         public string ID

@@ -14,7 +14,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         public override void Execute(object parameter)
         {
-            if (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem != null || _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity > 0)
+            if (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity > 0)
             {
                 DetailedClothesListingItemViewModel existingItem = GetDetailedClothesItem(parameter);
 

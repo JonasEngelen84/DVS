@@ -4,7 +4,9 @@ using DVS.WPF.ViewModels.Views;
 namespace DVS.WPF.Commands.AddEditCategoryCommands
 {
     public class CloseAddEditCategoryCommand(ModalNavigationStore modalNavigationStore,
-        AddClothesViewModel addClothesViewModel, EditClothesViewModel editClothesViewModel) : CommandBase
+                                             AddClothesViewModel addClothesViewModel,
+                                             EditClothesViewModel editClothesViewModel)
+                                             : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         private readonly AddClothesViewModel _addClothesViewModel = addClothesViewModel;

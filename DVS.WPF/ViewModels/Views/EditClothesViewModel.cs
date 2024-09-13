@@ -30,12 +30,15 @@ namespace DVS.WPF.ViewModels.Views
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
             ICommand updatedClothes = new EditClothesCommand(this,
-                                                            clothesStore,
-                                                            sizeStore,
-                                                            categoryStore,
-                                                            seasonStore,
-                                                            clothesSizeStore,
-                                                            modalNavigationStore);
+                                                             employeeStore,
+                                                             clothesStore,
+                                                             sizeStore,
+                                                             categoryStore,
+                                                             seasonStore,
+                                                             clothesSizeStore,
+                                                             employeeClothesSizesStore,
+                                                             modalNavigationStore);
+
             ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(modalNavigationStore,
                                                                               categoryStore,
                                                                               seasonStore,
@@ -48,6 +51,7 @@ namespace DVS.WPF.ViewModels.Views
                                                                               this,
                                                                               AddEditListingViewModel,
                                                                               dVSListingViewModel);
+
             ICommand openAddEditSeasons = new OpenAddEditSeasonsCommand(modalNavigationStore,
                                                                         sizeStore,
                                                                         categoryStore,

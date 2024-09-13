@@ -3,7 +3,6 @@ using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
-using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
@@ -20,6 +19,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
     {
         private readonly AddEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
+        private readonly ClothesStore _clothesStore = clothesStore;
         private readonly SizeStore _sizeStore = sizeStore;
         private readonly CategoryStore _categoryStore = categoryStore;
         private readonly SeasonStore _seasonStore = seasonStore;
@@ -34,36 +34,178 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             addEmployeeFormViewModel.HasError = false;
             addEmployeeFormViewModel.IsSubmitting = true;
 
-            Employee employee = new(Guid.NewGuid(),
-                                    addEmployeeFormViewModel.ID,
-                                    addEmployeeFormViewModel.Firstname,
-                                    addEmployeeFormViewModel.Lastname,
-                                    addEmployeeFormViewModel.Comment);
+            Employee employee = CreateEmployee(addEmployeeFormViewModel);
 
-            foreach (DetailedClothesListingItemViewModel item in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            await CreateAndAddEmployeeClothesSizesAsync(employee, addEmployeeFormViewModel);
+
+            await AddEmployeeAsync(employee, addEmployeeFormViewModel);
+
+            await UpdateClothesSizeAsync(addEmployeeFormViewModel);
+
+            await UpdateClothesAsync(addEmployeeFormViewModel);
+
+            await UpdateSizeModelAsync(addEmployeeFormViewModel);
+
+            await UpdateCategoryAsync(addEmployeeFormViewModel);
+
+            await UpdateSeasonAsync(addEmployeeFormViewModel);
+
+            addEmployeeFormViewModel.IsSubmitting = false;
+
+            _modalNavigationStore.Close();
+        }
+
+        private static Employee CreateEmployee(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
+            return new Employee(Guid.NewGuid(),
+                                addEmployeeFormViewModel.ID,
+                                addEmployeeFormViewModel.Firstname,
+                                addEmployeeFormViewModel.Lastname,
+                                addEmployeeFormViewModel.Comment);
+        }
+
+        private async Task CreateAndAddEmployeeClothesSizesAsync(Employee employee, AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
+            foreach (DetailedClothesListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                item.ClothesSize.EmployeeClothesSizes.Add(new EmployeeClothesSize(Guid.NewGuid(), employee, item.ClothesSize, (int)item.Quantity, null));
-                employee.Clothes.Add(new EmployeeClothesSize(Guid.NewGuid(), employee, item.ClothesSize, (int)item.Quantity, null));
-            }
+                EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), employee, dclivm.ClothesSize, (int)dclivm.Quantity, null);
+                employee.Clothes.Add(employeeClothesSize);
+                dclivm.ClothesSize.EmployeeClothesSizes.Add(employeeClothesSize);
 
+                try
+                {
+                    await _employeeClothesSizesStore.Add(employeeClothesSize);
+                }
+                catch (Exception)
+                {
+                    ShowErrorMessageBox("Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter erstellen");
+                    addEmployeeFormViewModel.HasError = true;
+                }
+            }
+        }
+        
+        private async Task AddEmployeeAsync(Employee employee, AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
             try
             {
                 await _employeeStore.Add(employee);
             }
             catch (Exception)
             {
-                string messageBoxText = "Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                string caption = " Bekleidung bearbeiten";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
-
+                ShowErrorMessageBox("Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter erstellen");
                 addEmployeeFormViewModel.HasError = true;
             }
-            finally
+        }
+
+        private async Task UpdateClothesSizeAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
+            foreach (DetailedClothesListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                addEmployeeFormViewModel.IsSubmitting = false;
-                _modalNavigationStore.Close();
+                var itemToRemove = dclivm.Clothes.Sizes.FirstOrDefault(cs => cs.GuidID == dclivm.ClothesSizeGuidID);
+
+                if (itemToRemove != null)
+                {
+                    dclivm.Clothes.Sizes.Remove(itemToRemove);
+                    dclivm.Clothes.Sizes.Add(dclivm.ClothesSize);
+                }
+
+                itemToRemove = dclivm.ClothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.GuidID == dclivm.ClothesSizeGuidID);
+
+                if (itemToRemove != null)
+                {
+                    dclivm.ClothesSize.Size.ClothesSizes.Remove(itemToRemove);
+                    dclivm.ClothesSize.Size.ClothesSizes.Add(dclivm.ClothesSize);
+                }
+
+                try
+                {
+                    await _clothesSizeStore.Update(dclivm.ClothesSize);
+                }
+                catch (Exception)
+                {
+                    ShowErrorMessageBox("Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter erstellen");
+                    addEmployeeFormViewModel.HasError = true;
+                }
+            }
+        }
+        
+        private async Task UpdateClothesAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
+            foreach (DetailedClothesListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            {
+                var itemToRemove = dclivm.Clothes.Category.Clothes.FirstOrDefault(c => c.GuidID == dclivm.Clothes.GuidID);
+
+                if (itemToRemove != null)
+                {
+                    dclivm.Clothes.Category.Clothes.Remove(itemToRemove);
+                    dclivm.Clothes.Category.Clothes.Add(dclivm.Clothes);
+                }
+
+                itemToRemove = dclivm.Clothes.Season.Clothes.FirstOrDefault(c => c.GuidID == dclivm.Clothes.GuidID);
+
+                if (itemToRemove != null)
+                {
+                    dclivm.Clothes.Season.Clothes.Remove(itemToRemove);
+                    dclivm.Clothes.Season.Clothes.Add(dclivm.Clothes);
+                }
+
+                try
+                {
+                    await _clothesStore.Update(dclivm.Clothes);
+                }
+                catch (Exception)
+                {
+                    ShowErrorMessageBox("Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter erstellen");
+                    addEmployeeFormViewModel.HasError = true;
+                }
+            }
+        }
+
+        private async Task UpdateSizeModelAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
+            foreach (DetailedClothesListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            {
+                try
+                {
+                    await _sizeStore.Update(dclivm.ClothesSize.Size);
+                }
+                catch (Exception)
+                {
+                    ShowErrorMessageBox("Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter erstellen");
+                    addEmployeeFormViewModel.HasError = true;
+                }
+            }
+        }
+
+        private async Task UpdateCategoryAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
+            foreach (DetailedClothesListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            {
+                try
+                {
+                    await _categoryStore.Update(dclivm.Clothes.Category, null);
+                }
+                catch (Exception)
+                {
+                    ShowErrorMessageBox("Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter erstellen");
+                    addEmployeeFormViewModel.HasError = true;
+                }
+            }
+        }
+
+        private async Task UpdateSeasonAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
+            foreach (DetailedClothesListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            {
+                try
+                {
+                    await _seasonStore.Update(dclivm.Clothes.Season, null);
+                }
+                catch (Exception)
+                {
+                    ShowErrorMessageBox("Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter erstellen");
+                    addEmployeeFormViewModel.HasError = true;
+                }
             }
         }
     }

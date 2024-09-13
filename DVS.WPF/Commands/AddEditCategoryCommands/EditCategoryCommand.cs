@@ -2,7 +2,6 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
-using System.Windows;
 
 namespace DVS.WPF.Commands.AddEditCategoryCommands
 {
@@ -15,7 +14,8 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
 
-            if (ConfirmEditCategory(addEditCategoryFormViewModel))
+            if (Confirm($"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
+                    $"\"{addEditCategoryFormViewModel.EditSelectedCategory}\" umbenannt.\n\nUmbennen fortsetzen?", "Kategorie umbenennen"))
             {
                 addEditCategoryFormViewModel.HasError = false;
                 addEditCategoryFormViewModel.IsSubmitting = true;
@@ -37,24 +37,6 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
                     addEditCategoryFormViewModel.IsSubmitting = false;
                 }
             }
-        }
-
-        private bool ConfirmEditCategory(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            string messageBoxText = $"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
-                    $"\"{addEditCategoryFormViewModel.EditSelectedCategory}\" umbenannt.\n\nUmbennen fortsetzen?";
-            string caption = "Kategorie umbenennen";
-            MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
-            return dialog == MessageBoxResult.Yes;
-        }
-
-        private void ShowErrorMessageBox(string message, string title)
-        {
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show(message, title, button, icon);
         }
     }
 }

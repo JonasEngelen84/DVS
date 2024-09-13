@@ -54,8 +54,12 @@ namespace DVS.WPF.Commands
                 EditEmployeeViewModel EditEmployeeViewModel = new(_selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem.Employee,
                                                                   _employeeStore,
                                                                   _clothesStore,
+                                                                  _sizeStore,
+                                                                  _categoryStore,
+                                                                  _seasonStore,
+                                                                  _clothesSizeStore,
+                                                                  _employeeClothesSizesStore,
                                                                   _modalNavigationStore,
-                                                                  _dVSListingViewModel,
                                                                   _addEditEmployeeListingViewModel);
 
                 _modalNavigationStore.CurrentViewModel = EditEmployeeViewModel;

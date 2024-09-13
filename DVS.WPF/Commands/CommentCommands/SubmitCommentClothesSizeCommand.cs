@@ -173,12 +173,5 @@ namespace DVS.WPF.Commands.CommentCommands
                 commentClothesSizeFormViewModel.IsSubmitting = false;
             }
         }
-
-        private void ShowErrorMessageBox(string message, string title)
-        {
-            MessageBoxButton button = MessageBoxButton.OK;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show(message, title, button, icon);
-        }
     }
 }

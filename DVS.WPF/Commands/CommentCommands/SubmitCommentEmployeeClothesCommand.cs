@@ -47,11 +47,7 @@ namespace DVS.WPF.Commands.CommentCommands
                 }
                 catch (Exception)
                 {
-                    string messageBoxText = $"Kommentieren der Bekleidungsgröße ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                    string caption = " Bekleidungsgröße Kommentieren";
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Warning;
-                    MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+                    ShowErrorMessageBox("Kommentieren der Bekleidungsgröße ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidungsgröße Kommentieren");
 
                     commentEmployeeClothesFormViewModel.HasError = true;
                 }
@@ -84,11 +80,7 @@ namespace DVS.WPF.Commands.CommentCommands
             }
             catch (Exception)
             {
-                string messageBoxText = "Kommentieren der Bekleidungsgröße ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                string caption = "Bekleidungsgröße Kommentieren";
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+                ShowErrorMessageBox("Kommentieren der Bekleidungsgröße ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidungsgröße Kommentieren");
 
                 commentEmployeeClothesFormViewModel.HasError = true;
             }

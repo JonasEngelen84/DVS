@@ -73,7 +73,12 @@ namespace DVS.WPF.ViewModels.ListViewItems
                                             ModalNavigationStore modalNavigationStore,
                                             AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
                                             EmployeeStore employeeStore,
-                                            ClothesStore clothesStore)
+                                            ClothesStore clothesStore,
+                                            SizeStore sizeStore,
+                                            CategoryStore categoryStore,
+                                            SeasonStore seasonStore,
+                                            ClothesSizeStore clothesSizeStore,
+                                            EmployeeClothesSizesStore employeeClothesSizesStore)
         {
             Employee = employee;
             DeleteEmployee = new DeleteEmployeeCommand(this, employeeStore);
@@ -84,6 +89,11 @@ namespace DVS.WPF.ViewModels.ListViewItems
                                                            modalNavigationStore,
                                                            employeeStore,
                                                            clothesStore,
+                                                           sizeStore,
+                                                           categoryStore,
+                                                           seasonStore,
+                                                           clothesSizeStore,
+                                                           employeeClothesSizesStore,
                                                            dVSListingViewModel,
                                                            addEditEmployeeListingViewModel);
         }

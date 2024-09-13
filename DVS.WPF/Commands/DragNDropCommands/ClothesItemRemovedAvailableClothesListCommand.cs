@@ -4,17 +4,15 @@ using System.Collections.ObjectModel;
 
 namespace DVS.WPF.Commands.DragNDropCommands
 {
-    public class ClothesItemRemovedAvailableClothesListCommand(AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-                                                               Action<DetailedClothesListingItemViewModel> removeItemFromAvailableClothesList)
-                                                               : CommandBase
+    public class ClothesItemRemovedAvailableClothesListCommand(AddEditEmployeeListingViewModel addEditEmployeeListingViewModel) : CommandBase
     {
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
 
-        public readonly Action<DetailedClothesListingItemViewModel> _removeItemFromAvailableClothesList = removeItemFromAvailableClothesList;
-
         public override void Execute(object parameter)
         {
-            if (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem != null || _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity > 0)
+            CheckQuantity();
+
+            if (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity > 0)
             {
                 DetailedClothesListingItemViewModel existingItem = GetDetailedClothesItem();
 
@@ -24,6 +22,30 @@ namespace DVS.WPF.Commands.DragNDropCommands
             }
         }
 
+        private void CheckQuantity()
+        {
+            switch (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity)
+            {
+                case 0:
+                    ShowErrorMessageBox("Diese Bekleidung ist zur Zeit nicht vorrätig!", "Bekleidung nicht vorhanden");
+                    break;
+
+                case 1:
+                    ShowErrorMessageBox("Nach der Transaktion ist diese Bekleidung nicht mehr vorrätig!", "Letztes Bekleidungsstück");
+                    break;
+
+                case 2:
+                    ShowErrorMessageBox("Nach der Transaktion ist diese Bekleidung noch  1  mal vorrätig!", "Sehr geringer Bestand");
+                    break;
+
+                case 3:
+                    ShowErrorMessageBox("Nach der Transaktion ist diese Bekleidung noch  2  mal vorrätig!", "geringer Bestand");
+                    break;
+
+                default:
+                    break;
+            }
+        }
 
         private DetailedClothesListingItemViewModel GetDetailedClothesItem()
         {

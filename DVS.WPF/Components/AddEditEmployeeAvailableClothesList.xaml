@@ -6,7 +6,8 @@
              mc:Ignorable="d"
              DataContext="{Binding AddEditEmployeeListingViewModel}">
 
-    <ListView Height="120"
+    <ListView x:Name="AvailableClothesSizesListView"
+              Height="120"
               FontSize="10"
               Foreground="Black"
               Background="WhiteSmoke"
