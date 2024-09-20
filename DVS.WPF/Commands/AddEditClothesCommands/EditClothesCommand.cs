@@ -43,7 +43,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 await DeleteRemovedClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
                 await CreateAndAddNewClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
                 await UpdateClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
-                await UpdateSizeModelAsync(editClothesFormViewModel, selectedSizes);
+                await UpdateSizeAsync(editClothesFormViewModel, selectedSizes);
                 await UpdateClothesAsync(editClothesFormViewModel, updatedClothes);
                 await UpdateCategoryAsync(editClothesFormViewModel, updatedClothes);
                 await UpdateSeasonAsync(editClothesFormViewModel, updatedClothes);
@@ -191,7 +191,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
         }
 
-        private async Task UpdateSizeModelAsync(AddEditClothesFormViewModel editClothesFormViewModel, List<SizeModel> selectedSizes)
+        private async Task UpdateSizeAsync(AddEditClothesFormViewModel editClothesFormViewModel, List<SizeModel> selectedSizes)
         {
             foreach (SizeModel sm in selectedSizes)
             {

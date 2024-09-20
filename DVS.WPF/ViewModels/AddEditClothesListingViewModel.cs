@@ -52,9 +52,9 @@ namespace DVS.WPF.ViewModels
 
 
         public AddEditClothesListingViewModel(Clothes clothes,
-                                       SizeStore sizeStore,
-                                       CategoryStore categoryStore,
-                                       SeasonStore seasonStore)
+                                              SizeStore sizeStore,
+                                              CategoryStore categoryStore,
+                                              SeasonStore seasonStore)
         {
             _clothes = clothes;
             _sizeStore = sizeStore;

@@ -34,24 +34,17 @@
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Lastname and errormessage -->
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="{Binding Name}"
-                               Margin="0 0 10 0" />
+                <TextBlock Text="{Binding Name}"
+                           Grid.Column="0"
+                           Margin="0 0 10 0" />
 
-                    <TextBlock FontSize="10"
-                               Foreground="Red"
-                               Text="{Binding ErrorMessage}"
-                               Visibility="{Binding HasErrorMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                </StackPanel>
-
-                <TextBlock Grid.Column="1"
-                           Text="{Binding Comment}"
+                <TextBlock Text="{Binding Comment}"
+                           Grid.Column="1"
                            Foreground="DarkGray"
                            TextWrapping="WrapWithOverflow" />
 
-                <TextBlock Grid.Column="2"
-                           Text="{Binding ID}"
+                <TextBlock Text="{Binding ID}"
+                           Grid.Column="2"
                            Margin="10 0 0 0"
                            HorizontalAlignment="Stretch" />
             </Grid>

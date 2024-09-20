@@ -55,6 +55,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             _modalNavigationStore.Close();
         }
 
+
         private static Employee CreateEmployee(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
         {
             return new Employee(Guid.NewGuid(),
@@ -131,27 +132,27 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         
         private async Task UpdateClothesAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
         {
-            foreach (DetailedClothesListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (Clothes clothes in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EditedClothesList)
             {
-                var itemToRemove = dclivm.Clothes.Category.Clothes.FirstOrDefault(c => c.GuidID == dclivm.Clothes.GuidID);
+                var itemToRemove = clothes.Category.Clothes.FirstOrDefault(c => c.GuidID == clothes.GuidID);
 
                 if (itemToRemove != null)
                 {
-                    dclivm.Clothes.Category.Clothes.Remove(itemToRemove);
-                    dclivm.Clothes.Category.Clothes.Add(dclivm.Clothes);
+                    clothes.Category.Clothes.Remove(itemToRemove);
+                    clothes.Category.Clothes.Add(clothes);
                 }
 
-                itemToRemove = dclivm.Clothes.Season.Clothes.FirstOrDefault(c => c.GuidID == dclivm.Clothes.GuidID);
+                itemToRemove = clothes.Season.Clothes.FirstOrDefault(c => c.GuidID == clothes.GuidID);
 
                 if (itemToRemove != null)
                 {
-                    dclivm.Clothes.Season.Clothes.Remove(itemToRemove);
-                    dclivm.Clothes.Season.Clothes.Add(dclivm.Clothes);
+                    clothes.Season.Clothes.Remove(itemToRemove);
+                    clothes.Season.Clothes.Add(clothes);
                 }
 
                 try
                 {
-                    await _clothesStore.Update(dclivm.Clothes);
+                    await _clothesStore.Update(clothes);
                 }
                 catch (Exception)
                 {

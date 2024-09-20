@@ -33,8 +33,6 @@ namespace DVS.WPF.ViewModels.Views
                                                         categoryStore,
                                                         seasonStore,
                                                         clothesSizeStore,
-                                                        employeeClothesSizesStore,
-                                                        employeeStore,
                                                         modalNavigationStore);
 
             ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(modalNavigationStore,
