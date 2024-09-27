@@ -18,7 +18,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
             {
                 DetailedClothesListingItemViewModel existingDclivm = GetDetailedClothesItem();
                 DetailedClothesListingItemViewModel editedDclivm = CreateNewDetailedClothesitem(existingDclivm);
-                AddOrUpdateItem(existingDclivm, editedDclivm);
+                AddOrUpdateDclivm(existingDclivm, editedDclivm);
             }
         }
 
@@ -62,12 +62,12 @@ namespace DVS.WPF.Commands.DragNDropCommands
             return new DetailedClothesListingItemViewModel(editedClothes, targetClothesSize);
         }
 
-        private void AddOrUpdateItem(DetailedClothesListingItemViewModel existingItem, DetailedClothesListingItemViewModel editedItem)
+        private void AddOrUpdateDclivm(DetailedClothesListingItemViewModel existingDclivm, DetailedClothesListingItemViewModel editedDclivm)
         {
-            if (existingItem != null)
-                existingItem.Update(editedItem.Clothes, editedItem.ClothesSize);
+            if (existingDclivm != null)
+                existingDclivm.Update(editedDclivm.Clothes, editedDclivm.ClothesSize);
             else
-                _addItemToEmployeeClothesList?.Invoke(editedItem);
+                _addItemToEmployeeClothesList?.Invoke(editedDclivm);
         }
     }
 }

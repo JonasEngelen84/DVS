@@ -1,19 +1,19 @@
-﻿using DVS.Domain.Commands.Category;
-using DVS.Domain.Commands.Clothes;
-using DVS.Domain.Commands.ClothesSize;
-using DVS.Domain.Commands.Employee;
-using DVS.Domain.Commands.EmployeeClothesSize;
-using DVS.Domain.Commands.Season;
-using DVS.Domain.Commands.Size;
+﻿using DVS.Domain.Commands.CategoryCommands;
+using DVS.Domain.Commands.ClothesCommands;
+using DVS.Domain.Commands.ClothesSizeCommands;
+using DVS.Domain.Commands.EmployeeCommands;
+using DVS.Domain.Commands.EmployeeClothesSizeCommands;
+using DVS.Domain.Commands.SeasonCommands;
+using DVS.Domain.Commands.SizeCommands;
 using DVS.Domain.Queries;
 using DVS.EntityFramework;
-using DVS.EntityFramework.Commands.Category;
-using DVS.EntityFramework.Commands.Clothes;
-using DVS.EntityFramework.Commands.ClothesSize;
-using DVS.EntityFramework.Commands.Employee;
-using DVS.EntityFramework.Commands.EmployeeClothesSize;
-using DVS.EntityFramework.Commands.Season;
-using DVS.EntityFramework.Commands.Size;
+using DVS.EntityFramework.Commands.CategoryCommands;
+using DVS.EntityFramework.Commands.ClothesCommands;
+using DVS.EntityFramework.Commands.ClothesSizeCommands;
+using DVS.EntityFramework.Commands.EmployeeCommands;
+using DVS.EntityFramework.Commands.EmployeeClothesSizeCommands;
+using DVS.EntityFramework.Commands.SeasonCommands;
+using DVS.EntityFramework.Commands.SizeCommands;
 using DVS.EntityFramework.Queries;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
@@ -118,36 +118,43 @@ namespace DVS.WPF
             _selectedDetailedEmployeeClothesItemStore = new();
                         
             _sizeStore = new(_getAllSizesQuery, _updateSizeCommand);
+            _sizeStore.Load();
 
             _categoryStore = new(_getAllCategoriesQuery,
                                  _createCategoryCommand,
                                  _updateCategoryCommand,
                                  _deleteCategoryCommand);
-            
+            _categoryStore.Load();
+
             _seasonStore = new(_getAllSeasonsQuery,
                                _createSeasonCommand,
                                _updateSeasonCommand,
                                _deleteSeasonsCommand);
+            _seasonStore.Load();
 
             _clothesStore = new(_getAllClothesQuery,
                                 _createClothesCommand,
                                 _updateClothesCommand,
                                 _deleteClothesCommand);
+            _clothesStore.Load();
 
             _clothesSizeStore = new(_getAllClothesSizesQuery,
                                     _createClothesSizeCommand,
                                     _updateClothesSizeCommand,
                                     _deleteClothesSizeCommand);
+            _clothesSizeStore.Load();
 
             _employeeClothesSizesStore = new(_getAllEmployeeClothesSizesQuery,
                                              _createEmployeeClothesSizeCommand,
                                              _updateEmployeeClothesSizeCommand,
                                              _deleteEmployeeClothesSizeCommand);
+            _employeeClothesSizesStore.Load();
 
             _employeeStore = new(_getAllEmployeesQuery,
                                  _createEmployeeCommand,
                                  _updateEmployeeCommand,
                                  _deleteEmployeeCommand);
+            _employeeStore.Load();
 
             _addEditEmployeeListingViewModel = new(_clothesStore);
 

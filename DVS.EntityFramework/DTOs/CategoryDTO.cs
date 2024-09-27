@@ -3,11 +3,11 @@ using System.Collections.ObjectModel;
 
 namespace DVS.EntityFramework.DTOs
 {
-    public class CategoryDTO
-    {
-        public Guid GuidID { get; set; }
-        public string Name { get; set; }
+    //public class CategoryDTO
+    //{
+    //    public Guid GuidID { get; set; }
+    //    public string Name { get; set; }
 
-        public ObservableCollection<Clothes> Clothes { get; set; } = [];
-    }
+    //    public List<Guid> ClothesGuidIDs { get; set; } = [];
+    //}
 }

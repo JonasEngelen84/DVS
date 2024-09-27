@@ -35,26 +35,18 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             addEmployeeFormViewModel.IsSubmitting = true;
 
             Employee employee = CreateEmployee(addEmployeeFormViewModel);
-
             await CreateAndAddEmployeeClothesSizesAsync(employee, addEmployeeFormViewModel);
-
             await AddEmployeeAsync(employee, addEmployeeFormViewModel);
-
             await UpdateClothesSizeAsync(addEmployeeFormViewModel);
-
             await UpdateClothesAsync(addEmployeeFormViewModel);
-
             await UpdateSizeModelAsync(addEmployeeFormViewModel);
-
             await UpdateCategoryAsync(addEmployeeFormViewModel);
-
             await UpdateSeasonAsync(addEmployeeFormViewModel);
 
             addEmployeeFormViewModel.IsSubmitting = false;
 
             _modalNavigationStore.Close();
         }
-
 
         private static Employee CreateEmployee(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
         {

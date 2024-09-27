@@ -15,7 +15,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
             if (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity > 0)
             {
                 DetailedClothesListingItemViewModel editedDclivm = CreateNewDetailedClothesitem();
-                RemoveOrUpdateItem(editedDclivm);
+                RemoveOrUpdateDclivm(editedDclivm);
             }
         }
 
@@ -72,9 +72,18 @@ namespace DVS.WPF.Commands.DragNDropCommands
             return new DetailedClothesListingItemViewModel(editedClothes, editedDclivm);
         }
 
-        private void RemoveOrUpdateItem(DetailedClothesListingItemViewModel editedDclivm)
+        private void RemoveOrUpdateDclivm(DetailedClothesListingItemViewModel editedDclivm)
         {
-            _addEditEmployeeListingViewModel.SelectedDetailedClothesItem?.Update(editedDclivm.Clothes, editedDclivm.ClothesSize);
+            foreach (DetailedClothesListingItemViewModel dclivm in _addEditEmployeeListingViewModel.AvailableClothesSizes)
+            {
+                if (dclivm.Clothes.GuidID == editedDclivm.Clothes.GuidID)
+                {
+                    if (dclivm.ClothesSizeGuidID == _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSizeGuidID)
+                        _addEditEmployeeListingViewModel.SelectedDetailedClothesItem?.Update(editedDclivm.Clothes, editedDclivm.ClothesSize);
+                    else
+                        dclivm.Update(editedDclivm.Clothes, null);
+                }
+            }
 
             var existingClothesItem = _addEditEmployeeListingViewModel.EditedClothesList
                     .FirstOrDefault(c => c.GuidID == editedDclivm.Clothes.GuidID)?

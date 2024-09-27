@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using DVS.EntityFramework.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Queries
@@ -13,9 +12,11 @@ namespace DVS.EntityFramework.Queries
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
 
-            IEnumerable<SeasonDTO> seasonDTOs = await context.Seasons.ToListAsync();
+            var actualSeason = await context.Seasons
+                .Include(s => s.Clothes)
+                .ToListAsync();
 
-            return seasonDTOs.Select(y => new Season(y.GuidID, y.Name));
+            return actualSeason;
         }
     }
 }

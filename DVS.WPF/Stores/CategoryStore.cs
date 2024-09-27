@@ -1,18 +1,22 @@
-﻿using DVS.Domain.Commands.Category;
+﻿using DVS.Domain.Commands.CategoryCommands;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
 using DVS.WPF.ViewModels.Forms;
+using System.Windows;
 
 namespace DVS.WPF.Stores
 {
-    public class CategoryStore
+    public class CategoryStore(IGetAllCategoriesQuery getAllCategoriesQuery,
+                               ICreateCategoryCommand createCategoryCommand,
+                               IUpdateCategoryCommand updateCategoryCommand,
+                               IDeleteCategoryCommand deleteCategoryCommand)
     {
         public Category Categoryless { get; }
         
-        private readonly IGetAllCategoriesQuery _getAllCategoriesQuery;
-        private readonly ICreateCategoryCommand _createCategoryCommand;
-        private readonly IUpdateCategoryCommand _updateCategoryCommand;
-        private readonly IDeleteCategoryCommand _deleteCategoryCommand;
+        private readonly IGetAllCategoriesQuery _getAllCategoriesQuery = getAllCategoriesQuery;
+        private readonly ICreateCategoryCommand _createCategoryCommand = createCategoryCommand;
+        private readonly IUpdateCategoryCommand _updateCategoryCommand = updateCategoryCommand; 
+        private readonly IDeleteCategoryCommand _deleteCategoryCommand = deleteCategoryCommand;
 
         private readonly List<Category> _categories = [new(Guid.NewGuid(), "Kategorielos")];
         public IEnumerable<Category> Categories => _categories;
@@ -23,50 +27,62 @@ namespace DVS.WPF.Stores
         public event Action<Guid, AddEditCategoryFormViewModel> CategoryDeleted;
         public event Action<AddEditCategoryFormViewModel> AllCategoriesDeleted;
 
-        public CategoryStore(IGetAllCategoriesQuery getAllCategoriesQuery,
-                             ICreateCategoryCommand createCategoryCommand,
-                             IUpdateCategoryCommand updateCategoryCommand,
-                             IDeleteCategoryCommand deleteCategoryCommand)
-        {
-            Categoryless =_categories.FirstOrDefault(cat => cat.Name.Equals("Kategorielos"));
-
-            _createCategoryCommand = createCategoryCommand;
-            _updateCategoryCommand = updateCategoryCommand;
-            _deleteCategoryCommand = deleteCategoryCommand;
-        }
 
         public async Task Load()
         {
+            IEnumerable<Category> categorie = [];
+
             try
             {
-                IEnumerable<Category> categorie = await _getAllCategoriesQuery.Execute();
-
-                _categories.Clear();
-
-                if (categorie != null)
-                {
-                    _categories.AddRange(categorie);
-                }
-
-                CategoriesLoaded?.Invoke();
+                categorie = await _getAllCategoriesQuery.Execute();
             }
-            catch (Exception ex)
+            catch
             {
-                //TODO: Fehlerbehandlung beim laden der aus DB
-                Console.WriteLine($"Fehler beim Laden der Kategorien: {ex.Message}");
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Laden der Categories von Datenbank ist fehlgeschlagen!", "CategoryStore, Load", button, icon);
             }
+
+            _categories.Clear();
+
+            if (categorie != null)
+            {
+                _categories.AddRange(categorie);
+            }
+
+            CategoriesLoaded?.Invoke();
         }
 
-        public async Task Add(Category newCategory, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Add(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            //await _createCategoryCommand.Execute(category);
-            _categories.Add(newCategory);
-            CategoryAdded.Invoke(newCategory, addEditCategoryFormViewModel);
+            try
+            {
+                await _createCategoryCommand.Execute(category);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Hinzufügen der Category in Datenbank ist fehlgeschlagen!", "CategoryStore, Add", button, icon);
+            }
+
+            _categories.Add(category);
+
+            CategoryAdded.Invoke(category, addEditCategoryFormViewModel);
         }
 
         public async Task Update(Category updatedCategory, AddEditCategoryFormViewModel? addEditCategoryFormViewModel)
         {
-            //await _updateCategoryCommand.Execute(category);
+            try
+            {
+                //await _updateCategoryCommand.Execute(category);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Updaten der Category in Datenbank ist fehlgeschlagen!", "CategoryStore, Update", button, icon);
+            }
 
             int index = _categories.FindIndex(y => y.GuidID == updatedCategory.GuidID);
 
@@ -81,16 +97,25 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task Delete(Guid guidID, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Delete(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            //await _deleteCategoryCommand.Execute(guidID);
+            try
+            {
+                await _deleteCategoryCommand.Execute(category);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Löschen der Category in Datenbank ist fehlgeschlagen!", "CategoryStore, Delete", button, icon);
+            }
 
-            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == guidID);
+            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
 
             if (categoryToDelete != null)
             {
-                _categories.RemoveAll(y => y.GuidID == guidID); ;
-                CategoryDeleted.Invoke(guidID, addEditCategoryFormViewModel);
+                _categories.RemoveAll(y => y.GuidID == category.GuidID); ;
+                CategoryDeleted.Invoke(category.GuidID, addEditCategoryFormViewModel);
             }
             else
             {

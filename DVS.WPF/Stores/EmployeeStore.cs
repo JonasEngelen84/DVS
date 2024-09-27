@@ -1,6 +1,7 @@
-﻿using DVS.Domain.Commands.Employee;
+﻿using DVS.Domain.Commands.EmployeeCommands;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
+using System.Windows;
 
 namespace DVS.WPF.Stores
 {
@@ -24,36 +25,59 @@ namespace DVS.WPF.Stores
 
         public async Task Load()
         {
+            IEnumerable<Employee> employee = [];
+
             try
             {
-                IEnumerable<Employee> employee = await _getAllEmployeesQuery.Execute();
-
-                _employees.Clear();
-
-                if (employee != null)
-                {
-                    _employees.AddRange(employee);
-                }
-
-                EmployeesLoaded?.Invoke();
+                employee = await _getAllEmployeesQuery.Execute();
             }
-            catch (Exception ex)
+            catch
             {
-                //TODO: Fehlerbehandlung beim laden der aus DB
-                Console.WriteLine($"Fehler beim Laden der Mitarbeiter: {ex.Message}");
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Laden der EmployeeClothesSizes von Datenbank ist fehlgeschlagen!", "EmployeeClothesSizesStore, Load", button, icon);
             }
+
+            _employees.Clear();
+
+            if (employee != null)
+            {
+                _employees.AddRange(employee);
+            }
+
+            EmployeesLoaded?.Invoke();
         }
 
         public async Task Add(Employee employee)
         {
-            //await _createEmployeeCommand.Execute(employee);
+            try
+            {
+                await _createEmployeeCommand.Execute(employee);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Hinzufügen des Employee in Datenbank ist fehlgeschlagen!", "EmployeeStore, Add", button, icon);
+            }
+
             _employees.Add(employee);
+
             EmployeeAdded?.Invoke(employee);
         }
 
         public async Task Update(Employee employee)
         {
-            //await _updateEmployeeCommand.Execute(employee);
+            try
+            {
+                //await _updateEmployeeCommand.Execute(employee);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Updaten des Employee in Datenbank ist fehlgeschlagen!", "EmployeeStore, Update", button, icon);
+            }
 
             int index = _employees.FindIndex(y => y.GuidID == employee.GuidID);
 
@@ -71,8 +95,19 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(Employee employee)
         {
-            //await _deleteEmployeeCommand.Execute(guidID);
+            try
+            {
+                await _deleteEmployeeCommand.Execute(employee);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Löschen des Employee aus Datenbank ist fehlgeschlagen!", "EmployeeStore, Delete", button, icon);
+            }
+
             _employees.RemoveAll(y => y.GuidID == employee.GuidID);
+
             EmployeeDeleted?.Invoke(employee.GuidID);
         }
     }

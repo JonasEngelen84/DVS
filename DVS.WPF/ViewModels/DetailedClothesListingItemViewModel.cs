@@ -21,7 +21,11 @@ namespace DVS.WPF.ViewModels
         public void Update(Clothes clothes, ClothesSize? clothesSize)
         {
             Clothes = clothes;
-            ClothesSize = clothesSize;
+            
+            if (clothesSize != null)
+            {
+                ClothesSize = clothesSize;
+            }
 
             OnPropertyChanged(nameof(ID));
             OnPropertyChanged(nameof(Name));

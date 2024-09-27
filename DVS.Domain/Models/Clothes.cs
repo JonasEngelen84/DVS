@@ -2,17 +2,36 @@
 
 namespace DVS.Domain.Models
 {
-    public class Clothes(Guid guidID, string id, string name, Category category, Season season, string comment)
+    public class Clothes
     {
-        public Guid GuidID { get; } = guidID;
-        public Guid CategoryGuidID { get; } = category.GuidID;
-        public Guid SeasonGuidID { get; } = season.GuidID;
-        public Category Category { get; } = category;
-        public Season Season { get; } = season;
-        public string ID { get; } = id;
-        public string Name { get; } = name;
-        public string Comment { get; } = comment;
+        public Guid GuidID { get; }
+        public Guid CategoryGuidID { get; private set; }
+        public Guid SeasonGuidID { get; private set; }
+        public string ID { get; private set; }
+        public string Name { get; private set; }
+        public string Comment { get; private set; }
+        public Category Category { get; private set; }
+        public Season Season { get; private set; }
 
-        public ObservableCollection<ClothesSize> Sizes { get; set; } = [];
+        public ObservableCollection<ClothesSize> Sizes { get; set; }
+
+        public Clothes(Guid guidID, string id, string name, Category category, Season season, string comment)
+        {
+            GuidID = guidID;
+            ID = id;
+            Name = name;
+            CategoryGuidID = category.GuidID;
+            SeasonGuidID = season.GuidID;
+            Category = category;
+            Season = season;
+            Comment = comment;
+
+            Sizes = [];
+        }
+
+        public Clothes()
+        {
+
+        }
     }
 }

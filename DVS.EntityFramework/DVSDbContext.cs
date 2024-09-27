@@ -1,48 +1,56 @@
 ﻿using DVS.Domain.Models;
-using DVS.EntityFramework.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework
 {
     public class DVSDbContext(DbContextOptions options) : DbContext(options)
     {
-        public DbSet<CategoryDTO> Categories { get; set; }
-        public DbSet<SeasonDTO> Seasons { get; set; }
-        public DbSet<SizeModelDTO> Sizes { get; set; }
-        public DbSet<ClothesDTO> Clothes { get; set; }
-        public DbSet<ClothesSizeDTO> ClothesSizes { get; set; }
-        public DbSet<EmployeeDTO> Employees { get; set; }
-        public DbSet<EmployeeClothesSizeDTO> EmployeeClothesSizes { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Season> Seasons { get; set; }
+        public DbSet<SizeModel> Sizes { get; set; }
+        public DbSet<Clothes> Clothes { get; set; }
+        public DbSet<ClothesSize> ClothesSizes { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeClothesSize> EmployeeClothesSizes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configuring the many-to-many relationship between Clothes and Size
-            modelBuilder.Entity<ClothesSizeDTO>()
-                .HasKey(cs => new { cs.ClothesGuidID, cs.SizeGuidID });
+            modelBuilder.Entity<Category>().HasKey(e => e.GuidID);
+            modelBuilder.Entity<Season>().HasKey(e => e.GuidID);
+            modelBuilder.Entity<SizeModel>().HasKey(s => s.GuidID);
+            modelBuilder.Entity<Employee>().HasKey(e => e.GuidID);
 
-            //modelBuilder.Entity<ClothesDTO>()
-            //    .HasOne(c => c.Category)
-            //    .WithMany()
-            //    .HasForeignKey(c => c.CategoryID);
+            modelBuilder.Entity<Clothes>().HasKey(c => c.GuidID);
+            modelBuilder.Entity<Clothes>()
+                .HasOne(c => c.Category)
+                .WithMany(cat => cat.Clothes)
+                .HasForeignKey(c => c.CategoryGuidID);
+            modelBuilder.Entity<Clothes>()
+                .HasOne(c => c.Season)
+                .WithMany(seas => seas.Clothes)
+                .HasForeignKey(c => c.SeasonGuidID);
 
-            //modelBuilder.Entity<ClothesSizeDTO>()
-            //    .HasOne(cs => cs.Size)
-            //    .WithMany(s => s.ClothesSizes)
-            //    .HasForeignKey(cs => cs.SizeGuidID);
+            modelBuilder.Entity<ClothesSize>().HasKey(cs => cs.GuidID);
+            modelBuilder.Entity<ClothesSize>()
+                .HasOne(cs => cs.Clothes)
+                .WithMany(c => c.Sizes)
+                .HasForeignKey(cs => cs.ClothesGuidID)
+                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<ClothesSize>()
+                .HasOne(cs => cs.Size)
+                .WithMany(s => s.ClothesSizes)
+                .HasForeignKey(cs => cs.SizeGuidID);
 
-            // Configuring the many-to-many relationship between Employee and ClothesSize
-            modelBuilder.Entity<EmployeeClothesSizeDTO>()
-                .HasKey(ec => new { ec.EmployeeGuidID, ec.ClothesSizeGuidID });
-
+            modelBuilder.Entity<EmployeeClothesSize>().HasKey(ecs => ecs.GuidID);
             modelBuilder.Entity<EmployeeClothesSize>()
-                .HasOne(ec => ec.Employee)
+                .HasOne(ecs => ecs.Employee)
                 .WithMany(e => e.Clothes)
-                .HasForeignKey(ec => ec.EmployeeGuidID);
-
+                .HasForeignKey(ecs => ecs.EmployeeGuidID)
+                .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<EmployeeClothesSize>()
-                .HasOne(ec => ec.ClothesSize)
+                .HasOne(ecs => ecs.ClothesSize)
                 .WithMany(cs => cs.EmployeeClothesSizes)
-                .HasForeignKey(ec => ec.ClothesSizeGuidID);
+                .HasForeignKey(ecs => ecs.ClothesSizeGuidID);
         }
     }
 }

@@ -13,9 +13,11 @@ namespace DVS.EntityFramework.Queries
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
 
-            IEnumerable<EmployeeDTO> employeeDTOs = await context.Employees.ToListAsync();
+            var actualEmployee = await context.Employees
+                .Include(s => s.Clothes)
+                .ToListAsync();
 
-            return employeeDTOs.Select(y => new Employee(y.GuidID, y.ID, y.Lastname, y.Firstname, y.Comment) { Clothes = y.Clothes } );
+            return actualEmployee;
         }
     }
 }

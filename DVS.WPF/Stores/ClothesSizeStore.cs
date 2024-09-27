@@ -1,6 +1,7 @@
-﻿using DVS.Domain.Commands.ClothesSize;
+﻿using DVS.Domain.Commands.ClothesSizeCommands;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
+using System.Windows;
 
 namespace DVS.WPF.Stores
 {
@@ -19,33 +20,55 @@ namespace DVS.WPF.Stores
 
         public async Task Load()
         {
+            IEnumerable<ClothesSize> clothesSizes = [];
+
             try
             {
-                IEnumerable<ClothesSize> clothesSizes = await _getAllClothesSizesQuery.Execute();
-
-                _clothesSizes.Clear();
-
-                if (clothesSizes != null)
-                {
-                    _clothesSizes.AddRange(clothesSizes);
-                }
+                clothesSizes = await _getAllClothesSizesQuery.Execute();
             }
-            catch (Exception ex)
+            catch
             {
-                //TODO: Fehlerbehandlung beim laden der Bekleidungsgrößen aus DB
-                Console.WriteLine($"Fehler beim Laden der ClothesSizes: {ex.Message}");
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Laden der ClothesSizes von Datenbank ist fehlgeschlagen!", "ClothesSizesStore, Load", button, icon);
+            }
+
+            _clothesSizes.Clear();
+
+            if (clothesSizes != null)
+            {
+                _clothesSizes.AddRange(clothesSizes);
             }
         }
 
         public async Task Add(ClothesSize clothesSize)
         {
-            //await _createClothesSizeCommand.Execute(clothesSize);
+            try
+            {
+                await _createClothesSizeCommand.Execute(clothesSize);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Hinzufügen der ClothesSize in Datenbank ist fehlgeschlagen!", "ClothesSizeStore, Add", button, icon);
+            }
+
             _clothesSizes.Add(clothesSize);
         }
 
         public async Task Update(ClothesSize clothesSize)
         {
-            //await _updateClothesSizeCommand.Execute(clothesSize);
+            try
+            {
+                //await _updateClothesSizeCommand.Execute(clothesSize);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Updaten des ClothesSize in Datenbank ist fehlgeschlagen!", "ClothesSizesStore, Update", button, icon);
+            }
 
             int index = _clothesSizes.FindIndex(y => y.GuidID == clothesSize.GuidID);
 
@@ -59,10 +82,20 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task Delete(Guid guidID)
+        public async Task Delete(ClothesSize clothesSize)
         {
-            //await _deleteClothesSizeCommand.Execute(guidID);
-            _clothesSizes.RemoveAll(y => y.GuidID == guidID);
+            try
+            {
+                await _deleteClothesSizeCommand.Execute(clothesSize);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Löschen der ClothesSize aus Datenbank ist fehlgeschlagen!", "ClothesSizesStore, Delete", button, icon);
+            }
+
+            _clothesSizes.RemoveAll(y => y.GuidID == clothesSize.GuidID);
         }
     }
 }

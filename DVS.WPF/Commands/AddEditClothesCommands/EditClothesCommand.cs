@@ -89,7 +89,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
                     try
                     {
-                        await _clothesSizeStore.Delete(cs.GuidID);
+                        await _clothesSizeStore.Delete(cs);
                     }
                     catch (Exception)
                     {
@@ -117,7 +117,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                     {
                         await _clothesSizeStore.Add(newClothesSize);
                     }
-                    catch (Exception)
+                    catch
                     {
                         ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung bearbeiten");
                         editClothesFormViewModel.HasError = true;

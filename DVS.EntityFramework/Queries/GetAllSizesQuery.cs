@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using DVS.EntityFramework.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Queries
@@ -13,9 +12,11 @@ namespace DVS.EntityFramework.Queries
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
 
-            IEnumerable<SizeModelDTO> sizeDTOs = await context.Sizes.ToListAsync();
+            var actualSizes = await context.Sizes
+                .Include(s => s.ClothesSizes)
+                .ToListAsync();
 
-            return sizeDTOs.Select(y => new SizeModel(y.GuidID, y.Size, y.IsSizeSystemEU));
+            return actualSizes;
         }
     }
 }

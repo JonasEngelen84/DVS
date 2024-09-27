@@ -1,7 +1,8 @@
-﻿using DVS.Domain.Commands.Season;
+﻿using DVS.Domain.Commands.SeasonCommands;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
 using DVS.WPF.ViewModels.Forms;
+using System.Windows;
 
 namespace DVS.WPF.Stores
 {
@@ -26,36 +27,59 @@ namespace DVS.WPF.Stores
 
         public async Task Load()
         {
+            IEnumerable<Season> season = [];
+
             try
             {
-                IEnumerable<Season> season = await _getAllSeasonsQuery.Execute();
-
-                _seasons.Clear();
-
-                if (season != null)
-                {
-                    _seasons.AddRange(season);
-                }
-
-                SeasonsLoaded?.Invoke();
+                season = await _getAllSeasonsQuery.Execute();
             }
-            catch (Exception ex)
+            catch
             {
-                //TODO: Fehlerbehandlung beim laden der aus DB
-                Console.WriteLine($"Fehler beim Laden der Saisons: {ex.Message}");
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Laden der Seasons von Datenbank ist fehlgeschlagen!", "SeasonStore, Load", button, icon);
             }
+
+            _seasons.Clear();
+
+            if (season != null)
+            {
+                _seasons.AddRange(season);
+            }
+
+            SeasonsLoaded?.Invoke();
         }
 
-        public async Task Add(Season newSeason, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        public async Task Add(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
-            //await _createSeasonCommand.Execute(season);
-            _seasons.Add(newSeason);
-            SeasonAdded.Invoke(newSeason, addEditSeasonFormViewModel);
+            try
+            {
+                await _createSeasonCommand.Execute(season);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Hinzufügen der Season in Datenbank ist fehlgeschlagen!", "SeasonStore, Add", button, icon);
+            }
+
+            _seasons.Add(season);
+
+            SeasonAdded.Invoke(season, addEditSeasonFormViewModel);
         }
 
         public async Task Update(Season updatedSeason, AddEditSeasonFormViewModel? addEditSeasonFormViewModel)
         {
-            //await _updateSeasonCommand.Execute(season);
+            try
+            {
+                //await _updateSeasonCommand.Execute(season);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Updaten der Season in Datenbank ist fehlgeschlagen!", "SeasonStore, Update", button, icon);
+            }
 
             int index = _seasons.FindIndex(y => y.GuidID == updatedSeason.GuidID);
 
@@ -70,33 +94,29 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task Delete(Guid guidID, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        public async Task Delete(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
-            //await _deleteSeasonCommand.Execute(guidID);
+            try
+            {
+                await _deleteSeasonCommand.Execute(season);
+            }
+            catch
+            {
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("Löschen der Season aus Datenbank ist fehlgeschlagen!", "SeasonStore, Delete", button, icon);
+            }
 
-            var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == guidID);
+            var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
 
             if (seasonToDelete != null)
             {
-                _seasons.RemoveAll(y => y.GuidID == guidID);
-                SeasonDeleted.Invoke(guidID, addEditSeasonFormViewModel);
+                _seasons.RemoveAll(y => y.GuidID == season.GuidID);
+                SeasonDeleted.Invoke(season.GuidID, addEditSeasonFormViewModel);
             }
             else
             {
                 throw new InvalidOperationException("Löschen der Saison nicht möglich.");
-            }
-        }
-
-        public async Task ClearSeasons(AddEditSeasonFormViewModel addEditSeasonFormViewModel)
-        {
-            if (_seasons != null)
-            {
-                _seasons.Clear();
-                AllSeasonsDeleted.Invoke(addEditSeasonFormViewModel);
-            }
-            else
-            {
-                throw new InvalidOperationException("Löschen aller Saisons nicht möglich.");
             }
         }
     }

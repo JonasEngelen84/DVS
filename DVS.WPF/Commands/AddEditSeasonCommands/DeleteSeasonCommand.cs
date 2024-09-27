@@ -29,7 +29,7 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
 
                 try
                 {
-                    await _seasonStore.Delete((Guid)addEditSeasonFormViewModel.SelectedSeason.GuidID, addEditSeasonFormViewModel);
+                    await _seasonStore.Delete(addEditSeasonFormViewModel.SelectedSeason, addEditSeasonFormViewModel);
                 }
                 catch (Exception)
                 {

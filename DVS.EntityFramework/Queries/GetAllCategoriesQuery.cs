@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using DVS.EntityFramework.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Queries
@@ -13,9 +12,11 @@ namespace DVS.EntityFramework.Queries
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
 
-            IEnumerable<CategoryDTO> categoryDTOs = await context.Categories.ToListAsync();
+            var actualCategory = await context.Categories
+                .Include(c => c.Clothes)
+                .ToListAsync();
 
-            return categoryDTOs.Select(y => new Category(y.GuidID, y.Name));
+            return actualCategory;
         }
     }
 }
