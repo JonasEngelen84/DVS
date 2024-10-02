@@ -64,10 +64,13 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
             ClothesSize existingDclivm = editedClothes.Sizes.FirstOrDefault(cs => cs.GuidID == editedDclivm.GuidID);
 
-            editedClothes.Sizes.Remove(existingDclivm);
-            editedClothes.Sizes.Add(editedDclivm);
-            existingDclivm.Clothes.Sizes.Remove(existingDclivm);
-            existingDclivm.Clothes.Sizes.Add(editedDclivm);
+            if (existingDclivm != null)
+            {
+                editedClothes.Sizes.Remove(existingDclivm);
+                editedClothes.Sizes.Add(editedDclivm);
+                existingDclivm.Clothes.Sizes.Remove(existingDclivm);
+                existingDclivm.Clothes.Sizes.Add(editedDclivm);
+            }
 
             return new DetailedClothesListingItemViewModel(editedClothes, editedDclivm);
         }

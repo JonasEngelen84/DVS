@@ -15,10 +15,53 @@ namespace DVS.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Category>().HasKey(e => e.GuidID);
-            modelBuilder.Entity<Season>().HasKey(e => e.GuidID);
-            modelBuilder.Entity<SizeModel>().HasKey(s => s.GuidID);
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Employee>().HasKey(e => e.GuidID);
+
+            modelBuilder.Entity<Season>().HasKey(e => e.GuidID);
+            modelBuilder.Entity<Season>().HasData(
+                new Season(Guid.NewGuid(), "Saisonlos"),
+                new Season(Guid.NewGuid(), "Sommer"),
+                new Season(Guid.NewGuid(), "Winter")
+            );
+
+            modelBuilder.Entity<Category>().HasKey(e => e.GuidID);
+            modelBuilder.Entity<Category>().HasData(
+                new Category(Guid.NewGuid(), "Kategorielos"),
+                new Category(Guid.NewGuid(), "Hose"),
+                new Category(Guid.NewGuid(), "Shirt"),
+                new Category(Guid.NewGuid(), "Hemd"),
+                new Category(Guid.NewGuid(), "Pullover"),
+                new Category(Guid.NewGuid(), "Jacke"),
+                new Category(Guid.NewGuid(), "Schuhe"),
+                new Category(Guid.NewGuid(), "Handschuhe"),
+                new Category(Guid.NewGuid(), "Kopbedeckung")
+            );
+
+            modelBuilder.Entity<SizeModel>().HasKey(e => e.GuidID);
+            modelBuilder.Entity<SizeModel>().HasData(
+                new SizeModel(Guid.NewGuid(), "44", true),
+                new SizeModel(Guid.NewGuid(), "46", true),
+                new SizeModel(Guid.NewGuid(), "48", true),
+                new SizeModel(Guid.NewGuid(), "50", true),
+                new SizeModel(Guid.NewGuid(), "52", true),
+                new SizeModel(Guid.NewGuid(), "54", true),
+                new SizeModel(Guid.NewGuid(), "56", true),
+                new SizeModel(Guid.NewGuid(), "58", true),
+                new SizeModel(Guid.NewGuid(), "60", true),
+                new SizeModel(Guid.NewGuid(), "62", true),
+                new SizeModel(Guid.NewGuid(), "XS", false),
+                new SizeModel(Guid.NewGuid(), "S", false),
+                new SizeModel(Guid.NewGuid(), "M", false),
+                new SizeModel(Guid.NewGuid(), "L", false),
+                new SizeModel(Guid.NewGuid(), "XL", false),
+                new SizeModel(Guid.NewGuid(), "XLL", false),
+                new SizeModel(Guid.NewGuid(), "3XL", false),
+                new SizeModel(Guid.NewGuid(), "4XL", false),
+                new SizeModel(Guid.NewGuid(), "5XL", false),
+                new SizeModel(Guid.NewGuid(), "6XL", false)
+            );
 
             modelBuilder.Entity<Clothes>().HasKey(c => c.GuidID);
             modelBuilder.Entity<Clothes>()

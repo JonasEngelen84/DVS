@@ -116,60 +116,44 @@ namespace DVS.WPF
             _modalNavigationStore = new();
             _selectedDetailedClothesItemStore = new();
             _selectedDetailedEmployeeClothesItemStore = new();
-                        
             _sizeStore = new(_getAllSizesQuery, _updateSizeCommand);
-            _sizeStore.Load();
-
             _categoryStore = new(_getAllCategoriesQuery,
                                  _createCategoryCommand,
                                  _updateCategoryCommand,
                                  _deleteCategoryCommand);
-            _categoryStore.Load();
-
             _seasonStore = new(_getAllSeasonsQuery,
                                _createSeasonCommand,
                                _updateSeasonCommand,
                                _deleteSeasonsCommand);
-            _seasonStore.Load();
-
             _clothesStore = new(_getAllClothesQuery,
                                 _createClothesCommand,
                                 _updateClothesCommand,
                                 _deleteClothesCommand);
-            _clothesStore.Load();
-
             _clothesSizeStore = new(_getAllClothesSizesQuery,
                                     _createClothesSizeCommand,
                                     _updateClothesSizeCommand,
                                     _deleteClothesSizeCommand);
-            _clothesSizeStore.Load();
-
             _employeeClothesSizesStore = new(_getAllEmployeeClothesSizesQuery,
                                              _createEmployeeClothesSizeCommand,
                                              _updateEmployeeClothesSizeCommand,
                                              _deleteEmployeeClothesSizeCommand);
-            _employeeClothesSizesStore.Load();
-
             _employeeStore = new(_getAllEmployeesQuery,
                                  _createEmployeeCommand,
                                  _updateEmployeeCommand,
                                  _deleteEmployeeCommand);
-            _employeeStore.Load();
 
             _addEditEmployeeListingViewModel = new(_clothesStore);
-
-            _dVSListingViewModel = new(_sizeStore, 
-                                       _clothesStore,
-                                       _employeeStore,
-                                       _modalNavigationStore,
-                                       _categoryStore,
-                                       _seasonStore,
-                                       _clothesSizeStore,
-                                       _employeeClothesSizesStore,
-                                       _selectedDetailedClothesItemStore,
-                                       _selectedDetailedEmployeeClothesItemStore,
-                                       _addEditEmployeeListingViewModel);
-
+            _dVSListingViewModel = DVSListingViewModel.LoadViewModel(_sizeStore,
+                                                                     _clothesStore,
+                                                                     _employeeStore,
+                                                                     _modalNavigationStore,
+                                                                     _categoryStore,
+                                                                     _seasonStore,
+                                                                     _clothesSizeStore,
+                                                                     _employeeClothesSizesStore,
+                                                                     _selectedDetailedClothesItemStore,
+                                                                     _selectedDetailedEmployeeClothesItemStore,
+                                                                     _addEditEmployeeListingViewModel);
             _dVSDetailedViewModel = new(_dVSListingViewModel,
                                         _modalNavigationStore,
                                         _sizeStore,
@@ -182,7 +166,6 @@ namespace DVS.WPF
                                         _selectedDetailedClothesItemStore,
                                         _selectedDetailedEmployeeClothesItemStore,
                                         _addEditEmployeeListingViewModel);
-
             _dVSHeadViewModel = new(_dVSListingViewModel,
                                     _addEditEmployeeListingViewModel,
                                     _modalNavigationStore,

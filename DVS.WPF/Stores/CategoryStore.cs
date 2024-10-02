@@ -18,7 +18,7 @@ namespace DVS.WPF.Stores
         private readonly IUpdateCategoryCommand _updateCategoryCommand = updateCategoryCommand; 
         private readonly IDeleteCategoryCommand _deleteCategoryCommand = deleteCategoryCommand;
 
-        private readonly List<Category> _categories = [new(Guid.NewGuid(), "Kategorielos")];
+        private readonly List<Category> _categories = [];
         public IEnumerable<Category> Categories => _categories;
 
         public event Action CategoriesLoaded;

@@ -1,7 +1,9 @@
 ﻿using DVS.Domain.Models;
+using DVS.WPF.Commands;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.ListViewItems;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels
 {
@@ -49,6 +51,8 @@ namespace DVS.WPF.ViewModels
         private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore;
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel;
 
+        public ICommand LoadDataFromDbCommand { get; }
+
         public DVSListingViewModel(SizeStore sizeStore,
                                    ClothesStore clothesStore,
                                    EmployeeStore employeeStore,
@@ -72,8 +76,14 @@ namespace DVS.WPF.ViewModels
             _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
             _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
             _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
-            ClothesStore_ClothesLoaded();
-            EmployeeStore_EmployeesLoaded();
+
+            LoadDataFromDbCommand = new LoadDataFromDbCommand(sizeStore,
+                                                              categoryStore,
+                                                              seasonStore,
+                                                              clothesStore,
+                                                              clothesSizeStore,
+                                                              employeeStore,
+                                                              employeeClothesSizesStore);
 
             _clothesStore.ClothesLoaded += ClothesStore_ClothesLoaded;
             _clothesStore.ClothesAdded += ClothesStore_ClothesAdded;
@@ -84,6 +94,35 @@ namespace DVS.WPF.ViewModels
             _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
             _employeeStore.EmployeeUpdated += EmployeeStore_EmployeeUpdated;
             _employeeStore.EmployeeDeleted += EmployeeStore_EmployeeDeleted;
+        }
+
+        public static DVSListingViewModel LoadViewModel(SizeStore sizeStore,
+                                                        ClothesStore clothesStore,
+                                                        EmployeeStore employeeStore,
+                                                        ModalNavigationStore modalNavigationStore,
+                                                        CategoryStore categoryStore,
+                                                        SeasonStore seasonStore,
+                                                        ClothesSizeStore clothesSizeStore,
+                                                        EmployeeClothesSizesStore employeeClothesSizesStore,
+                                                        SelectedDetailedClothesItemStore selectedDetailedClothesItemStore,
+                                                        SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore,
+                                                        AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
+        {
+            DVSListingViewModel viewModel = new (sizeStore,
+                                                 clothesStore,
+                                                 employeeStore,
+                                                 modalNavigationStore,
+                                                 categoryStore,
+                                                 seasonStore,
+                                                 clothesSizeStore,
+                                                 employeeClothesSizesStore,
+                                                 selectedDetailedClothesItemStore,
+                                                 selectedDetailedEmployeeClothesItemStore,
+                                                 addEditEmployeeListingViewModel);
+
+            viewModel.LoadDataFromDbCommand.Execute(null);
+
+            return viewModel;
         }
 
 

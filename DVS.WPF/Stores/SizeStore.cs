@@ -10,29 +10,7 @@ namespace DVS.WPF.Stores
         private readonly IGetAllSizesQuery _getAllSizesQuery = getAllSizesQuery;
         private readonly IUpdateSizeCommand _updateSizeCommand = updateSizeCommand;
 
-        private readonly List<SizeModel> _sizes =
-            [
-                new SizeModel(Guid.NewGuid(), "44", true),
-                new SizeModel(Guid.NewGuid(), "46", true),
-                new SizeModel(Guid.NewGuid(), "48", true),
-                new SizeModel(Guid.NewGuid(), "50", true),
-                new SizeModel(Guid.NewGuid(), "52", true),
-                new SizeModel(Guid.NewGuid(), "54", true),
-                new SizeModel(Guid.NewGuid(), "56", true),
-                new SizeModel(Guid.NewGuid(), "58", true),
-                new SizeModel(Guid.NewGuid(), "60", true),
-                new SizeModel(Guid.NewGuid(), "62", true),
-                new SizeModel(Guid.NewGuid(), "XS", false),
-                new SizeModel(Guid.NewGuid(), "S", false),
-                new SizeModel(Guid.NewGuid(), "M", false),
-                new SizeModel(Guid.NewGuid(), "L", false),
-                new SizeModel(Guid.NewGuid(), "XL", false),
-                new SizeModel(Guid.NewGuid(), "XLL", false),
-                new SizeModel(Guid.NewGuid(), "3XL", false),
-                new SizeModel(Guid.NewGuid(), "4XL", false),
-                new SizeModel(Guid.NewGuid(), "5XL", false),
-                new SizeModel(Guid.NewGuid(), "6XL", false)
-            ];
+        private readonly List<SizeModel> _sizes = [];
         public IEnumerable<SizeModel> Sizes => _sizes;
 
         public async Task Load()
@@ -50,7 +28,7 @@ namespace DVS.WPF.Stores
                 MessageBox.Show("Laden der Sizes von Datenbank ist fehlgeschlagen!", "SizesStore, Load", button, icon);
             }
 
-            //_sizes.Clear();
+            _sizes.Clear();
 
             if (sizes != null)
             {

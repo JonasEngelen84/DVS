@@ -33,7 +33,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             CreateAndAddClothesSizesAsync(addClothesFormViewModel, selectedSizes, newClothes);
             UpdateSizeAsync(addClothesFormViewModel, selectedSizes);
             UpdateCategoryAndSeasonCollectionsAsync(addClothesFormViewModel, newClothes);
-            UpdateClothesAsync(addClothesFormViewModel, newClothes);
+            AddClothesAsync(addClothesFormViewModel, newClothes);
 
             addClothesFormViewModel.IsSubmitting = false;
 
@@ -62,14 +62,14 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
         {
             foreach (SizeModel size in selectedSizes)
             {
-                ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size, size.Quantity, null);
+                ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size, size.Quantity, "");
 
                 newClothes.Sizes.Add(newClothesSize);
                 size.ClothesSizes.Add(newClothesSize);
 
                 try
                 {
-                    await _clothesSizeStore.Update(newClothesSize);
+                    await _clothesSizeStore.Add(newClothesSize);
                 }
                 catch (Exception)
                 {
@@ -115,7 +115,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
         }
 
-        private async Task UpdateClothesAsync(AddEditClothesFormViewModel addClothesFormViewModel, Clothes newClothes)
+        private async Task AddClothesAsync(AddEditClothesFormViewModel addClothesFormViewModel, Clothes newClothes)
         {
             try
             {
