@@ -33,27 +33,29 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 _clothesListingItemViewModel.HasError = false;
 
                 Clothes updatedClothes = CreateUpdatedClothesInstance();
-
                 await DeleteClothesSizesAsync();
-
                 await UpdateClothesAsync(updatedClothes);
+                await UpdateCategoryAsync(updatedClothes);
+                await UpdateSeasonAsync(updatedClothes);
+
+                _clothesListingItemViewModel.IsDeleting = false;
             }
         }
 
         private Clothes CreateUpdatedClothesInstance()
         {
              return new Clothes(_clothesListingItemViewModel.Clothes.GuidID,
-                                         _clothesListingItemViewModel.ID,
-                                         _clothesListingItemViewModel.Name,
-                                         _clothesListingItemViewModel.Category,
-                                         _clothesListingItemViewModel.Season,
-                                         _clothesListingItemViewModel.Comment)
+                                _clothesListingItemViewModel.ID,
+                                _clothesListingItemViewModel.Name,
+                                _clothesListingItemViewModel.Category,
+                                _clothesListingItemViewModel.Season,
+                                _clothesListingItemViewModel.Comment)
             {
                 Sizes = []
             };
         }
 
-        private async Task  DeleteClothesSizesAsync()
+        private async Task DeleteClothesSizesAsync()
         {
             foreach (ClothesSize cs in _clothesListingItemViewModel.Clothes.Sizes)
             {
@@ -65,30 +67,10 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 }
                 catch (Exception)
                 {
-                    ShowErrorMessageBox($"Update der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Alle Bekleidungsgrößen löschen");
+                    ShowErrorMessageBox("Löschen der ClothesSize aus Datenbank ist fehlgeschlagen!", "ClearSizesCommand DeleteClothesSizesAsync");
 
                     _clothesListingItemViewModel.HasError = false;
                 }
-            }
-        }
-
-        private async Task UpdateCategoryAndSeasonAsync(Clothes updatedClothes)
-        {
-            updatedClothes.Category?.Clothes.Remove(_clothesListingItemViewModel.Clothes);
-            updatedClothes.Category?.Clothes.Add(updatedClothes);
-            updatedClothes.Season?.Clothes.Remove(_clothesListingItemViewModel.Clothes);
-            updatedClothes.Season?.Clothes.Add(updatedClothes);
-
-            try
-            {
-                await _categoryStore.Update(updatedClothes.Category, null);
-                await _seasonStore.Update(updatedClothes.Season, null);
-            }
-            catch (Exception)
-            {
-                ShowErrorMessageBox("Löschen aller Bekleidungsgrößen ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Alle Bekleidungsgrößen löschen");
-
-                _clothesListingItemViewModel.HasError = true;
             }
         }
 
@@ -100,13 +82,43 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
             catch (Exception)
             {
-                ShowErrorMessageBox($"Löschen aller Bekleidungsgrößen ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Alle Bekleidungsgrößen löschen");
+                ShowErrorMessageBox("Updaten der Clothes in Datenbank ist fehlgeschlagen!", "ClearSizesCommand UpdateClothesAsync");
 
                 _clothesListingItemViewModel.HasError = true;
             }
-            finally
+        }
+
+        private async Task UpdateCategoryAsync(Clothes updatedClothes)
+        {
+            updatedClothes.Category?.Clothes.Remove(_clothesListingItemViewModel.Clothes);
+            updatedClothes.Category?.Clothes.Add(updatedClothes);
+
+            try
             {
-                _clothesListingItemViewModel.IsDeleting = false;
+                await _categoryStore.Update(updatedClothes.Category, null);
+            }
+            catch (Exception)
+            {
+                ShowErrorMessageBox("Updaten der Category in Datenbank ist fehlgeschlagen!", "ClearSizesCommand UpdateCategoryAsync");
+
+                _clothesListingItemViewModel.HasError = true;
+            }
+        }
+        
+        private async Task UpdateSeasonAsync(Clothes updatedClothes)
+        {
+            updatedClothes.Season?.Clothes.Remove(_clothesListingItemViewModel.Clothes);
+            updatedClothes.Season?.Clothes.Add(updatedClothes);
+
+            try
+            {
+                await _seasonStore.Update(updatedClothes.Season, null);
+            }
+            catch (Exception)
+            {
+                ShowErrorMessageBox("Updaten der Season in Datenbank ist fehlgeschlagen!", "ClearSizesCommand UpdateSeasonAsync");
+
+                _clothesListingItemViewModel.HasError = true;
             }
         }
     }

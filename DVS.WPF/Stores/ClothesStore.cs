@@ -1,7 +1,6 @@
 ﻿using DVS.Domain.Commands.ClothesCommands;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using System.Windows;
 
 namespace DVS.WPF.Stores
 {
@@ -25,18 +24,7 @@ namespace DVS.WPF.Stores
 
         public async Task Load()
         {
-            IEnumerable<Clothes> clothes = [];
-
-            try
-            {
-                clothes = await _getAllClothesQuery.Execute();
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Laden der Clothes von Datenbank ist fehlgeschlagen!", "ClothesStore, Load", button, icon);
-            }
+            IEnumerable<Clothes> clothes = await _getAllClothesQuery.Execute();
 
             _clothes.Clear();
 
@@ -50,61 +38,34 @@ namespace DVS.WPF.Stores
 
         public async Task Add(Clothes clothes)
         {
-            try
-            {
-                await _createClothesCommand.Execute(clothes);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Hinzufügen der Clothes in Datenbank ist fehlgeschlagen!", "ClothesStore, Add", button, icon);
-            }
+            await _createClothesCommand.Execute(clothes);
 
             _clothes.Add(clothes);
 
             ClothesAdded.Invoke(clothes);
         }
 
-        public async Task Update(Clothes clothes)
+        public async Task Update(Clothes updatedClothes)
         {
-            try
-            {
-                //await _updateClothesCommand.Execute(clothes);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Updaten des Clothes in Datenbank ist fehlgeschlagen!", "ClothesStore, Update", button, icon);
-            }
+            await _updateClothesCommand.Execute(updatedClothes);
 
-            int index = _clothes.FindIndex(y => y.GuidID == clothes.GuidID);
+            int index = _clothes.FindIndex(y => y.GuidID == updatedClothes.GuidID);
 
             if (index != -1)
             {
-                _clothes[index] = clothes;
+                _clothes[index] = updatedClothes;
             }
             else
             {
-                _clothes.Add(clothes);
+                _clothes.Add(updatedClothes);
             }
 
-            ClothesUpdated.Invoke(clothes);
+            ClothesUpdated.Invoke(updatedClothes);
         }
 
         public async Task Delete(Clothes clothes)
         {
-            try
-            {
-                await _deleteClothesCommand.Execute(clothes);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Löschen der Clothes aus Datenbank ist fehlgeschlagen!", "ClothesStore, Delete", button, icon);
-            }
+            await _deleteClothesCommand.Execute(clothes);
 
             _clothes.RemoveAll(y => y.GuidID == clothes.GuidID);
 

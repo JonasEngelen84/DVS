@@ -13,10 +13,10 @@
         public EmployeeClothesSize(Guid guidID, Employee employee, ClothesSize clothesSize, int quantity, string comment)
         {
             GuidID = guidID;
-            EmployeeGuidID = employee.GuidID;
-            ClothesSizeGuidID = clothesSize.GuidID;
             Employee = employee;
             ClothesSize = clothesSize;
+            EmployeeGuidID = employee.GuidID;
+            ClothesSizeGuidID = clothesSize.GuidID;
             Quantity = quantity;
             Comment = comment;
         }

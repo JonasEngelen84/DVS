@@ -21,22 +21,22 @@ namespace DVS.EntityFramework
 
             modelBuilder.Entity<Season>().HasKey(e => e.GuidID);
             modelBuilder.Entity<Season>().HasData(
-                new Season(Guid.NewGuid(), "Saisonlos"),
+                new Season(Guid.NewGuid(), "-Saisonlos-"),
                 new Season(Guid.NewGuid(), "Sommer"),
                 new Season(Guid.NewGuid(), "Winter")
             );
 
             modelBuilder.Entity<Category>().HasKey(e => e.GuidID);
             modelBuilder.Entity<Category>().HasData(
-                new Category(Guid.NewGuid(), "Kategorielos"),
-                new Category(Guid.NewGuid(), "Hose"),
-                new Category(Guid.NewGuid(), "Shirt"),
-                new Category(Guid.NewGuid(), "Hemd"),
-                new Category(Guid.NewGuid(), "Pullover"),
-                new Category(Guid.NewGuid(), "Jacke"),
-                new Category(Guid.NewGuid(), "Schuhe"),
+                new Category(Guid.NewGuid(), "-Kategorielos-"),
                 new Category(Guid.NewGuid(), "Handschuhe"),
-                new Category(Guid.NewGuid(), "Kopbedeckung")
+                new Category(Guid.NewGuid(), "Hemd"),
+                new Category(Guid.NewGuid(), "Hose"),
+                new Category(Guid.NewGuid(), "Jacke"),
+                new Category(Guid.NewGuid(), "Kopfbedeckung"),
+                new Category(Guid.NewGuid(), "Pullover"),
+                new Category(Guid.NewGuid(), "Schuhwerk"),
+                new Category(Guid.NewGuid(), "Shirt")
             );
 
             modelBuilder.Entity<SizeModel>().HasKey(e => e.GuidID);

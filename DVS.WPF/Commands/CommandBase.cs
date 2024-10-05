@@ -44,7 +44,7 @@ namespace DVS.WPF.Commands
         protected virtual void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, new EventArgs());
 
 
-        public void ShowErrorMessageBox(string message, string title)
+        public static void ShowErrorMessageBox(string message, string title)
         {
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Warning;

@@ -165,7 +165,8 @@ namespace DVS.WPF
                                         _employeeStore,
                                         _selectedDetailedClothesItemStore,
                                         _selectedDetailedEmployeeClothesItemStore,
-                                        _addEditEmployeeListingViewModel);
+                                        _addEditEmployeeListingViewModel,
+                                        _dVSDbContextFactory);
             _dVSHeadViewModel = new(_dVSListingViewModel,
                                     _addEditEmployeeListingViewModel,
                                     _modalNavigationStore,
@@ -175,7 +176,8 @@ namespace DVS.WPF
                                     _clothesStore,
                                     _clothesSizeStore,
                                     _employeeClothesSizesStore,
-                                    _employeeStore);
+                                    _employeeStore,
+                                    _dVSDbContextFactory);
         }
 
         protected override void OnStartup(StartupEventArgs e)

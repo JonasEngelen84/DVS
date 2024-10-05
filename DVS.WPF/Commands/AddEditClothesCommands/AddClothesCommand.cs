@@ -7,19 +7,11 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 {
     public class AddClothesCommand(AddClothesViewModel addClothesViewModel,
                                    ClothesStore clothesStore,
-                                   SizeStore sizeStore,
-                                   CategoryStore categoryStore,
-                                   SeasonStore seasonStore,
-                                   ClothesSizeStore clothesSizeStore,
                                    ModalNavigationStore modalNavigationStore)
                                    : AsyncCommandBase
     {
         private readonly AddClothesViewModel _addClothesViewModel = addClothesViewModel;
         private readonly ClothesStore _clothesStore = clothesStore;
-        private readonly SizeStore _sizeStore = sizeStore;
-        private readonly CategoryStore _categoryStore = categoryStore;
-        private readonly SeasonStore _seasonStore = seasonStore;
-        private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
         public override async Task ExecuteAsync(object parameter)
@@ -28,105 +20,41 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             addClothesFormViewModel.HasError = false;
             addClothesFormViewModel.IsSubmitting = true;
 
-            var selectedSizes = GetSelectedSizes(addClothesFormViewModel);
-            Clothes newClothes = CreateNewClothesInstance(addClothesFormViewModel);
-            CreateAndAddClothesSizesAsync(addClothesFormViewModel, selectedSizes, newClothes);
-            UpdateSizeAsync(addClothesFormViewModel, selectedSizes);
-            UpdateCategoryAndSeasonCollectionsAsync(addClothesFormViewModel, newClothes);
-            AddClothesAsync(addClothesFormViewModel, newClothes);
+            Clothes newClothes = new(Guid.NewGuid(),
+                                     addClothesFormViewModel.ID,
+                                     addClothesFormViewModel.Name,
+                                     addClothesFormViewModel.Category,
+                                     addClothesFormViewModel.Season,
+                                     addClothesFormViewModel.Comment);
 
-            addClothesFormViewModel.IsSubmitting = false;
+            List <SizeModel> selectedSizes = (addClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                ? addClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                : addClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
+                .ToList();
 
-            _modalNavigationStore.Close();
-        }
-
-        private static List<SizeModel> GetSelectedSizes(AddEditClothesFormViewModel addClothesFormViewModel)
-        {
-            return (addClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                    ? addClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                    : addClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
-                    .ToList();
-        }
-
-        private static Clothes CreateNewClothesInstance(AddEditClothesFormViewModel addClothesFormViewModel)
-        {
-            return new Clothes(Guid.NewGuid(),
-                               addClothesFormViewModel.ID,
-                               addClothesFormViewModel.Name,
-                               addClothesFormViewModel.Category,
-                               addClothesFormViewModel.Season,
-                               addClothesFormViewModel.Comment);
-        }
-
-        private async Task CreateAndAddClothesSizesAsync(AddEditClothesFormViewModel addClothesFormViewModel, List<SizeModel> selectedSizes, Clothes newClothes)
-        {
-            foreach (SizeModel size in selectedSizes)
+            if (selectedSizes != null)
             {
-                ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size, size.Quantity, "");
-
-                newClothes.Sizes.Add(newClothesSize);
-                size.ClothesSizes.Add(newClothesSize);
-
-                try
+                foreach (SizeModel size in selectedSizes)
                 {
-                    await _clothesSizeStore.Add(newClothesSize);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "AddClothesCommand CreateAndAddClothesSizesAsync");
-
-                    addClothesFormViewModel.HasError = true;
+                    ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size, size.Quantity, "");
+                    newClothes.Sizes.Add(newClothesSize);
                 }
             }
-        }
 
-        private async Task UpdateSizeAsync(AddEditClothesFormViewModel addClothesFormViewModel, List<SizeModel> selectedSizes)
-        {
-            foreach (SizeModel size in selectedSizes)
-            {
-                try
-                {
-                    await _sizeStore.Update(size);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "AddClothesCommand UpdateSizeAsync");
-
-                    addClothesFormViewModel.HasError = true;
-                }
-            }
-        }
-
-        private async Task UpdateCategoryAndSeasonCollectionsAsync(AddEditClothesFormViewModel addClothesFormViewModel, Clothes newClothes)
-        {
-            newClothes.Category?.Clothes.Add(newClothes);
-            newClothes.Season?.Clothes.Add(newClothes);
-
-            try
-            {
-                await _categoryStore.Update(newClothes.Category, null);
-                await _seasonStore.Update(newClothes.Season, null);
-            }
-            catch (Exception)
-            {
-                ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "AddClothesCommand UpdateCategoryAndSeasonCollectionsAsync");
-
-                addClothesFormViewModel.HasError = true;
-            }
-        }
-
-        private async Task AddClothesAsync(AddEditClothesFormViewModel addClothesFormViewModel, Clothes newClothes)
-        {
             try
             {
                 await _clothesStore.Add(newClothes);
             }
             catch (Exception)
             {
-                ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "AddClothesCommand UpdateClothesAsync");
+                ShowErrorMessageBox("Hinzufügen der Clothes ist fehlgeschlagen!", "AddClothesCommand CreateAndAddNewClothesAsync");
 
                 addClothesFormViewModel.HasError = true;
             }
+
+            addClothesFormViewModel.IsSubmitting = false;
+
+            _modalNavigationStore.Close();
         }
     }
 }

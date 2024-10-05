@@ -1,7 +1,6 @@
 ﻿using DVS.Domain.Commands.EmployeeCommands;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using System.Windows;
 
 namespace DVS.WPF.Stores
 {
@@ -25,18 +24,7 @@ namespace DVS.WPF.Stores
 
         public async Task Load()
         {
-            IEnumerable<Employee> employee = [];
-
-            try
-            {
-                employee = await _getAllEmployeesQuery.Execute();
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Laden der EmployeeClothesSizes von Datenbank ist fehlgeschlagen!", "EmployeeClothesSizesStore, Load", button, icon);
-            }
+            IEnumerable<Employee> employee = await _getAllEmployeesQuery.Execute();
 
             _employees.Clear();
 
@@ -50,61 +38,34 @@ namespace DVS.WPF.Stores
 
         public async Task Add(Employee employee)
         {
-            try
-            {
-                await _createEmployeeCommand.Execute(employee);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Hinzufügen des Employee in Datenbank ist fehlgeschlagen!", "EmployeeStore, Add", button, icon);
-            }
+            await _createEmployeeCommand.Execute(employee);
 
             _employees.Add(employee);
 
             EmployeeAdded?.Invoke(employee);
         }
 
-        public async Task Update(Employee employee)
+        public async Task Update(Employee updatedEmployee)
         {
-            try
-            {
-                //await _updateEmployeeCommand.Execute(employee);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Updaten des Employee in Datenbank ist fehlgeschlagen!", "EmployeeStore, Update", button, icon);
-            }
+            await _updateEmployeeCommand.Execute(updatedEmployee);
 
-            int index = _employees.FindIndex(y => y.GuidID == employee.GuidID);
+            int index = _employees.FindIndex(y => y.GuidID == updatedEmployee.GuidID);
 
             if (index != -1)
             {
-                _employees[index] = employee;
+                _employees[index] = updatedEmployee;
             }
             else
             {
-                _employees.Add(employee);
+                _employees.Add(updatedEmployee);
             }
 
-            EmployeeUpdated.Invoke(employee);
+            EmployeeUpdated.Invoke(updatedEmployee);
         }
 
         public async Task Delete(Employee employee)
         {
-            try
-            {
-                await _deleteEmployeeCommand.Execute(employee);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Löschen des Employee aus Datenbank ist fehlgeschlagen!", "EmployeeStore, Delete", button, icon);
-            }
+            await _deleteEmployeeCommand.Execute(employee);
 
             _employees.RemoveAll(y => y.GuidID == employee.GuidID);
 

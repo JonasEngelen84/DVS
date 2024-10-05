@@ -1,7 +1,6 @@
 ﻿using DVS.Domain.Commands.SizeCommands;
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using System.Windows;
 
 namespace DVS.WPF.Stores
 {
@@ -15,18 +14,7 @@ namespace DVS.WPF.Stores
 
         public async Task Load()
         {
-            IEnumerable<SizeModel> sizes = [];
-
-            try
-            {
-                sizes = await _getAllSizesQuery.Execute();                
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Laden der Sizes von Datenbank ist fehlgeschlagen!", "SizesStore, Load", button, icon);
-            }
+            IEnumerable<SizeModel> sizes = await _getAllSizesQuery.Execute();
 
             _sizes.Clear();
 
@@ -36,28 +24,19 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task Update(SizeModel size)
+        public async Task Update(SizeModel updatedSize)
         {
-            try
-            {
-                //await _updateSizeCommand.Execute(size);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Updaten der Size in Datenbank ist fehlgeschlagen!", "SizesStore, Update", button, icon);
-            }
+            await _updateSizeCommand.Execute(updatedSize);
 
-            int index = _sizes.FindIndex(y => y.GuidID == size.GuidID);
+            int index = _sizes.FindIndex(y => y.GuidID == updatedSize.GuidID);
 
             if (index != -1)
             {
-                _sizes[index] = size;
+                _sizes[index] = updatedSize;
             }
             else
             {
-                _sizes.Add(size);
+                _sizes.Add(updatedSize);
             }
         }
     }

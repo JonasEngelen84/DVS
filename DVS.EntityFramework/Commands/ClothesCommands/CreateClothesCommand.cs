@@ -11,17 +11,13 @@ namespace DVS.EntityFramework.Commands.ClothesCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //Clothes clothes = new()
-            //{
-            //    GuidID = clothes.GuidID,
-            //    ID = clothes.ID,
-            //    Name = clothes.Name,
-            //    CategoryGuidID = clothes.CategoryGuidID,
-            //    SeasonGuidID = clothes.SeasonGuidID,
-            //    Comment = clothes.Comment,
-            //    Sizes = clothes.Sizes,
-            //};
+            foreach (ClothesSize cs in clothes.Sizes)
+            {
+                context.Sizes.Attach(cs.Size);
+            }
 
+            context.Categories.Attach(clothes.Category);
+            context.Seasons.Attach(clothes.Season);
             context.Clothes.Add(clothes);
 
             await context.SaveChangesAsync();

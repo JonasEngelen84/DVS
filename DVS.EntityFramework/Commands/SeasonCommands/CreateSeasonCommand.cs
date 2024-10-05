@@ -11,14 +11,8 @@ namespace DVS.EntityFramework.Commands.SeasonCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //Season season = new()
-            //{
-            //    GuidID = season.GuidID,
-            //    Name = season.Name,
-            //    Clothes = season.Clothes
-            //};
-
             context.Seasons.Add(season);
+
             await context.SaveChangesAsync();
         }
     }

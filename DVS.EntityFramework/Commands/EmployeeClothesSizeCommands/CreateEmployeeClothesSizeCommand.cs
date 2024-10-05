@@ -11,16 +11,14 @@ namespace DVS.EntityFramework.Commands.EmployeeClothesSizeCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //EmployeeClothesSize employeeClothesSize = new()
-            //{
-            //    GuidID = employeeClothesSize.GuidID,
-            //    EmployeeGuidID = employeeClothesSize.EmployeeGuidID,
-            //    ClothesSizeGuidID = employeeClothesSize.ClothesSizeGuidID,
-            //    Quantity = employeeClothesSize.Quantity,
-            //    Comment = employeeClothesSize.Comment
-            //};
-
+            context.Employees.Attach(employeeClothesSize.Employee);
+            context.ClothesSizes.Attach(employeeClothesSize.ClothesSize);
+            context.Sizes.Attach(employeeClothesSize.ClothesSize.Size);
+            context.Clothes.Attach(employeeClothesSize.ClothesSize.Clothes);
+            context.Categories.Attach(employeeClothesSize.ClothesSize.Clothes.Category);
+            context.Seasons.Attach(employeeClothesSize.ClothesSize.Clothes.Season);
             context.EmployeeClothesSizes.Add(employeeClothesSize);
+
             await context.SaveChangesAsync();
         }
     }

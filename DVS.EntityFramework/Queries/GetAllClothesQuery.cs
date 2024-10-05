@@ -17,8 +17,6 @@ namespace DVS.EntityFramework.Queries
                 .Include(c => c.Season)
                 .Include(c => c.Sizes)
                     .ThenInclude(cs => cs.Size)
-                .Include(c => c.Sizes)
-                    .ThenInclude(cs => cs.Quantity)
                 .ToListAsync();
 
             return actualClothes;

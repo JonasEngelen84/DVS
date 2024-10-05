@@ -48,14 +48,14 @@ namespace DVS.WPF.Commands
                 ShowErrorMessageBox("Laden der Seasons ist fehlgeschlagen!", "LoadDataFromDbCommand");
             }
 
-            //try
-            //{
-            //    await _clothesStore.Load();
-            //}
-            //catch
-            //{
-            //    ShowErrorMessageBox("Laden der Clothes ist fehlgeschlagen!", "LoadDataFromDbCommand");
-            //}
+            try
+            {
+                await _clothesStore.Load();
+            }
+            catch
+            {
+                ShowErrorMessageBox("Laden der Clothes ist fehlgeschlagen!", "LoadDataFromDbCommand");
+            }
 
             try
             {

@@ -2,7 +2,6 @@
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
 using DVS.WPF.ViewModels.Forms;
-using System.Windows;
 
 namespace DVS.WPF.Stores
 {
@@ -27,18 +26,7 @@ namespace DVS.WPF.Stores
 
         public async Task Load()
         {
-            IEnumerable<Season> season = [];
-
-            try
-            {
-                season = await _getAllSeasonsQuery.Execute();
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Laden der Seasons von Datenbank ist fehlgeschlagen!", "SeasonStore, Load", button, icon);
-            }
+            IEnumerable<Season> season = await _getAllSeasonsQuery.Execute();
 
             _seasons.Clear();
 
@@ -52,16 +40,7 @@ namespace DVS.WPF.Stores
 
         public async Task Add(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
-            try
-            {
-                await _createSeasonCommand.Execute(season);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Hinzufügen der Season in Datenbank ist fehlgeschlagen!", "SeasonStore, Add", button, icon);
-            }
+            await _createSeasonCommand.Execute(season);
 
             _seasons.Add(season);
 
@@ -70,16 +49,7 @@ namespace DVS.WPF.Stores
 
         public async Task Update(Season updatedSeason, AddEditSeasonFormViewModel? addEditSeasonFormViewModel)
         {
-            try
-            {
-                //await _updateSeasonCommand.Execute(season);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Updaten der Season in Datenbank ist fehlgeschlagen!", "SeasonStore, Update", button, icon);
-            }
+            await _updateSeasonCommand.Execute(updatedSeason);
 
             int index = _seasons.FindIndex(y => y.GuidID == updatedSeason.GuidID);
 
@@ -96,16 +66,7 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
-            try
-            {
-                await _deleteSeasonCommand.Execute(season);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Löschen der Season aus Datenbank ist fehlgeschlagen!", "SeasonStore, Delete", button, icon);
-            }
+            await _deleteSeasonCommand.Execute(season);
 
             var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
 

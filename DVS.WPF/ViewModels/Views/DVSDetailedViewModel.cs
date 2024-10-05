@@ -1,4 +1,5 @@
-﻿using DVS.WPF.Commands;
+﻿using DVS.EntityFramework;
+using DVS.WPF.Commands;
 using DVS.WPF.Commands.AddEditClothesCommands;
 using DVS.WPF.Commands.AddEditEmployeeCommands;
 using DVS.WPF.Commands.CommentCommands;
@@ -18,7 +19,8 @@ namespace DVS.WPF.ViewModels.Views
                                       EmployeeStore employeeStore,
                                       SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore,
                                       SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore,
-                                      AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
+                                      AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
+                                      DVSDbContextFactory dVSDbContextFactory)
                                       : ViewModelBase
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
@@ -47,7 +49,8 @@ namespace DVS.WPF.ViewModels.Views
                                                                             clothesSizeStore,
                                                                             employeeClothesSizesStore,
                                                                             employeeStore,
-                                                                            dVSListingViewModel);
+                                                                            dVSListingViewModel,
+                                                                            dVSDbContextFactory);
 
         public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(dVSListingViewModel,
                                                                               addEditEmployeeListingViewModel,

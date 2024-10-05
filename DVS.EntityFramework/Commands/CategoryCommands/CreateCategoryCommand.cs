@@ -11,11 +11,6 @@ namespace DVS.EntityFramework.Commands.CategoryCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //Category newCategory = new(category.GuidID, category.Name)
-            //{
-            //    Clothes = category.Clothes
-            //};
-
             context.Categories.Add(category);
 
             await context.SaveChangesAsync();

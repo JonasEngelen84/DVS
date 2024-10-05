@@ -15,9 +15,13 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                                       : AsyncCommandBase
     {
         private readonly ClothesListingItemViewModel _clothesListingItemViewModel = clothesListingItemViewModel;
+        private readonly SizeStore sizeStore = sizeStore;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly CategoryStore _categoryStore = categoryStore;
         private readonly SeasonStore _seasonStore = seasonStore;
+        private readonly ClothesSizeStore clothesSizeStore = clothesSizeStore;
+        private readonly EmployeeClothesSizesStore employeeClothesSizesStore = employeeClothesSizesStore;
+        private readonly EmployeeStore employeeStore = employeeStore;
 
         public override async Task ExecuteAsync(object parameter)
         {
@@ -29,10 +33,10 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 _clothesListingItemViewModel.IsDeleting = true;
 
                 DeleteClothesSizes();
-
                 await UpdateCategoryAndSeasonAsync();
-
                 await DeleteClothesAsync();
+
+                _clothesListingItemViewModel.IsDeleting = false;
             }
         }
 
@@ -73,10 +77,6 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 ShowErrorMessageBox("Löschen der Bekleidung ist fehlgeschlagen!", "Bekleidung löschen");
 
                 _clothesListingItemViewModel.HasError = true;
-            }
-            finally
-            {
-                _clothesListingItemViewModel.IsDeleting = false;
             }
         }
     }

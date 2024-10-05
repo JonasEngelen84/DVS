@@ -2,7 +2,6 @@
 using DVS.Domain.Models;
 using DVS.Domain.Queries;
 using DVS.WPF.ViewModels.Forms;
-using System.Windows;
 
 namespace DVS.WPF.Stores
 {
@@ -30,18 +29,7 @@ namespace DVS.WPF.Stores
 
         public async Task Load()
         {
-            IEnumerable<Category> categorie = [];
-
-            try
-            {
-                categorie = await _getAllCategoriesQuery.Execute();
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Laden der Categories von Datenbank ist fehlgeschlagen!", "CategoryStore, Load", button, icon);
-            }
+            IEnumerable<Category> categorie = await _getAllCategoriesQuery.Execute();
 
             _categories.Clear();
 
@@ -55,16 +43,7 @@ namespace DVS.WPF.Stores
 
         public async Task Add(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            try
-            {
-                await _createCategoryCommand.Execute(category);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Hinzufügen der Category in Datenbank ist fehlgeschlagen!", "CategoryStore, Add", button, icon);
-            }
+            await _createCategoryCommand.Execute(category);
 
             _categories.Add(category);
 
@@ -73,16 +52,7 @@ namespace DVS.WPF.Stores
 
         public async Task Update(Category updatedCategory, AddEditCategoryFormViewModel? addEditCategoryFormViewModel)
         {
-            try
-            {
-                //await _updateCategoryCommand.Execute(category);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Updaten der Category in Datenbank ist fehlgeschlagen!", "CategoryStore, Update", button, icon);
-            }
+            await _updateCategoryCommand.Execute(updatedCategory);
 
             int index = _categories.FindIndex(y => y.GuidID == updatedCategory.GuidID);
 
@@ -99,16 +69,7 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            try
-            {
-                await _deleteCategoryCommand.Execute(category);
-            }
-            catch
-            {
-                MessageBoxButton button = MessageBoxButton.OK;
-                MessageBoxImage icon = MessageBoxImage.Warning;
-                MessageBox.Show("Löschen der Category in Datenbank ist fehlgeschlagen!", "CategoryStore, Delete", button, icon);
-            }
+            await _deleteCategoryCommand.Execute(category);
 
             var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
 

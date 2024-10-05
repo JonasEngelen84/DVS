@@ -37,9 +37,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 editClothesFormViewModel.IsSubmitting = true;
 
                 var selectedSizes = GetSelectedSizes(editClothesFormViewModel);
-
                 Clothes updatedClothes = CreateUpdatedClothesInstance(editClothesFormViewModel);
-
                 await DeleteRemovedClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
                 await CreateAndAddNewClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
                 await UpdateClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
@@ -93,7 +91,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                     }
                     catch (Exception)
                     {
-                        ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung bearbeiten");
+                        ShowErrorMessageBox("Löschen der ClothesSize aus Datenbank ist fehlgeschlagen!", "EditClothesCommand DeleteRemovedClothesSizesAsync");
+
                         editClothesFormViewModel.HasError = true;
                     }
                 }
@@ -119,7 +118,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                     }
                     catch
                     {
-                        ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung bearbeiten");
+                        ShowErrorMessageBox("Hinzufügen der ClothesSize in Datenbank ist fehlgeschlagen!", "EditClothesCommand CreateAndAddNewClothesSizesAsync");
+                        
                         editClothesFormViewModel.HasError = true;
                     }
                 }
@@ -155,7 +155,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                     }
                     catch (Exception)
                     {
-                        ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung bearbeiten");
+                        ShowErrorMessageBox("Updaten der ClothesSize in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateClothesSizesAsync");
+                        
                         editClothesFormViewModel.HasError = true;
                     }
                 }
@@ -186,7 +187,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
             catch (Exception)
             {
-                ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung bearbeiten");
+                ShowErrorMessageBox("Updaten der Clothes in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateClothesAsync");
+                
                 editClothesFormViewModel.HasError = true;
             }
         }
@@ -201,7 +203,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 }
                 catch (Exception)
                 {
-                    ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung bearbeiten");
+                    ShowErrorMessageBox("Updaten der Size in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateSizeAsync");
+                    
                     editClothesFormViewModel.HasError = true;
                 }
             }
@@ -215,7 +218,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
             catch (Exception)
             {
-                ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung bearbeiten");
+                ShowErrorMessageBox("Updaten der Category in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateCategoryAsync");
+                
                 editClothesFormViewModel.HasError = true;
             }
         }
@@ -228,7 +232,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
             catch (Exception)
             {
-                ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung bearbeiten");
+                ShowErrorMessageBox("Updaten der Season in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateSeasonAsync");
+
                 editClothesFormViewModel.HasError = true;
             }
         }
@@ -271,7 +276,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                     }
                     catch (Exception)
                     {
-                        ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung bearbeiten");
+                        ShowErrorMessageBox("Updaten der EmployeeClothesSize in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateEmployeeClothesSizesAsync");
+
                         editClothesFormViewModel.HasError = true;
                     }
 
@@ -288,7 +294,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
             catch (Exception)
             {
-                ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Bekleidung bearbeiten");
+                ShowErrorMessageBox("Updaten des Employee in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateEmployeeAsync");
+
                 editClothesFormViewModel.HasError = true;
             }
         }

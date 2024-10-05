@@ -11,17 +11,8 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //Employee employee = new()
-            //{
-            //    GuidID = employee.GuidID,
-            //    ID = employee.ID,
-            //    Lastname = employee.Lastname,
-            //    Firstname = employee.Firstname,
-            //    Comment = employee.Comment,
-            //    Clothes = employee.Clothes
-            //};
-
             context.Employees.Add(employee);
+
             await context.SaveChangesAsync();
         }
     }

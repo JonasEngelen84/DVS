@@ -1,4 +1,5 @@
-﻿using DVS.WPF.Commands.AddEditCategoryCommands;
+﻿using DVS.EntityFramework;
+using DVS.WPF.Commands.AddEditCategoryCommands;
 using DVS.WPF.Commands.AddEditClothesCommands;
 using DVS.WPF.Commands.AddEditSeasonCommands;
 using DVS.WPF.Stores;
@@ -21,19 +22,14 @@ namespace DVS.WPF.ViewModels.Views
                                    ClothesSizeStore clothesSizeStore,
                                    EmployeeClothesSizesStore employeeClothesSizesStore,
                                    EmployeeStore employeeStore,
-                                   DVSListingViewModel dVSListingViewModel)
+                                   DVSListingViewModel dVSListingViewModel,
+                                   DVSDbContextFactory dVSDbContextFactory)
         {
             AddEditListingViewModel = new(null, sizeStore, categoryStore, seasonStore);
 
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
-            ICommand addClothes = new AddClothesCommand(this,
-                                                        clothesStore,
-                                                        sizeStore,
-                                                        categoryStore,
-                                                        seasonStore,
-                                                        clothesSizeStore,
-                                                        modalNavigationStore);
+            ICommand addClothes = new AddClothesCommand(this, clothesStore, modalNavigationStore);
 
             ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(modalNavigationStore,
                                                                               categoryStore,
