@@ -11,11 +11,6 @@ namespace DVS.EntityFramework.Commands.ClothesCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //Clothes clothes = new()
-            //{
-            //    GuidID = guidID
-            //};
-
             context.Clothes.Remove(clothes);
 
             await context.SaveChangesAsync();

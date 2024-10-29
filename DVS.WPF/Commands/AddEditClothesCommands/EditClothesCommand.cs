@@ -18,13 +18,13 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                                     : AsyncCommandBase
     {
         private readonly EditClothesViewModel _editClothesViewModel = editClothesViewModel;
-        private readonly EmployeeStore _employeeStore = employeeStore;
-        private readonly ClothesStore _clothesStore = clothesStore;
-        private readonly SizeStore _sizeStore = sizeStore;
-        private readonly CategoryStore _categoryStore = categoryStore;
-        private readonly SeasonStore _seasonStore = seasonStore;
         private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
-        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore = employeeClothesSizesStore;
+        private readonly ClothesStore _clothesStore = clothesStore;
+        //private readonly EmployeeStore _employeeStore = employeeStore;
+        //private readonly SizeStore _sizeStore = sizeStore;
+        //private readonly CategoryStore _categoryStore = categoryStore;
+        //private readonly SeasonStore _seasonStore = seasonStore;
+        //private readonly EmployeeClothesSizesStore _employeeClothesSizesStore = employeeClothesSizesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         
         public override async Task ExecuteAsync(object parameter)
@@ -36,16 +36,44 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 editClothesFormViewModel.HasError = false;
                 editClothesFormViewModel.IsSubmitting = true;
 
-                var selectedSizes = GetSelectedSizes(editClothesFormViewModel);
-                Clothes updatedClothes = CreateUpdatedClothesInstance(editClothesFormViewModel);
-                await DeleteRemovedClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
-                await CreateAndAddNewClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
-                await UpdateClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
-                await UpdateSizeAsync(editClothesFormViewModel, selectedSizes);
-                await UpdateClothesAsync(editClothesFormViewModel, updatedClothes);
-                await UpdateCategoryAsync(editClothesFormViewModel, updatedClothes);
-                await UpdateSeasonAsync(editClothesFormViewModel, updatedClothes);
-                await UpdateEmployeeClothesSizesAsync(editClothesFormViewModel, updatedClothes);
+                Clothes updatedClothes = new(editClothesFormViewModel.Clothes.GuidID,
+                                             editClothesFormViewModel.ID,
+                                             editClothesFormViewModel.Name,
+                                             editClothesFormViewModel.Category,
+                                             editClothesFormViewModel.Season,
+                                             editClothesFormViewModel.Comment)
+                {
+                    Sizes = []
+                };
+
+                // Die vom User gewählten Größen/SizeModel auflisten
+                List<SizeModel> selectedSizes = (editClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                    ? editClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                    : editClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
+                    .ToList();
+
+                //await DeleteRemovedClothesSizesAsync(editClothesFormViewModel, selectedSizes);
+                await CreateUpdateOrAddClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
+
+                // Aktualisieren der Clothes-Liste von Category und Season
+                Clothes ClothesToRemove = updatedClothes.Category.Clothes.FirstOrDefault(c => c.GuidID == updatedClothes.GuidID);
+                updatedClothes.Category.Clothes.Remove(ClothesToRemove);
+                updatedClothes.Category.Clothes.Add(updatedClothes);
+
+                ClothesToRemove = updatedClothes.Season.Clothes.FirstOrDefault(c => c.GuidID == updatedClothes.GuidID);
+                updatedClothes.Season.Clothes.Remove(ClothesToRemove);
+                updatedClothes.Season.Clothes.Add(updatedClothes);
+
+                try
+                {
+                    await _clothesStore.Update(updatedClothes);
+                }
+                catch (Exception)
+                {
+                    ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", "EditClothesCommand UpdateClothesAsync");
+
+                    editClothesFormViewModel.HasError = true;
+                }
 
                 editClothesFormViewModel.IsSubmitting = false;
 
@@ -53,45 +81,27 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
         }
 
-        private static List<SizeModel> GetSelectedSizes(AddEditClothesFormViewModel editClothesFormViewModel)
+        private async Task DeleteRemovedClothesSizesAsync(AddEditClothesFormViewModel editClothesFormViewModel, List<SizeModel> selectedSizes)
         {
-            return (editClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                    ? editClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                    : editClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
-                    .ToList();
-        }
-
-        private static Clothes CreateUpdatedClothesInstance(AddEditClothesFormViewModel editClothesFormViewModel)
-        {
-            return new Clothes(editClothesFormViewModel.Clothes.GuidID,
-                               editClothesFormViewModel.ID,
-                               editClothesFormViewModel.Name,
-                               editClothesFormViewModel.Category,
-                               editClothesFormViewModel.Season,
-                               editClothesFormViewModel.Clothes.Comment)
+            // IEnumerable kann nicht in Foreach durchlaufen und bearbeitet werden!
+            List<ClothesSize> ClothesSizesToDelete = new(editClothesFormViewModel.Clothes.Sizes);
+            foreach (ClothesSize clothesSize in ClothesSizesToDelete)
             {
-                Sizes = new ObservableCollection<ClothesSize>(editClothesFormViewModel.Clothes.Sizes)
-            };
-        }
+                SizeModel existingSize = selectedSizes.FirstOrDefault(sm => sm.GuidID == clothesSize.SizeGuidID);
 
-        private async Task DeleteRemovedClothesSizesAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes, List<SizeModel> selectedSizes)
-        {
-            foreach (ClothesSize cs in updatedClothes.Sizes)
-            {
-                SizeModel existingItem = selectedSizes.FirstOrDefault(sm => sm.GuidID == cs.SizeGuidID);
-
-                if (existingItem == null)
+                if (existingSize == null)
                 {
-                    updatedClothes.Sizes.Remove(cs);
-                    cs.Size.ClothesSizes.Remove(cs);
+                    // Aktualisieren der ClothesSize-Liste des SizeModel
+                    ClothesSize existingClothesSize = clothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.Size.GuidID == clothesSize.Size.GuidID);
+                    clothesSize.Size.ClothesSizes.Remove(clothesSize);
 
                     try
                     {
-                        await _clothesSizeStore.Delete(cs);
+                        await _clothesSizeStore.Delete(clothesSize);
                     }
                     catch (Exception)
                     {
-                        ShowErrorMessageBox("Löschen der ClothesSize aus Datenbank ist fehlgeschlagen!", "EditClothesCommand DeleteRemovedClothesSizesAsync");
+                        ShowErrorMessageBox("Löschen der Bekleidungsgröße ist fehlgeschlagen!", "EditClothesCommand DeleteRemovedClothesSizesAsync");
 
                         editClothesFormViewModel.HasError = true;
                     }
@@ -99,206 +109,171 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
         }
 
-        private async Task CreateAndAddNewClothesSizesAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes, List<SizeModel> selectedSizes)
+        private async Task CreateUpdateOrAddClothesSizesAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes, List<SizeModel> selectedSizes)
         {
             foreach (SizeModel size in selectedSizes)
             {
-                ClothesSize existingClothesSize = updatedClothes.Sizes.FirstOrDefault(cs => cs.Size.GuidID == size.GuidID);
+                ClothesSize existingClothesSize = editClothesFormViewModel.Clothes.Sizes.FirstOrDefault(cs => cs.Size.GuidID == size.GuidID);
                 
                 if (existingClothesSize == null)
                 {
                     ClothesSize newClothesSize = new(Guid.NewGuid(), updatedClothes, size, size.Quantity, "");
 
+                    //try
+                    //{
+                    //    await _clothesSizeStore.Add(newClothesSize);
+                    //}
+                    //catch
+                    //{
+                    //    ShowErrorMessageBox("Erstellen der Bekleidungsgröße ist fehlgeschlagen!", "EditClothesCommand CreateAndAddNewClothesSizesAsync");
+
+                    //    editClothesFormViewModel.HasError = true;
+                    //}
+
+                    // Den ClothesSize-Listen des SizeModel und des neu erstellten Clothes, das neu erstellte ClothesSize hinzufügen
                     updatedClothes.Sizes.Add(newClothesSize);
-                    size.ClothesSizes.Add(newClothesSize);
+                    //size.ClothesSizes.Add(newClothesSize);
+                }
+                else
+                {
+                    if (existingClothesSize.Quantity != size.Quantity)
+                    {
+                        ClothesSize updatedClothesSize = new(existingClothesSize.GuidID, updatedClothes, size, size.Quantity, existingClothesSize.Comment)
+                        {
+                            EmployeeClothesSizes = new ObservableCollection<EmployeeClothesSize>(existingClothesSize.EmployeeClothesSizes)
+                        };
 
-                    try
-                    {
-                        await _clothesSizeStore.Add(newClothesSize);
+                        //try
+                        //{
+                        //    await _clothesSizeStore.Update(updatedClothesSize);
+                        //}
+                        //catch (Exception)
+                        //{
+                        //    ShowErrorMessageBox("Bearbeiten der Bekleidungsgröße ist fehlgeschlagen!", "EditClothesCommand UpdateClothesSizesAsync");
+
+                        //    editClothesFormViewModel.HasError = true;
+                        //}
+
+                        // Der ClothesSize-Liste des neu erstellten Clothes, das neu erstellte ClothesSize hinzufügen
+                        updatedClothes.Sizes.Add(updatedClothesSize);
+
+                        // Aktualisieren der ClothesSize-Liste des SizeModel
+                        ClothesSize ClothesSizeToRemove = updatedClothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.GuidID == updatedClothesSize.GuidID);
+                        size.ClothesSizes.Remove(ClothesSizeToRemove);
+                        size.ClothesSizes.Add(updatedClothesSize);
                     }
-                    catch
-                    {
-                        ShowErrorMessageBox("Hinzufügen der ClothesSize in Datenbank ist fehlgeschlagen!", "EditClothesCommand CreateAndAddNewClothesSizesAsync");
-                        
-                        editClothesFormViewModel.HasError = true;
-                    }
+                    else
+                        updatedClothes.Sizes.Add(existingClothesSize);
                 }
             }
         }
 
-        private async Task UpdateClothesSizesAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes, List<SizeModel> selectedSizes)
-        {
-            foreach (SizeModel size in selectedSizes)
-            {
-                ClothesSize existingClothesSize = updatedClothes.Sizes.FirstOrDefault(cs => cs.Size.GuidID == size.GuidID);
-
-                if (existingClothesSize != null)
-                {
-                    ClothesSize updatedClothesSize = new(existingClothesSize.GuidID, updatedClothes, size, size.Quantity, existingClothesSize.Comment)
-                    {
-                        EmployeeClothesSizes = new ObservableCollection<EmployeeClothesSize>(existingClothesSize.EmployeeClothesSizes)
-                    };
-
-                    ClothesSize itemToRemove = updatedClothes.Sizes.FirstOrDefault(cs => cs.GuidID == updatedClothesSize.GuidID);
-
-                    updatedClothes.Sizes.Remove(itemToRemove);
-                    updatedClothes.Sizes.Add(updatedClothesSize);
-
-                    itemToRemove = updatedClothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.GuidID == updatedClothesSize.GuidID);
-
-                    updatedClothesSize.Size.ClothesSizes.Remove(itemToRemove);
-                    updatedClothesSize.Size.ClothesSizes.Add(itemToRemove);
-
-                    try
-                    {
-                        await _clothesSizeStore.Update(updatedClothesSize);
-                    }
-                    catch (Exception)
-                    {
-                        ShowErrorMessageBox("Updaten der ClothesSize in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateClothesSizesAsync");
-                        
-                        editClothesFormViewModel.HasError = true;
-                    }
-                }
-            }
-        }
-
-        private async Task UpdateClothesAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes)
-        {
-            Clothes itemToRemove = updatedClothes.Category.Clothes.FirstOrDefault(c => c.GuidID == updatedClothes.GuidID);
-
-            if (itemToRemove != null)
-            {
-                updatedClothes.Category.Clothes.Remove(itemToRemove);
-                updatedClothes.Category.Clothes.Add(updatedClothes);
-            }
-
-            itemToRemove = updatedClothes.Season.Clothes.FirstOrDefault(c => c.GuidID == updatedClothes.GuidID);
-
-            if (itemToRemove != null)
-            {
-                updatedClothes.Season.Clothes.Remove(itemToRemove);
-                updatedClothes.Season.Clothes.Add(updatedClothes);
-            }
-
-            try
-            {
-                await _clothesStore.Update(updatedClothes);
-            }
-            catch (Exception)
-            {
-                ShowErrorMessageBox("Updaten der Clothes in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateClothesAsync");
-                
-                editClothesFormViewModel.HasError = true;
-            }
-        }
-
-        private async Task UpdateSizeAsync(AddEditClothesFormViewModel editClothesFormViewModel, List<SizeModel> selectedSizes)
-        {
-            foreach (SizeModel sm in selectedSizes)
-            {
-                try
-                {
-                    await _sizeStore.Update(sm);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Updaten der Size in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateSizeAsync");
+        //private async Task UpdateSizeAsync(AddEditClothesFormViewModel editClothesFormViewModel, List<SizeModel> selectedSizes)
+        //{
+        //    foreach (SizeModel sm in selectedSizes)
+        //    {
+        //        try
+        //        {
+        //            await _sizeStore.Update(sm);
+        //        }
+        //        catch (Exception)
+        //        {
+        //            ShowErrorMessageBox("Updaten der Size in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateSizeAsync");
                     
-                    editClothesFormViewModel.HasError = true;
-                }
-            }
-        }
+        //            editClothesFormViewModel.HasError = true;
+        //        }
+        //    }
+        //}
 
-        private async Task UpdateCategoryAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes)
-        {
-            try
-            {
-                await _categoryStore.Update(updatedClothes.Category, null);
-            }
-            catch (Exception)
-            {
-                ShowErrorMessageBox("Updaten der Category in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateCategoryAsync");
+        //private async Task UpdateCategoryAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes)
+        //{
+        //    try
+        //    {
+        //        await _categoryStore.Update(updatedClothes.Category, null);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ShowErrorMessageBox("Updaten der Category in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateCategoryAsync");
                 
-                editClothesFormViewModel.HasError = true;
-            }
-        }
+        //        editClothesFormViewModel.HasError = true;
+        //    }
+        //}
 
-        private async Task UpdateSeasonAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes)
-        {
-            try
-            {
-                await _seasonStore.Update(updatedClothes.Season, null);
-            }
-            catch (Exception)
-            {
-                ShowErrorMessageBox("Updaten der Season in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateSeasonAsync");
+        //private async Task UpdateSeasonAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes)
+        //{
+        //    try
+        //    {
+        //        await _seasonStore.Update(updatedClothes.Season, null);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ShowErrorMessageBox("Updaten der Season in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateSeasonAsync");
 
-                editClothesFormViewModel.HasError = true;
-            }
-        }
+        //        editClothesFormViewModel.HasError = true;
+        //    }
+        //}
 
-        private async Task UpdateEmployeeClothesSizesAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes)
-        {
-            foreach (EmployeeClothesSize employeeClothesSize in _employeeClothesSizesStore.EmployeeClothesSizes)
-            {
-                ClothesSize existingItem = updatedClothes.Sizes.FirstOrDefault(cs => cs.GuidID == employeeClothesSize.ClothesSizeGuidID);
+        //private async Task UpdateEmployeeClothesSizesAsync(AddEditClothesFormViewModel editClothesFormViewModel, Clothes updatedClothes)
+        //{
+        //    foreach (EmployeeClothesSize employeeClothesSize in _employeeClothesSizesStore.EmployeeClothesSizes)
+        //    {
+        //        ClothesSize existingItem = updatedClothes.Sizes.FirstOrDefault(cs => cs.GuidID == employeeClothesSize.ClothesSizeGuidID);
 
-                if (existingItem != null)
-                {
-                    EmployeeClothesSize UpdatedEmployeeClothesSize = new(employeeClothesSize.GuidID,
-                                                                         employeeClothesSize.Employee,
-                                                                         existingItem,
-                                                                         (int)employeeClothesSize.Quantity,
-                                                                         employeeClothesSize.Comment);
+        //        if (existingItem != null)
+        //        {
+        //            EmployeeClothesSize UpdatedEmployeeClothesSize = new(employeeClothesSize.GuidID,
+        //                                                                 employeeClothesSize.Employee,
+        //                                                                 existingItem,
+        //                                                                 (int)employeeClothesSize.Quantity,
+        //                                                                 employeeClothesSize.Comment);
 
-                    EmployeeClothesSize itemToRemove = employeeClothesSize.Employee.Clothes.FirstOrDefault(ecs => ecs.GuidID == UpdatedEmployeeClothesSize.GuidID);
+        //            EmployeeClothesSize itemToRemove = employeeClothesSize.Employee.Clothes.FirstOrDefault(ecs => ecs.GuidID == UpdatedEmployeeClothesSize.GuidID);
 
-                    if (itemToRemove != null)
-                    {
-                        employeeClothesSize.Employee.Clothes.Remove(itemToRemove);
-                        employeeClothesSize.Employee.Clothes.Add(UpdatedEmployeeClothesSize);
-                    }
-
-
-                    itemToRemove = UpdatedEmployeeClothesSize.ClothesSize.EmployeeClothesSizes.FirstOrDefault(ecs => ecs.GuidID == UpdatedEmployeeClothesSize.GuidID);
-
-                    if (itemToRemove != null)
-                    {
-                        UpdatedEmployeeClothesSize.ClothesSize.EmployeeClothesSizes.Remove(itemToRemove);
-                        UpdatedEmployeeClothesSize.ClothesSize.EmployeeClothesSizes.Add(UpdatedEmployeeClothesSize);
-                    }
+        //            if (itemToRemove != null)
+        //            {
+        //                employeeClothesSize.Employee.Clothes.Remove(itemToRemove);
+        //                employeeClothesSize.Employee.Clothes.Add(UpdatedEmployeeClothesSize);
+        //            }
 
 
-                    try
-                    {
-                        await _employeeClothesSizesStore.Update(UpdatedEmployeeClothesSize);
-                    }
-                    catch (Exception)
-                    {
-                        ShowErrorMessageBox("Updaten der EmployeeClothesSize in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateEmployeeClothesSizesAsync");
+        //            itemToRemove = UpdatedEmployeeClothesSize.ClothesSize.EmployeeClothesSizes.FirstOrDefault(ecs => ecs.GuidID == UpdatedEmployeeClothesSize.GuidID);
 
-                        editClothesFormViewModel.HasError = true;
-                    }
+        //            if (itemToRemove != null)
+        //            {
+        //                UpdatedEmployeeClothesSize.ClothesSize.EmployeeClothesSizes.Remove(itemToRemove);
+        //                UpdatedEmployeeClothesSize.ClothesSize.EmployeeClothesSizes.Add(UpdatedEmployeeClothesSize);
+        //            }
 
-                    UpdateEmployeeAsync(editClothesFormViewModel, employeeClothesSize.Employee);
-                }
-            }
-        }
 
-        private async Task UpdateEmployeeAsync(AddEditClothesFormViewModel editClothesFormViewModel, Employee updatedEmployee)
-        {
-            try
-            {
-                await _employeeStore.Update(updatedEmployee);
-            }
-            catch (Exception)
-            {
-                ShowErrorMessageBox("Updaten des Employee in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateEmployeeAsync");
+        //            try
+        //            {
+        //                await _employeeClothesSizesStore.Update(UpdatedEmployeeClothesSize);
+        //            }
+        //            catch (Exception)
+        //            {
+        //                ShowErrorMessageBox("Updaten der EmployeeClothesSize in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateEmployeeClothesSizesAsync");
 
-                editClothesFormViewModel.HasError = true;
-            }
-        }
+        //                editClothesFormViewModel.HasError = true;
+        //            }
+
+        //            UpdateEmployeeAsync(editClothesFormViewModel, employeeClothesSize.Employee);
+        //        }
+        //    }
+        //}
+
+        //private async Task UpdateEmployeeAsync(AddEditClothesFormViewModel editClothesFormViewModel, Employee updatedEmployee)
+        //{
+        //    try
+        //    {
+        //        await _employeeStore.Update(updatedEmployee);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ShowErrorMessageBox("Updaten des Employee in Datenbank ist fehlgeschlagen!", "EditClothesCommand UpdateEmployeeAsync");
+
+        //        editClothesFormViewModel.HasError = true;
+        //    }
+        //}
 
     }
 }

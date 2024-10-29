@@ -12,28 +12,15 @@ namespace DVS.WPF.ViewModels.Views
         public ICommand CloseAddEditEmployee { get; }
 
 
-        public AddEmployeeViewModel(DVSListingViewModel dVSListingViewModel,
-                                    AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
+        public AddEmployeeViewModel(AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
                                     EmployeeStore employeeStore,
                                     ClothesStore clothesStore,
-                                    SizeStore sizeStore,
-                                    CategoryStore categoryStore,
-                                    SeasonStore seasonStore,
                                     ClothesSizeStore clothesSizeStore,
-                                    EmployeeClothesSizesStore employeeClothesSizesStore,
                                     ModalNavigationStore modalNavigationStore)
         {
             _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
 
-            ICommand addEmployee = new AddEmployeeCommand(this,
-                                                          employeeStore,
-                                                          clothesStore,
-                                                          sizeStore,
-                                                          categoryStore,
-                                                          seasonStore,
-                                                          clothesSizeStore,
-                                                          employeeClothesSizesStore,
-                                                          modalNavigationStore);
+            ICommand addEmployee = new AddEmployeeCommand(this, employeeStore, clothesSizeStore, modalNavigationStore);
 
             CloseAddEditEmployee = new CloseAddEditEmployeeCommand(clothesStore, modalNavigationStore);
 

@@ -1,5 +1,6 @@
 ﻿using DVS.Domain.Commands.ClothesSizeCommands;
 using DVS.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Commands.ClothesSizeCommands
 {
@@ -7,16 +8,12 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
     {
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
-        public async Task Execute(ClothesSize clothesSize)
+        public async Task Execute(ClothesSize updatedClothesSize)
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //ClothesSize clothesSizeDTO = new()
-            //{
-            //    GuidID = guidID
-            //};
+            context.ClothesSizes.Remove(updatedClothesSize);
 
-            context.ClothesSizes.Remove(clothesSize);
             await context.SaveChangesAsync();
         }
     }

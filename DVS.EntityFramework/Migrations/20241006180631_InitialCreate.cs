@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DVS.EntityFramework.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedInitialData : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,8 +72,8 @@ namespace DVS.EntityFramework.Migrations
                 columns: table => new
                 {
                     GuidID = table.Column<Guid>(type: "TEXT", nullable: false),
-                    CategoryGuidID = table.Column<Guid>(type: "TEXT", nullable: false),
                     SeasonGuidID = table.Column<Guid>(type: "TEXT", nullable: false),
+                    CategoryGuidID = table.Column<Guid>(type: "TEXT", nullable: false),
                     ID = table.Column<string>(type: "TEXT", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Comment = table.Column<string>(type: "TEXT", nullable: false)
@@ -154,15 +154,15 @@ namespace DVS.EntityFramework.Migrations
                 columns: new[] { "GuidID", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("0b1154bb-6cf3-4e5c-a1ec-7584695239ed"), "Hemd" },
-                    { new Guid("0f16b995-1a67-449d-bc1d-c52fef0a9bd3"), "Hose" },
-                    { new Guid("1f3d145f-a59d-4976-adfa-8f1691855035"), "Kategorielos" },
-                    { new Guid("46a321a2-42d0-45ef-8517-dd4f682469a2"), "Kopbedeckung" },
-                    { new Guid("4fca12e3-24aa-49b6-8212-28740aeb71d3"), "Handschuhe" },
-                    { new Guid("6d50c10c-5b2d-4084-b0a6-65b9202bb0ab"), "Jacke" },
-                    { new Guid("86f81a83-b27d-4355-986a-8dd92558be9c"), "Pullover" },
-                    { new Guid("b8f64a16-9ce5-45e4-9b17-5e28b6455cdd"), "Shirt" },
-                    { new Guid("bdbe22ef-3dd4-47e8-92d0-de539e458a60"), "Schuhe" }
+                    { new Guid("41950fdb-c8d8-4212-bc19-c8a2db1947c8"), "Jacke" },
+                    { new Guid("6d99df2f-ae25-453e-9ddc-db137ba355ef"), "Hemd" },
+                    { new Guid("8fa99cb7-2768-4425-a867-8e5f9af2c0a7"), "-Kategorielos-" },
+                    { new Guid("a5590588-b87a-4097-8882-3839e3c9a33e"), "Schuhwerk" },
+                    { new Guid("cde7cce7-0f42-4a71-aa08-ff081caaff66"), "Shirt" },
+                    { new Guid("d312da04-7adb-43b3-b06d-666d365378e2"), "Hose" },
+                    { new Guid("e15ed144-3a26-47f7-8e37-cef2b6c0af02"), "Kopfbedeckung" },
+                    { new Guid("f18ffeef-f865-4b96-8a54-700668e3231f"), "Handschuhe" },
+                    { new Guid("f503e475-ecfe-41d8-a428-e50d95e6c020"), "Pullover" }
                 });
 
             migrationBuilder.InsertData(
@@ -170,9 +170,9 @@ namespace DVS.EntityFramework.Migrations
                 columns: new[] { "GuidID", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("93851660-0139-4756-9a37-129b22647992"), "Winter" },
-                    { new Guid("aa3a10cf-d490-4f6b-af90-db911216c1b1"), "Saisonlos" },
-                    { new Guid("bf06d31e-d6c6-40aa-8f05-4dc86d073d2a"), "Sommer" }
+                    { new Guid("8b7bcb99-e930-4b87-9f22-c95851768b0d"), "Winter" },
+                    { new Guid("f6935950-0bef-4b65-97e7-d0be6d211bda"), "Sommer" },
+                    { new Guid("f880adef-9443-4267-a481-0a508832337d"), "-Saisonlos-" }
                 });
 
             migrationBuilder.InsertData(
@@ -180,26 +180,26 @@ namespace DVS.EntityFramework.Migrations
                 columns: new[] { "GuidID", "IsSelected", "IsSizeSystemEU", "Quantity", "Size" },
                 values: new object[,]
                 {
-                    { new Guid("0c936ca8-a6c0-44ee-92d8-9c3806292ba1"), false, true, 0, "58" },
-                    { new Guid("0e22ef86-0e65-4fa0-a703-caa50cd1c9ed"), false, true, 0, "52" },
-                    { new Guid("13184e9c-4e62-4357-8622-557dae0609c8"), false, false, 0, "L" },
-                    { new Guid("1846e7a5-5a61-4cb6-9189-39388c331e51"), false, false, 0, "M" },
-                    { new Guid("264b7fc2-080e-4337-8aa9-6d271a8b3f83"), false, true, 0, "56" },
-                    { new Guid("29cd869f-ee39-4078-8d7a-86761ede436d"), false, false, 0, "5XL" },
-                    { new Guid("2bdca90f-8850-4693-b5c6-d323e5fe1ab6"), false, true, 0, "50" },
-                    { new Guid("2c636d16-c18a-4d87-bf0c-c840024bf29e"), false, true, 0, "54" },
-                    { new Guid("353cd701-422d-4b47-bc60-01d639a6463b"), false, false, 0, "XLL" },
-                    { new Guid("55e16509-6b5b-4458-8e6a-e2019b9c1747"), false, false, 0, "S" },
-                    { new Guid("588319aa-0238-4dfc-a43c-32c002a00dd4"), false, true, 0, "62" },
-                    { new Guid("600d98f2-213f-4771-86a7-4f9428c3f8c7"), false, true, 0, "46" },
-                    { new Guid("61818548-e475-49e9-9d19-20ad36152307"), false, false, 0, "3XL" },
-                    { new Guid("76032b2b-dc06-4015-84ed-127c63949ab6"), false, false, 0, "XS" },
-                    { new Guid("8e9d5411-3a73-4d52-9f62-7a5c8d329126"), false, true, 0, "44" },
-                    { new Guid("91213878-8115-4236-b771-a019b107382a"), false, true, 0, "60" },
-                    { new Guid("9d6996dd-94b0-4566-a883-678e393e2ecc"), false, false, 0, "XL" },
-                    { new Guid("a021d9a8-c62c-4660-a28c-5e5108573ec3"), false, false, 0, "6XL" },
-                    { new Guid("a0895bed-f36f-4a17-9245-793ad846035e"), false, false, 0, "4XL" },
-                    { new Guid("f062f06d-981d-4947-879a-644aa17cbe89"), false, true, 0, "48" }
+                    { new Guid("069fc08a-7fb5-4186-a354-ae04ba323c5f"), false, true, 0, "48" },
+                    { new Guid("211c1c92-80c2-4797-9bf0-dda630ade611"), false, false, 0, "6XL" },
+                    { new Guid("354871e6-787b-47a6-9bf3-13b8a5279274"), false, false, 0, "XL" },
+                    { new Guid("4a4da98c-e5e9-4a54-ae56-ddaa70b45fa9"), false, true, 0, "62" },
+                    { new Guid("4dd5978d-f378-40c9-8570-3750c300f565"), false, false, 0, "XS" },
+                    { new Guid("5d707730-97c8-4ebd-abd4-98e6d01378ee"), false, true, 0, "58" },
+                    { new Guid("7f3c5678-d81b-4c24-a4ed-42f49276980c"), false, true, 0, "44" },
+                    { new Guid("80dcb7af-117b-44dd-b9f6-30c3f4683337"), false, false, 0, "M" },
+                    { new Guid("8b956627-e921-40dd-bf0a-7aa9e447583c"), false, false, 0, "S" },
+                    { new Guid("8bea5e4c-f6a5-4155-b444-36e54132c9d0"), false, true, 0, "50" },
+                    { new Guid("9ac6bccc-d7ac-4065-b7bc-7221cc3c4a6b"), false, true, 0, "46" },
+                    { new Guid("9fe7bed4-5536-46eb-9354-8b7f91d7fea6"), false, false, 0, "4XL" },
+                    { new Guid("a107cb86-c893-46b0-a777-49ec49583e1f"), false, true, 0, "60" },
+                    { new Guid("a4af240f-2ba9-48c7-9f6a-2f4b717e5bd5"), false, true, 0, "54" },
+                    { new Guid("a981d7ba-afa8-4b86-8b16-1b897936b1fe"), false, false, 0, "XLL" },
+                    { new Guid("b79dfe44-f682-48b9-a595-916e7376829d"), false, false, 0, "5XL" },
+                    { new Guid("c889d6e8-cf43-4441-aa0d-92cac46d3a57"), false, false, 0, "3XL" },
+                    { new Guid("ce89381f-4962-4747-aad7-148acd1b7e91"), false, true, 0, "52" },
+                    { new Guid("e6616e1e-4d8a-4c8a-bba1-f07fb2f46e9d"), false, false, 0, "L" },
+                    { new Guid("fb444f83-9105-4581-adb1-473e7b002ea8"), false, true, 0, "56" }
                 });
 
             migrationBuilder.CreateIndex(

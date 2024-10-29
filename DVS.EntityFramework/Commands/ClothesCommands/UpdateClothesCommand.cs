@@ -1,5 +1,6 @@
 ﻿using DVS.Domain.Commands.ClothesCommands;
 using DVS.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Commands.ClothesCommands
 {
@@ -7,22 +8,12 @@ namespace DVS.EntityFramework.Commands.ClothesCommands
     {
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
-        public async Task Execute(Clothes clothes)
+        public async Task Execute(Clothes updatedClothes)
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //Clothes clothes = new()
-            //{
-            //    GuidID = clothes.GuidID,
-            //    ID = clothes.ID,
-            //    Name = clothes.Name,
-            //    CategoryGuidID = clothes.CategoryGuidID,
-            //    SeasonGuidID = clothes.SeasonGuidID,
-            //    Comment = clothes.Comment,
-            //    Sizes = clothes.Sizes,
-            //};
-
-            context.Clothes.Update(clothes);
+            context.Entry(updatedClothes).State = EntityState.Modified;
+            context.Clothes.Update(updatedClothes);
 
             await context.SaveChangesAsync();
         }

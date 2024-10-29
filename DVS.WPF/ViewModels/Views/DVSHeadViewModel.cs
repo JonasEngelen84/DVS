@@ -21,15 +21,10 @@ namespace DVS.WPF.ViewModels.Views
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
 
-        public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(dVSListingViewModel,
-                                                                              addEditEmployeeListingViewModel,
+        public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(addEditEmployeeListingViewModel,
                                                                               employeeStore,
                                                                               clothesStore,
-                                                                              sizeStore,
-                                                                              categoryStore,
-                                                                              seasonStore,
                                                                               clothesSizeStore,
-                                                                              employeeClothesSizesStore,
                                                                               modalNavigationStore);
 
         public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(modalNavigationStore,

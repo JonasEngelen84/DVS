@@ -27,6 +27,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                                      addClothesFormViewModel.Season,
                                      addClothesFormViewModel.Comment);
 
+            // Die vom User gewählten Größen/SizeModel auflisten
             List <SizeModel> selectedSizes = (addClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
                 ? addClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
                 : addClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
@@ -47,7 +48,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
             catch (Exception)
             {
-                ShowErrorMessageBox("Hinzufügen der Clothes ist fehlgeschlagen!", "AddClothesCommand CreateAndAddNewClothesAsync");
+                ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!", "AddClothesCommand CreateAndAddNewClothesAsync");
 
                 addClothesFormViewModel.HasError = true;
             }

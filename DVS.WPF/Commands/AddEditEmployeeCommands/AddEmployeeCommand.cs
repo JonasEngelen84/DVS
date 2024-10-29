@@ -8,17 +8,13 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
     public class AddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel,
                                     EmployeeStore employeeStore,
-                                    ClothesStore clothesStore,
-                                    SizeStore sizeStore,
-                                    CategoryStore categoryStore,
-                                    SeasonStore seasonStore,
                                     ClothesSizeStore clothesSizeStore,
-                                    EmployeeClothesSizesStore employeeClothesSizesStore,
                                     ModalNavigationStore modalNavigationStore)
                                     : AsyncCommandBase
     {
         private readonly AddEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
+        private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
         public override async Task ExecuteAsync(object parameter)
@@ -40,6 +36,15 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 {
                     EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), employee, dclivm.ClothesSize, (int)dclivm.Quantity, "");
                     employee.Clothes.Add(employeeClothesSize);
+
+                    try
+                    {
+                        await _clothesSizeStore.Update(dclivm.ClothesSize);
+                    }
+                    catch
+                    {
+
+                    }
                 }
             }
 
@@ -47,9 +52,9 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             {
                 await _employeeStore.Add(employee);
             }
-            catch (Exception)
+            catch
             {
-                ShowErrorMessageBox("Erstellen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter erstellen");
+                ShowErrorMessageBox("Erstellen des Mitarbeiter ist fehlgeschlagen!", "AddEmployeeCommand");
                 addEmployeeFormViewModel.HasError = true;
             }
 

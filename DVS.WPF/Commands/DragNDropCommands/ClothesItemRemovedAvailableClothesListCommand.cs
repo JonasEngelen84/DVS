@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.ViewModels;
-using System.Collections.ObjectModel;
 
 namespace DVS.WPF.Commands.DragNDropCommands
 {
@@ -46,33 +45,24 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         private DetailedClothesListingItemViewModel CreateNewDetailedClothesitem()
         {
-            Clothes editedClothes = new(_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes.GuidID,
-                                        _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes.ID,
-                                        _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes.Name,
-                                        _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes.Category,
-                                        _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes.Season,
-                                        _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes.Comment)
+            ClothesSize editedClothesSize = new(_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSize.GuidID,
+                                                _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes,
+                                                _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSize.Size,
+                                                (int)_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity - 1,
+                                                _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSize.Comment);
+
+            ClothesSize existingClothesSize = _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes.Sizes
+                .FirstOrDefault(cs => cs.GuidID == editedClothesSize.GuidID);
+
+            if (existingClothesSize != null)
             {
-                Sizes = new ObservableCollection<ClothesSize>(_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes.Sizes)
-            };
-
-            ClothesSize editedDclivm = new(_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSize.GuidID,
-                                           editedClothes,
-                                           _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSize.Size,
-                                           (int)_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity - 1,
-                                           _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSize.Comment);
-
-            ClothesSize existingDclivm = editedClothes.Sizes.FirstOrDefault(cs => cs.GuidID == editedDclivm.GuidID);
-
-            if (existingDclivm != null)
-            {
-                editedClothes.Sizes.Remove(existingDclivm);
-                editedClothes.Sizes.Add(editedDclivm);
-                existingDclivm.Clothes.Sizes.Remove(existingDclivm);
-                existingDclivm.Clothes.Sizes.Add(editedDclivm);
+                _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes.Sizes.Remove(existingClothesSize);
+                _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes.Sizes.Add(editedClothesSize);
+                existingClothesSize.Clothes.Sizes.Remove(existingClothesSize);
+                existingClothesSize.Clothes.Sizes.Add(editedClothesSize);
             }
 
-            return new DetailedClothesListingItemViewModel(editedClothes, editedDclivm);
+            return new DetailedClothesListingItemViewModel(_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes, editedClothesSize);
         }
 
         private void RemoveOrUpdateDclivm(DetailedClothesListingItemViewModel editedDclivm)
