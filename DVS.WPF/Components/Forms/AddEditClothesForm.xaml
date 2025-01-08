@@ -12,7 +12,7 @@
         <TextBox Width="252"
                  Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
 
         <!-- Name -->
         <TextBox Width="252"
@@ -36,7 +36,7 @@
         <StackPanel Orientation="Horizontal">
 
             <ComboBox Style="{StaticResource ComboBoxStyle}"
-                      ItemsSource="{Binding AddEditListingViewModel.Categories}"
+                      ItemsSource="{Binding AddEditClothesListingViewModel.Categories}"
                       SelectedItem="{Binding Category, Mode=TwoWay}"
                       DisplayMemberPath="Name" />
 
@@ -60,7 +60,7 @@
                     Margin="0 0 0 3">
 
             <ComboBox Style="{StaticResource ComboBoxStyle}"
-                      ItemsSource="{Binding AddEditListingViewModel.Seasons}"
+                      ItemsSource="{Binding AddEditClothesListingViewModel.Seasons}"
                       SelectedItem="{Binding Season, Mode=TwoWay}"
                       DisplayMemberPath="Name" />
 
@@ -98,7 +98,7 @@
 
                 <ScrollViewer>
                     <StackPanel>
-                        <ItemsControl ItemsSource="{Binding AddEditListingViewModel.AvailableSizesEU}">
+                        <ItemsControl ItemsSource="{Binding AddEditClothesListingViewModel.AvailableSizesEU}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -123,7 +123,7 @@
 
                 <ScrollViewer>
                     <StackPanel>
-                        <ItemsControl ItemsSource="{Binding AddEditListingViewModel.AvailableSizesUS}">
+                        <ItemsControl ItemsSource="{Binding AddEditClothesListingViewModel.AvailableSizesUS}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

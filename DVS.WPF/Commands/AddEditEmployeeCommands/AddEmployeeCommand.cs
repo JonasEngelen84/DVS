@@ -25,7 +25,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             addEmployeeFormViewModel.IsSubmitting = true;
 
             Employee employee = new(Guid.NewGuid(),
-                                    addEmployeeFormViewModel.ID,
+                                    addEmployeeFormViewModel.Id,
                                     addEmployeeFormViewModel.Firstname,
                                     addEmployeeFormViewModel.Lastname,
                                     addEmployeeFormViewModel.Comment);

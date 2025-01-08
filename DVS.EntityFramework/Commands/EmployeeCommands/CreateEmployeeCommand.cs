@@ -14,13 +14,13 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
 
             foreach (EmployeeClothesSize ecs in employee.Clothes)
             {
-                var localClothes = context.Clothes.Local.FirstOrDefault(c => c.GuidID == ecs.ClothesSize.Clothes.GuidID);
+                var localClothes = context.Clothes.Local.FirstOrDefault(c => c.GuidId == ecs.ClothesSize.Clothes.GuidId);
                 if (localClothes != null)
                 {
                     context.Entry(localClothes).State = EntityState.Detached;
                 }
 
-                var localClothesSize = context.ClothesSizes.Local.FirstOrDefault(cs => cs.GuidID == ecs.ClothesSize.GuidID);
+                var localClothesSize = context.ClothesSizes.Local.FirstOrDefault(cs => cs.GuidId == ecs.ClothesSize.GuidId);
                 if (localClothesSize != null)
                 {
                     context.Entry(localClothesSize).State = EntityState.Detached;

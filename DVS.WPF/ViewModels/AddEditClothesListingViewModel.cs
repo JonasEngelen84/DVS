@@ -131,7 +131,7 @@ namespace DVS.WPF.ViewModels
 
         private void SeasonStore_SeasonUpdated(Season season, AddEditSeasonFormViewModel? addEditSeasonFormViewModel)
         {
-            Season seasonToUpdate = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
+            Season seasonToUpdate = _seasons.FirstOrDefault(y => y.GuidId == season.GuidId);
 
             if (seasonToUpdate != null)
             {
@@ -152,9 +152,9 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private void SeasonStore_SeasonDeleted(Guid guidID, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        private void SeasonStore_SeasonDeleted(Guid GuidId, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
-            var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == guidID);
+            var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidId == GuidId);
 
             if (seasonToDelete != null)
             {
@@ -189,7 +189,7 @@ namespace DVS.WPF.ViewModels
 
         private void CategoryStore_CategoryUpdated(Category category, AddEditCategoryFormViewModel? addEditCategoryFormViewModel)
         {
-            Category categoryToUpdate = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
+            Category categoryToUpdate = _categories.FirstOrDefault(y => y.GuidId == category.GuidId);
 
             if (categoryToUpdate != null)
             {
@@ -210,9 +210,9 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private void CategoryStore_CategoryDeleted(Guid guidID, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        private void CategoryStore_CategoryDeleted(Guid GuidId, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == guidID);
+            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidId == GuidId);
 
             if (categoryToDelete != null)
             {

@@ -39,7 +39,7 @@ namespace DVS.WPF.ViewModels.Views
 
             AddEditEmployeeFormViewModel = new(employee, _addEditEmployeeListingViewModel, editEmployee)
             {
-                ID = employee.ID,
+                Id = employee.Id,
                 Lastname = employee.Lastname,
                 Firstname = employee.Firstname,
                 Comment = employee.Comment

@@ -49,7 +49,7 @@ namespace DVS.WPF.Stores
         {
             await _updateClothesCommand.Execute(updatedClothes);
 
-            int index = _clothes.FindIndex(y => y.GuidID == updatedClothes.GuidID);
+            int index = _clothes.FindIndex(y => y.GuidId == updatedClothes.GuidId);
 
             if (index != -1)
             {
@@ -67,9 +67,18 @@ namespace DVS.WPF.Stores
         {
             await _deleteClothesCommand.Execute(clothes);
 
-            _clothes.RemoveAll(y => y.GuidID == clothes.GuidID);
+            int index = _clothes.FindIndex(y => y.GuidId == clothes.GuidId);
 
-            ClothesDeleted?.Invoke(clothes.GuidID);
+            if (index != -1)
+            {
+                _clothes.RemoveAll(y => y.GuidId == clothes.GuidId);
+            }
+            else
+            {
+                throw new InvalidOperationException("Löschen der Bekleidung nicht möglich.");
+            }            
+
+            ClothesDeleted?.Invoke(clothes.GuidId);
         }
     }
 }

@@ -17,16 +17,16 @@ namespace DVS.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Employee>().HasKey(e => e.GuidID);
+            modelBuilder.Entity<Employee>().HasKey(e => e.GuidId);
 
-            modelBuilder.Entity<Season>().HasKey(e => e.GuidID);
+            modelBuilder.Entity<Season>().HasKey(e => e.GuidId);
             modelBuilder.Entity<Season>().HasData(
                 new Season(Guid.NewGuid(), "-Saisonlos-"),
                 new Season(Guid.NewGuid(), "Sommer"),
                 new Season(Guid.NewGuid(), "Winter")
             );
 
-            modelBuilder.Entity<Category>().HasKey(e => e.GuidID);
+            modelBuilder.Entity<Category>().HasKey(e => e.GuidId);
             modelBuilder.Entity<Category>().HasData(
                 new Category(Guid.NewGuid(), "-Kategorielos-"),
                 new Category(Guid.NewGuid(), "Handschuhe"),
@@ -39,7 +39,7 @@ namespace DVS.EntityFramework
                 new Category(Guid.NewGuid(), "Shirt")
             );
 
-            modelBuilder.Entity<SizeModel>().HasKey(e => e.GuidID);
+            modelBuilder.Entity<SizeModel>().HasKey(e => e.GuidId);
             modelBuilder.Entity<SizeModel>().HasData(
                 new SizeModel(Guid.NewGuid(), "44", true),
                 new SizeModel(Guid.NewGuid(), "46", true),
@@ -63,37 +63,37 @@ namespace DVS.EntityFramework
                 new SizeModel(Guid.NewGuid(), "6XL", false)
             );
 
-            modelBuilder.Entity<Clothes>().HasKey(c => c.GuidID);
+            modelBuilder.Entity<Clothes>().HasKey(c => c.GuidId);
             modelBuilder.Entity<Clothes>()
                 .HasOne(c => c.Category)
                 .WithMany(cat => cat.Clothes)
-                .HasForeignKey(c => c.CategoryGuidID);
+                .HasForeignKey(c => c.CategoryGuidId);
             modelBuilder.Entity<Clothes>()
                 .HasOne(c => c.Season)
                 .WithMany(seas => seas.Clothes)
-                .HasForeignKey(c => c.SeasonGuidID);
+                .HasForeignKey(c => c.SeasonGuidId);
 
-            modelBuilder.Entity<ClothesSize>().HasKey(cs => cs.GuidID);
+            modelBuilder.Entity<ClothesSize>().HasKey(cs => cs.GuidId);
             modelBuilder.Entity<ClothesSize>()
                 .HasOne(cs => cs.Clothes)
                 .WithMany(c => c.Sizes)
-                .HasForeignKey(cs => cs.ClothesGuidID)
+                .HasForeignKey(cs => cs.ClothesGuidId)
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ClothesSize>()
                 .HasOne(cs => cs.Size)
                 .WithMany(s => s.ClothesSizes)
-                .HasForeignKey(cs => cs.SizeGuidID);
+                .HasForeignKey(cs => cs.SizeGuidId);
 
-            modelBuilder.Entity<EmployeeClothesSize>().HasKey(ecs => ecs.GuidID);
+            modelBuilder.Entity<EmployeeClothesSize>().HasKey(ecs => ecs.GuidId);
             modelBuilder.Entity<EmployeeClothesSize>()
                 .HasOne(ecs => ecs.Employee)
                 .WithMany(e => e.Clothes)
-                .HasForeignKey(ecs => ecs.EmployeeGuidID)
+                .HasForeignKey(ecs => ecs.EmployeeGuidId)
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<EmployeeClothesSize>()
                 .HasOne(ecs => ecs.ClothesSize)
                 .WithMany(cs => cs.EmployeeClothesSizes)
-                .HasForeignKey(ecs => ecs.ClothesSizeGuidID);
+                .HasForeignKey(ecs => ecs.ClothesSizeGuidId);
         }
     }
 }

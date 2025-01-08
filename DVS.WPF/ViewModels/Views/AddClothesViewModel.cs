@@ -62,7 +62,7 @@ namespace DVS.WPF.ViewModels.Views
                                               openAddEditSeasons,
                                               AddEditListingViewModel)
             {
-                ID = "ID",
+                Id = "Id",
                 Name = "Name",
                 Comment = "Kommentar"
             };

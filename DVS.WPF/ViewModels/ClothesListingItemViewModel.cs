@@ -9,7 +9,7 @@ namespace DVS.WPF.ViewModels.ListViewItems
     public class ClothesListingItemViewModel : ViewModelBase
     {
         public Clothes Clothes { get; private set; }
-        public string ID => Clothes.ID;
+        public string Id => Clothes.Id;
         public string Name => Clothes.Name;
         public Category Category => Clothes.Category;
         public Season Season => Clothes.Season;
@@ -94,9 +94,7 @@ namespace DVS.WPF.ViewModels.ListViewItems
                                                          dVSListingViewModel);
 
             DeleteClothes = new DeleteClothesCommand(this, clothesStore);
-
             ClearClothesSizes = new ClearSizesCommand(this, clothesSizeStore);
-
             PrintClothes = new OpenPrintClothesCommand();
         }
 
@@ -104,7 +102,7 @@ namespace DVS.WPF.ViewModels.ListViewItems
         {
             Clothes = clothes;
 
-            OnPropertyChanged(nameof(ID));
+            OnPropertyChanged(nameof(Id));
             OnPropertyChanged(nameof(Name));
             OnPropertyChanged(nameof(Category));
             OnPropertyChanged(nameof(Season));

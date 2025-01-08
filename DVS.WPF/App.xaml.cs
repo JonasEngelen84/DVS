@@ -20,6 +20,7 @@ using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Views;
 using Microsoft.EntityFrameworkCore;
 using System.Windows;
+using Microsoft.Extensions.Hosting;
 
 namespace DVS.WPF
 {
@@ -75,8 +76,14 @@ namespace DVS.WPF
         private readonly IGetAllSizesQuery _getAllSizesQuery;
         private readonly IUpdateSizeCommand _updateSizeCommand;
 
+        //TODO: Beschreibung
+        // Nuget Paket: Microsoft.Extensions.Hosting
+        private readonly IHost _host;
+
         public App()
         {
+            _host = Host.CreateDefaultBuilder().Build();
+
             string connectionString = "Data Source=DVS.db";
             _dVSDbContextFactory = new(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
 
@@ -182,6 +189,7 @@ namespace DVS.WPF
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            _host.Start();
 
             MainWindow = new MainWindow()
             {
@@ -193,6 +201,14 @@ namespace DVS.WPF
             MainWindow.Show();
 
             base.OnStartup(e);
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _host.StopAsync();
+            _host.Dispose();
+
+            base.OnExit(e);
         }
     }
 

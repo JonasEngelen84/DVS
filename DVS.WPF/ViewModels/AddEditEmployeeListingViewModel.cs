@@ -97,7 +97,7 @@ namespace DVS.WPF.ViewModels
 
         private void RemoveItemFromEmployeeClothesList(DetailedClothesListingItemViewModel detailedClothesItem)
         {
-            var itemToRemove = _employeeClothesList.FirstOrDefault(dclivm => dclivm.ClothesSizeGuidID == detailedClothesItem.ClothesSizeGuidID);
+            var itemToRemove = _employeeClothesList.FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == detailedClothesItem.ClothesSizeGuidId);
 
             if (itemToRemove != null)
             {

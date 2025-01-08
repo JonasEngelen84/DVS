@@ -36,8 +36,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 editClothesFormViewModel.HasError = false;
                 editClothesFormViewModel.IsSubmitting = true;
 
-                Clothes updatedClothes = new(editClothesFormViewModel.Clothes.GuidID,
-                                             editClothesFormViewModel.ID,
+                Clothes updatedClothes = new(editClothesFormViewModel.Clothes.GuidId,
+                                             editClothesFormViewModel.Id,
                                              editClothesFormViewModel.Name,
                                              editClothesFormViewModel.Category,
                                              editClothesFormViewModel.Season,
@@ -47,20 +47,20 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 };
 
                 // Die vom User gewählten Größen/SizeModel auflisten
-                List<SizeModel> selectedSizes = (editClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                    ? editClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                    : editClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
+                List<SizeModel> selectedSizes = (editClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                    ? editClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                    : editClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
                     .ToList();
 
                 //await DeleteRemovedClothesSizesAsync(editClothesFormViewModel, selectedSizes);
                 await CreateUpdateOrAddClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
 
                 // Aktualisieren der Clothes-Liste von Category und Season
-                Clothes ClothesToRemove = updatedClothes.Category.Clothes.FirstOrDefault(c => c.GuidID == updatedClothes.GuidID);
+                Clothes ClothesToRemove = updatedClothes.Category.Clothes.FirstOrDefault(c => c.GuidId == updatedClothes.GuidId);
                 updatedClothes.Category.Clothes.Remove(ClothesToRemove);
                 updatedClothes.Category.Clothes.Add(updatedClothes);
 
-                ClothesToRemove = updatedClothes.Season.Clothes.FirstOrDefault(c => c.GuidID == updatedClothes.GuidID);
+                ClothesToRemove = updatedClothes.Season.Clothes.FirstOrDefault(c => c.GuidId == updatedClothes.GuidId);
                 updatedClothes.Season.Clothes.Remove(ClothesToRemove);
                 updatedClothes.Season.Clothes.Add(updatedClothes);
 
@@ -87,12 +87,12 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             List<ClothesSize> ClothesSizesToDelete = new(editClothesFormViewModel.Clothes.Sizes);
             foreach (ClothesSize clothesSize in ClothesSizesToDelete)
             {
-                SizeModel existingSize = selectedSizes.FirstOrDefault(sm => sm.GuidID == clothesSize.SizeGuidID);
+                SizeModel existingSize = selectedSizes.FirstOrDefault(sm => sm.GuidId == clothesSize.SizeGuidId);
 
                 if (existingSize == null)
                 {
                     // Aktualisieren der ClothesSize-Liste des SizeModel
-                    ClothesSize existingClothesSize = clothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.Size.GuidID == clothesSize.Size.GuidID);
+                    ClothesSize existingClothesSize = clothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.Size.GuidId == clothesSize.Size.GuidId);
                     clothesSize.Size.ClothesSizes.Remove(clothesSize);
 
                     try
@@ -113,7 +113,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
         {
             foreach (SizeModel size in selectedSizes)
             {
-                ClothesSize existingClothesSize = editClothesFormViewModel.Clothes.Sizes.FirstOrDefault(cs => cs.Size.GuidID == size.GuidID);
+                ClothesSize existingClothesSize = editClothesFormViewModel.Clothes.Sizes.FirstOrDefault(cs => cs.Size.GuidId == size.GuidId);
                 
                 if (existingClothesSize == null)
                 {
@@ -138,7 +138,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 {
                     if (existingClothesSize.Quantity != size.Quantity)
                     {
-                        ClothesSize updatedClothesSize = new(existingClothesSize.GuidID, updatedClothes, size, size.Quantity, existingClothesSize.Comment)
+                        ClothesSize updatedClothesSize = new(existingClothesSize.GuidId, updatedClothes, size, size.Quantity, existingClothesSize.Comment)
                         {
                             EmployeeClothesSizes = new ObservableCollection<EmployeeClothesSize>(existingClothesSize.EmployeeClothesSizes)
                         };
@@ -158,7 +158,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                         updatedClothes.Sizes.Add(updatedClothesSize);
 
                         // Aktualisieren der ClothesSize-Liste des SizeModel
-                        ClothesSize ClothesSizeToRemove = updatedClothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.GuidID == updatedClothesSize.GuidID);
+                        ClothesSize ClothesSizeToRemove = updatedClothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.GuidId == updatedClothesSize.GuidId);
                         size.ClothesSizes.Remove(ClothesSizeToRemove);
                         size.ClothesSizes.Add(updatedClothesSize);
                     }

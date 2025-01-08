@@ -27,10 +27,10 @@ namespace DVS.WPF.Commands.CommentCommands
 
             // Zu kommentierende EmployeeClothesSize speichern
             EmployeeClothesSize employeeClothesSizeToComment = commentEmployeeClothesFormViewModel.Employee.Clothes
-                .FirstOrDefault(ecs => ecs.GuidID == commentEmployeeClothesFormViewModel.EmployeeClothesSizeGuidID);
+                .FirstOrDefault(ecs => ecs.GuidId == commentEmployeeClothesFormViewModel.EmployeeClothesSizeGuidID);
 
             // Neues, kommentiertes, EmployeeClothesSize erstellen
-            EmployeeClothesSize commentedEmployeeClothesSize = new(employeeClothesSizeToComment.GuidID,
+            EmployeeClothesSize commentedEmployeeClothesSize = new(employeeClothesSizeToComment.GuidId,
                                                                    employeeClothesSizeToComment.Employee,
                                                                    employeeClothesSizeToComment.ClothesSize,
                                                                    employeeClothesSizeToComment.Quantity,
@@ -58,14 +58,14 @@ namespace DVS.WPF.Commands.CommentCommands
             commentedEmployeeClothesSize.Employee.Clothes.Add(commentedEmployeeClothesSize);
 
             // Neues Clothes mit neuer Bekleidungs-Liste erstellen
-            Employee updatedEmployee = new(commentEmployeeClothesFormViewModel.Employee.GuidID,
+            Employee updatedEmployee = new(commentEmployeeClothesFormViewModel.Employee.GuidId,
                                           commentEmployeeClothesFormViewModel.EmployeeID,
                                           commentEmployeeClothesFormViewModel.EmployeeLastname,
                                           commentEmployeeClothesFormViewModel.EmployeeFirstname,
                                           commentEmployeeClothesFormViewModel.Employee.Comment)
             {
                 Clothes = new ObservableCollection<EmployeeClothesSize>(commentEmployeeClothesFormViewModel.Employee.Clothes
-                .Select(ecs => new EmployeeClothesSize(ecs.GuidID, ecs.Employee, ecs.ClothesSize, ecs.Quantity, ecs.Comment)))
+                .Select(ecs => new EmployeeClothesSize(ecs.GuidId, ecs.Employee, ecs.ClothesSize, ecs.Quantity, ecs.Comment)))
             };
 
             // EmployeeClothesSize den ClothesSize-Listen hinzufügen

@@ -4,10 +4,10 @@ namespace DVS.Domain.Models
 {
     public class Clothes
     {
-        public Guid GuidID { get; }
-        public Guid SeasonGuidID { get; private set; }
-        public Guid CategoryGuidID { get; private set; }
-        public string ID { get; private set; }
+        public Guid GuidId { get; }
+        public Guid SeasonGuidId { get; private set; }
+        public Guid CategoryGuidId { get; private set; }
+        public string Id { get; private set; }
         public string Name { get; private set; }
         public string Comment { get; private set; }
         public Season Season { get; private set; }
@@ -15,23 +15,20 @@ namespace DVS.Domain.Models
 
         public ObservableCollection<ClothesSize> Sizes { get; set; }
 
-        public Clothes(Guid guidID, string id, string name, Category category, Season season, string comment)
+        public Clothes(Guid guidId, string id, string name, Category category, Season season, string comment)
         {
-            GuidID = guidID;
+            GuidId = guidId;
             Season = season;
             Category = category;
-            SeasonGuidID = season.GuidID;
-            CategoryGuidID = category.GuidID;
-            ID = id;
+            SeasonGuidId = season.GuidId;
+            CategoryGuidId = category.GuidId;
+            Id = id;
             Name = name;
             Comment = comment;
 
             Sizes = [];
         }
 
-        public Clothes()
-        {
-
-        }
+        public Clothes() {}
     }
 }

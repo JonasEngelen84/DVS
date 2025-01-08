@@ -1,10 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 
 namespace DVS.Domain.Models
 {
     public class SizeModel
     {
-        public Guid GuidID { get; }
+        public Guid GuidId { get; }
         public string Size { get; private set; }
         public int Quantity { get; set;  }
         public bool IsSizeSystemEU { get; private set; }
@@ -12,9 +13,9 @@ namespace DVS.Domain.Models
 
         public ObservableCollection<ClothesSize> ClothesSizes { get; set; }
 
-        public SizeModel(Guid guidID, string size, bool system)
+        public SizeModel(Guid guidId, string size, bool system)
         {
-            GuidID = guidID;
+            GuidId = guidId;
             Size = size;
             Quantity = 0;
             IsSizeSystemEU = system;

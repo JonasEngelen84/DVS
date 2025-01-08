@@ -64,8 +64,8 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
 
             foreach (Clothes clothes in ClothesToEdit)
             {
-                Clothes newClothes = new(clothes.GuidID,
-                                         clothes.ID,
+                Clothes newClothes = new(clothes.GuidId,
+                                         clothes.Id,
                                          clothes.Name,
                                          _categoryStore.Categoryless,
                                          clothes.Season,
@@ -96,8 +96,8 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
 
             foreach (ClothesSize cs in clothesSizesToEdit)
             {
-                ClothesSize newClothesSize = new(cs.GuidID,
-                                                 editedClothes.FirstOrDefault(c => c.GuidID == cs.Clothes.GuidID),
+                ClothesSize newClothesSize = new(cs.GuidId,
+                                                 editedClothes.FirstOrDefault(c => c.GuidId == cs.Clothes.GuidId),
                                                  cs.Size,
                                                  cs.Quantity,
                                                  cs.Comment)
@@ -125,9 +125,9 @@ namespace DVS.WPF.Commands.AddEditCategoryCommands
 
             foreach (EmployeeClothesSize ecs in employeeClothesSizesToEdit)
             {
-                EmployeeClothesSize newEmployeeClothesSize = new(ecs.GuidID,
+                EmployeeClothesSize newEmployeeClothesSize = new(ecs.GuidId,
                                                                  ecs.Employee,
-                                                                 editedClothesSizes.FirstOrDefault(cs => cs.GuidID == ecs.ClothesSizeGuidID),
+                                                                 editedClothesSizes.FirstOrDefault(cs => cs.GuidId == ecs.ClothesSizeGuidId),
                                                                  ecs.Quantity,
                                                                  ecs.Comment);
 

@@ -23,9 +23,9 @@
 
         <ListView.View>
             <GridView>
-                <GridViewColumn Header="ID"
+                <GridViewColumn Header="Id"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding ID}" />
+                                DisplayMemberBinding="{Binding Id}" />
                 <GridViewColumn Header="Name"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Name}" />

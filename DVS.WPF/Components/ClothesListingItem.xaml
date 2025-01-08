@@ -43,7 +43,7 @@
                            Foreground="DarkGray"
                            TextWrapping="WrapWithOverflow" />
 
-                <TextBlock Text="{Binding ID}"
+                <TextBlock Text="{Binding Id}"
                            Grid.Column="2"
                            Margin="10 0 0 0"
                            HorizontalAlignment="Stretch" />

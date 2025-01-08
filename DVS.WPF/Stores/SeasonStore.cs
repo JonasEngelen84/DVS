@@ -51,7 +51,7 @@ namespace DVS.WPF.Stores
         {
             await _updateSeasonCommand.Execute(updatedSeason);
 
-            int index = _seasons.FindIndex(y => y.GuidID == updatedSeason.GuidID);
+            int index = _seasons.FindIndex(y => y.GuidId == updatedSeason.GuidId);
 
             if (index > -1)
             {
@@ -68,17 +68,17 @@ namespace DVS.WPF.Stores
         {
             await _deleteSeasonCommand.Execute(season);
 
-            var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidID == season.GuidID);
+            int index = _seasons.FindIndex(y => y.GuidId == season.GuidId);
 
-            if (seasonToDelete != null)
+            if (index > -1)
             {
-                _seasons.RemoveAll(y => y.GuidID == season.GuidID);
-                SeasonDeleted.Invoke(season.GuidID, addEditSeasonFormViewModel);
+                _seasons.RemoveAll(y => y.GuidId == season.GuidId);
+                SeasonDeleted.Invoke(season.GuidId, addEditSeasonFormViewModel);
             }
             else
             {
                 throw new InvalidOperationException("Löschen der Saison nicht möglich.");
-            }
+            }            
         }
     }
 }

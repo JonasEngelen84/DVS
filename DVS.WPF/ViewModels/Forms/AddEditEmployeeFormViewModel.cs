@@ -14,16 +14,16 @@ namespace DVS.WPF.ViewModels.Forms
 
         public Employee? Employee { get; } = employee;
 
-        private string _iD;
-        public string ID
+        private string _id;
+        public string Id
         {
-            get => _iD;
+            get => _id;
             set
             {
-                if (ID != value)
+                if (Id != value)
                 {
-                    _iD = value;
-                    OnPropertyChanged(nameof(ID));
+                    _id = value;
+                    OnPropertyChanged(nameof(Id));
                     OnPropertyChanged(nameof(CanSubmit));
                 }
             }
@@ -96,7 +96,7 @@ namespace DVS.WPF.ViewModels.Forms
         {//TODO: canSubmitEmployee auf true setzen wenn Kleidungsliste verändert wird
             get
             {
-                if (string.IsNullOrEmpty(ID) || ID == "ID" ||
+                if (string.IsNullOrEmpty(Id) || Id == "Id" ||
                     string.IsNullOrEmpty(Lastname) || Lastname == "Nachname" ||
                     string.IsNullOrEmpty(Firstname) || Firstname == "Vorname")
                 {
@@ -105,7 +105,7 @@ namespace DVS.WPF.ViewModels.Forms
 
                 if (Employee != null)
                 {
-                    if (ID == Employee.ID &&
+                    if (Id == Employee.Id &&
                         Lastname == Employee.Lastname &&
                         Firstname == Employee.Firstname)
                     {

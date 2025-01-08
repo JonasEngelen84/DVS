@@ -15,7 +15,7 @@ namespace DVS.WPF.ViewModels.Forms
         public bool HasSelectedDetailedClothesListingItem => SelectedDetailedClothesItem != null;
         public Clothes Clothes => SelectedDetailedClothesItem.Clothes;
         public ClothesSize ClothesSize => SelectedDetailedClothesItem.ClothesSize;
-        public string ID => SelectedDetailedClothesItem.ID;
+        public string ID => SelectedDetailedClothesItem.Id;
         public string Name => SelectedDetailedClothesItem.Name;
         public string Category => SelectedDetailedClothesItem.Category;
         public string Season => SelectedDetailedClothesItem.Season;

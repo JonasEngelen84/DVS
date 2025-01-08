@@ -54,7 +54,7 @@ namespace DVS.WPF.Stores
         {
             await _updateCategoryCommand.Execute(updatedCategory);
 
-            int index = _categories.FindIndex(y => y.GuidID == updatedCategory.GuidID);
+            int index = _categories.FindIndex(y => y.GuidId == updatedCategory.GuidId);
 
             if (index > -1)
             {
@@ -71,17 +71,17 @@ namespace DVS.WPF.Stores
         {
             await _deleteCategoryCommand.Execute(category);
 
-            var categoryToDelete = _categories.FirstOrDefault(y => y.GuidID == category.GuidID);
+            int index = _categories.FindIndex(y => y.GuidId == category.GuidId);
 
-            if (categoryToDelete != null)
+            if (index > -1)
             {
-                _categories.RemoveAll(y => y.GuidID == category.GuidID); ;
-                CategoryDeleted.Invoke(category.GuidID, addEditCategoryFormViewModel);
+                _categories.RemoveAll(y => y.GuidId == category.GuidId);
+                CategoryDeleted.Invoke(category.GuidId, addEditCategoryFormViewModel);
             }
             else
             {
                 throw new InvalidOperationException("Löschen der Kategorie nicht möglich.");
-            }
+            }            
         }
     }
 }

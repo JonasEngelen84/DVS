@@ -57,8 +57,8 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private static Employee CreateUpdatedEmployee(AddEditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            return new Employee(editEmployeeFormViewModel.Employee.GuidID,
-                                editEmployeeFormViewModel.ID,
+            return new Employee(editEmployeeFormViewModel.Employee.GuidId,
+                                editEmployeeFormViewModel.Id,
                                 editEmployeeFormViewModel.Lastname,
                                 editEmployeeFormViewModel.Firstname,
                                 editEmployeeFormViewModel.Comment)
@@ -72,7 +72,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             foreach (EmployeeClothesSize ecs in updatedEmployee.Clothes)
             {
                 DetailedClothesListingItemViewModel existingItem = editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList
-                    .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidID == ecs.ClothesSizeGuidID);
+                    .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == ecs.ClothesSizeGuidId);
 
                 if (existingItem == null)
                 {
@@ -96,7 +96,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         {
             foreach (DetailedClothesListingItemViewModel dclivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                EmployeeClothesSize existingItem = updatedEmployee.Clothes.FirstOrDefault(ecs => ecs.ClothesSizeGuidID == dclivm.ClothesSizeGuidID);
+                EmployeeClothesSize existingItem = updatedEmployee.Clothes.FirstOrDefault(ecs => ecs.ClothesSizeGuidId == dclivm.ClothesSizeGuidId);
 
                 if (existingItem == null)
                 {
@@ -122,13 +122,13 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         {
             foreach (DetailedClothesListingItemViewModel dclivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                EmployeeClothesSize existingItem = updatedEmployee.Clothes.FirstOrDefault(ecs => ecs.ClothesSizeGuidID == dclivm.ClothesSizeGuidID);
+                EmployeeClothesSize existingItem = updatedEmployee.Clothes.FirstOrDefault(ecs => ecs.ClothesSizeGuidId == dclivm.ClothesSizeGuidId);
 
                 if (existingItem != null)
                 {
-                    EmployeeClothesSize UpdatedEmployeeClothesSize = new(existingItem.GuidID, updatedEmployee, dclivm.ClothesSize, (int)dclivm.Quantity, null);
+                    EmployeeClothesSize UpdatedEmployeeClothesSize = new(existingItem.GuidId, updatedEmployee, dclivm.ClothesSize, (int)dclivm.Quantity, null);
 
-                    EmployeeClothesSize itemToRemove = updatedEmployee.Clothes.FirstOrDefault(ecs => ecs.GuidID == UpdatedEmployeeClothesSize.GuidID);
+                    EmployeeClothesSize itemToRemove = updatedEmployee.Clothes.FirstOrDefault(ecs => ecs.GuidId == UpdatedEmployeeClothesSize.GuidId);
 
                     if (itemToRemove != null)
                     {
@@ -137,7 +137,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                     }
 
 
-                    itemToRemove = UpdatedEmployeeClothesSize.ClothesSize.EmployeeClothesSizes.FirstOrDefault(ecs => ecs.GuidID == UpdatedEmployeeClothesSize.GuidID);
+                    itemToRemove = UpdatedEmployeeClothesSize.ClothesSize.EmployeeClothesSizes.FirstOrDefault(ecs => ecs.GuidId == UpdatedEmployeeClothesSize.GuidId);
 
                     if (itemToRemove != null)
                     {
@@ -176,7 +176,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         {
             foreach (DetailedClothesListingItemViewModel dclivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                ClothesSize itemToRemove = dclivm.Clothes.Sizes.FirstOrDefault(cs => cs.GuidID == dclivm.ClothesSizeGuidID);
+                ClothesSize itemToRemove = dclivm.Clothes.Sizes.FirstOrDefault(cs => cs.GuidId == dclivm.ClothesSizeGuidId);
 
                 if (itemToRemove != null)
                 {
@@ -184,7 +184,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                     dclivm.Clothes.Sizes.Add(dclivm.ClothesSize);
                 }
 
-                itemToRemove = dclivm.ClothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.GuidID == dclivm.ClothesSizeGuidID);
+                itemToRemove = dclivm.ClothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.GuidId == dclivm.ClothesSizeGuidId);
 
                 if (itemToRemove != null)
                 {
@@ -208,7 +208,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         {
             foreach (DetailedClothesListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                var itemToRemove = dclivm.Clothes.Category.Clothes.FirstOrDefault(c => c.GuidID == dclivm.Clothes.GuidID);
+                var itemToRemove = dclivm.Clothes.Category.Clothes.FirstOrDefault(c => c.GuidId == dclivm.Clothes.GuidId);
 
                 if (itemToRemove != null)
                 {
@@ -216,7 +216,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                     dclivm.Clothes.Category.Clothes.Add(dclivm.Clothes);
                 }
 
-                itemToRemove = dclivm.Clothes.Season.Clothes.FirstOrDefault(c => c.GuidID == dclivm.Clothes.GuidID);
+                itemToRemove = dclivm.Clothes.Season.Clothes.FirstOrDefault(c => c.GuidId == dclivm.Clothes.GuidId);
 
                 if (itemToRemove != null)
                 {

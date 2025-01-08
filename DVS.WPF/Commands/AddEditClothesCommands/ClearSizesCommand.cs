@@ -18,8 +18,8 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 _clothesListingItemViewModel.IsDeleting = true;
                 _clothesListingItemViewModel.HasError = false;
 
-                Clothes newClothes = new(_clothesListingItemViewModel.Clothes.GuidID,
-                                         _clothesListingItemViewModel.ID,
+                Clothes newClothes = new(_clothesListingItemViewModel.Clothes.GuidId,
+                                         _clothesListingItemViewModel.Id,
                                          _clothesListingItemViewModel.Name,
                                          _clothesListingItemViewModel.Category,
                                          _clothesListingItemViewModel.Season,
@@ -41,20 +41,20 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                     }
 
                     // Aktualisieren der ClothesSize-Liste des SizeModel
-                    ClothesSize existingClothesSize = clothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.Size.GuidID == clothesSize.Size.GuidID);
+                    ClothesSize existingClothesSize = clothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.Size.GuidId == clothesSize.Size.GuidId);
                     if (existingClothesSize != null)
                         clothesSize.Size.ClothesSizes.Remove(clothesSize);
                 }
 
                 // Aktualisieren der Clothes-Listen von Category und Season
-                Clothes existingClothes = newClothes.Category.Clothes.FirstOrDefault(c => c.GuidID == _clothesListingItemViewModel.Clothes.GuidID);
+                Clothes existingClothes = newClothes.Category.Clothes.FirstOrDefault(c => c.GuidId == _clothesListingItemViewModel.Clothes.GuidId);
                 if (existingClothes != null)
                 {
                     newClothes.Category.Clothes.Remove(existingClothes);
                     newClothes.Category.Clothes.Add(newClothes);
                 }
 
-                existingClothes = newClothes.Season.Clothes.FirstOrDefault(c => c.GuidID == _clothesListingItemViewModel.Clothes.GuidID);
+                existingClothes = newClothes.Season.Clothes.FirstOrDefault(c => c.GuidId == _clothesListingItemViewModel.Clothes.GuidId);
                 if (existingClothes != null)
                 {
                     newClothes.Season.Clothes.Remove(existingClothes);

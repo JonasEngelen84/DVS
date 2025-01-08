@@ -15,7 +15,7 @@ namespace DVS.WPF.ViewModels.Forms
         public bool HasSelectedDetailedEmployeeListingItem => SelectedDetailedEmployeeItem != null;
         public Guid? EmployeeClothesSizeGuidID => SelectedDetailedEmployeeItem.EmployeeClothesSizeGuidID;
         public Employee Employee => SelectedDetailedEmployeeItem.Employee;
-        public string EmployeeID => SelectedDetailedEmployeeItem.Employee.ID;
+        public string EmployeeID => SelectedDetailedEmployeeItem.Employee.Id;
         public string EmployeeLastname => SelectedDetailedEmployeeItem.Lastname;
         public string EmployeeFirstname => SelectedDetailedEmployeeItem.Firstname;
         public EmployeeClothesSize EmployeeClothesSize => SelectedDetailedEmployeeItem.EmployeeClothesSize;

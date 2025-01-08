@@ -4,14 +4,14 @@ namespace DVS.Domain.Models
 {
     public class Season
     {
-        public Guid GuidID { get; }
+        public Guid GuidId { get; }
         public string Name { get; private set; }
 
         public ObservableCollection<Clothes> Clothes { get; set; }
-            
-        public Season(Guid guidID, string name)
+
+        public Season(Guid guidId, string name)
         {
-            GuidID = guidID;
+            GuidId = guidId;
             Name = name;
 
             Clothes = [];

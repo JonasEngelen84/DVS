@@ -28,7 +28,7 @@ namespace DVS.WPF.Stores
         {
             await _updateSizeCommand.Execute(updatedSize);
 
-            int index = _sizes.FindIndex(y => y.GuidID == updatedSize.GuidID);
+            int index = _sizes.FindIndex(y => y.GuidId == updatedSize.GuidId);
 
             if (index != -1)
             {

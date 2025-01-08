@@ -7,10 +7,10 @@ namespace DVS.WPF.ViewModels.Forms
                                              ICommand submitCommand,
                                              ICommand openAddEditCategoriesCommand,
                                              ICommand openAddEditSeasonsCommand,
-                                             AddEditClothesListingViewModel addEditListingViewModel)
+                                             AddEditClothesListingViewModel addEditClothesListingViewModel)
                                              : ViewModelBase
     {
-        public AddEditClothesListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
+        public AddEditClothesListingViewModel AddEditClothesListingViewModel { get; } = addEditClothesListingViewModel;
 
         public ICommand OpenAddEditCategories { get; } = openAddEditCategoriesCommand;
         public ICommand OpenAddEditSeasons { get; } = openAddEditSeasonsCommand;
@@ -18,16 +18,16 @@ namespace DVS.WPF.ViewModels.Forms
 
         public Clothes? Clothes { get; } = clothes;
 
-        private string _iD;
-        public string ID
+        private string _id;
+        public string Id
         {
-            get => _iD;
+            get => _id;
             set
             {
-                if (_iD != value)
+                if (_id != value)
                 {
-                    _iD = value;
-                    OnPropertyChanged(nameof(ID));
+                    _id = value;
+                    OnPropertyChanged(nameof(Id));
                     OnPropertyChanged(nameof(CanSubmit));
                 }
             }
@@ -113,7 +113,7 @@ namespace DVS.WPF.ViewModels.Forms
         {//TODO: canSubmitClothes auf true setzen wenn Größenliste verändert wird
             get
             {
-                if (string.IsNullOrEmpty(ID) || ID == "ID" ||
+                if (string.IsNullOrEmpty(Id) || Id == "Id" ||
                     string.IsNullOrEmpty(Name) || Name == "Name" ||
                     Category == null ||
                     Season == null)
@@ -123,7 +123,7 @@ namespace DVS.WPF.ViewModels.Forms
 
                 if (Clothes != null)
                 {
-                    if (ID == Clothes.ID &&
+                    if (Id == Clothes.Id &&
                         Name == Clothes.Name &&
                         Name == Clothes.Name &&
                         Category == Clothes.Category &&

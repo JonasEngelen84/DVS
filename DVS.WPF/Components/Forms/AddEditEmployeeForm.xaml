@@ -9,11 +9,11 @@
 
     <StackPanel>
 
-        <!-- ID -->
+        <!-- Id -->
         <TextBox Width="252"
                  Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" />
+                 Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
 
         <!-- Lastname -->
         <TextBox Width="252"

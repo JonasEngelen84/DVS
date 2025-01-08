@@ -5,14 +5,14 @@ namespace DVS.WPF.ViewModels
     public class DetailedEmployeeListingItemViewModel(Employee employee, EmployeeClothesSize? employeeClothesSize) : ViewModelBase
     {
         public Employee Employee { get; private set; } = employee;
-        public string ID => Employee.ID;
+        public string ID => Employee.Id;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
 
         public EmployeeClothesSize? EmployeeClothesSize { get; private set; } = employeeClothesSize;
-        public Guid? EmployeeClothesSizeGuidID => EmployeeClothesSize?.GuidID;
-        public Guid? ClothesGuidID => EmployeeClothesSize?.ClothesSize.Clothes.GuidID;
-        public string? ClothesID => EmployeeClothesSize?.ClothesSize.Clothes.ID ?? null;
+        public Guid? EmployeeClothesSizeGuidID => EmployeeClothesSize?.GuidId;
+        public Guid? ClothesGuidID => EmployeeClothesSize?.ClothesSize.Clothes.GuidId;
+        public string? ClothesID => EmployeeClothesSize?.ClothesSize.Clothes.Id ?? null;
         public string? ClothesName => EmployeeClothesSize?.ClothesSize.Clothes.Name ?? null;
         public string? Size => EmployeeClothesSize?.ClothesSize.Size.Size ?? null;
         public int? Quantity => EmployeeClothesSize?.Quantity ?? null;

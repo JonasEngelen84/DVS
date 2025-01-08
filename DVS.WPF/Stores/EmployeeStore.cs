@@ -49,7 +49,7 @@ namespace DVS.WPF.Stores
         {
             await _updateEmployeeCommand.Execute(updatedEmployee);
 
-            int index = _employees.FindIndex(y => y.GuidID == updatedEmployee.GuidID);
+            int index = _employees.FindIndex(y => y.GuidId == updatedEmployee.GuidId);
 
             if (index != -1)
             {
@@ -67,9 +67,18 @@ namespace DVS.WPF.Stores
         {
             await _deleteEmployeeCommand.Execute(employee);
 
-            _employees.RemoveAll(y => y.GuidID == employee.GuidID);
+            int index = _employees.FindIndex(y => y.GuidId == employee.GuidId);
 
-            EmployeeDeleted?.Invoke(employee.GuidID);
+            if (index != -1)
+            {
+                _employees.RemoveAll(y => y.GuidId == employee.GuidId);
+            }
+            else
+            {
+                throw new InvalidOperationException("Löschen des Mitarbeiters nicht möglich.");
+            }
+            
+            EmployeeDeleted?.Invoke(employee.GuidId);
         }
     }
 }

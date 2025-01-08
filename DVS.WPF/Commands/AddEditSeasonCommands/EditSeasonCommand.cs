@@ -28,7 +28,7 @@ namespace DVS.WPF.Commands.AddEditSeasonCommands
                 addEditSeasonFormViewModel.HasError = false;
                 addEditSeasonFormViewModel.IsSubmitting = true;
 
-                Season season = new(addEditSeasonFormViewModel.SelectedSeason.GuidID, addEditSeasonFormViewModel.EditSelectedSeason);
+                Season season = new(addEditSeasonFormViewModel.SelectedSeason.GuidId, addEditSeasonFormViewModel.EditSelectedSeason);
 
                 try
                 {

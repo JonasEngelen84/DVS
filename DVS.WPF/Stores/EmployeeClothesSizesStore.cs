@@ -40,7 +40,7 @@ namespace DVS.WPF.Stores
         {
             await _updateEmployeeClothesSizeCommand.Execute(updatedEmployeeClothesSize);
 
-            int index = _employeeClothesSizes.FindIndex(y => y.GuidID == updatedEmployeeClothesSize.GuidID);
+            int index = _employeeClothesSizes.FindIndex(y => y.GuidId == updatedEmployeeClothesSize.GuidId);
 
             if (index != -1)
             {
@@ -56,7 +56,16 @@ namespace DVS.WPF.Stores
         {
             await _deleteEmployeeClothesSizeCommand.Execute(employeeClothesSize);
 
-            _employeeClothesSizes.RemoveAll(y => y.GuidID == employeeClothesSize.GuidID);
+            int index = _employeeClothesSizes.FindIndex(y => y.GuidId == employeeClothesSize.GuidId);
+
+            if (index != -1)
+            {
+                _employeeClothesSizes.RemoveAll(y => y.GuidId == employeeClothesSize.GuidId);
+            }
+            else
+            {
+                throw new InvalidOperationException("Entfernen der Bekleidung nicht möglich.");
+            }            
         }
     }
 }

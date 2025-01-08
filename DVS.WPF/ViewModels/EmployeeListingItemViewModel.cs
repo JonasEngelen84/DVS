@@ -9,7 +9,7 @@ namespace DVS.WPF.ViewModels.ListViewItems
     public class EmployeeListingItemViewModel : ViewModelBase
     {
         public Employee Employee { get; private set; }
-        public string ID => Employee.ID;
+        public string ID => Employee.Id;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
         public string? Comment => Employee.Comment;

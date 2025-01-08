@@ -70,7 +70,7 @@ namespace DVS.WPF.ViewModels.Views
                                               openAddEditSeasons,
                                               AddEditListingViewModel)
             {
-                ID = clothes.ID,
+                Id = clothes.Id,
                 Name = clothes.Name,
                 Category = clothes.Category,
                 Season = clothes.Season,

@@ -21,16 +21,16 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             addClothesFormViewModel.IsSubmitting = true;
 
             Clothes newClothes = new(Guid.NewGuid(),
-                                     addClothesFormViewModel.ID,
+                                     addClothesFormViewModel.Id,
                                      addClothesFormViewModel.Name,
                                      addClothesFormViewModel.Category,
                                      addClothesFormViewModel.Season,
                                      addClothesFormViewModel.Comment);
 
             // Die vom User gewählten Größen/SizeModel auflisten
-            List <SizeModel> selectedSizes = (addClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                ? addClothesFormViewModel.AddEditListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                : addClothesFormViewModel.AddEditListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
+            List <SizeModel> selectedSizes = (addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                ? addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                : addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
                 .ToList();
 
             if (selectedSizes != null)
