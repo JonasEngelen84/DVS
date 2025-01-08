@@ -21,6 +21,7 @@ using DVS.WPF.ViewModels.Views;
 using Microsoft.EntityFrameworkCore;
 using System.Windows;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DVS.WPF
 {
@@ -82,121 +83,184 @@ namespace DVS.WPF
 
         public App()
         {
-            _host = Host.CreateDefaultBuilder().Build();
-
             string connectionString = "Data Source=DVS.db";
-            _dVSDbContextFactory = new(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
 
-            _getAllCategoriesQuery = new GetAllCategoriesQuery(_dVSDbContextFactory);
-            _createCategoryCommand = new CreateCategoryCommand(_dVSDbContextFactory);
-            _updateCategoryCommand = new UpdateCategoryCommand(_dVSDbContextFactory);
-            _deleteCategoryCommand = new DeleteCategoryCommand(_dVSDbContextFactory);
+            _host = Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) =>
+                {
+                    services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
+                    services.AddSingleton<DVSDbContextFactory>();
 
-            _getAllSeasonsQuery = new GetAllSeasonsQuery(_dVSDbContextFactory);
-            _createSeasonCommand = new CreateSeasonCommand(_dVSDbContextFactory);
-            _updateSeasonCommand = new UpdateSeasonCommand(_dVSDbContextFactory);
-            _deleteSeasonsCommand = new DeleteSeasonCommand(_dVSDbContextFactory);
+                    services.AddSingleton<IGetAllCategoriesQuery, GetAllCategoriesQuery>();
+                    services.AddSingleton<ICreateCategoryCommand, CreateCategoryCommand>();
+                    services.AddSingleton<IUpdateCategoryCommand, UpdateCategoryCommand>();
+                    services.AddSingleton<IDeleteCategoryCommand, DeleteCategoryCommand>();                    
+                    services.AddSingleton<IGetAllSeasonsQuery, GetAllSeasonsQuery>();
+                    services.AddSingleton<ICreateSeasonCommand, CreateSeasonCommand>();
+                    services.AddSingleton<IUpdateSeasonCommand, UpdateSeasonCommand>();
+                    services.AddSingleton<IDeleteSeasonCommand, DeleteSeasonCommand>();
+                    services.AddSingleton<IGetAllClothesQuery, GetAllClothesQuery>();
+                    services.AddSingleton<ICreateClothesCommand, CreateClothesCommand>();
+                    services.AddSingleton<IUpdateClothesCommand, UpdateClothesCommand>();
+                    services.AddSingleton<IDeleteClothesCommand, DeleteClothesCommand>();
+                    services.AddSingleton<IGetAllEmployeesQuery, GetAllEmployeesQuery>();
+                    services.AddSingleton<ICreateEmployeeCommand, CreateEmployeeCommand>();
+                    services.AddSingleton<IUpdateEmployeeCommand, UpdateEmployeeCommand>();
+                    services.AddSingleton<IDeleteEmployeeCommand, DeleteEmployeeCommand>();
+                    services.AddSingleton<IGetAllClothesSizesQuery, GetAllClothesSizesQuery>();
+                    services.AddSingleton<ICreateClothesSizeCommand, CreateClothesSizeCommand>();
+                    services.AddSingleton<IUpdateClothesSizeCommand, UpdateClothesSizeCommand>();
+                    services.AddSingleton<IDeleteClothesSizeCommand, DeleteClothesSizeCommand>();
+                    services.AddSingleton<IGetAllEmployeeClothesSizesQuery, GetAllEmployeeClothesSizesQuery>();
+                    services.AddSingleton<ICreateEmployeeClothesSizeCommand, CreateEmployeeClothesSizeCommand>();
+                    services.AddSingleton<IUpdateEmployeeClothesSizeCommand, UpdateEmployeeClothesSizeCommand>();
+                    services.AddSingleton<IDeleteEmployeeClothesSizeCommand, DeleteEmployeeClothesSizeCommand>();
+                    services.AddSingleton<IGetAllSizesQuery, GetAllSizesQuery>();
+                    services.AddSingleton<IUpdateSizeCommand, UpdateSizeCommand>();
 
-            _getAllClothesQuery = new GetAllClothesQuery(_dVSDbContextFactory);
-            _createClothesCommand = new CreateClothesCommand(_dVSDbContextFactory);
-            _updateClothesCommand = new UpdateClothesCommand(_dVSDbContextFactory);
-            _deleteClothesCommand = new DeleteClothesCommand(_dVSDbContextFactory);
+                    services.AddSingleton<DVSHeadViewModel>();
+                    services.AddSingleton<DVSListingViewModel>();
+                    services.AddSingleton<DVSDetailedViewModel>();
+                    services.AddSingleton<AddEditEmployeeListingViewModel>();
 
-            _getAllEmployeesQuery = new GetAllEmployeesQuery(_dVSDbContextFactory);
-            _createEmployeeCommand = new CreateEmployeeCommand(_dVSDbContextFactory);
-            _updateEmployeeCommand = new UpdateEmployeeCommand(_dVSDbContextFactory);
-            _deleteEmployeeCommand = new DeleteEmployeeCommand(_dVSDbContextFactory);
+                    services.AddSingleton<ModalNavigationStore>();
+                    services.AddSingleton<SelectedDetailedClothesItemStore>();
+                    services.AddSingleton<SelectedDetailedEmployeeClothesItemStore>();
+                    services.AddSingleton<CategoryStore>();
+                    services.AddSingleton<SeasonStore>();
+                    services.AddSingleton<ClothesStore>();
+                    services.AddSingleton<EmployeeStore>();
+                    services.AddSingleton<SizeStore>();
+                    services.AddSingleton<ClothesSizeStore>();
+                    services.AddSingleton<EmployeeClothesSizesStore>();
 
-            _getAllClothesSizesQuery = new GetAllClothesSizesQuery(_dVSDbContextFactory);
-            _createClothesSizeCommand = new CreateClothesSizeCommand(_dVSDbContextFactory);
-            _updateClothesSizeCommand = new UpdateClothesSizeCommand(_dVSDbContextFactory);
-            _deleteClothesSizeCommand = new DeleteClothesSizeCommand(_dVSDbContextFactory);
+                    services.AddTransient<DVSListingViewModel>(CreateDVSListingViewModel);
 
-            _getAllEmployeeClothesSizesQuery = new GetAllEmployeeClothesSizesQuery(_dVSDbContextFactory);
-            _createEmployeeClothesSizeCommand = new CreateEmployeeClothesSizeCommand(_dVSDbContextFactory);
-            _updateEmployeeClothesSizeCommand = new UpdateEmployeeClothesSizeCommand(_dVSDbContextFactory);
-            _deleteEmployeeClothesSizeCommand = new DeleteEmployeeClothesSizeCommand(_dVSDbContextFactory);
+                    services.AddSingleton<MainViewModel>();
 
-            _getAllSizesQuery = new GetAllSizesQuery(_dVSDbContextFactory);
-            _updateSizeCommand = new UpdateSizeCommand(_dVSDbContextFactory);
+                    services.AddSingleton<MainWindow>((services) => new MainWindow()
+                    {
+                        DataContext = services.GetRequiredService<MainViewModel>()
+                    });
+                })
+                .Build();
 
-            _modalNavigationStore = new();
-            _selectedDetailedClothesItemStore = new();
-            _selectedDetailedEmployeeClothesItemStore = new();
-            _sizeStore = new(_getAllSizesQuery, _updateSizeCommand);
-            _categoryStore = new(_getAllCategoriesQuery,
-                                 _createCategoryCommand,
-                                 _updateCategoryCommand,
-                                 _deleteCategoryCommand);
-            _seasonStore = new(_getAllSeasonsQuery,
-                               _createSeasonCommand,
-                               _updateSeasonCommand,
-                               _deleteSeasonsCommand);
-            _clothesStore = new(_getAllClothesQuery,
-                                _createClothesCommand,
-                                _updateClothesCommand,
-                                _deleteClothesCommand);
-            _clothesSizeStore = new(_getAllClothesSizesQuery,
-                                    _createClothesSizeCommand,
-                                    _updateClothesSizeCommand,
-                                    _deleteClothesSizeCommand);
-            _employeeClothesSizesStore = new(_getAllEmployeeClothesSizesQuery,
-                                             _createEmployeeClothesSizeCommand,
-                                             _updateEmployeeClothesSizeCommand,
-                                             _deleteEmployeeClothesSizeCommand);
-            _employeeStore = new(_getAllEmployeesQuery,
-                                 _createEmployeeCommand,
-                                 _updateEmployeeCommand,
-                                 _deleteEmployeeCommand);
+            //_dVSDbContextFactory = new(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
 
-            _addEditEmployeeListingViewModel = new(_clothesStore);
-            _dVSListingViewModel = DVSListingViewModel.LoadViewModel(_sizeStore,
-                                                                     _clothesStore,
-                                                                     _employeeStore,
-                                                                     _modalNavigationStore,
-                                                                     _categoryStore,
-                                                                     _seasonStore,
-                                                                     _clothesSizeStore,
-                                                                     _employeeClothesSizesStore,
-                                                                     _selectedDetailedClothesItemStore,
-                                                                     _selectedDetailedEmployeeClothesItemStore,
-                                                                     _addEditEmployeeListingViewModel);
-            _dVSDetailedViewModel = new(_dVSListingViewModel,
-                                        _modalNavigationStore,
-                                        _sizeStore,
-                                        _categoryStore,
-                                        _seasonStore,
-                                        _clothesStore,
-                                        _clothesSizeStore,
-                                        _employeeClothesSizesStore,
-                                        _employeeStore,
-                                        _selectedDetailedClothesItemStore,
-                                        _selectedDetailedEmployeeClothesItemStore,
-                                        _addEditEmployeeListingViewModel,
-                                        _dVSDbContextFactory);
-            _dVSHeadViewModel = new(_dVSListingViewModel,
-                                    _addEditEmployeeListingViewModel,
-                                    _modalNavigationStore,
-                                    _sizeStore,
-                                    _categoryStore,
-                                    _seasonStore,
-                                    _clothesStore,
-                                    _clothesSizeStore,
-                                    _employeeClothesSizesStore,
-                                    _employeeStore,
-                                    _dVSDbContextFactory);
+            //_getAllCategoriesQuery = new GetAllCategoriesQuery(_dVSDbContextFactory);
+            //_createCategoryCommand = new CreateCategoryCommand(_dVSDbContextFactory);
+            //_updateCategoryCommand = new UpdateCategoryCommand(_dVSDbContextFactory);
+            //_deleteCategoryCommand = new DeleteCategoryCommand(_dVSDbContextFactory);
+
+            //_getAllSeasonsQuery = new GetAllSeasonsQuery(_dVSDbContextFactory);
+            //_createSeasonCommand = new CreateSeasonCommand(_dVSDbContextFactory);
+            //_updateSeasonCommand = new UpdateSeasonCommand(_dVSDbContextFactory);
+            //_deleteSeasonsCommand = new DeleteSeasonCommand(_dVSDbContextFactory);
+
+            //_getAllClothesQuery = new GetAllClothesQuery(_dVSDbContextFactory);
+            //_createClothesCommand = new CreateClothesCommand(_dVSDbContextFactory);
+            //_updateClothesCommand = new UpdateClothesCommand(_dVSDbContextFactory);
+            //_deleteClothesCommand = new DeleteClothesCommand(_dVSDbContextFactory);
+
+            //_getAllEmployeesQuery = new GetAllEmployeesQuery(_dVSDbContextFactory);
+            //_createEmployeeCommand = new CreateEmployeeCommand(_dVSDbContextFactory);
+            //_updateEmployeeCommand = new UpdateEmployeeCommand(_dVSDbContextFactory);
+            //_deleteEmployeeCommand = new DeleteEmployeeCommand(_dVSDbContextFactory);
+
+            //_getAllClothesSizesQuery = new GetAllClothesSizesQuery(_dVSDbContextFactory);
+            //_createClothesSizeCommand = new CreateClothesSizeCommand(_dVSDbContextFactory);
+            //_updateClothesSizeCommand = new UpdateClothesSizeCommand(_dVSDbContextFactory);
+            //_deleteClothesSizeCommand = new DeleteClothesSizeCommand(_dVSDbContextFactory);
+
+            //_getAllEmployeeClothesSizesQuery = new GetAllEmployeeClothesSizesQuery(_dVSDbContextFactory);
+            //_createEmployeeClothesSizeCommand = new CreateEmployeeClothesSizeCommand(_dVSDbContextFactory);
+            //_updateEmployeeClothesSizeCommand = new UpdateEmployeeClothesSizeCommand(_dVSDbContextFactory);
+            //_deleteEmployeeClothesSizeCommand = new DeleteEmployeeClothesSizeCommand(_dVSDbContextFactory);
+
+            //_getAllSizesQuery = new GetAllSizesQuery(_dVSDbContextFactory);
+            //_updateSizeCommand = new UpdateSizeCommand(_dVSDbContextFactory);
+
+            //_modalNavigationStore = new();
+            //_selectedDetailedClothesItemStore = new();
+            //_selectedDetailedEmployeeClothesItemStore = new();
+            //_sizeStore = new(_getAllSizesQuery, _updateSizeCommand);
+            //_categoryStore = new(_getAllCategoriesQuery,
+            //                     _createCategoryCommand,
+            //                     _updateCategoryCommand,
+            //                     _deleteCategoryCommand);
+            //_seasonStore = new(_getAllSeasonsQuery,
+            //                   _createSeasonCommand,
+            //                   _updateSeasonCommand,
+            //                   _deleteSeasonsCommand);
+            //_clothesStore = new(_getAllClothesQuery,
+            //                    _createClothesCommand,
+            //                    _updateClothesCommand,
+            //                    _deleteClothesCommand);
+            //_clothesSizeStore = new(_getAllClothesSizesQuery,
+            //                        _createClothesSizeCommand,
+            //                        _updateClothesSizeCommand,
+            //                        _deleteClothesSizeCommand);
+            //_employeeClothesSizesStore = new(_getAllEmployeeClothesSizesQuery,
+            //                                 _createEmployeeClothesSizeCommand,
+            //                                 _updateEmployeeClothesSizeCommand,
+            //                                 _deleteEmployeeClothesSizeCommand);
+            //_employeeStore = new(_getAllEmployeesQuery,
+            //                     _createEmployeeCommand,
+            //                     _updateEmployeeCommand,
+            //                     _deleteEmployeeCommand);
+
+            //_addEditEmployeeListingViewModel = new(_clothesStore);
+            //_dVSListingViewModel = DVSListingViewModel.LoadViewModel(_sizeStore,
+            //                                                         _clothesStore,
+            //                                                         _employeeStore,
+            //                                                         _modalNavigationStore,
+            //                                                         _categoryStore,
+            //                                                         _seasonStore,
+            //                                                         _clothesSizeStore,
+            //                                                         _employeeClothesSizesStore,
+            //                                                         _selectedDetailedClothesItemStore,
+            //                                                         _selectedDetailedEmployeeClothesItemStore,
+            //                                                         _addEditEmployeeListingViewModel);
+
+            //_dVSDetailedViewModel = new(_dVSListingViewModel,
+            //                            _modalNavigationStore,
+            //                            _sizeStore,
+            //                            _categoryStore,
+            //                            _seasonStore,
+            //                            _clothesStore,
+            //                            _clothesSizeStore,
+            //                            _employeeClothesSizesStore,
+            //                            _employeeStore,
+            //                            _selectedDetailedClothesItemStore,
+            //                            _selectedDetailedEmployeeClothesItemStore,
+            //                            _addEditEmployeeListingViewModel,
+            //                            _dVSDbContextFactory);
+
+            //_dVSHeadViewModel = new(_dVSListingViewModel,
+            //                        _addEditEmployeeListingViewModel,
+            //                        _modalNavigationStore,
+            //                        _sizeStore,
+            //                        _categoryStore,
+            //                        _seasonStore,
+            //                        _clothesStore,
+            //                        _clothesSizeStore,
+            //                        _employeeClothesSizesStore,
+            //                        _employeeStore,
+            //                        _dVSDbContextFactory);
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             _host.Start();
 
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel(_dVSHeadViewModel,
-                                                _dVSDetailedViewModel,
-                                                _modalNavigationStore)
-            };
+            //MainWindow = new MainWindow()
+            //{
+            //    DataContext = new MainViewModel(_dVSHeadViewModel,
+            //                                    _dVSDetailedViewModel,
+            //                                    _modalNavigationStore)
+            //};
+
+            MainWindow = _host.Services.GetRequiredService<MainWindow>();
 
             MainWindow.Show();
 
@@ -210,6 +274,21 @@ namespace DVS.WPF
 
             base.OnExit(e);
         }
-    }
 
+        private DVSListingViewModel CreateDVSListingViewModel(IServiceProvider services)
+        {
+            return DVSListingViewModel.LoadViewModel(
+                services.GetRequiredService<SizeStore>(),
+                services.GetRequiredService<ClothesStore>(),
+                services.GetRequiredService<EmployeeStore>(),
+                services.GetRequiredService<ModalNavigationStore>(),
+                services.GetRequiredService<CategoryStore>(),
+                services.GetRequiredService<SeasonStore>(),
+                services.GetRequiredService<ClothesSizeStore>(),
+                services.GetRequiredService<EmployeeClothesSizesStore>(),
+                services.GetRequiredService<SelectedDetailedClothesItemStore>(),
+                services.GetRequiredService<SelectedDetailedEmployeeClothesItemStore>(),
+                services.GetRequiredService<AddEditEmployeeListingViewModel>());
+        }
+    }
 }

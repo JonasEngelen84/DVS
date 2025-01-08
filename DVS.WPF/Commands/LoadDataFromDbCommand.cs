@@ -59,7 +59,7 @@ namespace DVS.WPF.Commands
 
             try
             {
-                //await _clothesSizeStore.Load();
+                await _clothesSizeStore.Load();
             }
             catch
             {
@@ -77,7 +77,7 @@ namespace DVS.WPF.Commands
 
             try
             {
-                //await _employeeClothesSizesStore.Load();
+                await _employeeClothesSizesStore.Load();
             }
             catch
             {
