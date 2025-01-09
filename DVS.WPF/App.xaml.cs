@@ -22,60 +22,61 @@ using Microsoft.EntityFrameworkCore;
 using System.Windows;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace DVS.WPF
 {
     public partial class App : Application
     {
-        private readonly CategoryStore _categoryStore;
-        private readonly SeasonStore _seasonStore;
-        private readonly ClothesStore _clothesStore;
-        private readonly EmployeeStore _employeeStore;
-        private readonly SizeStore _sizeStore;
-        private readonly ClothesSizeStore _clothesSizeStore;
-        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore;
-        private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly DVSListingViewModel _dVSListingViewModel;
-        private readonly DVSDetailedViewModel _dVSDetailedViewModel;
-        private readonly DVSHeadViewModel _dVSHeadViewModel;
-        private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore;
-        private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore;
-        private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel;
+        //private readonly CategoryStore _categoryStore;
+        //private readonly SeasonStore _seasonStore;
+        //private readonly ClothesStore _clothesStore;
+        //private readonly EmployeeStore _employeeStore;
+        //private readonly SizeStore _sizeStore;
+        //private readonly ClothesSizeStore _clothesSizeStore;
+        //private readonly EmployeeClothesSizesStore _employeeClothesSizesStore;
+        //private readonly ModalNavigationStore _modalNavigationStore;
+        //private readonly DVSListingViewModel _dVSListingViewModel;
+        //private readonly DVSDetailedViewModel _dVSDetailedViewModel;
+        //private readonly DVSHeadViewModel _dVSHeadViewModel;
+        //private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore;
+        //private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore;
+        //private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel;
 
-        private readonly DVSDbContextFactory _dVSDbContextFactory;
+        //private readonly DVSDbContextFactory _dVSDbContextFactory;
 
-        private readonly IGetAllCategoriesQuery _getAllCategoriesQuery;
-        private readonly ICreateCategoryCommand _createCategoryCommand;
-        private readonly IUpdateCategoryCommand _updateCategoryCommand;
-        private readonly IDeleteCategoryCommand _deleteCategoryCommand;
+        //private readonly IGetAllCategoriesQuery _getAllCategoriesQuery;
+        //private readonly ICreateCategoryCommand _createCategoryCommand;
+        //private readonly IUpdateCategoryCommand _updateCategoryCommand;
+        //private readonly IDeleteCategoryCommand _deleteCategoryCommand;
 
-        private readonly IGetAllSeasonsQuery _getAllSeasonsQuery;
-        private readonly ICreateSeasonCommand _createSeasonCommand;
-        private readonly IUpdateSeasonCommand _updateSeasonCommand;
-        private readonly IDeleteSeasonCommand _deleteSeasonsCommand;
+        //private readonly IGetAllSeasonsQuery _getAllSeasonsQuery;
+        //private readonly ICreateSeasonCommand _createSeasonCommand;
+        //private readonly IUpdateSeasonCommand _updateSeasonCommand;
+        //private readonly IDeleteSeasonCommand _deleteSeasonsCommand;
 
-        private readonly IGetAllClothesQuery _getAllClothesQuery;
-        private readonly ICreateClothesCommand _createClothesCommand;
-        private readonly IUpdateClothesCommand _updateClothesCommand;
-        private readonly IDeleteClothesCommand _deleteClothesCommand;
+        //private readonly IGetAllClothesQuery _getAllClothesQuery;
+        //private readonly ICreateClothesCommand _createClothesCommand;
+        //private readonly IUpdateClothesCommand _updateClothesCommand;
+        //private readonly IDeleteClothesCommand _deleteClothesCommand;
 
-        private readonly IGetAllEmployeesQuery _getAllEmployeesQuery;
-        private readonly ICreateEmployeeCommand _createEmployeeCommand;
-        private readonly IUpdateEmployeeCommand _updateEmployeeCommand;
-        private readonly IDeleteEmployeeCommand _deleteEmployeeCommand;
+        //private readonly IGetAllEmployeesQuery _getAllEmployeesQuery;
+        //private readonly ICreateEmployeeCommand _createEmployeeCommand;
+        //private readonly IUpdateEmployeeCommand _updateEmployeeCommand;
+        //private readonly IDeleteEmployeeCommand _deleteEmployeeCommand;
 
-        private readonly IGetAllClothesSizesQuery _getAllClothesSizesQuery;
-        private readonly ICreateClothesSizeCommand _createClothesSizeCommand;
-        private readonly IUpdateClothesSizeCommand _updateClothesSizeCommand;
-        private readonly IDeleteClothesSizeCommand _deleteClothesSizeCommand;
+        //private readonly IGetAllClothesSizesQuery _getAllClothesSizesQuery;
+        //private readonly ICreateClothesSizeCommand _createClothesSizeCommand;
+        //private readonly IUpdateClothesSizeCommand _updateClothesSizeCommand;
+        //private readonly IDeleteClothesSizeCommand _deleteClothesSizeCommand;
 
-        private readonly IGetAllEmployeeClothesSizesQuery _getAllEmployeeClothesSizesQuery;
-        private readonly ICreateEmployeeClothesSizeCommand _createEmployeeClothesSizeCommand;
-        private readonly IUpdateEmployeeClothesSizeCommand _updateEmployeeClothesSizeCommand;
-        private readonly IDeleteEmployeeClothesSizeCommand _deleteEmployeeClothesSizeCommand;
+        //private readonly IGetAllEmployeeClothesSizesQuery _getAllEmployeeClothesSizesQuery;
+        //private readonly ICreateEmployeeClothesSizeCommand _createEmployeeClothesSizeCommand;
+        //private readonly IUpdateEmployeeClothesSizeCommand _updateEmployeeClothesSizeCommand;
+        //private readonly IDeleteEmployeeClothesSizeCommand _deleteEmployeeClothesSizeCommand;
 
-        private readonly IGetAllSizesQuery _getAllSizesQuery;
-        private readonly IUpdateSizeCommand _updateSizeCommand;
+        //private readonly IGetAllSizesQuery _getAllSizesQuery;
+        //private readonly IUpdateSizeCommand _updateSizeCommand;
 
         //TODO: Beschreibung
         // Nuget Paket: Microsoft.Extensions.Hosting
@@ -83,11 +84,11 @@ namespace DVS.WPF
 
         public App()
         {
-            string connectionString = "Data Source=DVS.db";
-
             _host = Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
                 {
+                    string connectionString = context.Configuration.GetConnectionString("sqlite");
+
                     services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
                     services.AddSingleton<DVSDbContextFactory>();
 
@@ -221,7 +222,6 @@ namespace DVS.WPF
             //                                                         _selectedDetailedClothesItemStore,
             //                                                         _selectedDetailedEmployeeClothesItemStore,
             //                                                         _addEditEmployeeListingViewModel);
-
             //_dVSDetailedViewModel = new(_dVSListingViewModel,
             //                            _modalNavigationStore,
             //                            _sizeStore,
@@ -235,7 +235,6 @@ namespace DVS.WPF
             //                            _selectedDetailedEmployeeClothesItemStore,
             //                            _addEditEmployeeListingViewModel,
             //                            _dVSDbContextFactory);
-
             //_dVSHeadViewModel = new(_dVSListingViewModel,
             //                        _addEditEmployeeListingViewModel,
             //                        _modalNavigationStore,

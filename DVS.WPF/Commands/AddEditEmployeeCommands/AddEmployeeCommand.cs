@@ -26,8 +26,8 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
             Employee employee = new(Guid.NewGuid(),
                                     addEmployeeFormViewModel.Id,
-                                    addEmployeeFormViewModel.Firstname,
                                     addEmployeeFormViewModel.Lastname,
+                                    addEmployeeFormViewModel.Firstname,
                                     addEmployeeFormViewModel.Comment);
 
             if (addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList != null)
