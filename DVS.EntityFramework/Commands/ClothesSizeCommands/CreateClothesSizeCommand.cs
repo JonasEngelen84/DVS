@@ -12,8 +12,8 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            context.Entry(updatedClothesSize.Clothes).State = EntityState.Modified;
-            context.Sizes.Attach(updatedClothesSize.Size);
+            //context.Entry(updatedClothesSize.Clothes).State = EntityState.Modified;
+            //context.Sizes.Attach(updatedClothesSize.Size);
             context.ClothesSizes.Add(updatedClothesSize);
 
             await context.SaveChangesAsync();

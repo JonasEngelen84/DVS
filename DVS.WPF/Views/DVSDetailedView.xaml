@@ -121,7 +121,7 @@
                           Width="18"
                           Margin="0,41,0,0"
                           Cursor="SizeWE"
-                          Background="#524E4F">
+                          Background="#433331">
             </GridSplitter>
 
             <components:DVSDetailedClothesListing Grid.Column="2"

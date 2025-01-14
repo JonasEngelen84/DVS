@@ -52,7 +52,7 @@
                           Width="5"
                           Margin="0,0,0,0"
                           Cursor="SizeWE"
-                          Background="#524E4F">
+                          Background="#433331">
             </GridSplitter>
 
             <components:DVSClothesListing Grid.Column="2" />

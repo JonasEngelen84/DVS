@@ -20,16 +20,9 @@ namespace DVS.WPF.Commands.DragNDropCommands
                     .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSizeGuidId);
 
                 DetailedClothesListingItemViewModel editedDclivm = CreateNewDetailedClothesitem(existingDclivm);
+
                 AddOrUpdateDclivm(existingDclivm, editedDclivm);
             }
-        }
-
-        private DetailedClothesListingItemViewModel GetDetailedClothesItem()
-        {
-            DetailedClothesListingItemViewModel existingItem = _addEditEmployeeListingViewModel.EmployeeClothesList
-                .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSizeGuidId);
-
-            return existingItem;
         }
 
         private DetailedClothesListingItemViewModel CreateNewDetailedClothesitem(DetailedClothesListingItemViewModel existingDclivm)

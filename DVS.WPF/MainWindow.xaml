@@ -57,7 +57,7 @@
 
     <!--Background-->
     <Border CornerRadius="15 15 10 10"
-            Background="#524E4F"
+            Background="#433331"
             Padding="10">
         <Border.Effect>
             <DropShadowEffect Color="#000000"
