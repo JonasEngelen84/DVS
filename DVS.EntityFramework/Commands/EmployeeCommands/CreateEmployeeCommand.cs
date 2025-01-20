@@ -15,7 +15,7 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
             foreach (EmployeeClothesSize ecs in employee.Clothes)
             {
                 //context.Clothes.Attach(ecs.ClothesSize.Clothes);
-                context.ClothesSizes.Attach(ecs.ClothesSize);
+                //context.ClothesSizes.Attach(ecs.ClothesSize);
 
                 //var localClothes = context.Clothes.Local.FirstOrDefault(c => c.GuidId == ecs.ClothesSize.Clothes.GuidId);
                 //if (localClothes != null)

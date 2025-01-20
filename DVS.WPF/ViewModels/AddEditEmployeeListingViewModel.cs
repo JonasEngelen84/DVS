@@ -63,15 +63,26 @@ namespace DVS.WPF.ViewModels
 
             foreach (Clothes clothes in _clothesStore.Clothes)
             {
+                Clothes newClothes = new(Guid.NewGuid(),
+                                         clothes.Id,
+                                         clothes.Name,
+                                         clothes.Category,
+                                         clothes.Season,
+                                         clothes.Comment);
+
                 if (clothes.Sizes.Count == 0)
                 {
-                    _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(clothes, null));
+                    _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(newClothes, null));
                 }
                 else
                 {
-                    foreach (ClothesSize size in clothes.Sizes)
+                    foreach (ClothesSize cs in clothes.Sizes)
                     {
-                        _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(clothes, size));
+                        ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes,cs.Size,cs.Quantity,cs.Comment);
+
+                        newClothes.Sizes.Add(newClothesSize);
+
+                        _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(newClothes, newClothesSize));
                     }
                 }
             }

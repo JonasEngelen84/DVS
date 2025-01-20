@@ -8,15 +8,15 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
     {
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
-        public async Task Execute(ClothesSize updatedClothesSize)
+        public async Task Execute(ClothesSize clothesSize)
         {
-            using DVSDbContext context = _contextFactory.Create();
+            //using DVSDbContext context = _contextFactory.Create();
 
-            //context.Entry(updatedClothesSize.Clothes).State = EntityState.Modified;
-            //context.Sizes.Attach(updatedClothesSize.Size);
-            context.ClothesSizes.Add(updatedClothesSize);
+            ////context.Entry(updatedClothesSize.Clothes).State = EntityState.Modified;
+            ////context.Sizes.Attach(updatedClothesSize.Size);
+            //context.ClothesSizes.Add(clothesSize);
 
-            await context.SaveChangesAsync();
+            //await context.SaveChangesAsync();
         }
     }
 }

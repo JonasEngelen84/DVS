@@ -19,7 +19,7 @@ namespace DVS.EntityFramework.Migrations
 
             modelBuilder.Entity("DVS.Domain.Models.Category", b =>
                 {
-                    b.Property<Guid>("GuidID")
+                    b.Property<Guid>("GuidId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
@@ -27,97 +27,97 @@ namespace DVS.EntityFramework.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("GuidID");
+                    b.HasKey("GuidId");
 
                     b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
-                            GuidID = new Guid("8fa99cb7-2768-4425-a867-8e5f9af2c0a7"),
+                            GuidId = new Guid("0d653157-7994-4bfc-890e-dba17c56a613"),
                             Name = "-Kategorielos-"
                         },
                         new
                         {
-                            GuidID = new Guid("f18ffeef-f865-4b96-8a54-700668e3231f"),
+                            GuidId = new Guid("9a7e877d-a06a-4da8-a534-36788daa96b4"),
                             Name = "Handschuhe"
                         },
                         new
                         {
-                            GuidID = new Guid("6d99df2f-ae25-453e-9ddc-db137ba355ef"),
+                            GuidId = new Guid("5ed6e56c-a5ec-47f7-8f2c-7fad3ba0f43f"),
                             Name = "Hemd"
                         },
                         new
                         {
-                            GuidID = new Guid("d312da04-7adb-43b3-b06d-666d365378e2"),
+                            GuidId = new Guid("d381d2ab-670a-46c9-b3d4-d276d1047bf3"),
                             Name = "Hose"
                         },
                         new
                         {
-                            GuidID = new Guid("41950fdb-c8d8-4212-bc19-c8a2db1947c8"),
+                            GuidId = new Guid("024a8684-918f-400a-96da-b59c8d4dfaa9"),
                             Name = "Jacke"
                         },
                         new
                         {
-                            GuidID = new Guid("e15ed144-3a26-47f7-8e37-cef2b6c0af02"),
+                            GuidId = new Guid("43d35db8-7a03-48cd-95ef-cd69ffbf19aa"),
                             Name = "Kopfbedeckung"
                         },
                         new
                         {
-                            GuidID = new Guid("f503e475-ecfe-41d8-a428-e50d95e6c020"),
+                            GuidId = new Guid("7f61a8a4-9b00-448c-8e2c-064441103f53"),
                             Name = "Pullover"
                         },
                         new
                         {
-                            GuidID = new Guid("a5590588-b87a-4097-8882-3839e3c9a33e"),
+                            GuidId = new Guid("e986c8e7-e2a5-492a-88a9-5db713ccb212"),
                             Name = "Schuhwerk"
                         },
                         new
                         {
-                            GuidID = new Guid("cde7cce7-0f42-4a71-aa08-ff081caaff66"),
+                            GuidId = new Guid("8cf80357-d4c6-49b2-8c38-6bd7a34ce607"),
                             Name = "Shirt"
                         });
                 });
 
             modelBuilder.Entity("DVS.Domain.Models.Clothes", b =>
                 {
-                    b.Property<Guid>("GuidID")
+                    b.Property<Guid>("GuidId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("CategoryGuidID")
+                    b.Property<Guid>("CategoryGuidId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ID")
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("SeasonGuidID")
+                    b.Property<Guid>("SeasonGuidId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("GuidID");
+                    b.HasKey("GuidId");
 
-                    b.HasIndex("CategoryGuidID");
+                    b.HasIndex("CategoryGuidId");
 
-                    b.HasIndex("SeasonGuidID");
+                    b.HasIndex("SeasonGuidId");
 
                     b.ToTable("Clothes");
                 });
 
             modelBuilder.Entity("DVS.Domain.Models.ClothesSize", b =>
                 {
-                    b.Property<Guid>("GuidID")
+                    b.Property<Guid>("GuidId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("ClothesGuidID")
+                    b.Property<Guid>("ClothesGuidId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Comment")
@@ -127,21 +127,21 @@ namespace DVS.EntityFramework.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("SizeGuidID")
+                    b.Property<Guid>("SizeGuidId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("GuidID");
+                    b.HasKey("GuidId");
 
-                    b.HasIndex("ClothesGuidID");
+                    b.HasIndex("ClothesGuidId");
 
-                    b.HasIndex("SizeGuidID");
+                    b.HasIndex("SizeGuidId");
 
                     b.ToTable("ClothesSizes");
                 });
 
             modelBuilder.Entity("DVS.Domain.Models.Employee", b =>
                 {
-                    b.Property<Guid>("GuidID")
+                    b.Property<Guid>("GuidId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
@@ -153,49 +153,49 @@ namespace DVS.EntityFramework.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ID")
+                    b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Lastname")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("GuidID");
+                    b.HasKey("GuidId");
 
                     b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("DVS.Domain.Models.EmployeeClothesSize", b =>
                 {
-                    b.Property<Guid>("GuidID")
+                    b.Property<Guid>("GuidId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("ClothesSizeGuidID")
+                    b.Property<Guid>("ClothesSizeGuidId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Comment")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("EmployeeGuidID")
+                    b.Property<Guid>("EmployeeGuidId")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("GuidID");
+                    b.HasKey("GuidId");
 
-                    b.HasIndex("ClothesSizeGuidID");
+                    b.HasIndex("ClothesSizeGuidId");
 
-                    b.HasIndex("EmployeeGuidID");
+                    b.HasIndex("EmployeeGuidId");
 
                     b.ToTable("EmployeeClothesSizes");
                 });
 
             modelBuilder.Entity("DVS.Domain.Models.Season", b =>
                 {
-                    b.Property<Guid>("GuidID")
+                    b.Property<Guid>("GuidId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
@@ -203,31 +203,31 @@ namespace DVS.EntityFramework.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("GuidID");
+                    b.HasKey("GuidId");
 
                     b.ToTable("Seasons");
 
                     b.HasData(
                         new
                         {
-                            GuidID = new Guid("f880adef-9443-4267-a481-0a508832337d"),
+                            GuidId = new Guid("85d1fd0c-4c3b-459f-afee-8d0cac26ae72"),
                             Name = "-Saisonlos-"
                         },
                         new
                         {
-                            GuidID = new Guid("f6935950-0bef-4b65-97e7-d0be6d211bda"),
+                            GuidId = new Guid("231b8532-c480-4000-93e5-614288a7899c"),
                             Name = "Sommer"
                         },
                         new
                         {
-                            GuidID = new Guid("8b7bcb99-e930-4b87-9f22-c95851768b0d"),
+                            GuidId = new Guid("5eeb0438-36b8-46c5-8338-02c3704fe5b6"),
                             Name = "Winter"
                         });
                 });
 
             modelBuilder.Entity("DVS.Domain.Models.SizeModel", b =>
                 {
-                    b.Property<Guid>("GuidID")
+                    b.Property<Guid>("GuidId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
@@ -244,14 +244,14 @@ namespace DVS.EntityFramework.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("GuidID");
+                    b.HasKey("GuidId");
 
                     b.ToTable("Sizes");
 
                     b.HasData(
                         new
                         {
-                            GuidID = new Guid("7f3c5678-d81b-4c24-a4ed-42f49276980c"),
+                            GuidId = new Guid("0342e65f-021b-4dca-892e-dcb51657313d"),
                             IsSelected = false,
                             IsSizeSystemEU = true,
                             Quantity = 0,
@@ -259,7 +259,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("9ac6bccc-d7ac-4065-b7bc-7221cc3c4a6b"),
+                            GuidId = new Guid("5e9d37a4-1a86-49dd-bf00-41d6b0e9eee0"),
                             IsSelected = false,
                             IsSizeSystemEU = true,
                             Quantity = 0,
@@ -267,7 +267,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("069fc08a-7fb5-4186-a354-ae04ba323c5f"),
+                            GuidId = new Guid("62413ba1-55ba-4696-8f98-70d440f36e9f"),
                             IsSelected = false,
                             IsSizeSystemEU = true,
                             Quantity = 0,
@@ -275,7 +275,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("8bea5e4c-f6a5-4155-b444-36e54132c9d0"),
+                            GuidId = new Guid("5bcd8a4f-a6ac-4111-a183-37b1115e6dc2"),
                             IsSelected = false,
                             IsSizeSystemEU = true,
                             Quantity = 0,
@@ -283,7 +283,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("ce89381f-4962-4747-aad7-148acd1b7e91"),
+                            GuidId = new Guid("da13581c-8ca4-4ce5-a5a2-ca997f37a245"),
                             IsSelected = false,
                             IsSizeSystemEU = true,
                             Quantity = 0,
@@ -291,7 +291,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("a4af240f-2ba9-48c7-9f6a-2f4b717e5bd5"),
+                            GuidId = new Guid("717f2e3e-76c3-46fa-9037-6b92bc425376"),
                             IsSelected = false,
                             IsSizeSystemEU = true,
                             Quantity = 0,
@@ -299,7 +299,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("fb444f83-9105-4581-adb1-473e7b002ea8"),
+                            GuidId = new Guid("0182e323-596e-4483-868c-4319e77c57f7"),
                             IsSelected = false,
                             IsSizeSystemEU = true,
                             Quantity = 0,
@@ -307,7 +307,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("5d707730-97c8-4ebd-abd4-98e6d01378ee"),
+                            GuidId = new Guid("b0e06f57-1db5-44ad-b6d3-5c16a83355eb"),
                             IsSelected = false,
                             IsSizeSystemEU = true,
                             Quantity = 0,
@@ -315,7 +315,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("a107cb86-c893-46b0-a777-49ec49583e1f"),
+                            GuidId = new Guid("3a6d3378-1f73-48fc-adc6-183264693ecb"),
                             IsSelected = false,
                             IsSizeSystemEU = true,
                             Quantity = 0,
@@ -323,7 +323,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("4a4da98c-e5e9-4a54-ae56-ddaa70b45fa9"),
+                            GuidId = new Guid("8feb8759-40a7-447f-8f4e-8331536143cf"),
                             IsSelected = false,
                             IsSizeSystemEU = true,
                             Quantity = 0,
@@ -331,7 +331,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("4dd5978d-f378-40c9-8570-3750c300f565"),
+                            GuidId = new Guid("fcd325b7-c211-4631-bdec-0d68bc8e4127"),
                             IsSelected = false,
                             IsSizeSystemEU = false,
                             Quantity = 0,
@@ -339,7 +339,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("8b956627-e921-40dd-bf0a-7aa9e447583c"),
+                            GuidId = new Guid("24c3623d-9504-463b-a4b0-43abbdfe1b5d"),
                             IsSelected = false,
                             IsSizeSystemEU = false,
                             Quantity = 0,
@@ -347,7 +347,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("80dcb7af-117b-44dd-b9f6-30c3f4683337"),
+                            GuidId = new Guid("4821e399-0f25-48e4-bf2e-56888311dbf3"),
                             IsSelected = false,
                             IsSizeSystemEU = false,
                             Quantity = 0,
@@ -355,7 +355,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("e6616e1e-4d8a-4c8a-bba1-f07fb2f46e9d"),
+                            GuidId = new Guid("03c77177-1475-440c-8dc3-70aea07a1d01"),
                             IsSelected = false,
                             IsSizeSystemEU = false,
                             Quantity = 0,
@@ -363,7 +363,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("354871e6-787b-47a6-9bf3-13b8a5279274"),
+                            GuidId = new Guid("69e348ad-346e-448c-ad04-ce8718ff18e6"),
                             IsSelected = false,
                             IsSizeSystemEU = false,
                             Quantity = 0,
@@ -371,7 +371,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("a981d7ba-afa8-4b86-8b16-1b897936b1fe"),
+                            GuidId = new Guid("fae44f9e-d3f5-46b7-ab23-95bcf5b7de90"),
                             IsSelected = false,
                             IsSizeSystemEU = false,
                             Quantity = 0,
@@ -379,7 +379,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("c889d6e8-cf43-4441-aa0d-92cac46d3a57"),
+                            GuidId = new Guid("40e40599-4c16-4054-8062-7d1449ea506d"),
                             IsSelected = false,
                             IsSizeSystemEU = false,
                             Quantity = 0,
@@ -387,7 +387,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("9fe7bed4-5536-46eb-9354-8b7f91d7fea6"),
+                            GuidId = new Guid("f1ae5bac-36e5-4242-a07f-a64069e67b15"),
                             IsSelected = false,
                             IsSizeSystemEU = false,
                             Quantity = 0,
@@ -395,7 +395,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("b79dfe44-f682-48b9-a595-916e7376829d"),
+                            GuidId = new Guid("7e93df17-1cac-4ee5-a4b3-bac8b5b82a2f"),
                             IsSelected = false,
                             IsSizeSystemEU = false,
                             Quantity = 0,
@@ -403,7 +403,7 @@ namespace DVS.EntityFramework.Migrations
                         },
                         new
                         {
-                            GuidID = new Guid("211c1c92-80c2-4797-9bf0-dda630ade611"),
+                            GuidId = new Guid("3bf7cabe-9cbb-47a8-92d8-6e35227da24e"),
                             IsSelected = false,
                             IsSizeSystemEU = false,
                             Quantity = 0,
@@ -415,13 +415,13 @@ namespace DVS.EntityFramework.Migrations
                 {
                     b.HasOne("DVS.Domain.Models.Category", "Category")
                         .WithMany("Clothes")
-                        .HasForeignKey("CategoryGuidID")
+                        .HasForeignKey("CategoryGuidId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DVS.Domain.Models.Season", "Season")
                         .WithMany("Clothes")
-                        .HasForeignKey("SeasonGuidID")
+                        .HasForeignKey("SeasonGuidId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -434,13 +434,13 @@ namespace DVS.EntityFramework.Migrations
                 {
                     b.HasOne("DVS.Domain.Models.Clothes", "Clothes")
                         .WithMany("Sizes")
-                        .HasForeignKey("ClothesGuidID")
+                        .HasForeignKey("ClothesGuidId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DVS.Domain.Models.SizeModel", "Size")
                         .WithMany("ClothesSizes")
-                        .HasForeignKey("SizeGuidID")
+                        .HasForeignKey("SizeGuidId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -453,13 +453,13 @@ namespace DVS.EntityFramework.Migrations
                 {
                     b.HasOne("DVS.Domain.Models.ClothesSize", "ClothesSize")
                         .WithMany("EmployeeClothesSizes")
-                        .HasForeignKey("ClothesSizeGuidID")
+                        .HasForeignKey("ClothesSizeGuidId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DVS.Domain.Models.Employee", "Employee")
                         .WithMany("Clothes")
-                        .HasForeignKey("EmployeeGuidID")
+                        .HasForeignKey("EmployeeGuidId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

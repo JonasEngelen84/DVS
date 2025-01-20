@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DVS.WPF.Components.AddEditEmployeeNewEmployeeClothesList"
+﻿<UserControl x:Class="DVS.WPF.Components.AddEditEmployeeAvailableClothesListDragNDrop"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,13 +6,14 @@
              mc:Ignorable="d"
              DataContext="{Binding AddEditEmployeeListingViewModel}">
 
-    <ListView Height="120"
+    <ListView x:Name="AvailableClothesSizesListView"
+              Height="120"
               FontSize="10"
               Foreground="Black"
               Background="WhiteSmoke"
               AllowDrop="True"
               Drop="ClothesItemList_Drop"
-              ItemsSource="{Binding EmployeeClothesList}">
+              ItemsSource="{Binding AvailableClothesSizes}">
 
         <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
@@ -34,6 +35,9 @@
                 <GridViewColumn Header="Menge"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Quantity}" />
+                <GridViewColumn Header="Kommentar."
+                                Width="auto"
+                                DisplayMemberBinding="{Binding Comment}" />
             </GridView>
         </ListView.View>
     </ListView>

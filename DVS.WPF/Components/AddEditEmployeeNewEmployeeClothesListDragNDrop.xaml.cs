@@ -2,14 +2,13 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace DVS.WPF.Components
 {
-    public partial class AddEditEmployeeNewEmployeeClothesList : UserControl
+    public partial class AddEditEmployeeNewEmployeeClothesListDragNDrop : UserControl
     {
         public static readonly DependencyProperty IncomingClothesItemProperty =
-            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployeeNewEmployeeClothesList),
+            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployeeNewEmployeeClothesListDragNDrop),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object IncomingClothesItem
@@ -19,7 +18,7 @@ namespace DVS.WPF.Components
         }
 
         public static readonly DependencyProperty ClothesItemDropCommandProperty =
-            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployeeNewEmployeeClothesList),
+            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployeeNewEmployeeClothesListDragNDrop),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemDropCommand
@@ -29,7 +28,7 @@ namespace DVS.WPF.Components
         }
 
         public static readonly DependencyProperty ClothesItemRemovedCommandProperty =
-            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployeeNewEmployeeClothesList),
+            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployeeNewEmployeeClothesListDragNDrop),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemRemovedCommand
@@ -39,7 +38,7 @@ namespace DVS.WPF.Components
         }
 
 
-        public AddEditEmployeeNewEmployeeClothesList()
+        public AddEditEmployeeNewEmployeeClothesListDragNDrop()
         {
             InitializeComponent();
         }

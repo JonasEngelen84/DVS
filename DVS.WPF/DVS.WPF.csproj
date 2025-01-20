@@ -26,6 +26,7 @@
     <None Remove="Resources\Images\Plus.png" />
     <None Remove="Resources\Images\Rückgängig.png" />
     <None Remove="Resources\Images\Speichern.png" />
+    <None Remove="Resources\Images\Switch.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,6 +51,7 @@
     <Resource Include="Resources\Images\Minus.png" />
     <Resource Include="Resources\Images\Normalize.png" />
     <Resource Include="Resources\Images\Plus.png" />
+    <Resource Include="Resources\Images\Switch.png" />
   </ItemGroup>
 
   <ItemGroup>

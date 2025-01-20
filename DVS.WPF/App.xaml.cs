@@ -147,40 +147,32 @@ namespace DVS.WPF
                 .Build();
 
             //_dVSDbContextFactory = new(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
-
             //_getAllCategoriesQuery = new GetAllCategoriesQuery(_dVSDbContextFactory);
             //_createCategoryCommand = new CreateCategoryCommand(_dVSDbContextFactory);
             //_updateCategoryCommand = new UpdateCategoryCommand(_dVSDbContextFactory);
             //_deleteCategoryCommand = new DeleteCategoryCommand(_dVSDbContextFactory);
-
             //_getAllSeasonsQuery = new GetAllSeasonsQuery(_dVSDbContextFactory);
             //_createSeasonCommand = new CreateSeasonCommand(_dVSDbContextFactory);
             //_updateSeasonCommand = new UpdateSeasonCommand(_dVSDbContextFactory);
             //_deleteSeasonsCommand = new DeleteSeasonCommand(_dVSDbContextFactory);
-
             //_getAllClothesQuery = new GetAllClothesQuery(_dVSDbContextFactory);
             //_createClothesCommand = new CreateClothesCommand(_dVSDbContextFactory);
             //_updateClothesCommand = new UpdateClothesCommand(_dVSDbContextFactory);
             //_deleteClothesCommand = new DeleteClothesCommand(_dVSDbContextFactory);
-
             //_getAllEmployeesQuery = new GetAllEmployeesQuery(_dVSDbContextFactory);
             //_createEmployeeCommand = new CreateEmployeeCommand(_dVSDbContextFactory);
             //_updateEmployeeCommand = new UpdateEmployeeCommand(_dVSDbContextFactory);
             //_deleteEmployeeCommand = new DeleteEmployeeCommand(_dVSDbContextFactory);
-
             //_getAllClothesSizesQuery = new GetAllClothesSizesQuery(_dVSDbContextFactory);
             //_createClothesSizeCommand = new CreateClothesSizeCommand(_dVSDbContextFactory);
             //_updateClothesSizeCommand = new UpdateClothesSizeCommand(_dVSDbContextFactory);
             //_deleteClothesSizeCommand = new DeleteClothesSizeCommand(_dVSDbContextFactory);
-
             //_getAllEmployeeClothesSizesQuery = new GetAllEmployeeClothesSizesQuery(_dVSDbContextFactory);
             //_createEmployeeClothesSizeCommand = new CreateEmployeeClothesSizeCommand(_dVSDbContextFactory);
             //_updateEmployeeClothesSizeCommand = new UpdateEmployeeClothesSizeCommand(_dVSDbContextFactory);
             //_deleteEmployeeClothesSizeCommand = new DeleteEmployeeClothesSizeCommand(_dVSDbContextFactory);
-
             //_getAllSizesQuery = new GetAllSizesQuery(_dVSDbContextFactory);
             //_updateSizeCommand = new UpdateSizeCommand(_dVSDbContextFactory);
-
             //_modalNavigationStore = new();
             //_selectedDetailedClothesItemStore = new();
             //_selectedDetailedEmployeeClothesItemStore = new();
@@ -209,7 +201,6 @@ namespace DVS.WPF
             //                     _createEmployeeCommand,
             //                     _updateEmployeeCommand,
             //                     _deleteEmployeeCommand);
-
             //_addEditEmployeeListingViewModel = new(_clothesStore);
             //_dVSListingViewModel = DVSListingViewModel.LoadViewModel(_sizeStore,
             //                                                         _clothesStore,

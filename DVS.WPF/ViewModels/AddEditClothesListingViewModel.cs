@@ -69,7 +69,7 @@ namespace DVS.WPF.ViewModels
 
             CategoryStore_CategoriesLoaded();
             SeasonStore_SeasonsLoaded();
-            SizesLoaded();
+            LoadSizes();
 
             _categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded += CategoryStore_CategoryAdded;
@@ -83,7 +83,7 @@ namespace DVS.WPF.ViewModels
         }
 
 
-        private void SizesLoaded()
+        private void LoadSizes()
         {
             _availableSizesEU.Clear();
             _availableSizesUS.Clear();

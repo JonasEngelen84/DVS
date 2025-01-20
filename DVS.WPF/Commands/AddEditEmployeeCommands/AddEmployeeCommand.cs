@@ -34,6 +34,12 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             {
                 foreach (DetailedClothesListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
                 {
+                    ClothesSize newClothesSize = new(Guid.NewGuid(),
+                                                     dclivm.ClothesSize.Clothes,
+                                                     dclivm.ClothesSize.Size,
+                                                     dclivm.ClothesSize.Quantity,
+                                                     dclivm.ClothesSize.Comment);
+
                     EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), employee, dclivm.ClothesSize, (int)dclivm.Quantity, "");
                     employee.Clothes.Add(employeeClothesSize);
 
