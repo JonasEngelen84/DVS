@@ -19,7 +19,6 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         public override void Execute(object parameter)
         {
-            _addEditEmployeeListingViewModel.LoadEmployeeClothes(null);
             _addEditEmployeeListingViewModel.LoadAvailableSizes();
             _addEditEmployeeListingViewModel.ClearEditedClothesList();
 

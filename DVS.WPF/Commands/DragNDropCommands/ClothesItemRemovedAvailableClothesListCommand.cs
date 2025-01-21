@@ -11,7 +11,10 @@ namespace DVS.WPF.Commands.DragNDropCommands
         {
             CheckQuantity();
 
-            if (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity > 0)
+            if (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity == null)
+                ShowErrorMessageBox("Diese Bekleidung ist zur Zeit nicht vorrätig!", "Bekleidung nicht vorhanden");
+
+            else if (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity > 0)
             {
                 DetailedClothesListingItemViewModel editedDclivm = CreateNewDetailedClothesitem();
                 RemoveOrUpdateDclivm(editedDclivm);

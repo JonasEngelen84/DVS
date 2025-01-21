@@ -63,26 +63,26 @@ namespace DVS.WPF.ViewModels
 
             foreach (Clothes clothes in _clothesStore.Clothes)
             {
-                Clothes newClothes = new(Guid.NewGuid(),
-                                         clothes.Id,
-                                         clothes.Name,
-                                         clothes.Category,
-                                         clothes.Season,
-                                         clothes.Comment);
+                //Clothes newClothes = new(Guid.NewGuid(),
+                //                         clothes.Id,
+                //                         clothes.Name,
+                //                         clothes.Category,
+                //                         clothes.Season,
+                //                         clothes.Comment);
 
                 if (clothes.Sizes.Count == 0)
                 {
-                    _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(newClothes, null));
+                    _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(clothes, null));
                 }
                 else
                 {
-                    foreach (ClothesSize cs in clothes.Sizes)
+                    foreach (ClothesSize clothesSize in clothes.Sizes)
                     {
-                        ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes,cs.Size,cs.Quantity,cs.Comment);
+                        //ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes,cs.Size,cs.Quantity,cs.Comment);
 
-                        newClothes.Sizes.Add(newClothesSize);
+                        //newClothes.Sizes.Add(newClothesSize);
 
-                        _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(newClothes, newClothesSize));
+                        _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(clothes, clothesSize));
                     }
                 }
             }
@@ -91,16 +91,13 @@ namespace DVS.WPF.ViewModels
         private void AddItemToAvailableSizes(DetailedClothesListingItemViewModel detailedClothesItem) => _availableClothesSizes.Add(detailedClothesItem);
 
 
-        public void LoadEmployeeClothes(Employee? employee)
+        public void LoadEmployeeClothes(Employee employee)
         {
             _employeeClothesList.Clear();
 
-            if (employee != null)
+            foreach (EmployeeClothesSize clothes in employee.Clothes)
             {
-                foreach (EmployeeClothesSize clothes in employee.Clothes)
-                {
-                    _employeeClothesList.Add(new DetailedClothesListingItemViewModel(clothes.ClothesSize.Clothes, clothes.ClothesSize));
-                }
+                _employeeClothesList.Add(new DetailedClothesListingItemViewModel(clothes.ClothesSize.Clothes, clothes.ClothesSize));
             }
         }
 

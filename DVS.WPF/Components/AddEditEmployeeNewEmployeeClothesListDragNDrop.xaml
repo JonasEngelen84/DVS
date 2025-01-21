@@ -31,7 +31,10 @@
                 <GridViewColumn Header="Größe"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Size}" />
-                <GridViewColumn Header="Menge"
+                <GridViewColumn Header="Kommentar."
+                                Width="auto"
+                                DisplayMemberBinding="{Binding Comment}" />
+                <GridViewColumn Header="Gelagert"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Quantity}" />
             </GridView>

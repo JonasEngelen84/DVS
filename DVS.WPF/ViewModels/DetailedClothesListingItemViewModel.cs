@@ -2,21 +2,38 @@
 
 namespace DVS.WPF.ViewModels
 {
-    public class DetailedClothesListingItemViewModel(Clothes clothes, ClothesSize? clothesSize) : ViewModelBase
+    public class DetailedClothesListingItemViewModel : ViewModelBase
     {
-        public Clothes Clothes { get; private set; } = clothes;
+        public Clothes Clothes { get; private set; }
         public string Id => Clothes.Id;
         public string Name => Clothes.Name;
         public string Category => Clothes.Category.Name;
         public string Season => Clothes.Season.Name;
 
-        public ClothesSize? ClothesSize { get; private set; } = clothesSize;
+        public ClothesSize? ClothesSize { get; private set; }
         public Guid? ClothesSizeGuidId => ClothesSize?.GuidId ?? null;
         public string? Size => ClothesSize?.Size.Size ?? null;
-        public int? Quantity => ClothesSize?.Quantity ?? null;
         public string? Comment => ClothesSize?.Comment ?? "";
 
-        public bool HasError;
+        private int? _quantity;
+        public int? Quantity
+        {
+            get => _quantity;
+
+            set
+            {
+                _quantity = value;
+
+                OnPropertyChanged(nameof(Quantity));
+            }
+        }
+
+        public DetailedClothesListingItemViewModel(Clothes clothes, ClothesSize? clothesSize)
+        {
+            Clothes = clothes;
+            ClothesSize = clothesSize;
+            _quantity = ClothesSize?.Quantity ?? null;
+        }
 
         public void Update(Clothes clothes, ClothesSize? clothesSize)
         {
