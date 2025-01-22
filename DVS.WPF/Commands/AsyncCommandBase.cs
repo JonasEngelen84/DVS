@@ -34,7 +34,7 @@ namespace DVS.WPF.Commands
             }
             catch (Exception) 
             {
-                ShowErrorMessageBox("Auftretender Fehler!", "Error");
+                ShowErrorMessageBox("Auftretender Fehler!", "Error AsyncCommandBase");
             }
             finally
             {

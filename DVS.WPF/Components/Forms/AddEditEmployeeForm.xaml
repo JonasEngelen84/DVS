@@ -36,14 +36,15 @@
         <!-- Label-Bekleidung hinzufügen & Switch-Button -->
         <StackPanel Orientation="Horizontal"
                     Margin="-4 10 0 5">
-            <!-- Label-Bekleidung hinzufügen -->
+
             <Label Content="Bekleidung hinzufügen:"
                    FontSize="14"
                    FontWeight="Bold" />
 
             <Button Margin="65 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
-                    Click="SwitchAvailableClothesListViewClick">
+                    Click="SwitchAvailableClothesListViewClick"
+                    Visibility="Hidden">
                 <Image Source="/Resources/Images/Switch.png"
                        HorizontalAlignment="Center"/>
             </Button>

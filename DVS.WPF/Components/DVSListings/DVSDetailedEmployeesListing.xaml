@@ -33,7 +33,7 @@
                                 DisplayMemberBinding="{Binding Size}" />
                 <GridViewColumn Header="Menge"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding Quantity}" />
+                                DisplayMemberBinding="{Binding EmployeeClothesSize.Quantity}" />
                 <GridViewColumn Header="Kommentar"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Comment}" />

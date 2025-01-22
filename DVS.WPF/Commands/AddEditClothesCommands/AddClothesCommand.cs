@@ -17,6 +17,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditClothesFormViewModel addClothesFormViewModel = _addClothesViewModel.AddEditClothesFormViewModel;
+
             addClothesFormViewModel.HasError = false;
             addClothesFormViewModel.IsSubmitting = true;
 

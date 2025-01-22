@@ -43,17 +43,12 @@ namespace DVS.WPF.Components
             InitializeComponent();
         }
 
-        //private bool _canMove;
 
         private void ClothesItem_MouseMove(object sender, MouseEventArgs e)
         {
-            //_canMove = true;
-
             if (e.LeftButton == MouseButtonState.Pressed && sender is FrameworkElement frameworkElement)
             {
                 object ClothesItem = frameworkElement.DataContext;
-
-                //_canMove = false;
 
                 DragDropEffects dragDropResult = DragDrop.DoDragDrop(frameworkElement,
                     new DataObject(DataFormats.Serializable, ClothesItem),
@@ -70,21 +65,12 @@ namespace DVS.WPF.Components
         {
             if (e.Data.GetData(DataFormats.Serializable) is DetailedClothesListingItemViewModel ClothesItem)
             {
-                //var sourceList = e.Source as ListView;
-
                 if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {
                     IncomingClothesItem = e.Data.GetData(DataFormats.Serializable);
                     AddClothesItem(ClothesItem);
                     ClothesItemRemovedCommand?.Execute(null);
                 }
-
-                //if (_canMove)
-                //{
-                    
-                //}
-
-                //_canMove = true;
             }
         }
 

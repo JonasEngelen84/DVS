@@ -30,7 +30,7 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        public List<Clothes> EditedClothesList { get; } = [];
+        public List<DetailedClothesListingItemViewModel> EditedClothesList { get; } = [];
 
         private readonly ClothesStore _clothesStore;
 
@@ -63,13 +63,6 @@ namespace DVS.WPF.ViewModels
 
             foreach (Clothes clothes in _clothesStore.Clothes)
             {
-                //Clothes newClothes = new(Guid.NewGuid(),
-                //                         clothes.Id,
-                //                         clothes.Name,
-                //                         clothes.Category,
-                //                         clothes.Season,
-                //                         clothes.Comment);
-
                 if (clothes.Sizes.Count == 0)
                 {
                     _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(clothes, null));
@@ -78,10 +71,6 @@ namespace DVS.WPF.ViewModels
                 {
                     foreach (ClothesSize clothesSize in clothes.Sizes)
                     {
-                        //ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes,cs.Size,cs.Quantity,cs.Comment);
-
-                        //newClothes.Sizes.Add(newClothesSize);
-
                         _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(clothes, clothesSize));
                     }
                 }
