@@ -67,7 +67,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
             DetailedClothesListingItemViewModel? existingDclivm = _addEditEmployeeListingViewModel.EditedClothesList
                 .FirstOrDefault(dclivm => dclivm.ClothesSize?.GuidId == _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSize?.GuidId);
 
-            if (existingDclivm == null)
+            if (existingDclivm != null)
                 existingDclivm.Quantity += 1;
             else
             {

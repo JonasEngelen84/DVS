@@ -8,7 +8,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         public override void Execute(object parameter)
         {
-            CheckQuantity();
+            //CheckQuantity();
 
             if (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity > 0)
             {

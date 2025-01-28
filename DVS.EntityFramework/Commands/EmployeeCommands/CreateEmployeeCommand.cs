@@ -14,6 +14,7 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
 
             foreach (EmployeeClothesSize ecs in employee.Clothes)
             {
+                context.Categories.Attach(ecs.ClothesSize.Clothes.Category);
                 //context.Clothes.Attach(ecs.ClothesSize.Clothes);
                 //context.ClothesSizes.Attach(ecs.ClothesSize);
 
