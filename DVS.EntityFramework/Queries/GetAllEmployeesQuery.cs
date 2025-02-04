@@ -14,7 +14,23 @@ namespace DVS.EntityFramework.Queries
             using DVSDbContext context = _dVSDbContextFactory.Create();
 
             var actualEmployee = await context.Employees
-                .Include(s => s.Clothes)
+                .Include(e => e.Clothes)
+                    .ThenInclude(ecs => ecs.ClothesSize)
+                        .ThenInclude(cs => cs.Clothes)
+                .Include(e => e.Clothes)
+                    .ThenInclude(ecs => ecs.ClothesSize)
+                        .ThenInclude(cs => cs.Clothes)
+                .Include(e => e.Clothes)
+                    .ThenInclude(ecs => ecs.ClothesSize)
+                        .ThenInclude(cs => cs.Clothes)
+                            .ThenInclude(c => c.Category)
+                .Include(e => e.Clothes)
+                    .ThenInclude(ecs => ecs.ClothesSize)
+                        .ThenInclude(cs => cs.Clothes)
+                            .ThenInclude(c => c.Season)
+                .Include(e => e.Clothes)
+                    .ThenInclude(ecs => ecs.ClothesSize)
+                        .ThenInclude(cs => cs.Size)
                 .ToListAsync();
 
             return actualEmployee;

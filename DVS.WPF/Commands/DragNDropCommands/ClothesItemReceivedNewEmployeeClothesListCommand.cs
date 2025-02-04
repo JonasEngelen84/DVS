@@ -13,10 +13,9 @@ namespace DVS.WPF.Commands.DragNDropCommands
         public override void Execute(object parameter)
         {
             if (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity > 0)
-            {
-                DetailedClothesListingItemViewModel? existingDclivm = _addEditEmployeeListingViewModel.EmployeeClothesList
-                    .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSizeGuidId);
-                
+            {                
+                DetailedClothesListingItemViewModel? existingDclivm = _addEditEmployeeListingViewModel.GetClothesSizeFrom_employeeClothesSizes();
+
                 if (existingDclivm != null)
                     existingDclivm.Quantity += 1;
                 else

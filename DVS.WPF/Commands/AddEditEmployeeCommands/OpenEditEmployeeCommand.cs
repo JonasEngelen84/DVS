@@ -35,9 +35,9 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         {
             Employee employee = _employeeListingItemViewModel.Employee;
 
-            _addEditEmployeeListingViewModel.LoadEmployeeClothes(employee);
+            _addEditEmployeeListingViewModel.ClearLists();
             _addEditEmployeeListingViewModel.LoadAvailableSizes();
-            _addEditEmployeeListingViewModel.ClearEditedClothesList();
+            _addEditEmployeeListingViewModel.LoadEmployeeClothes(employee);
 
             EditEmployeeViewModel EditEmployeeViewModel = new(employee,
                                                               _employeeStore,

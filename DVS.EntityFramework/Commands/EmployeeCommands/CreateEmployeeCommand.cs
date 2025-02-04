@@ -15,20 +15,8 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
             foreach (EmployeeClothesSize ecs in employee.Clothes)
             {
                 context.Categories.Attach(ecs.ClothesSize.Clothes.Category);
-                //context.Clothes.Attach(ecs.ClothesSize.Clothes);
                 //context.ClothesSizes.Attach(ecs.ClothesSize);
-
-                //var localClothes = context.Clothes.Local.FirstOrDefault(c => c.GuidId == ecs.ClothesSize.Clothes.GuidId);
-                //if (localClothes != null)
-                //{
-                //    context.Entry(localClothes).State = EntityState.Detached;
-                //}
-
-                //var localClothesSize = context.ClothesSizes.Local.FirstOrDefault(cs => cs.GuidId == ecs.ClothesSize.GuidId);
-                //if (localClothesSize != null)
-                //{
-                //    context.Entry(localClothesSize).State = EntityState.Detached;
-                //}
+                //context.Clothes.Attach(ecs.ClothesSize.Clothes);
             }
 
             context.Employees.Add(employee);

@@ -3,24 +3,27 @@
 namespace DVS.WPF.Commands.DragNDropCommands
 {
     class ClothesItemReceivedAvailableClothesListCommand(AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-                                                         Action<DetailedClothesListingItemViewModel> addItemToAvailableClothesList)
+                                                         Action<DetailedClothesListingItemViewModel> addItemToAvailableClothesList,
+                                                         Action<DetailedClothesListingItemViewModel> addItemToEditedClothesList,
+                                                         Action<DetailedClothesListingItemViewModel> removeItemFromEditedClothesList)
                                                          : CommandBase
     {
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
 
         public readonly Action<DetailedClothesListingItemViewModel> _addItemToAvailableClothesList = addItemToAvailableClothesList;
+        public readonly Action<DetailedClothesListingItemViewModel> _addItemToEditedClothesList = addItemToEditedClothesList;
+        public readonly Action<DetailedClothesListingItemViewModel> _removeItemFromEditedClothesList = removeItemFromEditedClothesList; 
 
         public override void Execute(object parameter)
         {
             DetailedClothesListingItemViewModel newDclivm;
 
-            DetailedClothesListingItemViewModel? existingClothes = _addEditEmployeeListingViewModel.AvailableClothesSizes
-                .FirstOrDefault(dclivm => dclivm.Clothes.GuidId == _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes.GuidId);
+            DetailedClothesListingItemViewModel? existingClothes = _addEditEmployeeListingViewModel.GetClothesFrom_availableClothesSizes();
 
             if (existingClothes != null)
             {
-                DetailedClothesListingItemViewModel? existingClothesSize = _addEditEmployeeListingViewModel.AvailableClothesSizes
-                    .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSizeGuidId);
+                
+                DetailedClothesListingItemViewModel? existingClothesSize = _addEditEmployeeListingViewModel.GetClothesSizeFrom_availableClothesSizes();
 
                 if (existingClothesSize != null)
                 {
@@ -42,11 +45,11 @@ namespace DVS.WPF.Commands.DragNDropCommands
                 if (Confirm($"Diese Bekleidung ist nicht Im Bestand.\nSoll ein neues Objekt dieser Bekleidung angelegt werden?" +
                 $"\nAndernfalls wird die zu entfernende Bekleidung gelöscht!", "Bekleidung nicht im Vorrat"))
                 {
-                    newDclivm = CreateNewDetailedClothesitem(_addEditEmployeeListingViewModel);
+                    //newDclivm = CreateNewDetailedClothesitem(_addEditEmployeeListingViewModel);
 
-                    _addItemToAvailableClothesList?.Invoke(CreateNewDetailedClothesitem(_addEditEmployeeListingViewModel));
+                    //_addItemToAvailableClothesList?.Invoke(CreateNewDetailedClothesitem(_addEditEmployeeListingViewModel));
 
-                    UpdateEditedClothesList(newDclivm);
+                    //UpdateEditedClothesList(newDclivm);
                 }
             }
         }
@@ -64,20 +67,18 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         private void UpdateEditedClothesList(DetailedClothesListingItemViewModel dclivm)
         {
-            DetailedClothesListingItemViewModel? existingDclivm = _addEditEmployeeListingViewModel.EditedClothesList
-                .FirstOrDefault(dclivm => dclivm.ClothesSize?.GuidId == _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSize?.GuidId);
+            DetailedClothesListingItemViewModel? existingClothesSize = _addEditEmployeeListingViewModel.GetClothesSizeFrom_editedClothesList();
 
-            if (existingDclivm != null)
-                existingDclivm.Quantity += 1;
-            else
+            if (existingClothesSize == null)
             {
-                DetailedClothesListingItemViewModel newDclivm = new(dclivm.Clothes, dclivm.ClothesSize)
-                {
-                    Quantity = dclivm.Quantity
-                };
+                //DetailedClothesListingItemViewModel newDclivm = new(dclivm.Clothes, dclivm.ClothesSize)
+                //{
+                //    Quantity = dclivm.Quantity
+                //};
 
-                _addEditEmployeeListingViewModel.EditedClothesList.Add(newDclivm);
+                _addItemToEditedClothesList?.Invoke(dclivm);
             }
+            
         }
     }
 }
