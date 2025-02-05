@@ -56,13 +56,13 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 await CreateUpdateOrAddClothesSizesAsync(editClothesFormViewModel, updatedClothes, selectedSizes);
 
                 // Aktualisieren der Clothes-Liste von Category und Season
-                Clothes ClothesToRemove = updatedClothes.Category.Clothes.FirstOrDefault(c => c.GuidId == updatedClothes.GuidId);
-                updatedClothes.Category.Clothes.Remove(ClothesToRemove);
-                updatedClothes.Category.Clothes.Add(updatedClothes);
+                //Clothes ClothesToRemove = updatedClothes.Category.Clothes.FirstOrDefault(c => c.GuidId == updatedClothes.GuidId);
+                //updatedClothes.Category.Clothes.Remove(ClothesToRemove);
+                //updatedClothes.Category.Clothes.Add(updatedClothes);
 
-                ClothesToRemove = updatedClothes.Season.Clothes.FirstOrDefault(c => c.GuidId == updatedClothes.GuidId);
-                updatedClothes.Season.Clothes.Remove(ClothesToRemove);
-                updatedClothes.Season.Clothes.Add(updatedClothes);
+                //ClothesToRemove = updatedClothes.Season.Clothes.FirstOrDefault(c => c.GuidId == updatedClothes.GuidId);
+                //updatedClothes.Season.Clothes.Remove(ClothesToRemove);
+                //updatedClothes.Season.Clothes.Add(updatedClothes);
 
                 try
                 {

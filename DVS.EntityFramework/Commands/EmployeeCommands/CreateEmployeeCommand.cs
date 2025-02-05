@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Commands.EmployeeCommands;
 using DVS.Domain.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Commands.EmployeeCommands
 {
@@ -20,7 +19,6 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
             }
 
             context.Employees.Add(employee);
-
             await context.SaveChangesAsync();
         }
     }

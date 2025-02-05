@@ -4,15 +4,15 @@ namespace DVS.WPF.Commands.DragNDropCommands
 {
     class ClothesItemReceivedAvailableClothesListCommand(AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
                                                          Action<DetailedClothesListingItemViewModel> addItemToAvailableClothesList,
-                                                         Action<DetailedClothesListingItemViewModel> addItemToEditedClothesList,
-                                                         Action<DetailedClothesListingItemViewModel> removeItemFromEditedClothesList)
+                                                         Action<Guid> addItemToEditedClothesList,
+                                                         Action<Guid> removeItemFromEditedClothesList)
                                                          : CommandBase
     {
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
 
         public readonly Action<DetailedClothesListingItemViewModel> _addItemToAvailableClothesList = addItemToAvailableClothesList;
-        public readonly Action<DetailedClothesListingItemViewModel> _addItemToEditedClothesList = addItemToEditedClothesList;
-        public readonly Action<DetailedClothesListingItemViewModel> _removeItemFromEditedClothesList = removeItemFromEditedClothesList; 
+        public readonly Action<Guid> _addItemToEditedClothesList = addItemToEditedClothesList;
+        public readonly Action<Guid> _removeItemFromEditedClothesList = removeItemFromEditedClothesList; 
 
         public override void Execute(object parameter)
         {
@@ -29,7 +29,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
                 {
                     existingClothesSize.Quantity += 1;
 
-                    UpdateEditedClothesList(existingClothesSize);
+                    UpdateEditedClothesList(existingClothesSize.ClothesSize.GuidId);
                 }                    
                 else
                 {
@@ -37,7 +37,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
                     _addItemToAvailableClothesList?.Invoke(newDclivm);
 
-                    UpdateEditedClothesList(newDclivm);
+                    UpdateEditedClothesList(newDclivm.ClothesSize.GuidId);
                 }
             }
             else
@@ -65,9 +65,9 @@ namespace DVS.WPF.Commands.DragNDropCommands
             return newDclivm;
         }
 
-        private void UpdateEditedClothesList(DetailedClothesListingItemViewModel dclivm)
+        private void UpdateEditedClothesList(Guid guidId)
         {
-            DetailedClothesListingItemViewModel? existingClothesSize = _addEditEmployeeListingViewModel.GetClothesSizeFrom_editedClothesList();
+            Guid? existingClothesSize = _addEditEmployeeListingViewModel.GetClothesSizeFrom_editedClothesList();
 
             if (existingClothesSize == null)
             {
@@ -76,7 +76,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
                 //    Quantity = dclivm.Quantity
                 //};
 
-                _addItemToEditedClothesList?.Invoke(dclivm);
+                _addItemToEditedClothesList?.Invoke(guidId);
             }
             
         }

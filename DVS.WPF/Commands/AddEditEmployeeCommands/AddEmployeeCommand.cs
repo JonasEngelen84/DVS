@@ -21,37 +21,112 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         {
             AddEditEmployeeFormViewModel addEmployeeFormViewModel = _addEmployeeViewModel.AddEditEmployeeFormViewModel;
 
-            addEmployeeFormViewModel.HasError = false;
-            addEmployeeFormViewModel.IsSubmitting = true;
+            if (ExistingEmployeeId(addEmployeeFormViewModel) != null)
+                ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
+            else
+            {
+                addEmployeeFormViewModel.HasError = false;
+                addEmployeeFormViewModel.IsSubmitting = true;
 
-            Employee employee = new(Guid.NewGuid(),
-                                    addEmployeeFormViewModel.Id,
-                                    addEmployeeFormViewModel.Lastname,
-                                    addEmployeeFormViewModel.Firstname,
-                                    addEmployeeFormViewModel.Comment);
+                Employee newEmployee = CreateNewEmployee(addEmployeeFormViewModel);
+
+                await UpdateClothesSizes(newEmployee, addEmployeeFormViewModel);
+
+                //await UpdateClothes(addEmployeeFormViewModel);
+                
+                addEmployeeFormViewModel.IsSubmitting = false;
+
+                _modalNavigationStore.Close();
+            }
+        }
+
+        private Employee ExistingEmployeeId(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
+            Employee? existingEmployeeId = _employeeStore.Employees
+                .FirstOrDefault(e => e.Id == addEmployeeFormViewModel.Id);
+
+            return existingEmployeeId;
+        }
+
+        private static Employee CreateNewEmployee(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
+            Employee newEmployee = new(Guid.NewGuid(),
+                                       addEmployeeFormViewModel.Id,
+                                       addEmployeeFormViewModel.Lastname,
+                                       addEmployeeFormViewModel.Firstname,
+                                       addEmployeeFormViewModel.Comment);
 
             if (addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList != null)
             {
                 foreach (DetailedClothesListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
                 {
-                    EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), employee, dclivm.ClothesSize, (int)dclivm.Quantity, "");
-                    employee.Clothes.Add(employeeClothesSize);
+                    EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), newEmployee, dclivm.ClothesSize, (int)dclivm.Quantity, "");
+                    newEmployee.Clothes.Add(employeeClothesSize);
                 }
             }
 
+            return newEmployee;
+        }
+
+        private async Task UpdateClothesSizes(Employee newEmployee, AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
+            List<Guid> EditedClothes = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.GetAllEditedClothes();
+
             try
             {
-                await _employeeStore.Add(employee);
+                foreach (Guid clothesSizeGuidId in EditedClothes)
+                {
+                    ClothesSize? existingClothesSize = _clothesSizeStore.ClothesSizes
+                        .FirstOrDefault(cs => cs.GuidId == clothesSizeGuidId);
+
+                    if (existingClothesSize != null)
+                    {
+                        DetailedClothesListingItemViewModel? targetItem = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.AvailableClothesSizes
+                            .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == clothesSizeGuidId);
+
+                        ClothesSize editedClothesSize = new(existingClothesSize.GuidId,
+                                                            existingClothesSize.Clothes,
+                                                            existingClothesSize.Size,
+                                                            targetItem.Quantity,
+                                                            existingClothesSize.Comment)
+                        {
+                            EmployeeClothesSizes = []
+                        };
+
+                        await _clothesSizeStore.Update(editedClothesSize);
+                    }
+                }
+
+                await AddNewEmployee(newEmployee, addEmployeeFormViewModel);
             }
             catch
             {
-                ShowErrorMessageBox("Erstellen des Mitarbeiter ist fehlgeschlagen!", "AddEmployeeCommand");
+                ShowErrorMessageBox("Erstellen des Mitarbeiters ist fehlgeschlagen!", "AddEmployeeCommand, UpdateClothesSizes");
+
                 addEmployeeFormViewModel.HasError = true;
             }
-
-            addEmployeeFormViewModel.IsSubmitting = false;
-
-            _modalNavigationStore.Close();
         }
+
+        private async Task AddNewEmployee(Employee newEmployee, AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        {
+            try
+            {
+                await _employeeStore.Add(newEmployee);
+            }
+            catch
+            {
+                ShowErrorMessageBox("Erstellen des Mitarbeiters ist fehlgeschlagen!", "AddEmployeeCommand");
+
+                addEmployeeFormViewModel.HasError = true;
+            }
+        }
+        
+        //private async Task UpdateClothes(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        //{
+        //    foreach (DetailedClothesListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+        //    {
+
+        //    }
+        //}
     }
 }

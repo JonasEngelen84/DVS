@@ -10,9 +10,8 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
         public async Task Execute(ClothesSize clothesSize)
         {
             using DVSDbContext context = _contextFactory.Create();
-
+            context.ClothesSizes.Attach(clothesSize);
             context.ClothesSizes.Update(clothesSize);
-
             await context.SaveChangesAsync();
         }
     }

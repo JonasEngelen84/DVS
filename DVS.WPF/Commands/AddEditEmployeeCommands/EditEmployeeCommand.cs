@@ -103,7 +103,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                     EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), updatedEmployee, dclivm.ClothesSize, (int)dclivm.Quantity, null);
 
                     updatedEmployee.Clothes.Add(employeeClothesSize);
-                    dclivm.ClothesSize.EmployeeClothesSizes.Add(employeeClothesSize);
+                    //dclivm.ClothesSize.EmployeeClothesSizes.Add(employeeClothesSize);
 
                     try
                     {

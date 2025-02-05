@@ -19,7 +19,6 @@ namespace DVS.EntityFramework.Commands.ClothesCommands
             context.Categories.Attach(clothes.Category);
             context.Seasons.Attach(clothes.Season);
             context.Clothes.Add(clothes);
-
             await context.SaveChangesAsync();
         }
     }

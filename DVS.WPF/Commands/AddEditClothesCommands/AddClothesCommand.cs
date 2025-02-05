@@ -18,45 +18,53 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
         {
             AddEditClothesFormViewModel addClothesFormViewModel = _addClothesViewModel.AddEditClothesFormViewModel;
 
-            addClothesFormViewModel.HasError = false;
-            addClothesFormViewModel.IsSubmitting = true;
+            Clothes? existingClothes = _clothesStore.Clothes
+                .FirstOrDefault(c => c.Id == addClothesFormViewModel.Id);
 
-            Clothes newClothes = new(Guid.NewGuid(),
-                                     addClothesFormViewModel.Id,
-                                     addClothesFormViewModel.Name,
-                                     addClothesFormViewModel.Category,
-                                     addClothesFormViewModel.Season,
-                                     addClothesFormViewModel.Comment);
-
-            // Die vom User gewählten Größen/SizeModel auflisten
-            List <SizeModel> selectedSizes = (addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                ? addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                : addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
-                .ToList();
-
-            if (selectedSizes != null)
+            if (existingClothes != null)
+                ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
+            else
             {
-                foreach (SizeModel size in selectedSizes)
+                addClothesFormViewModel.HasError = false;
+                addClothesFormViewModel.IsSubmitting = true;
+
+                Clothes newClothes = new(Guid.NewGuid(),
+                                         addClothesFormViewModel.Id,
+                                         addClothesFormViewModel.Name,
+                                         addClothesFormViewModel.Category,
+                                         addClothesFormViewModel.Season,
+                                         addClothesFormViewModel.Comment);
+
+                // Die vom User gewählten Größen/SizeModel auflisten
+                List<SizeModel> selectedSizes = (addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+                    ? addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
+                    : addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
+                    .ToList();
+
+                if (selectedSizes != null)
                 {
-                    ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size, size.Quantity, "");
-                    newClothes.Sizes.Add(newClothesSize);
+                    foreach (SizeModel size in selectedSizes)
+                    {
+                        ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size, size.Quantity, "");
+                        newClothes.Sizes.Add(newClothesSize);
+                    }
                 }
-            }
 
-            try
-            {
-                await _clothesStore.Add(newClothes);
-            }
-            catch (Exception)
-            {
-                ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!", "AddClothesCommand CreateAndAddNewClothesAsync");
+                try
+                {
+                    await _clothesStore.Add(newClothes);
+                }
+                catch (Exception)
+                {
+                    ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!", "AddClothesCommand CreateAndAddNewClothesAsync");
 
-                addClothesFormViewModel.HasError = true;
-            }
+                    addClothesFormViewModel.HasError = true;
+                }
 
-            addClothesFormViewModel.IsSubmitting = false;
+                addClothesFormViewModel.IsSubmitting = false;
 
-            _modalNavigationStore.Close();
+                _modalNavigationStore.Close();
+            }            
         }
     }
 }

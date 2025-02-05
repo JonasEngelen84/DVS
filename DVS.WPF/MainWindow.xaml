@@ -134,8 +134,6 @@
                                    HorizontalAlignment="Center" />
                         </Button>
                     </StackPanel>
-
-
                 </Grid>
             </Border>
 
@@ -146,14 +144,14 @@
                 <ContentControl Content="{Binding CurrentModalViewModel}" />
             </custom:Modal>
 
+            <views:DVSHeadView x:Name="HeadView"
+                               Grid.Row="1"
+                               Margin="0,3,0,0"/>
+
             <views:DVSDetailedView x:Name="DetailedView"
                                    Grid.Row="1"
                                    Margin="0,3,0,0"
                                    Visibility="Hidden" />
-
-            <views:DVSHeadView x:Name="HeadView"
-                               Grid.Row="1"
-                               Margin="0,3,0,0"/>
 
         </Grid>
     </Border>
