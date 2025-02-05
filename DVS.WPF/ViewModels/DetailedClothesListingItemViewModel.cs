@@ -10,13 +10,13 @@ namespace DVS.WPF.ViewModels
         public string Category => Clothes.Category.Name;
         public string Season => Clothes.Season.Name;
 
-        public ClothesSize? ClothesSize { get; private set; }
+        public ClothesSize ClothesSize { get; private set; }
         public Guid? ClothesSizeGuidId => ClothesSize?.GuidId ?? null;
         public string? Size => ClothesSize?.Size.Size ?? null;
         public string? Comment => ClothesSize?.Comment ?? "";
 
-        private int? _quantity;
-        public int? Quantity
+        private int _quantity;
+        public int Quantity
         {
             get => _quantity;
 
@@ -32,7 +32,7 @@ namespace DVS.WPF.ViewModels
         {
             Clothes = clothes;
             ClothesSize = clothesSize;
-            _quantity = ClothesSize?.Quantity ?? null;
+            _quantity = ClothesSize.Quantity;
         }
 
         public void Update(Clothes clothes, ClothesSize? clothesSize)

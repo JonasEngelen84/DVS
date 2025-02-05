@@ -20,7 +20,7 @@
         <!-- Topping Item -->
         <Border Grid.Row="0"
                 TextBlock.FontSize="14"
-                Background="AliceBlue"
+                Background="white"
                 Padding="5"
                 CornerRadius="10 10 0 0"
                 SnapsToDevicePixels="True">
@@ -81,7 +81,7 @@
         <!-- Bottom Item -->
         <Border Grid.Row="2"
                 TextBlock.FontSize="14"
-                Background="AliceBlue"
+                Background="White"
                 Padding="5"
                 CornerRadius="0 0 10 10"
                 SnapsToDevicePixels="True">

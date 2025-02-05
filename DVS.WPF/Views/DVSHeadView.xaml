@@ -13,10 +13,10 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <!--AddEmployee/AddClothes Button & Images-->
+        <!--AddEmployee/AddClothes Button-->
         <Grid Grid.Row="0">
             
-            <!--AddEmployee Button & Image-->
+            <!--AddEmployee Button-->
             <Button Margin="5 0 0 0"
                     HorizontalAlignment="Left"
                     Style="{StaticResource EditComboBoxButtonStyle}"
@@ -26,7 +26,7 @@
                        HorizontalAlignment="Center" />
             </Button>
 
-            <!--AddClothes Button & Image-->
+            <!--AddClothes Button-->
             <Button Margin="5 0 0 0"
                     HorizontalAlignment="Right"
                     Style="{StaticResource EditComboBoxButtonStyle}"

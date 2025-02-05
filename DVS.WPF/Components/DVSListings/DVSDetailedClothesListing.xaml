@@ -6,9 +6,9 @@
              mc:Ignorable="d"
              DataContext="{Binding DVSListingViewModel}">
 
-    <ListView FontSize="12"
+    <ListView FontSize="14"
               Foreground="#FF212129"
-              Background="WhiteSmoke"
+              Background="lightgray"
               ItemsSource="{Binding DetailedClothesListingItemCollection}"
               SelectedItem="{Binding SelectedDetailedClothesItem}">
         <ListView.View>

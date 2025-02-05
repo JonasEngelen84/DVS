@@ -14,7 +14,7 @@ namespace DVS.WPF.ViewModels
         private readonly ObservableCollection<DetailedClothesListingItemViewModel> _employeeClothesList = [];
         public IEnumerable<DetailedClothesListingItemViewModel> EmployeeClothesList => _employeeClothesList;
 
-        private readonly List<DetailedClothesListingItemViewModel> _editedClothesList = [];
+        private List<Guid> EditedClothesList = [];
 
         private DetailedClothesListingItemViewModel _selectedDetailedClothesItem;
         public DetailedClothesListingItemViewModel SelectedDetailedClothesItem
@@ -53,7 +53,7 @@ namespace DVS.WPF.ViewModels
 
         public void ClearLists()
         {
-            _editedClothesList.Clear();
+            EditedClothesList.Clear();
             _employeeClothesList.Clear();
             _availableClothesSizes.Clear();
         }
@@ -94,7 +94,10 @@ namespace DVS.WPF.ViewModels
         {
             foreach (EmployeeClothesSize clothes in employee.Clothes)
             {
-                _employeeClothesList.Add(new DetailedClothesListingItemViewModel(clothes.ClothesSize.Clothes, clothes.ClothesSize));
+                _employeeClothesList.Add(new DetailedClothesListingItemViewModel(clothes.ClothesSize.Clothes, clothes.ClothesSize)
+                {
+                    Quantity = clothes.Quantity
+                });
             }
         }
 
@@ -117,16 +120,23 @@ namespace DVS.WPF.ViewModels
         }
 
 
-        public DetailedClothesListingItemViewModel GetClothesSizeFrom_editedClothesList()
+        public Guid? GetClothesSizeFrom_editedClothesList()
         {
-            return _editedClothesList.FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == SelectedDetailedClothesItem.ClothesSizeGuidId);
+            var found = EditedClothesList.FirstOrDefault(guid => guid == SelectedDetailedClothesItem.ClothesSizeGuidId);
+
+            return found == default ? (Guid?)null : found;
         }
 
-        private void AddEditedClothesList(DetailedClothesListingItemViewModel detailedClothesItem) => _editedClothesList.Add(detailedClothesItem);
-
-        private void RemoveEditedClothesList(DetailedClothesListingItemViewModel itemToRemove)
+        public List<Guid> GetAllEditedClothes()
         {
-            _editedClothesList.Remove(itemToRemove);
+            return EditedClothesList;
+        }
+
+        private void AddEditedClothesList(Guid ClothesSizeGuidId) => EditedClothesList.Add(ClothesSizeGuidId);
+
+        private void RemoveEditedClothesList(Guid GuidIdToRemove)
+        {
+            EditedClothesList.Remove(GuidIdToRemove);
         }
     }
 }
