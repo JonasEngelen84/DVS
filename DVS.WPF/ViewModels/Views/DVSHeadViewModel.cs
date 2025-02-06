@@ -25,7 +25,8 @@ namespace DVS.WPF.ViewModels.Views
                                                                               employeeStore,
                                                                               clothesStore,
                                                                               clothesSizeStore,
-                                                                              modalNavigationStore);
+                                                                              modalNavigationStore,
+                                                                              dVSListingViewModel);
 
         public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(modalNavigationStore,
                                                                             sizeStore,

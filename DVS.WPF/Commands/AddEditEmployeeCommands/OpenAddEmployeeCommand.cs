@@ -8,7 +8,8 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                                         EmployeeStore employeeStore,
                                         ClothesStore clothesStore,
                                         ClothesSizeStore clothesSizeStore,
-                                        ModalNavigationStore modalNavigationStore)
+                                        ModalNavigationStore modalNavigationStore,
+                                        DVSListingViewModel dVSListingViewModel)
                                         : CommandBase
     {
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
@@ -26,7 +27,8 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                                                             _employeeStore,
                                                             _clothesStore,
                                                             _clothesSizeStore,
-                                                            _modalNavigationStore);
+                                                            _modalNavigationStore,
+                                                            dVSListingViewModel);
 
             _modalNavigationStore.CurrentViewModel = addEmployeeViewModel;
         }

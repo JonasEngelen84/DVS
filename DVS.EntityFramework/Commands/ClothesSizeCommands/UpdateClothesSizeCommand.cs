@@ -1,5 +1,6 @@
 ﻿using DVS.Domain.Commands.ClothesSizeCommands;
 using DVS.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Commands.ClothesSizeCommands
 {
@@ -10,8 +11,19 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
         public async Task Execute(ClothesSize clothesSize)
         {
             using DVSDbContext context = _contextFactory.Create();
-            context.ClothesSizes.Attach(clothesSize);
-            context.ClothesSizes.Update(clothesSize);
+
+            var existingClothesSize = await context.ClothesSizes
+                .FirstOrDefaultAsync(cs => cs.GuidId == clothesSize.GuidId);
+
+            if (existingClothesSize != null)
+            {
+                context.Entry(existingClothesSize).CurrentValues.SetValues(clothesSize);
+            }
+            else
+            {
+                context.ClothesSizes.Add(clothesSize);
+            }
+
             await context.SaveChangesAsync();
         }
     }

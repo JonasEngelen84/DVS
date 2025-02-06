@@ -42,6 +42,7 @@ namespace DVS.WPF.ViewModels
             if (clothesSize != null)
             {
                 ClothesSize = clothesSize;
+                _quantity = clothesSize.Quantity;
             }
 
             OnPropertyChanged(nameof(Id));

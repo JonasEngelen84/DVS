@@ -56,7 +56,8 @@ namespace DVS.WPF.ViewModels.Views
                                                                               employeeStore,
                                                                               clothesStore,
                                                                               clothesSizeStore,
-                                                                              modalNavigationStore);
+                                                                              modalNavigationStore,
+                                                                              dVSListingViewModel);
 
         public ICommand OpenEditDetailedItem { get; } = new OpenEditDetailedItemCommand(_selectedDetailedClothesItemStore,
                                                                                         _selectedDetailedEmployeeClothesItemStore,

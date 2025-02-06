@@ -9,13 +9,15 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
     public class AddEmployeeCommand(AddEmployeeViewModel addEmployeeViewModel,
                                     EmployeeStore employeeStore,
                                     ClothesSizeStore clothesSizeStore,
-                                    ModalNavigationStore modalNavigationStore)
+                                    ModalNavigationStore modalNavigationStore,
+                                    DVSListingViewModel dVSListingViewModel)
                                     : AsyncCommandBase
     {
         private readonly AddEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
         private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
+        private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
 
         public override async Task ExecuteAsync(object parameter)
         {
@@ -94,6 +96,11 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                         };
 
                         await _clothesSizeStore.Update(editedClothesSize);
+
+                        DetailedClothesListingItemViewModel? dclivm = _dVSListingViewModel.DetailedClothesListingItemCollection
+                            .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == clothesSizeGuidId);
+
+                        dclivm?.Update(dclivm.Clothes, editedClothesSize);
                     }
                 }
 
