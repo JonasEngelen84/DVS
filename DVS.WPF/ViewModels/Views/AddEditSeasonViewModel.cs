@@ -1,4 +1,4 @@
-﻿using DVS.WPF.Commands.AddEditSeasonCommands;
+﻿using DVS.WPF.Commands.SeasonCommands;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using System.Windows.Input;

@@ -15,7 +15,7 @@ namespace DVS.WPF.ViewModels.Views
                                            CategoryStore categoryStore,
                                            SeasonStore seasonStore,
                                            ClothesSizeStore clothesSizeStore,
-                                           SelectedDetailedClothesItemStore selectedDetailedClothesItemStore,
+                                           SelectedClothesSizeStore selectedDetailedClothesItemStore,
                                            DVSListingViewModel dVSListingViewModel)
         {
             ICommand submitComment = new SubmitCommentClothesSizeCommand(this, clothesStore, categoryStore, seasonStore, clothesSizeStore, modalNavigationStore);
@@ -23,7 +23,7 @@ namespace DVS.WPF.ViewModels.Views
 
             CommentClothesSizeFormViewModel = new(submitComment, selectedDetailedClothesItemStore)
             {
-                Comment = selectedDetailedClothesItemStore.SelectedDetailedClothesItem.Comment
+                Comment = selectedDetailedClothesItemStore.SelectedClothesSize.Comment
             };
         }
     }

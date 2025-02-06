@@ -1,8 +1,8 @@
-﻿using DVS.WPF.Commands.AddEditClothesCommands;
-using DVS.Domain.Models;
+﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using DVS.WPF.Commands.ClothesCommands;
 
 namespace DVS.WPF.ViewModels.ListViewItems
 {

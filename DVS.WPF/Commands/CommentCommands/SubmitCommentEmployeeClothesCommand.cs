@@ -25,16 +25,16 @@ namespace DVS.WPF.Commands.CommentCommands
             commentEmployeeClothesFormViewModel.HasError = false;
             commentEmployeeClothesFormViewModel.IsSubmitting = true;
 
-            // Zu kommentierende EmployeeClothesSize speichern
-            EmployeeClothesSize employeeClothesSizeToComment = commentEmployeeClothesFormViewModel.Employee.Clothes
-                .FirstOrDefault(ecs => ecs.GuidId == commentEmployeeClothesFormViewModel.EmployeeClothesSizeGuidID);
+            //// Zu kommentierende EmployeeClothesSize speichern
+            //EmployeeClothesSize employeeClothesSizeToComment = commentEmployeeClothesFormViewModel.Employee.Clothes
+            //    .FirstOrDefault(ecs => ecs.GuidId == commentEmployeeClothesFormViewModel.EmployeeClothesSizeGuidID);
 
-            // Neues, kommentiertes, EmployeeClothesSize erstellen
-            EmployeeClothesSize commentedEmployeeClothesSize = new(employeeClothesSizeToComment.GuidId,
-                                                                   employeeClothesSizeToComment.Employee,
-                                                                   employeeClothesSizeToComment.ClothesSize,
-                                                                   employeeClothesSizeToComment.Quantity,
-                                                                   commentEmployeeClothesFormViewModel.Comment);
+            //// Neues, kommentiertes, EmployeeClothesSize erstellen
+            //EmployeeClothesSize commentedEmployeeClothesSize = new(employeeClothesSizeToComment.GuidId,
+            //                                                       employeeClothesSizeToComment.Employee,
+            //                                                       employeeClothesSizeToComment.ClothesSize,
+            //                                                       employeeClothesSizeToComment.Quantity,
+            //                                                       commentEmployeeClothesFormViewModel.Comment);
 
             // Sämtliche alten EmployeeClothesSizes aus ClothesSize-Liste und DB entfernen
             foreach (EmployeeClothesSize ecs in commentEmployeeClothesFormViewModel.Employee.Clothes)
@@ -54,12 +54,12 @@ namespace DVS.WPF.Commands.CommentCommands
             }
 
             // Altes EmployeeClothesSize entfernen und neues einfügen
-            commentedEmployeeClothesSize.Employee.Clothes.Remove(employeeClothesSizeToComment);
-            commentedEmployeeClothesSize.Employee.Clothes.Add(commentedEmployeeClothesSize);
+            //commentedEmployeeClothesSize.Employee.Clothes.Remove(employeeClothesSizeToComment);
+            //commentedEmployeeClothesSize.Employee.Clothes.Add(commentedEmployeeClothesSize);
 
             // Neues Clothes mit neuer Bekleidungs-Liste erstellen
             Employee updatedEmployee = new(commentEmployeeClothesFormViewModel.Employee.GuidId,
-                                          commentEmployeeClothesFormViewModel.EmployeeID,
+                                          commentEmployeeClothesFormViewModel.EmployeeId,
                                           commentEmployeeClothesFormViewModel.EmployeeLastname,
                                           commentEmployeeClothesFormViewModel.EmployeeFirstname,
                                           commentEmployeeClothesFormViewModel.Employee.Comment)

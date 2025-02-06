@@ -125,8 +125,8 @@ namespace DVS.WPF
                     services.AddSingleton<AddEditEmployeeListingViewModel>();
 
                     services.AddSingleton<ModalNavigationStore>();
-                    services.AddSingleton<SelectedDetailedClothesItemStore>();
-                    services.AddSingleton<SelectedDetailedEmployeeClothesItemStore>();
+                    services.AddSingleton<SelectedClothesSizeStore>();
+                    services.AddSingleton<SelectedEmployeeClothesSizeStore>();
                     services.AddSingleton<CategoryStore>();
                     services.AddSingleton<SeasonStore>();
                     services.AddSingleton<ClothesStore>();
@@ -276,8 +276,8 @@ namespace DVS.WPF
                 services.GetRequiredService<SeasonStore>(),
                 services.GetRequiredService<ClothesSizeStore>(),
                 services.GetRequiredService<EmployeeClothesSizesStore>(),
-                services.GetRequiredService<SelectedDetailedClothesItemStore>(),
-                services.GetRequiredService<SelectedDetailedEmployeeClothesItemStore>(),
+                services.GetRequiredService<SelectedClothesSizeStore>(),
+                services.GetRequiredService<SelectedEmployeeClothesSizeStore>(),
                 services.GetRequiredService<AddEditEmployeeListingViewModel>());
         }
     }

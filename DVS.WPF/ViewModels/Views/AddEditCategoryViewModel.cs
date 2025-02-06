@@ -1,4 +1,4 @@
-﻿using DVS.WPF.Commands.AddEditCategoryCommands;
+﻿using DVS.WPF.Commands.CategoryCommands;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using System.Windows.Input;

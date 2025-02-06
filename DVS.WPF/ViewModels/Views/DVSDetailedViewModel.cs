@@ -1,7 +1,7 @@
 ﻿using DVS.EntityFramework;
 using DVS.WPF.Commands;
-using DVS.WPF.Commands.AddEditClothesCommands;
-using DVS.WPF.Commands.AddEditEmployeeCommands;
+using DVS.WPF.Commands.EmployeeCommands;
+using DVS.WPF.Commands.ClothesCommands;
 using DVS.WPF.Commands.CommentCommands;
 using DVS.WPF.Stores;
 using System.Windows.Input;
@@ -17,8 +17,8 @@ namespace DVS.WPF.ViewModels.Views
                                       ClothesSizeStore clothesSizeStore,
                                       EmployeeClothesSizesStore employeeClothesSizesStore,
                                       EmployeeStore employeeStore,
-                                      SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore,
-                                      SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore,
+                                      SelectedClothesSizeStore _selectedDetailedClothesItemStore,
+                                      SelectedEmployeeClothesSizeStore _selectedDetailedEmployeeClothesItemStore,
                                       AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
                                       DVSDbContextFactory dVSDbContextFactory)
                                       : ViewModelBase
@@ -59,7 +59,7 @@ namespace DVS.WPF.ViewModels.Views
                                                                               modalNavigationStore,
                                                                               dVSListingViewModel);
 
-        public ICommand OpenEditDetailedItem { get; } = new OpenEditDetailedItemCommand(_selectedDetailedClothesItemStore,
+        public ICommand OpenEditDetailedItem { get; } = new OpenEditEmployeeOrClothesCommand(_selectedDetailedClothesItemStore,
                                                                                         _selectedDetailedEmployeeClothesItemStore,
                                                                                         modalNavigationStore,
                                                                                         addEditEmployeeListingViewModel,

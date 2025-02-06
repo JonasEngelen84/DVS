@@ -8,16 +8,16 @@ namespace DVS.WPF.ViewModels
 {
     public class AddEditEmployeeListingViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<DetailedClothesListingItemViewModel> _availableClothesSizes = [];
-        public IEnumerable<DetailedClothesListingItemViewModel> AvailableClothesSizes => _availableClothesSizes;
+        private readonly ObservableCollection<ClothesSizeListingItemViewModel> _availableClothesSizes = [];
+        public IEnumerable<ClothesSizeListingItemViewModel> AvailableClothesSizes => _availableClothesSizes;
 
-        private readonly ObservableCollection<DetailedClothesListingItemViewModel> _employeeClothesList = [];
-        public IEnumerable<DetailedClothesListingItemViewModel> EmployeeClothesList => _employeeClothesList;
+        private readonly ObservableCollection<ClothesSizeListingItemViewModel> _employeeClothesList = [];
+        public IEnumerable<ClothesSizeListingItemViewModel> EmployeeClothesList => _employeeClothesList;
 
         private readonly List<Guid> _editedClothesList = [];
 
-        private DetailedClothesListingItemViewModel _selectedDetailedClothesItem;
-        public DetailedClothesListingItemViewModel SelectedDetailedClothesItem
+        private ClothesSizeListingItemViewModel _selectedDetailedClothesItem;
+        public ClothesSizeListingItemViewModel SelectedDetailedClothesItem
         {
             get
             {
@@ -44,10 +44,10 @@ namespace DVS.WPF.ViewModels
         {
             _clothesStore = clothesStore;
 
-            ClothesItemReceivedNewEmployeeClothesListCommand = new ClothesItemReceivedNewEmployeeClothesListCommand(this, AddItemToEmployeeClothesList);
-            ClothesItemRemovedNewEmployeeClothesListCommand = new ClothesItemRemovedNewEmployeeClothesListCommand(this, RemoveItemFromEmployeeClothesList);
-            ClothesItemReceivedAvailableClothesListCommand = new ClothesItemReceivedAvailableClothesListCommand(this, AddItemToAvailableSizes, AddEditedClothesList, RemoveEditedClothesList);
-            ClothesItemRemovedAvailableClothesListCommand = new ClothesItemRemovedAvailableClothesListCommand(this, AddEditedClothesList, RemoveEditedClothesList);
+            ClothesItemReceivedNewEmployeeClothesListCommand = new ReceivedNewEmployeeClothesListCommand(this, AddItemToEmployeeClothesList);
+            ClothesItemRemovedNewEmployeeClothesListCommand = new RemovedNewEmployeeClothesListCommand(this, RemoveItemFromEmployeeClothesList);
+            ClothesItemReceivedAvailableClothesListCommand = new ReceivedAvailableClothesListCommand(this, AddItemToAvailableSizes, AddEditedClothesList, RemoveEditedClothesList);
+            ClothesItemRemovedAvailableClothesListCommand = new RemovedAvailableClothesListCommand(this, AddEditedClothesList, RemoveEditedClothesList);
         }
 
 
@@ -65,52 +65,52 @@ namespace DVS.WPF.ViewModels
             {
                 if (clothes.Sizes.Count == 0)
                 {
-                    _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(clothes, null));
+                    _availableClothesSizes.Add(new ClothesSizeListingItemViewModel(clothes, null));
                 }
                 else
                 {
                     foreach (ClothesSize clothesSize in clothes.Sizes)
                     {
-                        _availableClothesSizes.Add(new DetailedClothesListingItemViewModel(clothes, clothesSize));
+                        _availableClothesSizes.Add(new ClothesSizeListingItemViewModel(clothes, clothesSize));
                     }
                 }
             }
         }
 
-        public DetailedClothesListingItemViewModel GetClothesFrom_availableClothesSizes()
+        public ClothesSizeListingItemViewModel GetClothesFrom_availableClothesSizes()
         {
             return _availableClothesSizes.FirstOrDefault(dclivm => dclivm.Clothes.GuidId == SelectedDetailedClothesItem.Clothes.GuidId);
         }
         
-        public DetailedClothesListingItemViewModel GetClothesSizeFrom_availableClothesSizes()
+        public ClothesSizeListingItemViewModel GetClothesSizeFrom_availableClothesSizes()
         {
             return _availableClothesSizes.FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == SelectedDetailedClothesItem.ClothesSizeGuidId);
         }
 
-        private void AddItemToAvailableSizes(DetailedClothesListingItemViewModel detailedClothesItem) => _availableClothesSizes.Add(detailedClothesItem);
+        private void AddItemToAvailableSizes(ClothesSizeListingItemViewModel detailedClothesItem) => _availableClothesSizes.Add(detailedClothesItem);
 
 
         public void LoadEmployeeClothes(Employee employee)
         {
             foreach (EmployeeClothesSize clothes in employee.Clothes)
             {
-                _employeeClothesList.Add(new DetailedClothesListingItemViewModel(clothes.ClothesSize.Clothes, clothes.ClothesSize)
+                _employeeClothesList.Add(new ClothesSizeListingItemViewModel(clothes.ClothesSize.Clothes, clothes.ClothesSize)
                 {
                     Quantity = clothes.Quantity
                 });
             }
         }
 
-        public DetailedClothesListingItemViewModel GetClothesSizeFrom_employeeClothesSizes()
+        public ClothesSizeListingItemViewModel GetClothesSizeFrom_employeeClothesSizes()
         {
             return _employeeClothesList.FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == SelectedDetailedClothesItem.ClothesSizeGuidId);
         }
 
-        private void AddItemToEmployeeClothesList(DetailedClothesListingItemViewModel detailedClothesItem) => _employeeClothesList.Add(detailedClothesItem);
+        private void AddItemToEmployeeClothesList(ClothesSizeListingItemViewModel detailedClothesItem) => _employeeClothesList.Add(detailedClothesItem);
 
-        private void RemoveItemFromEmployeeClothesList(DetailedClothesListingItemViewModel detailedClothesItem)
+        private void RemoveItemFromEmployeeClothesList(ClothesSizeListingItemViewModel detailedClothesItem)
         {
-            DetailedClothesListingItemViewModel? itemToRemove = _employeeClothesList
+            ClothesSizeListingItemViewModel? itemToRemove = _employeeClothesList
                 .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == detailedClothesItem.ClothesSizeGuidId);
 
             if (itemToRemove != null)

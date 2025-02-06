@@ -4,8 +4,8 @@ using DVS.WPF.ViewModels.Views;
 
 namespace DVS.WPF.Commands.CommentCommands
 {
-    public class OpenCommentCommand(SelectedDetailedClothesItemStore selectedDetailedClothesItemStore,
-                                    SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore,
+    public class OpenCommentCommand(SelectedClothesSizeStore selectedDetailedClothesItemStore,
+                                    SelectedEmployeeClothesSizeStore selectedDetailedEmployeeClothesItemStore,
                                     ModalNavigationStore modalNavigationStore,
                                     ClothesStore clothesStore,
                                     CategoryStore categoryStore,
@@ -16,8 +16,8 @@ namespace DVS.WPF.Commands.CommentCommands
                                     DVSListingViewModel dVSListingViewModel)
                                     : CommandBase
     {
-        private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
-        private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
+        private readonly SelectedClothesSizeStore _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
+        private readonly SelectedEmployeeClothesSizeStore _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly CategoryStore _categoryStore = categoryStore;
@@ -29,7 +29,7 @@ namespace DVS.WPF.Commands.CommentCommands
 
         public override void Execute(object parameter)
         {
-            if (_selectedDetailedClothesItemStore.SelectedDetailedClothesItem != null)
+            if (_selectedDetailedClothesItemStore.SelectedClothesSize != null)
             {
                 CommentClothesSizeViewModel commentClothesSizeViewModel = new(_modalNavigationStore,
                                                                               _clothesStore,
@@ -41,7 +41,7 @@ namespace DVS.WPF.Commands.CommentCommands
 
                 _modalNavigationStore.CurrentViewModel = commentClothesSizeViewModel;
             }
-            else if (_selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem != null)
+            else if (_selectedDetailedEmployeeClothesItemStore.SelectedEmployeeClothesSize != null)
             {
                 CommentEmployeeClothesViewModel commentEmployeeClothesViewModel = new(_modalNavigationStore,
                                                                                       _employeeStore,

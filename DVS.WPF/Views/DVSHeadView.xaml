@@ -45,7 +45,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <components:DVSEmployeesListing Grid.Column="0"/>
+            <components:DVSEmployeeListing Grid.Column="0"/>
 
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Center"

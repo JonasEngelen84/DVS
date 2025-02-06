@@ -86,7 +86,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <components:DVSDetailedEmployeesListing Grid.Column="0"
+            <components:DVSEmployeeClothesSizeListing Grid.Column="0"
                                                     Margin="0 3 0 0"/>
 
             <!-- Plus/Minus Button -->
@@ -124,7 +124,7 @@
                           Background="#433331">
             </GridSplitter>
 
-            <components:DVSDetailedClothesListing Grid.Column="2"
+            <components:DVSClothesSizeListing Grid.Column="2"
                                                   Margin="0 3 0 0"/>
         </Grid>
     </Grid>

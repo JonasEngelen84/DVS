@@ -5,24 +5,22 @@ using System.Windows.Input;
 namespace DVS.WPF.ViewModels.Forms
 {
     public class CommentEmployeeClothesFormViewModel(ICommand submitComment,
-                                                     SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore)
+                                                     SelectedEmployeeClothesSizeStore selectedDetailedEmployeeClothesItemStore)
                                                      : ViewModelBase
     {
-        private readonly SelectedDetailedEmployeeClothesItemStore _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
+        private readonly SelectedEmployeeClothesSizeStore _selectedEmployeeClothesSizeStore = selectedDetailedEmployeeClothesItemStore;
 
-        private DetailedEmployeeListingItemViewModel SelectedDetailedEmployeeItem => _selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem;
+        private EmployeeClothesSize SelectedEmployeeClothesSize => _selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize;
 
-        public bool HasSelectedDetailedEmployeeListingItem => SelectedDetailedEmployeeItem != null;
-        public Guid? EmployeeClothesSizeGuidID => SelectedDetailedEmployeeItem.EmployeeClothesSizeGuidID;
-        public Employee Employee => SelectedDetailedEmployeeItem.Employee;
-        public string EmployeeID => SelectedDetailedEmployeeItem.Employee.Id;
-        public string EmployeeLastname => SelectedDetailedEmployeeItem.Lastname;
-        public string EmployeeFirstname => SelectedDetailedEmployeeItem.Firstname;
-        public EmployeeClothesSize EmployeeClothesSize => SelectedDetailedEmployeeItem.EmployeeClothesSize;
-        public string? ClothesID => SelectedDetailedEmployeeItem.ClothesID;
-        public string? ClothesName => SelectedDetailedEmployeeItem.ClothesName;
-        public string? Size => SelectedDetailedEmployeeItem.Size;
-        public int? Quantity => SelectedDetailedEmployeeItem.Quantity;
+        public bool HasSelectedDetailedEmployeeListingItem => SelectedEmployeeClothesSize != null;
+        public Employee Employee => SelectedEmployeeClothesSize.Employee;
+        public string EmployeeId => SelectedEmployeeClothesSize.Employee.Id;
+        public string EmployeeLastname => SelectedEmployeeClothesSize.Employee.Lastname;
+        public string EmployeeFirstname => SelectedEmployeeClothesSize.Employee.Firstname;
+        public string? ClothesId => SelectedEmployeeClothesSize.ClothesSize.Clothes.Id;
+        public string? ClothesName => SelectedEmployeeClothesSize.ClothesSize.Clothes.Name;
+        public string? Size => SelectedEmployeeClothesSize.ClothesSize.Size.Size;
+        public int? Quantity => SelectedEmployeeClothesSize.Quantity;
 
         private string? _comment;
         public string? Comment
@@ -35,7 +33,6 @@ namespace DVS.WPF.ViewModels.Forms
             {
                 _comment = value;
                 OnPropertyChanged(nameof(Comment));
-                OnPropertyChanged(nameof(CanSubmit));
             }
         }
 
@@ -52,8 +49,6 @@ namespace DVS.WPF.ViewModels.Forms
                 OnPropertyChanged(nameof(IsSubmitting));
             }
         }
-
-        public bool CanSubmit => !Comment.Equals(EmployeeClothesSize.Comment);
 
         public bool HasError;
 

@@ -13,7 +13,7 @@ namespace DVS.WPF.ViewModels.Views
         public CommentEmployeeClothesViewModel(ModalNavigationStore modalNavigationStore,
                                                EmployeeStore employeeStore,
                                                EmployeeClothesSizesStore employeeClothesSizesStore,
-                                               SelectedDetailedEmployeeClothesItemStore selectedDetailedEmployeeClothesItemStore,
+                                               SelectedEmployeeClothesSizeStore selectedDetailedEmployeeClothesItemStore,
                                                DVSListingViewModel dVSListingViewModel)
         {
             ICommand submitComment = new SubmitCommentEmployeeClothesCommand(this, employeeStore, employeeClothesSizesStore, modalNavigationStore);
@@ -21,7 +21,7 @@ namespace DVS.WPF.ViewModels.Views
 
             CommentEmployeeClothesFormViewModel = new(submitComment, selectedDetailedEmployeeClothesItemStore)
             {
-                Comment = selectedDetailedEmployeeClothesItemStore.SelectedDetailedEmployeeItem.Comment
+                Comment = selectedDetailedEmployeeClothesItemStore.SelectedEmployeeClothesSize.Comment
             };
         }
     }

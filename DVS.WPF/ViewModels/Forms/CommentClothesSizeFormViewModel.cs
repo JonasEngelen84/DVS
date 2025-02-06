@@ -4,23 +4,20 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class CommentClothesSizeFormViewModel(ICommand submitComment,
-                                                 SelectedDetailedClothesItemStore selectedDetailedClothesItemStore)
-                                                 : ViewModelBase
+    public class CommentClothesSizeFormViewModel : ViewModelBase
     {
-        private readonly SelectedDetailedClothesItemStore _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
+        private readonly SelectedClothesSizeStore _selectedClothesSizeStore;
 
-        private DetailedClothesListingItemViewModel SelectedDetailedClothesItem => _selectedDetailedClothesItemStore.SelectedDetailedClothesItem;
+        private ClothesSize SelectedClothesSize => _selectedClothesSizeStore.SelectedClothesSize;
 
-        public bool HasSelectedDetailedClothesListingItem => SelectedDetailedClothesItem != null;
-        public Clothes Clothes => SelectedDetailedClothesItem.Clothes;
-        public ClothesSize ClothesSize => SelectedDetailedClothesItem.ClothesSize;
-        public string ID => SelectedDetailedClothesItem.Id;
-        public string Name => SelectedDetailedClothesItem.Name;
-        public string Category => SelectedDetailedClothesItem.Category;
-        public string Season => SelectedDetailedClothesItem.Season;
-        public string Size => SelectedDetailedClothesItem.Size;
-        public int Quantity => (int)SelectedDetailedClothesItem.Quantity;
+        public bool HasSelectedClothesSize => SelectedClothesSize != null;
+        public Clothes Clothes => SelectedClothesSize.Clothes;
+        public string ID => Clothes.Id;
+        public string Name => Clothes.Name;
+        public string Category => Clothes.Category.Name;
+        public string Season => Clothes.Season.Name;
+        public string Size => SelectedClothesSize.Size.Size;
+        public int Quantity => (int)SelectedClothesSize.Quantity;
 
         private string? _comment;
         public string? Comment
@@ -33,7 +30,6 @@ namespace DVS.WPF.ViewModels.Forms
             {
                 _comment = value;
                 OnPropertyChanged(nameof(Comment));
-                OnPropertyChanged(nameof(CanSubmit));
             }
         }
 
@@ -51,10 +47,16 @@ namespace DVS.WPF.ViewModels.Forms
             }
         }
 
-        public bool CanSubmit => !Comment.Equals(ClothesSize.Comment);
-
         public bool HasError;
 
-        public ICommand SubmitComment { get; } = submitComment;
+        public ICommand SubmitComment { get; }
+
+        public CommentClothesSizeFormViewModel(ICommand submitComment, SelectedClothesSizeStore selectedClothesSizeStore)
+        {
+            SubmitComment = submitComment;
+            _selectedClothesSizeStore = selectedClothesSizeStore;
+
+            _comment = SelectedClothesSize.Comment;
+        }
     }
 }

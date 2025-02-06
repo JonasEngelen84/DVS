@@ -5,7 +5,7 @@ namespace DVS.WPF.ViewModels
     public class DetailedEmployeeListingItemViewModel : ViewModelBase
     {
         public Employee Employee { get; private set; }
-        public string ID => Employee.Id;
+        public string Id => Employee.Id;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
 
@@ -43,7 +43,7 @@ namespace DVS.WPF.ViewModels
             Employee = employee;
             EmployeeClothesSize = employeeClothesSize;
 
-            OnPropertyChanged(nameof(ID));
+            OnPropertyChanged(nameof(Id));
             OnPropertyChanged(nameof(Lastname));
             OnPropertyChanged(nameof(Firstname));
             OnPropertyChanged(nameof(ClothesID));

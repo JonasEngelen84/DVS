@@ -1,6 +1,6 @@
 ﻿using DVS.EntityFramework;
-using DVS.WPF.Commands.AddEditClothesCommands;
-using DVS.WPF.Commands.AddEditEmployeeCommands;
+using DVS.WPF.Commands.EmployeeCommands;
+using DVS.WPF.Commands.ClothesCommands;
 using DVS.WPF.Stores;
 using System.Windows.Input;
 

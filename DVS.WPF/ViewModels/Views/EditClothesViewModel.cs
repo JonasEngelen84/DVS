@@ -1,10 +1,11 @@
-﻿using DVS.WPF.Commands.AddEditCategoryCommands;
-using DVS.WPF.Commands.AddEditClothesCommands;
-using DVS.WPF.Commands.AddEditSeasonCommands;
+﻿using DVS.WPF.Commands.AddEditClothesCommands;
 using DVS.Domain.Models;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using System.Windows.Input;
+using DVS.WPF.Commands.CategoryCommands;
+using DVS.WPF.Commands.ClothesCommands;
+using DVS.WPF.Commands.SeasonCommands;
 
 namespace DVS.WPF.ViewModels.Views
 {
@@ -14,17 +15,17 @@ namespace DVS.WPF.ViewModels.Views
         public AddEditClothesListingViewModel AddEditListingViewModel { get; }
         public ICommand CloseAddEditClothes { get; }
 
-
-        public EditClothesViewModel(Clothes clothes,
-                                      ModalNavigationStore modalNavigationStore,
-                                      SizeStore sizeStore,
-                                      CategoryStore categoryStore,
-                                      SeasonStore seasonStore,
-                                      ClothesStore clothesStore,
-                                      ClothesSizeStore clothesSizeStore,
-                                      EmployeeClothesSizesStore employeeClothesSizesStore,
-                                      EmployeeStore employeeStore,
-                                      DVSListingViewModel dVSListingViewModel)
+        public EditClothesViewModel(
+            Clothes clothes,
+            ModalNavigationStore modalNavigationStore,
+            SizeStore sizeStore,
+            CategoryStore categoryStore,
+            SeasonStore seasonStore,
+            ClothesStore clothesStore,
+            ClothesSizeStore clothesSizeStore,
+            EmployeeClothesSizesStore employeeClothesSizesStore,
+            EmployeeStore employeeStore,
+            DVSListingViewModel dVSListingViewModel)
         {
             AddEditListingViewModel = new(clothes, sizeStore, categoryStore, seasonStore);
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
