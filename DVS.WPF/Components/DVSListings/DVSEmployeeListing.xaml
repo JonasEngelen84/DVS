@@ -21,8 +21,8 @@
 
             <ListView BorderThickness="0"
                       Background="lightgray"
-                      ItemsSource="{Binding EmployeeListingItemCollection}"
-                      SelectedItem="{Binding SelectedEmployeeListingItemViewModel}"
+                      ItemsSource="{Binding EmployeeCollection}"
+                      SelectedItem="{Binding SelectedEmployeeClothesSize}"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       SelectionMode="Single">
                 <ListView.ItemTemplate>

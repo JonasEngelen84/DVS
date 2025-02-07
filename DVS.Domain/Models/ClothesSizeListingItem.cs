@@ -1,6 +1,6 @@
 ﻿namespace DVS.Domain.Models
 {
-    public class ClothesSizeListingItemViewModel : ModelBase
+    public class ClothesSizeListingItem : ModelBase
     {
         public Clothes Clothes { get; private set; }
         public string Id => Clothes.Id;
@@ -26,7 +26,7 @@
             }
         }
 
-        public ClothesSizeListingItemViewModel(Clothes clothes, ClothesSize? clothesSize)
+        public ClothesSizeListingItem(Clothes clothes, ClothesSize? clothesSize)
         {
             Clothes = clothes;
             ClothesSize = clothesSize;

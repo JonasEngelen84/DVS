@@ -1,5 +1,4 @@
-﻿using DVS.EntityFramework;
-using DVS.WPF.Commands.AddEditClothesCommands;
+﻿using DVS.WPF.Commands.AddEditClothesCommands;
 using DVS.WPF.Commands.CategoryCommands;
 using DVS.WPF.Commands.ClothesCommands;
 using DVS.WPF.Commands.SeasonCommands;
@@ -23,8 +22,7 @@ namespace DVS.WPF.ViewModels.Views
                                    ClothesSizeStore clothesSizeStore,
                                    EmployeeClothesSizesStore employeeClothesSizesStore,
                                    EmployeeStore employeeStore,
-                                   DVSListingViewModel dVSListingViewModel,
-                                   DVSDbContextFactory dVSDbContextFactory)
+                                   DVSListingViewModel dVSListingViewModel)
         {
             AddEditListingViewModel = new(null, sizeStore, categoryStore, seasonStore);
 

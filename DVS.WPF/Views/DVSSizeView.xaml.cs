@@ -2,9 +2,9 @@
 
 namespace DVS.WPF.Views
 {
-    public partial class DVSDetailedView : UserControl
+    public partial class DVSSizeView : UserControl
     {
-        public DVSDetailedView()
+        public DVSSizeView()
         {
             InitializeComponent();
         }

@@ -121,7 +121,7 @@ namespace DVS.WPF
 
                     services.AddSingleton<DVSHeadViewModel>();
                     services.AddSingleton<DVSListingViewModel>();
-                    services.AddSingleton<DVSDetailedViewModel>();
+                    services.AddSingleton<DVSSizeViewModel>();
                     services.AddSingleton<AddEditEmployeeListingViewModel>();
 
                     services.AddSingleton<ModalNavigationStore>();

@@ -17,7 +17,7 @@ namespace DVS.WPF.ViewModels
     class MainViewModel : ViewModelBase
     {
         public DVSHeadViewModel DVSHeadViewModel { get; }
-        public DVSDetailedViewModel DVSDetailedViewModel { get; }
+        public DVSSizeViewModel DVSSizeViewModel { get; }
         private readonly ModalNavigationStore _modalNavigationStore;
 
         // Pointer auf das aktuelle Modal(ViewModel) 
@@ -28,11 +28,11 @@ namespace DVS.WPF.ViewModels
 
 
         public MainViewModel(DVSHeadViewModel dVSHeadViewModel,
-                             DVSDetailedViewModel dVSViewModel,
+                             DVSSizeViewModel dVSViewModel,
                              ModalNavigationStore modalNavigationStore)
         {
             DVSHeadViewModel = dVSHeadViewModel;
-            DVSDetailedViewModel = dVSViewModel;
+            DVSSizeViewModel = dVSViewModel;
             _modalNavigationStore = modalNavigationStore;
 
             _modalNavigationStore.CurrentViewModelChanged += ModalNavigationStore_CurrentViewModelChanged;

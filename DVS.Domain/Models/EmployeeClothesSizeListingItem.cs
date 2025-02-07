@@ -1,8 +1,6 @@
-﻿using DVS.Domain.Models;
-
-namespace DVS.WPF.ViewModels
+﻿namespace DVS.Domain.Models
 {
-    public class DetailedEmployeeListingItemViewModel : ViewModelBase
+    public class EmployeeClothesSizeListingItem : ModelBase
     {
         public Employee Employee { get; private set; }
         public string Id => Employee.Id;
@@ -31,7 +29,7 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        public DetailedEmployeeListingItemViewModel(Employee employee, EmployeeClothesSize? employeeClothesSize)
+        public EmployeeClothesSizeListingItem(Employee employee, EmployeeClothesSize? employeeClothesSize)
         {
             Employee = employee;
             EmployeeClothesSize = employeeClothesSize;

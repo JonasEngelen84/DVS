@@ -1,7 +1,6 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Commands;
 using DVS.WPF.Stores;
-using DVS.WPF.ViewModels.ListViewItems;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -26,15 +25,15 @@ namespace DVS.WPF.ViewModels
             set
             {
                 _selectedClothesSizeStore.SelectedClothesSize = value;
-                _selectedDetailedEmployeeClothesItemStore.SelectedEmployeeClothesSize = null;
+                _selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize = null;
             }
         }
         
-        public EmployeeClothesSize SelectedDetailedEmployeeClothesItem
+        public EmployeeClothesSize SelectedEmployeeClothesSize
         {
             set
             {
-                _selectedDetailedEmployeeClothesItemStore.SelectedEmployeeClothesSize = value;
+                _selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize = value;
                 _selectedClothesSizeStore.SelectedClothesSize = null;
             }
         }
@@ -48,7 +47,7 @@ namespace DVS.WPF.ViewModels
         private readonly ClothesSizeStore _clothesSizeStore;
         private readonly EmployeeClothesSizesStore _employeeClothesSizesStore;
         private readonly SelectedClothesSizeStore _selectedClothesSizeStore;
-        private readonly SelectedEmployeeClothesSizeStore _selectedDetailedEmployeeClothesItemStore;
+        private readonly SelectedEmployeeClothesSizeStore _selectedEmployeeClothesSizeStore;
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel;
 
         public ICommand LoadDataFromDbCommand { get; }
@@ -74,7 +73,7 @@ namespace DVS.WPF.ViewModels
             _clothesSizeStore = clothesSizeStore;
             _employeeClothesSizesStore = employeeClothesSizesStore;
             _selectedClothesSizeStore = selectedClothesSizeStore;
-            _selectedDetailedEmployeeClothesItemStore = selectedEmployeeClothesSizeStore;
+            _selectedEmployeeClothesSizeStore = selectedEmployeeClothesSizeStore;
             _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
 
             LoadDataFromDbCommand = new LoadDataFromDbCommand(sizeStore,
@@ -140,16 +139,17 @@ namespace DVS.WPF.ViewModels
         private void ClothesStore_ClothesAdded(Clothes clothes)
         {
             // Add ClothesListingItemViewModel
-            _clothesCollection.Add(new ClothesListingItemViewModel(clothes,
-                                                                              _modalNavigationStore,
-                                                                              _sizeStore,
-                                                                              _categoryStore,
-                                                                              _seasonStore,
-                                                                              _clothesStore,
-                                                                              _clothesSizeStore,
-                                                                              _employeeClothesSizesStore,
-                                                                              _employeeStore,
-                                                                              this));
+            _clothesCollection.Add(new ClothesListingItemViewModel(
+                clothes,
+                _modalNavigationStore,
+                _sizeStore,
+                _categoryStore,
+                _seasonStore,
+                _clothesStore,
+                _clothesSizeStore,
+                _employeeClothesSizesStore,
+                _employeeStore,
+                this));
 
             // Add DetailedClothesListingItemViewModel
             if (clothes.Sizes.Count > 0)

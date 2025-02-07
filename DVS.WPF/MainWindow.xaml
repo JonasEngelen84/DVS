@@ -149,9 +149,9 @@
                                Margin="0,3,0,0"
                                Visibility="Hidden" />
 
-            <views:DVSDetailedView x:Name="DetailedView"
-                                   Grid.Row="1"
-                                   Margin="0,3,0,0" />
+            <views:DVSSizeView x:Name="SizeView"
+                               Grid.Row="1"
+                               Margin="0,3,0,0" />
 
         </Grid>
     </Border>

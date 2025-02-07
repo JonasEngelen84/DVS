@@ -4,12 +4,12 @@ using DVS.WPF.ViewModels;
 namespace DVS.WPF.Commands.DragNDropCommands
 {
     public class RemovedNewEmployeeClothesListCommand(AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-                                                      Action<ClothesSizeListingItemViewModel> removeItemFromEmployeeClothesList)
+                                                      Action<ClothesSizeListingItem> removeItemFromEmployeeClothesList)
                                                       : CommandBase
     {
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
 
-        public readonly Action<ClothesSizeListingItemViewModel> _removeItemFromEmployeeClothesList = removeItemFromEmployeeClothesList;
+        public readonly Action<ClothesSizeListingItem> _removeItemFromEmployeeClothesList = removeItemFromEmployeeClothesList;
 
         public override void Execute(object parameter)
         {

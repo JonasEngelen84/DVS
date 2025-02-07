@@ -60,7 +60,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
             if (addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList != null)
             {
-                foreach (ClothesSizeListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+                foreach (ClothesSizeListingItem dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
                 {
                     EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), newEmployee, dclivm.ClothesSize, (int)dclivm.Quantity, "");
                     newEmployee.Clothes.Add(employeeClothesSize);
@@ -83,7 +83,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
                     if (existingClothesSize != null)
                     {
-                        ClothesSizeListingItemViewModel? targetItem = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.AvailableClothesSizes
+                        ClothesSizeListingItem? targetItem = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.AvailableClothesSizes
                             .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == clothesSizeGuidId);
 
                         ClothesSize editedClothesSize = new(existingClothesSize.GuidId,

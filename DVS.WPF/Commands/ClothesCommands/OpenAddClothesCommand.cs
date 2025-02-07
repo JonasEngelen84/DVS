@@ -1,5 +1,4 @@
-﻿using DVS.EntityFramework;
-using DVS.WPF.Stores;
+﻿using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Views;
 
@@ -13,8 +12,7 @@ namespace DVS.WPF.Commands.ClothesCommands
                                        ClothesSizeStore clothesSizeStore,
                                        EmployeeClothesSizesStore employeeClothesSizesStore,
                                        EmployeeStore employeeStore,
-                                       DVSListingViewModel dVSListingViewModel,
-                                       DVSDbContextFactory dVSDbContextFactory)
+                                       DVSListingViewModel dVSListingViewModel)
                                        : CommandBase
     {
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
@@ -26,7 +24,6 @@ namespace DVS.WPF.Commands.ClothesCommands
         private readonly EmployeeClothesSizesStore _employeeClothesSizesStore = employeeClothesSizesStore;
         private readonly EmployeeStore _employeeStore = employeeStore;
         private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
-        private readonly DVSDbContextFactory _dVSDbContextFactory = dVSDbContextFactory;
 
         public override void Execute(object parameter)
         {
@@ -38,8 +35,7 @@ namespace DVS.WPF.Commands.ClothesCommands
                                                           _clothesSizeStore,
                                                           _employeeClothesSizesStore,
                                                           _employeeStore,
-                                                          _dVSListingViewModel,
-                                                          _dVSDbContextFactory);
+                                                          _dVSListingViewModel);
 
             _modalNavigationStore.CurrentViewModel = addClothesViewModel;
         }

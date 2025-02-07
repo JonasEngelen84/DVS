@@ -70,7 +70,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         {
             foreach (EmployeeClothesSize ecs in updatedEmployee.Clothes)
             {
-                ClothesSizeListingItemViewModel existingItem = editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList
+                ClothesSizeListingItem existingItem = editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList
                     .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == ecs.ClothesSizeGuidId);
 
                 if (existingItem == null)
@@ -93,7 +93,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task CreateAndAddNewEmployeeClothesSizesAsync(Employee updatedEmployee, AddEditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (ClothesSizeListingItemViewModel dclivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (ClothesSizeListingItem dclivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 EmployeeClothesSize existingItem = updatedEmployee.Clothes.FirstOrDefault(ecs => ecs.ClothesSizeGuidId == dclivm.ClothesSizeGuidId);
 
@@ -119,7 +119,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task UpdateEmployeeClothesSizesAsync(Employee updatedEmployee, AddEditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (ClothesSizeListingItemViewModel dclivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (ClothesSizeListingItem dclivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 EmployeeClothesSize existingItem = updatedEmployee.Clothes.FirstOrDefault(ecs => ecs.ClothesSizeGuidId == dclivm.ClothesSizeGuidId);
 
@@ -173,7 +173,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task UpdateClothesSizeAsync(AddEditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (ClothesSizeListingItemViewModel dclivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (ClothesSizeListingItem dclivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 ClothesSize itemToRemove = dclivm.Clothes.Sizes.FirstOrDefault(cs => cs.GuidId == dclivm.ClothesSizeGuidId);
 
@@ -205,7 +205,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task UpdateClothesAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
         {
-            foreach (ClothesSizeListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (ClothesSizeListingItem dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 var itemToRemove = dclivm.Clothes.Category.Clothes.FirstOrDefault(c => c.GuidId == dclivm.Clothes.GuidId);
 
@@ -237,7 +237,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task UpdateSizeModelAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
         {
-            foreach (ClothesSizeListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (ClothesSizeListingItem dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 try
                 {
@@ -253,7 +253,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task UpdateCategoryAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
         {
-            foreach (ClothesSizeListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (ClothesSizeListingItem dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 try
                 {
@@ -269,7 +269,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task UpdateSeasonAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
         {
-            foreach (ClothesSizeListingItemViewModel dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (ClothesSizeListingItem dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 try
                 {

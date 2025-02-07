@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DVS.WPF.Commands.EmployeeCommands;
 
-namespace DVS.WPF.ViewModels.ListViewItems
+namespace DVS.WPF.ViewModels
 {
-    public class EmployeeListingItemViewModel : ViewModelBase
+    public class EmployeeListingItemViewModel : ModelBase
     {
         public Employee Employee { get; private set; }
         public string ID => Employee.Id;

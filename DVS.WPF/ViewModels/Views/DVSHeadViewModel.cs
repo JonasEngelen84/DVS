@@ -15,28 +15,28 @@ namespace DVS.WPF.ViewModels.Views
                                   ClothesStore clothesStore,
                                   ClothesSizeStore clothesSizeStore,
                                   EmployeeClothesSizesStore employeeClothesSizesStore,
-                                  EmployeeStore employeeStore,
-                                  DVSDbContextFactory dVSDbContextFactory)
+                                  EmployeeStore employeeStore)
                                   : ViewModelBase
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
 
-        public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(addEditEmployeeListingViewModel,
-                                                                              employeeStore,
-                                                                              clothesStore,
-                                                                              clothesSizeStore,
-                                                                              modalNavigationStore,
-                                                                              dVSListingViewModel);
+        public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(
+            addEditEmployeeListingViewModel,
+            employeeStore,
+            clothesStore,
+            clothesSizeStore,
+            modalNavigationStore,
+            dVSListingViewModel);
 
-        public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(modalNavigationStore,
-                                                                            sizeStore,
-                                                                            categoryStore,
-                                                                            seasonStore,
-                                                                            clothesStore,
-                                                                            clothesSizeStore,
-                                                                            employeeClothesSizesStore,
-                                                                            employeeStore,
-                                                                            dVSListingViewModel,
-                                                                            dVSDbContextFactory);
+        public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(
+            modalNavigationStore,
+            sizeStore,
+            categoryStore,
+            seasonStore,
+            clothesStore,
+            clothesSizeStore,
+            employeeClothesSizesStore,
+            employeeStore,
+            dVSListingViewModel);
     }
 }

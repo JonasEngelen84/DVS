@@ -1,7 +1,6 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
-using DVS.WPF.ViewModels.ListViewItems;
 using DVS.WPF.ViewModels.Views;
 
 namespace DVS.WPF.Commands.ClothesCommands

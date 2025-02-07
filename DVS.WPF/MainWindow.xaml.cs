@@ -14,14 +14,14 @@ namespace DVS.WPF
         // Change View
         private void ChangeViewClick(object sender, RoutedEventArgs e)
         {
-            if (DetailedView.Visibility == Visibility.Visible)
+            if (SizeView.Visibility == Visibility.Visible)
             {
-                DetailedView.Visibility = Visibility.Hidden;
+                SizeView.Visibility = Visibility.Hidden;
                 HeadView.Visibility = Visibility.Visible;
             }
             else
             {
-                DetailedView.Visibility = Visibility.Visible;
+                SizeView.Visibility = Visibility.Visible;
                 HeadView.Visibility = Visibility.Hidden;
             }
         }

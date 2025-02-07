@@ -4,27 +4,27 @@ using DVS.WPF.ViewModels;
 namespace DVS.WPF.Commands.DragNDropCommands
 {
     class ReceivedAvailableClothesListCommand(AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-                                              Action<ClothesSizeListingItemViewModel> addItemToAvailableClothesList,
+                                              Action<ClothesSizeListingItem> addItemToAvailableClothesList,
                                               Action<Guid> addItemToEditedClothesList,
                                               Action<Guid> removeItemFromEditedClothesList)
                                               : CommandBase
     {
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
 
-        public readonly Action<ClothesSizeListingItemViewModel> _addItemToAvailableClothesList = addItemToAvailableClothesList;
+        public readonly Action<ClothesSizeListingItem> _addItemToAvailableClothesList = addItemToAvailableClothesList;
         public readonly Action<Guid> _addItemToEditedClothesList = addItemToEditedClothesList;
         public readonly Action<Guid> _removeItemFromEditedClothesList = removeItemFromEditedClothesList; 
 
         public override void Execute(object parameter)
         {
-            ClothesSizeListingItemViewModel newDclivm;
+            ClothesSizeListingItem newDclivm;
 
-            ClothesSizeListingItemViewModel? existingClothes = _addEditEmployeeListingViewModel.GetClothesFrom_availableClothesSizes();
+            ClothesSizeListingItem? existingClothes = _addEditEmployeeListingViewModel.GetClothesFrom_availableClothesSizes();
 
             if (existingClothes != null)
             {
                 
-                ClothesSizeListingItemViewModel? existingClothesSize = _addEditEmployeeListingViewModel.GetClothesSizeFrom_availableClothesSizes();
+                ClothesSizeListingItem? existingClothesSize = _addEditEmployeeListingViewModel.GetClothesSizeFrom_availableClothesSizes();
 
                 if (existingClothesSize != null)
                 {
@@ -55,9 +55,9 @@ namespace DVS.WPF.Commands.DragNDropCommands
             }
         }
 
-        private static ClothesSizeListingItemViewModel CreateNewDetailedClothesitem(AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel)
+        private static ClothesSizeListingItem CreateNewDetailedClothesitem(AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel)
         {
-            ClothesSizeListingItemViewModel newDclivm = new(_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes,
+            ClothesSizeListingItem newDclivm = new(_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes,
                                                                 _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSize)
             {
                 Quantity = 1
