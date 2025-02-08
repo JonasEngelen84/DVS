@@ -8,7 +8,7 @@
     
     <ListView FontSize="14"
               Foreground="#FF212129"
-              Background="lightgray"
+              Background="#dedece"
               ItemsSource="{Binding EmployeeClothesSizeCollection}"
               SelectedItem="{Binding SelectedEmployeeClothesSize}">
         <ListView.View>
