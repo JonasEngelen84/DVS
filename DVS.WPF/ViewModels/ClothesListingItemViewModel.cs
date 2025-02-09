@@ -76,7 +76,7 @@ namespace DVS.WPF.ViewModels
                                            SeasonStore seasonStore,
                                            ClothesStore clothesStore,
                                            ClothesSizeStore clothesSizeStore,
-                                           EmployeeClothesSizesStore employeeClothesSizesStore,
+                                           EmployeeClothesSizeStore employeeClothesSizesStore,
                                            EmployeeStore employeeStore,
                                            DVSListingViewModel dVSListingViewModel)
         {

@@ -13,7 +13,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
                                          CategoryStore categoryStore,
                                          SeasonStore seasonStore,
                                          ClothesSizeStore clothesSizeStore,
-                                         EmployeeClothesSizesStore employeeClothesSizesStore,
+                                         EmployeeClothesSizeStore employeeClothesSizesStore,
                                          DVSListingViewModel dVSListingViewModel,
                                          AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
                                          : CommandBase
@@ -26,7 +26,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
         private readonly CategoryStore _categoryStore = categoryStore;
         private readonly SeasonStore _seasonStore = seasonStore;
         private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
-        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore = employeeClothesSizesStore;
+        private readonly EmployeeClothesSizeStore _employeeClothesSizesStore = employeeClothesSizesStore;
         private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
 
@@ -34,7 +34,6 @@ namespace DVS.WPF.Commands.EmployeeCommands
         {
             Employee employee = _employeeListingItemViewModel.Employee;
 
-            _addEditEmployeeListingViewModel.ClearLists();
             _addEditEmployeeListingViewModel.LoadAvailableSizes();
             _addEditEmployeeListingViewModel.LoadEmployeeClothes(employee);
 

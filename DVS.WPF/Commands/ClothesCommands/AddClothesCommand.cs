@@ -28,8 +28,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 addClothesFormViewModel.HasError = false;
                 addClothesFormViewModel.IsSubmitting = true;
 
-                Clothes newClothes = new(Guid.NewGuid(),
-                                         addClothesFormViewModel.Id,
+                Clothes newClothes = new(addClothesFormViewModel.Id,
                                          addClothesFormViewModel.Name,
                                          addClothesFormViewModel.Category,
                                          addClothesFormViewModel.Season,

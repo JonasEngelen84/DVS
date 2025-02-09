@@ -78,7 +78,7 @@ namespace DVS.WPF.ViewModels
                                             CategoryStore categoryStore,
                                             SeasonStore seasonStore,
                                             ClothesSizeStore clothesSizeStore,
-                                            EmployeeClothesSizesStore employeeClothesSizesStore)
+                                            EmployeeClothesSizeStore employeeClothesSizesStore)
         {
             Employee = employee;
             DeleteEmployee = new DeleteEmployeeCommand(this, employeeStore);

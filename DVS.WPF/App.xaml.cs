@@ -133,7 +133,7 @@ namespace DVS.WPF
                     services.AddSingleton<EmployeeStore>();
                     services.AddSingleton<SizeStore>();
                     services.AddSingleton<ClothesSizeStore>();
-                    services.AddSingleton<EmployeeClothesSizesStore>();
+                    services.AddSingleton<EmployeeClothesSizeStore>();
 
                     services.AddTransient<DVSListingViewModel>(CreateDVSListingViewModel);
 
@@ -275,7 +275,7 @@ namespace DVS.WPF
                 services.GetRequiredService<CategoryStore>(),
                 services.GetRequiredService<SeasonStore>(),
                 services.GetRequiredService<ClothesSizeStore>(),
-                services.GetRequiredService<EmployeeClothesSizesStore>(),
+                services.GetRequiredService<EmployeeClothesSizeStore>(),
                 services.GetRequiredService<SelectedClothesSizeStore>(),
                 services.GetRequiredService<SelectedEmployeeClothesSizeStore>(),
                 services.GetRequiredService<AddEditEmployeeListingViewModel>());

@@ -52,15 +52,14 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private static Employee CreateNewEmployee(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
         {
-            Employee newEmployee = new(Guid.NewGuid(),
-                                       addEmployeeFormViewModel.Id,
+            Employee newEmployee = new(addEmployeeFormViewModel.Id,
                                        addEmployeeFormViewModel.Lastname,
                                        addEmployeeFormViewModel.Firstname,
                                        addEmployeeFormViewModel.Comment);
 
             if (addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList != null)
             {
-                foreach (ClothesSizeListingItem dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+                foreach (AvailableClothesSizeItem dclivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
                 {
                     EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), newEmployee, dclivm.ClothesSize, (int)dclivm.Quantity, "");
                     newEmployee.Clothes.Add(employeeClothesSize);
@@ -83,8 +82,8 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
                     if (existingClothesSize != null)
                     {
-                        ClothesSizeListingItem? targetItem = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.AvailableClothesSizes
-                            .FirstOrDefault(dclivm => dclivm.ClothesSizeGuidId == clothesSizeGuidId);
+                        AvailableClothesSizeItem? targetItem = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.AvailableClothesSizes
+                            .FirstOrDefault(acsi => acsi.ClothesSize.GuidId == clothesSizeGuidId);
 
                         ClothesSize editedClothesSize = new(existingClothesSize.GuidId,
                                                             existingClothesSize.Clothes,

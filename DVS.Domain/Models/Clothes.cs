@@ -4,7 +4,6 @@ namespace DVS.Domain.Models
 {
     public class Clothes
     {
-        public Guid GuidId { get; }
         public Guid SeasonGuidId { get; private set; }
         public Guid CategoryGuidId { get; private set; }
         public string Id { get; private set; }
@@ -15,9 +14,8 @@ namespace DVS.Domain.Models
 
         public ObservableCollection<ClothesSize> Sizes { get; set; }
 
-        public Clothes(Guid guidId, string id, string name, Category category, Season season, string comment)
+        public Clothes(string id, string name, Category category, Season season, string comment)
         {
-            GuidId = guidId;
             Season = season;
             Category = category;
             SeasonGuidId = season.GuidId;

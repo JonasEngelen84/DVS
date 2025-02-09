@@ -3,8 +3,8 @@
     public class EmployeeClothesSize
     {
         public Guid GuidId { get; }
-        public Guid EmployeeGuidId { get; private set; }
         public Guid ClothesSizeGuidId { get; private set; }
+        public string EmployeeId { get; private set; }
         public int Quantity { get; private set; }
         public string Comment { get; private set; }
         public Employee Employee { get; private set; }
@@ -15,15 +15,11 @@
             GuidId = guidId;
             Employee = employee;
             ClothesSize = clothesSize;
-            EmployeeGuidId = employee.GuidId;
             ClothesSizeGuidId = clothesSize.GuidId;
             Quantity = quantity;
             Comment = comment;
         }
 
-        public EmployeeClothesSize()
-        {
-
-        }
+        public EmployeeClothesSize() {}
     }
 }

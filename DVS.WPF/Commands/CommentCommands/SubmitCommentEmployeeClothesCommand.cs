@@ -10,13 +10,13 @@ namespace DVS.WPF.Commands.CommentCommands
 {
     public class SubmitCommentEmployeeClothesCommand(CommentEmployeeClothesViewModel commentEmployeeClothesViewModel,
                                                      EmployeeStore employeeStore,
-                                                     EmployeeClothesSizesStore employeeClothesSizesStore,
+                                                     EmployeeClothesSizeStore employeeClothesSizesStore,
                                                      ModalNavigationStore modalNavigationStore)
                                                      : AsyncCommandBase
     {
         private readonly CommentEmployeeClothesViewModel _commentEmployeeClothesViewModel = commentEmployeeClothesViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
-        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore = employeeClothesSizesStore;
+        private readonly EmployeeClothesSizeStore _employeeClothesSizesStore = employeeClothesSizesStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
         public override async Task ExecuteAsync(object parameter)
@@ -58,11 +58,10 @@ namespace DVS.WPF.Commands.CommentCommands
             //commentedEmployeeClothesSize.Employee.Clothes.Add(commentedEmployeeClothesSize);
 
             // Neues Clothes mit neuer Bekleidungs-Liste erstellen
-            Employee updatedEmployee = new(commentEmployeeClothesFormViewModel.Employee.GuidId,
-                                          commentEmployeeClothesFormViewModel.EmployeeId,
-                                          commentEmployeeClothesFormViewModel.EmployeeLastname,
-                                          commentEmployeeClothesFormViewModel.EmployeeFirstname,
-                                          commentEmployeeClothesFormViewModel.Employee.Comment)
+            Employee updatedEmployee = new(commentEmployeeClothesFormViewModel.EmployeeId,
+                                           commentEmployeeClothesFormViewModel.EmployeeLastname,
+                                           commentEmployeeClothesFormViewModel.EmployeeFirstname,
+                                           commentEmployeeClothesFormViewModel.Employee.Comment)
             {
                 Clothes = new ObservableCollection<EmployeeClothesSize>(commentEmployeeClothesFormViewModel.Employee.Clothes
                 .Select(ecs => new EmployeeClothesSize(ecs.GuidId, ecs.Employee, ecs.ClothesSize, ecs.Quantity, ecs.Comment)))

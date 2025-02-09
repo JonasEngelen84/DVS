@@ -20,7 +20,7 @@ namespace DVS.WPF.Stores
         public event Action ClothesLoaded;
         public event Action<Clothes> ClothesAdded;
         public event Action<Clothes> ClothesUpdated;
-        public event Action<Guid> ClothesDeleted;
+        public event Action<string> ClothesDeleted;
 
         public async Task Load()
         {
@@ -49,7 +49,7 @@ namespace DVS.WPF.Stores
         {
             await _updateClothesCommand.Execute(updatedClothes);
 
-            int index = _clothes.FindIndex(y => y.GuidId == updatedClothes.GuidId);
+            int index = _clothes.FindIndex(c => c.Id == updatedClothes.Id);
 
             if (index != -1)
             {
@@ -67,18 +67,18 @@ namespace DVS.WPF.Stores
         {
             await _deleteClothesCommand.Execute(clothes);
 
-            int index = _clothes.FindIndex(y => y.GuidId == clothes.GuidId);
+            int index = _clothes.FindIndex(c => c.Id == clothes.Id);
 
             if (index != -1)
             {
-                _clothes.RemoveAll(y => y.GuidId == clothes.GuidId);
+                _clothes.RemoveAll(c => c.Id == clothes.Id);
             }
             else
             {
                 throw new InvalidOperationException("Löschen der Bekleidung nicht möglich.");
             }            
 
-            ClothesDeleted?.Invoke(clothes.GuidId);
+            ClothesDeleted?.Invoke(clothes.Id);
         }
     }
 }

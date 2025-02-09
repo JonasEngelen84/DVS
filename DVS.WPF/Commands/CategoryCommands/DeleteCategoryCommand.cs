@@ -13,7 +13,7 @@ namespace DVS.WPF.Commands.CategoryCommands
                                        SizeStore sizeStore,
                                        ClothesStore clothesStore,
                                        ClothesSizeStore clothesSizeStore,
-                                       EmployeeClothesSizesStore employeeClothesSizesStore,
+                                       EmployeeClothesSizeStore employeeClothesSizesStore,
                                        EmployeeStore employeeStore,
                                        DVSListingViewModel dVSListingViewModel)
                                        : AsyncCommandBase
@@ -24,7 +24,7 @@ namespace DVS.WPF.Commands.CategoryCommands
         private readonly SizeStore _sizeStore = sizeStore;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
-        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore = employeeClothesSizesStore;
+        private readonly EmployeeClothesSizeStore _employeeClothesSizesStore = employeeClothesSizesStore;
         private readonly EmployeeStore _employeeStore = employeeStore;
         private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
 
@@ -64,8 +64,7 @@ namespace DVS.WPF.Commands.CategoryCommands
 
             foreach (Clothes clothes in ClothesToEdit)
             {
-                Clothes newClothes = new(clothes.GuidId,
-                                         clothes.Id,
+                Clothes newClothes = new(clothes.Id,
                                          clothes.Name,
                                          _categoryStore.Categoryless,
                                          clothes.Season,
@@ -97,7 +96,7 @@ namespace DVS.WPF.Commands.CategoryCommands
             foreach (ClothesSize cs in clothesSizesToEdit)
             {
                 ClothesSize newClothesSize = new(cs.GuidId,
-                                                 editedClothes.FirstOrDefault(c => c.GuidId == cs.Clothes.GuidId),
+                                                 editedClothes.FirstOrDefault(c => c.Id == cs.Clothes.Id),
                                                  cs.Size,
                                                  cs.Quantity,
                                                  cs.Comment)

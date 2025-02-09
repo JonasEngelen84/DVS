@@ -83,8 +83,7 @@ namespace DVS.WPF.Commands.CommentCommands
 
         private Clothes CreateEditedClothesSizeInstance(CommentClothesSizeFormViewModel commentClothesSizeFormViewModel)
         {
-            return new Clothes(commentClothesSizeFormViewModel.Clothes.GuidId,
-                               commentClothesSizeFormViewModel.Clothes.Id,
+            return new Clothes(commentClothesSizeFormViewModel.Clothes.Id,
                                commentClothesSizeFormViewModel.Clothes.Name,
                                commentClothesSizeFormViewModel.Clothes.Category,
                                commentClothesSizeFormViewModel.Clothes.Season,

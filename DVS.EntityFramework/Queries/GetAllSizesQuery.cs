@@ -13,7 +13,6 @@ namespace DVS.EntityFramework.Queries
             using DVSDbContext context = _dVSDbContextFactory.Create();
 
             var actualSizes = await context.Sizes
-                .Include(s => s.ClothesSizes)
                 .ToListAsync();
 
             return actualSizes;

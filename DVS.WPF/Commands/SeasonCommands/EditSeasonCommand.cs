@@ -11,7 +11,7 @@ namespace DVS.WPF.Commands.SeasonCommands
                                    SeasonStore seasonStore,
                                    ClothesStore clothesStore,
                                    ClothesSizeStore clothesSizeStore,
-                                   EmployeeClothesSizesStore employeeClothesSizesStore,
+                                   EmployeeClothesSizeStore employeeClothesSizesStore,
                                    EmployeeStore employeeStore)
                                    : AsyncCommandBase
     {

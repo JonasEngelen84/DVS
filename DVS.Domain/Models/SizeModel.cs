@@ -23,9 +23,6 @@ namespace DVS.Domain.Models
             ClothesSizes = [];
         }
 
-        public SizeModel()
-        {
-
-        }
+        public SizeModel() {}
     }
 }

@@ -33,7 +33,7 @@ namespace DVS.WPF.Stores
         {
             await _createClothesSizeCommand.Execute(clothesSize);
 
-            _clothesSizes.Add(clothesSize);
+            //_clothesSizes.Add(clothesSize);
         }
 
         public async Task Update(ClothesSize updatedClothesSize)
@@ -65,7 +65,7 @@ namespace DVS.WPF.Stores
             else
             {
                 throw new InvalidOperationException("Entfernen der Bekleidungsgröße nicht möglich.");
-            }            
+            }
         }
     }
 }

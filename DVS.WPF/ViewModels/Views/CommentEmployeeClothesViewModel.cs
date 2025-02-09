@@ -12,7 +12,7 @@ namespace DVS.WPF.ViewModels.Views
 
         public CommentEmployeeClothesViewModel(ModalNavigationStore modalNavigationStore,
                                                EmployeeStore employeeStore,
-                                               EmployeeClothesSizesStore employeeClothesSizesStore,
+                                               EmployeeClothesSizeStore employeeClothesSizesStore,
                                                SelectedEmployeeClothesSizeStore selectedDetailedEmployeeClothesItemStore,
                                                DVSListingViewModel dVSListingViewModel)
         {

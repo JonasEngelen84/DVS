@@ -17,7 +17,7 @@ namespace DVS.EntityFramework
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Employee>().HasKey(e => e.GuidId);
+            modelBuilder.Entity<Employee>().HasKey(e => e.Id);
 
             modelBuilder.Entity<Season>().HasKey(e => e.GuidId);
             modelBuilder.Entity<Season>().HasData(
@@ -63,7 +63,7 @@ namespace DVS.EntityFramework
                 new SizeModel(Guid.NewGuid(), "6XL", false)
             );
 
-            modelBuilder.Entity<Clothes>().HasKey(c => c.GuidId);
+            modelBuilder.Entity<Clothes>().HasKey(c => c.Id);
             modelBuilder.Entity<Clothes>()
                 .HasOne(c => c.Category)
                 .WithMany(cat => cat.Clothes)
@@ -77,7 +77,7 @@ namespace DVS.EntityFramework
             modelBuilder.Entity<ClothesSize>()
                 .HasOne(cs => cs.Clothes)
                 .WithMany(c => c.Sizes)
-                .HasForeignKey(cs => cs.ClothesGuidId)
+                .HasForeignKey(cs => cs.ClothesId)
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<ClothesSize>()
                 .HasOne(cs => cs.Size)
@@ -88,7 +88,7 @@ namespace DVS.EntityFramework
             modelBuilder.Entity<EmployeeClothesSize>()
                 .HasOne(ecs => ecs.Employee)
                 .WithMany(e => e.Clothes)
-                .HasForeignKey(ecs => ecs.EmployeeGuidId)
+                .HasForeignKey(ecs => ecs.EmployeeId)
                 .OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<EmployeeClothesSize>()
                 .HasOne(ecs => ecs.ClothesSize)

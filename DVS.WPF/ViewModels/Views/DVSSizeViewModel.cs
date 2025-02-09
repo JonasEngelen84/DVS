@@ -14,7 +14,7 @@ namespace DVS.WPF.ViewModels.Views
                                   SeasonStore seasonStore,
                                   ClothesStore clothesStore,
                                   ClothesSizeStore clothesSizeStore,
-                                  EmployeeClothesSizesStore employeeClothesSizesStore,
+                                  EmployeeClothesSizeStore employeeClothesSizesStore,
                                   EmployeeStore employeeStore,
                                   SelectedClothesSizeStore _selectedDetailedClothesItemStore,
                                   SelectedEmployeeClothesSizeStore _selectedDetailedEmployeeClothesItemStore,

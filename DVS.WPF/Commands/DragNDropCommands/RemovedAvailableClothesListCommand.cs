@@ -16,9 +16,9 @@ namespace DVS.WPF.Commands.DragNDropCommands
         {
             CheckQuantity();
 
-            if (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity > 0)
+            if (_addEditEmployeeListingViewModel.SelectedClothesSizeItem.Quantity > 0)
             {
-                _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity -= 1;
+                _addEditEmployeeListingViewModel.SelectedClothesSizeItem.Quantity -= 1;
 
                 UpdateEditedClothesList();
             }
@@ -28,7 +28,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         private void CheckQuantity()
         {
-            switch (_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity)
+            switch (_addEditEmployeeListingViewModel.SelectedClothesSizeItem.Quantity)
             {
                 case 1:
                     ShowErrorMessageBox("Nach der Transaktion ist diese Bekleidung nicht mehr vorrätig!", "Letztes Bekleidungsstück");
@@ -59,7 +59,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
                 //    Quantity = _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity -= 1
                 //};
 
-                addItemToEditedClothesList.Invoke(_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSize.GuidId);
+                addItemToEditedClothesList.Invoke(_addEditEmployeeListingViewModel.SelectedClothesSizeItem.ClothesSize.GuidId);
             }
             //else if (existingClothesSize != null && existingClothesSize.Quantity > 0)
             //    existingClothesSize.Quantity -= 1;

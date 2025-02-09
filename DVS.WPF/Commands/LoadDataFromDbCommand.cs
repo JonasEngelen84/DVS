@@ -8,7 +8,7 @@ namespace DVS.WPF.Commands
                                        ClothesStore clothesStore,
                                        ClothesSizeStore clothesSizeStore,
                                        EmployeeStore employeeStore,
-                                       EmployeeClothesSizesStore employeeClothesSizesStore)
+                                       EmployeeClothesSizeStore employeeClothesSizesStore)
                                        : AsyncCommandBase
     {
         private readonly SizeStore _sizeStore = sizeStore;
@@ -17,13 +17,14 @@ namespace DVS.WPF.Commands
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
         private readonly EmployeeStore _employeeStore = employeeStore;
-        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore = employeeClothesSizesStore;
+        private readonly EmployeeClothesSizeStore _employeeClothesSizesStore = employeeClothesSizesStore;
 
         public override async Task ExecuteAsync(object parameter)
         {
             try
             {
                 await _sizeStore.Load();
+
             }
             catch
             {
@@ -72,6 +73,7 @@ namespace DVS.WPF.Commands
             }
             catch
             {
+                
                 ShowErrorMessageBox("Laden der Employees ist fehlgeschlagen!", "LoadDataFromDbCommand");
             }
 

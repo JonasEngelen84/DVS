@@ -17,9 +17,6 @@ namespace DVS.Domain.Models
             Clothes = [];
         }
 
-        public Season()
-        {
-
-        }
+        public Season() {}
     }
 }

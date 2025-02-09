@@ -20,7 +20,7 @@ namespace DVS.WPF.Stores
         public event Action EmployeesLoaded;
         public event Action<Employee> EmployeeAdded;
         public event Action<Employee> EmployeeUpdated;
-        public event Action<Guid> EmployeeDeleted;
+        public event Action<string> EmployeeDeleted;
 
         public async Task Load()
         {
@@ -49,7 +49,7 @@ namespace DVS.WPF.Stores
         {
             await _updateEmployeeCommand.Execute(updatedEmployee);
 
-            int index = _employees.FindIndex(y => y.GuidId == updatedEmployee.GuidId);
+            int index = _employees.FindIndex(e => e.Id == updatedEmployee.Id);
 
             if (index != -1)
             {
@@ -67,18 +67,18 @@ namespace DVS.WPF.Stores
         {
             await _deleteEmployeeCommand.Execute(employee);
 
-            int index = _employees.FindIndex(y => y.GuidId == employee.GuidId);
+            int index = _employees.FindIndex(e => e.Id == employee.Id);
 
             if (index != -1)
             {
-                _employees.RemoveAll(y => y.GuidId == employee.GuidId);
+                _employees.RemoveAll(e => e.Id == employee.Id);
             }
             else
             {
                 throw new InvalidOperationException("Löschen des Mitarbeiters nicht möglich.");
             }
             
-            EmployeeDeleted?.Invoke(employee.GuidId);
+            EmployeeDeleted?.Invoke(employee.Id);
         }
     }
 }

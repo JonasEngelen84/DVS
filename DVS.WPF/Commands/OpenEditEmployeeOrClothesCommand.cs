@@ -15,7 +15,7 @@ namespace DVS.WPF.Commands
                                                   DVSListingViewModel dVSListingViewModel,
                                                   CategoryStore categoryStore,
                                                   ClothesSizeStore clothesSizeStore,
-                                                  EmployeeClothesSizesStore employeeClothesSizesStore,
+                                                  EmployeeClothesSizeStore employeeClothesSizesStore,
                                                   SeasonStore seasonStore)
                                                   : CommandBase
     {
@@ -29,7 +29,7 @@ namespace DVS.WPF.Commands
         private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
         private readonly CategoryStore _categoryStore = categoryStore;
         private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
-        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore = employeeClothesSizesStore;
+        private readonly EmployeeClothesSizeStore _employeeClothesSizesStore = employeeClothesSizesStore;
         private readonly SeasonStore _seasonStore = seasonStore;
 
         public override void Execute(object parameter)

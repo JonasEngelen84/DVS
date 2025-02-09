@@ -5,7 +5,7 @@ namespace DVS.Domain.Models
     public class ClothesSize
     {
         public Guid GuidId { get; }
-        public Guid ClothesGuidId { get; private set; }
+        public string ClothesId { get; private set; }
         public Guid SizeGuidId { get; private set; }
         public int Quantity { get; private set; }
         public string Comment { get; private set; }
@@ -19,7 +19,6 @@ namespace DVS.Domain.Models
             GuidId = guidId;
             Clothes = clothes;
             Size = size;
-            ClothesGuidId = clothes.GuidId;
             SizeGuidId = size.GuidId;
             Quantity = quantity;
             Comment = comment;
@@ -27,9 +26,6 @@ namespace DVS.Domain.Models
             EmployeeClothesSizes = [];
         }
 
-        public ClothesSize()
-        {
-
-        }
+        public ClothesSize() {}
     }
 }

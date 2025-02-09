@@ -45,7 +45,7 @@ namespace DVS.WPF.ViewModels
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
         private readonly ClothesSizeStore _clothesSizeStore;
-        private readonly EmployeeClothesSizesStore _employeeClothesSizesStore;
+        private readonly EmployeeClothesSizeStore _employeeClothesSizesStore;
         private readonly SelectedClothesSizeStore _selectedClothesSizeStore;
         private readonly SelectedEmployeeClothesSizeStore _selectedEmployeeClothesSizeStore;
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel;
@@ -59,7 +59,7 @@ namespace DVS.WPF.ViewModels
                                    CategoryStore categoryStore,
                                    SeasonStore seasonStore,
                                    ClothesSizeStore clothesSizeStore,
-                                   EmployeeClothesSizesStore employeeClothesSizesStore,
+                                   EmployeeClothesSizeStore employeeClothesSizesStore,
                                    SelectedClothesSizeStore selectedClothesSizeStore,
                                    SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
                                    AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
@@ -102,7 +102,7 @@ namespace DVS.WPF.ViewModels
                                                         CategoryStore categoryStore,
                                                         SeasonStore seasonStore,
                                                         ClothesSizeStore clothesSizeStore,
-                                                        EmployeeClothesSizesStore employeeClothesSizesStore,
+                                                        EmployeeClothesSizeStore employeeClothesSizesStore,
                                                         SelectedClothesSizeStore selectedDetailedClothesItemStore,
                                                         SelectedEmployeeClothesSizeStore selectedDetailedEmployeeClothesItemStore,
                                                         AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
@@ -138,7 +138,6 @@ namespace DVS.WPF.ViewModels
 
         private void ClothesStore_ClothesAdded(Clothes clothes)
         {
-            // Add ClothesListingItemViewModel
             _clothesCollection.Add(new ClothesListingItemViewModel(
                 clothes,
                 _modalNavigationStore,
@@ -151,7 +150,6 @@ namespace DVS.WPF.ViewModels
                 _employeeStore,
                 this));
 
-            // Add DetailedClothesListingItemViewModel
             if (clothes.Sizes.Count > 0)
             {
                 foreach (ClothesSize clothesSize in clothes.Sizes)
@@ -166,7 +164,7 @@ namespace DVS.WPF.ViewModels
             // ClothesItem:
             // Finden des zu bearbeitenden ClothesItem mit der passenden ClothesGuidID
             ClothesListingItemViewModel? ItemToUpdate = _clothesCollection
-                .FirstOrDefault(y => y.Clothes.GuidId == updatedClothes.GuidId);
+                .FirstOrDefault(y => y.Clothes.Id == updatedClothes.Id);
 
             ItemToUpdate?.Update(updatedClothes);
 
@@ -177,7 +175,7 @@ namespace DVS.WPF.ViewModels
 
             // Finden aller ClothesSizes mit der passenden ClothesID
             var existingClothesSizes = _clothesSizeCollection
-                .Where(y => y.Clothes.GuidId == updatedClothes.GuidId)
+                .Where(y => y.Clothes.Id == updatedClothes.Id)
                 .ToList();
 
             //if (currentClothesSizes.Count == 0)
@@ -220,21 +218,21 @@ namespace DVS.WPF.ViewModels
             //}
         }
         
-        private void ClothesStore_ClothesDeleted(Guid ClothesGuidID)
+        private void ClothesStore_ClothesDeleted(string ClothesId)
         {
-            //ClothesListingItemViewModel? ItemToDelete = _clothesCollection
-            //    .FirstOrDefault(y => y.Clothes.GuidId == ClothesGuidID);
+            ClothesListingItemViewModel? ItemToDelete = _clothesCollection
+                .FirstOrDefault(y => y.Clothes.Id == ClothesId);
 
-            //_clothesCollection.Remove(ItemToDelete);
+            _clothesCollection.Remove(ItemToDelete);
 
-            //List<DetailedClothesListingItemViewModel> ItemsToDelete = _clothesSizeCollection
-            //    .Where(y => y.Clothes.GuidId == ClothesGuidID)
-            //    .ToList();
+            List<ClothesSize> ItemsToDelete = _clothesSizeCollection
+                .Where(y => y.Clothes.Id == ClothesId)
+                .ToList();
 
-            //foreach (DetailedClothesListingItemViewModel item in ItemsToDelete)
-            //{
-            //    _clothesSizeCollection.Remove(item);
-            //}
+            foreach (ClothesSize item in ItemsToDelete)
+            {
+                _clothesSizeCollection.Remove(item);
+            }
         }
         
 
@@ -276,7 +274,7 @@ namespace DVS.WPF.ViewModels
         {
             // Finden des zu bearbeitenden EmployeeItem mit der passenden EmployeeGuidID
             EmployeeListingItemViewModel? ItemToUpdate = _employeeCollection
-                .FirstOrDefault(y => y.Employee.GuidId == updatedEmployee.GuidId);
+                .FirstOrDefault(y => y.Employee.Id == updatedEmployee.Id);
 
             ItemToUpdate?.Update(updatedEmployee);
 
@@ -285,7 +283,7 @@ namespace DVS.WPF.ViewModels
             {
                 // Finden aller EmployeeClothesSizes mit der passenden EmployeeGuidID
                 List<EmployeeClothesSize> itemsToDelete = _employeeClothesSizeCollection
-                .Where(y => y.Employee.GuidId == updatedEmployee.GuidId)
+                .Where(y => y.Employee.Id == updatedEmployee.Id)
                 .ToList();
 
                 foreach (EmployeeClothesSize item in itemsToDelete)
@@ -302,12 +300,12 @@ namespace DVS.WPF.ViewModels
                 {
                     // Erstellen einer Liste der aktuellen Bekleidungsgrößen des Mitarbeiter
                     var currentClothesSizes = updatedEmployee.Clothes
-                        .Select(ecs => new { ecs.ClothesSize.Clothes.GuidId, ecs.ClothesSize.Size.Size })
+                        .Select(ecs => new { ecs.ClothesSize.Clothes.Id, ecs.ClothesSize.Size.Size })
                         .ToHashSet();
 
                     // Finden der DetailedEmployeeClothesItems mit der passenden EmployeeGuidID
                     var detailedItems = _employeeClothesSizeCollection
-                        .Where(y => y.Employee.GuidId == updatedEmployee.GuidId)
+                        .Where(y => y.Employee.Id == updatedEmployee.Id)
                         .ToList();
 
                     //foreach (var item in detailedItems)
@@ -340,15 +338,15 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private void EmployeeStore_EmployeeDeleted(Guid EmployeeGuidID)
+        private void EmployeeStore_EmployeeDeleted(string EmployeeId)
         {
             EmployeeListingItemViewModel? ItemToDelete = _employeeCollection
-                .FirstOrDefault(y => y.Employee.GuidId == EmployeeGuidID);
+                .FirstOrDefault(y => y.Employee.Id == EmployeeId);
 
             _employeeCollection.Remove(ItemToDelete);
 
             List<EmployeeClothesSize> itemsToDelete = _employeeClothesSizeCollection
-                .Where(y => y.Employee.GuidId == EmployeeGuidID)
+                .Where(y => y.Employee.Id == EmployeeId)
                 .ToList();
 
             foreach (EmployeeClothesSize item in itemsToDelete)

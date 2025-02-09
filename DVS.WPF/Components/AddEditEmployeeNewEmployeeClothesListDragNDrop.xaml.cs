@@ -64,7 +64,7 @@ namespace DVS.WPF.Components
 
         private void ClothesItemList_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Serializable) is ClothesSizeListingItem ClothesItem)
+            if (e.Data.GetData(DataFormats.Serializable) is AvailableClothesSizeItem ClothesItem)
             {
                 if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {

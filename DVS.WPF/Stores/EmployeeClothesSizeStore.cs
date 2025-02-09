@@ -4,7 +4,7 @@ using DVS.Domain.Queries;
 
 namespace DVS.WPF.Stores
 {
-    public class EmployeeClothesSizesStore(IGetAllEmployeeClothesSizesQuery getAllEmployeeClothesSizesQuery,
+    public class EmployeeClothesSizeStore(IGetAllEmployeeClothesSizesQuery getAllEmployeeClothesSizesQuery,
                                            ICreateEmployeeClothesSizeCommand createEmployeeClothesSizeCommand,
                                            IUpdateEmployeeClothesSizeCommand updateEmployeeClothesSizeCommand,
                                            IDeleteEmployeeClothesSizeCommand deleteEmployeeClothesSizeCommand)

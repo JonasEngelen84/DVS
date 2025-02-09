@@ -13,7 +13,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                                     CategoryStore categoryStore,
                                     SeasonStore seasonStore,
                                     ClothesSizeStore clothesSizeStore,
-                                    EmployeeClothesSizesStore employeeClothesSizesStore,
+                                    EmployeeClothesSizeStore employeeClothesSizesStore,
                                     ModalNavigationStore modalNavigationStore) 
                                     : AsyncCommandBase
     {
@@ -36,8 +36,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 editClothesFormViewModel.HasError = false;
                 editClothesFormViewModel.IsSubmitting = true;
 
-                Clothes updatedClothes = new(editClothesFormViewModel.Clothes.GuidId,
-                                             editClothesFormViewModel.Id,
+                Clothes updatedClothes = new(editClothesFormViewModel.Id,
                                              editClothesFormViewModel.Name,
                                              editClothesFormViewModel.Category,
                                              editClothesFormViewModel.Season,

@@ -1,4 +1,5 @@
-﻿using DVS.WPF.Stores;
+﻿using DVS.Domain.Models;
+using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Views;
 
@@ -20,8 +21,8 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
         public override void Execute(object parameter)
         {
-            _addEditEmployeeListingViewModel.ClearLists();
             _addEditEmployeeListingViewModel.LoadAvailableSizes();
+            _addEditEmployeeListingViewModel.LoadEmployeeClothes(null);
 
             AddEmployeeViewModel addEmployeeViewModel = new(_addEditEmployeeListingViewModel,
                                                             _employeeStore,

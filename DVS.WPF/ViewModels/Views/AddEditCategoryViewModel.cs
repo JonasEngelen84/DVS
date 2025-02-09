@@ -16,7 +16,7 @@ namespace DVS.WPF.ViewModels.Views
                                         SizeStore sizeStore,
                                         ClothesStore clothesStore,
                                         ClothesSizeStore clothesSizeStore,
-                                        EmployeeClothesSizesStore employeeClothesSizesStore,
+                                        EmployeeClothesSizeStore employeeClothesSizesStore,
                                         EmployeeStore employeeStore,
                                         AddClothesViewModel addClothesViewModel,
                                         EditClothesViewModel editClothesViewModel,

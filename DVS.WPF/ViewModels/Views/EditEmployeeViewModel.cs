@@ -21,7 +21,7 @@ namespace DVS.WPF.ViewModels.Views
                                      CategoryStore categoryStore,
                                      SeasonStore seasonStore,
                                      ClothesSizeStore clothesSizeStore,
-                                     EmployeeClothesSizesStore employeeClothesSizesStore,
+                                     EmployeeClothesSizeStore employeeClothesSizesStore,
                                      ModalNavigationStore modalNavigationStore,
                                      AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
         {

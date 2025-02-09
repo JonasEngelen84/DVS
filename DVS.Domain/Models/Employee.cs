@@ -4,7 +4,6 @@ namespace DVS.Domain.Models
 {
     public class Employee
     {
-        public Guid GuidId { get; }
         public string Id { get; private set; }
         public string Lastname { get; private set; }
         public string Firstname { get; private set; }
@@ -12,9 +11,8 @@ namespace DVS.Domain.Models
 
         public ObservableCollection<EmployeeClothesSize> Clothes { get; set; }
 
-        public Employee(Guid guidId, string id, string lastname, string firstname, string comment)
+        public Employee(string id, string lastname, string firstname, string comment)
         {
-            GuidId = guidId;
             Id = id;
             Lastname = lastname;
             Firstname = firstname;
@@ -23,9 +21,6 @@ namespace DVS.Domain.Models
             Clothes = [];
         }
 
-        public Employee()
-        {
-
-        }
+        public Employee() {}
     }
 }
