@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Models;
 using DVS.Domain.Queries;
-using DVS.EntityFramework.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Queries
@@ -14,9 +13,6 @@ namespace DVS.EntityFramework.Queries
             using DVSDbContext context = _dVSDbContextFactory.Create();
 
             var actualEmployee = await context.Employees
-                .Include(e => e.Clothes)
-                    .ThenInclude(ecs => ecs.ClothesSize)
-                        .ThenInclude(cs => cs.Clothes)
                 .Include(e => e.Clothes)
                     .ThenInclude(ecs => ecs.ClothesSize)
                         .ThenInclude(cs => cs.Clothes)

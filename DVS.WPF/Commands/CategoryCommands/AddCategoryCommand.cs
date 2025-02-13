@@ -25,7 +25,6 @@ namespace DVS.WPF.Commands.CategoryCommands
             catch (Exception)
             {
                 ShowErrorMessageBox("Hinzufügen der Category in Datenbank ist fehlgeschlagen!", "AddCategoryCommand ExecuteAsync");
-
                 addEditCategoryFormViewModel.HasError = true;
             }
             finally

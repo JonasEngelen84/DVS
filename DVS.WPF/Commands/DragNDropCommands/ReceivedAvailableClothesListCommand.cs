@@ -57,12 +57,12 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         private static AvailableClothesSizeItem CreateNewAcsi(AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel)
         {
-            AvailableClothesSizeItem newDclivm = new(_addEditEmployeeListingViewModel.SelectedClothesSizeItem.ClothesSize)
+            AvailableClothesSizeItem newAcsi = new(_addEditEmployeeListingViewModel.SelectedClothesSizeItem.ClothesSize)
             {
                 Quantity = 1
             };
 
-            return newDclivm;
+            return newAcsi;
         }
 
         private void UpdateEditedClothesList(Guid guidId)

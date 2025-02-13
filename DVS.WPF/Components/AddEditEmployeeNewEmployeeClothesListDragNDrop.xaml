@@ -12,7 +12,8 @@
               Background="WhiteSmoke"
               AllowDrop="True"
               Drop="ClothesItemList_Drop"
-              ItemsSource="{Binding EmployeeClothesList}">
+              ItemsSource="{Binding EmployeeClothesList}"
+              SelectedItem="{Binding SelectedClothesSizeItem}">
 
         <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
@@ -24,10 +25,10 @@
             <GridView>
                 <GridViewColumn Header="Id"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding Id}" />
+                                DisplayMemberBinding="{Binding ClothesId}" />
                 <GridViewColumn Header="Name"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding Name}" />
+                                DisplayMemberBinding="{Binding ClothesName}" />
                 <GridViewColumn Header="Größe"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Size}" />

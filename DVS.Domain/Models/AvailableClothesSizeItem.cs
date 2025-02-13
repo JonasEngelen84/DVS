@@ -18,7 +18,6 @@
             set
             {
                 _quantity = value;
-
                 OnPropertyChanged(nameof(Quantity));
             }
         }
@@ -27,19 +26,6 @@
         {
             ClothesSize = clothesSize;
             _quantity = ClothesSize.Quantity;
-        }
-
-        public void Update(ClothesSize clothesSize)
-        {
-            ClothesSize = clothesSize;
-            _quantity = clothesSize.Quantity;
-
-            OnPropertyChanged(nameof(ClothesId));
-            OnPropertyChanged(nameof(ClothesName));
-            OnPropertyChanged(nameof(Category));
-            OnPropertyChanged(nameof(Season));
-            OnPropertyChanged(nameof(Quantity));
-            OnPropertyChanged(nameof(Comment));
         }
     }
 }

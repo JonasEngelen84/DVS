@@ -15,10 +15,10 @@ namespace DVS.WPF.Commands.DragNDropCommands
         {
             if (_addEditEmployeeListingViewModel.SelectedClothesSizeItem.Quantity > 0)
             {
-                AvailableClothesSizeItem? existingDclivm = _addEditEmployeeListingViewModel.GetClothesSizeFrom_employeeClothesSizes();
+                AvailableClothesSizeItem? existingAcsi = _addEditEmployeeListingViewModel.GetClothesSizeFrom_employeeClothesSizes();
 
-                if (existingDclivm != null)
-                    existingDclivm.Quantity += 1;
+                if (existingAcsi != null)
+                    existingAcsi.Quantity += 1;
                 else
                     _addItemToEmployeeClothesList?.Invoke(CreateNewAcsi(_addEditEmployeeListingViewModel));
             }

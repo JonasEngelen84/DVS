@@ -9,6 +9,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
                                         EmployeeStore employeeStore,
                                         ClothesStore clothesStore,
                                         ClothesSizeStore clothesSizeStore,
+                                        EmployeeClothesSizeStore employeeClothesSizeStore,
                                         ModalNavigationStore modalNavigationStore,
                                         DVSListingViewModel dVSListingViewModel)
                                         : CommandBase
@@ -17,6 +18,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
         private readonly EmployeeStore _employeeStore = employeeStore;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
+        private readonly EmployeeClothesSizeStore _employeeClothesSizeStore = employeeClothesSizeStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
 
         public override void Execute(object parameter)
@@ -28,6 +30,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
                                                             _employeeStore,
                                                             _clothesStore,
                                                             _clothesSizeStore,
+                                                            _employeeClothesSizeStore,
                                                             _modalNavigationStore,
                                                             dVSListingViewModel);
 

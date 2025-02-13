@@ -53,18 +53,8 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
             if (existingClothesSize == null)
             {
-                //DetailedClothesListingItemViewModel newDclivm = new(_addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Clothes,
-                //                                                    _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.ClothesSize)
-                //{
-                //    Quantity = _addEditEmployeeListingViewModel.SelectedDetailedClothesItem.Quantity -= 1
-                //};
-
                 addItemToEditedClothesList.Invoke(_addEditEmployeeListingViewModel.SelectedClothesSizeItem.ClothesSize.GuidId);
             }
-            //else if (existingClothesSize != null && existingClothesSize.Quantity > 0)
-            //    existingClothesSize.Quantity -= 1;
-            //else
-            //    _removeItemFromEditedClothesList.Invoke(existingClothesSize);
         }
     }
 }

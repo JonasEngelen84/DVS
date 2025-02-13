@@ -1,5 +1,4 @@
 ﻿using DVS.Domain.Models;
-using DVS.WPF.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

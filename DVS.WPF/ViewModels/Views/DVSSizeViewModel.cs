@@ -56,6 +56,7 @@ namespace DVS.WPF.ViewModels.Views
             employeeStore,
             clothesStore,
             clothesSizeStore,
+            employeeClothesSizesStore,
             modalNavigationStore,
             dVSListingViewModel);
 

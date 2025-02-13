@@ -14,6 +14,7 @@
         {
             GuidId = guidId;
             Employee = employee;
+            EmployeeId = employee.Id;
             ClothesSize = clothesSize;
             ClothesSizeGuidId = clothesSize.GuidId;
             Quantity = quantity;

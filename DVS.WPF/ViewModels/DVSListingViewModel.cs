@@ -224,15 +224,6 @@ namespace DVS.WPF.ViewModels
                 .FirstOrDefault(y => y.Clothes.Id == ClothesId);
 
             _clothesCollection.Remove(ItemToDelete);
-
-            List<ClothesSize> ItemsToDelete = _clothesSizeCollection
-                .Where(y => y.Clothes.Id == ClothesId)
-                .ToList();
-
-            foreach (ClothesSize item in ItemsToDelete)
-            {
-                _clothesSizeCollection.Remove(item);
-            }
         }
         
 

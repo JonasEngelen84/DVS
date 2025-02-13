@@ -11,12 +11,7 @@ namespace DVS.EntityFramework.Queries
         public async Task<IEnumerable<Category>> Execute()
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
-
-            var actualCategory = await context.Categories
-                .Include(c => c.Clothes)
-                .ToListAsync();
-
-            return actualCategory;
+            return await context.Categories.ToListAsync();
         }
     }
 }

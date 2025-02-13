@@ -18,6 +18,7 @@ namespace DVS.Domain.Models
         {
             GuidId = guidId;
             Clothes = clothes;
+            ClothesId = clothes.Id;
             Size = size;
             SizeGuidId = size.GuidId;
             Quantity = quantity;

@@ -28,7 +28,7 @@ namespace DVS.WPF.ViewModels.Views
 
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
-            ICommand addClothes = new AddClothesCommand(this, clothesStore, modalNavigationStore);
+            ICommand addClothes = new AddClothesCommand(this, clothesStore, clothesSizeStore, modalNavigationStore);
 
             ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(modalNavigationStore,
                                                                               categoryStore,

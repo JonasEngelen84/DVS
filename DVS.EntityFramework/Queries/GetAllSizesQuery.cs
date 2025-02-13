@@ -11,11 +11,7 @@ namespace DVS.EntityFramework.Queries
         public async Task<IEnumerable<SizeModel>> Execute()
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
-
-            var actualSizes = await context.Sizes
-                .ToListAsync();
-
-            return actualSizes;
+            return await context.Sizes.ToListAsync();
         }
     }
 }

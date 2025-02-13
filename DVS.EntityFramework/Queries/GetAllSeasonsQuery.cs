@@ -11,12 +11,7 @@ namespace DVS.EntityFramework.Queries
         public async Task<IEnumerable<Season>> Execute()
         {
             using DVSDbContext context = _dVSDbContextFactory.Create();
-
-            var actualSeason = await context.Seasons
-                .Include(s => s.Clothes)
-                .ToListAsync();
-
-            return actualSeason;
+            return await context.Seasons.ToListAsync();
         }
     }
 }

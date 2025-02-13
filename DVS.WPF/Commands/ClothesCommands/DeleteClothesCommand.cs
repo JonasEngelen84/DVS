@@ -18,12 +18,6 @@ namespace DVS.WPF.Commands.ClothesCommands
                 _clothesListingItemViewModel.HasError = false;
                 _clothesListingItemViewModel.IsDeleting = true;
 
-                // Aktualisieren der ClothesSize-Liste von Size
-                foreach (ClothesSize clothesSize in _clothesListingItemViewModel.Clothes.Sizes)
-                {
-                    clothesSize.Size.ClothesSizes.Remove(clothesSize);
-                }
-
                 try
                 {
                     await _clothesStore.Delete(_clothesListingItemViewModel.Clothes);
