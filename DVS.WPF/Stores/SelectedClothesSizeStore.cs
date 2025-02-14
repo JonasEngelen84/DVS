@@ -7,7 +7,7 @@ namespace DVS.WPF.Stores
         private ClothesSize _selectedClothesSize;
         public ClothesSize SelectedClothesSize
         {
-            get =>_selectedClothesSize;
+            get => _selectedClothesSize;
 
             set
             {

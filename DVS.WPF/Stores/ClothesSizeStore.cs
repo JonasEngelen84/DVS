@@ -41,19 +41,19 @@ namespace DVS.WPF.Stores
             _clothesSizes.Add(clothesSize);
         }
 
-        public async Task Update(ClothesSize updatedClothesSize)
+        public async Task Update(ClothesSize editedClothesSize)
         {
-            await _updateClothesSizeCommand.Execute(updatedClothesSize);
+            await _updateClothesSizeCommand.Execute(editedClothesSize);
 
-            int index = _clothesSizes.FindIndex(y => y.GuidId == updatedClothesSize.GuidId);
+            int index = _clothesSizes.FindIndex(y => y.GuidId == editedClothesSize.GuidId);
 
             if (index != -1)
             {
-                _clothesSizes[index] = updatedClothesSize;
+                _clothesSizes[index] = editedClothesSize;
             }
             else
             {
-                _clothesSizes.Add(updatedClothesSize);
+                _clothesSizes.Add(editedClothesSize);
             }
         }
 
