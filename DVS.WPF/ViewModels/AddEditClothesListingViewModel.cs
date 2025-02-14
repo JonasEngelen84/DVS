@@ -71,12 +71,10 @@ namespace DVS.WPF.ViewModels
             SeasonStore_SeasonsLoaded();
             LoadSizes();
 
-            _categoryStore.CategoriesLoaded += CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded += CategoryStore_CategoryAdded;
             _categoryStore.CategoryUpdated += CategoryStore_CategoryUpdated;
             _categoryStore.CategoryDeleted += CategoryStore_CategoryDeleted;
 
-            _seasonStore.SeasonsLoaded += SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonAdded += SeasonStore_SeasonAdded;
             _seasonStore.SeasonUpdated += SeasonStore_SeasonUpdated;
             _seasonStore.SeasonDeleted += SeasonStore_SeasonDeleted;
@@ -230,12 +228,10 @@ namespace DVS.WPF.ViewModels
 
         protected override void Dispose()
         {
-            _categoryStore.CategoriesLoaded -= CategoryStore_CategoriesLoaded;
             _categoryStore.CategoryAdded -= CategoryStore_CategoryAdded;
             _categoryStore.CategoryUpdated -= CategoryStore_CategoryUpdated;
             _categoryStore.CategoryDeleted -= CategoryStore_CategoryDeleted;
 
-            _seasonStore.SeasonsLoaded -= SeasonStore_SeasonsLoaded;
             _seasonStore.SeasonAdded -= SeasonStore_SeasonAdded;
             _seasonStore.SeasonUpdated -= SeasonStore_SeasonUpdated;
             _seasonStore.SeasonDeleted -= SeasonStore_SeasonDeleted;
