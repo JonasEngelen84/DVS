@@ -4,12 +4,10 @@ using DVS.Domain.Queries;
 
 namespace DVS.WPF.Stores
 {
-    public class EmployeeClothesSizeStore(IGetAllEmployeeClothesSizesQuery getAllEmployeeClothesSizesQuery,
-                                           ICreateEmployeeClothesSizeCommand createEmployeeClothesSizeCommand,
-                                           IUpdateEmployeeClothesSizeCommand updateEmployeeClothesSizeCommand,
-                                           IDeleteEmployeeClothesSizeCommand deleteEmployeeClothesSizeCommand)
+    public class EmployeeClothesSizeStore(ICreateEmployeeClothesSizeCommand createEmployeeClothesSizeCommand,
+                                          IUpdateEmployeeClothesSizeCommand updateEmployeeClothesSizeCommand,
+                                          IDeleteEmployeeClothesSizeCommand deleteEmployeeClothesSizeCommand)
     {
-        private readonly IGetAllEmployeeClothesSizesQuery _getAllEmployeeClothesSizesQuery = getAllEmployeeClothesSizesQuery;
         private readonly ICreateEmployeeClothesSizeCommand _createEmployeeClothesSizeCommand = createEmployeeClothesSizeCommand;
         private readonly IUpdateEmployeeClothesSizeCommand _updateEmployeeClothesSizeCommand = updateEmployeeClothesSizeCommand;
         private readonly IDeleteEmployeeClothesSizeCommand _deleteEmployeeClothesSizeCommand = deleteEmployeeClothesSizeCommand;
@@ -17,10 +15,8 @@ namespace DVS.WPF.Stores
         private readonly List<EmployeeClothesSize> _employeeClothesSizes = [];
         public IEnumerable<EmployeeClothesSize> EmployeeClothesSizes => _employeeClothesSizes;
 
-        public async Task Load()
+        public void Load(List<EmployeeClothesSize> employeeClothesSize)
         {
-            IEnumerable<EmployeeClothesSize> employeeClothesSize = await _getAllEmployeeClothesSizesQuery.Execute();
-
             _employeeClothesSizes.Clear();
 
             if (employeeClothesSize != null)

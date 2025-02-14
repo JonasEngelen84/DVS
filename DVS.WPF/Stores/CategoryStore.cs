@@ -5,14 +5,12 @@ using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
 {
-    public class CategoryStore(IGetAllCategoriesQuery getAllCategoriesQuery,
-                               ICreateCategoryCommand createCategoryCommand,
+    public class CategoryStore(ICreateCategoryCommand createCategoryCommand,
                                IUpdateCategoryCommand updateCategoryCommand,
                                IDeleteCategoryCommand deleteCategoryCommand)
     {
         public Category Categoryless { get; }
         
-        private readonly IGetAllCategoriesQuery _getAllCategoriesQuery = getAllCategoriesQuery;
         private readonly ICreateCategoryCommand _createCategoryCommand = createCategoryCommand;
         private readonly IUpdateCategoryCommand _updateCategoryCommand = updateCategoryCommand; 
         private readonly IDeleteCategoryCommand _deleteCategoryCommand = deleteCategoryCommand;
@@ -20,25 +18,20 @@ namespace DVS.WPF.Stores
         private readonly List<Category> _categories = [];
         public IEnumerable<Category> Categories => _categories;
 
-        public event Action CategoriesLoaded;
         public event Action<Category, AddEditCategoryFormViewModel> CategoryAdded;
         public event Action<Category, AddEditCategoryFormViewModel> CategoryUpdated;
         public event Action<Guid, AddEditCategoryFormViewModel> CategoryDeleted;
         public event Action<AddEditCategoryFormViewModel> AllCategoriesDeleted;
 
 
-        public async Task Load()
+        public void Load(List<Category> categorie)
         {
-            IEnumerable<Category> categorie = await _getAllCategoriesQuery.Execute();
-
             _categories.Clear();
 
             if (categorie != null)
             {
                 _categories.AddRange(categorie);
             }
-
-            CategoriesLoaded?.Invoke();
         }
 
         public async Task Add(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)

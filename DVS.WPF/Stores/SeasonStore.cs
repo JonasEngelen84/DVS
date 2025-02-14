@@ -5,12 +5,10 @@ using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
 {
-    public class SeasonStore(IGetAllSeasonsQuery getAllSeasonsQuery,
-                             ICreateSeasonCommand CreateSeasonCommand,
+    public class SeasonStore(ICreateSeasonCommand CreateSeasonCommand,
                              IUpdateSeasonCommand UpdateSeasonCommand,
                              IDeleteSeasonCommand DeleteSeasonCommand)
     {
-        private readonly IGetAllSeasonsQuery _getAllSeasonsQuery = getAllSeasonsQuery;
         private readonly ICreateSeasonCommand _createSeasonCommand = CreateSeasonCommand;
         private readonly IUpdateSeasonCommand _updateSeasonCommand = UpdateSeasonCommand;
         private readonly IDeleteSeasonCommand _deleteSeasonCommand = DeleteSeasonCommand;
@@ -18,24 +16,19 @@ namespace DVS.WPF.Stores
         private readonly List<Season> _seasons = [];
         public IEnumerable<Season> Seasons => _seasons;
 
-        public event Action SeasonsLoaded;
         public event Action<Season, AddEditSeasonFormViewModel> SeasonAdded;
         public event Action<Season, AddEditSeasonFormViewModel> SeasonUpdated;
         public event Action<Guid, AddEditSeasonFormViewModel> SeasonDeleted;
         public event Action<AddEditSeasonFormViewModel> AllSeasonsDeleted;
 
-        public async Task Load()
+        public void Load(List<Season> seasons)
         {
-            IEnumerable<Season> season = await _getAllSeasonsQuery.Execute();
-
             _seasons.Clear();
 
-            if (season != null)
+            if (seasons != null)
             {
-                _seasons.AddRange(season);
+                _seasons.AddRange(seasons);
             }
-
-            SeasonsLoaded?.Invoke();
         }
 
         public async Task Add(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)

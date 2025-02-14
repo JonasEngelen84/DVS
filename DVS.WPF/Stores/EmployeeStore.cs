@@ -4,12 +4,10 @@ using DVS.Domain.Queries;
 
 namespace DVS.WPF.Stores
 {
-    public class EmployeeStore(IGetAllEmployeesQuery getAllEmployeesQuery,
-                               ICreateEmployeeCommand createEmployeeCommand,
+    public class EmployeeStore(ICreateEmployeeCommand createEmployeeCommand,
                                IUpdateEmployeeCommand updateEmployeeCommand,
                                IDeleteEmployeeCommand deleteEmployeeCommand)
     {
-        private readonly IGetAllEmployeesQuery _getAllEmployeesQuery = getAllEmployeesQuery;
         private readonly ICreateEmployeeCommand _createEmployeeCommand = createEmployeeCommand;
         private readonly IUpdateEmployeeCommand _updateEmployeeCommand = updateEmployeeCommand;
         private readonly IDeleteEmployeeCommand _deleteEmployeeCommand = deleteEmployeeCommand;
@@ -17,23 +15,18 @@ namespace DVS.WPF.Stores
         private readonly List<Employee> _employees = [];
         public IEnumerable<Employee> Employees => _employees;
 
-        public event Action EmployeesLoaded;
         public event Action<Employee> EmployeeAdded;
         public event Action<Employee> EmployeeUpdated;
         public event Action<string> EmployeeDeleted;
 
-        public async Task Load()
+        public void Load(List<Employee> employees)
         {
-            IEnumerable<Employee> employee = await _getAllEmployeesQuery.Execute();
-
             _employees.Clear();
 
-            if (employee != null)
+            if (employees != null)
             {
-                _employees.AddRange(employee);
+                _employees.AddRange(employees);
             }
-
-            EmployeesLoaded?.Invoke();
         }
 
         public async Task Add(Employee employee)

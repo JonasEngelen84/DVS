@@ -4,12 +4,10 @@ using DVS.Domain.Queries;
 
 namespace DVS.WPF.Stores
 {
-    public class ClothesSizeStore(IGetAllClothesSizesQuery getallClotesSizesQuery,
-                                  ICreateClothesSizeCommand createClothesSizeCommand,
+    public class ClothesSizeStore(ICreateClothesSizeCommand createClothesSizeCommand,
                                   IUpdateClothesSizeCommand updateClothesSizeCommand,
                                   IDeleteClothesSizeCommand deleteClothesSizeCommand)
     {
-        private readonly IGetAllClothesSizesQuery _getAllClothesSizesQuery = getallClotesSizesQuery;
         private readonly ICreateClothesSizeCommand _createClothesSizeCommand = createClothesSizeCommand;
         private readonly IUpdateClothesSizeCommand _updateClothesSizeCommand = updateClothesSizeCommand;
         private readonly IDeleteClothesSizeCommand _deleteClothesSizeCommand = deleteClothesSizeCommand;
@@ -17,10 +15,8 @@ namespace DVS.WPF.Stores
         private readonly List<ClothesSize> _clothesSizes = [];
         public IEnumerable<ClothesSize> ClothesSizes => _clothesSizes;
 
-        public async Task Load()
+        public void Load(List<ClothesSize> clothesSizes)
         {
-            IEnumerable<ClothesSize> clothesSizes = await _getAllClothesSizesQuery.Execute();
-
             _clothesSizes.Clear();
 
             if (clothesSizes != null)

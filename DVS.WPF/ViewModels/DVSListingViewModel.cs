@@ -1,8 +1,6 @@
 ﻿using DVS.Domain.Models;
-using DVS.WPF.Commands;
 using DVS.WPF.Stores;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels
 {
@@ -50,8 +48,6 @@ namespace DVS.WPF.ViewModels
         private readonly SelectedEmployeeClothesSizeStore _selectedEmployeeClothesSizeStore;
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel;
 
-        public ICommand LoadDataFromDbCommand { get; }
-
         public DVSListingViewModel(SizeStore sizeStore,
                                    ClothesStore clothesStore,
                                    EmployeeStore employeeStore,
@@ -76,56 +72,19 @@ namespace DVS.WPF.ViewModels
             _selectedEmployeeClothesSizeStore = selectedEmployeeClothesSizeStore;
             _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
 
-            LoadDataFromDbCommand = new LoadDataFromDbCommand(sizeStore,
-                                                              categoryStore,
-                                                              seasonStore,
-                                                              clothesStore,
-                                                              clothesSizeStore,
-                                                              employeeStore,
-                                                              employeeClothesSizesStore);
-
-            _clothesStore.ClothesLoaded += ClothesStore_ClothesLoaded;
             _clothesStore.ClothesAdded += ClothesStore_ClothesAdded;
             _clothesStore.ClothesUpdated += ClothesStore_ClothesUpdated;
             _clothesStore.ClothesDeleted += ClothesStore_ClothesDeleted;
 
-            _employeeStore.EmployeesLoaded += EmployeeStore_EmployeesLoaded;
             _employeeStore.EmployeeAdded += EmployeeStore_EmployeeAdded;
             _employeeStore.EmployeeUpdated += EmployeeStore_EmployeeUpdated;
             _employeeStore.EmployeeDeleted += EmployeeStore_EmployeeDeleted;
+
+            LoadClothes();
+            LoadEmployees();
         }
 
-        public static DVSListingViewModel LoadViewModel(SizeStore sizeStore,
-                                                        ClothesStore clothesStore,
-                                                        EmployeeStore employeeStore,
-                                                        ModalNavigationStore modalNavigationStore,
-                                                        CategoryStore categoryStore,
-                                                        SeasonStore seasonStore,
-                                                        ClothesSizeStore clothesSizeStore,
-                                                        EmployeeClothesSizeStore employeeClothesSizesStore,
-                                                        SelectedClothesSizeStore selectedDetailedClothesItemStore,
-                                                        SelectedEmployeeClothesSizeStore selectedDetailedEmployeeClothesItemStore,
-                                                        AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
-        {
-            DVSListingViewModel viewModel = new (sizeStore,
-                                                 clothesStore,
-                                                 employeeStore,
-                                                 modalNavigationStore,
-                                                 categoryStore,
-                                                 seasonStore,
-                                                 clothesSizeStore,
-                                                 employeeClothesSizesStore,
-                                                 selectedDetailedClothesItemStore,
-                                                 selectedDetailedEmployeeClothesItemStore,
-                                                 addEditEmployeeListingViewModel);
-
-            viewModel.LoadDataFromDbCommand.Execute(null);
-
-            return viewModel;
-        }
-
-
-        private void ClothesStore_ClothesLoaded()
+        private void LoadClothes()
         {
             _clothesCollection.Clear();
             _clothesSizeCollection.Clear();
@@ -227,7 +186,7 @@ namespace DVS.WPF.ViewModels
         }
         
 
-        private void EmployeeStore_EmployeesLoaded()
+        private void LoadEmployees()
         {
             _employeeCollection.Clear();
             _employeeClothesSizeCollection.Clear();
@@ -349,12 +308,10 @@ namespace DVS.WPF.ViewModels
 
         protected override void Dispose()
         {
-            _clothesStore.ClothesLoaded -= ClothesStore_ClothesLoaded;
             _clothesStore.ClothesAdded -= ClothesStore_ClothesAdded;
             _clothesStore.ClothesUpdated -= ClothesStore_ClothesUpdated;
             _clothesStore.ClothesDeleted -= ClothesStore_ClothesDeleted;
 
-            _employeeStore.EmployeesLoaded -= EmployeeStore_EmployeesLoaded;
             _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
             _employeeStore.EmployeeUpdated -= EmployeeStore_EmployeeUpdated;
             _employeeStore.EmployeeDeleted += EmployeeStore_EmployeeDeleted;

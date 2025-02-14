@@ -1,15 +1,12 @@
 ﻿using DVS.Domain.Commands.ClothesCommands;
 using DVS.Domain.Models;
-using DVS.Domain.Queries;
 
 namespace DVS.WPF.Stores
 {
-    public class ClothesStore(IGetAllClothesQuery getAllClothesQuery,
-                              ICreateClothesCommand createClothesCommand,
+    public class ClothesStore(ICreateClothesCommand createClothesCommand,
                               IUpdateClothesCommand updateClothesCommand,
                               IDeleteClothesCommand deleteClothesCommand)
     {
-        private readonly IGetAllClothesQuery _getAllClothesQuery = getAllClothesQuery;
         private readonly ICreateClothesCommand _createClothesCommand = createClothesCommand;
         private readonly IUpdateClothesCommand _updateClothesCommand = updateClothesCommand;
         private readonly IDeleteClothesCommand _deleteClothesCommand = deleteClothesCommand;
@@ -17,23 +14,18 @@ namespace DVS.WPF.Stores
         private readonly List<Clothes> _clothes = [];
         public IEnumerable<Clothes> Clothes => _clothes;
 
-        public event Action ClothesLoaded;
         public event Action<Clothes> ClothesAdded;
         public event Action<Clothes> ClothesUpdated;
         public event Action<string> ClothesDeleted;
 
-        public async Task Load()
+        public void Load(List<Clothes> clothes)
         {
-            IEnumerable<Clothes> clothes = await _getAllClothesQuery.Execute();
-
             _clothes.Clear();
 
             if (clothes != null)
             {
                 _clothes.AddRange(clothes);
             }
-
-            ClothesLoaded?.Invoke();
         }
 
         public async Task Add(Clothes clothes)
