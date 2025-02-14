@@ -16,8 +16,8 @@ namespace DVS.WPF.Commands.CommentCommands
                                     DVSListingViewModel dVSListingViewModel)
                                     : CommandBase
     {
-        private readonly SelectedClothesSizeStore _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
-        private readonly SelectedEmployeeClothesSizeStore _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
+        private readonly SelectedClothesSizeStore _selectedClothesSizeStore = selectedDetailedClothesItemStore;
+        private readonly SelectedEmployeeClothesSizeStore _selectedEmployeeClothesSizeStore = selectedDetailedEmployeeClothesItemStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly CategoryStore _categoryStore = categoryStore;
@@ -29,24 +29,24 @@ namespace DVS.WPF.Commands.CommentCommands
 
         public override void Execute(object parameter)
         {
-            if (_selectedDetailedClothesItemStore.SelectedClothesSize != null)
+            if (_selectedClothesSizeStore.SelectedClothesSize != null)
             {
                 CommentClothesSizeViewModel commentClothesSizeViewModel = new(_modalNavigationStore,
                                                                               _clothesStore,
                                                                               _categoryStore,
                                                                               _seasonStore,
                                                                               _clothesSizeStore,
-                                                                              _selectedDetailedClothesItemStore,
+                                                                              _selectedClothesSizeStore,
                                                                               _dVSListingViewModel);
 
                 _modalNavigationStore.CurrentViewModel = commentClothesSizeViewModel;
             }
-            else if (_selectedDetailedEmployeeClothesItemStore.SelectedEmployeeClothesSize != null)
+            else if (_selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize != null)
             {
                 CommentEmployeeClothesViewModel commentEmployeeClothesViewModel = new(_modalNavigationStore,
                                                                                       _employeeStore,
                                                                                       _employeeClothesSizesStore,
-                                                                                      _selectedDetailedEmployeeClothesItemStore,
+                                                                                      _selectedEmployeeClothesSizeStore,
                                                                                       _dVSListingViewModel);
 
                 _modalNavigationStore.CurrentViewModel = commentEmployeeClothesViewModel;

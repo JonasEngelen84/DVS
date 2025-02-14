@@ -17,47 +17,36 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         public override void Execute(object parameter)
         {
-            AvailableClothesSizeItem newDclivm;
+            AvailableClothesSizeItem existingAcsi = _addEditEmployeeListingViewModel.GetAvailableClothesSizeItemFrom_availableClothesSizes();
+            Clothes? existingClothes = _addEditEmployeeListingViewModel.GetClothesFrom_availableClothesSizes();
 
-            AvailableClothesSizeItem? existingClothes = _addEditEmployeeListingViewModel.GetClothesFrom_availableClothesSizes();
-
-            if (existingClothes != null)
-            {
-                
-                AvailableClothesSizeItem? existingClothesSize = _addEditEmployeeListingViewModel.GetClothesSizeFrom_availableClothesSizes();
-
-                if (existingClothesSize != null)
-                {
-                    existingClothesSize.Quantity += 1;
-
-                    UpdateEditedClothesList(existingClothesSize.ClothesSize.GuidId);
-                }                    
-                else
-                {
-                    newDclivm = CreateNewAcsi(_addEditEmployeeListingViewModel);
-
-                    _addItemToAvailableClothesList?.Invoke(newDclivm);
-
-                    UpdateEditedClothesList(newDclivm.ClothesSize.GuidId);
-                }
-            }
+            if (existingAcsi != null)
+                existingAcsi.Quantity += 1;
             else
             {
-                if (Confirm($"Diese Bekleidung ist nicht Im Bestand.\nSoll ein neues Objekt dieser Bekleidung angelegt werden?" +
-                $"\nAndernfalls wird die zu entfernende Bekleidung gelöscht!", "Bekleidung nicht im Vorrat"))
+                if (existingClothes == null)
                 {
-                    //newDclivm = CreateNewDetailedClothesitem(_addEditEmployeeListingViewModel);
-
-                    //_addItemToAvailableClothesList?.Invoke(CreateNewDetailedClothesitem(_addEditEmployeeListingViewModel));
-
-                    //UpdateEditedClothesList(newDclivm);
+                    if (Confirm($"Diese Bekleidung ist nicht Im Bestand.\nSoll ein neues Objekt dieser Bekleidung angelegt werden?" +
+                                $"\nAndernfalls wird die zu entfernende Bekleidung gelöscht!", "Bekleidung nicht im Vorrat"))
+                    {
+                        //newDclivm = CreateNewDetailedClothesitem(_addEditEmployeeListingViewModel);
+                        //_addItemToAvailableClothesList?.Invoke(CreateNewDetailedClothesitem(_addEditEmployeeListingViewModel));
+                        //UpdateEditedClothesList(newDclivm);
+                        //UpdateEditedClothesList(existingClothesSize.ClothesSize.GuidId);
+                    }
+                }
+                else
+                {
+                    AvailableClothesSizeItem newAcsi = CreateNewAcsi(_addEditEmployeeListingViewModel);
+                    _addItemToAvailableClothesList?.Invoke(newAcsi);
+                    UpdateEditedClothesList(newAcsi.ClothesSize.GuidId);
                 }
             }
         }
 
         private static AvailableClothesSizeItem CreateNewAcsi(AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel)
         {
-            AvailableClothesSizeItem newAcsi = new(_addEditEmployeeListingViewModel.SelectedClothesSizeItem.ClothesSize)
+            AvailableClothesSizeItem newAcsi = new(_addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesSize)
             {
                 Quantity = 1
             };
@@ -71,14 +60,8 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
             if (existingClothesSize == null)
             {
-                //DetailedClothesListingItemViewModel newDclivm = new(dclivm.Clothes, dclivm.ClothesSize)
-                //{
-                //    Quantity = dclivm.Quantity
-                //};
-
                 _addItemToEditedClothesList?.Invoke(guidId);
-            }
-            
+            }            
         }
     }
 }

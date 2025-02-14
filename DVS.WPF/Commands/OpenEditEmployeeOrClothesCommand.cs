@@ -19,8 +19,8 @@ namespace DVS.WPF.Commands
                                                   SeasonStore seasonStore)
                                                   : CommandBase
     {
-        private readonly SelectedClothesSizeStore _selectedDetailedClothesItemStore = selectedDetailedClothesItemStore;
-        private readonly SelectedEmployeeClothesSizeStore _selectedDetailedEmployeeClothesItemStore = selectedDetailedEmployeeClothesItemStore;
+        private readonly SelectedClothesSizeStore _selectedClothesSizeStore = selectedDetailedClothesItemStore;
+        private readonly SelectedEmployeeClothesSizeStore _selectedEmployeeClothesSizeStore = selectedDetailedEmployeeClothesItemStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
         private readonly SizeStore _sizeStore = sizeStore;
@@ -34,9 +34,9 @@ namespace DVS.WPF.Commands
 
         public override void Execute(object parameter)
         {
-            if (_selectedDetailedClothesItemStore.SelectedClothesSize != null)
+            if (_selectedClothesSizeStore.SelectedClothesSize != null)
             {
-                EditClothesViewModel EditClothesViewModel = new(_selectedDetailedClothesItemStore.SelectedClothesSize.Clothes,
+                EditClothesViewModel EditClothesViewModel = new(_selectedClothesSizeStore.SelectedClothesSize.Clothes,
                                                                 _modalNavigationStore,
                                                                 _sizeStore,
                                                                 _categoryStore,
@@ -49,9 +49,9 @@ namespace DVS.WPF.Commands
 
                 _modalNavigationStore.CurrentViewModel = EditClothesViewModel;
             }
-            else if (_selectedDetailedEmployeeClothesItemStore.SelectedEmployeeClothesSize != null)
+            else if (_selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize != null)
             {
-                EditEmployeeViewModel EditEmployeeViewModel = new(_selectedDetailedEmployeeClothesItemStore.SelectedEmployeeClothesSize.Employee,
+                EditEmployeeViewModel EditEmployeeViewModel = new(_selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize.Employee,
                                                                   _employeeStore,
                                                                   _clothesStore,
                                                                   _sizeStore,

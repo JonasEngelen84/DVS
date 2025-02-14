@@ -13,7 +13,7 @@
               AllowDrop="True"
               Drop="ClothesItemList_Drop"
               ItemsSource="{Binding EmployeeClothesList}"
-              SelectedItem="{Binding SelectedClothesSizeItem}">
+              SelectedItem="{Binding SelectedAvailableClothesSizeItem}">
 
         <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">

@@ -13,10 +13,10 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         public override void Execute(object parameter)
         {
-            if (_addEditEmployeeListingViewModel.SelectedClothesSizeItem.Quantity > 1)
-                _addEditEmployeeListingViewModel.SelectedClothesSizeItem.Quantity -= 1;
-            else if (_addEditEmployeeListingViewModel.SelectedClothesSizeItem.Quantity == 1)
-                _removeItemFromEmployeeClothesList?.Invoke(_addEditEmployeeListingViewModel.SelectedClothesSizeItem);
+            if (_addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity > 1)
+                _addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity -= 1;
+            else if (_addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity == 1)
+                _removeItemFromEmployeeClothesList?.Invoke(_addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem);
         }
     }
 }
