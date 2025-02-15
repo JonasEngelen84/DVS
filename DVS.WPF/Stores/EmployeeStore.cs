@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Commands.EmployeeCommands;
 using DVS.Domain.Models;
-using DVS.Domain.Queries;
 
 namespace DVS.WPF.Stores
 {

@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Commands.CategoryCommands;
 using DVS.Domain.Models;
-using DVS.Domain.Queries;
 using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
