@@ -11,7 +11,10 @@ namespace DVS.WPF.Stores
 
             set
             {
-                _selectedClothesSize = value;
+                if (_selectedClothesSize != value)
+                {
+                    _selectedClothesSize = value;
+                }
             }
         }
     }

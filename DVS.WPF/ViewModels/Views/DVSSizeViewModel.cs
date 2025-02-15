@@ -16,8 +16,8 @@ namespace DVS.WPF.ViewModels.Views
                                   ClothesSizeStore clothesSizeStore,
                                   EmployeeClothesSizeStore employeeClothesSizesStore,
                                   EmployeeStore employeeStore,
-                                  SelectedClothesSizeStore _selectedDetailedClothesItemStore,
-                                  SelectedEmployeeClothesSizeStore _selectedDetailedEmployeeClothesItemStore,
+                                  SelectedClothesSizeStore selectedClothesSizeStore,
+                                  SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
                                   AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
                                   : ViewModelBase
     {
@@ -25,12 +25,23 @@ namespace DVS.WPF.ViewModels.Views
 
         public ICommand OpenFilterClothesList { get; } = new OpenFilterClothesListCommand(modalNavigationStore);
         public ICommand OpenFilterEmployeeList { get; } = new OpenFilterEmployeeListCommand(modalNavigationStore);
-        public ICommand Plus { get; } = new PlusCommand(modalNavigationStore);
+        public ICommand Plus { get; } = new PlusCommand(
+            selectedClothesSizeStore,
+            selectedEmployeeClothesSizeStore,
+            employeeStore,
+            clothesStore,
+            sizeStore,
+            categoryStore,
+            seasonStore,
+            clothesSizeStore,
+            employeeClothesSizesStore,
+            modalNavigationStore);
+
         public ICommand Minus { get; } = new MinusCommand(modalNavigationStore);
 
         public ICommand OpenComment { get; } = new OpenCommentCommand(
-            _selectedDetailedClothesItemStore,
-            _selectedDetailedEmployeeClothesItemStore,
+            selectedClothesSizeStore,
+            selectedEmployeeClothesSizeStore,
             modalNavigationStore,
             clothesStore,
             categoryStore,
@@ -61,8 +72,8 @@ namespace DVS.WPF.ViewModels.Views
             dVSListingViewModel);
 
         public ICommand OpenEditDetailedItem { get; } = new OpenEditEmployeeOrClothesCommand(
-            _selectedDetailedClothesItemStore,
-            _selectedDetailedEmployeeClothesItemStore,
+            selectedClothesSizeStore,
+            selectedEmployeeClothesSizeStore,
             modalNavigationStore,
             addEditEmployeeListingViewModel,
             sizeStore,

@@ -14,6 +14,8 @@ namespace DVS.WPF.Stores
         private readonly List<ClothesSize> _clothesSizes = [];
         public IEnumerable<ClothesSize> ClothesSizes => _clothesSizes;
 
+        public event Action<ClothesSize> ClothesSizeUpdated;
+
         public void Load(List<ClothesSize> clothesSizes)
         {
             _clothesSizes.Clear();
@@ -46,10 +48,8 @@ namespace DVS.WPF.Stores
             {
                 _clothesSizes[index] = editedClothesSize;
             }
-            else
-            {
-                _clothesSizes.Add(editedClothesSize);
-            }
+
+            ClothesSizeUpdated.Invoke(editedClothesSize);
         }
 
         public async Task Delete(ClothesSize clothesSize)

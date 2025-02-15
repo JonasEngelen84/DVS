@@ -146,12 +146,12 @@
 
             <views:DVSHeadView x:Name="HeadView"
                                Grid.Row="1"
-                               Margin="0,3,0,0"/>
+                               Margin="0,3,0,0"
+                               Visibility="Hidden" />
 
             <views:DVSSizeView x:Name="SizeView"
                                Grid.Row="1"
-                               Margin="0,3,0,0"
-                               Visibility="Hidden"  />
+                               Margin="0,3,0,0" />
 
         </Grid>
     </Border>

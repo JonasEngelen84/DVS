@@ -29,10 +29,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
                     if (Confirm($"Diese Bekleidung ist nicht Im Bestand.\nSoll ein neues Objekt dieser Bekleidung angelegt werden?" +
                                 $"\nAndernfalls wird die zu entfernende Bekleidung gelöscht!", "Bekleidung nicht im Vorrat"))
                     {
-                        //newDclivm = CreateNewDetailedClothesitem(_addEditEmployeeListingViewModel);
-                        //_addItemToAvailableClothesList?.Invoke(CreateNewDetailedClothesitem(_addEditEmployeeListingViewModel));
-                        //UpdateEditedClothesList(newDclivm);
-                        //UpdateEditedClothesList(existingClothesSize.ClothesSize.GuidId);
+                        
                     }
                 }
                 else

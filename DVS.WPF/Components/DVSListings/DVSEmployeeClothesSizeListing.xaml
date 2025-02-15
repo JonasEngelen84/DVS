@@ -13,7 +13,7 @@
               SelectedItem="{Binding SelectedEmployeeClothesSize}">
         <ListView.View>
             <GridView>
-                <GridViewColumn Header="Mitarbeiter ID"
+                <GridViewColumn Header="Ma.Id"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Employee.Id}" />
                 <GridViewColumn Header="Nachname"
@@ -22,7 +22,7 @@
                 <GridViewColumn Header="Vorname"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Employee.Firstname}" />
-                <GridViewColumn Header="Kleidungs ID"
+                <GridViewColumn Header="Kl.Id"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding ClothesSize.Clothes.Id}" />
                 <GridViewColumn Header="Kleidung"
