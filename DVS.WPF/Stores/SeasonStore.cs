@@ -4,14 +4,10 @@ using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
 {
-    public class SeasonStore(ICreateSeasonCommand CreateSeasonCommand,
-                             IUpdateSeasonCommand UpdateSeasonCommand,
-                             IDeleteSeasonCommand DeleteSeasonCommand)
+    public class SeasonStore(ICreateSeasonCommand createSeasonCommand,
+                             IUpdateSeasonCommand updateSeasonCommand,
+                             IDeleteSeasonCommand deleteSeasonCommand)
     {
-        private readonly ICreateSeasonCommand _createSeasonCommand = CreateSeasonCommand;
-        private readonly IUpdateSeasonCommand _updateSeasonCommand = UpdateSeasonCommand;
-        private readonly IDeleteSeasonCommand _deleteSeasonCommand = DeleteSeasonCommand;
-
         private readonly List<Season> _seasons = [];
         public IEnumerable<Season> Seasons => _seasons;
 
@@ -32,7 +28,7 @@ namespace DVS.WPF.Stores
 
         public async Task Add(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
-            await _createSeasonCommand.Execute(season);
+            await createSeasonCommand.Execute(season);
 
             _seasons.Add(season);
 
@@ -41,7 +37,7 @@ namespace DVS.WPF.Stores
 
         public async Task Update(Season updatedSeason, AddEditSeasonFormViewModel? addEditSeasonFormViewModel)
         {
-            await _updateSeasonCommand.Execute(updatedSeason);
+            await updateSeasonCommand.Execute(updatedSeason);
 
             int index = _seasons.FindIndex(y => y.GuidId == updatedSeason.GuidId);
 
@@ -58,7 +54,7 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
-            await _deleteSeasonCommand.Execute(season);
+            await deleteSeasonCommand.Execute(season);
 
             int index = _seasons.FindIndex(y => y.GuidId == season.GuidId);
 

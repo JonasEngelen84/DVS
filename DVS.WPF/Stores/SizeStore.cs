@@ -5,8 +5,6 @@ namespace DVS.WPF.Stores
 {
     public class SizeStore(IUpdateSizeCommand updateSizeCommand)
     {
-        private readonly IUpdateSizeCommand _updateSizeCommand = updateSizeCommand;
-
         private readonly List<SizeModel> _sizes = [];
         public IEnumerable<SizeModel> Sizes => _sizes;
 
@@ -22,7 +20,7 @@ namespace DVS.WPF.Stores
 
         public async Task Update(SizeModel updatedSize)
         {
-            await _updateSizeCommand.Execute(updatedSize);
+            await updateSizeCommand.Execute(updatedSize);
 
             int index = _sizes.FindIndex(y => y.GuidId == updatedSize.GuidId);
 

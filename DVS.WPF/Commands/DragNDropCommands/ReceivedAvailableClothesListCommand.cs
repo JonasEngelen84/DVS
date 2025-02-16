@@ -3,26 +3,19 @@ using DVS.WPF.ViewModels;
 
 namespace DVS.WPF.Commands.DragNDropCommands
 {
-    class ReceivedAvailableClothesListCommand(AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-                                              Action<AvailableClothesSizeItem> addItemToAvailableClothesList,
-                                              Action<AvailableClothesSizeItem> addItemToEditedClothesSizesList,
-                                              Action<AvailableClothesSizeItem> removeItemFromEditedClothesSizesList,
-                                              Action<Clothes> addItemToEditedClothesList,
-                                              Action<Clothes> removeItemFromEditedClothesList)
-                                              : CommandBase
+    class ReceivedAvailableClothesListCommand(
+        AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
+        Action<AvailableClothesSizeItem> addItemToAvailableClothesList,
+        Action<AvailableClothesSizeItem> addItemToEditedClothesSizesList,
+        Action<AvailableClothesSizeItem> removeItemFromEditedClothesSizesList,
+        Action<Clothes> addItemToEditedClothesList,
+        Action<Clothes> removeItemFromEditedClothesList)
+        : CommandBase
     {
-        private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
-
-        public readonly Action<AvailableClothesSizeItem> _addItemToAvailableClothesList = addItemToAvailableClothesList;
-        public readonly Action<AvailableClothesSizeItem> _addItemToEditedClothesSizesList = addItemToEditedClothesSizesList;
-        public readonly Action<AvailableClothesSizeItem> _removeItemFromEditedClothesSizesList = removeItemFromEditedClothesSizesList;
-        public readonly Action<Clothes> _addItemToEditedClothesList = addItemToEditedClothesList;
-        public readonly Action<Clothes> _removeItemFromEditedClothesList = removeItemFromEditedClothesList;
-
         public override void Execute(object parameter)
         {
-            AvailableClothesSizeItem existingAcsi = _addEditEmployeeListingViewModel.GetAvailableClothesSizeItemFrom_availableClothesSizes();
-            Clothes? existingClothes = _addEditEmployeeListingViewModel.GetClothesFrom_availableClothesSizes();
+            AvailableClothesSizeItem existingAcsi = addEditEmployeeListingViewModel.GetAvailableClothesSizeItemFrom_availableClothesSizes();
+            Clothes? existingClothes = addEditEmployeeListingViewModel.GetClothesFrom_availableClothesSizes();
 
             if (existingAcsi != null)
                 existingAcsi.Quantity += 1;
@@ -38,8 +31,8 @@ namespace DVS.WPF.Commands.DragNDropCommands
                 }
                 else
                 {
-                    AvailableClothesSizeItem newAcsi = CreateNewAcsi(_addEditEmployeeListingViewModel);
-                    _addItemToAvailableClothesList?.Invoke(newAcsi);
+                    AvailableClothesSizeItem newAcsi = CreateNewAcsi(addEditEmployeeListingViewModel);
+                    addItemToAvailableClothesList?.Invoke(newAcsi);
                     UpdateEditedLists(newAcsi);
                 }
             }
@@ -57,11 +50,11 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         private void UpdateEditedLists(AvailableClothesSizeItem acsi)
         {
-            AvailableClothesSizeItem? existingAcsi = _addEditEmployeeListingViewModel.GetClothesSizeFrom_editedClothesSizesList();
-            if (existingAcsi == null) _addItemToEditedClothesSizesList.Invoke(acsi);
+            AvailableClothesSizeItem? existingAcsi = addEditEmployeeListingViewModel.GetClothesSizeFrom_editedClothesSizesList();
+            if (existingAcsi == null) addItemToEditedClothesSizesList.Invoke(acsi);
 
-            Clothes? existingClothes = _addEditEmployeeListingViewModel.GetClothesFrom_editedClothesList();
-            if (existingClothes == null) _addItemToEditedClothesList.Invoke(acsi.ClothesSize.Clothes);
+            Clothes? existingClothes = addEditEmployeeListingViewModel.GetClothesFrom_editedClothesList();
+            if (existingClothes == null) addItemToEditedClothesList.Invoke(acsi.ClothesSize.Clothes);
         }
     }
 }

@@ -4,40 +4,31 @@ using DVS.WPF.ViewModels.Views;
 
 namespace DVS.WPF.Commands.ClothesCommands
 {
-    public class OpenAddClothesCommand(ModalNavigationStore modalNavigationStore,
-                                       SizeStore sizeStore,
-                                       CategoryStore categoryStore,
-                                       SeasonStore seasonStore,
-                                       ClothesStore clothesStore,
-                                       ClothesSizeStore clothesSizeStore,
-                                       EmployeeClothesSizeStore employeeClothesSizesStore,
-                                       EmployeeStore employeeStore,
-                                       DVSListingViewModel dVSListingViewModel)
-                                       : CommandBase
+    public class OpenAddClothesCommand(
+        ModalNavigationStore modalNavigationStore,
+        SizeStore sizeStore,
+        CategoryStore categoryStore,
+        SeasonStore seasonStore,
+        ClothesStore clothesStore,
+        ClothesSizeStore clothesSizeStore,
+        EmployeeClothesSizeStore employeeClothesSizesStore,
+        EmployeeStore employeeStore,
+        DVSListingViewModel dVSListingViewModel)
+        : CommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
-        private readonly SizeStore _sizeStore = sizeStore;
-        private readonly CategoryStore _categoryStore = categoryStore;
-        private readonly SeasonStore _seasonStore = seasonStore;
-        private readonly ClothesStore _clothesStore = clothesStore;
-        private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
-        private readonly EmployeeClothesSizeStore _employeeClothesSizesStore = employeeClothesSizesStore;
-        private readonly EmployeeStore _employeeStore = employeeStore;
-        private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
-
         public override void Execute(object parameter)
         {
-            AddClothesViewModel addClothesViewModel = new(_modalNavigationStore,
-                                                          _sizeStore,
-                                                          _categoryStore,
-                                                          _seasonStore,
-                                                          _clothesStore,
-                                                          _clothesSizeStore,
-                                                          _employeeClothesSizesStore,
-                                                          _employeeStore,
-                                                          _dVSListingViewModel);
+            AddClothesViewModel addClothesViewModel = new(modalNavigationStore,
+                                                          sizeStore,
+                                                          categoryStore,
+                                                          seasonStore,
+                                                          clothesStore,
+                                                          clothesSizeStore,
+                                                          employeeClothesSizesStore,
+                                                          employeeStore,
+                                                          dVSListingViewModel);
 
-            _modalNavigationStore.CurrentViewModel = addClothesViewModel;
+            modalNavigationStore.CurrentViewModel = addClothesViewModel;
         }
     }
 }

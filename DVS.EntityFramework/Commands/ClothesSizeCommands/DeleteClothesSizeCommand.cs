@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Commands.ClothesSizeCommands;
 using DVS.Domain.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Commands.ClothesSizeCommands
 {

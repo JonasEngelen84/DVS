@@ -2,15 +2,8 @@
 
 namespace DVS.WPF.Commands.ClothesCommands
 {
-    public class OpenFilterClothesListCommand : CommandBase
+    public class OpenFilterClothesListCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore;
-
-        public OpenFilterClothesListCommand(ModalNavigationStore modalNavigationStore)
-        {
-            _modalNavigationStore = modalNavigationStore;
-        }
-
         public override void Execute(object parameter)
         {
 

@@ -6,30 +6,21 @@ using System.Collections.ObjectModel;
 
 namespace DVS.WPF.Commands.AddEditEmployeeCommands
 {
-    public class EditEmployeeCommand(EditEmployeeViewModel editEmployeeViewModel,
-                                     EmployeeStore employeeStore,
-                                     ClothesStore clothesStore,
-                                     SizeStore sizeStore,
-                                     CategoryStore categoryStore,
-                                     SeasonStore seasonStore,
-                                     ClothesSizeStore clothesSizeStore,
-                                     EmployeeClothesSizeStore employeeClothesSizesStore,
-                                     ModalNavigationStore modalNavigationStore)
-                                     : AsyncCommandBase
+    public class EditEmployeeCommand(
+        EditEmployeeViewModel editEmployeeViewModel,
+        EmployeeStore employeeStore,
+        ClothesStore clothesStore,
+        SizeStore sizeStore,
+        CategoryStore categoryStore,
+        SeasonStore seasonStore,
+        ClothesSizeStore clothesSizeStore,
+        EmployeeClothesSizeStore employeeClothesSizesStore,
+        ModalNavigationStore modalNavigationStore)
+        : AsyncCommandBase
     {
-        private readonly EditEmployeeViewModel _editEmployeeViewModel = editEmployeeViewModel;
-        private readonly EmployeeStore _employeeStore = employeeStore;
-        private readonly ClothesStore _clothesStore = clothesStore;
-        private readonly SizeStore _sizeStore = sizeStore;
-        private readonly CategoryStore _categoryStore = categoryStore;
-        private readonly SeasonStore _seasonStore = seasonStore;
-        private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
-        private readonly EmployeeClothesSizeStore _employeeClothesSizesStore = employeeClothesSizesStore;
-        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
-
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditEmployeeFormViewModel editEmployeeFormViewModel = _editEmployeeViewModel.AddEditEmployeeFormViewModel;
+            AddEditEmployeeFormViewModel editEmployeeFormViewModel = editEmployeeViewModel.AddEditEmployeeFormViewModel;
             
             if (Confirm($"Soll der/die Mitarbeiter/in  \"{editEmployeeFormViewModel.Lastname}\", \"{editEmployeeFormViewModel.Firstname}\"  bearbeiten werden?", "Mitarbeiter bearbeiten"))
             {
@@ -50,7 +41,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
                 editEmployeeFormViewModel.IsSubmitting = false;
 
-                _modalNavigationStore.Close();
+                modalNavigationStore.Close();
             }
         }
 
@@ -79,7 +70,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
                     try
                     {
-                        await _employeeClothesSizesStore.Delete(ecs);
+                        await employeeClothesSizesStore.Delete(ecs);
                     }
                     catch (Exception)
                     {
@@ -105,7 +96,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
                     try
                     {
-                        await _employeeClothesSizesStore.Add(employeeClothesSize);
+                        await employeeClothesSizesStore.Add(employeeClothesSize);
                     }
                     catch (Exception)
                     {
@@ -146,7 +137,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
                     try
                     {
-                        await _employeeClothesSizesStore.Update(UpdatedEmployeeClothesSize);
+                        await employeeClothesSizesStore.Update(UpdatedEmployeeClothesSize);
                     }
                     catch (Exception)
                     {
@@ -161,7 +152,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         {
             try
             {
-                await _employeeStore.Update(updatedEmployee);
+                await employeeStore.Update(updatedEmployee);
             }
             catch (Exception)
             {
@@ -192,7 +183,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
                 try
                 {
-                    await _clothesSizeStore.Update(acsi.ClothesSize);
+                    await clothesSizeStore.Update(acsi.ClothesSize);
                 }
                 catch (Exception)
                 {
@@ -224,7 +215,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
                 try
                 {
-                    await _clothesStore.Update(acsi.ClothesSize.Clothes);
+                    await clothesStore.Update(acsi.ClothesSize.Clothes);
                 }
                 catch (Exception)
                 {
@@ -240,7 +231,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             {
                 try
                 {
-                    await _sizeStore.Update(acsi.ClothesSize.Size);
+                    await sizeStore.Update(acsi.ClothesSize.Size);
                 }
                 catch (Exception)
                 {
@@ -256,7 +247,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             {
                 try
                 {
-                    await _categoryStore.Update(acsi.ClothesSize.Clothes.Category, null);
+                    await categoryStore.Update(acsi.ClothesSize.Clothes.Category, null);
                 }
                 catch (Exception)
                 {
@@ -272,7 +263,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             {
                 try
                 {
-                    await _seasonStore.Update(acsi.ClothesSize.Clothes.Season, null);
+                    await seasonStore.Update(acsi.ClothesSize.Clothes.Season, null);
                 }
                 catch (Exception)
                 {

@@ -1,43 +1,32 @@
 ﻿using DVS.Domain.Models;
-using DVS.WPF.Commands.ClothesSizeCommands;
 using DVS.WPF.Stores;
 
 namespace DVS.WPF.Commands
 {
-    public class PlusCommand(SelectedClothesSizeStore selectedClothesSizeStore,
-                             SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
-                             EmployeeStore employeeStore,
-                             ClothesStore clothesStore,
-                             SizeStore sizeStore,
-                             CategoryStore categoryStore,
-                             SeasonStore seasonStore,
-                             ClothesSizeStore clothesSizeStore,
-                             EmployeeClothesSizeStore employeeClothesSizesStore,
-                             ModalNavigationStore modalNavigationStore)
-                             : AsyncCommandBase
+    public class PlusCommand(
+        SelectedClothesSizeStore selectedClothesSizeStore,
+        SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
+        EmployeeStore employeeStore,
+        ClothesStore clothesStore,
+        SizeStore sizeStore,
+        CategoryStore categoryStore,
+        SeasonStore seasonStore,
+        ClothesSizeStore clothesSizeStore,
+        EmployeeClothesSizeStore employeeClothesSizesStore,
+        ModalNavigationStore modalNavigationStore)
+        : AsyncCommandBase
     {
-        private readonly SelectedClothesSizeStore _selectedClothesSizeStore = selectedClothesSizeStore;
-        private readonly SelectedEmployeeClothesSizeStore _selectedEmployeeClothesSizeStore = selectedEmployeeClothesSizeStore;
-        private readonly EmployeeStore _employeeStore = employeeStore;
-        private readonly ClothesStore _clothesStore = clothesStore;
-        private readonly SizeStore _sizeStore = sizeStore;
-        private readonly CategoryStore _categoryStore = categoryStore;
-        private readonly SeasonStore _seasonStore = seasonStore;
-        private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
-        private readonly EmployeeClothesSizeStore _employeeClothesSizesStore = employeeClothesSizesStore;
-        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
-
         public override async Task ExecuteAsync(object parameter)
         {
-            if (_selectedClothesSizeStore.SelectedClothesSize != null)
+            if (selectedClothesSizeStore.SelectedClothesSize != null)
                 EditClothesSize();
-            else if (_selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize != null)
+            else if (selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize != null)
                 EditEmployeeClothesSize();
         }
 
         private async void EditClothesSize()
         {
-            ClothesSize selectedClothesSize = _selectedClothesSizeStore.SelectedClothesSize;
+            ClothesSize selectedClothesSize = selectedClothesSizeStore.SelectedClothesSize;
             await UpdateClothesSize(CreateEditedClothesSize(selectedClothesSize));
         }
 
@@ -62,7 +51,7 @@ namespace DVS.WPF.Commands
         {
             try
             {
-                await _clothesSizeStore.Update(editedClothesSize);
+                await clothesSizeStore.Update(editedClothesSize);
             }
             catch
             {

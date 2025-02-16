@@ -9,10 +9,6 @@ namespace DVS.WPF.Stores
                                IDeleteCategoryCommand deleteCategoryCommand)
     {
         public Category Categoryless { get; }
-        
-        private readonly ICreateCategoryCommand _createCategoryCommand = createCategoryCommand;
-        private readonly IUpdateCategoryCommand _updateCategoryCommand = updateCategoryCommand; 
-        private readonly IDeleteCategoryCommand _deleteCategoryCommand = deleteCategoryCommand;
 
         private readonly List<Category> _categories = [];
         public IEnumerable<Category> Categories => _categories;
@@ -35,7 +31,7 @@ namespace DVS.WPF.Stores
 
         public async Task Add(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            await _createCategoryCommand.Execute(category);
+            await createCategoryCommand.Execute(category);
 
             _categories.Add(category);
 
@@ -44,7 +40,7 @@ namespace DVS.WPF.Stores
 
         public async Task Update(Category updatedCategory, AddEditCategoryFormViewModel? addEditCategoryFormViewModel)
         {
-            await _updateCategoryCommand.Execute(updatedCategory);
+            await updateCategoryCommand.Execute(updatedCategory);
 
             int index = _categories.FindIndex(y => y.GuidId == updatedCategory.GuidId);
 
@@ -61,7 +57,7 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            await _deleteCategoryCommand.Execute(category);
+            await deleteCategoryCommand.Execute(category);
 
             int index = _categories.FindIndex(y => y.GuidId == category.GuidId);
 

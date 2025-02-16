@@ -7,10 +7,6 @@ namespace DVS.WPF.Stores
                                   IUpdateClothesSizeCommand updateClothesSizeCommand,
                                   IDeleteClothesSizeCommand deleteClothesSizeCommand)
     {
-        private readonly ICreateClothesSizeCommand _createClothesSizeCommand = createClothesSizeCommand;
-        private readonly IUpdateClothesSizeCommand _updateClothesSizeCommand = updateClothesSizeCommand;
-        private readonly IDeleteClothesSizeCommand _deleteClothesSizeCommand = deleteClothesSizeCommand;
-
         private readonly List<ClothesSize> _clothesSizes = [];
         public IEnumerable<ClothesSize> ClothesSizes => _clothesSizes;
 
@@ -28,7 +24,7 @@ namespace DVS.WPF.Stores
 
         public async Task AddToDB(ClothesSize clothesSize)
         {
-            await _createClothesSizeCommand.Execute(clothesSize);
+            await createClothesSizeCommand.Execute(clothesSize);
 
             _clothesSizes.Add(clothesSize);
         }
@@ -40,7 +36,7 @@ namespace DVS.WPF.Stores
 
         public async Task Update(ClothesSize editedClothesSize)
         {
-            await _updateClothesSizeCommand.Execute(editedClothesSize);
+            await updateClothesSizeCommand.Execute(editedClothesSize);
 
             int index = _clothesSizes.FindIndex(y => y.GuidId == editedClothesSize.GuidId);
 
@@ -54,17 +50,13 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(ClothesSize clothesSize)
         {
-            await _deleteClothesSizeCommand.Execute(clothesSize);
+            await deleteClothesSizeCommand.Execute(clothesSize);
 
             int index = _clothesSizes.FindIndex(y => y.GuidId == clothesSize.GuidId);
 
             if (index != -1)
             {
                 _clothesSizes.RemoveAll(y => y.GuidId == clothesSize.GuidId);
-            }
-            else
-            {
-                throw new InvalidOperationException("Entfernen der Bekleidungsgröße nicht möglich.");
             }
         }
     }

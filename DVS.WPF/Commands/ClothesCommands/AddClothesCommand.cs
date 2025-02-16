@@ -5,20 +5,16 @@ using DVS.WPF.ViewModels.Views;
 
 namespace DVS.WPF.Commands.AddEditClothesCommands
 {
-    public class AddClothesCommand(AddClothesViewModel addClothesViewModel,
-                                   ClothesStore clothesStore,
-                                   ClothesSizeStore clothesSizeStore,
-                                   ModalNavigationStore modalNavigationStore)
-                                   : AsyncCommandBase
+    public class AddClothesCommand(
+        AddClothesViewModel addClothesViewModel,
+        ClothesStore clothesStore,
+        ClothesSizeStore clothesSizeStore,
+        ModalNavigationStore modalNavigationStore)
+        : AsyncCommandBase
     {
-        private readonly AddClothesViewModel _addClothesViewModel = addClothesViewModel;
-        private readonly ClothesStore _clothesStore = clothesStore;
-        private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
-        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
-
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditClothesFormViewModel addClothesFormViewModel = _addClothesViewModel.AddEditClothesFormViewModel;
+            AddEditClothesFormViewModel addClothesFormViewModel = addClothesViewModel.AddEditClothesFormViewModel;
             
             if (CheckClothesId(addClothesFormViewModel) != null)
                 ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
@@ -39,13 +35,13 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 await AddClothesToDB(newClothes, addClothesFormViewModel);
 
                 addClothesFormViewModel.IsSubmitting = false;
-                _modalNavigationStore.Close();
-            }            
+                modalNavigationStore.Close();
+            }
         }
 
         private Clothes CheckClothesId(AddEditClothesFormViewModel addClothesFormViewModel)
         {
-            Clothes? existingClothes = _clothesStore.Clothes
+            Clothes? existingClothes = clothesStore.Clothes
                 .FirstOrDefault(c => c.Id == addClothesFormViewModel.Id);
 
             return existingClothes;
@@ -53,11 +49,12 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
         private static Clothes CreateClothes(AddEditClothesFormViewModel addClothesFormViewModel)
         {
-            return new Clothes(addClothesFormViewModel.Id,
-                               addClothesFormViewModel.Name,
-                               addClothesFormViewModel.Category,
-                               addClothesFormViewModel.Season,
-                               addClothesFormViewModel.Comment)
+            return new Clothes(
+                addClothesFormViewModel.Id,
+                addClothesFormViewModel.Name,
+                addClothesFormViewModel.Category,
+                addClothesFormViewModel.Season,
+                addClothesFormViewModel.Comment)
             {
                 Sizes = []
             };
@@ -92,7 +89,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
         {
             try
             {
-                await _clothesStore.Add(newClothes);
+                await clothesStore.Add(newClothes);
             }
             catch (Exception)
             {

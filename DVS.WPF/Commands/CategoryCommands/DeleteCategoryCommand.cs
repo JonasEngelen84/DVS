@@ -7,30 +7,21 @@ using System.Collections.ObjectModel;
 
 namespace DVS.WPF.Commands.CategoryCommands
 {
-    public class DeleteCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel,
-                                       CategoryStore categoryStore,
-                                       SeasonStore seasonStore,
-                                       SizeStore sizeStore,
-                                       ClothesStore clothesStore,
-                                       ClothesSizeStore clothesSizeStore,
-                                       EmployeeClothesSizeStore employeeClothesSizesStore,
-                                       EmployeeStore employeeStore,
-                                       DVSListingViewModel dVSListingViewModel)
-                                       : AsyncCommandBase
+    public class DeleteCategoryCommand(
+        AddEditCategoryViewModel addEditCategoryViewModel,
+        CategoryStore categoryStore,
+        SeasonStore seasonStore,
+        SizeStore sizeStore,
+        ClothesStore clothesStore,
+        ClothesSizeStore clothesSizeStore,
+        EmployeeClothesSizeStore employeeClothesSizesStore,
+        EmployeeStore employeeStore,
+        DVSListingViewModel dVSListingViewModel)
+        : AsyncCommandBase
     {
-        private readonly AddEditCategoryViewModel _addEditCategoryViewModel = addEditCategoryViewModel;
-        private readonly CategoryStore _categoryStore = categoryStore;
-        private readonly SeasonStore _seasonStore = seasonStore;
-        private readonly SizeStore _sizeStore = sizeStore;
-        private readonly ClothesStore _clothesStore = clothesStore;
-        private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
-        private readonly EmployeeClothesSizeStore _employeeClothesSizesStore = employeeClothesSizesStore;
-        private readonly EmployeeStore _employeeStore = employeeStore;
-        private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
-
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
+            AddEditCategoryFormViewModel addEditCategoryFormViewModel = addEditCategoryViewModel.AddEditCategoryFormViewModel;
 
             if (Confirm($"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\"" +
                 $"wird gelöscht, und ihre Schnittstellen werden auf \"Kategorielos\" gesetzt.\n\nLöschen fortsetzen?", "Kategorie löschen"))
@@ -38,11 +29,11 @@ namespace DVS.WPF.Commands.CategoryCommands
                 addEditCategoryFormViewModel.HasError = false;
                 addEditCategoryFormViewModel.IsDeleting = true;
 
-                var clothesToEdit = GetClothesToEdit(addEditCategoryFormViewModel, _dVSListingViewModel);
+                var clothesToEdit = GetClothesToEdit(addEditCategoryFormViewModel, dVSListingViewModel);
                 var editedClothes = EditClothes(clothesToEdit);
                 var clothesSizesToEdit = GetClothesSizesToEdit(addEditCategoryFormViewModel);
                 var editedClothesSizes = EditClothesSizes(clothesSizesToEdit, editedClothes);
-                var employeeClothesSizesToEdit = GetEmployeeClothesSizeToEdit(addEditCategoryFormViewModel, _dVSListingViewModel);
+                var employeeClothesSizesToEdit = GetEmployeeClothesSizeToEdit(addEditCategoryFormViewModel, dVSListingViewModel);
                 var editedEmployeeClothesSize = EditEmployeeClothesSizes(employeeClothesSizesToEdit, editedClothesSizes);
 
                 await UpdateClothesAsync(editedClothes, addEditCategoryFormViewModel);
@@ -66,7 +57,7 @@ namespace DVS.WPF.Commands.CategoryCommands
             {
                 Clothes newClothes = new(clothes.Id,
                                          clothes.Name,
-                                         _categoryStore.Categoryless,
+                                         categoryStore.Categoryless,
                                          clothes.Season,
                                          clothes.Comment)
                 {
@@ -142,7 +133,7 @@ namespace DVS.WPF.Commands.CategoryCommands
             {
                 try
                 {
-                    await _clothesSizeStore.Update(cs);
+                    await clothesSizeStore.Update(cs);
                 }
                 catch (Exception)
                 {
@@ -158,7 +149,7 @@ namespace DVS.WPF.Commands.CategoryCommands
             {
                 try
                 {
-                    await _clothesSizeStore.Update(cs);
+                    await clothesSizeStore.Update(cs);
                 }
                 catch (Exception)
                 {
@@ -174,7 +165,7 @@ namespace DVS.WPF.Commands.CategoryCommands
             {
                 try
                 {
-                    await _clothesSizeStore.Update(cs);
+                    await clothesSizeStore.Update(cs);
                 }
                 catch (Exception)
                 {
@@ -190,7 +181,7 @@ namespace DVS.WPF.Commands.CategoryCommands
             {
                 try
                 {
-                    await _clothesStore.Update(c);
+                    await clothesStore.Update(c);
                 }
                 catch (Exception)
                 {
@@ -213,7 +204,7 @@ namespace DVS.WPF.Commands.CategoryCommands
 
                 try
                 {
-                    await _sizeStore.Update(cs.Size);
+                    await sizeStore.Update(cs.Size);
                 }
                 catch (Exception)
                 {
@@ -236,7 +227,7 @@ namespace DVS.WPF.Commands.CategoryCommands
 
                 try
                 {
-                    await _seasonStore.Update(c.Season, null);
+                    await seasonStore.Update(c.Season, null);
                 }
                 catch (Exception)
                 {
@@ -250,16 +241,16 @@ namespace DVS.WPF.Commands.CategoryCommands
         {
             foreach (Clothes c in clothesToEdit)
             {
-                _categoryStore.Categoryless.Clothes.Remove(c);
+                categoryStore.Categoryless.Clothes.Remove(c);
             }
 
             foreach (Clothes c in editedClothes)
             {
-                _categoryStore.Categoryless.Clothes.Add(c);
+                categoryStore.Categoryless.Clothes.Add(c);
 
                 try
                 {
-                    await _categoryStore.Update(_categoryStore.Categoryless, null);
+                    await categoryStore.Update(categoryStore.Categoryless, null);
                 }
                 catch (Exception)
                 {
@@ -273,7 +264,7 @@ namespace DVS.WPF.Commands.CategoryCommands
         {
             try
             {
-                await _categoryStore.Delete(addEditCategoryFormViewModel.SelectedCategory, addEditCategoryFormViewModel);
+                await categoryStore.Delete(addEditCategoryFormViewModel.SelectedCategory, addEditCategoryFormViewModel);
             }
             catch (Exception)
             {

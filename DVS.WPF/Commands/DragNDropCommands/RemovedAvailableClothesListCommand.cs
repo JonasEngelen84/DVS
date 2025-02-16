@@ -3,27 +3,21 @@ using DVS.WPF.ViewModels;
 
 namespace DVS.WPF.Commands.DragNDropCommands
 {
-    public class RemovedAvailableClothesListCommand(AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-                                                    Action<AvailableClothesSizeItem> addItemToEditedClothesSizesList,
-                                                    Action<AvailableClothesSizeItem> removeItemFromEditedClothesSizesList,
-                                                    Action<Clothes> addItemToEditedClothesList,
-                                                    Action<Clothes> removeItemFromEditedClothesList)
-                                                    : CommandBase
+    public class RemovedAvailableClothesListCommand(
+        AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
+        Action<AvailableClothesSizeItem> addItemToEditedClothesSizesList,
+        Action<AvailableClothesSizeItem> removeItemFromEditedClothesSizesList,
+        Action<Clothes> addItemToEditedClothesList,
+        Action<Clothes> removeItemFromEditedClothesList)
+        : CommandBase
     {
-        private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
-
-        public readonly Action<AvailableClothesSizeItem> _addItemToEditedClothesSizesList = addItemToEditedClothesSizesList;
-        public readonly Action<AvailableClothesSizeItem> _removeItemFromEditedClothesSizesList = removeItemFromEditedClothesSizesList;
-        public readonly Action<Clothes> _addItemToEditedClothesList = addItemToEditedClothesList;
-        public readonly Action<Clothes> _removeItemFromEditedClothesList = removeItemFromEditedClothesList;
-
         public override void Execute(object parameter)
         {
             CheckQuantity();
 
-            if (_addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity > 0)
+            if (addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity > 0)
             {
-                _addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity -= 1;
+                addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity -= 1;
 
                 UpdateEditedList();
             }
@@ -33,7 +27,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         private void CheckQuantity()
         {
-            switch (_addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity)
+            switch (addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity)
             {
                 case 1:
                     ShowErrorMessageBox("Nach der Transaktion ist diese Bekleidung nicht mehr vorrätig!", "Letztes Bekleidungsstück");
@@ -54,13 +48,13 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         private void UpdateEditedList()
         {
-            AvailableClothesSizeItem? existingAcsi = _addEditEmployeeListingViewModel.GetClothesSizeFrom_editedClothesSizesList();
+            AvailableClothesSizeItem? existingAcsi = addEditEmployeeListingViewModel.GetClothesSizeFrom_editedClothesSizesList();
             if (existingAcsi == null)
-                addItemToEditedClothesSizesList.Invoke(_addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem);
+                addItemToEditedClothesSizesList.Invoke(addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem);
 
-            Clothes? existingClothes = _addEditEmployeeListingViewModel.GetClothesFrom_editedClothesList();
+            Clothes? existingClothes = addEditEmployeeListingViewModel.GetClothesFrom_editedClothesList();
             if (existingClothes == null)
-                addItemToEditedClothesList.Invoke(_addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesSize.Clothes);
+                addItemToEditedClothesList.Invoke(addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesSize.Clothes);
         }
     }
 }

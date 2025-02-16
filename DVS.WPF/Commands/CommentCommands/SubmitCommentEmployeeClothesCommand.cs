@@ -2,26 +2,20 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
-using DVS.WPF.Views;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace DVS.WPF.Commands.CommentCommands
 {
-    public class SubmitCommentEmployeeClothesCommand(CommentEmployeeClothesViewModel commentEmployeeClothesViewModel,
-                                                     EmployeeStore employeeStore,
-                                                     EmployeeClothesSizeStore employeeClothesSizesStore,
-                                                     ModalNavigationStore modalNavigationStore)
-                                                     : AsyncCommandBase
+    public class SubmitCommentEmployeeClothesCommand(
+        CommentEmployeeClothesViewModel commentEmployeeClothesViewModel,
+        EmployeeStore employeeStore,
+        EmployeeClothesSizeStore employeeClothesSizesStore,
+        ModalNavigationStore modalNavigationStore)
+        : AsyncCommandBase
     {
-        private readonly CommentEmployeeClothesViewModel _commentEmployeeClothesViewModel = commentEmployeeClothesViewModel;
-        private readonly EmployeeStore _employeeStore = employeeStore;
-        private readonly EmployeeClothesSizeStore _employeeClothesSizesStore = employeeClothesSizesStore;
-        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
-
         public override async Task ExecuteAsync(object parameter)
         {
-            CommentEmployeeClothesFormViewModel commentEmployeeClothesFormViewModel = _commentEmployeeClothesViewModel.CommentEmployeeClothesFormViewModel;
+            CommentEmployeeClothesFormViewModel commentEmployeeClothesFormViewModel = commentEmployeeClothesViewModel.CommentEmployeeClothesFormViewModel;
             commentEmployeeClothesFormViewModel.HasError = false;
             commentEmployeeClothesFormViewModel.IsSubmitting = true;
 
@@ -43,7 +37,7 @@ namespace DVS.WPF.Commands.CommentCommands
 
                 try
                 {
-                    await _employeeClothesSizesStore.Delete(ecs);
+                    await employeeClothesSizesStore.Delete(ecs);
                 }
                 catch (Exception)
                 {
@@ -75,7 +69,7 @@ namespace DVS.WPF.Commands.CommentCommands
 
             try
             {
-                await _employeeStore.Update(updatedEmployee);
+                await employeeStore.Update(updatedEmployee);
             }
             catch (Exception)
             {
@@ -86,7 +80,7 @@ namespace DVS.WPF.Commands.CommentCommands
             finally
             {
                 commentEmployeeClothesFormViewModel.IsSubmitting = false;
-                _modalNavigationStore.Close();
+                modalNavigationStore.Close();
             }
         }
     }

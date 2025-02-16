@@ -2,15 +2,8 @@
 
 namespace DVS.WPF.Commands.EmployeeCommands
 {
-    public class OpenFilterEmployeeListCommand : CommandBase
+    public class OpenFilterEmployeeListCommand(ModalNavigationStore modalNavigationStore) : CommandBase
     {
-        private readonly ModalNavigationStore _modalNavigationStore;
-
-        public OpenFilterEmployeeListCommand(ModalNavigationStore modalNavigationStore)
-        {
-            _modalNavigationStore = modalNavigationStore;
-        }
-
         public override void Execute(object parameter)
         {
 

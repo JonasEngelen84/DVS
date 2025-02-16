@@ -7,10 +7,6 @@ namespace DVS.WPF.Stores
                                           IUpdateEmployeeClothesSizeCommand updateEmployeeClothesSizeCommand,
                                           IDeleteEmployeeClothesSizeCommand deleteEmployeeClothesSizeCommand)
     {
-        private readonly ICreateEmployeeClothesSizeCommand _createEmployeeClothesSizeCommand = createEmployeeClothesSizeCommand;
-        private readonly IUpdateEmployeeClothesSizeCommand _updateEmployeeClothesSizeCommand = updateEmployeeClothesSizeCommand;
-        private readonly IDeleteEmployeeClothesSizeCommand _deleteEmployeeClothesSizeCommand = deleteEmployeeClothesSizeCommand;
-
         private readonly List<EmployeeClothesSize> _employeeClothesSizes = [];
         public IEnumerable<EmployeeClothesSize> EmployeeClothesSizes => _employeeClothesSizes;
 
@@ -26,14 +22,14 @@ namespace DVS.WPF.Stores
 
         public async Task Add(EmployeeClothesSize employeeClothesSize)
         {
-            await _createEmployeeClothesSizeCommand.Execute(employeeClothesSize);
+            await createEmployeeClothesSizeCommand.Execute(employeeClothesSize);
 
             _employeeClothesSizes.Add(employeeClothesSize);
         }
 
         public async Task Update(EmployeeClothesSize updatedEmployeeClothesSize)
         {
-            await _updateEmployeeClothesSizeCommand.Execute(updatedEmployeeClothesSize);
+            await updateEmployeeClothesSizeCommand.Execute(updatedEmployeeClothesSize);
 
             int index = _employeeClothesSizes.FindIndex(y => y.GuidId == updatedEmployeeClothesSize.GuidId);
 
@@ -49,7 +45,7 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(EmployeeClothesSize employeeClothesSize)
         {
-            await _deleteEmployeeClothesSizeCommand.Execute(employeeClothesSize);
+            await deleteEmployeeClothesSizeCommand.Execute(employeeClothesSize);
 
             int index = _employeeClothesSizes.FindIndex(y => y.GuidId == employeeClothesSize.GuidId);
 

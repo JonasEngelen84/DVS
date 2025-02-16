@@ -7,10 +7,6 @@ namespace DVS.WPF.Stores
                                IUpdateEmployeeCommand updateEmployeeCommand,
                                IDeleteEmployeeCommand deleteEmployeeCommand)
     {
-        private readonly ICreateEmployeeCommand _createEmployeeCommand = createEmployeeCommand;
-        private readonly IUpdateEmployeeCommand _updateEmployeeCommand = updateEmployeeCommand;
-        private readonly IDeleteEmployeeCommand _deleteEmployeeCommand = deleteEmployeeCommand;
-
         private readonly List<Employee> _employees = [];
         public IEnumerable<Employee> Employees => _employees;
 
@@ -30,7 +26,7 @@ namespace DVS.WPF.Stores
 
         public async Task Add(Employee employee)
         {
-            await _createEmployeeCommand.Execute(employee);
+            await createEmployeeCommand.Execute(employee);
 
             _employees.Add(employee);
 
@@ -39,7 +35,7 @@ namespace DVS.WPF.Stores
 
         public async Task Update(Employee updatedEmployee)
         {
-            await _updateEmployeeCommand.Execute(updatedEmployee);
+            await updateEmployeeCommand.Execute(updatedEmployee);
 
             int index = _employees.FindIndex(e => e.Id == updatedEmployee.Id);
 
@@ -57,7 +53,7 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(Employee employee)
         {
-            await _deleteEmployeeCommand.Execute(employee);
+            await deleteEmployeeCommand.Execute(employee);
 
             int index = _employees.FindIndex(e => e.Id == employee.Id);
 

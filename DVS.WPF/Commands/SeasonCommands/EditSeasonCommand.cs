@@ -5,22 +5,20 @@ using DVS.WPF.ViewModels.Views;
 
 namespace DVS.WPF.Commands.SeasonCommands
 {
-    public class EditSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel,
-                                   SizeStore sizeStore,
-                                   CategoryStore categoryStore,
-                                   SeasonStore seasonStore,
-                                   ClothesStore clothesStore,
-                                   ClothesSizeStore clothesSizeStore,
-                                   EmployeeClothesSizeStore employeeClothesSizesStore,
-                                   EmployeeStore employeeStore)
-                                   : AsyncCommandBase
+    public class EditSeasonCommand(
+        AddEditSeasonViewModel addEditSeasonViewModel,
+        SizeStore sizeStore,
+        CategoryStore categoryStore,
+        SeasonStore seasonStore,
+        ClothesStore clothesStore,
+        ClothesSizeStore clothesSizeStore,
+        EmployeeClothesSizeStore employeeClothesSizesStore,
+        EmployeeStore employeeStore)
+        : AsyncCommandBase
     {
-        private readonly AddEditSeasonViewModel _addEditSeasonViewModel = addEditSeasonViewModel;
-        private readonly SeasonStore _seasonStore = seasonStore;
-
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditSeasonFormViewModel addEditSeasonFormViewModel = _addEditSeasonViewModel.AddEditSeasonFormViewModel;
+            AddEditSeasonFormViewModel addEditSeasonFormViewModel = addEditSeasonViewModel.AddEditSeasonFormViewModel;
 
             if (Confirm($"Die Saison \"{addEditSeasonFormViewModel.SelectedSeason.Name}\" und ihre Schnittstellen werden in" +
                     $"\"{addEditSeasonFormViewModel.EditSelectedSeason}\" umbenannt.\n\nUmbennen fortsetzen?", "Saison umbenennen"))
@@ -32,7 +30,7 @@ namespace DVS.WPF.Commands.SeasonCommands
 
                 try
                 {
-                    await _seasonStore.Update(season, addEditSeasonFormViewModel);
+                    await seasonStore.Update(season, addEditSeasonFormViewModel);
                 }
                 catch (Exception)
                 {

@@ -7,12 +7,9 @@ namespace DVS.WPF.Commands.CategoryCommands
 {
     public class EditCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
     {
-        private readonly AddEditCategoryViewModel _addEditCategoryViewModel = addEditCategoryViewModel;
-        private readonly CategoryStore _categoryStore = categoryStore;
-
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
+            AddEditCategoryFormViewModel addEditCategoryFormViewModel = addEditCategoryViewModel.AddEditCategoryFormViewModel;
 
             if (Confirm($"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
                     $"\"{addEditCategoryFormViewModel.EditSelectedCategory}\" umbenannt.\n\nUmbennen fortsetzen?", "Kategorie umbenennen"))
@@ -24,7 +21,7 @@ namespace DVS.WPF.Commands.CategoryCommands
 
                 try
                 {
-                    await _categoryStore.Update(updatedCategory, addEditCategoryFormViewModel);
+                    await categoryStore.Update(updatedCategory, addEditCategoryFormViewModel);
                 }
                 catch (Exception)
                 {

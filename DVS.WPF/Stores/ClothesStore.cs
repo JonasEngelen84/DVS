@@ -7,10 +7,6 @@ namespace DVS.WPF.Stores
                               IUpdateClothesCommand updateClothesCommand,
                               IDeleteClothesCommand deleteClothesCommand)
     {
-        private readonly ICreateClothesCommand _createClothesCommand = createClothesCommand;
-        private readonly IUpdateClothesCommand _updateClothesCommand = updateClothesCommand;
-        private readonly IDeleteClothesCommand _deleteClothesCommand = deleteClothesCommand;
-
         private readonly List<Clothes> _clothes = [];
         public IEnumerable<Clothes> Clothes => _clothes;
 
@@ -30,7 +26,7 @@ namespace DVS.WPF.Stores
 
         public async Task Add(Clothes clothes)
         {
-            await _createClothesCommand.Execute(clothes);
+            await createClothesCommand.Execute(clothes);
 
             _clothes.Add(clothes);
 
@@ -39,7 +35,7 @@ namespace DVS.WPF.Stores
 
         public async Task Update(Clothes updatedClothes)
         {
-            await _updateClothesCommand.Execute(updatedClothes);
+            await updateClothesCommand.Execute(updatedClothes);
 
             int index = _clothes.FindIndex(c => c.Id == updatedClothes.Id);
 
@@ -57,7 +53,7 @@ namespace DVS.WPF.Stores
 
         public async Task Delete(Clothes clothes)
         {
-            await _deleteClothesCommand.Execute(clothes);
+            await deleteClothesCommand.Execute(clothes);
 
             int index = _clothes.FindIndex(c => c.Id == clothes.Id);
 

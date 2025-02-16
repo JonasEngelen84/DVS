@@ -42,10 +42,21 @@ namespace DVS.WPF.ViewModels
         {
             _clothesSizeStore = clothesSizeStore;
 
-            ClothesItemReceivedNewEmployeeClothesListCommand = new ReceivedNewEmployeeClothesListCommand(this, AddItemToEmployeeClothesList);
             ClothesItemRemovedNewEmployeeClothesListCommand = new RemovedNewEmployeeClothesListCommand(this, RemoveItemFromEmployeeClothesList);
-            ClothesItemReceivedAvailableClothesListCommand = new ReceivedAvailableClothesListCommand(this, AddItemToAvailableSizes, AddEditedClothesSizesList, RemoveEditedClothesSizesList);
-            ClothesItemRemovedAvailableClothesListCommand = new RemovedAvailableClothesListCommand(this, AddEditedClothesSizesList, RemoveEditedClothesSizesList);
+            ClothesItemReceivedNewEmployeeClothesListCommand = new ReceivedNewEmployeeClothesListCommand(this, AddItemToEmployeeClothesList);
+            ClothesItemRemovedAvailableClothesListCommand = new RemovedAvailableClothesListCommand(
+                this,
+                AddEditedClothesSizesList,
+                RemoveEditedClothesSizesList,
+                AddEditedClothesList,
+                RemoveEditedClothesList);
+            ClothesItemReceivedAvailableClothesListCommand = new ReceivedAvailableClothesListCommand(
+                this,
+                AddItemToAvailableSizes,
+                AddEditedClothesSizesList,
+                RemoveEditedClothesSizesList,
+                AddEditedClothesList,
+                RemoveEditedClothesList);
         }
 
 

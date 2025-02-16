@@ -7,12 +7,9 @@ namespace DVS.WPF.Commands.CategoryCommands
 {
     public class AddCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
     {
-        private readonly AddEditCategoryViewModel _addEditCategoryViewModel = addEditCategoryViewModel;
-        private readonly CategoryStore _categoryStore = categoryStore;
-
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditCategoryFormViewModel addEditCategoryFormViewModel = _addEditCategoryViewModel.AddEditCategoryFormViewModel;
+            AddEditCategoryFormViewModel addEditCategoryFormViewModel = addEditCategoryViewModel.AddEditCategoryFormViewModel;
             addEditCategoryFormViewModel.HasError = false;
             addEditCategoryFormViewModel.IsSubmitting = true;
 
@@ -20,7 +17,7 @@ namespace DVS.WPF.Commands.CategoryCommands
 
             try
             {
-                await _categoryStore.Add(newCategory, addEditCategoryFormViewModel);
+                await categoryStore.Add(newCategory, addEditCategoryFormViewModel);
             }
             catch (Exception)
             {
