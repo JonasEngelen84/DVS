@@ -10,13 +10,18 @@ namespace DVS.EntityFramework.Commands.EmployeeClothesSizeCommands
         public async Task Execute(EmployeeClothesSize employeeClothesSize)
         {
             using DVSDbContext context = _contextFactory.Create();
-            //context.Employees.Attach(employeeClothesSize.Employee);
-            //context.ClothesSizes.Attach(employeeClothesSize.ClothesSize);
-            //context.Sizes.Attach(employeeClothesSize.ClothesSize.Size);
-            //context.Clothes.Attach(employeeClothesSize.ClothesSize.Clothes);
-            //context.Categories.Attach(employeeClothesSize.ClothesSize.Clothes.Category);
-            //context.Seasons.Attach(employeeClothesSize.ClothesSize.Clothes.Season);
-            context.EmployeeClothesSizes.Add(employeeClothesSize);
+
+            Employee? existingEmployee = await context.Employees.FindAsync(employeeClothesSize.EmployeeId);
+            ClothesSize? existingClothesSize = await context.ClothesSizes.FindAsync(employeeClothesSize.ClothesSizeGuidId);
+
+            EmployeeClothesSize newEmployeeClothesSize = new(
+                employeeClothesSize.GuidId,
+                existingEmployee,
+                existingClothesSize,
+                employeeClothesSize.Quantity,
+                employeeClothesSize.Comment);
+
+            context.EmployeeClothesSizes.Add(newEmployeeClothesSize);
             await context.SaveChangesAsync();
         }
     }

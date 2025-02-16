@@ -11,14 +11,31 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
+            Employee newEmployee = new(
+                employee.Id,
+                employee.Lastname,
+                employee.Firstname,
+                employee.Comment)
+            {
+                Clothes = []
+            };
+
             foreach (EmployeeClothesSize ecs in employee.Clothes)
             {
-                context.Categories.Attach(ecs.ClothesSize.Clothes.Category);
-                //context.ClothesSizes.Attach(ecs.ClothesSize);
-                //context.Clothes.Attach(ecs.ClothesSize.Clothes);
+                ClothesSize? existingClothesSize = await context.ClothesSizes.FindAsync(ecs.ClothesSizeGuidId);
+
+                EmployeeClothesSize newEmployeeClothesSize = new(
+                    ecs.GuidId,
+                    newEmployee,
+                    existingClothesSize,
+                    ecs.Quantity,
+                    ecs.Comment
+                );
+
+                newEmployee.Clothes.Add(newEmployeeClothesSize);
             }
 
-            context.Employees.Add(employee);
+            context.Employees.Add(newEmployee);
             await context.SaveChangesAsync();
         }
     }

@@ -11,10 +11,20 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //context.Entry(updatedClothesSize.Clothes).State = EntityState.Modified;
-            //context.Sizes.Attach(updatedClothesSize.Size);
-            context.ClothesSizes.Add(clothesSize);
+            Clothes? existingClothes = await context.Clothes.FindAsync(clothesSize.ClothesId);
+            SizeModel? existingSize = await context.Sizes.FindAsync(clothesSize.SizeGuidId);
 
+            ClothesSize newClothesSize = new(
+                clothesSize.GuidId,
+                existingClothes,
+                existingSize,
+                existingSize.Quantity,
+                clothesSize.Comment)
+            {
+                EmployeeClothesSizes = []
+            };
+
+            context.ClothesSizes.Add(clothesSize);
             await context.SaveChangesAsync();
         }
     }
