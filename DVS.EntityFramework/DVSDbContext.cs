@@ -23,7 +23,7 @@ namespace DVS.EntityFramework
 
                 entity.Property(s => s.Name)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasMaxLength(15);
 
                 entity.HasMany(s => s.Clothes)
                     .WithOne(c => c.Season)
@@ -31,8 +31,8 @@ namespace DVS.EntityFramework
 
                 entity.HasData(
                     new Season(Guid.NewGuid(), "-Saisonlos-"),
-                new Season(Guid.NewGuid(), "Sommer"),
-                new Season(Guid.NewGuid(), "Winter"));
+                    new Season(Guid.NewGuid(), "Sommer"),
+                    new Season(Guid.NewGuid(), "Winter"));
             });
             modelBuilder.Entity<Category>(entity =>
             {
@@ -40,7 +40,7 @@ namespace DVS.EntityFramework
 
                 entity.Property(c => c.Name)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasMaxLength(20);
 
                 entity.HasMany(c => c.Clothes)
                     .WithOne(c => c.Category)
@@ -100,7 +100,7 @@ namespace DVS.EntityFramework
 
                 entity.Property(c => c.Name)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasMaxLength(25);
 
                 entity.Property(c => c.Comment)
                     .HasMaxLength(500);
@@ -123,11 +123,11 @@ namespace DVS.EntityFramework
 
                 entity.Property(e => e.Lastname)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasMaxLength(25);
 
                 entity.Property(e => e.Firstname)
                     .IsRequired()
-                    .HasMaxLength(100);
+                    .HasMaxLength(25);
 
                 entity.Property(e => e.Comment)
                     .HasMaxLength(500);

@@ -61,12 +61,12 @@
             <!-- Header -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="45" />
-                    <ColumnDefinition Width="55" />
-                    <ColumnDefinition Width="75"/>
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="65" />
+                    <ColumnDefinition Width="70"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Größe" FontWeight="Bold" Padding="2 0 0 0"/>
+                <TextBlock Grid.Column="0" Text="Größe" FontWeight="Bold" Padding="15 0 0 0"/>
                 <TextBlock Grid.Column="1" Text="Bestand" FontWeight="Bold" />
                 <TextBlock Grid.Column="2" Text="Kommentar" FontWeight="Bold" />
             </Grid>
@@ -78,8 +78,8 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="55" />
+                                <ColumnDefinition Width="55" />
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
