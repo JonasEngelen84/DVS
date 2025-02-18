@@ -50,28 +50,47 @@
             </Grid>
         </Border>
 
-        <!-- Clothes sizes and quantity -->
-        <ItemsControl Grid.Row="1"
-                      Padding="15 0 15 0"
-                      ItemsSource="{Binding Sizes}"
-                      Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        
-                        <TextBlock Grid.Column="0" Text="{Binding Size.Size}" />
-                        <TextBlock Grid.Column="1" Text="{Binding Quantity}" />
-                        <TextBlock Grid.Column="2" Text="{Binding Comment}" />
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <!-- Clothes  -->
+        <Grid Grid.Row="1"
+              Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="45" />
+                    <ColumnDefinition Width="55" />
+                    <ColumnDefinition Width="75"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Größe" FontWeight="Bold" Padding="2 0 0 0"/>
+                <TextBlock Grid.Column="1" Text="Bestand" FontWeight="Bold" />
+                <TextBlock Grid.Column="2" Text="Kommentar" FontWeight="Bold" />
+            </Grid>
+
+            <!-- Data -->
+            <ItemsControl Padding="15 15 15 0"
+                          ItemsSource="{Binding Sizes}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" Text="{Binding Size.Size}" />
+                            <TextBlock Grid.Column="1" Text="{Binding Quantity}" />
+                            <TextBlock Grid.Column="2" Text="{Binding Comment}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
         
         <!-- Bottom Item -->
         <Border Grid.Row="2"

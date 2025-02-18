@@ -49,34 +49,69 @@
         </Border>
 
         <!-- Employee ClothesList -->
-        <ItemsControl Grid.Row="1"
-                      Padding="10 0 10 0"
-                      ItemsSource="{Binding Clothes}"
-                      Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="50" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        
-                        <TextBlock Grid.Column="0" Text="{Binding ClothesSize.Clothes.ID}" />
-                        <TextBlock Grid.Column="1" Text="{Binding ClothesSize.Clothes.Category.Name}" />
-                        <TextBlock Grid.Column="2" Text="{Binding ClothesSize.Clothes.Name}" />
-                        <TextBlock Grid.Column="3" Text="{Binding ClothesSize.Clothes.Season.Name}" />
-                        <TextBlock Grid.Column="4" Text="{Binding ClothesSize.Size.Size}" />
-                        <TextBlock Grid.Column="5" Text="{Binding Quantity}" />
-                        <TextBlock Grid.Column="6" Text="{Binding Comment}" />
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Grid Grid.Row="1"
+              Visibility="{Binding IsExpanded, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="75" />
+                    <ColumnDefinition Width="85" />
+                    <ColumnDefinition Width="55" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Id" FontWeight="Bold" Padding="15 0 0 0" />
+                <TextBlock Grid.Column="1" Text="Kategorie" FontWeight="Bold" Padding="35 0 0 0" />
+                <TextBlock Grid.Column="2" Text="Bezeichnung" FontWeight="Bold" Padding="35 0 0 0" />
+                <TextBlock Grid.Column="3" Text="Saison" FontWeight="Bold" Padding="25 0 0 0" />
+                <TextBlock Grid.Column="4" Text="Größe" FontWeight="Bold" Padding="50 0 0 0" />
+                <TextBlock Grid.Column="5" Text="Menge" FontWeight="Bold" Padding="15 0 0 0" />
+                <TextBlock Grid.Column="6" Text="Kommentar" FontWeight="Bold" Padding="35 0 0 0" />
+            </Grid>
+
+            <!-- Data -->
+            <ItemsControl Padding="15 15 15 0"
+                          ItemsSource="{Binding Clothes}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0"
+                                       Text="{Binding ClothesSize.Clothes.Id}" />
+                            <TextBlock Grid.Column="1"
+                                       Text="{Binding ClothesSize.Clothes.Category.Name}" />
+                            <TextBlock Grid.Column="2"
+                                       Text="{Binding ClothesSize.Clothes.Name}" />
+                            <TextBlock Grid.Column="3"
+                                       Text="{Binding ClothesSize.Clothes.Season.Name}" />
+                            <TextBlock Grid.Column="4"
+                                       Text="{Binding ClothesSize.Size.Size}" />
+                            <TextBlock Grid.Column="5"
+                                       Text="{Binding Quantity}" />
+                            <TextBlock Grid.Column="6"
+                                       Text="{Binding Comment}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
 
         <!-- Bottom Item -->
         <Border Grid.Row="2"
