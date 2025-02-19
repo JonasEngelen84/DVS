@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              DataContext="{Binding DVSHeadViewModel}">
     
-    <Grid>
+    <Grid Cursor="Hand">
         <Grid.RowDefinitions>
             <RowDefinition Height="27"/>
             <RowDefinition />
@@ -20,7 +20,8 @@
             <Button Margin="5 0 0 0"
                     HorizontalAlignment="Left"
                     Style="{StaticResource EditComboBoxButtonStyle}"
-                    Command="{Binding OpenAddEmployee}">
+                    Command="{Binding OpenAddEmployee}"
+                    Cursor="Hand">
                 <Image x:Name="addEmployeeButton"
                        Source="/Resources/Images/Add Employee.png"
                        HorizontalAlignment="Center" />
@@ -30,7 +31,8 @@
             <Button Margin="5 0 0 0"
                     HorizontalAlignment="Right"
                     Style="{StaticResource EditComboBoxButtonStyle}"
-                    Command="{Binding OpenAddClothes}">
+                    Command="{Binding OpenAddClothes}"
+                    Cursor="Hand">
                 <Image x:Name="addClothesButton"
                        Source="/Resources/Images/Add Shirt.png"
                        HorizontalAlignment="Center" />

@@ -9,29 +9,50 @@
 
     <StackPanel>
 
-        <!-- Id -->
-        <TextBox Width="252"
-                 Margin="0 0 0 5"
-                 Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <!-- Lastname -->
-        <TextBox Width="252"
-                 Margin="0 0 0 5"
-                 Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <!-- Firstname -->
-        <TextBox Width="252"
-                 Margin="0 0 0 5"
-                 Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" />
+            <!-- Id -->
+            <TextBox Grid.Row="0"
+                     Grid.Column="0"
+                     Margin="0 0 0 5"
+                     HorizontalAlignment="Stretch"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
 
-        <!-- Comment -->
-        <TextBox Width="252"
-                 Margin="0 0 0 5"
-                 Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
+            <!-- Lastname -->
+            <TextBox Grid.Row="1"
+                     Grid.Column="0"
+                     Margin="0 0 0 5"
+                     HorizontalAlignment="Stretch"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" />
+
+            <!-- Firstname -->
+            <TextBox Grid.Row="2"
+                     Grid.Column="0"
+                     Margin="0 0 0 5"
+                     HorizontalAlignment="Stretch"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" />
+
+            <!-- Comment -->
+            <TextBox Grid.Row="3"
+                     Grid.Column="0"
+                     Margin="0 0 0 5"
+                     HorizontalAlignment="Stretch"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
 
         <!-- Label-Bekleidung hinzufügen & Switch-Button -->
         <StackPanel Orientation="Horizontal"
