@@ -3,8 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:componentmodel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d"
              DataContext="{Binding AddEditEmployeeListingViewModel}">
+
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="SortedAvailableClothesSizes"
+                              Source="{Binding AvailableClothesSizes}">
+            <CollectionViewSource.SortDescriptions>
+                <componentmodel:SortDescription PropertyName="ClothesId"
+                                                Direction="Ascending" />
+                <componentmodel:SortDescription PropertyName="Size"
+                                                Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
 
     <ListView Height="120"
               FontSize="10"
@@ -12,7 +25,7 @@
               Background="WhiteSmoke"
               AllowDrop="True"
               Drop="ClothesItemList_Drop"
-              ItemsSource="{Binding AvailableClothesSizes}"
+              ItemsSource="{Binding Source={StaticResource SortedAvailableClothesSizes}}"
               SelectedItem="{Binding SelectedAvailableClothesSizeItem}">
 
         <ListView.ItemContainerStyle>

@@ -5,11 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:custom="clr-namespace:DropdownMenuControl;assembly=DropdownMenuControl"
              xmlns:local="clr-namespace:DVS.WPF.Converter"
+             xmlns:componentmodel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d">
     
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <local:ClothesItemWithCommaConverter x:Key="CommaConverter" />
+        <CollectionViewSource x:Key="SortedClothesSizes"
+                              Source="{Binding Sizes}">
+            <CollectionViewSource.SortDescriptions>
+                <componentmodel:SortDescription PropertyName="Size.Size"
+                                                Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
     </UserControl.Resources>
 
     <Grid>
@@ -73,7 +81,7 @@
 
             <!-- Data -->
             <ItemsControl Padding="15 15 15 0"
-                          ItemsSource="{Binding Sizes}">
+                          ItemsSource="{Binding Source={StaticResource SortedClothesSizes}}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid>

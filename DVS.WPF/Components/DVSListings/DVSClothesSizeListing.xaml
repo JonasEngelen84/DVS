@@ -3,13 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:componentmodel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d"
              DataContext="{Binding DVSListingViewModel}">
+
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="SortedClothesSizeCollection"
+                              Source="{Binding ClothesSizeCollection}">
+            <CollectionViewSource.SortDescriptions>
+                <componentmodel:SortDescription PropertyName="ClothesId"
+                                                Direction="Ascending" />
+                <componentmodel:SortDescription PropertyName="Size.Size"
+                                                Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
 
     <ListView FontSize="14"
               Foreground="#FF212129"
               Background="#dedece"
-              ItemsSource="{Binding ClothesSizeCollection}"
+              ItemsSource="{Binding Source={StaticResource SortedClothesSizeCollection}}"
               SelectedItem="{Binding SelectedClothesSize}">
         <ListView.View>
             <GridView>
