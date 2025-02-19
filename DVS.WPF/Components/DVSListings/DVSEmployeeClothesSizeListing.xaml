@@ -25,33 +25,18 @@
               Foreground="#FF212129"
               Background="#dedece"
               ItemsSource="{Binding Source={StaticResource SortedEmployeeClothesSizeCollection}}"
-              SelectedItem="{Binding SelectedEmployeeClothesSize}">
+              SelectedItem="{Binding SelectedEmployeeClothesSize}"
+              Loaded="SizesListsAutoWidth">
         <ListView.View>
             <GridView>
-                <GridViewColumn Header="Ma.Id"
-                                Width="auto"
-                                DisplayMemberBinding="{Binding Employee.Id}" />
-                <GridViewColumn Header="Nachname"
-                                Width="auto"
-                                DisplayMemberBinding="{Binding Employee.Lastname}" />
-                <GridViewColumn Header="Vorname"
-                                Width="auto"
-                                DisplayMemberBinding="{Binding Employee.Firstname}" />
-                <GridViewColumn Header="Kl.Id"
-                                Width="auto"
-                                DisplayMemberBinding="{Binding ClothesSize.Clothes.Id}" />
-                <GridViewColumn Header="Kleidung"
-                                Width="auto"
-                                DisplayMemberBinding="{Binding ClothesSize.Clothes.Name}" />
-                <GridViewColumn Header="Größe"
-                                Width="auto"
-                                DisplayMemberBinding="{Binding ClothesSize.Size.Size}" />
-                <GridViewColumn Header="Menge"
-                                Width="auto"
-                                DisplayMemberBinding="{Binding Quantity}" />
-                <GridViewColumn Header="Kommentar"
-                                Width="auto"
-                                DisplayMemberBinding="{Binding Comment}" />
+                <GridViewColumn Header="Ma.Id" DisplayMemberBinding="{Binding Employee.Id}" />
+                <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Employee.Lastname}" />
+                <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Employee.Firstname}" />
+                <GridViewColumn Header="Kl.Id" DisplayMemberBinding="{Binding ClothesSize.Clothes.Id}" />
+                <GridViewColumn Header="Kleidung" DisplayMemberBinding="{Binding ClothesSize.Clothes.Name}" />
+                <GridViewColumn Header="Größe" DisplayMemberBinding="{Binding ClothesSize.Size.Size}" />
+                <GridViewColumn Header="Menge" DisplayMemberBinding="{Binding Quantity}" />
+                <GridViewColumn Header="Kommentar" DisplayMemberBinding="{Binding Comment}" />
             </GridView>
         </ListView.View>
     </ListView>

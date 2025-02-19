@@ -3,13 +3,14 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class AddEditSeasonFormViewModel(ICommand addSeasonCommand,
-                                            ICommand editSeasonCommand,
-                                            ICommand deleteSeasonCommand,
-                                            AddEditClothesListingViewModel addEditListingViewModel)
-                                            : ViewModelBase
+    public class AddEditSeasonFormViewModel(
+        ICommand addSeasonCommand,
+        ICommand editSeasonCommand,
+        ICommand deleteSeasonCommand,
+        AddEditClothesListingViewModel addEditClothesListingViewModel)
+        : ViewModelBase
     {
-        public AddEditClothesListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
+        public AddEditClothesListingViewModel AddEditClothesListingViewModel { get; } = addEditClothesListingViewModel;
         public ICommand AddSeason { get; } = addSeasonCommand;
         public ICommand EditSeason { get; } = editSeasonCommand;
         public ICommand DeleteSeason { get; } = deleteSeasonCommand;

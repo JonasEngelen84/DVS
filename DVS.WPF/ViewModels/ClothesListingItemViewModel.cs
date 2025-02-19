@@ -69,29 +69,31 @@ namespace DVS.WPF.ViewModels
         public ICommand PrintClothes { get; set; }
 
 
-        public ClothesListingItemViewModel(Clothes clothes,
-                                           ModalNavigationStore modalNavigationStore,
-                                           SizeStore sizeStore,
-                                           CategoryStore categoryStore,
-                                           SeasonStore seasonStore,
-                                           ClothesStore clothesStore,
-                                           ClothesSizeStore clothesSizeStore,
-                                           EmployeeClothesSizeStore employeeClothesSizesStore,
-                                           EmployeeStore employeeStore,
-                                           DVSListingViewModel dVSListingViewModel)
+        public ClothesListingItemViewModel(
+            Clothes clothes,
+            ModalNavigationStore modalNavigationStore,
+            SizeStore sizeStore,
+            CategoryStore categoryStore,
+            SeasonStore seasonStore,
+            ClothesStore clothesStore,
+            ClothesSizeStore clothesSizeStore,
+            EmployeeClothesSizeStore employeeClothesSizesStore,
+            EmployeeStore employeeStore,
+            DVSListingViewModel dVSListingViewModel)
         {
             Clothes = clothes;
 
-            OpenEditClothes = new OpenEditClothesCommand(this,
-                                                         modalNavigationStore,
-                                                         sizeStore,
-                                                         categoryStore,
-                                                         seasonStore,
-                                                         clothesStore,
-                                                         clothesSizeStore,
-                                                         employeeClothesSizesStore,
-                                                         employeeStore,
-                                                         dVSListingViewModel);
+            OpenEditClothes = new OpenEditClothesCommand(
+                this,
+                modalNavigationStore,
+                sizeStore,
+                categoryStore,
+                seasonStore,
+                clothesStore,
+                clothesSizeStore,
+                employeeClothesSizesStore,
+                employeeStore,
+                dVSListingViewModel);
 
             DeleteClothes = new DeleteClothesCommand(this, clothesStore);
             ClearClothesSizes = new ClearSizesCommand(this, clothesSizeStore);

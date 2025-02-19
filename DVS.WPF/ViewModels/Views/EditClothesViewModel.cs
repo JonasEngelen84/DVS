@@ -71,7 +71,7 @@ namespace DVS.WPF.ViewModels.Views
                 openAddEditCategories,
                 openAddEditSeasons,
                 AddEditListingViewModel)
-            {
+            {//TODO: verwendete Category & Season werden nicht in UI ausgegeben.
                 Id = clothes.Id,
                 Name = clothes.Name,
                 Category = clothes.Category,

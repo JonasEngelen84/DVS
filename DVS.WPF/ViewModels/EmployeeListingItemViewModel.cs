@@ -68,34 +68,36 @@ namespace DVS.WPF.ViewModels
         public ICommand PrintEmployee { get; set; }
 
 
-        public EmployeeListingItemViewModel(Employee employee,
-                                            DVSListingViewModel dVSListingViewModel,
-                                            ModalNavigationStore modalNavigationStore,
-                                            AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-                                            EmployeeStore employeeStore,
-                                            ClothesStore clothesStore,
-                                            SizeStore sizeStore,
-                                            CategoryStore categoryStore,
-                                            SeasonStore seasonStore,
-                                            ClothesSizeStore clothesSizeStore,
-                                            EmployeeClothesSizeStore employeeClothesSizesStore)
+        public EmployeeListingItemViewModel(
+            Employee employee,
+            DVSListingViewModel dVSListingViewModel,
+            ModalNavigationStore modalNavigationStore,
+            AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
+            EmployeeStore employeeStore,
+            ClothesStore clothesStore,
+            SizeStore sizeStore,
+            CategoryStore categoryStore,
+            SeasonStore seasonStore,
+            ClothesSizeStore clothesSizeStore,
+            EmployeeClothesSizeStore employeeClothesSizesStore)
         {
             Employee = employee;
             DeleteEmployee = new DeleteEmployeeCommand(this, employeeStore);
             ClearEmpoyeeClothesList = new ClearEmployeeClothesListCommand(this, employeeStore);
             PrintEmployee = new OpenPrintEmployeeCommand();
 
-            OpenEditEmployee = new OpenEditEmployeeCommand(this,
-                                                           modalNavigationStore,
-                                                           employeeStore,
-                                                           clothesStore,
-                                                           sizeStore,
-                                                           categoryStore,
-                                                           seasonStore,
-                                                           clothesSizeStore,
-                                                           employeeClothesSizesStore,
-                                                           dVSListingViewModel,
-                                                           addEditEmployeeListingViewModel);
+            OpenEditEmployee = new OpenEditEmployeeCommand(
+                this,
+                modalNavigationStore,
+                employeeStore,
+                clothesStore,
+                sizeStore,
+                categoryStore,
+                seasonStore,
+                clothesSizeStore,
+                employeeClothesSizesStore,
+                dVSListingViewModel,
+                addEditEmployeeListingViewModel);
         }
 
         public void Update(Employee employee)

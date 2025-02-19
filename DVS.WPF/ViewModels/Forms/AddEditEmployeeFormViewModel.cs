@@ -24,7 +24,6 @@ namespace DVS.WPF.ViewModels.Forms
                 {
                     _id = value;
                     OnPropertyChanged(nameof(Id));
-                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -39,7 +38,6 @@ namespace DVS.WPF.ViewModels.Forms
                 {
                     _lastname = value;
                     OnPropertyChanged(nameof(Lastname));
-                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -54,7 +52,6 @@ namespace DVS.WPF.ViewModels.Forms
                 {
                     _firstname = value;
                     OnPropertyChanged(nameof(Firstname));
-                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -91,30 +88,5 @@ namespace DVS.WPF.ViewModels.Forms
         }
 
         public bool HasError;
-
-        public bool CanSubmit
-        {//TODO: canSubmitEmployee auf true setzen wenn Kleidungsliste verändert wird
-            get
-            {
-                if (string.IsNullOrEmpty(Id) || Id == "Id" ||
-                    string.IsNullOrEmpty(Lastname) || Lastname == "Nachname" ||
-                    string.IsNullOrEmpty(Firstname) || Firstname == "Vorname")
-                {
-                    return false;
-                }
-
-                if (Employee != null)
-                {
-                    if (Id == Employee.Id &&
-                        Lastname == Employee.Lastname &&
-                        Firstname == Employee.Firstname)
-                    {
-                        return false;
-                    }
-                }
-
-                return true;
-            }
-        }
     }
 }

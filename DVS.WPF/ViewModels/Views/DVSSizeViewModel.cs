@@ -30,14 +30,16 @@ namespace DVS.WPF.ViewModels.Views
             selectedEmployeeClothesSizeStore,
             employeeStore,
             clothesStore,
-            sizeStore,
-            categoryStore,
-            seasonStore,
             clothesSizeStore,
-            employeeClothesSizesStore,
-            modalNavigationStore);
+            employeeClothesSizesStore);
 
-        public ICommand Minus { get; } = new MinusCommand(modalNavigationStore);
+        public ICommand Minus { get; } = new MinusCommand(
+            selectedClothesSizeStore,
+            selectedEmployeeClothesSizeStore,
+            employeeStore,
+            clothesStore,
+            clothesSizeStore,
+            employeeClothesSizesStore);
 
         public ICommand OpenComment { get; } = new OpenCommentCommand(
             selectedClothesSizeStore,

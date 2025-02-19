@@ -2,74 +2,71 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Data;
 
 namespace DVS.WPF.ViewModels
 {
     public class AddEditClothesListingViewModel : ViewModelBase
     {
         private readonly ObservableCollection<Category> _categories = [];
-        private readonly CollectionViewSource _categoryCollectionViewSource;
-        public ICollectionView Categories => _categoryCollectionViewSource.View;
+        public IEnumerable<Category> Categories => _categories;
 
         private readonly ObservableCollection<Season> _seasons = [];
-        private readonly CollectionViewSource _seasonCollectionViewSource;
-        public ICollectionView Seasons => _seasonCollectionViewSource.View;
+        public IEnumerable<Season> Seasons => _seasons;
 
-        private ObservableCollection<SizeModel> _availableSizesEU = [];
-        public ObservableCollection<SizeModel> AvailableSizesEU
-        {
-            get => _availableSizesEU;
-            set
-            {
-                if (_availableSizesEU != value)
-                {
-                    _availableSizesEU = value;
-                    OnPropertyChanged(nameof(AvailableSizesEU));
-                }
-            }
-        }
+        private readonly List<SizeModel> _availableSizesEU;
+        public List<SizeModel> AvailableSizesEU => _availableSizesEU;
+        
 
-        private ObservableCollection<SizeModel> _availableSizesUS = [];
-        public ObservableCollection<SizeModel> AvailableSizesUS
-        {
-            get => _availableSizesUS;
-            set
-            {
-                if (_availableSizesEU != value)
-                {
-                    _availableSizesUS = value;
-                    OnPropertyChanged(nameof(AvailableSizesUS));
-                }
-            }
-        }
+        private readonly List<SizeModel> _availableSizesUS;
+        public List<SizeModel> AvailableSizesUS => _availableSizesUS;
 
-        private readonly Clothes _clothes;
-        private readonly  SizeStore _sizeStore;
+        private readonly Clothes? _clothes;
+        //private readonly  SizeStore _sizeStore;
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
 
 
-        public AddEditClothesListingViewModel(Clothes clothes,
-                                              SizeStore sizeStore,
-                                              CategoryStore categoryStore,
-                                              SeasonStore seasonStore)
+        public AddEditClothesListingViewModel(
+            Clothes? clothes,
+            SizeStore sizeStore,
+            CategoryStore categoryStore,
+            SeasonStore seasonStore)
         {
+            _availableSizesEU =
+            [
+                new SizeModel("44"),
+                new SizeModel("46"),
+                new SizeModel("48"),
+                new SizeModel("50"),
+                new SizeModel("52"),
+                new SizeModel("54"),
+                new SizeModel("56"),
+                new SizeModel("58"),
+                new SizeModel("60"),
+                new SizeModel("62"),
+            ];
+            
+            _availableSizesUS =
+            [
+                new SizeModel("XS"),
+                new SizeModel("S"),
+                new SizeModel("M"),
+                new SizeModel("L"),
+                new SizeModel("XL"),
+                new SizeModel("XXL"),
+                new SizeModel("3XL"),
+                new SizeModel("4XL"),
+                new SizeModel("5XL"),
+                new SizeModel("6XL"),
+            ];
+
             _clothes = clothes;
-            _sizeStore = sizeStore;
+            //_sizeStore = sizeStore;
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
 
-            _categoryCollectionViewSource = new CollectionViewSource { Source = _categories };
-            _categoryCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(Category.Name), ListSortDirection.Ascending));
-
-            _seasonCollectionViewSource = new CollectionViewSource { Source = _seasons };
-            _seasonCollectionViewSource.SortDescriptions.Add(new SortDescription(nameof(Season.Name), ListSortDirection.Ascending));
-
-            CategoryStore_CategoriesLoaded();
-            SeasonStore_SeasonsLoaded();
-            LoadSizes();
+            LoadSeasons();
+            LoadCategories();
 
             _categoryStore.CategoryAdded += CategoryStore_CategoryAdded;
             _categoryStore.CategoryUpdated += CategoryStore_CategoryUpdated;
@@ -81,36 +78,36 @@ namespace DVS.WPF.ViewModels
         }
 
 
-        private void LoadSizes()
-        {
-            _availableSizesEU.Clear();
-            _availableSizesUS.Clear();
+        //private void LoadSizes()
+        //{
+        //    _availableSizesEU.Clear();
+        //    _availableSizesUS.Clear();
 
-            foreach (SizeModel size in _sizeStore.Sizes)
-            {
-                // Wenn eine Clothes-Instanz übergeben wurde => prüfen ob sie die aktuelle Größe beinhaltet
-                var matchingSize = _clothes?.Sizes.FirstOrDefault(s => s.Size.Size == size.Size);
+        //    foreach (SizeModel size in _sizeStore.Sizes)
+        //    {
+        //        // Wenn eine Clothes-Instanz übergeben wurde => prüfen ob sie die aktuelle Größe beinhaltet
+        //        var matchingSize = _clothes?.Sizes.FirstOrDefault(s => s.Size.Size == size.Size);
 
-                if (matchingSize != null)
-                {
-                    size.IsSelected = true;
-                    size.Quantity = matchingSize.Quantity;
-                }
-                else
-                {
-                    size.IsSelected = false;
-                    size.Quantity = 0;
-                }
+        //        if (matchingSize != null)
+        //        {
+        //            size.IsSelected = true;
+        //            size.Quantity = matchingSize.Quantity;
+        //        }
+        //        else
+        //        {
+        //            size.IsSelected = false;
+        //            size.Quantity = 0;
+        //        }
 
-                if (size.IsSizeSystemEU)
-                    _availableSizesEU.Add(size);
-                else
-                    _availableSizesUS.Add(size);
-            }
-        }
+        //        if (size.IsSizeSystemEU)
+        //            _availableSizesEU.Add(size);
+        //        else
+        //            _availableSizesUS.Add(size);
+        //    }
+        //}
 
 
-        private void SeasonStore_SeasonsLoaded()
+        private void LoadSeasons()
         {
             _seasons.Clear();
 
@@ -123,19 +120,17 @@ namespace DVS.WPF.ViewModels
         private void SeasonStore_SeasonAdded(Season newSeason,  AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             _seasons.Add(newSeason);
-            _seasonCollectionViewSource.View.Refresh();
             addEditSeasonFormViewModel.AddNewSeason = "Neue Saison";
         }
 
         private void SeasonStore_SeasonUpdated(Season season, AddEditSeasonFormViewModel? addEditSeasonFormViewModel)
         {
-            Season seasonToUpdate = _seasons.FirstOrDefault(y => y.GuidId == season.GuidId);
+            Season seasonToUpdate = _seasons.First(y => y.GuidId == season.GuidId);
 
             if (seasonToUpdate != null)
             {
                 int index = _seasons.IndexOf(seasonToUpdate);
                 _seasons[index] = season;
-                _seasonCollectionViewSource.View.Refresh();
 
                 if (addEditSeasonFormViewModel != null)
                 {
@@ -157,7 +152,6 @@ namespace DVS.WPF.ViewModels
             if (seasonToDelete != null)
             {
                 _seasons.Remove(seasonToDelete);
-                _seasonCollectionViewSource.View.Refresh();
                 addEditSeasonFormViewModel.SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
                 addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
             }
@@ -168,7 +162,7 @@ namespace DVS.WPF.ViewModels
         }
 
         
-        private void CategoryStore_CategoriesLoaded()
+        private void LoadCategories()
         {
             _categories.Clear();
 
@@ -181,7 +175,6 @@ namespace DVS.WPF.ViewModels
         private void CategoryStore_CategoryAdded(Category newCategory, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             _categories.Add(newCategory);
-            _categoryCollectionViewSource.View.Refresh();
             addEditCategoryFormViewModel.AddNewCategory = "Neue Kategorie";
         }
 
@@ -193,7 +186,6 @@ namespace DVS.WPF.ViewModels
             {
                 int index = _categories.IndexOf(categoryToUpdate);
                 _categories[index] = category;
-                _categoryCollectionViewSource.View.Refresh();
 
                 if (addEditCategoryFormViewModel != null)
                 {
@@ -215,7 +207,6 @@ namespace DVS.WPF.ViewModels
             if (categoryToDelete != null)
             {
                 _categories.Remove(categoryToDelete);
-                _categoryCollectionViewSource.View.Refresh();
                 addEditCategoryFormViewModel.SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen");
                 addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
             }

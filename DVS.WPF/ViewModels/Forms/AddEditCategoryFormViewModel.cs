@@ -3,13 +3,14 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class AddEditCategoryFormViewModel(ICommand addCategoryCommand,
-                                              ICommand editCategoryCommand,
-                                              ICommand deleteCategoryCommand,
-                                              AddEditClothesListingViewModel addEditListingViewModel)
-                                              : ViewModelBase
+    public class AddEditCategoryFormViewModel(
+        ICommand addCategoryCommand,
+        ICommand editCategoryCommand,
+        ICommand deleteCategoryCommand,
+        AddEditClothesListingViewModel addEditClothesListingViewModel)
+        : ViewModelBase
     {
-        public AddEditClothesListingViewModel AddEditListingViewModel { get; } = addEditListingViewModel;
+        public AddEditClothesListingViewModel AddEditClothesListingViewModel { get; } = addEditClothesListingViewModel;
         public ICommand AddCategory { get; } = addCategoryCommand;
         public ICommand EditCategory { get; } = editCategoryCommand;
         public ICommand DeleteCategory { get; } = deleteCategoryCommand;

@@ -3,12 +3,13 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class AddEditClothesFormViewModel(Clothes? clothes,
-                                             ICommand submitCommand,
-                                             ICommand openAddEditCategoriesCommand,
-                                             ICommand openAddEditSeasonsCommand,
-                                             AddEditClothesListingViewModel addEditClothesListingViewModel)
-                                             : ViewModelBase
+    public class AddEditClothesFormViewModel(
+        Clothes? clothes,
+        ICommand submitCommand,
+        ICommand openAddEditCategoriesCommand,
+        ICommand openAddEditSeasonsCommand,
+        AddEditClothesListingViewModel addEditClothesListingViewModel)
+        : ViewModelBase
     {
         public AddEditClothesListingViewModel AddEditClothesListingViewModel { get; } = addEditClothesListingViewModel;
 
@@ -28,7 +29,6 @@ namespace DVS.WPF.ViewModels.Forms
                 {
                     _id = value;
                     OnPropertyChanged(nameof(Id));
-                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -43,7 +43,6 @@ namespace DVS.WPF.ViewModels.Forms
                 {
                     _name = value;
                     OnPropertyChanged(nameof(Name));
-                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -71,7 +70,6 @@ namespace DVS.WPF.ViewModels.Forms
                 if (_category != value)
                 {
                     _category = value;
-                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -85,7 +83,6 @@ namespace DVS.WPF.ViewModels.Forms
                 if (_season != value)
                 {
                     _season = value;
-                    OnPropertyChanged(nameof(CanSubmit));
                 }
             }
         }
@@ -108,33 +105,5 @@ namespace DVS.WPF.ViewModels.Forms
         }
 
         public bool HasError;
-
-        public bool CanSubmit
-        {//TODO: canSubmitClothes auf true setzen wenn Größenliste verändert wird
-            get
-            {
-                if (string.IsNullOrEmpty(Id) || Id == "Id" ||
-                    string.IsNullOrEmpty(Name) || Name == "Name" ||
-                    Category == null ||
-                    Season == null)
-                {
-                    return false;
-                }
-
-                if (Clothes != null)
-                {
-                    if (Id == Clothes.Id &&
-                        Name == Clothes.Name &&
-                        Name == Clothes.Name &&
-                        Category == Clothes.Category &&
-                        Season == Clothes.Season)
-                    {
-                        return false;
-                    }
-                }
-
-                return true;
-            }
-        }
     }
 }

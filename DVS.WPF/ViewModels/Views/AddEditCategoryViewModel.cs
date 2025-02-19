@@ -10,39 +10,43 @@ namespace DVS.WPF.ViewModels.Views
         public AddEditCategoryFormViewModel AddEditCategoryFormViewModel { get; }
         public ICommand CloseAddEditCategory { get; }
 
-        public AddEditCategoryViewModel(ModalNavigationStore modalNavigationStore,
-                                        CategoryStore categoryStore,
-                                        SeasonStore seasonStore,
-                                        SizeStore sizeStore,
-                                        ClothesStore clothesStore,
-                                        ClothesSizeStore clothesSizeStore,
-                                        EmployeeClothesSizeStore employeeClothesSizesStore,
-                                        EmployeeStore employeeStore,
-                                        AddClothesViewModel addClothesViewModel,
-                                        EditClothesViewModel editClothesViewModel,
-                                        AddEditClothesListingViewModel addEditListingViewModel,
-                                        DVSListingViewModel dVSListingViewModel)
+        public AddEditCategoryViewModel(
+            ModalNavigationStore modalNavigationStore,
+            CategoryStore categoryStore,
+            SeasonStore seasonStore,
+            SizeStore sizeStore,
+            ClothesStore clothesStore,
+            ClothesSizeStore clothesSizeStore,
+            EmployeeClothesSizeStore employeeClothesSizesStore,
+            EmployeeStore employeeStore,
+            AddClothesViewModel addClothesViewModel,
+            EditClothesViewModel editClothesViewModel,
+            AddEditClothesListingViewModel addEditListingViewModel,
+            DVSListingViewModel dVSListingViewModel)
         {
             ICommand addCategory = new AddCategoryCommand(this, categoryStore);
             ICommand updateCategory = new EditCategoryCommand(this, categoryStore);
-            ICommand deleteCategory = new DeleteCategoryCommand(this,
-                                                                categoryStore,
-                                                                seasonStore,
-                                                                sizeStore,
-                                                                clothesStore,
-                                                                clothesSizeStore,
-                                                                employeeClothesSizesStore,
-                                                                employeeStore,
-                                                                dVSListingViewModel);
+            ICommand deleteCategory = new DeleteCategoryCommand(
+                this,
+                categoryStore,
+                seasonStore,
+                sizeStore,
+                clothesStore,
+                clothesSizeStore,
+                employeeClothesSizesStore,
+                employeeStore,
+                dVSListingViewModel);
 
-            CloseAddEditCategory = new CloseAddEditCategoryCommand(modalNavigationStore,
-                                                                   addClothesViewModel,
-                                                                   editClothesViewModel);
+            CloseAddEditCategory = new CloseAddEditCategoryCommand(
+                modalNavigationStore,
+                addClothesViewModel,
+                editClothesViewModel);
 
-            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(addCategory,
-                                                                            updateCategory,
-                                                                            deleteCategory,
-                                                                            addEditListingViewModel)
+            AddEditCategoryFormViewModel = new AddEditCategoryFormViewModel(
+                addCategory,
+                updateCategory,
+                deleteCategory,
+                addEditListingViewModel)
             {
                 AddNewCategory = "Neue Kategorie",
                 SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen")
