@@ -18,15 +18,16 @@ namespace DVS.WPF.Commands.ClothesCommands
     {
         public override void Execute(object parameter)
         {
-            AddClothesViewModel addClothesViewModel = new(modalNavigationStore,
-                                                          sizeStore,
-                                                          categoryStore,
-                                                          seasonStore,
-                                                          clothesStore,
-                                                          clothesSizeStore,
-                                                          employeeClothesSizesStore,
-                                                          employeeStore,
-                                                          dVSListingViewModel);
+            AddClothesViewModel addClothesViewModel = new(
+                modalNavigationStore,
+                sizeStore,
+                categoryStore,
+                seasonStore,
+                clothesStore,
+                clothesSizeStore,
+                employeeClothesSizesStore,
+                employeeStore,
+                dVSListingViewModel);
 
             modalNavigationStore.CurrentViewModel = addClothesViewModel;
         }

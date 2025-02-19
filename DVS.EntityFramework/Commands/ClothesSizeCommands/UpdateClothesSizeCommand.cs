@@ -8,20 +8,16 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
     {
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
-        public async Task Execute(ClothesSize clothesSize)
+        public async Task Execute(ClothesSize editedClothesSize)
         {
             using DVSDbContext context = _contextFactory.Create();
 
             var existingClothesSize = await context.ClothesSizes
-                .FirstOrDefaultAsync(cs => cs.GuidId == clothesSize.GuidId);
+                .FirstOrDefaultAsync(cs => cs.GuidId == editedClothesSize.GuidId);
 
             if (existingClothesSize != null)
             {
-                context.Entry(existingClothesSize).CurrentValues.SetValues(clothesSize);
-            }
-            else
-            {
-                context.ClothesSizes.Add(clothesSize);
+                context.Entry(existingClothesSize).CurrentValues.SetValues(editedClothesSize);
             }
 
             await context.SaveChangesAsync();

@@ -8,12 +8,17 @@ namespace DVS.EntityFramework.Commands.ClothesCommands
     {
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
-        public async Task Execute(Clothes updatedClothes)
+        public async Task Execute(Clothes editedClothes)
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            context.Entry(updatedClothes).State = EntityState.Modified;
-            context.Clothes.Update(updatedClothes);
+            var existingClothes = await context.Clothes
+                .FirstOrDefaultAsync(c => c.Id == editedClothes.Id);
+
+            if (existingClothes != null)
+            {
+                context.Entry(existingClothes).CurrentValues.SetValues(editedClothes);
+            }
 
             await context.SaveChangesAsync();
         }

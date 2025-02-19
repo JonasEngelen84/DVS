@@ -1,5 +1,6 @@
 ﻿using DVS.Domain.Commands.EmployeeClothesSizeCommands;
 using DVS.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Commands.EmployeeClothesSizeCommands
 {
@@ -7,20 +8,18 @@ namespace DVS.EntityFramework.Commands.EmployeeClothesSizeCommands
     {
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
-        public async Task Execute(EmployeeClothesSize employeeClothesSize)
+        public async Task Execute(EmployeeClothesSize editedEcs)
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //EmployeeClothesSize employeeClothesSize = new()
-            //{
-            //    GuidID = employeeClothesSize.GuidID,
-            //    EmployeeGuidID = employeeClothesSize.EmployeeGuidID,
-            //    ClothesSizeGuidID = employeeClothesSize.ClothesSizeGuidID,
-            //    Quantity = employeeClothesSize.Quantity,
-            //    Comment = employeeClothesSize.Comment
-            //};
+            var existingEcs = await context.EmployeeClothesSizes
+                .FirstOrDefaultAsync(ecs => ecs.GuidId == editedEcs.GuidId);
 
-            context.EmployeeClothesSizes.Update(employeeClothesSize);
+            if (existingEcs != null)
+            {
+                context.Entry(existingEcs).CurrentValues.SetValues(editedEcs);
+            }
+
             await context.SaveChangesAsync();
         }
     }

@@ -1,5 +1,6 @@
 ﻿using DVS.Domain.Commands.EmployeeCommands;
 using DVS.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Commands.EmployeeCommands
 {
@@ -7,21 +8,18 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
     {
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
-        public async Task Execute(Employee employee)
+        public async Task Execute(Employee editedEmployee)
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //Employee employee = new()
-            //{
-            //    GuidID = employee.GuidID,
-            //    ID = employee.ID,
-            //    Lastname = employee.Lastname,
-            //    Firstname = employee.Firstname,
-            //    Comment = employee.Comment,
-            //    Clothes = employee.Clothes
-            //};
+            var existingEmployee = await context.Employees
+                .FirstOrDefaultAsync(e => e.Id == editedEmployee.Id);
 
-            context.Employees.Update(employee);
+            if (existingEmployee != null)
+            {
+                context.Entry(existingEmployee).CurrentValues.SetValues(editedEmployee);
+            }
+
             await context.SaveChangesAsync();
         }
     }

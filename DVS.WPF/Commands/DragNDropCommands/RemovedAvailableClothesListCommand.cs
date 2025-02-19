@@ -13,35 +13,33 @@ namespace DVS.WPF.Commands.DragNDropCommands
     {
         public override void Execute(object parameter)
         {
-            CheckQuantity();
-
-            if (addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity > 0)
-            {
-                addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity -= 1;
-
-                UpdateEditedList();
-            }
-            else
-                ShowErrorMessageBox("Diese Bekleidung ist zur Zeit nicht vorrätig!", "Bekleidung nicht vorhanden");
-        }
-
-        private void CheckQuantity()
-        {
             switch (addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity)
             {
+                case 0:
+                    ShowErrorMessageBox("Diese Bekleidung ist zur Zeit nicht vorrätig!", "Bekleidung nicht vorhanden");
+                    break;
+
                 case 1:
                     ShowErrorMessageBox("Nach der Transaktion ist diese Bekleidung nicht mehr vorrätig!", "Letztes Bekleidungsstück");
+                    addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity -= 1;
+                    UpdateEditedList();
                     break;
 
                 case 2:
                     ShowErrorMessageBox("Nach der Transaktion ist diese Bekleidung noch  1  mal vorrätig!", "Sehr geringer Bestand");
+                    addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity -= 1;
+                    UpdateEditedList();
                     break;
 
                 case 3:
                     ShowErrorMessageBox("Nach der Transaktion ist diese Bekleidung noch  2  mal vorrätig!", "geringer Bestand");
+                    addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity -= 1;
+                    UpdateEditedList();
                     break;
 
                 default:
+                    addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity -= 1;
+                    UpdateEditedList();
                     break;
             }
         }
