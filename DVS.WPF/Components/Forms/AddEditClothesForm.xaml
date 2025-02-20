@@ -23,6 +23,22 @@
                                                 Direction="Ascending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
+        
+        <CollectionViewSource x:Key="SortedSizesEU"
+                              Source="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesEU}">
+            <CollectionViewSource.SortDescriptions>
+                <componentmodel:SortDescription PropertyName="Name"
+                                                Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+        
+        <CollectionViewSource x:Key="SortedSizesUS"
+                              Source="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesUS}">
+            <CollectionViewSource.SortDescriptions>
+                <componentmodel:SortDescription PropertyName="Name"
+                                                Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
     </UserControl.Resources>
 
     <StackPanel>
@@ -116,7 +132,7 @@
 
                 <ScrollViewer>
                     <StackPanel>
-                        <ItemsControl ItemsSource="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesEU}">
+                        <ItemsControl ItemsSource="{Binding Source={StaticResource SortedSizesEU}}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -141,7 +157,7 @@
 
                 <ScrollViewer>
                     <StackPanel>
-                        <ItemsControl ItemsSource="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesUS}">
+                        <ItemsControl ItemsSource="{Binding Source={StaticResource SortedSizesUS}}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
