@@ -68,11 +68,13 @@ namespace DVS.WPF.ViewModels.Views
                 openAddEditCategories,
                 openAddEditSeasons,
                 SizesCategoriesSeasonsListingViewModel)
-            {//TODO: verwendete Category & Season werden nicht in UI ausgegeben.
+            {
                 Id = clothes.Id,
                 Name = clothes.Name,
-                Category = clothes.Category,
-                Season = clothes.Season,
+                Category = SizesCategoriesSeasonsListingViewModel.Categories
+                    .First(c => c.GuidId == clothes.Category?.GuidId),
+                Season = SizesCategoriesSeasonsListingViewModel.Seasons
+                    .First(s => s.GuidId == clothes.Season?.GuidId),
                 Comment = clothes.Comment
             };
         }

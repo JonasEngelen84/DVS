@@ -79,7 +79,7 @@
 
             <ComboBox Style="{StaticResource ComboBoxStyle}"
                       ItemsSource="{Binding Source={StaticResource SortedSeasons}}"
-                      SelectedItem="{Binding Season, Mode=TwoWay}"
+                      SelectedItem="{Binding Season}"
                       DisplayMemberPath="Name" />
 
             <Button Margin="5 0 0 0"
