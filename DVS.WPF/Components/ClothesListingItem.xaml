@@ -14,7 +14,7 @@
         <CollectionViewSource x:Key="SortedClothesSizes"
                               Source="{Binding Sizes}">
             <CollectionViewSource.SortDescriptions>
-                <componentmodel:SortDescription PropertyName="Size.Size"
+                <componentmodel:SortDescription PropertyName="Size.Name"
                                                 Direction="Ascending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
@@ -91,7 +91,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Grid.Column="0" Text="{Binding Size.Size}" />
+                            <TextBlock Grid.Column="0" Text="{Binding Size}" />
                             <TextBlock Grid.Column="1" Text="{Binding Quantity}" />
                             <TextBlock Grid.Column="2" Text="{Binding Comment}" />
                         </Grid>

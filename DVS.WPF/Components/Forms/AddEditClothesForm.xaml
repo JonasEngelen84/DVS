@@ -27,7 +27,7 @@
         <CollectionViewSource x:Key="SortedEuSizes"
                               Source="{Binding AddEditClothesListingViewModel.AvailableSizesEU}">
             <CollectionViewSource.SortDescriptions>
-                <componentmodel:SortDescription PropertyName="Size"
+                <componentmodel:SortDescription PropertyName="Name"
                                                 Direction="Ascending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
@@ -129,7 +129,7 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <CheckBox IsChecked="{Binding IsSelected}"
-                                                  Content="{Binding Size}"
+                                                  Content="{Binding Name}"
                                                   Margin="5" />
                                         <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
                                                  Width="46"
@@ -154,7 +154,7 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <CheckBox IsChecked="{Binding IsSelected}"
-                                                  Content="{Binding Size}"
+                                                  Content="{Binding Name}"
                                                   Margin="5"
                                                   Width="40"/>
                                         <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"

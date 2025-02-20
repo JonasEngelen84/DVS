@@ -102,10 +102,10 @@
                             </Grid.ColumnDefinitions>
 
                             <TextBlock Grid.Column="0" Text="{Binding ClothesSize.Clothes.Id}" />
-                            <TextBlock Grid.Column="1"  Text="{Binding ClothesSize.Clothes.Category.Name}" />
+                            <TextBlock Grid.Column="1" Text="{Binding ClothesSize.Clothes.Category.Name}" />
                             <TextBlock Grid.Column="2" Text="{Binding ClothesSize.Clothes.Name}" />
                             <TextBlock Grid.Column="3" Text="{Binding ClothesSize.Clothes.Season.Name}" />
-                            <TextBlock Grid.Column="4" Text="{Binding ClothesSize.Size.Size}" />
+                            <TextBlock Grid.Column="4" Text="{Binding ClothesSize.Size}" />
                             <TextBlock Grid.Column="5" Text="{Binding Quantity}" />
                             <TextBlock Grid.Column="6" Text="{Binding Comment}" />
                         </Grid>
