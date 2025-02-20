@@ -72,7 +72,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 }
                 catch
                 {
-                    ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!", "AddClothesCommand CreateAndAddNewClothesAsync");
+                    ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", "AddClothesCommand CreateAndAddNewClothesAsync");
                     editClothesFormViewModel.HasError = true;
                 }
             }
@@ -95,7 +95,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
             catch (Exception)
             {
-                ShowErrorMessageBox("Erstellen der Bekleidung ist fehlgeschlagen!", "AddClothesCommand CreateAndAddNewClothesAsync");
+                ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", "AddClothesCommand CreateAndAddNewClothesAsync");
                 editClothesFormViewModel.HasError = true;
             }
         }

@@ -5,25 +5,25 @@ namespace DVS.WPF.Commands.DragNDropCommands
 {
     public class ReceivedNewEmployeeClothesListCommand(
         AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-        Action<AvailableClothesSizeItem> addItemToEmployeeClothesList)
+        Action<EmployeeClothesSizeItem> addItemToEmployeeClothesList)
         : CommandBase
     {
         public override void Execute(object parameter)
         {
             if (addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity > 0)
             {
-                AvailableClothesSizeItem? existingAcsi = addEditEmployeeListingViewModel.GetClothesSizeFrom_employeeClothesSizes();
+                EmployeeClothesSizeItem? existingEcsi = addEditEmployeeListingViewModel.GetClothesSizeFrom_employeeClothesSizes();
 
-                if (existingAcsi != null)
-                    existingAcsi.Quantity += 1;
+                if (existingEcsi != null)
+                    existingEcsi.Quantity += 1;
                 else
-                    addItemToEmployeeClothesList?.Invoke(CreateNewAcsi(addEditEmployeeListingViewModel));
+                    addItemToEmployeeClothesList?.Invoke(CreateNewEcsi(addEditEmployeeListingViewModel));
             }
         }
 
-        private static AvailableClothesSizeItem CreateNewAcsi(AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel)
+        private static EmployeeClothesSizeItem CreateNewEcsi(AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel)
         {
-            return new AvailableClothesSizeItem(_addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesSize)
+            return new EmployeeClothesSizeItem(_addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesSize)
             {
                 Quantity = 1
             };

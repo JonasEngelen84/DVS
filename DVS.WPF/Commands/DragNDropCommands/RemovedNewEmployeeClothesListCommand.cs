@@ -5,15 +5,15 @@ namespace DVS.WPF.Commands.DragNDropCommands
 {
     public class RemovedNewEmployeeClothesListCommand(
         AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-        Action<AvailableClothesSizeItem> removeItemFromEmployeeClothesList)
+        Action<EmployeeClothesSizeItem> removeItemFromEmployeeClothesList)
         : CommandBase
     {
         public override void Execute(object parameter)
         {
-            if (addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity > 1)
-                addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity -= 1;
-            else if (addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.Quantity == 1)
-                removeItemFromEmployeeClothesList?.Invoke(addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem);
+            if (addEditEmployeeListingViewModel.SelectedEmployeeClothesSizeItem.Quantity > 1)
+                addEditEmployeeListingViewModel.SelectedEmployeeClothesSizeItem.Quantity -= 1;
+            else if (addEditEmployeeListingViewModel.SelectedEmployeeClothesSizeItem.Quantity == 1)
+                removeItemFromEmployeeClothesList?.Invoke(addEditEmployeeListingViewModel.SelectedEmployeeClothesSizeItem);
         }
     }
 }

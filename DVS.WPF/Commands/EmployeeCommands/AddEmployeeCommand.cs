@@ -70,9 +70,9 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private static void CreateEmployeeClothesSizes(Employee newEmployee, AddEditEmployeeFormViewModel addEmployeeFormViewModel)
         {
-            foreach (AvailableClothesSizeItem acsi in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSizeItem ecsi in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), newEmployee, acsi.ClothesSize, (int)acsi.Quantity, "");
+                EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), newEmployee, ecsi.ClothesSize, (int)ecsi.Quantity, "");
                 newEmployee.Clothes.Add(employeeClothesSize);
             }
         }

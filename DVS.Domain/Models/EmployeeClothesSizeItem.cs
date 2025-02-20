@@ -1,12 +1,12 @@
 ﻿namespace DVS.Domain.Models
 {
-    public class EmployeeClothesSizeItem : ModelBase
+    public class EmployeeClothesSizeItem(ClothesSize clothesSize) : ModelBase
     {
-        public EmployeeClothesSize EmployeeClothesSize { get; private set; }
-        public string ClothesId => EmployeeClothesSize.ClothesSize.Clothes.Id;
-        public string ClothesName => EmployeeClothesSize.ClothesSize.Clothes.Name;
-        public string Size => EmployeeClothesSize.ClothesSize.Size;
-        public string Comment => EmployeeClothesSize.Comment;
+        public ClothesSize ClothesSize { get; } = clothesSize;
+        public string ClothesId => ClothesSize.Clothes.Id;
+        public string ClothesName => ClothesSize.Clothes.Name;
+        public string Size => ClothesSize.Size;
+        public string Comment => Comment;
 
         private int _quantity;
         public int Quantity
@@ -15,23 +15,11 @@
 
             set
             {
-                if (EmployeeClothesSize != null)
-                    _quantity = EmployeeClothesSize.Quantity;
+                if (_quantity != value)
+                    _quantity = value;
                 
                 OnPropertyChanged(nameof(Quantity));
             }
-        }
-
-        public EmployeeClothesSizeItem(EmployeeClothesSize employeeClothesSize)
-        {
-            EmployeeClothesSize = employeeClothesSize;
-            _quantity = EmployeeClothesSize.Quantity;
-        }
-
-        public void Update(EmployeeClothesSize employeeClothesSize)
-        {
-            EmployeeClothesSize = employeeClothesSize;
-            _quantity = employeeClothesSize.Quantity;
         }
     }
 }
