@@ -10,7 +10,6 @@ namespace DVS.WPF.Commands.EmployeeCommands
         ModalNavigationStore modalNavigationStore,
         EmployeeStore employeeStore,
         ClothesStore clothesStore,
-        SizeStore sizeStore,
         CategoryStore categoryStore,
         SeasonStore seasonStore,
         ClothesSizeStore clothesSizeStore,
@@ -26,16 +25,16 @@ namespace DVS.WPF.Commands.EmployeeCommands
             addEditEmployeeListingViewModel.LoadAvailableSizes();
             addEditEmployeeListingViewModel.LoadEmployeeClothes(employee);
 
-            EditEmployeeViewModel EditEmployeeViewModel = new(employee,
-                                                              employeeStore,
-                                                              clothesStore,
-                                                              sizeStore,
-                                                              categoryStore,
-                                                              seasonStore,
-                                                              clothesSizeStore,
-                                                              employeeClothesSizesStore,
-                                                              modalNavigationStore,
-                                                              addEditEmployeeListingViewModel);
+            EditEmployeeViewModel EditEmployeeViewModel = new(
+                employee,
+                employeeStore,
+                clothesStore,
+                categoryStore,
+                seasonStore,
+                clothesSizeStore,
+                employeeClothesSizesStore,
+                modalNavigationStore,
+                addEditEmployeeListingViewModel);
 
             modalNavigationStore.CurrentViewModel = EditEmployeeViewModel;
         }

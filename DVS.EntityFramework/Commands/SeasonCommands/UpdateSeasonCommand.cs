@@ -12,6 +12,7 @@ namespace DVS.EntityFramework.Commands.SeasonCommands
             using DVSDbContext context = _contextFactory.Create();
 
             context.Seasons.Update(season);
+
             await context.SaveChangesAsync();
         }
     }

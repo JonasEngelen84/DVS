@@ -52,21 +52,6 @@ namespace DVS.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sizes",
-                columns: table => new
-                {
-                    GuidId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Size = table.Column<string>(type: "TEXT", maxLength: 3, nullable: false),
-                    Quantity = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsSizeSystemEU = table.Column<bool>(type: "INTEGER", nullable: false),
-                    IsSelected = table.Column<bool>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sizes", x => x.GuidId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Clothes",
                 columns: table => new
                 {
@@ -99,7 +84,7 @@ namespace DVS.EntityFramework.Migrations
                 {
                     GuidId = table.Column<Guid>(type: "TEXT", nullable: false),
                     ClothesId = table.Column<string>(type: "TEXT", nullable: false),
-                    SizeGuidId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Size = table.Column<string>(type: "TEXT", nullable: false),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
                     Comment = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
                 },
@@ -111,12 +96,6 @@ namespace DVS.EntityFramework.Migrations
                         column: x => x.ClothesId,
                         principalTable: "Clothes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ClothesSizes_Sizes_SizeGuidId",
-                        column: x => x.SizeGuidId,
-                        principalTable: "Sizes",
-                        principalColumn: "GuidId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -152,15 +131,15 @@ namespace DVS.EntityFramework.Migrations
                 columns: new[] { "GuidId", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("00445c2c-7802-4288-8ca1-02083c165be2"), "-Kategorielos-" },
-                    { new Guid("19fe021a-e631-4d27-9531-3e74e964c31a"), "Hemd" },
-                    { new Guid("225576d2-4a21-4555-bbb1-04222749a0c2"), "Schuhwerk" },
-                    { new Guid("431d98a8-2885-4cfc-8331-0b2b8e4fad58"), "Kopfbedeckung" },
-                    { new Guid("58022f20-be80-4e12-b01e-1b8c8c6be10b"), "Shirt" },
-                    { new Guid("63a54768-07d9-4e23-8d69-b1766f58f819"), "Jacke" },
-                    { new Guid("b95019a2-dc1c-4eb6-bd28-24962e797158"), "Pullover" },
-                    { new Guid("d6c7190f-a81a-4218-91f5-790c8bad986d"), "Handschuhe" },
-                    { new Guid("ff12e73a-0036-47b6-a62c-9ecba3faa0d3"), "Hose" }
+                    { new Guid("056bb78e-e6a1-4ddb-b80a-64d39b0d3eaf"), "Handschuhe" },
+                    { new Guid("2bf22fe1-df90-405a-b981-c5d643e0e1ac"), "Hose" },
+                    { new Guid("36abcba5-aaa1-4abc-81c3-437039a3f11f"), "Schuhwerk" },
+                    { new Guid("4c11ad04-ee91-4aa9-b531-ff287699b929"), "Hemd" },
+                    { new Guid("6cef334b-ef29-476a-af52-f01c4ee53328"), "-Kategorielos-" },
+                    { new Guid("a197e74c-b23d-4a23-978d-daddee378041"), "Pullover" },
+                    { new Guid("c16f4c8c-9de8-4251-ac68-626356c5a281"), "Jacke" },
+                    { new Guid("e1204550-9844-4c0c-94d7-f7099d458cf9"), "Shirt" },
+                    { new Guid("fcab1d1d-d5ed-4b6a-9e31-e6c10158e8f6"), "Kopfbedeckung" }
                 });
 
             migrationBuilder.InsertData(
@@ -168,36 +147,9 @@ namespace DVS.EntityFramework.Migrations
                 columns: new[] { "GuidId", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("9a7b2791-51fd-4987-a438-d1b3c8341bcc"), "-Saisonlos-" },
-                    { new Guid("acd09cd9-3a06-445e-9589-84459bb85e80"), "Winter" },
-                    { new Guid("ef563275-eb5f-44bd-9c7f-def6ebd2660f"), "Sommer" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Sizes",
-                columns: new[] { "GuidId", "IsSelected", "IsSizeSystemEU", "Quantity", "Size" },
-                values: new object[,]
-                {
-                    { new Guid("07d7717d-a2bc-476e-81fd-dd6fb09fef17"), false, false, 0, "5XL" },
-                    { new Guid("0adbf1b7-6a5a-412f-aaf3-6ecc9014d2bb"), false, true, 0, "60" },
-                    { new Guid("16aba701-bd90-49c4-9746-ad030c801279"), false, true, 0, "58" },
-                    { new Guid("1f6621f0-f5f8-4914-ba51-9ecac5a04555"), false, true, 0, "56" },
-                    { new Guid("26e0366c-2d3c-4b37-9bbf-6b25c6855abf"), false, true, 0, "46" },
-                    { new Guid("35f19f44-36cd-4b92-a1c7-1e78d71177ad"), false, true, 0, "62" },
-                    { new Guid("5c1be7ff-a749-4639-8b56-a507dab24b5a"), false, false, 0, "4XL" },
-                    { new Guid("6950d119-d753-4e06-b343-a896197e4f66"), false, false, 0, "L" },
-                    { new Guid("845be64d-5a6e-4db1-b2a0-ef83fae8ae2b"), false, false, 0, "M" },
-                    { new Guid("b2dd13ee-a0f6-42f1-94ac-5adb45327e79"), false, false, 0, "S" },
-                    { new Guid("c8b59cf7-d392-4b9d-a662-65348d5d157c"), false, false, 0, "XS" },
-                    { new Guid("cbc334ea-946b-48c4-9e58-7fc76bff0a7a"), false, false, 0, "XXL" },
-                    { new Guid("cf7cfdab-bf7c-4b8d-86a4-d162b1646a5c"), false, false, 0, "XL" },
-                    { new Guid("d299da73-85d1-478f-91e9-e24a898d1904"), false, true, 0, "50" },
-                    { new Guid("d454954e-f572-4fb0-934e-92e058710a1f"), false, false, 0, "6XL" },
-                    { new Guid("da974cad-fed9-4317-959b-2071921df33d"), false, false, 0, "3XL" },
-                    { new Guid("dbe5b2a4-be54-484d-8acd-37e0bd96ad30"), false, true, 0, "44" },
-                    { new Guid("e4f633ef-3925-443a-8d44-2ebae9224f51"), false, true, 0, "54" },
-                    { new Guid("e8bb6044-bf94-4596-88e2-1dc56427018d"), false, true, 0, "48" },
-                    { new Guid("f5038a59-0167-4404-83f0-d7a03e82c75b"), false, true, 0, "52" }
+                    { new Guid("055944f9-d66f-4c42-9549-ed3dd2276654"), "-Saisonlos-" },
+                    { new Guid("875eeda6-4203-42c0-9bae-59908e7d1d06"), "Sommer" },
+                    { new Guid("b439d5cf-4c48-4464-9662-847f1380d8a4"), "Winter" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -214,11 +166,6 @@ namespace DVS.EntityFramework.Migrations
                 name: "IX_ClothesSizes_ClothesId",
                 table: "ClothesSizes",
                 column: "ClothesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ClothesSizes_SizeGuidId",
-                table: "ClothesSizes",
-                column: "SizeGuidId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeClothesSizes_ClothesSizeGuidId",
@@ -245,9 +192,6 @@ namespace DVS.EntityFramework.Migrations
 
             migrationBuilder.DropTable(
                 name: "Clothes");
-
-            migrationBuilder.DropTable(
-                name: "Sizes");
 
             migrationBuilder.DropTable(
                 name: "Categories");

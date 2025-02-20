@@ -8,7 +8,7 @@
         public string ClothesName => ClothesSize.Clothes.Name;
         public string Category => ClothesSize.Clothes.Category.Name;
         public string Season => ClothesSize.Clothes.Season.Name;
-        public string Size => ClothesSize.Size.Size;
+        public string Size => ClothesSize.Size;
         public string Comment => ClothesSize.Comment;
 
         private int _quantity;

@@ -4,7 +4,6 @@ using DVS.Domain.Commands.ClothesSizeCommands;
 using DVS.Domain.Commands.EmployeeClothesSizeCommands;
 using DVS.Domain.Commands.EmployeeCommands;
 using DVS.Domain.Commands.SeasonCommands;
-using DVS.Domain.Commands.SizeCommands;
 using DVS.Domain.Services;
 using DVS.EntityFramework;
 using DVS.EntityFramework.Commands.CategoryCommands;
@@ -13,7 +12,6 @@ using DVS.EntityFramework.Commands.ClothesSizeCommands;
 using DVS.EntityFramework.Commands.EmployeeClothesSizeCommands;
 using DVS.EntityFramework.Commands.EmployeeCommands;
 using DVS.EntityFramework.Commands.SeasonCommands;
-using DVS.EntityFramework.Commands.SizeCommands;
 using DVS.EntityFramework.Services;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
@@ -35,7 +33,7 @@ namespace DVS.WPF
             _host = Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
                 {
-                    string connectionString = context.Configuration.GetConnectionString("sqlite");
+                    string? connectionString = context.Configuration.GetConnectionString("sqlite");
 
                     services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
                     services.AddSingleton<DVSDbContextFactory>();
@@ -59,7 +57,6 @@ namespace DVS.WPF
                     services.AddSingleton<ICreateEmployeeClothesSizeCommand, CreateEmployeeClothesSizeCommand>();
                     services.AddSingleton<IUpdateEmployeeClothesSizeCommand, UpdateEmployeeClothesSizeCommand>();
                     services.AddSingleton<IDeleteEmployeeClothesSizeCommand, DeleteEmployeeClothesSizeCommand>();
-                    services.AddSingleton<IUpdateSizeCommand, UpdateSizeCommand>();
 
                     services.AddSingleton<DVSHeadViewModel>();
                     services.AddSingleton<DVSSizeViewModel>();
@@ -73,7 +70,6 @@ namespace DVS.WPF
                     services.AddSingleton<SeasonStore>();
                     services.AddSingleton<ClothesStore>();
                     services.AddSingleton<EmployeeStore>();
-                    services.AddSingleton<SizeStore>();
                     services.AddSingleton<ClothesSizeStore>();
                     services.AddSingleton<EmployeeClothesSizeStore>();
 
@@ -106,7 +102,6 @@ namespace DVS.WPF
         private async void LoadData()
         {
             var dataLoader = _host.Services.GetRequiredService<IDataLoaderService>();
-            var sizeStore = _host.Services.GetRequiredService<SizeStore>();
             var categoryStore = _host.Services.GetRequiredService<CategoryStore>();
             var seasonStore = _host.Services.GetRequiredService<SeasonStore>();
             var clothesStore = _host.Services.GetRequiredService<ClothesStore>();
@@ -114,7 +109,6 @@ namespace DVS.WPF
             var clothesSizeStore = _host.Services.GetRequiredService<ClothesSizeStore>();
             var employeeClothesSizeStore = _host.Services.GetRequiredService<EmployeeClothesSizeStore>();
 
-            var sizes = await dataLoader.LoadSizesAsync();
             var categories = await dataLoader.LoadCategoriesAsync();
             var seasons = await dataLoader.LoadSeasonsAsync();
             var clothes = await dataLoader.LoadClothesAsync();
@@ -122,7 +116,6 @@ namespace DVS.WPF
             var clothesSizes = await dataLoader.LoadClothesSizesAsync();
             var employeeClothesSizes = await dataLoader.LoadEmployeeClothesSizesAsync();
 
-            sizeStore.Load(sizes);
             categoryStore.Load(categories);
             seasonStore.Load(seasons);
             clothesStore.Load(clothes);

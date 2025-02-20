@@ -1,8 +1,6 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
-using System.Windows;
 
 namespace DVS.WPF.ViewModels
 {
@@ -39,8 +37,7 @@ namespace DVS.WPF.ViewModels
         }
 
         private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly SizeStore _sizeStore;
-        private readonly ClothesStore _clothesStore;
+         readonly ClothesStore _clothesStore;
         private readonly EmployeeStore _employeeStore;
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
@@ -50,19 +47,18 @@ namespace DVS.WPF.ViewModels
         private readonly SelectedEmployeeClothesSizeStore _selectedEmployeeClothesSizeStore;
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel;
 
-        public DVSListingViewModel(SizeStore sizeStore,
-                                   ClothesStore clothesStore,
-                                   EmployeeStore employeeStore,
-                                   ModalNavigationStore modalNavigationStore,
-                                   CategoryStore categoryStore,
-                                   SeasonStore seasonStore,
-                                   ClothesSizeStore clothesSizeStore,
-                                   EmployeeClothesSizeStore employeeClothesSizesStore,
-                                   SelectedClothesSizeStore selectedClothesSizeStore,
-                                   SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
-                                   AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
+        public DVSListingViewModel(
+            ClothesStore clothesStore,
+            EmployeeStore employeeStore,
+            ModalNavigationStore modalNavigationStore,
+            CategoryStore categoryStore,
+            SeasonStore seasonStore,
+            ClothesSizeStore clothesSizeStore,
+            EmployeeClothesSizeStore employeeClothesSizesStore,
+            SelectedClothesSizeStore selectedClothesSizeStore,
+            SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
+            AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
         {
-            _sizeStore = sizeStore;
             _clothesStore = clothesStore;
             _employeeStore = employeeStore;
             _modalNavigationStore = modalNavigationStore;
@@ -102,7 +98,6 @@ namespace DVS.WPF.ViewModels
             _clothesCollection.Add(new ClothesListingItemViewModel(
                 clothes,
                 _modalNavigationStore,
-                _sizeStore,
                 _categoryStore,
                 _seasonStore,
                 _clothesStore,
@@ -197,17 +192,17 @@ namespace DVS.WPF.ViewModels
         }
         private void EmployeeStore_EmployeeAdded(Employee newEmployee)
         {
-            _employeeCollection.Add(new EmployeeListingItemViewModel(newEmployee,
-                                                                                this,
-                                                                                _modalNavigationStore,
-                                                                                _addEditEmployeeListingViewModel,
-                                                                                _employeeStore,
-                                                                                _clothesStore,
-                                                                                _sizeStore,
-                                                                                _categoryStore,
-                                                                                _seasonStore,
-                                                                                _clothesSizeStore,
-                                                                                _employeeClothesSizeStore));
+            _employeeCollection.Add(new EmployeeListingItemViewModel(
+                newEmployee,
+                this,
+                _modalNavigationStore,
+                _addEditEmployeeListingViewModel,
+                _employeeStore,
+                _clothesStore,
+                _categoryStore,
+                _seasonStore,
+                _clothesSizeStore,
+                _employeeClothesSizeStore));
 
             if (newEmployee.Clothes.Count > 0)
             {
@@ -247,7 +242,7 @@ namespace DVS.WPF.ViewModels
                 {
                     // Erstellen einer Liste der aktuellen Bekleidungsgrößen des Mitarbeiter
                     var currentClothesSizes = editedEmployee.Clothes
-                        .Select(ecs => new { ecs.ClothesSize.Clothes.Id, ecs.ClothesSize.Size.Size })
+                        .Select(ecs => new { ecs.ClothesSize.Clothes.Id, ecs.ClothesSize.Size })
                         .ToHashSet();
 
                     // Finden der DetailedEmployeeClothesItems mit der passenden EmployeeGuidID

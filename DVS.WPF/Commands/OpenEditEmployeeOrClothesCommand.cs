@@ -10,7 +10,6 @@ namespace DVS.WPF.Commands
         SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
         ModalNavigationStore modalNavigationStore,
         AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-        SizeStore sizeStore,
         ClothesStore clothesStore,
         EmployeeStore employeeStore,
         DVSListingViewModel dVSListingViewModel,
@@ -27,7 +26,6 @@ namespace DVS.WPF.Commands
                 EditClothesViewModel EditClothesViewModel = new(
                     selectedClothesSizeStore.SelectedClothesSize.Clothes,
                     modalNavigationStore,
-                    sizeStore,
                     categoryStore,
                     seasonStore,
                     clothesStore,
@@ -44,7 +42,6 @@ namespace DVS.WPF.Commands
                     selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize.Employee,
                     employeeStore,
                     clothesStore,
-                    sizeStore,
                     categoryStore,
                     seasonStore,
                     clothesSizeStore,

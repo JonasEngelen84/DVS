@@ -72,7 +72,6 @@ namespace DVS.WPF.ViewModels
         public ClothesListingItemViewModel(
             Clothes clothes,
             ModalNavigationStore modalNavigationStore,
-            SizeStore sizeStore,
             CategoryStore categoryStore,
             SeasonStore seasonStore,
             ClothesStore clothesStore,
@@ -86,7 +85,6 @@ namespace DVS.WPF.ViewModels
             OpenEditClothes = new OpenEditClothesCommand(
                 this,
                 modalNavigationStore,
-                sizeStore,
                 categoryStore,
                 seasonStore,
                 clothesStore,

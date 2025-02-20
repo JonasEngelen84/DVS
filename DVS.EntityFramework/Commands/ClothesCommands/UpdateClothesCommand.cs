@@ -12,8 +12,7 @@ namespace DVS.EntityFramework.Commands.ClothesCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            var existingClothes = await context.Clothes
-                .FirstOrDefaultAsync(c => c.Id == editedClothes.Id);
+            var existingClothes = await context.Clothes.FindAsync(editedClothes.Id);
 
             if (existingClothes != null)
             {

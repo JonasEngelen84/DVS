@@ -5,17 +5,17 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Views
 {
-    public class DVSHeadViewModel(DVSListingViewModel dVSListingViewModel,
-                                  AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-                                  ModalNavigationStore modalNavigationStore,
-                                  SizeStore sizeStore,
-                                  CategoryStore categoryStore,
-                                  SeasonStore seasonStore,
-                                  ClothesStore clothesStore,
-                                  ClothesSizeStore clothesSizeStore,
-                                  EmployeeClothesSizeStore employeeClothesSizesStore,
-                                  EmployeeStore employeeStore)
-                                  : ViewModelBase
+    public class DVSHeadViewModel(
+        DVSListingViewModel dVSListingViewModel,
+        AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
+        ModalNavigationStore modalNavigationStore,
+        CategoryStore categoryStore,
+        SeasonStore seasonStore,
+        ClothesStore clothesStore,
+        ClothesSizeStore clothesSizeStore,
+        EmployeeClothesSizeStore employeeClothesSizesStore,
+        EmployeeStore employeeStore)
+        : ViewModelBase
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
 
@@ -30,7 +30,6 @@ namespace DVS.WPF.ViewModels.Views
 
         public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(
             modalNavigationStore,
-            sizeStore,
             categoryStore,
             seasonStore,
             clothesStore,

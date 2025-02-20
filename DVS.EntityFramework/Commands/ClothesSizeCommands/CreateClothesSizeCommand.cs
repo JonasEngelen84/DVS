@@ -12,13 +12,12 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
             using DVSDbContext context = _contextFactory.Create();
 
             Clothes? existingClothes = await context.Clothes.FindAsync(clothesSize.ClothesId);
-            SizeModel? existingSize = await context.Sizes.FindAsync(clothesSize.SizeGuidId);
 
             ClothesSize newClothesSize = new(
                 clothesSize.GuidId,
                 existingClothes,
-                existingSize,
-                existingSize.Quantity,
+                clothesSize.Size,
+                clothesSize.Quantity,
                 clothesSize.Comment)
             {
                 EmployeeClothesSizes = []

@@ -19,13 +19,14 @@ namespace DVS.WPF.Commands.EmployeeCommands
             addEditEmployeeListingViewModel.LoadAvailableSizes();
             addEditEmployeeListingViewModel.LoadEmployeeClothes(null);
 
-            AddEmployeeViewModel addEmployeeViewModel = new(addEditEmployeeListingViewModel,
-                                                            employeeStore,
-                                                            clothesStore,
-                                                            clothesSizeStore,
-                                                            employeeClothesSizeStore,
-                                                            modalNavigationStore,
-                                                            dVSListingViewModel);
+            AddEmployeeViewModel addEmployeeViewModel = new(
+                addEditEmployeeListingViewModel,
+                employeeStore,
+                clothesStore,
+                clothesSizeStore,
+                employeeClothesSizeStore,
+                modalNavigationStore,
+                dVSListingViewModel);
 
             modalNavigationStore.CurrentViewModel = addEmployeeViewModel;
         }

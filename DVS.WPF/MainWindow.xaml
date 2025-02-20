@@ -90,7 +90,8 @@
 
                         <Button Margin="10 0 0 0"
                                 Style="{StaticResource EditComboBoxButtonStyle}"
-                                Click="ChangeViewClick">
+                                Click="ChangeViewClick"
+                                Cursor="Hand">
                             <Image Source="/Resources/Images/DVS Icon.png"
                                    Height="22"
                                    Width="22"

@@ -24,7 +24,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 addClothesFormViewModel.IsSubmitting = true;
 
                 Clothes newClothes = CreateClothes(addClothesFormViewModel);
-                List<SizeModel> selectedSizes = GetSizes(addClothesFormViewModel);
+                List<Size> selectedSizes = GetSizes(addClothesFormViewModel);
 
                 if (selectedSizes != null)
                 {
@@ -60,19 +60,19 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             };
         }
 
-        private static List<SizeModel> GetSizes(AddEditClothesFormViewModel addClothesFormViewModel)
+        private static List<Size> GetSizes(AddEditClothesFormViewModel addClothesFormViewModel)
         {
-            return new List<SizeModel>(addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
+            return new List<Size>(addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
                     ? addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
                     : addClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
                     .ToList();
         }
 
-        private static void CreateClothesSizes(List<SizeModel> selectedSizes, Clothes newClothes)
+        private static void CreateClothesSizes(List<Size> selectedSizes, Clothes newClothes)
         {
-            foreach (SizeModel size in selectedSizes)
+            foreach (Size size in selectedSizes)
             {
-                ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size, size.Quantity, "");
+                ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size.Name, size.Quantity, "");
                 newClothes.Sizes.Add(newClothesSize);                
             }
         }

@@ -16,7 +16,6 @@ namespace DVS.WPF.ViewModels.Views
 
         public AddClothesViewModel(
             ModalNavigationStore modalNavigationStore,
-            SizeStore sizeStore,
             CategoryStore categoryStore,
             SeasonStore seasonStore,
             ClothesStore clothesStore,
@@ -25,7 +24,7 @@ namespace DVS.WPF.ViewModels.Views
             EmployeeStore employeeStore,
             DVSListingViewModel dVSListingViewModel)
         {
-            AddEditClothesListingViewModel = new(null, sizeStore, categoryStore, seasonStore);
+            AddEditClothesListingViewModel = new(null, categoryStore, seasonStore);
 
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
@@ -35,7 +34,6 @@ namespace DVS.WPF.ViewModels.Views
                 modalNavigationStore,
                 categoryStore,
                 seasonStore,
-                sizeStore,
                 clothesStore,
                 clothesSizeStore,
                 employeeClothesSizesStore,
@@ -47,7 +45,6 @@ namespace DVS.WPF.ViewModels.Views
 
             ICommand openAddEditSeasons = new OpenAddEditSeasonsCommand(
                 modalNavigationStore,
-                sizeStore,
                 categoryStore,
                 seasonStore,
                 clothesStore,

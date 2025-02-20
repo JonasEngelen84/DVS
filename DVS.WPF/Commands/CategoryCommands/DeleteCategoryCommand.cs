@@ -11,7 +11,6 @@ namespace DVS.WPF.Commands.CategoryCommands
         AddEditCategoryViewModel addEditCategoryViewModel,
         CategoryStore categoryStore,
         SeasonStore seasonStore,
-        SizeStore sizeStore,
         ClothesStore clothesStore,
         ClothesSizeStore clothesSizeStore,
         EmployeeClothesSizeStore employeeClothesSizesStore,
@@ -193,25 +192,25 @@ namespace DVS.WPF.Commands.CategoryCommands
         
         private async Task UpdateSizeAsync(List<ClothesSize> clothesSizesToEdit, List<ClothesSize> editedClothesSizes, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            foreach (ClothesSize cs in clothesSizesToEdit)
-            {
-                cs.Size.ClothesSizes.Remove(cs);
-            }
+            //foreach (ClothesSize cs in clothesSizesToEdit)
+            //{
+            //    cs.Size.ClothesSizes.Remove(cs);
+            //}
 
-            foreach (ClothesSize cs in editedClothesSizes)
-            {
-                cs.Size.ClothesSizes.Add(cs);
+            //foreach (ClothesSize cs in editedClothesSizes)
+            //{
+            //    cs.Size.ClothesSizes.Add(cs);
 
-                try
-                {
-                    await sizeStore.Update(cs.Size);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Löschen der Kategorie ist fehlgeschlagen!", "Kategorie löschen");
-                    addEditCategoryFormViewModel.HasError = true;
-                }
-            }
+            //    try
+            //    {
+            //        await sizeStore.Update(cs.Size);
+            //    }
+            //    catch (Exception)
+            //    {
+            //        ShowErrorMessageBox("Löschen der Kategorie ist fehlgeschlagen!", "Kategorie löschen");
+            //        addEditCategoryFormViewModel.HasError = true;
+            //    }
+            //}
         }
         
         private async Task UpdateSeasonAsync(List<Clothes> clothesToEdit, List<Clothes> editedClothes, AddEditCategoryFormViewModel addEditCategoryFormViewModel)

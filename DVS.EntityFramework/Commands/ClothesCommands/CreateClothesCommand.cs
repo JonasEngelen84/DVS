@@ -26,12 +26,10 @@ namespace DVS.EntityFramework.Commands.ClothesCommands
 
             foreach (ClothesSize cs in clothes.Sizes)
             {
-                SizeModel? existingSize = await context.Sizes.FindAsync(cs.Size.GuidId);
-
                 ClothesSize newClothesSize = new(
                     cs.GuidId,
                     newClothes,
-                    existingSize,
+                    cs.Size,
                     cs.Quantity,
                     cs.Comment);
 

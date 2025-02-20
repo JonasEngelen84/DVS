@@ -12,8 +12,7 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            var existingClothesSize = await context.ClothesSizes
-                .FirstOrDefaultAsync(cs => cs.GuidId == editedClothesSize.GuidId);
+            var existingClothesSize = await context.ClothesSizes.FindAsync(editedClothesSize.GuidId);
 
             if (existingClothesSize != null)
             {

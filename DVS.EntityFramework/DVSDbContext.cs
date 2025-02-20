@@ -7,7 +7,6 @@ namespace DVS.EntityFramework
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Season> Seasons { get; set; }
-        public DbSet<SizeModel> Sizes { get; set; }
         public DbSet<Clothes> Clothes { get; set; }
         public DbSet<ClothesSize> ClothesSizes { get; set; }
         public DbSet<Employee> Employees { get; set; }
@@ -57,43 +56,6 @@ namespace DVS.EntityFramework
                     new Category(Guid.NewGuid(), "Schuhwerk"),
                     new Category(Guid.NewGuid(), "Shirt"));
             });
-            modelBuilder.Entity<SizeModel>(entity =>
-            {
-                entity.HasKey(s => s.GuidId);
-
-                entity.Property(s => s.Size)
-                    .IsRequired()
-                    .HasMaxLength(3);
-
-                entity.Property(s => s.IsSizeSystemEU)
-                    .IsRequired();
-
-                entity.HasMany(s => s.ClothesSizes)
-                    .WithOne(cs => cs.Size)
-                    .HasForeignKey(cs => cs.SizeGuidId);
-
-                entity.HasData(
-                    new SizeModel(Guid.NewGuid(), "44", true),
-                    new SizeModel(Guid.NewGuid(), "46", true),
-                    new SizeModel(Guid.NewGuid(), "48", true),
-                    new SizeModel(Guid.NewGuid(), "50", true),
-                    new SizeModel(Guid.NewGuid(), "52", true),
-                    new SizeModel(Guid.NewGuid(), "54", true),
-                    new SizeModel(Guid.NewGuid(), "56", true),
-                    new SizeModel(Guid.NewGuid(), "58", true),
-                    new SizeModel(Guid.NewGuid(), "60", true),
-                    new SizeModel(Guid.NewGuid(), "62", true),
-                    new SizeModel(Guid.NewGuid(), "XS", false),
-                    new SizeModel(Guid.NewGuid(), "S", false),
-                    new SizeModel(Guid.NewGuid(), "M", false),
-                    new SizeModel(Guid.NewGuid(), "L", false),
-                    new SizeModel(Guid.NewGuid(), "XL", false),
-                    new SizeModel(Guid.NewGuid(), "XXL", false),
-                    new SizeModel(Guid.NewGuid(), "3XL", false),
-                    new SizeModel(Guid.NewGuid(), "4XL", false),
-                    new SizeModel(Guid.NewGuid(), "5XL", false),
-                    new SizeModel(Guid.NewGuid(), "6XL", false));
-            });
             modelBuilder.Entity<Clothes>(entity =>
             {
                 entity.HasKey(c => c.Id);
@@ -140,6 +102,9 @@ namespace DVS.EntityFramework
             {
                 entity.HasKey(cs => cs.GuidId);
 
+                entity.Property(cs => cs.Size)
+                    .IsRequired();
+                
                 entity.Property(cs => cs.Quantity)
                     .IsRequired();
 
@@ -150,10 +115,6 @@ namespace DVS.EntityFramework
                     .WithMany(c => c.Sizes)
                     .HasForeignKey(cs => cs.ClothesId)
                     .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(cs => cs.Size)
-                    .WithMany(s => s.ClothesSizes)
-                    .HasForeignKey(cs => cs.SizeGuidId);
 
                 entity.HasMany(cs => cs.EmployeeClothesSizes)
                     .WithOne(ecs => ecs.ClothesSize)

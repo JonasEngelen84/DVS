@@ -4,9 +4,10 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
-    public class CommentEmployeeClothesFormViewModel(ICommand submitComment,
-                                                     SelectedEmployeeClothesSizeStore selectedDetailedEmployeeClothesItemStore)
-                                                     : ViewModelBase
+    public class CommentEmployeeClothesFormViewModel(
+        ICommand submitComment,
+        SelectedEmployeeClothesSizeStore selectedDetailedEmployeeClothesItemStore)
+        : ViewModelBase
     {
         private readonly SelectedEmployeeClothesSizeStore _selectedEmployeeClothesSizeStore = selectedDetailedEmployeeClothesItemStore;
 
@@ -19,7 +20,7 @@ namespace DVS.WPF.ViewModels.Forms
         public string EmployeeFirstname => SelectedEmployeeClothesSize.Employee.Firstname;
         public string? ClothesId => SelectedEmployeeClothesSize.ClothesSize.Clothes.Id;
         public string? ClothesName => SelectedEmployeeClothesSize.ClothesSize.Clothes.Name;
-        public string? Size => SelectedEmployeeClothesSize.ClothesSize.Size.Size;
+        public string? Size => SelectedEmployeeClothesSize.ClothesSize.Size;
         public int? Quantity => SelectedEmployeeClothesSize.Quantity;
 
         private string? _comment;

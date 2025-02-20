@@ -13,7 +13,7 @@
             <CollectionViewSource.SortDescriptions>
                 <componentmodel:SortDescription PropertyName="ClothesId"
                                                 Direction="Ascending" />
-                <componentmodel:SortDescription PropertyName="Size.Size"
+                <componentmodel:SortDescription PropertyName="Size"
                                                 Direction="Ascending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
@@ -40,7 +40,7 @@
                                 DisplayMemberBinding="{Binding Clothes.Season.Name}" />
                 <GridViewColumn Header="Größe"
                                 Width="auto"
-                                DisplayMemberBinding="{Binding Size.Size}" />
+                                DisplayMemberBinding="{Binding Size}" />
                 <GridViewColumn Header="Bestand"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Quantity}" />

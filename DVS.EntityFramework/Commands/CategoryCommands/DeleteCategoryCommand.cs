@@ -11,11 +11,6 @@ namespace DVS.EntityFramework.Commands.CategoryCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            //Category category = new()
-            //{
-            //    GuidID = guidID
-            //};
-
             context.Categories.Remove(category);
 
             await context.SaveChangesAsync();

@@ -35,11 +35,6 @@ namespace DVS.WPF.Commands.ClothesCommands
 
                         clothesListingItemViewModel.HasError = false;
                     }
-
-                    // Aktualisieren der ClothesSize-Liste des SizeModel
-                    ClothesSize existingClothesSize = clothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.Size.GuidId == clothesSize.Size.GuidId);
-                    if (existingClothesSize != null)
-                        clothesSize.Size.ClothesSizes.Remove(clothesSize);
                 }
 
                 // Aktualisieren der Clothes-Listen von Category und Season

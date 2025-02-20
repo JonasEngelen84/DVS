@@ -5,16 +5,7 @@ using DVS.WPF.ViewModels.Views;
 
 namespace DVS.WPF.Commands.SeasonCommands
 {
-    public class EditSeasonCommand(
-        AddEditSeasonViewModel addEditSeasonViewModel,
-        SizeStore sizeStore,
-        CategoryStore categoryStore,
-        SeasonStore seasonStore,
-        ClothesStore clothesStore,
-        ClothesSizeStore clothesSizeStore,
-        EmployeeClothesSizeStore employeeClothesSizesStore,
-        EmployeeStore employeeStore)
-        : AsyncCommandBase
+    public class EditSeasonCommand(AddEditSeasonViewModel addEditSeasonViewModel, SeasonStore seasonStore) : AsyncCommandBase
     {
         public override async Task ExecuteAsync(object parameter)
         {

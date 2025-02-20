@@ -14,29 +14,29 @@ namespace DVS.WPF.ViewModels.Views
         public ICommand CloseAddEditEmployee { get; }
 
 
-        public EditEmployeeViewModel(Employee employee,
-                                     EmployeeStore employeeStore,
-                                     ClothesStore clothesStore,
-                                     SizeStore sizeStore,
-                                     CategoryStore categoryStore,
-                                     SeasonStore seasonStore,
-                                     ClothesSizeStore clothesSizeStore,
-                                     EmployeeClothesSizeStore employeeClothesSizesStore,
-                                     ModalNavigationStore modalNavigationStore,
-                                     AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
+        public EditEmployeeViewModel(
+            Employee employee,
+            EmployeeStore employeeStore,
+            ClothesStore clothesStore,
+            CategoryStore categoryStore,
+            SeasonStore seasonStore,
+            ClothesSizeStore clothesSizeStore,
+            EmployeeClothesSizeStore employeeClothesSizesStore,
+            ModalNavigationStore modalNavigationStore,
+            AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
         {
             _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
             CloseAddEditEmployee = new CloseAddEditEmployeeCommand(clothesStore, modalNavigationStore);
 
-            ICommand editEmployee = new EditEmployeeCommand(this,
-                                                            employeeStore,
-                                                            clothesStore,
-                                                            sizeStore,
-                                                            categoryStore,
-                                                            seasonStore,
-                                                            clothesSizeStore,
-                                                            employeeClothesSizesStore,
-                                                            modalNavigationStore);
+            ICommand editEmployee = new EditEmployeeCommand(
+                this,
+                employeeStore,
+                clothesStore,
+                categoryStore,
+                seasonStore,
+                clothesSizeStore,
+                employeeClothesSizesStore,
+                modalNavigationStore);
 
             AddEditEmployeeFormViewModel = new(employee, _addEditEmployeeListingViewModel, editEmployee)
             {

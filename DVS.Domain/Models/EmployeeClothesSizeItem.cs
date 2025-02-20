@@ -5,7 +5,7 @@
         public EmployeeClothesSize EmployeeClothesSize { get; private set; }
         public string ClothesId => EmployeeClothesSize.ClothesSize.Clothes.Id;
         public string ClothesName => EmployeeClothesSize.ClothesSize.Clothes.Name;
-        public string Size => EmployeeClothesSize.ClothesSize.Size.Size;
+        public string Size => EmployeeClothesSize.ClothesSize.Size;
         public string Comment => EmployeeClothesSize.Comment;
 
         private int _quantity;

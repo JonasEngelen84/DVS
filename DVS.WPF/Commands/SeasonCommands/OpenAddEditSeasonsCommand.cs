@@ -6,7 +6,6 @@ namespace DVS.WPF.Commands.SeasonCommands
 {
     public class OpenAddEditSeasonsCommand(
         ModalNavigationStore modalNavigationStore,
-        SizeStore sizeStore,
         CategoryStore categoryStore,
         SeasonStore seasonStore,
         ClothesStore clothesStore,
@@ -22,7 +21,6 @@ namespace DVS.WPF.Commands.SeasonCommands
         {
             AddEditSeasonViewModel addEditSeasonViewModel = new(
                 modalNavigationStore,
-                sizeStore,
                 categoryStore,
                 seasonStore,
                 clothesStore,

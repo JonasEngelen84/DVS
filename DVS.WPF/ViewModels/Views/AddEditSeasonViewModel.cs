@@ -10,46 +10,34 @@ namespace DVS.WPF.ViewModels.Views
         public AddEditSeasonFormViewModel AddEditSeasonFormViewModel { get; }
         public ICommand CloseAddSeason { get; }
 
-        public AddEditSeasonViewModel(ModalNavigationStore modalNavigationStore,
-                                      SizeStore sizeStore,
-                                      CategoryStore categoryStore,
-                                      SeasonStore seasonStore,
-                                      ClothesStore clothesStore,
-                                      ClothesSizeStore clothesSizeStore,
-                                      EmployeeClothesSizeStore employeeClothesSizesStore,
-                                      EmployeeStore employeeStore,
-                                      AddClothesViewModel addClothesViewModel,
-                                      EditClothesViewModel editClothesViewModel,
-                                      AddEditClothesListingViewModel addEditListingViewModel)
+        public AddEditSeasonViewModel(
+            ModalNavigationStore modalNavigationStore,
+            CategoryStore categoryStore,
+            SeasonStore seasonStore,
+            ClothesStore clothesStore,
+            ClothesSizeStore clothesSizeStore,
+            EmployeeClothesSizeStore employeeClothesSizesStore,
+            EmployeeStore employeeStore,
+            AddClothesViewModel addClothesViewModel,
+            EditClothesViewModel editClothesViewModel,
+            AddEditClothesListingViewModel addEditListingViewModel)
         {
             ICommand addSeason = new AddSeasonCommand(this, seasonStore);
 
-            ICommand updateSeason = new EditSeasonCommand(this,
-                                                          sizeStore,
-                                                          categoryStore,
-                                                          seasonStore,
-                                                          clothesStore,
-                                                          clothesSizeStore,
-                                                          employeeClothesSizesStore,
-                                                          employeeStore);
+            ICommand updateSeason = new EditSeasonCommand( this, seasonStore);
 
-            ICommand deleteSeason = new DeleteSeasonCommand(this,
-                                                            sizeStore,
-                                                            categoryStore,
-                                                            seasonStore,
-                                                            clothesStore,
-                                                            clothesSizeStore,
-                                                            employeeClothesSizesStore,
-                                                            employeeStore);
+            ICommand deleteSeason = new DeleteSeasonCommand(this,seasonStore);
 
-            CloseAddSeason = new CloseAddEditSeasonCommand(modalNavigationStore,
-                                                           addClothesViewModel,
-                                                           editClothesViewModel);
+            CloseAddSeason = new CloseAddEditSeasonCommand(
+                modalNavigationStore,
+                addClothesViewModel,
+                editClothesViewModel);
 
-            AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(addSeason,
-                                                                        updateSeason,
-                                                                        deleteSeason,
-                                                                        addEditListingViewModel)
+            AddEditSeasonFormViewModel = new AddEditSeasonFormViewModel(
+                addSeason,
+                updateSeason,
+                deleteSeason,
+                addEditListingViewModel)
             {
                 AddNewSeason = "Neue Saison",
                 SelectedSeason = new(Guid.NewGuid(), "Saison wählen")

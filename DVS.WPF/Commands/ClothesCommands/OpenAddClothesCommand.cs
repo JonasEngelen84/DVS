@@ -6,7 +6,6 @@ namespace DVS.WPF.Commands.ClothesCommands
 {
     public class OpenAddClothesCommand(
         ModalNavigationStore modalNavigationStore,
-        SizeStore sizeStore,
         CategoryStore categoryStore,
         SeasonStore seasonStore,
         ClothesStore clothesStore,
@@ -20,7 +19,6 @@ namespace DVS.WPF.Commands.ClothesCommands
         {
             AddClothesViewModel addClothesViewModel = new(
                 modalNavigationStore,
-                sizeStore,
                 categoryStore,
                 seasonStore,
                 clothesStore,

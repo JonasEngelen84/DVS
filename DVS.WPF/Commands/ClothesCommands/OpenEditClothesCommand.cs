@@ -8,7 +8,6 @@ namespace DVS.WPF.Commands.ClothesCommands
     public class OpenEditClothesCommand(
         ClothesListingItemViewModel clothesListingItemViewModel,
         ModalNavigationStore modalNavigationStore,
-        SizeStore sizeStore,
         CategoryStore categoryStore,
         SeasonStore seasonStore,
         ClothesStore clothesStore,
@@ -22,16 +21,16 @@ namespace DVS.WPF.Commands.ClothesCommands
         {
             Clothes clothes = clothesListingItemViewModel.Clothes;
 
-            EditClothesViewModel EditClothesViewModel = new(clothes,
-                                                            modalNavigationStore,
-                                                            sizeStore,
-                                                            categoryStore,
-                                                            seasonStore,
-                                                            clothesStore,
-                                                            clothesSizeStore,
-                                                            employeeClothesSizesStore,
-                                                            employeeStore,
-                                                            dVSListingViewModel);
+            EditClothesViewModel EditClothesViewModel = new(
+                clothes,
+                modalNavigationStore,
+                categoryStore,
+                seasonStore,
+                clothesStore,
+                clothesSizeStore,
+                employeeClothesSizesStore,
+                employeeStore,
+                dVSListingViewModel);
 
             modalNavigationStore.CurrentViewModel = EditClothesViewModel;
         }

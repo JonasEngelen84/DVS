@@ -35,47 +35,47 @@ namespace DVS.EntityFramework.Migrations
                     b.HasData(
                         new
                         {
-                            GuidId = new Guid("00445c2c-7802-4288-8ca1-02083c165be2"),
+                            GuidId = new Guid("6cef334b-ef29-476a-af52-f01c4ee53328"),
                             Name = "-Kategorielos-"
                         },
                         new
                         {
-                            GuidId = new Guid("d6c7190f-a81a-4218-91f5-790c8bad986d"),
+                            GuidId = new Guid("056bb78e-e6a1-4ddb-b80a-64d39b0d3eaf"),
                             Name = "Handschuhe"
                         },
                         new
                         {
-                            GuidId = new Guid("19fe021a-e631-4d27-9531-3e74e964c31a"),
+                            GuidId = new Guid("4c11ad04-ee91-4aa9-b531-ff287699b929"),
                             Name = "Hemd"
                         },
                         new
                         {
-                            GuidId = new Guid("ff12e73a-0036-47b6-a62c-9ecba3faa0d3"),
+                            GuidId = new Guid("2bf22fe1-df90-405a-b981-c5d643e0e1ac"),
                             Name = "Hose"
                         },
                         new
                         {
-                            GuidId = new Guid("63a54768-07d9-4e23-8d69-b1766f58f819"),
+                            GuidId = new Guid("c16f4c8c-9de8-4251-ac68-626356c5a281"),
                             Name = "Jacke"
                         },
                         new
                         {
-                            GuidId = new Guid("431d98a8-2885-4cfc-8331-0b2b8e4fad58"),
+                            GuidId = new Guid("fcab1d1d-d5ed-4b6a-9e31-e6c10158e8f6"),
                             Name = "Kopfbedeckung"
                         },
                         new
                         {
-                            GuidId = new Guid("b95019a2-dc1c-4eb6-bd28-24962e797158"),
+                            GuidId = new Guid("a197e74c-b23d-4a23-978d-daddee378041"),
                             Name = "Pullover"
                         },
                         new
                         {
-                            GuidId = new Guid("225576d2-4a21-4555-bbb1-04222749a0c2"),
+                            GuidId = new Guid("36abcba5-aaa1-4abc-81c3-437039a3f11f"),
                             Name = "Schuhwerk"
                         },
                         new
                         {
-                            GuidId = new Guid("58022f20-be80-4e12-b01e-1b8c8c6be10b"),
+                            GuidId = new Guid("e1204550-9844-4c0c-94d7-f7099d458cf9"),
                             Name = "Shirt"
                         });
                 });
@@ -128,14 +128,13 @@ namespace DVS.EntityFramework.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("SizeGuidId")
+                    b.Property<string>("Size")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("GuidId");
 
                     b.HasIndex("ClothesId");
-
-                    b.HasIndex("SizeGuidId");
 
                     b.ToTable("ClothesSizes");
                 });
@@ -213,205 +212,18 @@ namespace DVS.EntityFramework.Migrations
                     b.HasData(
                         new
                         {
-                            GuidId = new Guid("9a7b2791-51fd-4987-a438-d1b3c8341bcc"),
+                            GuidId = new Guid("055944f9-d66f-4c42-9549-ed3dd2276654"),
                             Name = "-Saisonlos-"
                         },
                         new
                         {
-                            GuidId = new Guid("ef563275-eb5f-44bd-9c7f-def6ebd2660f"),
+                            GuidId = new Guid("875eeda6-4203-42c0-9bae-59908e7d1d06"),
                             Name = "Sommer"
                         },
                         new
                         {
-                            GuidId = new Guid("acd09cd9-3a06-445e-9589-84459bb85e80"),
+                            GuidId = new Guid("b439d5cf-4c48-4464-9662-847f1380d8a4"),
                             Name = "Winter"
-                        });
-                });
-
-            modelBuilder.Entity("DVS.Domain.Models.SizeModel", b =>
-                {
-                    b.Property<Guid>("GuidId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("IsSelected")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<bool>("IsSizeSystemEU")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Size")
-                        .IsRequired()
-                        .HasMaxLength(3)
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("GuidId");
-
-                    b.ToTable("Sizes");
-
-                    b.HasData(
-                        new
-                        {
-                            GuidId = new Guid("dbe5b2a4-be54-484d-8acd-37e0bd96ad30"),
-                            IsSelected = false,
-                            IsSizeSystemEU = true,
-                            Quantity = 0,
-                            Size = "44"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("26e0366c-2d3c-4b37-9bbf-6b25c6855abf"),
-                            IsSelected = false,
-                            IsSizeSystemEU = true,
-                            Quantity = 0,
-                            Size = "46"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("e8bb6044-bf94-4596-88e2-1dc56427018d"),
-                            IsSelected = false,
-                            IsSizeSystemEU = true,
-                            Quantity = 0,
-                            Size = "48"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("d299da73-85d1-478f-91e9-e24a898d1904"),
-                            IsSelected = false,
-                            IsSizeSystemEU = true,
-                            Quantity = 0,
-                            Size = "50"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("f5038a59-0167-4404-83f0-d7a03e82c75b"),
-                            IsSelected = false,
-                            IsSizeSystemEU = true,
-                            Quantity = 0,
-                            Size = "52"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("e4f633ef-3925-443a-8d44-2ebae9224f51"),
-                            IsSelected = false,
-                            IsSizeSystemEU = true,
-                            Quantity = 0,
-                            Size = "54"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("1f6621f0-f5f8-4914-ba51-9ecac5a04555"),
-                            IsSelected = false,
-                            IsSizeSystemEU = true,
-                            Quantity = 0,
-                            Size = "56"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("16aba701-bd90-49c4-9746-ad030c801279"),
-                            IsSelected = false,
-                            IsSizeSystemEU = true,
-                            Quantity = 0,
-                            Size = "58"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("0adbf1b7-6a5a-412f-aaf3-6ecc9014d2bb"),
-                            IsSelected = false,
-                            IsSizeSystemEU = true,
-                            Quantity = 0,
-                            Size = "60"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("35f19f44-36cd-4b92-a1c7-1e78d71177ad"),
-                            IsSelected = false,
-                            IsSizeSystemEU = true,
-                            Quantity = 0,
-                            Size = "62"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("c8b59cf7-d392-4b9d-a662-65348d5d157c"),
-                            IsSelected = false,
-                            IsSizeSystemEU = false,
-                            Quantity = 0,
-                            Size = "XS"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("b2dd13ee-a0f6-42f1-94ac-5adb45327e79"),
-                            IsSelected = false,
-                            IsSizeSystemEU = false,
-                            Quantity = 0,
-                            Size = "S"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("845be64d-5a6e-4db1-b2a0-ef83fae8ae2b"),
-                            IsSelected = false,
-                            IsSizeSystemEU = false,
-                            Quantity = 0,
-                            Size = "M"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("6950d119-d753-4e06-b343-a896197e4f66"),
-                            IsSelected = false,
-                            IsSizeSystemEU = false,
-                            Quantity = 0,
-                            Size = "L"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("cf7cfdab-bf7c-4b8d-86a4-d162b1646a5c"),
-                            IsSelected = false,
-                            IsSizeSystemEU = false,
-                            Quantity = 0,
-                            Size = "XL"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("cbc334ea-946b-48c4-9e58-7fc76bff0a7a"),
-                            IsSelected = false,
-                            IsSizeSystemEU = false,
-                            Quantity = 0,
-                            Size = "XXL"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("da974cad-fed9-4317-959b-2071921df33d"),
-                            IsSelected = false,
-                            IsSizeSystemEU = false,
-                            Quantity = 0,
-                            Size = "3XL"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("5c1be7ff-a749-4639-8b56-a507dab24b5a"),
-                            IsSelected = false,
-                            IsSizeSystemEU = false,
-                            Quantity = 0,
-                            Size = "4XL"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("07d7717d-a2bc-476e-81fd-dd6fb09fef17"),
-                            IsSelected = false,
-                            IsSizeSystemEU = false,
-                            Quantity = 0,
-                            Size = "5XL"
-                        },
-                        new
-                        {
-                            GuidId = new Guid("d454954e-f572-4fb0-934e-92e058710a1f"),
-                            IsSelected = false,
-                            IsSizeSystemEU = false,
-                            Quantity = 0,
-                            Size = "6XL"
                         });
                 });
 
@@ -442,15 +254,7 @@ namespace DVS.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DVS.Domain.Models.SizeModel", "Size")
-                        .WithMany("ClothesSizes")
-                        .HasForeignKey("SizeGuidId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Clothes");
-
-                    b.Navigation("Size");
                 });
 
             modelBuilder.Entity("DVS.Domain.Models.EmployeeClothesSize", b =>
@@ -495,11 +299,6 @@ namespace DVS.EntityFramework.Migrations
             modelBuilder.Entity("DVS.Domain.Models.Season", b =>
                 {
                     b.Navigation("Clothes");
-                });
-
-            modelBuilder.Entity("DVS.Domain.Models.SizeModel", b =>
-                {
-                    b.Navigation("ClothesSizes");
                 });
 #pragma warning restore 612, 618
         }

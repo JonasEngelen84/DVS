@@ -7,19 +7,19 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Views
 {
-    public class DVSSizeViewModel(DVSListingViewModel dVSListingViewModel,
-                                  ModalNavigationStore modalNavigationStore,
-                                  SizeStore sizeStore,
-                                  CategoryStore categoryStore,
-                                  SeasonStore seasonStore,
-                                  ClothesStore clothesStore,
-                                  ClothesSizeStore clothesSizeStore,
-                                  EmployeeClothesSizeStore employeeClothesSizesStore,
-                                  EmployeeStore employeeStore,
-                                  SelectedClothesSizeStore selectedClothesSizeStore,
-                                  SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
-                                  AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
-                                  : ViewModelBase
+    public class DVSSizeViewModel(
+        DVSListingViewModel dVSListingViewModel,
+        ModalNavigationStore modalNavigationStore,
+        CategoryStore categoryStore,
+        SeasonStore seasonStore,
+        ClothesStore clothesStore,
+        ClothesSizeStore clothesSizeStore,
+        EmployeeClothesSizeStore employeeClothesSizesStore,
+        EmployeeStore employeeStore,
+        SelectedClothesSizeStore selectedClothesSizeStore,
+        SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
+        AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
+        : ViewModelBase
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
 
@@ -55,7 +55,6 @@ namespace DVS.WPF.ViewModels.Views
 
         public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(
             modalNavigationStore,
-            sizeStore,
             categoryStore,
             seasonStore,
             clothesStore,
@@ -78,7 +77,6 @@ namespace DVS.WPF.ViewModels.Views
             selectedEmployeeClothesSizeStore,
             modalNavigationStore,
             addEditEmployeeListingViewModel,
-            sizeStore,
             clothesStore,
             employeeStore,
             dVSListingViewModel,

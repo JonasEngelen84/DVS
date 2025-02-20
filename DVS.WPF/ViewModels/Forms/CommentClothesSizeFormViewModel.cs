@@ -16,7 +16,7 @@ namespace DVS.WPF.ViewModels.Forms
         public string Name => Clothes.Name;
         public string Category => Clothes.Category.Name;
         public string Season => Clothes.Season.Name;
-        public string Size => SelectedClothesSize.Size.Size;
+        public string Size => SelectedClothesSize.Size;
         public int Quantity => (int)SelectedClothesSize.Quantity;
 
         private string? _comment;

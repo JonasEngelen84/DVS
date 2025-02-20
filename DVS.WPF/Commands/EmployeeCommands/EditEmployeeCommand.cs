@@ -10,7 +10,6 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         EditEmployeeViewModel editEmployeeViewModel,
         EmployeeStore employeeStore,
         ClothesStore clothesStore,
-        SizeStore sizeStore,
         CategoryStore categoryStore,
         SeasonStore seasonStore,
         ClothesSizeStore clothesSizeStore,
@@ -35,7 +34,6 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 await UpdateEmployeeAsync(updatedEmployee, editEmployeeFormViewModel);
                 await UpdateClothesSizeAsync(editEmployeeFormViewModel);
                 await UpdateClothesAsync(editEmployeeFormViewModel);
-                await UpdateSizeModelAsync(editEmployeeFormViewModel);
                 await UpdateCategoryAsync(editEmployeeFormViewModel);
                 await UpdateSeasonAsync(editEmployeeFormViewModel);
 
@@ -173,14 +171,6 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                     acsi.ClothesSize.Clothes.Sizes.Add(acsi.ClothesSize);
                 }
 
-                csToRemove = acsi.ClothesSize.Size.ClothesSizes.FirstOrDefault(cs => cs.GuidId == acsi.ClothesSize.GuidId);
-
-                if (csToRemove != null)
-                {
-                    acsi.ClothesSize.Size.ClothesSizes.Remove(csToRemove);
-                    acsi.ClothesSize.Size.ClothesSizes.Add(acsi.ClothesSize);
-                }
-
                 try
                 {
                     await clothesSizeStore.Update(acsi.ClothesSize);
@@ -216,22 +206,6 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 try
                 {
                     await clothesStore.Update(acsi.ClothesSize.Clothes);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
-                    addEmployeeFormViewModel.HasError = true;
-                }
-            }
-        }
-
-        private async Task UpdateSizeModelAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
-        {
-            foreach (AvailableClothesSizeItem acsi in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
-            {
-                try
-                {
-                    await sizeStore.Update(acsi.ClothesSize.Size);
                 }
                 catch (Exception)
                 {

@@ -15,7 +15,7 @@
                                                 Direction="Ascending" />
                 <componentmodel:SortDescription PropertyName="ClothesSize.ClothesId"
                                                 Direction="Ascending" />
-                <componentmodel:SortDescription PropertyName="ClothesSize.Size.Size"
+                <componentmodel:SortDescription PropertyName="ClothesSize.Size"
                                                 Direction="Ascending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
@@ -34,7 +34,7 @@
                 <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Employee.Firstname}" />
                 <GridViewColumn Header="Kl.Id" DisplayMemberBinding="{Binding ClothesSize.Clothes.Id}" />
                 <GridViewColumn Header="Kleidung" DisplayMemberBinding="{Binding ClothesSize.Clothes.Name}" />
-                <GridViewColumn Header="Größe" DisplayMemberBinding="{Binding ClothesSize.Size.Size}" />
+                <GridViewColumn Header="Größe" DisplayMemberBinding="{Binding ClothesSize.Size}" />
                 <GridViewColumn Header="Menge" DisplayMemberBinding="{Binding Quantity}" />
                 <GridViewColumn Header="Kommentar" DisplayMemberBinding="{Binding Comment}" />
             </GridView>

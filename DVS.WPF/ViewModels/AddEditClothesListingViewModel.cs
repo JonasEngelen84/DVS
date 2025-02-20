@@ -13,12 +13,12 @@ namespace DVS.WPF.ViewModels
         private readonly ObservableCollection<Season> _seasons = [];
         public IEnumerable<Season> Seasons => _seasons;
 
-        private readonly List<SizeModel> _availableSizesEU;
-        public List<SizeModel> AvailableSizesEU => _availableSizesEU;
+        private readonly List<Size> _availableSizesEU;
+        public List<Size> AvailableSizesEU => _availableSizesEU;
         
 
-        private readonly List<SizeModel> _availableSizesUS;
-        public List<SizeModel> AvailableSizesUS => _availableSizesUS;
+        private readonly List<Size> _availableSizesUS;
+        public List<Size> AvailableSizesUS => _availableSizesUS;
 
         private readonly Clothes? _clothes;
         //private readonly  SizeStore _sizeStore;
@@ -28,40 +28,38 @@ namespace DVS.WPF.ViewModels
 
         public AddEditClothesListingViewModel(
             Clothes? clothes,
-            SizeStore sizeStore,
             CategoryStore categoryStore,
             SeasonStore seasonStore)
         {
             _availableSizesEU =
             [
-                new SizeModel("44"),
-                new SizeModel("46"),
-                new SizeModel("48"),
-                new SizeModel("50"),
-                new SizeModel("52"),
-                new SizeModel("54"),
-                new SizeModel("56"),
-                new SizeModel("58"),
-                new SizeModel("60"),
-                new SizeModel("62"),
+                new Size("44"),
+                new Size("46"),
+                new Size("48"),
+                new Size("50"),
+                new Size("52"),
+                new Size("54"),
+                new Size("56"),
+                new Size("58"),
+                new Size("60"),
+                new Size("62"),
             ];
             
             _availableSizesUS =
             [
-                new SizeModel("XS"),
-                new SizeModel("S"),
-                new SizeModel("M"),
-                new SizeModel("L"),
-                new SizeModel("XL"),
-                new SizeModel("XXL"),
-                new SizeModel("3XL"),
-                new SizeModel("4XL"),
-                new SizeModel("5XL"),
-                new SizeModel("6XL"),
+                new Size("XS"),
+                new Size("S"),
+                new Size("M"),
+                new Size("L"),
+                new Size("XL"),
+                new Size("XXL"),
+                new Size("3XL"),
+                new Size("4XL"),
+                new Size("5XL"),
+                new Size("6XL"),
             ];
 
             _clothes = clothes;
-            //_sizeStore = sizeStore;
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
 
@@ -76,35 +74,6 @@ namespace DVS.WPF.ViewModels
             _seasonStore.SeasonUpdated += SeasonStore_SeasonUpdated;
             _seasonStore.SeasonDeleted += SeasonStore_SeasonDeleted;
         }
-
-
-        //private void LoadSizes()
-        //{
-        //    _availableSizesEU.Clear();
-        //    _availableSizesUS.Clear();
-
-        //    foreach (SizeModel size in _sizeStore.Sizes)
-        //    {
-        //        // Wenn eine Clothes-Instanz übergeben wurde => prüfen ob sie die aktuelle Größe beinhaltet
-        //        var matchingSize = _clothes?.Sizes.FirstOrDefault(s => s.Size.Size == size.Size);
-
-        //        if (matchingSize != null)
-        //        {
-        //            size.IsSelected = true;
-        //            size.Quantity = matchingSize.Quantity;
-        //        }
-        //        else
-        //        {
-        //            size.IsSelected = false;
-        //            size.Quantity = 0;
-        //        }
-
-        //        if (size.IsSizeSystemEU)
-        //            _availableSizesEU.Add(size);
-        //        else
-        //            _availableSizesUS.Add(size);
-        //    }
-        //}
 
 
         private void LoadSeasons()

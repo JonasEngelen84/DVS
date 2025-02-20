@@ -12,8 +12,7 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            var existingEmployee = await context.Employees
-                .FirstOrDefaultAsync(e => e.Id == editedEmployee.Id);
+            var existingEmployee = await context.Employees.FindAsync(editedEmployee.Id);
 
             if (existingEmployee != null)
             {

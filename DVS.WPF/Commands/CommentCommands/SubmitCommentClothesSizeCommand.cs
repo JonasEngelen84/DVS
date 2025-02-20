@@ -21,7 +21,9 @@ namespace DVS.WPF.Commands.CommentCommands
             commentClothesSizeFormViewModel.HasError = false;
             commentClothesSizeFormViewModel.IsSubmitting = true;
 
-            ClothesSize clothesSizeToComment = GetClothesSizeToComment(commentClothesSizeFormViewModel);
+            ClothesSize clothesSizeToComment = commentClothesSizeFormViewModel.Clothes.Sizes
+                .First(cs => cs.Size == commentClothesSizeFormViewModel.Size);
+
             RemoveOldClothesSize(commentClothesSizeFormViewModel, clothesSizeToComment);
             ClothesSize editedClothesSize = CreateEditedClothesSizeInstance(commentClothesSizeFormViewModel, clothesSizeToComment);
             AddEditedClothesSizeToSizeAndClothesLists(commentClothesSizeFormViewModel, editedClothesSize);
@@ -35,16 +37,10 @@ namespace DVS.WPF.Commands.CommentCommands
             modalNavigationStore.Close();
         }
 
-        private static ClothesSize GetClothesSizeToComment(CommentClothesSizeFormViewModel commentClothesSizeFormViewModel)
-        {
-            return commentClothesSizeFormViewModel.Clothes.Sizes
-                .FirstOrDefault(s => s.Size.Size == commentClothesSizeFormViewModel.Size);
-        }
-
         private static void RemoveOldClothesSize(CommentClothesSizeFormViewModel commentClothesSizeFormViewModel, ClothesSize OldClothesSize)
         {
             commentClothesSizeFormViewModel.Clothes.Sizes.Remove(OldClothesSize);
-            OldClothesSize.Size.ClothesSizes.Remove(OldClothesSize);
+            //OldClothesSize.Size.Remove(OldClothesSize);
         }
 
         private static ClothesSize CreateEditedClothesSizeInstance(
@@ -63,7 +59,7 @@ namespace DVS.WPF.Commands.CommentCommands
         private static void AddEditedClothesSizeToSizeAndClothesLists(
             CommentClothesSizeFormViewModel commentClothesSizeFormViewModel, ClothesSize editedClothesSize)
         {
-            editedClothesSize.Size.ClothesSizes.Add(editedClothesSize);
+            //editedClothesSize.Size.ClothesSizes.Add(editedClothesSize);
             commentClothesSizeFormViewModel.Clothes.Sizes.Add(editedClothesSize);
         }
 

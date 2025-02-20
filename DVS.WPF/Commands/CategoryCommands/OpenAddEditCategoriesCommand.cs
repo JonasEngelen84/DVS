@@ -8,7 +8,6 @@ namespace DVS.WPF.Commands.CategoryCommands
         ModalNavigationStore modalNavigationStore,
         CategoryStore categoryStore,
         SeasonStore seasonStore,
-        SizeStore sizeStore,
         ClothesStore clothesStore,
         ClothesSizeStore clothesSizeStore,
         EmployeeClothesSizeStore employeeClothesSizesStore,
@@ -21,18 +20,18 @@ namespace DVS.WPF.Commands.CategoryCommands
     {
         public override void Execute(object parameter)
         {
-            AddEditCategoryViewModel addEditCategorieViewModel = new(modalNavigationStore,
-                                                                     categoryStore,
-                                                                     seasonStore,
-                                                                     sizeStore,
-                                                                     clothesStore,
-                                                                     clothesSizeStore,
-                                                                     employeeClothesSizesStore,
-                                                                     employeeStore,
-                                                                     addClothesViewModel,
-                                                                     editClothesViewModel,
-                                                                     addEditListingViewModel,
-                                                                     dVSListingViewModel);
+            AddEditCategoryViewModel addEditCategorieViewModel = new(
+                modalNavigationStore,
+                categoryStore,
+                seasonStore,
+                clothesStore,
+                clothesSizeStore,
+                employeeClothesSizesStore,
+                employeeStore,
+                addClothesViewModel,
+                editClothesViewModel,
+                addEditListingViewModel,
+                dVSListingViewModel);
 
             modalNavigationStore.CurrentViewModel = addEditCategorieViewModel;
         }
