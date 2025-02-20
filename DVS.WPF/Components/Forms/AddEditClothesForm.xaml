@@ -9,23 +9,15 @@
 
     <UserControl.Resources>
         <CollectionViewSource x:Key="SortedSeasons"
-                              Source="{Binding AddEditClothesListingViewModel.Seasons}">
+                              Source="{Binding SizesCategoriesSeasonsListingViewModel.Seasons}">
             <CollectionViewSource.SortDescriptions>
                 <componentmodel:SortDescription PropertyName="Name"
                                                 Direction="Ascending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
-        
+
         <CollectionViewSource x:Key="SortedCategories"
-                              Source="{Binding AddEditClothesListingViewModel.Categories}">
-            <CollectionViewSource.SortDescriptions>
-                <componentmodel:SortDescription PropertyName="Name"
-                                                Direction="Ascending" />
-            </CollectionViewSource.SortDescriptions>
-        </CollectionViewSource>
-        
-        <CollectionViewSource x:Key="SortedEuSizes"
-                              Source="{Binding AddEditClothesListingViewModel.AvailableSizesEU}">
+                              Source="{Binding SizesCategoriesSeasonsListingViewModel.Categories}">
             <CollectionViewSource.SortDescriptions>
                 <componentmodel:SortDescription PropertyName="Name"
                                                 Direction="Ascending" />
@@ -102,12 +94,12 @@
         <!-- Labels-Size eu/us -->
         <StackPanel Orientation="Horizontal">
             
-            <Label Content="Größe (eu):"
+            <Label Content="Größe (EU):"
                    FontSize="14"
                    FontWeight="Bold"
                    Margin="-5.5 0 0 -2" />
 
-            <Label Content="Größe (us):"
+            <Label Content="Größe (US):"
                    FontSize="14"
                    FontWeight="Bold"
                    Margin="42 0 0 -2" />
@@ -124,7 +116,7 @@
 
                 <ScrollViewer>
                     <StackPanel>
-                        <ItemsControl ItemsSource="{Binding Source={StaticResource SortedEuSizes}}">
+                        <ItemsControl ItemsSource="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesEU}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -149,7 +141,7 @@
 
                 <ScrollViewer>
                     <StackPanel>
-                        <ItemsControl ItemsSource="{Binding AddEditClothesListingViewModel.AvailableSizesUS}">
+                        <ItemsControl ItemsSource="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesUS}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">

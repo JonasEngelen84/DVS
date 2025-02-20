@@ -20,7 +20,7 @@ namespace DVS.WPF.ViewModels.Views
             EmployeeStore employeeStore,
             AddClothesViewModel addClothesViewModel,
             EditClothesViewModel editClothesViewModel,
-            AddEditClothesListingViewModel addEditListingViewModel)
+            SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel)
         {
             ICommand addSeason = new AddSeasonCommand(this, seasonStore);
 
@@ -37,7 +37,7 @@ namespace DVS.WPF.ViewModels.Views
                 addSeason,
                 updateSeason,
                 deleteSeason,
-                addEditListingViewModel)
+                SizesCategoriesSeasonsListingViewModel)
             {
                 AddNewSeason = "Neue Saison",
                 SelectedSeason = new(Guid.NewGuid(), "Saison wählen")

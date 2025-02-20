@@ -12,7 +12,7 @@ namespace DVS.WPF.ViewModels.Views
     public class EditClothesViewModel : ViewModelBase
     {
         public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
-        public AddEditClothesListingViewModel AddEditListingViewModel { get; }
+        public SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel { get; }
         public ICommand CloseAddEditClothes { get; }
 
         public EditClothesViewModel(
@@ -26,7 +26,7 @@ namespace DVS.WPF.ViewModels.Views
             EmployeeStore employeeStore,
             DVSListingViewModel dVSListingViewModel)
         {
-            AddEditListingViewModel = new(clothes, categoryStore, seasonStore);
+            SizesCategoriesSeasonsListingViewModel = new(clothes, categoryStore, seasonStore);
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
             ICommand updatedClothes = new EditClothesCommand(
@@ -47,7 +47,7 @@ namespace DVS.WPF.ViewModels.Views
                 employeeStore,
                 null,
                 this,
-                AddEditListingViewModel,
+                SizesCategoriesSeasonsListingViewModel,
                 dVSListingViewModel);
 
             ICommand openAddEditSeasons = new OpenAddEditSeasonsCommand(
@@ -60,14 +60,14 @@ namespace DVS.WPF.ViewModels.Views
                 employeeStore,
                 null,
                 this,
-                AddEditListingViewModel);
+                SizesCategoriesSeasonsListingViewModel);
 
             AddEditClothesFormViewModel = new(
                 clothes,
                 updatedClothes,
                 openAddEditCategories,
                 openAddEditSeasons,
-                AddEditListingViewModel)
+                SizesCategoriesSeasonsListingViewModel)
             {//TODO: verwendete Category & Season werden nicht in UI ausgegeben.
                 Id = clothes.Id,
                 Name = clothes.Name,

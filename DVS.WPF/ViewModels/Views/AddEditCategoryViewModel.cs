@@ -20,7 +20,7 @@ namespace DVS.WPF.ViewModels.Views
             EmployeeStore employeeStore,
             AddClothesViewModel addClothesViewModel,
             EditClothesViewModel editClothesViewModel,
-            AddEditClothesListingViewModel addEditListingViewModel,
+            SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel,
             DVSListingViewModel dVSListingViewModel)
         {
             ICommand addCategory = new AddCategoryCommand(this, categoryStore);
@@ -44,7 +44,7 @@ namespace DVS.WPF.ViewModels.Views
                 addCategory,
                 updateCategory,
                 deleteCategory,
-                addEditListingViewModel)
+                SizesCategoriesSeasonsListingViewModel)
             {
                 AddNewCategory = "Neue Kategorie",
                 SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen")

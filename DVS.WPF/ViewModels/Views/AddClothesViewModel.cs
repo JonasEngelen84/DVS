@@ -11,7 +11,7 @@ namespace DVS.WPF.ViewModels.Views
     public class AddClothesViewModel : ViewModelBase
     {
         public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
-        public AddEditClothesListingViewModel AddEditClothesListingViewModel { get; }
+        public SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel { get; }
         public ICommand CloseAddEditClothes { get; }
 
         public AddClothesViewModel(
@@ -24,7 +24,7 @@ namespace DVS.WPF.ViewModels.Views
             EmployeeStore employeeStore,
             DVSListingViewModel dVSListingViewModel)
         {
-            AddEditClothesListingViewModel = new(null, categoryStore, seasonStore);
+            SizesCategoriesSeasonsListingViewModel = new(null, categoryStore, seasonStore);
 
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
@@ -40,7 +40,7 @@ namespace DVS.WPF.ViewModels.Views
                 employeeStore,
                 this,
                 null,
-                AddEditClothesListingViewModel,
+                SizesCategoriesSeasonsListingViewModel,
                 dVSListingViewModel);
 
             ICommand openAddEditSeasons = new OpenAddEditSeasonsCommand(
@@ -53,14 +53,14 @@ namespace DVS.WPF.ViewModels.Views
                 employeeStore,
                 this,
                 null,
-                AddEditClothesListingViewModel);
+                SizesCategoriesSeasonsListingViewModel);
 
             AddEditClothesFormViewModel = new(
                 null,
                 addClothes,
                 openAddEditCategories,
                 openAddEditSeasons,
-                AddEditClothesListingViewModel)
+                SizesCategoriesSeasonsListingViewModel)
             {
                 Id = "Id",
                 Name = "Name",

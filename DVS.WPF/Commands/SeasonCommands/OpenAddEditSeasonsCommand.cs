@@ -14,7 +14,7 @@ namespace DVS.WPF.Commands.SeasonCommands
         EmployeeStore employeeStore,
         AddClothesViewModel addClothesViewModel,
         EditClothesViewModel editClothesViewModel,
-        AddEditClothesListingViewModel addEditListingViewModel)
+        SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel)
         : CommandBase
     {
         public override void Execute(object parameter)
@@ -29,7 +29,7 @@ namespace DVS.WPF.Commands.SeasonCommands
                 employeeStore,
                 addClothesViewModel,
                 editClothesViewModel,
-                addEditListingViewModel);
+                SizesCategoriesSeasonsListingViewModel);
 
             modalNavigationStore.CurrentViewModel = addEditSeasonViewModel;
         }

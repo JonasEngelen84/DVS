@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace DVS.WPF.ViewModels
 {
-    public class AddEditClothesListingViewModel : ViewModelBase
+    public class SizesCategoriesSeasonsListingViewModel : ViewModelBase
     {
         private readonly ObservableCollection<Category> _categories = [];
         public IEnumerable<Category> Categories => _categories;
@@ -13,56 +13,27 @@ namespace DVS.WPF.ViewModels
         private readonly ObservableCollection<Season> _seasons = [];
         public IEnumerable<Season> Seasons => _seasons;
 
-        private readonly List<Size> _availableSizesEU;
-        public List<Size> AvailableSizesEU => _availableSizesEU;
+        private readonly List<string> _sizesEU;
+        private readonly ObservableCollection<Size> _loadedSizesEU = [];
+        public IEnumerable<Size> LoadedSizesEU => _loadedSizesEU;
         
+        private readonly List<string> _sizesUS;
+        private readonly ObservableCollection<Size> _loadedSizesUS = [];
+        public IEnumerable<Size> LoadedSizesUS => _loadedSizesUS;
 
-        private readonly List<Size> _availableSizesUS;
-        public List<Size> AvailableSizesUS => _availableSizesUS;
-
-        private readonly Clothes? _clothes;
-        //private readonly  SizeStore _sizeStore;
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
 
 
-        public AddEditClothesListingViewModel(
-            Clothes? clothes,
-            CategoryStore categoryStore,
-            SeasonStore seasonStore)
+        public SizesCategoriesSeasonsListingViewModel(Clothes? clothes, CategoryStore categoryStore, SeasonStore seasonStore)
         {
-            _availableSizesEU =
-            [
-                new Size("44"),
-                new Size("46"),
-                new Size("48"),
-                new Size("50"),
-                new Size("52"),
-                new Size("54"),
-                new Size("56"),
-                new Size("58"),
-                new Size("60"),
-                new Size("62"),
-            ];
-            
-            _availableSizesUS =
-            [
-                new Size("XS"),
-                new Size("S"),
-                new Size("M"),
-                new Size("L"),
-                new Size("XL"),
-                new Size("XXL"),
-                new Size("3XL"),
-                new Size("4XL"),
-                new Size("5XL"),
-                new Size("6XL"),
-            ];
+            _sizesEU = [ "30", "32", "34", "36", "38", "40", "42", "44", "46", "48", "50", "52", "54", "56", "58", "60", "62" ];            
+            _sizesUS = [ "XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL", "5XL", "6XL" ];
 
-            _clothes = clothes;
             _categoryStore = categoryStore;
             _seasonStore = seasonStore;
 
+            LoadSizes(clothes);
             LoadSeasons();
             LoadCategories();
 
@@ -76,6 +47,42 @@ namespace DVS.WPF.ViewModels
         }
 
 
+        private void LoadSizes(Clothes? clothes)
+        {
+            if (clothes != null)
+            {
+                foreach (var size in _sizesEU)
+                {
+                    ClothesSize? selectedSize = clothes.Sizes.FirstOrDefault(cs => cs.Size == size);
+                    if (selectedSize != null)
+                        _loadedSizesEU.Add(new Size() { Name = size, Quantity = selectedSize.Quantity, IsSelected = true });
+                    else
+                        _loadedSizesEU.Add(new Size() { Name = size });
+                }
+
+                foreach (var size in _sizesUS)
+                {
+                    ClothesSize? selectedSize = clothes.Sizes.FirstOrDefault(cs => cs.Size == size);
+                    if (selectedSize != null)
+                        _loadedSizesUS.Add(new Size() { Name = size, Quantity = selectedSize.Quantity, IsSelected = true });
+                    else
+                        _loadedSizesUS.Add(new Size() { Name = size });
+                }
+            }
+            else
+            {
+                foreach (var size in _sizesEU)
+                {
+                    _loadedSizesEU.Add(new Size() { Name = size });
+                }
+
+                foreach (var size in _sizesUS)
+                {
+                    _loadedSizesUS.Add(new Size() { Name = size });
+                }
+            }
+        }
+
         private void LoadSeasons()
         {
             _seasons.Clear();
@@ -85,13 +92,11 @@ namespace DVS.WPF.ViewModels
                 _seasons.Add(season);
             }
         }
-
         private void SeasonStore_SeasonAdded(Season newSeason,  AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             _seasons.Add(newSeason);
             addEditSeasonFormViewModel.AddNewSeason = "Neue Saison";
         }
-
         private void SeasonStore_SeasonUpdated(Season season, AddEditSeasonFormViewModel? addEditSeasonFormViewModel)
         {
             Season seasonToUpdate = _seasons.First(y => y.GuidId == season.GuidId);
@@ -113,7 +118,6 @@ namespace DVS.WPF.ViewModels
                 throw new InvalidOperationException("Umbenennen der Saison nicht möglich.");
             }
         }
-
         private void SeasonStore_SeasonDeleted(Guid GuidId, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             var seasonToDelete = _seasons.FirstOrDefault(y => y.GuidId == GuidId);
@@ -129,7 +133,6 @@ namespace DVS.WPF.ViewModels
                 throw new InvalidOperationException("Löschen der Saison nicht möglich.");
             }
         }
-
         
         private void LoadCategories()
         {
@@ -140,13 +143,11 @@ namespace DVS.WPF.ViewModels
                 _categories.Add(category);
             }
         }
-
         private void CategoryStore_CategoryAdded(Category newCategory, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             _categories.Add(newCategory);
             addEditCategoryFormViewModel.AddNewCategory = "Neue Kategorie";
         }
-
         private void CategoryStore_CategoryUpdated(Category category, AddEditCategoryFormViewModel? addEditCategoryFormViewModel)
         {
             Category categoryToUpdate = _categories.FirstOrDefault(y => y.GuidId == category.GuidId);
@@ -168,7 +169,6 @@ namespace DVS.WPF.ViewModels
                 throw new InvalidOperationException("Umbenennen der Kategorie nicht möglich.");
             }
         }
-
         private void CategoryStore_CategoryDeleted(Guid GuidId, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             var categoryToDelete = _categories.FirstOrDefault(y => y.GuidId == GuidId);
@@ -184,7 +184,6 @@ namespace DVS.WPF.ViewModels
                 throw new InvalidOperationException("Löschen der Kategorie nicht möglich.");
             }
         }
-
 
         protected override void Dispose()
         {

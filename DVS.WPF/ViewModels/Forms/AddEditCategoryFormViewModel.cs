@@ -7,10 +7,10 @@ namespace DVS.WPF.ViewModels.Forms
         ICommand addCategoryCommand,
         ICommand editCategoryCommand,
         ICommand deleteCategoryCommand,
-        AddEditClothesListingViewModel addEditClothesListingViewModel)
+        SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel)
         : ViewModelBase
     {
-        public AddEditClothesListingViewModel AddEditClothesListingViewModel { get; } = addEditClothesListingViewModel;
+        public SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel { get; } = SizesCategoriesSeasonsListingViewModel;
         public ICommand AddCategory { get; } = addCategoryCommand;
         public ICommand EditCategory { get; } = editCategoryCommand;
         public ICommand DeleteCategory { get; } = deleteCategoryCommand;

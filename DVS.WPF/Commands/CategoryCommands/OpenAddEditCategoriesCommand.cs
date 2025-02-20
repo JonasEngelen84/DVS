@@ -14,7 +14,7 @@ namespace DVS.WPF.Commands.CategoryCommands
         EmployeeStore employeeStore,
         AddClothesViewModel addClothesViewModel,
         EditClothesViewModel editClothesViewModel,
-        AddEditClothesListingViewModel addEditListingViewModel,
+        SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel,
         DVSListingViewModel dVSListingViewModel)
         : CommandBase
     {
@@ -30,7 +30,7 @@ namespace DVS.WPF.Commands.CategoryCommands
                 employeeStore,
                 addClothesViewModel,
                 editClothesViewModel,
-                addEditListingViewModel,
+                SizesCategoriesSeasonsListingViewModel,
                 dVSListingViewModel);
 
             modalNavigationStore.CurrentViewModel = addEditCategorieViewModel;

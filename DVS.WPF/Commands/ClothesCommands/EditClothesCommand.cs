@@ -55,9 +55,9 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
 
         private static List<Size> GetSizes(AddEditClothesFormViewModel editClothesFormViewModel)
         {
-            return new List<Size>(editClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Any(size => size.IsSelected)
-                    ? editClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesUS.Where(size => size.IsSelected)
-                    : editClothesFormViewModel.AddEditClothesListingViewModel.AvailableSizesEU.Where(size => size.IsSelected))
+            return new List<Size>(editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Any(size => size.IsSelected)
+                    ? editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Where(size => size.IsSelected)
+                    : editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesEU.Where(size => size.IsSelected))
                     .ToList();
         }
         
