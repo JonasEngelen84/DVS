@@ -61,8 +61,7 @@
 
             <Button Margin="65 0 0 0"
                     Style="{StaticResource EditComboBoxButtonStyle}"
-                    Click="SwitchAvailableClothesListViewClick"
-                    Visibility="Hidden">
+                    Click="SwitchAvailableClothesListViewClick">
                 <Image Source="/Resources/Images/Switch.png"
                        HorizontalAlignment="Center" />
             </Button>
