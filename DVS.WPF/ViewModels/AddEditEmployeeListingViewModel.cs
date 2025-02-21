@@ -111,13 +111,13 @@ namespace DVS.WPF.ViewModels
             {
                 foreach (EmployeeClothesSize ecs in employee.Clothes)
                 {
-                    _employeeClothesList.Add(new EmployeeClothesSizeItem(ecs.ClothesSize));
+                    _employeeClothesList.Add(new EmployeeClothesSizeItem(ecs.ClothesSize) { Quantity = ecs.Quantity});
                 }
             }
         }
         public EmployeeClothesSizeItem GetClothesSizeFrom_employeeClothesSizes()
         {
-            return _employeeClothesList.First(ecsi => ecsi.ClothesSize.GuidId == SelectedAvailableClothesSizeItem.ClothesSize.GuidId);
+            return _employeeClothesList.FirstOrDefault(ecsi => ecsi.ClothesSize.GuidId == SelectedAvailableClothesSizeItem.ClothesSize.GuidId);
         }
         private void AddItemToEmployeeClothesList(EmployeeClothesSizeItem ecsi) => _employeeClothesList.Add(ecsi);
         private void RemoveItemFromEmployeeClothesList(EmployeeClothesSizeItem ecsi)

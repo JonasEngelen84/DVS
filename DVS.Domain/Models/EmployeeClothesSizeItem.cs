@@ -6,7 +6,6 @@
         public string ClothesId => ClothesSize.Clothes.Id;
         public string ClothesName => ClothesSize.Clothes.Name;
         public string Size => ClothesSize.Size;
-        public string Comment => Comment;
 
         private int _quantity;
         public int Quantity
