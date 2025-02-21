@@ -1,8 +1,8 @@
 ﻿namespace DVS.Domain.Models
 {
-    public class AvailableClothesSizeItem : ModelBase
+    public class AvailableClothesSizeItem(ClothesSize clothesSize) : ModelBase
     {
-        public ClothesSize ClothesSize { get; private set; }
+        public ClothesSize ClothesSize { get; private set; } = clothesSize;
         public Guid ClothesSizeId => ClothesSize.GuidId;
         public string ClothesId => ClothesSize.Clothes.Id;
         public string ClothesName => ClothesSize.Clothes.Name;
@@ -21,12 +21,6 @@
                 _quantity = value;
                 OnPropertyChanged(nameof(Quantity));
             }
-        }
-
-        public AvailableClothesSizeItem(ClothesSize clothesSize)
-        {
-            ClothesSize = clothesSize;
-            _quantity = ClothesSize.Quantity;
         }
     }
 }

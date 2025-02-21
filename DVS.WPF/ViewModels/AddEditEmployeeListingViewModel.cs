@@ -80,7 +80,10 @@ namespace DVS.WPF.ViewModels
 
             foreach (ClothesSize clothesSize in _clothesSizeStore.ClothesSizes)
             {
-                _availableClothesSizes.Add(new AvailableClothesSizeItem(clothesSize));
+                _availableClothesSizes.Add(new AvailableClothesSizeItem(clothesSize)
+                {
+                    Quantity = clothesSize.Quantity
+                });
             }
         }
         public AvailableClothesSizeItem GetAvailableClothesSizeItemFrom_availableClothesSizes()
