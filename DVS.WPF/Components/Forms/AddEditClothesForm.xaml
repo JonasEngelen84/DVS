@@ -23,17 +23,9 @@
                                                 Direction="Ascending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
-        
+
         <CollectionViewSource x:Key="SortedSizesEU"
                               Source="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesEU}">
-            <CollectionViewSource.SortDescriptions>
-                <componentmodel:SortDescription PropertyName="Name"
-                                                Direction="Ascending" />
-            </CollectionViewSource.SortDescriptions>
-        </CollectionViewSource>
-        
-        <CollectionViewSource x:Key="SortedSizesUS"
-                              Source="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesUS}">
             <CollectionViewSource.SortDescriptions>
                 <componentmodel:SortDescription PropertyName="Name"
                                                 Direction="Ascending" />
@@ -47,25 +39,21 @@
                  Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
-
         <!-- Name -->
         <TextBox Width="252"
                  Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-
         <!-- Comment -->
         <TextBox Width="252"
                  Margin="0 0 0 5"
                  Style="{StaticResource TextBoxStyle}"
                  Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
-
         <!-- Label-Categorie -->
         <Label Content="Kategorie:"
                FontSize="14"
                FontWeight="Bold"
                Margin="-6 0 0 -4" />
-
         <!-- ComboBox-Categorie and Button-Edit  -->
         <StackPanel Orientation="Horizontal">
 
@@ -82,13 +70,11 @@
                        HorizontalAlignment="Center" />
             </Button>
         </StackPanel>
-
         <!-- Label-Season -->
         <Label Content="Saison:"
                FontSize="14"
                FontWeight="Bold"
                Margin="-5.5 0 0 -4" />
-
         <!-- ComboBox-Season and Button-Edit -->
         <StackPanel Orientation="Horizontal"
                     Margin="0 0 0 3">
@@ -106,7 +92,6 @@
                        HorizontalAlignment="Center" />
             </Button>
         </StackPanel>
-
         <!-- Labels-Size eu/us -->
         <StackPanel Orientation="Horizontal">
             
@@ -120,7 +105,6 @@
                    FontWeight="Bold"
                    Margin="42 0 0 -2" />
         </StackPanel>
-
         <!-- Checkboxes-Size -->
         <StackPanel Orientation="Horizontal">
 
@@ -157,7 +141,7 @@
 
                 <ScrollViewer>
                     <StackPanel>
-                        <ItemsControl ItemsSource="{Binding Source={StaticResource SortedSizesUS}}">
+                        <ItemsControl ItemsSource="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesUS}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -176,7 +160,6 @@
                 </ScrollViewer>
             </Border>
         </StackPanel>
-
         <!-- Button-Bestätigen -->
         <Button Content="BESTÄTIGEN"
                 Width="175"
