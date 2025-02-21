@@ -16,7 +16,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
     {
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditClothesFormViewModel editClothesFormViewModel = editClothesViewModel.AddEditClothesFormViewModel;
+            EditClothesFormViewModel editClothesFormViewModel = editClothesViewModel.EditClothesFormViewModel;
 
             if (Confirm($"Soll die Bekleidung  \"{editClothesFormViewModel.Name}\"  und Ihre Schnittstellen bearbeiten werden?", "Bekleidung bearbeiten"))
             {
@@ -40,7 +40,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
         }
 
-        private static Clothes CreateClothes(AddEditClothesFormViewModel editClothesFormViewModel)
+        private static Clothes CreateClothes(EditClothesFormViewModel editClothesFormViewModel)
         {
             return new Clothes(
                 editClothesFormViewModel.Id,
@@ -53,7 +53,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             };
         }
 
-        private static List<Size> GetSizes(AddEditClothesFormViewModel editClothesFormViewModel)
+        private static List<Size> GetSizes(EditClothesFormViewModel editClothesFormViewModel)
         {
             return new List<Size>(editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Any(size => size.IsSelected)
                     ? editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Where(size => size.IsSelected)
@@ -61,7 +61,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                     .ToList();
         }
         
-        private async Task DeleteClothesSizesAsync(AddEditClothesFormViewModel editClothesFormViewModel)
+        private async Task DeleteClothesSizesAsync(EditClothesFormViewModel editClothesFormViewModel)
         {
             List<ClothesSize> ClothesSizesToDelete = new(editClothesFormViewModel.Clothes.Sizes);
             foreach (ClothesSize clothesSize in ClothesSizesToDelete)
@@ -87,7 +87,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
         }
 
-        private async Task AddClothesToDB(Clothes newClothes, AddEditClothesFormViewModel editClothesFormViewModel)
+        private async Task AddClothesToDB(Clothes newClothes, EditClothesFormViewModel editClothesFormViewModel)
         {
             try
             {

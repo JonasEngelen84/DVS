@@ -14,7 +14,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
     {
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditClothesFormViewModel addClothesFormViewModel = addClothesViewModel.AddEditClothesFormViewModel;
+            AddClothesFormViewModel addClothesFormViewModel = addClothesViewModel.AddClothesFormViewModel;
             
             if (CheckClothesId(addClothesFormViewModel) != null)
                 ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
@@ -39,7 +39,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
         }
 
-        private Clothes CheckClothesId(AddEditClothesFormViewModel addClothesFormViewModel)
+        private Clothes CheckClothesId(AddClothesFormViewModel addClothesFormViewModel)
         {
             Clothes? existingClothes = clothesStore.Clothes
                 .FirstOrDefault(c => c.Id == addClothesFormViewModel.Id);
@@ -47,7 +47,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             return existingClothes;
         }
 
-        private static Clothes CreateClothes(AddEditClothesFormViewModel addClothesFormViewModel)
+        private static Clothes CreateClothes(AddClothesFormViewModel addClothesFormViewModel)
         {
             return new Clothes(
                 addClothesFormViewModel.Id,
@@ -60,7 +60,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             };
         }
 
-        private static List<Size> GetSizes(AddEditClothesFormViewModel addClothesFormViewModel)
+        private static List<Size> GetSizes(AddClothesFormViewModel addClothesFormViewModel)
         {
             return new List<Size>(addClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Any(size => size.IsSelected)
                     ? addClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Where(size => size.IsSelected)
@@ -85,7 +85,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
         }
 
-        private async Task AddClothesToDB(Clothes newClothes, AddEditClothesFormViewModel addClothesFormViewModel)
+        private async Task AddClothesToDB(Clothes newClothes, AddClothesFormViewModel addClothesFormViewModel)
         {
             try
             {

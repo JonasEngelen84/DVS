@@ -48,9 +48,6 @@
                 <GridViewColumn Header="Menge"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Quantity}" />
-                <GridViewColumn Header="Kommentar."
-                                Width="auto"
-                                DisplayMemberBinding="{Binding Comment}" />
             </GridView>
         </ListView.View>
     </ListView>

@@ -49,8 +49,7 @@
                 </StackPanel>
             </Border>
 
-            <components:AddEditClothesForm Grid.Row="1"
-                                           Margin="15 10 15 15"/>
+            <components:EditClothesForm Grid.Row="1" Margin="15 10 15 15"/>
         </Grid>
     </Border>
 </UserControl>

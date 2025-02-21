@@ -26,7 +26,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditEmployeeFormViewModel addEmployeeFormViewModel = _addEmployeeViewModel.AddEditEmployeeFormViewModel;
+            AddEmployeeFormViewModel addEmployeeFormViewModel = _addEmployeeViewModel.AddEmployeeFormViewModel;
 
             if (CheckEmployeeId(addEmployeeFormViewModel) != null)
                 ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
@@ -47,7 +47,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             }
         }
 
-        private Employee CheckEmployeeId(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        private Employee CheckEmployeeId(AddEmployeeFormViewModel addEmployeeFormViewModel)
         {
             Employee? existingEmployeeId = _employeeStore.Employees
                 .FirstOrDefault(e => e.Id == addEmployeeFormViewModel.Id);
@@ -55,7 +55,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             return existingEmployeeId;
         }
 
-        private static Employee CreateNewEmployee(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        private static Employee CreateNewEmployee(AddEmployeeFormViewModel addEmployeeFormViewModel)
         {
             Employee newEmployee = new(addEmployeeFormViewModel.Id,
                                        addEmployeeFormViewModel.Lastname,
@@ -68,7 +68,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             return newEmployee;
         }
 
-        private static void CreateEmployeeClothesSizes(Employee newEmployee, AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        private static void CreateEmployeeClothesSizes(Employee newEmployee, AddEmployeeFormViewModel addEmployeeFormViewModel)
         {
             foreach (EmployeeClothesSizeItem ecsi in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
@@ -77,7 +77,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             }
         }
 
-        private async Task AddEmployeeToDB(Employee newEmployee, AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        private async Task AddEmployeeToDB(Employee newEmployee, AddEmployeeFormViewModel addEmployeeFormViewModel)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             }
         }
 
-        private async Task UpdateClothesSizes(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        private async Task UpdateClothesSizes(AddEmployeeFormViewModel addEmployeeFormViewModel)
         {
             List<AvailableClothesSizeItem> EditedClothesSizes = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.GetAllEditedClothesSizes();
 
@@ -126,7 +126,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             }
         }
 
-        //private async Task UpdateClothes(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        //private async Task UpdateClothes(AddEmployeeFormViewModel addEmployeeFormViewModel)
         //{
         //    List<AvailableClothesSizeItem> EditedClothesSizes = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.GetAllEditedClothesSizes();
         //    List<Clothes> EditedClothes = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.GetAllEditedClothes();

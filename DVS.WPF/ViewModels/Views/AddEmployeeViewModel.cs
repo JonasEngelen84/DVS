@@ -9,7 +9,7 @@ namespace DVS.WPF.ViewModels.Views
     public class AddEmployeeViewModel : ViewModelBase
     {
         private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel;
-        public AddEditEmployeeFormViewModel AddEditEmployeeFormViewModel { get; }
+        public AddEmployeeFormViewModel AddEmployeeFormViewModel { get; }
         public ICommand CloseAddEditEmployee { get; }
 
 
@@ -35,7 +35,7 @@ namespace DVS.WPF.ViewModels.Views
 
             CloseAddEditEmployee = new CloseAddEditEmployeeCommand(clothesStore, modalNavigationStore);
 
-            AddEditEmployeeFormViewModel = new(null, _addEditEmployeeListingViewModel, addEmployee)
+            AddEmployeeFormViewModel = new(_addEditEmployeeListingViewModel, addEmployee)
             {
                 Id = "Id",
                 Lastname = "Nachname",

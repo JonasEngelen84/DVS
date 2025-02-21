@@ -49,7 +49,7 @@
                 </StackPanel>
             </Border>
 
-            <components:AddEditEmployeeForm Grid.Row="1"
+            <components:EditEmployeeForm Grid.Row="1"
                                             Margin="15 10 15 15"/>
         </Grid>
     </Border>

@@ -19,7 +19,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
     {
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEditEmployeeFormViewModel editEmployeeFormViewModel = editEmployeeViewModel.AddEditEmployeeFormViewModel;
+            EditEmployeeFormViewModel editEmployeeFormViewModel = editEmployeeViewModel.EditEmployeeFormViewModel;
             
             if (Confirm($"Soll der/die Mitarbeiter/in  \"{editEmployeeFormViewModel.Lastname}\", \"{editEmployeeFormViewModel.Firstname}\"  bearbeiten werden?", "Mitarbeiter bearbeiten"))
             {
@@ -43,7 +43,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             }
         }
 
-        private static Employee CreateUpdatedEmployee(AddEditEmployeeFormViewModel editEmployeeFormViewModel)
+        private static Employee CreateUpdatedEmployee(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             return new Employee(editEmployeeFormViewModel.Id,
                                 editEmployeeFormViewModel.Lastname,
@@ -54,7 +54,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             };
         }
 
-        private async Task DeleteRemovedEmployeeClothesSizesAsync(Employee updatedEmployee, AddEditEmployeeFormViewModel editEmployeeFormViewModel)
+        private async Task DeleteRemovedEmployeeClothesSizesAsync(Employee updatedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             foreach (EmployeeClothesSize ecs in updatedEmployee.Clothes)
             {
@@ -76,7 +76,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             }
         }
 
-        private async Task CreateAndAddNewEmployeeClothesSizesAsync(Employee updatedEmployee, AddEditEmployeeFormViewModel editEmployeeFormViewModel)
+        private async Task CreateAndAddNewEmployeeClothesSizesAsync(Employee updatedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             foreach (EmployeeClothesSizeItem ecsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
@@ -99,7 +99,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             }
         }
 
-        private async Task UpdateEmployeeClothesSizesAsync(Employee updatedEmployee, AddEditEmployeeFormViewModel editEmployeeFormViewModel)
+        private async Task UpdateEmployeeClothesSizesAsync(Employee updatedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             foreach (EmployeeClothesSizeItem ecsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
@@ -127,7 +127,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             }
         }
 
-        private async Task UpdateEmployeeAsync(Employee updatedEmployee, AddEditEmployeeFormViewModel editEmployeeFormViewModel)
+        private async Task UpdateEmployeeAsync(Employee updatedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             try
             {
@@ -140,7 +140,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             }
         }
 
-        private async Task UpdateClothesSizeAsync(AddEditEmployeeFormViewModel editEmployeeFormViewModel)
+        private async Task UpdateClothesSizeAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             foreach (EmployeeClothesSizeItem ecsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
@@ -161,9 +161,9 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
             }
         }
 
-        private async Task UpdateClothesAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        private async Task UpdateClothesAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (EmployeeClothesSizeItem ecsi in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSizeItem ecsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 Clothes ClothesToRemove = ecsi.ClothesSize.Clothes.Category.Clothes.First(c => c.Id == ecsi.ClothesSize.Clothes.Id);
 
@@ -188,14 +188,14 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 catch (Exception)
                 {
                     ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
-                    addEmployeeFormViewModel.HasError = true;
+                    editEmployeeFormViewModel.HasError = true;
                 }
             }
         }
 
-        private async Task UpdateCategoryAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        private async Task UpdateCategoryAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (EmployeeClothesSizeItem acsi in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSizeItem acsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 try
                 {
@@ -204,14 +204,14 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 catch (Exception)
                 {
                     ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
-                    addEmployeeFormViewModel.HasError = true;
+                    editEmployeeFormViewModel.HasError = true;
                 }
             }
         }
 
-        private async Task UpdateSeasonAsync(AddEditEmployeeFormViewModel addEmployeeFormViewModel)
+        private async Task UpdateSeasonAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (EmployeeClothesSizeItem ecsi in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSizeItem ecsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 try
                 {
@@ -220,11 +220,11 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 catch (Exception)
                 {
                     ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
-                    addEmployeeFormViewModel.HasError = true;
+                    editEmployeeFormViewModel.HasError = true;
                 }
                 finally
                 {
-                    addEmployeeFormViewModel.IsSubmitting = false;
+                    editEmployeeFormViewModel.IsSubmitting = false;
                 }
             }
         }

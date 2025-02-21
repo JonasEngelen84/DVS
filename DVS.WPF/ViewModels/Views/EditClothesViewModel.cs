@@ -11,7 +11,7 @@ namespace DVS.WPF.ViewModels.Views
 {
     public class EditClothesViewModel : ViewModelBase
     {
-        public AddEditClothesFormViewModel AddEditClothesFormViewModel { get; }
+        public EditClothesFormViewModel EditClothesFormViewModel { get; }
         public SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel { get; }
         public ICommand CloseAddEditClothes { get; }
 
@@ -62,7 +62,7 @@ namespace DVS.WPF.ViewModels.Views
                 this,
                 SizesCategoriesSeasonsListingViewModel);
 
-            AddEditClothesFormViewModel = new(
+            EditClothesFormViewModel = new(
                 clothes,
                 updatedClothes,
                 openAddEditCategories,

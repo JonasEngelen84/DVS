@@ -2,9 +2,9 @@
 
 namespace DVS.WPF.Components.Forms
 {
-    public partial class AddEditClothesForm : UserControl
+    public partial class EditClothesForm : UserControl
     {
-        public AddEditClothesForm()
+        public EditClothesForm()
         {
             InitializeComponent();
         }
