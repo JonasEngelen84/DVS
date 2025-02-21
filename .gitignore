@@ -363,3 +363,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /DVS.WPF/MainWindow.xaml
+/DVS.WPF/ViewModels/DVSListingViewModel.cs

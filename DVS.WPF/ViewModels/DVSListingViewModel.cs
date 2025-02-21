@@ -37,7 +37,7 @@ namespace DVS.WPF.ViewModels
         }
 
         private readonly ModalNavigationStore _modalNavigationStore;
-         readonly ClothesStore _clothesStore;
+        private readonly ClothesStore _clothesStore;
         private readonly EmployeeStore _employeeStore;
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
