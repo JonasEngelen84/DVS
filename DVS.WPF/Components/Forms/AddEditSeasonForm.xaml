@@ -9,7 +9,7 @@
 
     <UserControl.Resources>
         <CollectionViewSource x:Key="SortedSeasons"
-                              Source="{Binding AddEditClothesListingViewModel.Seasons}">
+                              Source="{Binding SizesCategoriesSeasonsListingViewModel.Seasons}">
             <CollectionViewSource.SortDescriptions>
                 <componentmodel:SortDescription PropertyName="Name"
                                                 Direction="Ascending" />
