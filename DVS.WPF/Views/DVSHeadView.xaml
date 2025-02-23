@@ -39,16 +39,19 @@
             </Button>
         </Grid>
 
-        <!--Components & GridSplitter-->
+        <!--Components/GridSplitter-->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="700"/>
-                <ColumnDefinition Width="5" />
-                <ColumnDefinition />
+                <ColumnDefinition Width="625"/>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <components:DVSEmployeeListing Grid.Column="0"/>
+            <!-- component:DVSEmployeeListing -->
+            <components:DVSEmployeeListing x:Name="DVSEmployeeListing"
+                                           Grid.Column="0" />
 
+            <!-- GridSplitter -->
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Center"
                           Width="5"
@@ -57,7 +60,9 @@
                           Background="#433331">
             </GridSplitter>
 
-            <components:DVSClothesListing Grid.Column="2" />
+            <!-- component:DVSClothesListing -->
+            <components:DVSClothesListing x:Name="DVSClothesListing"
+                                          Grid.Column="2" />
         </Grid>
     </Grid>
 </UserControl>

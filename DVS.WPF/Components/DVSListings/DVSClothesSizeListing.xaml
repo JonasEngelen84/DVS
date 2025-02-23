@@ -27,16 +27,16 @@
         <ListView.View>
             <GridView>
                 <GridViewColumn Header="Kl.Id"
-                                Width="auto"
+                                Width="80"
                                 DisplayMemberBinding="{Binding Clothes.Id}" />
-                <GridViewColumn Header="Kleidung"
-                                Width="auto"
+                <GridViewColumn Header="Bekleidung"
+                                Width="100"
                                 DisplayMemberBinding="{Binding Clothes.Name}" />
                 <GridViewColumn Header="Kategorie"
-                                Width="auto"
+                                Width="80"
                                 DisplayMemberBinding="{Binding Clothes.Category.Name}" />
                 <GridViewColumn Header="Saison"
-                                Width="auto"
+                                Width="80"
                                 DisplayMemberBinding="{Binding Clothes.Season.Name}" />
                 <GridViewColumn Header="Größe"
                                 Width="auto"
@@ -45,7 +45,7 @@
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Quantity}" />
                 <GridViewColumn Header="Kommentar"
-                                Width="auto"
+                                Width="100"
                                 DisplayMemberBinding="{Binding Comment}" />
             </GridView>
         </ListView.View>

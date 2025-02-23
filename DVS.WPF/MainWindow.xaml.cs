@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -18,11 +19,13 @@ namespace DVS.WPF
             {
                 SizeView.Visibility = Visibility.Hidden;
                 HeadView.Visibility = Visibility.Visible;
+                UserWindow.Width = 900;
             }
             else
             {
                 SizeView.Visibility = Visibility.Visible;
                 HeadView.Visibility = Visibility.Hidden;
+                UserWindow.Width = 1250;
             }
         }
 

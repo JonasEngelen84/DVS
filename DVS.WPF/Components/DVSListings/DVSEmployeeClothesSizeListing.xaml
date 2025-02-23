@@ -29,14 +29,29 @@
               Loaded="SizesListsAutoWidth">
         <ListView.View>
             <GridView>
-                <GridViewColumn Header="Ma.Id" DisplayMemberBinding="{Binding Employee.Id}" />
-                <GridViewColumn Header="Nachname" DisplayMemberBinding="{Binding Employee.Lastname}" />
-                <GridViewColumn Header="Vorname" DisplayMemberBinding="{Binding Employee.Firstname}" />
-                <GridViewColumn Header="Kl.Id" DisplayMemberBinding="{Binding ClothesSize.Clothes.Id}" />
-                <GridViewColumn Header="Kleidung" DisplayMemberBinding="{Binding ClothesSize.Clothes.Name}" />
-                <GridViewColumn Header="Größe" DisplayMemberBinding="{Binding ClothesSize.Size}" />
-                <GridViewColumn Header="Menge" DisplayMemberBinding="{Binding Quantity}" />
-                <GridViewColumn Header="Kommentar" DisplayMemberBinding="{Binding Comment}" />
+                <GridViewColumn Header="Ma.Id" 
+                                Width="80"
+                                DisplayMemberBinding="{Binding Employee.Id}" />
+                <GridViewColumn Header="Nachname"
+                                Width="100"
+                                DisplayMemberBinding="{Binding Employee.Lastname}" />
+                <GridViewColumn Header="Vorname"
+                                Width="100"
+                                DisplayMemberBinding="{Binding Employee.Firstname}" />
+                <GridViewColumn Header="Kl.Id"
+                                Width="80"
+                                DisplayMemberBinding="{Binding ClothesSize.Clothes.Id}" />
+                <GridViewColumn Header="Bekleidung"
+                                Width="100"
+                                DisplayMemberBinding="{Binding ClothesSize.Clothes.Name}" />
+                <GridViewColumn Header="Größe"
+                                Width="auto"
+                                DisplayMemberBinding="{Binding ClothesSize.Size}" />
+                <GridViewColumn Header="Menge"
+                                Width="auto"
+                                DisplayMemberBinding="{Binding Quantity}" />
+                <GridViewColumn Header="Kommentar"
+                                Width="100" DisplayMemberBinding="{Binding Comment}" />
             </GridView>
         </ListView.View>
     </ListView>
