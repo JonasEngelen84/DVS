@@ -82,9 +82,9 @@
         <!-- components/Plus Minus Button -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="675" />
+                <ColumnDefinition Width="1.2*" />
                 <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
             <!-- component:DVSEmployeeClothesSizeListing -->

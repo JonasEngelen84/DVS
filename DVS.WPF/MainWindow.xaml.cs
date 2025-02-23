@@ -20,12 +20,14 @@ namespace DVS.WPF
                 SizeView.Visibility = Visibility.Hidden;
                 HeadView.Visibility = Visibility.Visible;
                 UserWindow.Width = 900;
+                UserWindow.Height = 900;
             }
             else
             {
                 SizeView.Visibility = Visibility.Visible;
                 HeadView.Visibility = Visibility.Hidden;
                 UserWindow.Width = 1250;
+                UserWindow.Height = 900;
             }
         }
 

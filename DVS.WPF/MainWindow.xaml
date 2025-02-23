@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         x:Name="UserWindow"
         Icon="/Resources/Images/DVS Icon.png"
-        Height="700"
+        Height="900"
         MinHeight="500"
         Width="900"
         MinWidth="500"
