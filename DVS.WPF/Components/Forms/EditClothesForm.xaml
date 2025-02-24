@@ -6,7 +6,6 @@
              xmlns:componentmodel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d"
              DataContext="{Binding EditClothesFormViewModel}">
-
     <UserControl.Resources>
         <CollectionViewSource x:Key="SortedSeasons"
                               Source="{Binding SizesCategoriesSeasonsListingViewModel.Seasons}">
@@ -33,87 +32,100 @@
         </CollectionViewSource>
     </UserControl.Resources>
 
-    <StackPanel>
-        <!-- Id -->
-        <TextBox Width="252"
-                 Margin="0 0 0 5"
-                 Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
-        <!-- Name -->
-        <TextBox Width="252"
-                 Margin="0 0 0 5"
-                 Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-        <!-- Comment -->
-        <TextBox Width="252"
-                 Margin="0 0 0 5"
-                 Style="{StaticResource TextBoxStyle}"
-                 Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
-        <!-- Label-Categorie -->
-        <Label Content="Kategorie:"
-               FontSize="14"
-               FontWeight="Bold"
-               Margin="-6 0 0 -4" />
-        <!-- ComboBox-Categorie and Button-Edit  -->
-        <StackPanel Orientation="Horizontal">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
 
-            <ComboBox Style="{StaticResource ComboBoxStyle}"
-                      ItemsSource="{Binding Source={StaticResource SortedCategories}}"
-                      SelectedItem="{Binding Category, Mode=TwoWay}"
-                      DisplayMemberPath="Name" />
+        <!--Clothes Data-->
+        <StackPanel Grid.Column="0"
+                    Margin="0 0 10 0">
+            <Label Content="Id:"
+                   Margin="-5 -10 0 -3"
+                   FontSize="14"
+                   FontWeight="Bold" />
+            <!-- Id -->
+            <TextBox Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Button Margin="5 0 0 0"
-                    Style="{StaticResource EditComboBoxButtonStyle}"
-                    Command="{Binding OpenAddEditCategories}">
-                <Image x:Name="categorieEditButton"
-                       Source="/Resources/Images/Edit.png"
-                       HorizontalAlignment="Center" />
-            </Button>
+            <Label Content="Name:"
+                   Margin="-5 0 0 -3"
+                   FontSize="14"
+                   FontWeight="Bold" />
+            <!-- Name -->
+            <TextBox Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Kommentar:"
+                   Margin="-5 0 0 -3"
+                   FontSize="14"
+                   FontWeight="Bold" />
+            <!-- Comment -->
+            <TextBox Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Label Content="Kategorie:"
+                   Margin="-5 0 0 -3"
+                   FontSize="14"
+                   FontWeight="Bold" />
+            <!-- ComboBox-Categorie and Button-Edit  -->
+            <StackPanel Orientation="Horizontal">
+
+                <ComboBox Height="23"
+                          FontSize="14"
+                          Width="209"
+                          FontWeight="DemiBold"
+                          ItemsSource="{Binding Source={StaticResource SortedCategories}}"
+                          SelectedItem="{Binding Category, Mode=TwoWay}"
+                          DisplayMemberPath="Name" />
+
+                <Button Margin="5 0 0 0"
+                        Style="{StaticResource EditComboBoxButtonStyle}"
+                        Command="{Binding OpenAddEditCategories}">
+                    <Image x:Name="categorieEditButton"
+                           Source="/Resources/Images/Edit.png"
+                           HorizontalAlignment="Center" />
+                </Button>
+            </StackPanel>
+
+            <Label Content="Saison:"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Margin="-5.5 0 0 -4" />
+            <!-- ComboBox-Season and Button-Edit -->
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 0 0 3">
+
+                <ComboBox Height="23"
+                          FontSize="14"
+                          Width="209"
+                          FontWeight="DemiBold"
+                          ItemsSource="{Binding Source={StaticResource SortedSeasons}}"
+                          SelectedItem="{Binding Season}"
+                          DisplayMemberPath="Name" />
+
+                <Button Margin="5 0 0 0"
+                        Style="{StaticResource EditComboBoxButtonStyle}"
+                        Command="{Binding OpenAddEditSeasons}">
+                    <Image x:Name="seasonEditButton"
+                           Source="/Resources/Images/Edit.png"
+                           HorizontalAlignment="Center" />
+                </Button>
+            </StackPanel>
         </StackPanel>
-        <!-- Label-Season -->
-        <Label Content="Saison:"
-               FontSize="14"
-               FontWeight="Bold"
-               Margin="-5.5 0 0 -4" />
-        <!-- ComboBox-Season and Button-Edit -->
-        <StackPanel Orientation="Horizontal"
-                    Margin="0 0 0 3">
 
-            <ComboBox Style="{StaticResource ComboBoxStyle}"
-                      ItemsSource="{Binding Source={StaticResource SortedSeasons}}"
-                      SelectedItem="{Binding Season}"
-                      DisplayMemberPath="Name" />
+        <!-- Sizes -->
+        <StackPanel Grid.Column="1">
 
-            <Button Margin="5 0 0 0"
-                    Style="{StaticResource EditComboBoxButtonStyle}"
-                    Command="{Binding OpenAddEditSeasons}">
-                <Image x:Name="seasonEditButton"
-                       Source="/Resources/Images/Edit.png"
-                       HorizontalAlignment="Center" />
-            </Button>
-        </StackPanel>
-        <!-- Labels-Size eu/us -->
-        <StackPanel Orientation="Horizontal">
-            
             <Label Content="Größe (EU):"
                    FontSize="14"
                    FontWeight="Bold"
-                   Margin="-5.5 0 0 -2" />
-
-            <Label Content="Größe (US):"
-                   FontSize="14"
-                   FontWeight="Bold"
-                   Margin="42 0 0 -2" />
-        </StackPanel>
-        <!-- Checkboxes-Size -->
-        <StackPanel Orientation="Horizontal">
-
+                   Margin="-5.5 -10 0 -2" />
             <!-- SizeListEU -->
-            <Border Margin="0 0 10 0"
-                    Height="150"
+            <Border Height="150"
                     BorderThickness="0.5"
                     BorderBrush="Black">
-
                 <ScrollViewer>
                     <StackPanel>
                         <ItemsControl ItemsSource="{Binding Source={StaticResource SortedSizesEU}}">
@@ -134,11 +146,14 @@
                 </ScrollViewer>
             </Border>
 
+            <Label Content="Größe (US):"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   Margin="-5.5 5 0 -2" />
             <!-- SizeListUS -->
             <Border Height="150"
                     BorderThickness="0.5"
                     BorderBrush="Black">
-
                 <ScrollViewer>
                     <StackPanel>
                         <ItemsControl ItemsSource="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesUS}">
@@ -148,7 +163,7 @@
                                         <CheckBox IsChecked="{Binding IsSelected}"
                                                   Content="{Binding Name}"
                                                   Margin="5"
-                                                  Width="40"/>
+                                                  Width="40" />
                                         <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
                                                  Width="46"
                                                  Margin="5" />
@@ -160,12 +175,12 @@
                 </ScrollViewer>
             </Border>
         </StackPanel>
+
         <!-- Button-Bestätigen -->
         <Button Content="BESTÄTIGEN"
-                Width="175"
-                Margin="0 20 0 0 "
+                Margin="-15 325 0 0 "
                 Style="{StaticResource ModalButtonStyle}"
-                Command="{Binding SubmitClothes}" 
-                IsEnabled="{Binding CanSubmit}"/>
-    </StackPanel>
+                Command="{Binding SubmitClothes}"
+                IsEnabled="{Binding CanSubmit}" />
+    </Grid>
 </UserControl>

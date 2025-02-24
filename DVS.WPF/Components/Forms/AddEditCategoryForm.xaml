@@ -24,6 +24,7 @@
                      Style="{StaticResource TextBoxStyle}"
                      Text="{Binding AddNewCategory, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="ERSTELLEN"
+                    Width="100"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
                     Command="{Binding AddCategory}"
@@ -37,6 +38,7 @@
                      Style="{StaticResource TextBoxStyle}"
                      Text="{Binding EditSelectedCategory, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="BEARBEITEN"
+                    Width="100"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
                     Command="{Binding EditCategory}"
@@ -75,6 +77,7 @@
             <Button Grid.Column="1"
                     Content="LÖSCHEN"
                     VerticalAlignment="Bottom"
+                    Width="100"
                     Margin="5 0 0 1"
                     Style="{StaticResource ModalButtonStyle}"
                     Command="{Binding DeleteCategory}"

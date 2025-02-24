@@ -19,8 +19,8 @@
         </CollectionViewSource>
     </UserControl.Resources>
 
-    <ListView Height="120"
-              FontSize="10"
+    <ListView Height="200"
+              FontSize="12"
               Foreground="Black"
               Background="WhiteSmoke"
               AllowDrop="True"

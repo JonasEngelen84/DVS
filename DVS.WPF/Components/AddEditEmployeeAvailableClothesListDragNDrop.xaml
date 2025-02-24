@@ -19,8 +19,8 @@
         </CollectionViewSource>
     </UserControl.Resources>
 
-    <ListView Height="120"
-              FontSize="10"
+    <ListView Height="394"
+              FontSize="12"
               Foreground="Black"
               Background="WhiteSmoke"
               AllowDrop="True"
@@ -48,7 +48,7 @@
                 <GridViewColumn Header="Gelagert"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Quantity}" />
-                <GridViewColumn Header="Kommentar."
+                <GridViewColumn Header="Kommentar"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Comment}" />
             </GridView>

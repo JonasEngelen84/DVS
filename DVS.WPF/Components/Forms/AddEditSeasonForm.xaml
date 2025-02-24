@@ -24,6 +24,7 @@
                      Style="{StaticResource TextBoxStyle}"
                      Text="{Binding AddNewSeason, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="ERSTELLEN"
+                    Width="100"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
                     Command="{Binding AddSeason}"
@@ -37,6 +38,7 @@
                      Style="{StaticResource TextBoxStyle}"
                      Text="{Binding EditSelectedSeason, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="BEARBEITEN"
+                    Width="100"
                     Margin="5 0 0 0"
                     Style="{StaticResource ModalButtonStyle}"
                     Command="{Binding EditSeason}"
@@ -74,6 +76,7 @@
             <!-- Delete Button -->
             <Button Grid.Column="1"
                     Content="LÖSCHEN"
+                    Width="100"
                     VerticalAlignment="Bottom"
                     Margin="5 0 0 1"
                     Style="{StaticResource ModalButtonStyle}"

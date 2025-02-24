@@ -5,104 +5,84 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:components="clr-namespace:DVS.WPF.Components"
              mc:Ignorable="d"
+             Width="600"
              DataContext="{Binding EditEmployeeFormViewModel}">
 
-    <StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="300" />
+        </Grid.ColumnDefinitions>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
+        <!--Employee Data-->
+        <StackPanel Grid.Column="0" Margin="0 0 10 0">
+            <Label Content="Id:"
+                   Margin="-5 -10 0 -3"
+                   FontSize="14"
+                   FontWeight="Bold" />
             <!-- Id -->
-            <TextBox Grid.Row="0"
-                     Grid.Column="0"
-                     Margin="0 0 0 5"
-                     HorizontalAlignment="Stretch"
+            <TextBox HorizontalAlignment="Stretch"
                      Style="{StaticResource TextBoxStyle}"
                      Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
 
+            <Label Content="Nachname:"
+                   Margin="-5 0 0 -3"
+                   FontSize="14"
+                   FontWeight="Bold" />
             <!-- Lastname -->
-            <TextBox Grid.Row="1"
-                     Grid.Column="0"
-                     Margin="0 0 0 5"
-                     HorizontalAlignment="Stretch"
+            <TextBox HorizontalAlignment="Stretch"
                      Style="{StaticResource TextBoxStyle}"
                      Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" />
 
+            <Label Content="Vorname:"
+                   Margin="-5 0 0 -3"
+                   FontSize="14"
+                   FontWeight="Bold" />
             <!-- Firstname -->
-            <TextBox Grid.Row="2"
-                     Grid.Column="0"
-                     Margin="0 0 0 5"
-                     HorizontalAlignment="Stretch"
+            <TextBox HorizontalAlignment="Stretch"
                      Style="{StaticResource TextBoxStyle}"
                      Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" />
 
-            <!-- Comment -->
-            <TextBox Grid.Row="3"
-                     Grid.Column="0"
-                     Margin="0 0 0 5"
-                     HorizontalAlignment="Stretch"
-                     Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
-        </Grid>
-
-        <!-- Label-Bekleidung hinzufügen & Switch-Button -->
-        <StackPanel Orientation="Horizontal"
-                    Margin="-4 10 0 5">
-
-            <Label Content="Bekleidung hinzufügen:"
+            <Label Content="Kommentar:"
+                   Margin="-5 0 0 -3"
                    FontSize="14"
                    FontWeight="Bold" />
+            <!-- Comment -->
+            <TextBox HorizontalAlignment="Stretch"
+                     Style="{StaticResource TextBoxStyle}"
+                     Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Button Margin="65 0 0 0"
-                    Style="{StaticResource EditComboBoxButtonStyle}"
-                    Click="SwitchAvailableClothesListViewClick"
-                    Visibility="Hidden">
-                <Image Source="/Resources/Images/Switch.png"
-                       HorizontalAlignment="Center"/>
-            </Button>
+            <Label Content="Bekleidung:"
+                   Margin="-5 0 0 -3"
+                   FontSize="14"
+                   FontWeight="Bold" />
+            <!--EmployeeClothesList-->
+            <components:AddEditEmployeeNewEmployeeClothesListDragNDrop Foreground="Black"
+                                                                       Background="WhiteSmoke"
+                                                                       IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
+                                                                       ClothesItemDropCommand="{Binding ClothesItemReceivedNewEmployeeClothesListCommand}"
+                                                                       ClothesItemRemovedCommand="{Binding ClothesItemRemovedAvailableClothesListCommand}" />
         </StackPanel>
 
-        <!-- ClothesLists -->
-        <Grid>
-            <!-- AvailableClothesList -->
-            <components:AddEditEmployeeAvailableClothesList x:Name="AvailableClothesList"
-                                                            Margin="0 0 0 5"
-                                                            Visibility="Hidden" />
+        <!--AvailableClothesList-->
+        <StackPanel Grid.Column="1">
+            <Label Content="Vorrätige Bekleidung:"
+                   Margin="-5 -10 0 -3"
+                   FontSize="14"
+                   FontWeight="Bold" />
+            <components:AddEditEmployeeAvailableClothesListDragNDrop Foreground="Black"
+                                                                     Background="WhiteSmoke"
+                                                                     IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
+                                                                     ClothesItemDropCommand="{Binding ClothesItemReceivedAvailableClothesListCommand}"
+                                                                     ClothesItemRemovedCommand="{Binding ClothesItemRemovedNewEmployeeClothesListCommand}" />
+        </StackPanel>
 
-            <!-- DragNDropClothesLists -->
-            <StackPanel x:Name="DragNDropClothesLists">
-
-                <!--NewEmployeeClothesList-->
-                <components:AddEditEmployeeNewEmployeeClothesListDragNDrop Margin="0 0 0 5"
-                                                                           Foreground="Black"
-                                                                           Background="WhiteSmoke"
-                                                                           IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
-                                                                           ClothesItemDropCommand="{Binding ClothesItemReceivedNewEmployeeClothesListCommand}"
-                                                                           ClothesItemRemovedCommand="{Binding ClothesItemRemovedAvailableClothesListCommand}" />
-
-                <!--AvailableClothesList-->
-                <components:AddEditEmployeeAvailableClothesListDragNDrop Foreground="Black"
-                                                                         Background="WhiteSmoke"
-                                                                         IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
-                                                                         ClothesItemDropCommand="{Binding ClothesItemReceivedAvailableClothesListCommand}"
-                                                                         ClothesItemRemovedCommand="{Binding ClothesItemRemovedNewEmployeeClothesListCommand}" />
-            </StackPanel>
-        </Grid>
-
-        <!-- Button-Bestätigen -->
-        <Button Content="BESTÄTIGEN"
-                Margin="0 20 0 0 "
+        <!-- Button_Bestätigen -->
+        <Button Grid.ColumnSpan="2"
+                Content="BESTÄTIGEN"
+                Margin="0 430 0 0"
                 Style="{StaticResource ModalButtonStyle}"
-                Command="{Binding SubmitEmployee}" 
-                IsEnabled="{Binding CanSubmit}"/>
-    </StackPanel>
+                Command="{Binding SubmitEmployee}"
+                IsEnabled="{Binding CanSubmit}" />
+    </Grid>
 </UserControl>

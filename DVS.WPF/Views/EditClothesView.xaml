@@ -9,46 +9,41 @@
     <Border Background="#FFDEDEDE">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <!-- TitleBar -->
-            <Border Grid.Row="0"
-                    Background="#FFBFBFBF">
-                <StackPanel>
-                    <Grid>
-                        <!-- Title -->
-                        <TextBlock Text="Bekleidung"
-                                   FontSize="28"
-                                   FontWeight="SemiBold"
-                                   HorizontalAlignment="Left"
-                                   VerticalAlignment="Center"
-                                   Margin="13 -10 0 0" />
+            <!-- Title/Close-Button -->
+            <Border Grid.Row="0" Background="#FFBFBFBF">
+                <Grid>
+                    <!-- Title -->
+                    <TextBlock Text="Bekleidung"
+                               FontSize="28"
+                               FontWeight="SemiBold"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Margin="13 -5 0 0" />
 
-                        <!-- Button-Close -->
-                        <Button HorizontalAlignment="Right"
-                                Width="50"
-                                Height="50"
-                                Style="{StaticResource TitleBarButtonStyle}"
-                                Command="{Binding CloseAddEditClothes}">
-                            <Image Source="/Resources/Images/Close.png"
-                                   Height="25"
-                                   Width="25"
-                                   HorizontalAlignment="Center" />
-                        </Button>
-                    </Grid>
-
-                    <!-- Label-Add -->
-                    <Label Content="bearbeiten"
-                           Width="85"
-                           HorizontalAlignment="Left"
-                           Margin="9.5 -23 0 0"
-                           FontSize="15"
+                    <!-- Label_Add -->
+                    <Label Content="erstellen"
+                           Width="100"
+                           Margin="-120 5 0 0"
+                           FontSize="18"
                            FontWeight="SemiBold" />
-                </StackPanel>
-            </Border>
 
+                    <!-- Button-Close -->
+                    <Button HorizontalAlignment="Right"
+                            Width="40"
+                            Height="40"
+                            Style="{StaticResource TitleBarButtonStyle}"
+                            Command="{Binding CloseAddEditClothes}">
+                        <Image Source="/Resources/Images/Close.png"
+                               Height="25"
+                               Width="25"
+                               HorizontalAlignment="Center" />
+                    </Button>
+                </Grid>
+            </Border>
             <components:EditClothesForm Grid.Row="1" Margin="15 10 15 15"/>
         </Grid>
     </Border>

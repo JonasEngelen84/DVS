@@ -15,7 +15,6 @@
                 <ResourceDictionary Source="Resources/Dictionaries/Button/SubMenuItemResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/Button/TitleButtonResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/BorderDragClothesToEmployeeListView.xaml" />
-                <ResourceDictionary Source="Resources/Dictionaries/ComboBoxResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/ModalTextResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/TextBoxResourcesDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>

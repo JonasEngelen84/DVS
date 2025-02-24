@@ -59,12 +59,7 @@ namespace DVS.WPF.ViewModels.Views
                 addClothes,
                 openAddEditCategories,
                 openAddEditSeasons,
-                SizesCategoriesSeasonsListingViewModel)
-            {
-                Id = "Id",
-                Name = "Name",
-                Comment = "Kommentar"
-            };
+                SizesCategoriesSeasonsListingViewModel);
         }
     }
 }

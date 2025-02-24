@@ -9,19 +9,5 @@ namespace DVS.WPF.Components.Forms
         {
             InitializeComponent();
         }
-
-        private void SwitchAvailableClothesListViewClick(object sender, RoutedEventArgs e)
-        {
-            if (AvailableClothesList.Visibility == Visibility.Visible)
-            {
-                AvailableClothesList.Visibility = Visibility.Hidden;
-                DragNDropClothesLists.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                AvailableClothesList.Visibility = Visibility.Visible;
-                DragNDropClothesLists.Visibility = Visibility.Hidden;
-            }
-        }
     }
 }
