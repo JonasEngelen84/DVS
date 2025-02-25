@@ -29,7 +29,7 @@ namespace DVS.WPF.ViewModels
                 }
             }
         }
-        
+
         private EmployeeClothesSizeItem _selectedEmployeeClothesSizeItem;
         public EmployeeClothesSizeItem SelectedEmployeeClothesSizeItem
         {
@@ -91,13 +91,13 @@ namespace DVS.WPF.ViewModels
             return _availableClothesSizes
                 .FirstOrDefault(acsi => acsi.ClothesId == SelectedAvailableClothesSizeItem.ClothesId &&
                 acsi.ClothesSizeId == SelectedAvailableClothesSizeItem.ClothesSizeId);
-        }        
+        }
         public Clothes GetClothesFrom_availableClothesSizes()
         {
             return _availableClothesSizes
                 .FirstOrDefault(acsi => acsi.ClothesId == SelectedAvailableClothesSizeItem.ClothesId)
                 .ClothesSize.Clothes;
-        }        
+        }
         public ClothesSize GetClothesSizeFrom_availableClothesSizes()
         {
             return _availableClothesSizes
@@ -114,13 +114,13 @@ namespace DVS.WPF.ViewModels
             {
                 foreach (EmployeeClothesSize ecs in employee.Clothes)
                 {
-                    _employeeClothesList.Add(new EmployeeClothesSizeItem(ecs.ClothesSize) { Quantity = ecs.Quantity});
+                    _employeeClothesList.Add(new EmployeeClothesSizeItem(ecs.ClothesSize) { Quantity = ecs.Quantity });
                 }
             }
         }
         public EmployeeClothesSizeItem GetClothesSizeFrom_employeeClothesSizes()
         {
-            return _employeeClothesList.FirstOrDefault(ecsi => ecsi.ClothesSize.GuidId == SelectedAvailableClothesSizeItem.ClothesSize.GuidId);
+            return _employeeClothesList.First(ecsi => ecsi.ClothesSize.GuidId == SelectedAvailableClothesSizeItem.ClothesSize.GuidId);
         }
         private void AddItemToEmployeeClothesList(EmployeeClothesSizeItem ecsi) => _employeeClothesList.Add(ecsi);
         private void RemoveItemFromEmployeeClothesList(EmployeeClothesSizeItem ecsi)
