@@ -14,12 +14,12 @@ namespace DVS.WPF.ViewModels
         public IEnumerable<Season> Seasons => _seasons;
 
         private readonly List<string> _sizesEU;
-        private readonly ObservableCollection<Size> _loadedSizesEU = [];
-        public IEnumerable<Size> LoadedSizesEU => _loadedSizesEU;
+        private readonly ObservableCollection<SizeListingItemViewModel> _loadedSizesEU = [];
+        public IEnumerable<SizeListingItemViewModel> LoadedSizesEU => _loadedSizesEU;
         
         private readonly List<string> _sizesUS;
-        private readonly ObservableCollection<Size> _loadedSizesUS = [];
-        public IEnumerable<Size> LoadedSizesUS => _loadedSizesUS;
+        private readonly ObservableCollection<SizeListingItemViewModel> _loadedSizesUS = [];
+        public IEnumerable<SizeListingItemViewModel> LoadedSizesUS => _loadedSizesUS;
 
         private readonly CategoryStore _categoryStore;
         private readonly SeasonStore _seasonStore;
@@ -55,30 +55,38 @@ namespace DVS.WPF.ViewModels
                 {
                     ClothesSize? selectedSize = clothes.Sizes.FirstOrDefault(cs => cs.Size == size);
                     if (selectedSize != null)
-                        _loadedSizesEU.Add(new Size() { Name = size, Quantity = selectedSize.Quantity, IsSelected = true });
+                        _loadedSizesEU.Add(new SizeListingItemViewModel(size)
+                        {
+                            Quantity = selectedSize.Quantity,
+                            Comment = selectedSize.Comment
+                        });
                     else
-                        _loadedSizesEU.Add(new Size() { Name = size });
+                        _loadedSizesEU.Add(new SizeListingItemViewModel(size));
                 }
 
                 foreach (var size in _sizesUS)
                 {
                     ClothesSize? selectedSize = clothes.Sizes.FirstOrDefault(cs => cs.Size == size);
                     if (selectedSize != null)
-                        _loadedSizesUS.Add(new Size() { Name = size, Quantity = selectedSize.Quantity, IsSelected = true });
+                        _loadedSizesUS.Add(new SizeListingItemViewModel(size)
+                        {
+                            Quantity = selectedSize.Quantity,
+                            Comment = selectedSize.Comment
+                        });
                     else
-                        _loadedSizesUS.Add(new Size() { Name = size });
+                        _loadedSizesUS.Add(new SizeListingItemViewModel(size));
                 }
             }
             else
             {
                 foreach (var size in _sizesEU)
                 {
-                    _loadedSizesEU.Add(new Size() { Name = size });
+                    _loadedSizesEU.Add(new SizeListingItemViewModel(size));
                 }
 
                 foreach (var size in _sizesUS)
                 {
-                    _loadedSizesUS.Add(new Size() { Name = size });
+                    _loadedSizesUS.Add(new SizeListingItemViewModel(size));
                 }
             }
         }

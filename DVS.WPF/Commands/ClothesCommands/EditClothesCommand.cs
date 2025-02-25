@@ -1,5 +1,6 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
+using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
 
@@ -24,7 +25,7 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
                 editClothesFormViewModel.IsSubmitting = true;
 
                 Clothes newClothes = CreateClothes(editClothesFormViewModel);
-                List<Size> selectedSizes = GetSizes(editClothesFormViewModel);
+                List<SizeListingItemViewModel> selectedSizes = GetSizes(editClothesFormViewModel);
 
                 if (selectedSizes != null)
                 {
@@ -53,11 +54,11 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             };
         }
 
-        private static List<Size> GetSizes(EditClothesFormViewModel editClothesFormViewModel)
+        private static List<SizeListingItemViewModel> GetSizes(EditClothesFormViewModel editClothesFormViewModel)
         {
-            return new List<Size>(editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Any(size => size.IsSelected)
-                    ? editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Where(size => size.IsSelected)
-                    : editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesEU.Where(size => size.IsSelected))
+            return new List<SizeListingItemViewModel>(editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Any(size => size.Quantity != null)
+                    ? editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Where(size => size.Quantity != null)
+                    : editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesEU.Where(size => size.Quantity != null))
                     .ToList();
         }
         
@@ -78,11 +79,11 @@ namespace DVS.WPF.Commands.AddEditClothesCommands
             }
         }
 
-        private static void CreateClothesSizes(List<Size> selectedSizes, Clothes newClothes)
+        private static void CreateClothesSizes(List<SizeListingItemViewModel> selectedSizes, Clothes newClothes)
         {
-            foreach (Size size in selectedSizes)
+            foreach (SizeListingItemViewModel size in selectedSizes)
             {
-                ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size.Name, size.Quantity, "");
+                ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size.Size, size.Quantity, size.Comment);
                 newClothes.Sizes.Add(newClothesSize);
             }
         }

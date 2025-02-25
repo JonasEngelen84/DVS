@@ -5,9 +5,6 @@ using System.Windows.Input;
 namespace DVS.WPF.Components.DVSListings
 
 {
-    /// <summary>
-    /// Interaktionslogik für DVSClothesListing.xaml
-    /// </summary>
     public partial class DVSClothesListing : UserControl
     {
         public DVSClothesListing()

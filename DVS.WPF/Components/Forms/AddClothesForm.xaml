@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:componentmodel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:components="clr-namespace:DVS.WPF.Components"
              mc:Ignorable="d"
              DataContext="{Binding AddClothesFormViewModel}">
     <UserControl.Resources>
@@ -17,14 +18,6 @@
 
         <CollectionViewSource x:Key="SortedCategories"
                               Source="{Binding SizesCategoriesSeasonsListingViewModel.Categories}">
-            <CollectionViewSource.SortDescriptions>
-                <componentmodel:SortDescription PropertyName="Name"
-                                                Direction="Ascending" />
-            </CollectionViewSource.SortDescriptions>
-        </CollectionViewSource>
-
-        <CollectionViewSource x:Key="SortedSizesEU"
-                              Source="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesEU}">
             <CollectionViewSource.SortDescriptions>
                 <componentmodel:SortDescription PropertyName="Name"
                                                 Direction="Ascending" />
@@ -116,63 +109,19 @@
 
         <!-- Sizes -->
         <StackPanel Grid.Column="1">
-
             <Label Content="Größe (EU):"
                    FontSize="14"
                    FontWeight="Bold"
                    Margin="-5.5 -10 0 -2" />
             <!-- SizeListEU -->
-            <Border Height="150"
-                    BorderThickness="0.5"
-                    BorderBrush="Black">
-                <ScrollViewer>
-                    <StackPanel>
-                        <ItemsControl ItemsSource="{Binding Source={StaticResource SortedSizesEU}}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding IsSelected}"
-                                                  Content="{Binding Name}"
-                                                  Margin="5" />
-                                        <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
-                                                 Width="46"
-                                                 Margin="5" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </ScrollViewer>
-            </Border>
+            <components:SizesEUListing Height="150"/>
 
             <Label Content="Größe (US):"
                    FontSize="14"
                    FontWeight="Bold"
                    Margin="-5.5 5 0 -2" />
             <!-- SizeListUS -->
-            <Border Height="150"
-                    BorderThickness="0.5"
-                    BorderBrush="Black">
-                <ScrollViewer>
-                    <StackPanel>
-                        <ItemsControl ItemsSource="{Binding SizesCategoriesSeasonsListingViewModel.LoadedSizesUS}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <CheckBox IsChecked="{Binding IsSelected}"
-                                                  Content="{Binding Name}"
-                                                  Margin="5"
-                                                  Width="40" />
-                                        <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged}"
-                                                 Width="46"
-                                                 Margin="5" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </StackPanel>
-                </ScrollViewer>
-            </Border>
+            <components:SizesUSListing Height="150" />
         </StackPanel>
 
         <!-- Button-Bestätigen -->
