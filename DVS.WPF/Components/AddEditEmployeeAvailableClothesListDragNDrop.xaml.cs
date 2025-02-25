@@ -1,4 +1,4 @@
-﻿using DVS.Domain.Models;
+﻿using DVS.WPF.ViewModels.ListingItems;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -63,12 +63,12 @@ namespace DVS.WPF.Components
         
         private void ClothesItemList_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Serializable) is EmployeeClothesSizeItem ecsi)
+            if (e.Data.GetData(DataFormats.Serializable) is EmployeeClothesSizeListingItemViewModel ecslivm)
             {
                 if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {
                     IncomingClothesItem = e.Data.GetData(DataFormats.Serializable);
-                    AddClothesItem(ecsi);
+                    AddClothesItem(ecslivm);
                     ClothesItemRemovedCommand?.Execute(null);
                 }
             }

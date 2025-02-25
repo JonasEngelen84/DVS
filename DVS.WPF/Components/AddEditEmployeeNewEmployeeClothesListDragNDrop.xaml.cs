@@ -63,12 +63,12 @@ namespace DVS.WPF.Components
 
         private void ClothesItemList_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Serializable) is AvailableClothesSizeItem ClothesItem)
+            if (e.Data.GetData(DataFormats.Serializable) is AvailableClothesSizeItem acsi)
             {
                 if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {
                     IncomingClothesItem = e.Data.GetData(DataFormats.Serializable);
-                    AddClothesItem(ClothesItem);
+                    AddClothesItem(acsi);
                     ClothesItemRemovedCommand?.Execute(null);
                 }
             }

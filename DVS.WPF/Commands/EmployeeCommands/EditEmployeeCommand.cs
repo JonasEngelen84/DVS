@@ -1,6 +1,7 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
+using DVS.WPF.ViewModels.ListingItems;
 using DVS.WPF.ViewModels.Views;
 using System.Collections.ObjectModel;
 
@@ -58,7 +59,7 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
         {
             foreach (EmployeeClothesSize ecs in updatedEmployee.Clothes)
             {
-                EmployeeClothesSizeItem existingItem = editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList
+                EmployeeClothesSizeListingItemViewModel existingEcslivm = editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList
                     .First(acsi => acsi.ClothesSize.GuidId == ecs.ClothesSizeGuidId);
 
                 updatedEmployee.Clothes.Remove(ecs);
@@ -78,11 +79,11 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task CreateAndAddNewEmployeeClothesSizesAsync(Employee updatedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (EmployeeClothesSizeItem ecsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                EmployeeClothesSize existingEcs = updatedEmployee.Clothes.First(ecs => ecs.ClothesSizeGuidId == ecsi.ClothesSize.GuidId);
+                EmployeeClothesSize existingEcs = updatedEmployee.Clothes.First(ecs => ecs.ClothesSizeGuidId == ecslivm.ClothesSize.GuidId);
 
-                EmployeeClothesSize newEcs = new(Guid.NewGuid(), updatedEmployee, ecsi.ClothesSize, (int)ecsi.Quantity, null);
+                EmployeeClothesSize newEcs = new(Guid.NewGuid(), updatedEmployee, ecslivm.ClothesSize, (int)ecslivm.Quantity, null);
 
                 updatedEmployee.Clothes.Add(newEcs);
                 //dclivm.ClothesSize.EmployeeClothesSizes.Add(employeeClothesSize);
@@ -101,10 +102,10 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task UpdateEmployeeClothesSizesAsync(Employee updatedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (EmployeeClothesSizeItem ecsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                EmployeeClothesSize existingEcsi = updatedEmployee.Clothes.First(ecs => ecs.ClothesSizeGuidId == ecsi.ClothesSize.GuidId);
-                EmployeeClothesSize UpdatedEmployeeClothesSize = new(existingEcsi.GuidId, updatedEmployee, ecsi.ClothesSize, (int)ecsi.Quantity, null);
+                EmployeeClothesSize existingEcsi = updatedEmployee.Clothes.First(ecs => ecs.ClothesSizeGuidId == ecslivm.ClothesSize.GuidId);
+                EmployeeClothesSize UpdatedEmployeeClothesSize = new(existingEcsi.GuidId, updatedEmployee, ecslivm.ClothesSize, (int)ecslivm.Quantity, null);
                 EmployeeClothesSize itemToRemove = updatedEmployee.Clothes.First(ecs => ecs.GuidId == UpdatedEmployeeClothesSize.GuidId);
 
                 updatedEmployee.Clothes.Remove(itemToRemove);
@@ -142,16 +143,16 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task UpdateClothesSizeAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (EmployeeClothesSizeItem ecsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                ClothesSize csToRemove = ecsi.ClothesSize.Clothes.Sizes.First(cs => cs.GuidId == ecsi.ClothesSize.GuidId);
+                ClothesSize csToRemove = ecslivm.ClothesSize.Clothes.Sizes.First(cs => cs.GuidId == ecslivm.ClothesSize.GuidId);
 
-                ecsi.ClothesSize.Clothes.Sizes.Remove(csToRemove);
-                ecsi.ClothesSize.Clothes.Sizes.Add(ecsi.ClothesSize);
+                ecslivm.ClothesSize.Clothes.Sizes.Remove(csToRemove);
+                ecslivm.ClothesSize.Clothes.Sizes.Add(ecslivm.ClothesSize);
 
                 try
                 {
-                    await clothesSizeStore.Update(ecsi.ClothesSize);
+                    await clothesSizeStore.Update(ecslivm.ClothesSize);
                 }
                 catch (Exception)
                 {
@@ -163,27 +164,27 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task UpdateClothesAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (EmployeeClothesSizeItem ecsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                Clothes ClothesToRemove = ecsi.ClothesSize.Clothes.Category.Clothes.First(c => c.Id == ecsi.ClothesSize.Clothes.Id);
+                Clothes ClothesToRemove = ecslivm.ClothesSize.Clothes.Category.Clothes.First(c => c.Id == ecslivm.ClothesSize.Clothes.Id);
 
                 if (ClothesToRemove != null)
                 {
-                    ecsi.ClothesSize.Clothes.Category.Clothes.Remove(ClothesToRemove);
-                    ecsi.ClothesSize.Clothes.Category.Clothes.Add(ecsi.ClothesSize.Clothes);
+                    ecslivm.ClothesSize.Clothes.Category.Clothes.Remove(ClothesToRemove);
+                    ecslivm.ClothesSize.Clothes.Category.Clothes.Add(ecslivm.ClothesSize.Clothes);
                 }
 
-                ClothesToRemove = ecsi.ClothesSize.Clothes.Season.Clothes.FirstOrDefault(c => c.Id == ecsi.ClothesSize.Clothes.Id);
+                ClothesToRemove = ecslivm.ClothesSize.Clothes.Season.Clothes.FirstOrDefault(c => c.Id == ecslivm.ClothesSize.Clothes.Id);
 
                 if (ClothesToRemove != null)
                 {
-                    ecsi.ClothesSize.Clothes.Season.Clothes.Remove(ClothesToRemove);
-                    ecsi.ClothesSize.Clothes.Season.Clothes.Add(ecsi.ClothesSize.Clothes);
+                    ecslivm.ClothesSize.Clothes.Season.Clothes.Remove(ClothesToRemove);
+                    ecslivm.ClothesSize.Clothes.Season.Clothes.Add(ecslivm.ClothesSize.Clothes);
                 }
 
                 try
                 {
-                    await clothesStore.Update(ecsi.ClothesSize.Clothes);
+                    await clothesStore.Update(ecslivm.ClothesSize.Clothes);
                 }
                 catch (Exception)
                 {
@@ -195,11 +196,11 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task UpdateCategoryAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (EmployeeClothesSizeItem acsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 try
                 {
-                    await categoryStore.Update(acsi.ClothesSize.Clothes.Category, null);
+                    await categoryStore.Update(ecslivm.ClothesSize.Clothes.Category, null);
                 }
                 catch (Exception)
                 {
@@ -211,11 +212,11 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private async Task UpdateSeasonAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            foreach (EmployeeClothesSizeItem ecsi in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 try
                 {
-                    await seasonStore.Update(ecsi.ClothesSize.Clothes.Season, null);
+                    await seasonStore.Update(ecslivm.ClothesSize.Clothes.Season, null);
                 }
                 catch (Exception)
                 {

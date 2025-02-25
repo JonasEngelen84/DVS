@@ -1,6 +1,6 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
-using DVS.WPF.ViewModels;
+using DVS.WPF.ViewModels.ListingItems;
 using System.Windows;
 
 namespace DVS.WPF.Commands.EmployeeCommands

@@ -1,4 +1,4 @@
-﻿using DVS.WPF.ViewModels;
+﻿using DVS.WPF.ViewModels.ListingItems;
 using System.Windows.Controls;
 using System.Windows.Input;
 

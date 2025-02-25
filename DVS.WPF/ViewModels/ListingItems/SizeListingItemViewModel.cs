@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace DVS.WPF.ViewModels
+﻿namespace DVS.WPF.ViewModels.ListingItems
 {
     public class SizeListingItemViewModel(string size) : ViewModelBase
     {

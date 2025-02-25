@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DVS.WPF.Commands.EmployeeCommands;
 
-namespace DVS.WPF.ViewModels
+namespace DVS.WPF.ViewModels.ListingItems
 {
     public class EmployeeListingItemViewModel : ModelBase
     {

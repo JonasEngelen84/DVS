@@ -2,6 +2,7 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
+using DVS.WPF.ViewModels.ListingItems;
 using DVS.WPF.ViewModels.Views;
 
 namespace DVS.WPF.Commands.AddEditEmployeeCommands
@@ -70,9 +71,9 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
         private static void CreateEmployeeClothesSizes(Employee newEmployee, AddEmployeeFormViewModel addEmployeeFormViewModel)
         {
-            foreach (EmployeeClothesSizeItem ecsi in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), newEmployee, ecsi.ClothesSize, (int)ecsi.Quantity, "");
+                EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), newEmployee, ecslivm.ClothesSize, (int)ecslivm.Quantity, "");
                 newEmployee.Clothes.Add(employeeClothesSize);
             }
         }
@@ -101,13 +102,13 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
 
                 if (existingClothesSize != null)
                 {
-                    AvailableClothesSizeItem? targetItem = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.AvailableClothesSizes
+                    AvailableClothesSizeItem? existingAcsi = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.AvailableClothesSizes
                         .FirstOrDefault(acsi => acsi.ClothesSize.GuidId == existingClothesSize.GuidId);
 
                     ClothesSize editedClothesSize = new(existingClothesSize.GuidId,
                                                         existingClothesSize.Clothes,
                                                         existingClothesSize.Size,
-                                                        targetItem.Quantity,
+                                                        existingAcsi.Quantity,
                                                         existingClothesSize.Comment)
                     {
                         EmployeeClothesSizes = []

@@ -1,11 +1,11 @@
-﻿using DVS.Domain.Models;
-using DVS.WPF.ViewModels;
+﻿using DVS.WPF.ViewModels;
+using DVS.WPF.ViewModels.ListingItems;
 
 namespace DVS.WPF.Commands.DragNDropCommands
 {
     public class RemovedNewEmployeeClothesListCommand(
         AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
-        Action<EmployeeClothesSizeItem> removeItemFromEmployeeClothesList)
+        Action<EmployeeClothesSizeListingItemViewModel> removeItemFromEmployeeClothesList)
         : CommandBase
     {
         public override void Execute(object parameter)

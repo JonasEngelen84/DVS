@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DVS.WPF.Commands.ClothesCommands;
 
-namespace DVS.WPF.ViewModels
+namespace DVS.WPF.ViewModels.ListingItems
 {
-    public class ClothesListingItemViewModel : ModelBase
+    public class ClothesListingItemViewModel : ViewModelBase
     {
         public Clothes Clothes { get; private set; }
         public string Id => Clothes.Id;

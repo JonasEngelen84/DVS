@@ -1,6 +1,7 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
+using DVS.WPF.ViewModels.ListingItems;
 using System.Collections.ObjectModel;
 
 namespace DVS.WPF.ViewModels
