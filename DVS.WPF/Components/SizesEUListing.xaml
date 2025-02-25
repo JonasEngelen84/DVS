@@ -28,13 +28,6 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid.OpacityMask>
-                <VisualBrush Visual="{Binding ElementName=border}" />
-            </Grid.OpacityMask>
-            <Border x:Name="border"
-                    Background="White"
-                    CornerRadius="5" />
-
             <!-- Header -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -49,9 +42,10 @@
             </Grid>
 
             <!-- List -->
-            <ListView Grid.Row="1"
+            <ListView ItemsSource="{Binding LoadedSizesEU}"
+                      Grid.Row="1"
                       BorderThickness="0"
-                      ItemsSource="{Binding LoadedSizesEU}"
+                      Background="Transparent"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
                     <DataTemplate>

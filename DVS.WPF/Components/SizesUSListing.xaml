@@ -18,13 +18,6 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid.OpacityMask>
-                <VisualBrush Visual="{Binding ElementName=border}" />
-            </Grid.OpacityMask>            
-            <Border x:Name="border"
-                    Background="White"
-                    CornerRadius="5" />
-
             <!-- Header -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -38,10 +31,11 @@
                 <TextBlock Grid.Column="2" Text="Kommentar" FontWeight="Bold" Margin="16 0 0 0" />
             </Grid>
 
-            <!-- List -->
-            <ListView Grid.Row="1"
+            <!-- LoadedSizesUS -->
+            <ListView ItemsSource="{Binding LoadedSizesUS}"
+                      Grid.Row="1"                      
                       BorderThickness="0"
-                      ItemsSource="{Binding LoadedSizesUS}"
+                      Background="Transparent"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemTemplate>
                     <DataTemplate>
