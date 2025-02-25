@@ -64,7 +64,7 @@
             <!-- ComboBox-Categorie and Button-Edit  -->
             <StackPanel Orientation="Horizontal">
 
-                <ComboBox Height="23"
+                <ComboBox Height="25"
                           FontSize="14"
                           Width="209"
                           FontWeight="DemiBold"
@@ -89,7 +89,7 @@
             <StackPanel Orientation="Horizontal"
                         Margin="0 0 0 3">
 
-                <ComboBox Height="23"
+                <ComboBox Height="25"
                           FontSize="14"
                           Width="209"
                           FontWeight="DemiBold"
