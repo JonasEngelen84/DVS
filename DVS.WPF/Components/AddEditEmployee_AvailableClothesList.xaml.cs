@@ -5,10 +5,10 @@ using System.Windows.Input;
 
 namespace DVS.WPF.Components
 {
-    public partial class AddEditEmployeeAvailableClothesListDragNDrop : UserControl
+    public partial class AddEditEmployee_AvailableClothesList : UserControl
     {
         public static readonly DependencyProperty IncomingClothesItemProperty =
-            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployeeAvailableClothesListDragNDrop),
+            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployee_AvailableClothesList),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object IncomingClothesItem
@@ -18,7 +18,7 @@ namespace DVS.WPF.Components
         }
 
         public static readonly DependencyProperty ClothesItemDropCommandProperty =
-            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployeeAvailableClothesListDragNDrop),
+            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployee_AvailableClothesList),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemDropCommand
@@ -28,7 +28,7 @@ namespace DVS.WPF.Components
         }
 
         public static readonly DependencyProperty ClothesItemRemovedCommandProperty =
-            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployeeAvailableClothesListDragNDrop),
+            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployee_AvailableClothesList),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemRemovedCommand
@@ -38,7 +38,7 @@ namespace DVS.WPF.Components
         }
 
 
-        public AddEditEmployeeAvailableClothesListDragNDrop()
+        public AddEditEmployee_AvailableClothesList()
         {
             InitializeComponent();
         }
@@ -63,11 +63,11 @@ namespace DVS.WPF.Components
         
         private void ClothesItemList_Drop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Serializable) is EmployeeClothesSizeListingItemViewModel ecslivm)
+            if (e.Data.GetData("EmployeeClothesSize") is EmployeeClothesSizeListingItemViewModel ecslivm)
             {
                 if (ClothesItemRemovedCommand?.CanExecute(null) ?? false)
                 {
-                    IncomingClothesItem = e.Data.GetData(DataFormats.Serializable);
+                    IncomingClothesItem = ecslivm;
                     AddClothesItem(ecslivm);
                     ClothesItemRemovedCommand?.Execute(null);
                 }

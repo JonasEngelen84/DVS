@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace DVS.WPF.Components
+namespace DVS.WPF.Components.ListingItems
 {
-    public partial class EmployeeListingItem : UserControl
+    public partial class ClothesListingItem : UserControl
     {
-        public EmployeeListingItem()
+        public ClothesListingItem()
         {
             InitializeComponent();
         }
@@ -13,6 +13,6 @@ namespace DVS.WPF.Components
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             dropdown.IsOpen = false;
-        }
+        } 
     }
 }

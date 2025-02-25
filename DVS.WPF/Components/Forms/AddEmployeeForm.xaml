@@ -56,13 +56,11 @@
                    Margin="-5 0 0 -3"
                    FontSize="14"
                    FontWeight="Bold" />
-
             <!--EmployeeClothesList-->
-            <components:AddEditEmployeeNewEmployeeClothesListDragNDrop Foreground="Black"
-                                                                       Background="WhiteSmoke"
-                                                                       IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
-                                                                       ClothesItemDropCommand="{Binding ClothesItemReceivedNewEmployeeClothesListCommand}"
-                                                                       ClothesItemRemovedCommand="{Binding ClothesItemRemovedAvailableClothesListCommand}" />
+            <components:AddEditEmployee_EmployeeClothesList Foreground="Black"
+                                                            IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
+                                                            ClothesItemDropCommand="{Binding ClothesItemReceivedNewEmployeeClothesListCommand}"
+                                                            ClothesItemRemovedCommand="{Binding ClothesItemRemovedAvailableClothesListCommand}" />
         </StackPanel>
 
         <!--AvailableClothesList-->
@@ -71,16 +69,15 @@
                    Margin="-5 -10 0 -3"
                    FontSize="14"
                    FontWeight="Bold" />
-            <components:AddEditEmployeeAvailableClothesListDragNDrop Foreground="Black"
-                                                                     Background="WhiteSmoke"
-                                                                     IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
-                                                                     ClothesItemDropCommand="{Binding ClothesItemReceivedAvailableClothesListCommand}"
-                                                                     ClothesItemRemovedCommand="{Binding ClothesItemRemovedNewEmployeeClothesListCommand}" />
+            <components:AddEditEmployee_AvailableClothesList Foreground="Black"
+                                                             IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
+                                                             ClothesItemDropCommand="{Binding ClothesItemReceivedAvailableClothesListCommand}"
+                                                             ClothesItemRemovedCommand="{Binding ClothesItemRemovedNewEmployeeClothesListCommand}" />
         </StackPanel>
 
         <!-- Button_Bestätigen -->
-        <Button Grid.ColumnSpan="2"
-                Content="BESTÄTIGEN"
+        <Button Content="BESTÄTIGEN"
+                Grid.ColumnSpan="2"                
                 Margin="0 430 0 0"
                 Style="{StaticResource ModalButtonStyle}"
                 Command="{Binding SubmitEmployee}"

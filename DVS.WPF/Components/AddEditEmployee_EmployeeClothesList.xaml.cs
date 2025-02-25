@@ -5,10 +5,10 @@ using System.Windows.Input;
 
 namespace DVS.WPF.Components
 {
-    public partial class AddEditEmployeeNewEmployeeClothesListDragNDrop : UserControl
+    public partial class AddEditEmployee_EmployeeClothesList : UserControl
     {
         public static readonly DependencyProperty IncomingClothesItemProperty =
-            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployeeNewEmployeeClothesListDragNDrop),
+            DependencyProperty.Register("IncomingClothesItem", typeof(object), typeof(AddEditEmployee_EmployeeClothesList),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public object IncomingClothesItem
@@ -18,7 +18,7 @@ namespace DVS.WPF.Components
         }
 
         public static readonly DependencyProperty ClothesItemDropCommandProperty =
-            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployeeNewEmployeeClothesListDragNDrop),
+            DependencyProperty.Register("ClothesItemDropCommand", typeof(ICommand), typeof(AddEditEmployee_EmployeeClothesList),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemDropCommand
@@ -28,7 +28,7 @@ namespace DVS.WPF.Components
         }
 
         public static readonly DependencyProperty ClothesItemRemovedCommandProperty =
-            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployeeNewEmployeeClothesListDragNDrop),
+            DependencyProperty.Register("ClothesItemRemovedCommand", typeof(ICommand), typeof(AddEditEmployee_EmployeeClothesList),
                 new PropertyMetadata(null));
 
         public ICommand ClothesItemRemovedCommand
@@ -38,7 +38,7 @@ namespace DVS.WPF.Components
         }
 
 
-        public AddEditEmployeeNewEmployeeClothesListDragNDrop()
+        public AddEditEmployee_EmployeeClothesList()
         {
             InitializeComponent();
         }

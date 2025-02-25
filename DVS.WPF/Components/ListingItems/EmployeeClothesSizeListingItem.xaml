@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="DVS.WPF.Components.ListingItems.EmployeeClothesSizeListingItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             MouseMove="EmployeeClothesSizeListingItem_MouseMove">
+
+    <StackPanel Orientation="Horizontal">
+        <Label Content="{Binding ClothesId}"
+               Width="45"
+               Margin="-6 0 0 0"
+               FontSize="11"
+               VerticalAlignment="Center" />
+
+        <Label Content="{Binding ClothesName}"
+               Width="80"
+               Margin="0"
+               FontSize="11"
+               VerticalAlignment="Center" />
+
+        <Label Content="{Binding Size}"
+               Width="28"
+               FontSize="11"
+               VerticalAlignment="Center" />
+
+        <Label Content="{Binding Quantity}"
+               Width="25"
+               FontSize="11"
+               VerticalAlignment="Center" />
+
+        <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+                 Margin="10 0 0 0"
+                 Width="77"
+                 Height="20"
+                 VerticalAlignment="Center" />
+    </StackPanel>
+</UserControl>

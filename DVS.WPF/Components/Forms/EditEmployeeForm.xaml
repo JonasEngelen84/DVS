@@ -57,7 +57,7 @@
                    FontSize="14"
                    FontWeight="Bold" />
             <!--EmployeeClothesList-->
-            <components:AddEditEmployeeNewEmployeeClothesListDragNDrop Foreground="Black"
+            <components:AddEditEmployee_EmployeeClothesList Foreground="Black"
                                                                        Background="WhiteSmoke"
                                                                        IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
                                                                        ClothesItemDropCommand="{Binding ClothesItemReceivedNewEmployeeClothesListCommand}"
@@ -70,7 +70,7 @@
                    Margin="-5 -10 0 -3"
                    FontSize="14"
                    FontWeight="Bold" />
-            <components:AddEditEmployeeAvailableClothesListDragNDrop Foreground="Black"
+            <components:AddEditEmployee_AvailableClothesList Foreground="Black"
                                                                      Background="WhiteSmoke"
                                                                      IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
                                                                      ClothesItemDropCommand="{Binding ClothesItemReceivedAvailableClothesListCommand}"

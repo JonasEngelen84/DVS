@@ -2,21 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DVS.WPF.Components"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DVS.WPF.Components.ListingItems"
              xmlns:componentmodel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d"
              DataContext="{Binding SizesCategoriesSeasonsListingViewModel}">
-
-    <UserControl.Resources>
-        <CollectionViewSource x:Key="SortedLoadedSizesEU"
-                              Source="{Binding LoadedSizesEU}">
-            <CollectionViewSource.SortDescriptions>
-                <componentmodel:SortDescription PropertyName="Size"
-                                                Direction="Ascending" />
-            </CollectionViewSource.SortDescriptions>
-        </CollectionViewSource>
-    </UserControl.Resources>
 
     <Border BorderBrush="#1c1c1c"
             BorderThickness="0.75"

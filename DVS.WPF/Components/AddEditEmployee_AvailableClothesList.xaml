@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DVS.WPF.Components.AddEditEmployeeNewEmployeeClothesListDragNDrop"
+﻿<UserControl x:Class="DVS.WPF.Components.AddEditEmployee_AvailableClothesList"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,8 +8,8 @@
              DataContext="{Binding AddEditEmployeeListingViewModel}">
 
     <UserControl.Resources>
-        <CollectionViewSource x:Key="SortedEmployeeClothesList"
-                              Source="{Binding EmployeeClothesList}">
+        <CollectionViewSource x:Key="SortedAvailableClothesSizes"
+                              Source="{Binding AvailableClothesSizes}">
             <CollectionViewSource.SortDescriptions>
                 <componentmodel:SortDescription PropertyName="ClothesId"
                                                 Direction="Ascending" />
@@ -19,14 +19,14 @@
         </CollectionViewSource>
     </UserControl.Resources>
 
-    <ListView Height="200"
+    <ListView Height="394"
               FontSize="12"
               Foreground="Black"
               Background="WhiteSmoke"
               AllowDrop="True"
               Drop="ClothesItemList_Drop"
-              ItemsSource="{Binding Source={StaticResource SortedEmployeeClothesList}}"
-              SelectedItem="{Binding SelectedEmployeeClothesSizeItem}">
+              ItemsSource="{Binding Source={StaticResource SortedAvailableClothesSizes}}"
+              SelectedItem="{Binding SelectedAvailableClothesSizeItem}">
 
         <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
@@ -45,9 +45,12 @@
                 <GridViewColumn Header="Größe"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Size}" />
-                <GridViewColumn Header="Menge"
+                <GridViewColumn Header="Gelagert"
                                 Width="auto"
                                 DisplayMemberBinding="{Binding Quantity}" />
+                <GridViewColumn Header="Kommentar"
+                                Width="auto"
+                                DisplayMemberBinding="{Binding Comment}" />
             </GridView>
         </ListView.View>
     </ListView>
