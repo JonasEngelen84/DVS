@@ -46,7 +46,7 @@ namespace DVS.WPF.ViewModels.Forms
             }
         }
 
-        private string _comment;
+        private string _comment = "";
         public string Comment
         {
             get => _comment;
