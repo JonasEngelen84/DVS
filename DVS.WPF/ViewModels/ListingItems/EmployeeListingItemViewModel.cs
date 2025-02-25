@@ -1,15 +1,15 @@
 ﻿using DVS.Domain.Models;
+using DVS.WPF.Commands.EmployeeCommands;
 using DVS.WPF.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using DVS.WPF.Commands.EmployeeCommands;
 
 namespace DVS.WPF.ViewModels.ListingItems
 {
     public class EmployeeListingItemViewModel : ModelBase
     {
         public Employee Employee { get; private set; }
-        public string ID => Employee.Id;
+        public string Id => Employee.Id;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
         public string? Comment => Employee.Comment;
@@ -102,7 +102,7 @@ namespace DVS.WPF.ViewModels.ListingItems
         {
             Employee = employee;
 
-            OnPropertyChanged(nameof(ID));
+            OnPropertyChanged(nameof(Id));
             OnPropertyChanged(nameof(Lastname));
             OnPropertyChanged(nameof(Firstname));
             OnPropertyChanged(nameof(Comment));

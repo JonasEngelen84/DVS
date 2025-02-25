@@ -14,6 +14,8 @@
             <CollectionViewSource.SortDescriptions>
                 <componentmodel:SortDescription PropertyName="ClothesSize.ClothesId"
                                                 Direction="Ascending" />
+                <componentmodel:SortDescription PropertyName="ClothesSize.Size"
+                                                Direction="Ascending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
@@ -49,7 +51,7 @@
                            Foreground="DarkGray"
                            TextWrapping="WrapWithOverflow"/>
 
-                <TextBlock Text="{Binding ID}"
+                <TextBlock Text="{Binding Id}"
                            Grid.Column="2"
                            Margin="10 0 0 0"
                            HorizontalAlignment="Stretch" />
@@ -67,10 +69,10 @@
             <!-- Header -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="110" />
-                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="55" />
                     <ColumnDefinition Width="*" />
@@ -92,12 +94,12 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="85" />
-                                <ColumnDefinition Width="100" />
-                                <ColumnDefinition Width="110" />
-                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="55" />
+                                <ColumnDefinition Width="90" />
+                                <ColumnDefinition Width="90" />
+                                <ColumnDefinition Width="80" />
                                 <ColumnDefinition Width="50" />
-                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="55" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
