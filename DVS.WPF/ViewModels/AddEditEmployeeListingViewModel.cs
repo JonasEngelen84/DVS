@@ -61,16 +61,11 @@ namespace DVS.WPF.ViewModels
             ClothesItemRemovedAvailableClothesListCommand = new RemovedAvailableClothesListCommand(
                 this,
                 AddEditedClothesSizesList,
-                RemoveEditedClothesSizesList,
-                AddEditedClothesList,
-                RemoveEditedClothesList);
+                AddEditedClothesList);
             ClothesItemReceivedAvailableClothesListCommand = new ReceivedAvailableClothesListCommand(
                 this,
-                AddItemToAvailableSizes,
                 AddEditedClothesSizesList,
-                RemoveEditedClothesSizesList,
-                AddEditedClothesList,
-                RemoveEditedClothesList);
+                AddEditedClothesList);
 
             LoadAvailableSizes();
             LoadEmployeeClothes(employee);

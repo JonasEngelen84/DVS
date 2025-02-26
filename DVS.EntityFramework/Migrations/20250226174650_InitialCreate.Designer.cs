@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DVS.EntityFramework.Migrations
 {
     [DbContext(typeof(DVSDbContext))]
-    [Migration("20250219235938_InitialCreate")]
+    [Migration("20250226174650_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -38,47 +38,47 @@ namespace DVS.EntityFramework.Migrations
                     b.HasData(
                         new
                         {
-                            GuidId = new Guid("6cef334b-ef29-476a-af52-f01c4ee53328"),
+                            GuidId = new Guid("3ae08c4d-5ed8-49d6-ba47-70905656a8da"),
                             Name = "-Kategorielos-"
                         },
                         new
                         {
-                            GuidId = new Guid("056bb78e-e6a1-4ddb-b80a-64d39b0d3eaf"),
+                            GuidId = new Guid("81097732-b772-409f-b6e5-0ad86d09d358"),
                             Name = "Handschuhe"
                         },
                         new
                         {
-                            GuidId = new Guid("4c11ad04-ee91-4aa9-b531-ff287699b929"),
+                            GuidId = new Guid("e0e4a0f6-74a2-4a0b-8cc1-7af467171152"),
                             Name = "Hemd"
                         },
                         new
                         {
-                            GuidId = new Guid("2bf22fe1-df90-405a-b981-c5d643e0e1ac"),
+                            GuidId = new Guid("b885bd14-18ce-47a2-93bd-a4299c954775"),
                             Name = "Hose"
                         },
                         new
                         {
-                            GuidId = new Guid("c16f4c8c-9de8-4251-ac68-626356c5a281"),
+                            GuidId = new Guid("431a00b1-cb40-4bb2-a934-fdc2b43b7fb7"),
                             Name = "Jacke"
                         },
                         new
                         {
-                            GuidId = new Guid("fcab1d1d-d5ed-4b6a-9e31-e6c10158e8f6"),
+                            GuidId = new Guid("626071a5-4159-42b1-8045-ac7341b8ffc5"),
                             Name = "Kopfbedeckung"
                         },
                         new
                         {
-                            GuidId = new Guid("a197e74c-b23d-4a23-978d-daddee378041"),
+                            GuidId = new Guid("5ac22e71-afe3-4628-9fd2-9d96c9b82c14"),
                             Name = "Pullover"
                         },
                         new
                         {
-                            GuidId = new Guid("36abcba5-aaa1-4abc-81c3-437039a3f11f"),
+                            GuidId = new Guid("04c7f227-8d8f-4a77-ae33-b48da6dee758"),
                             Name = "Schuhwerk"
                         },
                         new
                         {
-                            GuidId = new Guid("e1204550-9844-4c0c-94d7-f7099d458cf9"),
+                            GuidId = new Guid("d3a824a4-1dfc-4a76-bc8c-00cca56366b1"),
                             Name = "Shirt"
                         });
                 });
@@ -215,17 +215,17 @@ namespace DVS.EntityFramework.Migrations
                     b.HasData(
                         new
                         {
-                            GuidId = new Guid("055944f9-d66f-4c42-9549-ed3dd2276654"),
+                            GuidId = new Guid("6d3542f1-fdf0-488d-949d-33d5d7ea02c6"),
                             Name = "-Saisonlos-"
                         },
                         new
                         {
-                            GuidId = new Guid("875eeda6-4203-42c0-9bae-59908e7d1d06"),
+                            GuidId = new Guid("c698e58e-92f7-4556-b3c9-82af6e461a29"),
                             Name = "Sommer"
                         },
                         new
                         {
-                            GuidId = new Guid("b439d5cf-4c48-4464-9662-847f1380d8a4"),
+                            GuidId = new Guid("de7030ed-37fc-4136-8b23-2c3824fb4814"),
                             Name = "Winter"
                         });
                 });

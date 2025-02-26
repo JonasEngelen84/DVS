@@ -14,19 +14,17 @@ namespace DVS.WPF.Commands.DragNDropCommands
             {
                 EmployeeClothesSizeListingItemViewModel? existingEcsi = addEditEmployeeListingViewModel.GetClothesSizeFrom_employeeClothesSizes();
 
-                if (existingEcsi != null)
-                    existingEcsi.Quantity += 1;
+                if (existingEcsi != null) existingEcsi.Quantity += 1;
                 else
-                    addItemToEmployeeClothesList?.Invoke(CreateNewEcsi(addEditEmployeeListingViewModel));
-            }
-        }
+                {
+                   EmployeeClothesSizeListingItemViewModel newEcslivm = new(addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesSize)
+                    {
+                        Quantity = 1
+                    };
 
-        private static EmployeeClothesSizeListingItemViewModel CreateNewEcsi(AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel)
-        {
-            return new EmployeeClothesSizeListingItemViewModel(_addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesSize)
-            {
-                Quantity = 1
-            };
+                    addItemToEmployeeClothesList?.Invoke(newEcslivm);
+                }
+            }
         }
     }
 }
