@@ -46,7 +46,6 @@ namespace DVS.WPF.ViewModels
         private readonly EmployeeClothesSizeStore _employeeClothesSizeStore;
         private readonly SelectedClothesSizeStore _selectedClothesSizeStore;
         private readonly SelectedEmployeeClothesSizeStore _selectedEmployeeClothesSizeStore;
-        private readonly AddEditEmployeeListingViewModel _addEditEmployeeListingViewModel;
 
         public DVSListingViewModel(
             ClothesStore clothesStore,
@@ -57,8 +56,7 @@ namespace DVS.WPF.ViewModels
             ClothesSizeStore clothesSizeStore,
             EmployeeClothesSizeStore employeeClothesSizesStore,
             SelectedClothesSizeStore selectedClothesSizeStore,
-            SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
-            AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
+            SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore)
         {
             _clothesStore = clothesStore;
             _employeeStore = employeeStore;
@@ -69,7 +67,6 @@ namespace DVS.WPF.ViewModels
             _employeeClothesSizeStore = employeeClothesSizesStore;
             _selectedClothesSizeStore = selectedClothesSizeStore;
             _selectedEmployeeClothesSizeStore = selectedEmployeeClothesSizeStore;
-            _addEditEmployeeListingViewModel = addEditEmployeeListingViewModel;
 
             _clothesStore.ClothesAdded += ClothesStore_ClothesAdded;
             _clothesStore.ClothesUpdated += ClothesStore_ClothesUpdated;
@@ -197,7 +194,6 @@ namespace DVS.WPF.ViewModels
                 newEmployee,
                 this,
                 _modalNavigationStore,
-                _addEditEmployeeListingViewModel,
                 _employeeStore,
                 _clothesStore,
                 _categoryStore,

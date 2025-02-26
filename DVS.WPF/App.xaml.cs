@@ -61,7 +61,6 @@ namespace DVS.WPF
                     services.AddSingleton<DVSHeadViewModel>();
                     services.AddSingleton<DVSSizeViewModel>();
                     services.AddSingleton<DVSListingViewModel>();
-                    services.AddSingleton<AddEditEmployeeListingViewModel>();
 
                     services.AddSingleton<ModalNavigationStore>();
                     services.AddSingleton<SelectedClothesSizeStore>();

@@ -7,7 +7,6 @@ namespace DVS.WPF.ViewModels.Views
 {
     public class DVSHeadViewModel(
         DVSListingViewModel dVSListingViewModel,
-        AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
         ModalNavigationStore modalNavigationStore,
         CategoryStore categoryStore,
         SeasonStore seasonStore,
@@ -20,7 +19,6 @@ namespace DVS.WPF.ViewModels.Views
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
 
         public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(
-            addEditEmployeeListingViewModel,
             employeeStore,
             clothesStore,
             clothesSizeStore,

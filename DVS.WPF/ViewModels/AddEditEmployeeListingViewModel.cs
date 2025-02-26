@@ -52,7 +52,7 @@ namespace DVS.WPF.ViewModels
         public ICommand ClothesItemRemovedAvailableClothesListCommand { get; }
 
 
-        public AddEditEmployeeListingViewModel(ClothesSizeStore clothesSizeStore)
+        public AddEditEmployeeListingViewModel(Employee? employee, ClothesSizeStore clothesSizeStore)
         {
             _clothesSizeStore = clothesSizeStore;
 
@@ -71,6 +71,9 @@ namespace DVS.WPF.ViewModels
                 RemoveEditedClothesSizesList,
                 AddEditedClothesList,
                 RemoveEditedClothesList);
+
+            LoadAvailableSizes();
+            LoadEmployeeClothes(employee);
         }
 
 

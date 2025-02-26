@@ -5,7 +5,6 @@ using DVS.WPF.ViewModels.Views;
 namespace DVS.WPF.Commands.EmployeeCommands
 {
     public class OpenAddEmployeeCommand(
-        AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
         EmployeeStore employeeStore,
         ClothesStore clothesStore,
         ClothesSizeStore clothesSizeStore,
@@ -16,11 +15,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
     {
         public override void Execute(object parameter)
         {
-            addEditEmployeeListingViewModel.LoadAvailableSizes();
-            addEditEmployeeListingViewModel.LoadEmployeeClothes(null);
-
             AddEmployeeViewModel addEmployeeViewModel = new(
-                addEditEmployeeListingViewModel,
                 employeeStore,
                 clothesStore,
                 clothesSizeStore,

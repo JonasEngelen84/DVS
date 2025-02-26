@@ -17,8 +17,7 @@ namespace DVS.WPF.ViewModels.Views
         EmployeeClothesSizeStore employeeClothesSizesStore,
         EmployeeStore employeeStore,
         SelectedClothesSizeStore selectedClothesSizeStore,
-        SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
-        AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
+        SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore)
         : ViewModelBase
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
@@ -32,7 +31,6 @@ namespace DVS.WPF.ViewModels.Views
             clothesStore,
             clothesSizeStore,
             employeeClothesSizesStore);
-
         public ICommand Minus { get; } = new MinusCommand(
             selectedClothesSizeStore,
             selectedEmployeeClothesSizeStore,
@@ -40,7 +38,6 @@ namespace DVS.WPF.ViewModels.Views
             clothesStore,
             clothesSizeStore,
             employeeClothesSizesStore);
-
         public ICommand OpenComment { get; } = new OpenCommentCommand(
             selectedClothesSizeStore,
             selectedEmployeeClothesSizeStore,
@@ -52,7 +49,6 @@ namespace DVS.WPF.ViewModels.Views
             clothesSizeStore,
             employeeClothesSizesStore,
             dVSListingViewModel);
-
         public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(
             modalNavigationStore,
             categoryStore,
@@ -62,21 +58,17 @@ namespace DVS.WPF.ViewModels.Views
             employeeClothesSizesStore,
             employeeStore,
             dVSListingViewModel);
-
         public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(
-            addEditEmployeeListingViewModel,
             employeeStore,
             clothesStore,
             clothesSizeStore,
             employeeClothesSizesStore,
             modalNavigationStore,
             dVSListingViewModel);
-
         public ICommand OpenEditDetailedItem { get; } = new OpenEditEmployeeOrClothesCommand(
             selectedClothesSizeStore,
             selectedEmployeeClothesSizeStore,
             modalNavigationStore,
-            addEditEmployeeListingViewModel,
             clothesStore,
             employeeStore,
             dVSListingViewModel,

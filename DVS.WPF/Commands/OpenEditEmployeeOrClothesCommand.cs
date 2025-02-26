@@ -9,7 +9,6 @@ namespace DVS.WPF.Commands
         SelectedClothesSizeStore selectedClothesSizeStore,
         SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
         ModalNavigationStore modalNavigationStore,
-        AddEditEmployeeListingViewModel addEditEmployeeListingViewModel,
         ClothesStore clothesStore,
         EmployeeStore employeeStore,
         DVSListingViewModel dVSListingViewModel,
@@ -46,15 +45,14 @@ namespace DVS.WPF.Commands
                     seasonStore,
                     clothesSizeStore,
                     employeeClothesSizesStore,
-                    modalNavigationStore,
-                    addEditEmployeeListingViewModel);
+                    modalNavigationStore);
 
                 modalNavigationStore.CurrentViewModel = EditEmployeeViewModel;
             }
             else
             {
                 string messageBoxText = "Bitte das gewünschte Element auswählen.";
-                string caption = "Bearbeiten";
+                string caption = "Objekt Bearbeiten";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Warning;
                 _ = MessageBox.Show(messageBoxText, caption, button, icon);

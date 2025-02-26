@@ -1,5 +1,4 @@
-﻿using DVS.Domain.Models;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Forms
 {
@@ -71,6 +70,21 @@ namespace DVS.WPF.ViewModels.Forms
             }
         }
 
+        public bool CanSubmit
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Id) || Id == "Id" ||
+                    string.IsNullOrEmpty(Lastname) || Lastname == "Nachname" ||
+                    string.IsNullOrEmpty(Firstname) || Firstname == "Vorname")
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
         private bool _isSubmitting;
         public bool IsSubmitting
         {
@@ -89,20 +103,5 @@ namespace DVS.WPF.ViewModels.Forms
         }
 
         public bool HasError;
-
-        public bool CanSubmit
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(Id) || Id == "Id" ||
-                    string.IsNullOrEmpty(Lastname) || Lastname == "Nachname" ||
-                    string.IsNullOrEmpty(Firstname) || Firstname == "Vorname")
-                {
-                    return false;
-                }
-
-                return true;
-            }
-        }
     }
 }

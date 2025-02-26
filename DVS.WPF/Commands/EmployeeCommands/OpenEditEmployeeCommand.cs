@@ -1,5 +1,4 @@
-﻿using DVS.Domain.Models;
-using DVS.WPF.Stores;
+﻿using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.ListingItems;
 using DVS.WPF.ViewModels.Views;
@@ -15,27 +14,20 @@ namespace DVS.WPF.Commands.EmployeeCommands
         SeasonStore seasonStore,
         ClothesSizeStore clothesSizeStore,
         EmployeeClothesSizeStore employeeClothesSizesStore,
-        DVSListingViewModel dVSListingViewModel,
-        AddEditEmployeeListingViewModel addEditEmployeeListingViewModel)
+        DVSListingViewModel dVSListingViewModel)
         : CommandBase
     {
         public override void Execute(object parameter)
         {
-            Employee employee = employeeListingItemViewModel.Employee;
-
-            addEditEmployeeListingViewModel.LoadAvailableSizes();
-            addEditEmployeeListingViewModel.LoadEmployeeClothes(employee);
-
             EditEmployeeViewModel EditEmployeeViewModel = new(
-                employee,
+                employeeListingItemViewModel.Employee,
                 employeeStore,
                 clothesStore,
                 categoryStore,
                 seasonStore,
                 clothesSizeStore,
                 employeeClothesSizesStore,
-                modalNavigationStore,
-                addEditEmployeeListingViewModel);
+                modalNavigationStore);
 
             modalNavigationStore.CurrentViewModel = EditEmployeeViewModel;
         }
