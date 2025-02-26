@@ -18,7 +18,7 @@ namespace DVS.WPF.ViewModels
         private readonly List<AvailableClothesSizeItem> _editedClothesSizesList = [];
         private readonly List<Clothes> _editedClothesList = [];
 
-        private AvailableClothesSizeItem _selectedAvailableClothesSizeItem;
+        private AvailableClothesSizeItem? _selectedAvailableClothesSizeItem;
         public AvailableClothesSizeItem SelectedAvailableClothesSizeItem
         {
             get => _selectedAvailableClothesSizeItem;
@@ -31,7 +31,7 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private EmployeeClothesSizeListingItemViewModel _selectedEmployeeClothesSizeItem;
+        private EmployeeClothesSizeListingItemViewModel? _selectedEmployeeClothesSizeItem;
         public EmployeeClothesSizeListingItemViewModel SelectedEmployeeClothesSizeItem
         {
             get => _selectedEmployeeClothesSizeItem;
@@ -103,8 +103,7 @@ namespace DVS.WPF.ViewModels
                 .FirstOrDefault(acsi => acsi.ClothesSizeId == SelectedAvailableClothesSizeItem.ClothesSizeId)
                 .ClothesSize;
         }
-        private void AddItemToAvailableSizes(AvailableClothesSizeItem acsi) => _availableClothesSizes.Add(acsi);
-
+        
         public void LoadEmployeeClothes(Employee? employee)
         {
             _employeeClothesList.Clear();
@@ -133,8 +132,7 @@ namespace DVS.WPF.ViewModels
         }
         public List<AvailableClothesSizeItem> GetAllEditedClothesSizes() { return _editedClothesSizesList; }
         private void AddEditedClothesSizesList(AvailableClothesSizeItem acsi) => _editedClothesSizesList.Add(acsi);
-        private void RemoveEditedClothesSizesList(AvailableClothesSizeItem acsi) => _editedClothesSizesList.Remove(acsi);
-
+        
         public Clothes? GetClothesFrom_editedClothesList()
         {
             var found = _editedClothesList
@@ -144,6 +142,5 @@ namespace DVS.WPF.ViewModels
         }
         public List<Clothes> GetAllEditedClothes() { return _editedClothesList; }
         private void AddEditedClothesList(Clothes clothes) => _editedClothesList.Add(clothes);
-        private void RemoveEditedClothesList(Clothes clothes) => _editedClothesList.Remove(clothes);
     }
 }

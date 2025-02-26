@@ -40,8 +40,8 @@ namespace DVS.WPF.Commands.AddEditEmployeeCommands
                 if (addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList != null)
                     CreateEmployeeClothesSizes(newEmployee, addEmployeeFormViewModel);
 
-                await AddEmployeeToDB(newEmployee, addEmployeeFormViewModel);
                 await UpdateClothesSizes(addEmployeeFormViewModel);
+                await AddEmployeeToDB(newEmployee, addEmployeeFormViewModel);
 
                 addEmployeeFormViewModel.IsSubmitting = false;
                 _modalNavigationStore.Close();

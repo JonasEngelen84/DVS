@@ -10,7 +10,12 @@
         public Employee Employee { get; private set; }
         public ClothesSize ClothesSize { get; private set; }
 
-        public EmployeeClothesSize(Guid guidId, Employee employee, ClothesSize clothesSize, int quantity, string comment)
+        public EmployeeClothesSize(
+            Guid guidId,
+            Employee employee,
+            ClothesSize clothesSize,
+            int quantity,
+            string comment)
         {
             GuidId = guidId;
             Employee = employee;

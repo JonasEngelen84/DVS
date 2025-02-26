@@ -14,7 +14,12 @@ namespace DVS.Domain.Models
 
         public ObservableCollection<ClothesSize> Sizes { get; set; }
 
-        public Clothes(string id, string name, Category category, Season season, string comment)
+        public Clothes(
+            string id,
+            string name,
+            Category category,
+            Season season,
+            string comment)
         {
             Season = season;
             Category = category;

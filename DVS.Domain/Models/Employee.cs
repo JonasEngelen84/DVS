@@ -11,7 +11,11 @@ namespace DVS.Domain.Models
 
         public ObservableCollection<EmployeeClothesSize> Clothes { get; set; }
 
-        public Employee(string id, string lastname, string firstname, string comment)
+        public Employee(
+            string id,
+            string lastname,
+            string firstname,
+            string comment)
         {
             Id = id;
             Lastname = lastname;
