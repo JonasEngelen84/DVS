@@ -102,12 +102,12 @@ namespace DVS.WPF.ViewModels.ListingItems
         {
             Clothes = clothes;
 
-            //OnPropertyChanged(nameof(Id));
-            //OnPropertyChanged(nameof(Name));
-            //OnPropertyChanged(nameof(Category));
-            //OnPropertyChanged(nameof(Season));
-            //OnPropertyChanged(nameof(Comment));
-            //OnPropertyChanged(nameof(Sizes));
+            OnPropertyChanged(nameof(Id));
+            OnPropertyChanged(nameof(Name));
+            OnPropertyChanged(nameof(Category));
+            OnPropertyChanged(nameof(Season));
+            OnPropertyChanged(nameof(Comment));
+            OnPropertyChanged(nameof(Sizes));
         }
     }
 }

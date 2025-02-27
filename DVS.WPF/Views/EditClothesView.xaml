@@ -24,8 +24,8 @@
                                VerticalAlignment="Center"
                                Margin="13 -5 0 0" />
 
-                    <!-- Label_Add -->
-                    <Label Content="erstellen"
+                    <!-- Label_Edit -->
+                    <Label Content="bearbeiten"
                            Width="100"
                            Margin="-120 5 0 0"
                            FontSize="18"

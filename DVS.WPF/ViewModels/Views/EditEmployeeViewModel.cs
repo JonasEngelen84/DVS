@@ -1,6 +1,5 @@
-﻿using DVS.WPF.Commands.AddEditEmployeeCommands;
+﻿using DVS.Domain.Models;
 using DVS.WPF.Commands.EmployeeCommands;
-using DVS.Domain.Models;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using System.Windows.Input;

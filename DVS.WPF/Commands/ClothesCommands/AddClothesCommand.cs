@@ -4,7 +4,7 @@ using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.ListingItems;
 using DVS.WPF.ViewModels.Views;
 
-namespace DVS.WPF.Commands.AddEditClothesCommands
+namespace DVS.WPF.Commands.ClothesCommands
 {
     public class AddClothesCommand(
         AddClothesViewModel addClothesViewModel,

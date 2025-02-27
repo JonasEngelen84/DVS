@@ -1,5 +1,4 @@
-﻿using DVS.WPF.Commands.AddEditClothesCommands;
-using DVS.WPF.Commands.CategoryCommands;
+﻿using DVS.WPF.Commands.CategoryCommands;
 using DVS.WPF.Commands.ClothesCommands;
 using DVS.WPF.Commands.SeasonCommands;
 using DVS.WPF.Stores;

@@ -1,11 +1,10 @@
-﻿using DVS.WPF.Commands.AddEditClothesCommands;
-using DVS.Domain.Models;
-using DVS.WPF.Stores;
-using DVS.WPF.ViewModels.Forms;
-using System.Windows.Input;
+﻿using DVS.Domain.Models;
 using DVS.WPF.Commands.CategoryCommands;
 using DVS.WPF.Commands.ClothesCommands;
 using DVS.WPF.Commands.SeasonCommands;
+using DVS.WPF.Stores;
+using DVS.WPF.ViewModels.Forms;
+using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Views
 {

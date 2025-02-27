@@ -5,7 +5,7 @@ using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.ListingItems;
 using DVS.WPF.ViewModels.Views;
 
-namespace DVS.WPF.Commands.AddEditEmployeeCommands
+namespace DVS.WPF.Commands.EmployeeCommands
 {
     public class AddEmployeeCommand(
         AddEmployeeViewModel addEmployeeViewModel,
