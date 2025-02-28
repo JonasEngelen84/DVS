@@ -14,10 +14,10 @@ namespace DVS.WPF.Commands.DragNDropCommands
             AvailableClothesSizeItem? existingAcsi = addEditEmployeeListingViewModel.GetAvailableClothesSizeItemFrom_availableClothesSizes();
             existingAcsi.Quantity += 1;
 
-            existingAcsi = addEditEmployeeListingViewModel.GetClothesSizeFrom_editedClothesSizesList();
+            existingAcsi = addEditEmployeeListingViewModel.GetClothesSizeFrom_clothesSizesToEdit();
             if (existingAcsi == null) addItemToEditedClothesSizesList.Invoke(existingAcsi);
 
-            Clothes? existingClothes = addEditEmployeeListingViewModel.GetClothesFrom_editedClothesList();
+            Clothes? existingClothes = addEditEmployeeListingViewModel.GetClothesFrom_clothesToEdit();
             if (existingClothes == null) addItemToEditedClothesList.Invoke(existingAcsi.ClothesSize.Clothes);
         }
     }
