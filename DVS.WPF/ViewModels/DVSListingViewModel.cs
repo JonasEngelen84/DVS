@@ -117,13 +117,6 @@ namespace DVS.WPF.ViewModels
             // ClothesItem:
             ClothesListingItemViewModel clivmToUpdate = _clothesCollection.First(clivm => clivm.Clothes.Id == editedClothes.Id);
             clivmToUpdate.Update(editedClothes);
-
-
-            // ClothesSizeItem:
-            List<string> currentClothesSizes = editedClothes.Sizes.Select(s => s.Size).ToList();
-
-            // Finden aller ClothesSizes mit der passenden ClothesID
-            List<ClothesSize> existingClothesSizes = _clothesSizeCollection .Where(y => y.Clothes.Id == editedClothes.Id) .ToList();
         }        
         private void ClothesStore_ClothesDeleted(string ClothesId)
         {

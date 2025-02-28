@@ -27,9 +27,7 @@ namespace DVS.WPF.ViewModels.Views
                 employeeStore,
                 clothesStore,
                 clothesSizeStore,
-                employeeClothesSizeStore,
-                modalNavigationStore,
-                dVSListingViewModel);
+                modalNavigationStore);
 
             CloseAddEditEmployee = new CloseAddEditEmployeeCommand(clothesStore, modalNavigationStore);
             AddEmployeeFormViewModel = new(_addEditEmployeeListingViewModel, addEmployee);

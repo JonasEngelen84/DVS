@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
-using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.ListingItems;
 using DVS.WPF.ViewModels.Views;
@@ -12,21 +11,15 @@ namespace DVS.WPF.Commands.EmployeeCommands
         EmployeeStore employeeStore,
         ClothesStore clothesStore,
         ClothesSizeStore clothesSizeStore,
-        EmployeeClothesSizeStore employeeClothesSizeStore,
-        ModalNavigationStore modalNavigationStore,
-        DVSListingViewModel dVSListingViewModel)
+        ModalNavigationStore modalNavigationStore)
         : AsyncCommandBase
     {
         private readonly AddEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
         private readonly EmployeeStore _employeeStore = employeeStore;
         private readonly ClothesStore _clothesStore = clothesStore;
         private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
-        private readonly EmployeeClothesSizeStore _employeeClothesSizeStore = employeeClothesSizeStore;
         private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
-        private readonly DVSListingViewModel _dVSListingViewModel = dVSListingViewModel;
 
-        private readonly List<ClothesSize> editedClothesSizesList = [];
-        //private readonly List<Clothes> editedClothesList = [];
 
         public override async Task ExecuteAsync(object parameter)
         {
@@ -40,13 +33,11 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 addEmployeeFormViewModel.HasError = false;
                 addEmployeeFormViewModel.IsSubmitting = true;
 
-                await UpdateClothesSizes(addEmployeeFormViewModel);
-                await UpdateClothes(addEmployeeFormViewModel);
+                List<ClothesSize> editedClothesSizesList = [];
+
+                await UpdateClothesSizes(editedClothesSizesList, addEmployeeFormViewModel);
+                await UpdateClothes(editedClothesSizesList, addEmployeeFormViewModel);
                 Employee newEmployee = CreateNewEmployee(addEmployeeFormViewModel);
-
-                if (addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList != null)
-                    CreateEmployeeClothesSizes(newEmployee, addEmployeeFormViewModel);
-
                 await AddEmployeeToDB(newEmployee, addEmployeeFormViewModel);
 
                 addEmployeeFormViewModel.IsSubmitting = false;
@@ -62,7 +53,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
             return existingEmployeeId;
         }
 
-        private async Task UpdateClothesSizes(AddEmployeeFormViewModel addEmployeeFormViewModel)
+        private async Task UpdateClothesSizes(List<ClothesSize> editedClothesSizesList, AddEmployeeFormViewModel addEmployeeFormViewModel)
         {
             List<AvailableClothesSizeItem> ClothesSizesToEdit = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.GetAllClothesSizesToEdit();
 
@@ -84,6 +75,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
                     };
 
                     editedClothesSizesList.Add(editedClothesSize);
+
                     try
                     {
                         await _clothesSizeStore.Update(editedClothesSize);
@@ -97,7 +89,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
             }
         }
 
-        private async Task UpdateClothes(AddEmployeeFormViewModel addEmployeeFormViewModel)
+        private async Task UpdateClothes(List<ClothesSize> editedClothesSizesList, AddEmployeeFormViewModel addEmployeeFormViewModel)
         {
             List<Clothes> clothesToEdited = addEmployeeFormViewModel.AddEditEmployeeListingViewModel.GetAllClothesToEdit();
 
@@ -126,7 +118,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
                         }
                     }
                 }
-                //editedClothesList.Add(editedClothes);
+                
                 try
                 {
                     await _clothesStore.Update(editedClothes);
@@ -149,16 +141,13 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 Clothes = []
             };
 
-            return newEmployee;
-        }
-
-        private static void CreateEmployeeClothesSizes(Employee newEmployee, AddEmployeeFormViewModel addEmployeeFormViewModel)
-        {
             foreach (EmployeeClothesSizeListingItemViewModel ecslivm in addEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
                 EmployeeClothesSize employeeClothesSize = new(Guid.NewGuid(), newEmployee, ecslivm.ClothesSize, ecslivm.Quantity, ecslivm.Comment);
                 newEmployee.Clothes.Add(employeeClothesSize);
             }
+
+            return newEmployee;
         }
 
         private async Task AddEmployeeToDB(Employee newEmployee, AddEmployeeFormViewModel addEmployeeFormViewModel)
