@@ -1,57 +1,54 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.ListingItems;
-using System.Windows;
 
 namespace DVS.WPF.Commands.EmployeeCommands
 {
     public class ClearEmployeeClothesListCommand(
         EmployeeListingItemViewModel employeeListingItemViewModel,
-        EmployeeStore employeeStore)
+        EmployeeStore employeeStore,
+        ClothesStore clothesStore,
+        ClothesSizeStore clothesSizeStore)
         : AsyncCommandBase
     {
         public override async Task ExecuteAsync(object parameter)
         {
-            string messageBoxText = $"Die gesamte Kleidungsliste des Mitarbeiters  " +
-                $"{employeeListingItemViewModel.Lastname}, {employeeListingItemViewModel.Firstname}  " +
-                $"wird gelöscht!\n\nLöschen fortsetzen?";
-            string caption = "Alle Bekleidungen löschen";
-            MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+            employeeListingItemViewModel.HasError = false;
+            employeeListingItemViewModel.IsDeleting = true;
 
-            if (dialog == MessageBoxResult.Yes)
+            Employee employee = employeeListingItemViewModel.Employee;
+
+            if (Confirm("Alle Bekleidungen des Mitarbeiters" +
+                $"  {employeeListingItemViewModel.Lastname}, {employeeListingItemViewModel.Firstname}  werden entfernt!" +
+                $"\n\nSollen die Bekleidungen dem Lager zugefügt werden?",
+                "Alle Bekleidungen entfernen"))
             {
-                employeeListingItemViewModel.HasError = false;
-                employeeListingItemViewModel.IsDeleting = true;
-
-                Employee employee = employeeListingItemViewModel.Employee;
-
-                foreach (EmployeeClothesSize size in employee.Clothes)
+                foreach(EmployeeClothesSize ecs in employee.Clothes)
                 {
-                    size.ClothesSize.EmployeeClothesSizes.Remove(size);
-                }
 
+                }
+            }
+            else
+            {                
                 employee.Clothes.Clear();
+                await UpdateEmployee(employee);
+            }
 
-                try
-                {
-                    await employeeStore.Update(employee);
-                }
-                catch (Exception)
-                {
-                    messageBoxText = $"Löschen aller Bekleidungen ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                    caption = " Alle Bekleidungen löschen";
-                    button = MessageBoxButton.OK;
-                    icon = MessageBoxImage.Warning;
-                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+            employeeListingItemViewModel.IsDeleting = false;
+        }
 
-                    employeeListingItemViewModel.HasError = true;
-                }
-                finally
-                {
-                    employeeListingItemViewModel.IsDeleting = false;
-                }
+        private async Task UpdateEmployee(Employee editedEmployee)
+        {
+            try
+            {
+                await employeeStore.Update(editedEmployee);
+            }
+            catch (Exception)
+            {
+                ShowErrorMessageBox("Entfernen aller Bekleidungen ist fehlgeschlagen!\nBitte versuchen Sie es erneut.",
+                    "Alle Bekleidungen löschen");
+
+                employeeListingItemViewModel.HasError = true;
             }
         }
     }
