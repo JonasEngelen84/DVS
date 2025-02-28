@@ -14,17 +14,9 @@ namespace DVS.WPF.Commands.EmployeeCommands
         ModalNavigationStore modalNavigationStore)
         : AsyncCommandBase
     {
-        private readonly AddEmployeeViewModel _addEmployeeViewModel = addEmployeeViewModel;
-        private readonly EmployeeStore _employeeStore = employeeStore;
-        private readonly ClothesStore _clothesStore = clothesStore;
-        private readonly ClothesSizeStore _clothesSizeStore = clothesSizeStore;
-        private readonly ModalNavigationStore _modalNavigationStore = modalNavigationStore;
-
-
         public override async Task ExecuteAsync(object parameter)
         {
-            AddEmployeeFormViewModel addEmployeeFormViewModel = _addEmployeeViewModel.AddEmployeeFormViewModel;
-
+            AddEmployeeFormViewModel addEmployeeFormViewModel = addEmployeeViewModel.AddEmployeeFormViewModel;
 
             if (CheckEmployeeId(addEmployeeFormViewModel) != null)
                 ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
@@ -38,16 +30,16 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 await UpdateClothesSizes(editedClothesSizesList, addEmployeeFormViewModel);
                 await UpdateClothes(editedClothesSizesList, addEmployeeFormViewModel);
                 Employee newEmployee = CreateNewEmployee(addEmployeeFormViewModel);
-                await AddEmployeeToDB(newEmployee, addEmployeeFormViewModel);
+                await AddEmployee(newEmployee, addEmployeeFormViewModel);
 
                 addEmployeeFormViewModel.IsSubmitting = false;
-                _modalNavigationStore.Close();
+                modalNavigationStore.Close();
             }
         }
 
         private Employee CheckEmployeeId(AddEmployeeFormViewModel addEmployeeFormViewModel)
         {
-            Employee? existingEmployeeId = _employeeStore.Employees
+            Employee? existingEmployeeId = employeeStore.Employees
                 .FirstOrDefault(e => e.Id == addEmployeeFormViewModel.Id);
 
             return existingEmployeeId;
@@ -59,7 +51,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
             foreach (AvailableClothesSizeItem acsi in ClothesSizesToEdit)
             {
-                ClothesSize existingClothesSize = _clothesSizeStore.ClothesSizes.First(cs => cs.GuidId == acsi.ClothesSizeId);
+                ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes.First(cs => cs.GuidId == acsi.ClothesSizeId);
 
                 if (existingClothesSize != null)
                 {
@@ -78,7 +70,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
                     try
                     {
-                        await _clothesSizeStore.Update(editedClothesSize);
+                        await clothesSizeStore.Update(editedClothesSize);
                     }
                     catch
                     {
@@ -121,7 +113,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 
                 try
                 {
-                    await _clothesStore.Update(editedClothes);
+                    await clothesStore.Update(editedClothes);
                 }
                 catch
                 {
@@ -150,11 +142,11 @@ namespace DVS.WPF.Commands.EmployeeCommands
             return newEmployee;
         }
 
-        private async Task AddEmployeeToDB(Employee newEmployee, AddEmployeeFormViewModel addEmployeeFormViewModel)
+        private async Task AddEmployee(Employee newEmployee, AddEmployeeFormViewModel addEmployeeFormViewModel)
         {
             try
             {
-                await _employeeStore.Add(newEmployee);
+                await employeeStore.Add(newEmployee);
             }
             catch
             {

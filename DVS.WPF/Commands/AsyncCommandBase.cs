@@ -52,7 +52,7 @@ namespace DVS.WPF.Commands
             return dialog == MessageBoxResult.Yes;
         }
 
-        public void ShowErrorMessageBox(string message, string title)
+        public static void ShowErrorMessageBox(string message, string title)
         {
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Warning;
