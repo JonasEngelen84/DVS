@@ -1,54 +1,129 @@
 ﻿using DVS.Domain.Models;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.ListingItems;
-using System.Windows;
 
 namespace DVS.WPF.Commands.EmployeeCommands
 {
     public class DeleteEmployeeCommand(
         EmployeeListingItemViewModel employeeListingItemViewModel,
-        EmployeeStore employeeStore)
+        EmployeeStore employeeStore,
+        ClothesStore clothesStore,
+        ClothesSizeStore clothesSizeStore,
+        EmployeeClothesSizeStore employeeClothesSizeStore)
         : AsyncCommandBase
     {
         public override async Task ExecuteAsync(object parameter)
         {
-            string messageBoxText = $"Der Mitarbeiter  {employeeListingItemViewModel.Lastname}, {employeeListingItemViewModel.Firstname}  " +
-                $"wird gelöscht!\n\nLöschen fortsetzen?";
-            string caption = "Mitarbeiter löschen";
-            MessageBoxButton button = MessageBoxButton.YesNo;
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult dialog = MessageBox.Show(messageBoxText, caption, button, icon);
+            employeeListingItemViewModel.HasError = false;
+            employeeListingItemViewModel.IsDeleting = true;
 
-            if (dialog == MessageBoxResult.Yes)
+            Employee employee = employeeListingItemViewModel.Employee;
+
+            if (Confirm($"Der/die Mitarbeiter/in  {employeeListingItemViewModel.Lastname}, {employeeListingItemViewModel.Firstname}  " +
+                "wird gelöscht!\n\nSollen die Bekleidungen dem Lager zugefügt werden?", "Mitarbeiter/in löschen"))
             {
-                employeeListingItemViewModel.HasError = false;
-                employeeListingItemViewModel.IsDeleting = true;
-
-                Employee employee = employeeListingItemViewModel.Employee;
-
-                foreach (EmployeeClothesSize size in employee.Clothes)
+                foreach (EmployeeClothesSize ecs in employee.Clothes)
                 {
-                    size.ClothesSize.EmployeeClothesSizes.Remove(size);
+                    ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes.First(cs => cs.GuidId == ecs.ClothesSizeGuidId);
+                    ClothesSize editedClothesSize = CreateEditedClothesSize(existingClothesSize, ecs.Quantity);
+                    await UpdateClothesSize(editedClothesSize);
+                    await DeleteEmployeeClothesSizes(ecs);
+                    await UpdateClothes(editedClothesSize);
                 }
 
-                try
+                await DeleteEmployee(employee);
+            }
+            else
+            {
+                foreach (EmployeeClothesSize ecs in employee.Clothes)
                 {
-                    await employeeStore.Delete(employee);
+                    await DeleteEmployeeClothesSizes(ecs);
                 }
-                catch (Exception)
-                {
-                    messageBoxText = "Löschen des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.";
-                    caption = " Mitarbeiter löschen";
-                    button = MessageBoxButton.OK;
-                    icon = MessageBoxImage.Warning;
-                    dialog = MessageBox.Show(messageBoxText, caption, button, icon);
 
-                    employeeListingItemViewModel.HasError = true;
-                }
-                finally
-                {
-                    employeeListingItemViewModel.IsDeleting = false;
-                }
+                await DeleteEmployee(employee);
+            }
+
+            employeeListingItemViewModel.IsDeleting = false;
+        }
+
+        private static ClothesSize CreateEditedClothesSize(ClothesSize existingClothesSize, int ecsQuantity)
+        {
+            int newQuantity = existingClothesSize.Quantity + ecsQuantity;
+
+            ClothesSize editedClothesSize = new(existingClothesSize.GuidId,
+                                                existingClothesSize.Clothes,
+                                                existingClothesSize.Size,
+                                                newQuantity,
+                                                existingClothesSize.Comment)
+            {
+                EmployeeClothesSizes = []
+            };
+
+            return editedClothesSize;
+        }
+
+        private async Task UpdateClothesSize(ClothesSize editedClothesSize)
+        {
+            try
+            {
+                await clothesSizeStore.Update(editedClothesSize);
+            }
+            catch
+            {
+                ShowErrorMessageBox("Entfernen der Bekleidungen ist fehlgeschlagen!", "Bekleidung entfernen");
+            }
+        }
+
+        private async Task UpdateClothes(ClothesSize editedClothesSize)
+        {
+            Clothes editedClothes = new(
+                    editedClothesSize.Clothes.Id,
+                    editedClothesSize.Clothes.Name,
+                    editedClothesSize.Clothes.Category,
+                    editedClothesSize.Clothes.Season,
+                    editedClothesSize.Clothes.Comment)
+            {
+                Sizes = editedClothesSize.Clothes.Sizes
+            };
+
+            ClothesSize existingClothesSize = editedClothes.Sizes.First(cs => cs.GuidId == editedClothesSize.GuidId);
+
+            editedClothes.Sizes.Remove(existingClothesSize);
+            editedClothes.Sizes.Add(editedClothesSize);
+
+            try
+            {
+                await clothesStore.Update(editedClothes);
+            }
+            catch
+            {
+                ShowErrorMessageBox("Entfernen der Bekleidungen ist fehlgeschlagen!", "Bekleidungen entfernen");
+            }
+        }
+
+        private async Task DeleteEmployeeClothesSizes(EmployeeClothesSize ecsToDelete)
+        {
+            try
+            {
+                await employeeClothesSizeStore.Delete(ecsToDelete);
+            }
+            catch
+            {
+                ShowErrorMessageBox("Entfernen der Bekleidungen ist fehlgeschlagen!", "Bekleidungen entfernen");
+            }
+        }
+
+        private async Task DeleteEmployee(Employee employee)
+        {
+            employee.Clothes.Clear();
+
+            try
+            {
+                await employeeStore.Update(employee);
+            }
+            catch (Exception)
+            {
+                ShowErrorMessageBox("Entfernen der Bekleidungen ist fehlgeschlagen!", "Bekleidungen entfernen");
             }
         }
     }
