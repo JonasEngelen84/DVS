@@ -81,7 +81,12 @@ namespace DVS.WPF.ViewModels.ListingItems
         {
             Employee = employee;
             DeleteEmployee = new DeleteEmployeeCommand(this, employeeStore);
-            ClearEmpoyeeClothesList = new ClearEmployeeClothesListCommand(this, employeeStore);
+            ClearEmpoyeeClothesList = new ClearEmployeeClothesListCommand(
+                this,
+                employeeStore,
+                clothesStore,
+                clothesSizeStore,
+                employeeClothesSizesStore);
             PrintEmployee = new OpenPrintEmployeeCommand();
 
             OpenEditEmployee = new OpenEditEmployeeCommand(

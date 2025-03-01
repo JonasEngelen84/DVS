@@ -8,15 +8,16 @@ namespace DVS.EntityFramework.Commands.EmployeeClothesSizeCommands
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
         public async Task Execute(EmployeeClothesSize employeeClothesSize)
-        {
+        {            
             using DVSDbContext context = _contextFactory.Create();
 
-            //EmployeeClothesSize employeeClothesSize = new()
-            //{
-            //    GuidID = guidID
-            //};
+            var existingEcs = await context.EmployeeClothesSizes.FindAsync(employeeClothesSize.GuidId);
 
-            context.EmployeeClothesSizes.Remove(employeeClothesSize);
+            if (existingEcs != null)
+            {
+                context.EmployeeClothesSizes.Remove(existingEcs);
+            }
+            
             await context.SaveChangesAsync();
         }
     }
