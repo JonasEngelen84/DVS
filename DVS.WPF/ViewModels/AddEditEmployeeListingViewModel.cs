@@ -58,14 +58,8 @@ namespace DVS.WPF.ViewModels
 
             ClothesItemRemovedNewEmployeeClothesListCommand = new RemovedNewEmployeeClothesListCommand(this, RemoveItemFromEmployeeClothesList);
             ClothesItemReceivedNewEmployeeClothesListCommand = new ReceivedNewEmployeeClothesListCommand(this, AddItemToEmployeeClothesList);
-            ClothesItemRemovedAvailableClothesListCommand = new RemovedAvailableClothesListCommand(
-                this,
-                AddClothesSizesToEdit,
-                AddClothesToEdit);
-            ClothesItemReceivedAvailableClothesListCommand = new ReceivedAvailableClothesListCommand(
-                this,
-                AddClothesSizesToEdit,
-                AddClothesToEdit);
+            ClothesItemRemovedAvailableClothesListCommand = new RemovedAvailableClothesListCommand(this, AddClothesSizesToEdit, AddClothesToEdit);
+            ClothesItemReceivedAvailableClothesListCommand = new ReceivedAvailableClothesListCommand(this, AddClothesSizesToEdit, AddClothesToEdit);
 
             LoadAvailableSizes();
             LoadEmployeeClothes(employee);
@@ -88,7 +82,7 @@ namespace DVS.WPF.ViewModels
         public AvailableClothesSizeItem GetAvailableClothesSizeItemFrom_availableClothesSizes()
         {
             return _availableClothesSizes
-                .First(acsi => acsi.ClothesSizeId == SelectedEmployeeClothesSizeItem.ClothesSize.GuidId);
+                .FirstOrDefault(acsi => acsi.ClothesSizeId == SelectedEmployeeClothesSizeItem.ClothesSize.GuidId);
         }
         public Clothes GetClothesFrom_availableClothesSizes()
         {
