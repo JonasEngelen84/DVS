@@ -17,7 +17,7 @@ namespace DVS.WPF.Commands.DragNDropCommands
                 if (existingEcsi != null) existingEcsi.Quantity += 1;
                 else
                 {
-                   EmployeeClothesSizeListingItemViewModel newEcslivm = new(addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesSize)
+                   EmployeeClothesSizeListingItemViewModel newEcslivm = new(addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesSize, null)
                     {
                         Quantity = 1
                     };

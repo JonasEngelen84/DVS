@@ -94,11 +94,8 @@ namespace DVS.WPF.ViewModels.ListingItems
                 modalNavigationStore,
                 employeeStore,
                 clothesStore,
-                categoryStore,
-                seasonStore,
                 clothesSizeStore,
-                employeeClothesSizesStore,
-                dVSListingViewModel);
+                employeeClothesSizesStore);
         }
 
         public void Update(Employee employee)

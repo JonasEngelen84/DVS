@@ -131,15 +131,15 @@ namespace DVS.EntityFramework.Migrations
                 columns: new[] { "GuidId", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("04c7f227-8d8f-4a77-ae33-b48da6dee758"), "Schuhwerk" },
-                    { new Guid("3ae08c4d-5ed8-49d6-ba47-70905656a8da"), "-Kategorielos-" },
-                    { new Guid("431a00b1-cb40-4bb2-a934-fdc2b43b7fb7"), "Jacke" },
-                    { new Guid("5ac22e71-afe3-4628-9fd2-9d96c9b82c14"), "Pullover" },
-                    { new Guid("626071a5-4159-42b1-8045-ac7341b8ffc5"), "Kopfbedeckung" },
-                    { new Guid("81097732-b772-409f-b6e5-0ad86d09d358"), "Handschuhe" },
-                    { new Guid("b885bd14-18ce-47a2-93bd-a4299c954775"), "Hose" },
-                    { new Guid("d3a824a4-1dfc-4a76-bc8c-00cca56366b1"), "Shirt" },
-                    { new Guid("e0e4a0f6-74a2-4a0b-8cc1-7af467171152"), "Hemd" }
+                    { new Guid("2341a6cd-b4d2-45a5-ae77-3cf4b0e9c689"), "Hose" },
+                    { new Guid("5139b4a5-2042-4069-9e4f-2556895c14b5"), "Shirt" },
+                    { new Guid("6b49f933-4023-4f3e-a312-785a825fdb8e"), "Pullover" },
+                    { new Guid("7bcdf8d2-4d8a-41e0-837c-8427fbc42cda"), "-Kategorielos-" },
+                    { new Guid("8aefb5f6-32b7-4a43-9931-4a31e1e92c0f"), "Jacke" },
+                    { new Guid("9f5e27f3-1f20-4976-aba5-2f7b54e0dbd8"), "Handschuhe" },
+                    { new Guid("a7e93b9e-16ff-4b19-989f-08b2fa0326f6"), "Schuhwerk" },
+                    { new Guid("b96f95ed-8e97-4b21-951b-377cebd9156e"), "Kopfbedeckung" },
+                    { new Guid("d1f086e5-80a0-4c2b-bf78-3c8f383b88fb"), "Hemd" }
                 });
 
             migrationBuilder.InsertData(
@@ -147,9 +147,11 @@ namespace DVS.EntityFramework.Migrations
                 columns: new[] { "GuidId", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("6d3542f1-fdf0-488d-949d-33d5d7ea02c6"), "-Saisonlos-" },
-                    { new Guid("c698e58e-92f7-4556-b3c9-82af6e461a29"), "Sommer" },
-                    { new Guid("de7030ed-37fc-4136-8b23-2c3824fb4814"), "Winter" }
+                    { new Guid("1d5f3c9e-2d2f-49cb-9b71-9b7e8f58b8a1"), "Herbst" },
+                    { new Guid("3f8a1a87-9b74-4a32-8297-68f3b2eaa23f"), "Frühling" },
+                    { new Guid("6a2d84c5-743e-4298-8546-963b193e0d02"), "Sommer" },
+                    { new Guid("e1a3f5c8-7f7b-4e82-bc2d-8b0e4a7f26f3"), "-Saisonlos-" },
+                    { new Guid("f4e9c892-903f-4047-bcd5-5f273db9dc5b"), "Winter" }
                 });
 
             migrationBuilder.CreateIndex(

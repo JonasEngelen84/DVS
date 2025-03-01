@@ -2,9 +2,10 @@
 
 namespace DVS.WPF.ViewModels.ListingItems
 {
-    public class EmployeeClothesSizeListingItemViewModel(ClothesSize clothesSize) : ViewModelBase
+    public class EmployeeClothesSizeListingItemViewModel(ClothesSize clothesSize, Guid? employeeClothesSizeGuidId) : ViewModelBase
     {
         public ClothesSize ClothesSize { get; } = clothesSize;
+        public Guid? EmployeeClothesSizeGuidId { get; } = employeeClothesSizeGuidId;
         public string ClothesId => ClothesSize.Clothes.Id;
         public string ClothesName => ClothesSize.Clothes.Name;
         public string Size => ClothesSize.Size;

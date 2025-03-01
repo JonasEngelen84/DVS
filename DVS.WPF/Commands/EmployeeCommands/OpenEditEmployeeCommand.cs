@@ -1,5 +1,4 @@
 ﻿using DVS.WPF.Stores;
-using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.ListingItems;
 using DVS.WPF.ViewModels.Views;
 
@@ -10,11 +9,8 @@ namespace DVS.WPF.Commands.EmployeeCommands
         ModalNavigationStore modalNavigationStore,
         EmployeeStore employeeStore,
         ClothesStore clothesStore,
-        CategoryStore categoryStore,
-        SeasonStore seasonStore,
         ClothesSizeStore clothesSizeStore,
-        EmployeeClothesSizeStore employeeClothesSizesStore,
-        DVSListingViewModel dVSListingViewModel)
+        EmployeeClothesSizeStore employeeClothesSizesStore)
         : CommandBase
     {
         public override void Execute(object parameter)
@@ -23,8 +19,6 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 employeeListingItemViewModel.Employee,
                 employeeStore,
                 clothesStore,
-                categoryStore,
-                seasonStore,
                 clothesSizeStore,
                 employeeClothesSizesStore,
                 modalNavigationStore);

@@ -11,10 +11,12 @@ namespace DVS.WPF.Commands.EmployeeCommands
         EmployeeStore employeeStore,
         ClothesStore clothesStore,
         ClothesSizeStore clothesSizeStore,
-        EmployeeClothesSizeStore employeeClothesSizeStore,
+        EmployeeClothesSizeStore employeeClothesSizesStore,
         ModalNavigationStore modalNavigationStore)
         : AsyncCommandBase
     {
+        private readonly List<ClothesSize> editedClothesSizesList = [];
+
         public override async Task ExecuteAsync(object parameter)
         {
             AddEmployeeFormViewModel addEmployeeFormViewModel = addEmployeeViewModel.AddEmployeeFormViewModel;
@@ -26,13 +28,11 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 addEmployeeFormViewModel.HasError = false;
                 addEmployeeFormViewModel.IsSubmitting = true;
 
-                List<ClothesSize> editedClothesSizesList = [];
-
                 await UpdateClothesSizes(editedClothesSizesList, addEmployeeFormViewModel);
                 await UpdateClothes(editedClothesSizesList, addEmployeeFormViewModel);
                 Employee newEmployee = CreateNewEmployee(addEmployeeFormViewModel);
                 await AddEmployee(newEmployee, addEmployeeFormViewModel);
-                AddEmployeeClothesSizeToStore(newEmployee, employeeClothesSizeStore);
+                AddEmployeeClothesSizeToStore(newEmployee);
 
                 addEmployeeFormViewModel.IsSubmitting = false;
                 modalNavigationStore.Close();
@@ -157,11 +157,11 @@ namespace DVS.WPF.Commands.EmployeeCommands
             }
         }
 
-        private static void AddEmployeeClothesSizeToStore(Employee newEmployee, EmployeeClothesSizeStore employeeClothesSizeStore)
+        private void AddEmployeeClothesSizeToStore(Employee newEmployee)
         {
             foreach(EmployeeClothesSize ecs in newEmployee.Clothes)
             {
-                employeeClothesSizeStore.AddToStore(ecs);
+                employeeClothesSizesStore.AddToStore(ecs);
             }
         }
     }

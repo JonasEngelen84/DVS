@@ -40,7 +40,7 @@ namespace DVS.WPF.Commands
 
                 EmployeeClothesSize editedEcs = CreateEditedEmployeeClothesSize(
                     selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize, editedClothesSize);
-                await UpdateEmployeeClothesSize(editedEcs);
+                UpdateEmployeeClothesSize(editedEcs);
 
                 selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize = editedEcs;
             }
@@ -128,16 +128,9 @@ namespace DVS.WPF.Commands
             }
         }
 
-        private async Task UpdateEmployeeClothesSize(EmployeeClothesSize editedEcs)
+        private void UpdateEmployeeClothesSize(EmployeeClothesSize editedEcs)
         {
-            try
-            {
-                await employeeClothesSizesStore.Update(editedEcs);
-            }
-            catch
-            {
-                ShowErrorMessageBox("Erhöhen der Stückzahl ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Stückzahl erhöhen");
-            }
+            employeeClothesSizesStore.Update(editedEcs);
         }
     }
 }

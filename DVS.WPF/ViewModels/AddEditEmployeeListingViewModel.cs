@@ -112,7 +112,10 @@ namespace DVS.WPF.ViewModels
             {
                 foreach (EmployeeClothesSize ecs in employee.Clothes)
                 {
-                    _employeeClothesList.Add(new EmployeeClothesSizeListingItemViewModel(ecs.ClothesSize) { Quantity = ecs.Quantity });
+                    _employeeClothesList.Add(new EmployeeClothesSizeListingItemViewModel(ecs.ClothesSize, ecs.GuidId)
+                    {
+                        Quantity = ecs.Quantity
+                    });
                 }
             }
         }

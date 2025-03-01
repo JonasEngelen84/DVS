@@ -26,8 +26,7 @@ namespace DVS.WPF.ViewModels
                 _selectedClothesSizeStore.SelectedClothesSize = value;
                 _selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize = null;
             }
-        }
-        
+        }        
         public EmployeeClothesSize SelectedEmployeeClothesSize
         {
             set
@@ -160,70 +159,10 @@ namespace DVS.WPF.ViewModels
         }        
         private void EmployeeStore_EmployeeUpdated(Employee editedEmployee)
         {
-            // Finden des zu bearbeitenden EmployeeItem mit der passenden EmployeeGuidID
-            EmployeeListingItemViewModel? ItemToUpdate = _employeeCollection
-                .FirstOrDefault(y => y.Employee.Id == editedEmployee.Id);
+            EmployeeListingItemViewModel ElivmToUpdate = _employeeCollection
+                .First(e => e.Employee.Id == editedEmployee.Id);
 
-            ItemToUpdate?.Update(editedEmployee);
-
-            // Entfernen sämtlicher Bekleidung des zu bearbeitenden Mitarbeiters
-            if (editedEmployee.Clothes.Count == 0)
-            {
-                // Finden aller EmployeeClothesSizes mit der passenden EmployeeGuidID
-                List<EmployeeClothesSize> itemsToDelete = _employeeClothesSizeCollection
-                .Where(y => y.Employee.Id == editedEmployee.Id)
-                .ToList();
-
-                foreach (EmployeeClothesSize item in itemsToDelete)
-                {
-                    _employeeClothesSizeCollection.Remove(item);
-                }
-
-                //_employeeClothesSizeCollection.Add(new DetailedEmployeeListingItemViewModel(updatedEmployee, null));
-            }
-            else
-            {
-                // Entfernen von DetailedEmployeeClothesItems, deren Bekleidungsgrößen nicht mehr im aktuellen EmployeeModel vorhanden sind
-                foreach (EmployeeClothesSize clothes in editedEmployee.Clothes)
-                {
-                    // Erstellen einer Liste der aktuellen Bekleidungsgrößen des Mitarbeiter
-                    var currentClothesSizes = editedEmployee.Clothes
-                        .Select(ecs => new { ecs.ClothesSize.Clothes.Id, ecs.ClothesSize.Size })
-                        .ToHashSet();
-
-                    // Finden der DetailedEmployeeClothesItems mit der passenden EmployeeGuidID
-                    var detailedItems = _employeeClothesSizeCollection
-                        .Where(y => y.Employee.Id == editedEmployee.Id)
-                        .ToList();
-
-                    //foreach (var item in detailedItems)
-                    //{
-                    //    if (!currentClothesSizes.Any(cs => cs.GuidId == item.ClothesGuidID && cs.Size == item.Size))
-                    //    {
-                    //        _employeeClothesSizeCollection.Remove(item);
-                    //    }
-                    //}
-                }
-
-                // Prüfen ob der zu bearbeitende Mitarbeiter neue Bekleidung hinzubekommen hat? DetailedEmployeeClothesItems hinzufügen
-                // ?? Aktualisieren der DetailedEmployeeClothesItems
-                //foreach (EmployeeClothesSize clothes in updatedEmployee.Clothes)
-                //{
-                //    var itemToUpdate = _employeeClothesSizeCollection
-                //            .FirstOrDefault(y => y.Employee.GuidId == updatedEmployee.GuidId
-                //                            && y.ClothesGuidID == clothes.ClothesSize.ClothesGuidId
-                //                            && y.Size == clothes.ClothesSize.Size.Size);
-
-                //    if (itemToUpdate != null)
-                //    {
-                //        itemToUpdate.Update(updatedEmployee, clothes);
-                //    }
-                //    else
-                //    {
-                //        _employeeClothesSizeCollection.Add(new DetailedEmployeeListingItemViewModel(updatedEmployee, clothes));
-                //    }
-                //}
-            }
+            ElivmToUpdate.Update(editedEmployee);
         }
         private void EmployeeStore_EmployeeDeleted(string EmployeeId)
         {
@@ -236,9 +175,9 @@ namespace DVS.WPF.ViewModels
                 .Where(y => y.Employee.Id == EmployeeId)
                 .ToList();
 
-            foreach (EmployeeClothesSize item in itemsToDelete)
+            foreach (EmployeeClothesSize ecs in itemsToDelete)
             {
-                _employeeClothesSizeCollection.Remove(item);
+                EmployeeClothesSizeStore_EmployeeClothesSizeDeleted(ecs);
             }
         }
 
@@ -255,22 +194,16 @@ namespace DVS.WPF.ViewModels
         
         private void EmployeeClothesSizeStore_EmployeeClothesSizeUpdated(EmployeeClothesSize editedEcs)
         {
-            EmployeeClothesSize existingEcs = _employeeClothesSizeCollection
-                .First(ecs => ecs.GuidId == editedEcs.GuidId);
+            EmployeeClothesSize? existingEcs = _employeeClothesSizeCollection
+                .FirstOrDefault(ecs => ecs.GuidId == editedEcs.GuidId);
 
             if (existingEcs != null)
             {
                 _employeeClothesSizeCollection.Remove(existingEcs);
                 _employeeClothesSizeCollection.Add(editedEcs);
-                                
-                //_employeeCollection.Remove(existingEcs.Employee);
-                //_employeeCollection.Add(editedEcs);
-            }            
-
-            EmployeeListingItemViewModel elivmToUpdate = _employeeCollection
-                .First(elivm => elivm.Employee.Id == existingEcs.Employee.Id);
-
-            elivmToUpdate?.Update(editedEcs.Employee);
+            }
+            else
+                _employeeClothesSizeCollection.Add(editedEcs);
         }
         private void EmployeeClothesSizeStore_EmployeeClothesSizeDeleted(EmployeeClothesSize ecsToDelete)
         {

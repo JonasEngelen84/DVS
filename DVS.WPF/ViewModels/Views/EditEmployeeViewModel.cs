@@ -17,8 +17,6 @@ namespace DVS.WPF.ViewModels.Views
             Employee employee,
             EmployeeStore employeeStore,
             ClothesStore clothesStore,
-            CategoryStore categoryStore,
-            SeasonStore seasonStore,
             ClothesSizeStore clothesSizeStore,
             EmployeeClothesSizeStore employeeClothesSizesStore,
             ModalNavigationStore modalNavigationStore)
@@ -30,8 +28,6 @@ namespace DVS.WPF.ViewModels.Views
                 this,
                 employeeStore,
                 clothesStore,
-                categoryStore,
-                seasonStore,
                 clothesSizeStore,
                 employeeClothesSizesStore,
                 modalNavigationStore);

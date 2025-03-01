@@ -3,7 +3,6 @@ using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.ListingItems;
 using DVS.WPF.ViewModels.Views;
-using System.Collections.ObjectModel;
 
 namespace DVS.WPF.Commands.EmployeeCommands
 {
@@ -11,32 +10,29 @@ namespace DVS.WPF.Commands.EmployeeCommands
         EditEmployeeViewModel editEmployeeViewModel,
         EmployeeStore employeeStore,
         ClothesStore clothesStore,
-        CategoryStore categoryStore,
-        SeasonStore seasonStore,
         ClothesSizeStore clothesSizeStore,
         EmployeeClothesSizeStore employeeClothesSizesStore,
         ModalNavigationStore modalNavigationStore)
         : AsyncCommandBase
     {
+        private readonly List<ClothesSize> editedClothesSizesList = [];
+
         public override async Task ExecuteAsync(object parameter)
         {
             EditEmployeeFormViewModel editEmployeeFormViewModel = editEmployeeViewModel.EditEmployeeFormViewModel;
-            
-            if (Confirm($"Soll der/die Mitarbeiter/in  \"{editEmployeeFormViewModel.Lastname}\", \"{editEmployeeFormViewModel.Firstname}\"  bearbeiten werden?", "Mitarbeiter bearbeiten"))
+
+            if (Confirm($"Soll der/die Mitarbeiter/in  \"{editEmployeeFormViewModel.Lastname}\", \"{editEmployeeFormViewModel.Firstname}\"" +
+                "  bearbeiten werden?", "Mitarbeiter bearbeiten"))
             {
                 editEmployeeFormViewModel.HasError = false;
                 editEmployeeFormViewModel.IsSubmitting = true;
 
-                Employee updatedEmployee = CreateUpdatedEmployee(editEmployeeFormViewModel);
 
-                await DeleteRemovedEmployeeClothesSizesAsync(updatedEmployee, editEmployeeFormViewModel);
-                await CreateAndAddNewEmployeeClothesSizesAsync(updatedEmployee, editEmployeeFormViewModel);
-                await UpdateEmployeeClothesSizesAsync(updatedEmployee, editEmployeeFormViewModel);
-                await UpdateEmployeeAsync(updatedEmployee, editEmployeeFormViewModel);
-                await UpdateClothesSizeAsync(editEmployeeFormViewModel);
-                await UpdateClothesAsync(editEmployeeFormViewModel);
-                await UpdateCategoryAsync(editEmployeeFormViewModel);
-                await UpdateSeasonAsync(editEmployeeFormViewModel);
+                await UpdateClothesSizes(editEmployeeFormViewModel);
+                await UpdateClothes(editedClothesSizesList, editEmployeeFormViewModel);
+                Employee editedEmployee = EditEmployee(editEmployeeFormViewModel);
+                await UpdateEmployee(editedEmployee, editEmployeeFormViewModel);
+                UpdateEmployeeClothesSizes(editedEmployee);
 
                 editEmployeeFormViewModel.IsSubmitting = false;
 
@@ -44,189 +40,121 @@ namespace DVS.WPF.Commands.EmployeeCommands
             }
         }
 
-        private static Employee CreateUpdatedEmployee(EditEmployeeFormViewModel editEmployeeFormViewModel)
+        private async Task UpdateClothesSizes(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
-            return new Employee(editEmployeeFormViewModel.Id,
-                                editEmployeeFormViewModel.Lastname,
-                                editEmployeeFormViewModel.Firstname,
-                                editEmployeeFormViewModel.Comment)
+            List<AvailableClothesSizeItem> ClothesSizesToEdit = editEmployeeFormViewModel.AddEditEmployeeListingViewModel.GetAllClothesSizesToEdit();
+
+            foreach (AvailableClothesSizeItem acsi in ClothesSizesToEdit)
             {
-                Clothes = new ObservableCollection<EmployeeClothesSize>(editEmployeeFormViewModel.Employee.Clothes)
+                ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes.First(cs => cs.GuidId == acsi.ClothesSizeId);
+
+                if (existingClothesSize != null)
+                {
+                    AvailableClothesSizeItem existingAcsi = ClothesSizesToEdit.First(acsi => acsi.ClothesSize.GuidId == existingClothesSize.GuidId);
+
+                    ClothesSize editedClothesSize = new(existingClothesSize.GuidId,
+                                                        existingClothesSize.Clothes,
+                                                        existingClothesSize.Size,
+                                                        existingAcsi.Quantity,
+                                                        existingClothesSize.Comment)
+                    {
+                        EmployeeClothesSizes = []
+                    };
+
+                    editedClothesSizesList.Add(editedClothesSize);
+
+                    try
+                    {
+                        await clothesSizeStore.Update(editedClothesSize);
+                    }
+                    catch
+                    {
+                        ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!", "Mitarbeiter bearbeiten");
+                        editEmployeeFormViewModel.HasError = true;
+                    }
+                }
+            }
+        }
+
+        private async Task UpdateClothes(List<ClothesSize> editedClothesSizesList, EditEmployeeFormViewModel editEmployeeFormViewModel)
+        {
+            List<Clothes> clothesToEdited = editEmployeeFormViewModel.AddEditEmployeeListingViewModel.GetAllClothesToEdit();
+
+            foreach (Clothes clothes in clothesToEdited)
+            {
+                Clothes editedClothes = new(
+                    clothes.Id,
+                    clothes.Name,
+                    clothes.Category,
+                    clothes.Season,
+                    clothes.Comment)
+                {
+                    Sizes = clothes.Sizes
+                };
+
+                foreach (ClothesSize editedClothesSize in editedClothesSizesList)
+                {
+                    if (editedClothesSize.ClothesId == clothes.Id)
+                    {
+                        ClothesSize existingClothesSize = editedClothes.Sizes.First(cs => cs.GuidId == editedClothesSize.GuidId);
+
+                        if (existingClothesSize != null)
+                        {
+                            editedClothes.Sizes.Remove(existingClothesSize);
+                            editedClothes.Sizes.Add(editedClothesSize);
+                        }
+                    }
+                }
+
+                try
+                {
+                    await clothesStore.Update(editedClothes);
+                }
+                catch
+                {
+                    ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!", "Mitarbeiter bearbeiten");
+                    editEmployeeFormViewModel.HasError = true;
+                }
+            }
+        }
+
+        private static Employee EditEmployee(EditEmployeeFormViewModel editEmployeeFormViewModel)
+        {
+            Employee editedEmployee = new(editEmployeeFormViewModel.Id,
+                                          editEmployeeFormViewModel.Lastname,
+                                          editEmployeeFormViewModel.Firstname,
+                                          editEmployeeFormViewModel.Comment)
+            {
+                Clothes = []
             };
-        }
 
-        private async Task DeleteRemovedEmployeeClothesSizesAsync(Employee updatedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
-        {
-            foreach (EmployeeClothesSize ecs in updatedEmployee.Clothes)
-            {
-                EmployeeClothesSizeListingItemViewModel existingEcslivm = editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList
-                    .First(acsi => acsi.ClothesSize.GuidId == ecs.ClothesSizeGuidId);
-
-                updatedEmployee.Clothes.Remove(ecs);
-                ecs.ClothesSize.EmployeeClothesSizes.Remove(ecs);
-
-                try
-                {
-                    await employeeClothesSizesStore.Delete(ecs);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
-                    editEmployeeFormViewModel.HasError = true;
-                }
-            }
-        }
-
-        private async Task CreateAndAddNewEmployeeClothesSizesAsync(Employee updatedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
-        {
             foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
             {
-                EmployeeClothesSize existingEcs = updatedEmployee.Clothes.First(ecs => ecs.ClothesSizeGuidId == ecslivm.ClothesSize.GuidId);
-
-                EmployeeClothesSize newEcs = new(Guid.NewGuid(), updatedEmployee, ecslivm.ClothesSize, (int)ecslivm.Quantity, null);
-
-                updatedEmployee.Clothes.Add(newEcs);
-                //dclivm.ClothesSize.EmployeeClothesSizes.Add(employeeClothesSize);
-
-                try
-                {
-                    await employeeClothesSizesStore.Add(newEcs);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
-                    editEmployeeFormViewModel.HasError = true;
-                }
+                EmployeeClothesSize employeeClothesSize = new(ecslivm.EmployeeClothesSizeGuidId ?? Guid.NewGuid(), editedEmployee, ecslivm.ClothesSize, ecslivm.Quantity, ecslivm.Comment);
+                editedEmployee.Clothes.Add(employeeClothesSize);
             }
+
+            return editedEmployee;
         }
 
-        private async Task UpdateEmployeeClothesSizesAsync(Employee updatedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
-        {
-            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
-            {
-                EmployeeClothesSize existingEcsi = updatedEmployee.Clothes.First(ecs => ecs.ClothesSizeGuidId == ecslivm.ClothesSize.GuidId);
-                EmployeeClothesSize UpdatedEmployeeClothesSize = new(existingEcsi.GuidId, updatedEmployee, ecslivm.ClothesSize, (int)ecslivm.Quantity, null);
-                EmployeeClothesSize itemToRemove = updatedEmployee.Clothes.First(ecs => ecs.GuidId == UpdatedEmployeeClothesSize.GuidId);
-
-                updatedEmployee.Clothes.Remove(itemToRemove);
-                updatedEmployee.Clothes.Add(UpdatedEmployeeClothesSize);
-
-                itemToRemove = UpdatedEmployeeClothesSize.ClothesSize.EmployeeClothesSizes.First(ecs => ecs.GuidId == UpdatedEmployeeClothesSize.GuidId);
-
-                UpdatedEmployeeClothesSize.ClothesSize.EmployeeClothesSizes.Remove(itemToRemove);
-                UpdatedEmployeeClothesSize.ClothesSize.EmployeeClothesSizes.Add(UpdatedEmployeeClothesSize);
-
-                try
-                {
-                    await employeeClothesSizesStore.Update(UpdatedEmployeeClothesSize);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
-                    editEmployeeFormViewModel.HasError = true;
-                }
-            }
-        }
-
-        private async Task UpdateEmployeeAsync(Employee updatedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
+        private async Task UpdateEmployee(Employee editedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             try
             {
-                await employeeStore.Update(updatedEmployee);
+                await employeeStore.Update(editedEmployee);
             }
-            catch (Exception)
+            catch
             {
-                ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
+                ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!", "Mitarbeiter bearbeiten");
                 editEmployeeFormViewModel.HasError = true;
             }
         }
 
-        private async Task UpdateClothesSizeAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
+        private void UpdateEmployeeClothesSizes(Employee editedEmployee)
         {
-            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
+            foreach (EmployeeClothesSize ecs in editedEmployee.Clothes)
             {
-                ClothesSize csToRemove = ecslivm.ClothesSize.Clothes.Sizes.First(cs => cs.GuidId == ecslivm.ClothesSize.GuidId);
-
-                ecslivm.ClothesSize.Clothes.Sizes.Remove(csToRemove);
-                ecslivm.ClothesSize.Clothes.Sizes.Add(ecslivm.ClothesSize);
-
-                try
-                {
-                    await clothesSizeStore.Update(ecslivm.ClothesSize);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
-                    editEmployeeFormViewModel.HasError = true;
-                }
-            }
-        }
-
-        private async Task UpdateClothesAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
-        {
-            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
-            {
-                Clothes ClothesToRemove = ecslivm.ClothesSize.Clothes.Category.Clothes.First(c => c.Id == ecslivm.ClothesSize.Clothes.Id);
-
-                if (ClothesToRemove != null)
-                {
-                    ecslivm.ClothesSize.Clothes.Category.Clothes.Remove(ClothesToRemove);
-                    ecslivm.ClothesSize.Clothes.Category.Clothes.Add(ecslivm.ClothesSize.Clothes);
-                }
-
-                ClothesToRemove = ecslivm.ClothesSize.Clothes.Season.Clothes.FirstOrDefault(c => c.Id == ecslivm.ClothesSize.Clothes.Id);
-
-                if (ClothesToRemove != null)
-                {
-                    ecslivm.ClothesSize.Clothes.Season.Clothes.Remove(ClothesToRemove);
-                    ecslivm.ClothesSize.Clothes.Season.Clothes.Add(ecslivm.ClothesSize.Clothes);
-                }
-
-                try
-                {
-                    await clothesStore.Update(ecslivm.ClothesSize.Clothes);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
-                    editEmployeeFormViewModel.HasError = true;
-                }
-            }
-        }
-
-        private async Task UpdateCategoryAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
-        {
-            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
-            {
-                try
-                {
-                    await categoryStore.Update(ecslivm.ClothesSize.Clothes.Category, null);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
-                    editEmployeeFormViewModel.HasError = true;
-                }
-            }
-        }
-
-        private async Task UpdateSeasonAsync(EditEmployeeFormViewModel editEmployeeFormViewModel)
-        {
-            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
-            {
-                try
-                {
-                    await seasonStore.Update(ecslivm.ClothesSize.Clothes.Season, null);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Bearbeiten des Mitarbeiters ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Mitarbeiter bearbeiten");
-                    editEmployeeFormViewModel.HasError = true;
-                }
-                finally
-                {
-                    editEmployeeFormViewModel.IsSubmitting = false;
-                }
+                employeeClothesSizesStore.Update(ecs);
             }
         }
     }
