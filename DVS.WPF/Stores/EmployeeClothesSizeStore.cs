@@ -11,6 +11,7 @@ namespace DVS.WPF.Stores
         public IEnumerable<EmployeeClothesSize> EmployeeClothesSizes => _employeeClothesSizes;
 
         public event Action<EmployeeClothesSize> EmployeeClothesSizeUpdated;
+        public event Action<EmployeeClothesSize> EmployeeClothesSizeDeleted;
 
         public void Load(List<EmployeeClothesSize> employeeClothesSize)
         {
@@ -26,6 +27,11 @@ namespace DVS.WPF.Stores
         {
             await createEmployeeClothesSizeCommand.Execute(employeeClothesSize);
 
+            _employeeClothesSizes.Add(employeeClothesSize);
+        }
+        
+        public void AddToStore(EmployeeClothesSize employeeClothesSize)
+        {
             _employeeClothesSizes.Add(employeeClothesSize);
         }
 
@@ -60,7 +66,9 @@ namespace DVS.WPF.Stores
             else
             {
                 throw new InvalidOperationException("Entfernen der Bekleidung nicht möglich.");
-            }            
+            }
+
+            EmployeeClothesSizeDeleted.Invoke(employeeClothesSize);
         }
     }
 }
