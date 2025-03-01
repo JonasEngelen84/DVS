@@ -75,7 +75,8 @@ namespace DVS.WPF.ViewModels
             _employeeStore.EmployeeUpdated += EmployeeStore_EmployeeUpdated;
             _employeeStore.EmployeeDeleted += EmployeeStore_EmployeeDeleted;
             _clothesSizeStore.ClothesSizeUpdated += ClothesSizeStore_ClothesSizeUpdated;
-            _employeeClothesSizeStore.EmployeeClothesSizeUpdated += EmployeeClothesSizeStore_EmployeeClothesSizeUpdate;
+            _employeeClothesSizeStore.EmployeeClothesSizeUpdated += EmployeeClothesSizeStore_EmployeeClothesSizeUpdated;
+            _employeeClothesSizeStore.EmployeeClothesSizeDeleted += EmployeeClothesSizeStore_EmployeeClothesSizeDeleted;
 
             LoadClothes();
             LoadEmployees();
@@ -252,7 +253,7 @@ namespace DVS.WPF.ViewModels
             }
         }
         
-        private void EmployeeClothesSizeStore_EmployeeClothesSizeUpdate(EmployeeClothesSize editedEcs)
+        private void EmployeeClothesSizeStore_EmployeeClothesSizeUpdated(EmployeeClothesSize editedEcs)
         {
             EmployeeClothesSize existingEcs = _employeeClothesSizeCollection
                 .First(ecs => ecs.GuidId == editedEcs.GuidId);
@@ -271,6 +272,13 @@ namespace DVS.WPF.ViewModels
 
             elivmToUpdate?.Update(editedEcs.Employee);
         }
+        private void EmployeeClothesSizeStore_EmployeeClothesSizeDeleted(EmployeeClothesSize ecsToDelete)
+        {
+            EmployeeClothesSize existingEcs = _employeeClothesSizeCollection
+                .First(ecs => ecs.GuidId == ecsToDelete.GuidId);
+
+            _employeeClothesSizeCollection.Remove(existingEcs);
+        }
 
         protected override void Dispose()
         {
@@ -281,7 +289,8 @@ namespace DVS.WPF.ViewModels
             _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
             _employeeStore.EmployeeUpdated -= EmployeeStore_EmployeeUpdated;
             _employeeStore.EmployeeDeleted += EmployeeStore_EmployeeDeleted;
-            _employeeClothesSizeStore.EmployeeClothesSizeUpdated += EmployeeClothesSizeStore_EmployeeClothesSizeUpdate;
+            _employeeClothesSizeStore.EmployeeClothesSizeUpdated += EmployeeClothesSizeStore_EmployeeClothesSizeUpdated;
+            _employeeClothesSizeStore.EmployeeClothesSizeDeleted += EmployeeClothesSizeStore_EmployeeClothesSizeDeleted;
 
             base.Dispose();
         }
