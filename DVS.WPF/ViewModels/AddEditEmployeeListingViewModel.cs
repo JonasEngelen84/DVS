@@ -88,8 +88,7 @@ namespace DVS.WPF.ViewModels
         public AvailableClothesSizeItem GetAvailableClothesSizeItemFrom_availableClothesSizes()
         {
             return _availableClothesSizes
-                .FirstOrDefault(acsi => acsi.ClothesId == SelectedEmployeeClothesSizeItem.ClothesId &&
-                acsi.ClothesSizeId == SelectedEmployeeClothesSizeItem.ClothesSize.GuidId);
+                .First(acsi => acsi.ClothesSizeId == SelectedEmployeeClothesSizeItem.ClothesSize.GuidId);
         }
         public Clothes GetClothesFrom_availableClothesSizes()
         {

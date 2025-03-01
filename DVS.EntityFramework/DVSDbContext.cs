@@ -115,8 +115,7 @@ namespace DVS.EntityFramework
 
                 entity.HasOne(cs => cs.Clothes)
                     .WithMany(c => c.Sizes)
-                    .HasForeignKey(cs => cs.ClothesId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .HasForeignKey(cs => cs.ClothesId);
 
                 entity.HasMany(cs => cs.EmployeeClothesSizes)
                     .WithOne(ecs => ecs.ClothesSize)
@@ -134,8 +133,7 @@ namespace DVS.EntityFramework
 
                 entity.HasOne(ecs => ecs.Employee)
                     .WithMany(e => e.Clothes)
-                    .HasForeignKey(ecs => ecs.EmployeeId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .HasForeignKey(ecs => ecs.EmployeeId);
 
                 entity.HasOne(ecs => ecs.ClothesSize)
                     .WithMany(cs => cs.EmployeeClothesSizes)

@@ -115,11 +115,10 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
         private async Task DeleteEmployee(Employee employee)
         {
-            employee.Clothes.Clear();
-
             try
             {
-                await employeeStore.Update(employee);
+                employee.Clothes.Clear();
+                await employeeStore.Delete(employee);
             }
             catch (Exception)
             {

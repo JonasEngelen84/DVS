@@ -10,12 +10,6 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
         public async Task Execute(Employee employee)
         {
             using DVSDbContext context = _contextFactory.Create();
-
-            //Employee employee = new()
-            //{
-            //    GuidID = guidID
-            //};
-
             context.Employees.Remove(employee);
             await context.SaveChangesAsync();
         }
