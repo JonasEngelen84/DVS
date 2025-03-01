@@ -11,6 +11,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
         EmployeeStore employeeStore,
         ClothesStore clothesStore,
         ClothesSizeStore clothesSizeStore,
+        EmployeeClothesSizeStore employeeClothesSizeStore,
         ModalNavigationStore modalNavigationStore)
         : AsyncCommandBase
     {
@@ -31,6 +32,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 await UpdateClothes(editedClothesSizesList, addEmployeeFormViewModel);
                 Employee newEmployee = CreateNewEmployee(addEmployeeFormViewModel);
                 await AddEmployee(newEmployee, addEmployeeFormViewModel);
+                AddEmployeeClothesSizeToStore(newEmployee, employeeClothesSizeStore);
 
                 addEmployeeFormViewModel.IsSubmitting = false;
                 modalNavigationStore.Close();
@@ -152,6 +154,14 @@ namespace DVS.WPF.Commands.EmployeeCommands
             {
                 ShowErrorMessageBox("Erstellen des Mitarbeiters ist fehlgeschlagen!", "AddEmployeeCommand, UpdateClothesSizes");
                 addEmployeeFormViewModel.HasError = true;
+            }
+        }
+
+        private static void AddEmployeeClothesSizeToStore(Employee newEmployee, EmployeeClothesSizeStore employeeClothesSizeStore)
+        {
+            foreach(EmployeeClothesSize ecs in newEmployee.Clothes)
+            {
+                employeeClothesSizeStore.AddToStore(ecs);
             }
         }
     }
