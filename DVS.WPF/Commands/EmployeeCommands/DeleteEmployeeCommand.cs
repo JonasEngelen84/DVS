@@ -19,28 +19,33 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
             Employee employee = employeeListingItemViewModel.Employee;
 
-            if (Confirm($"Der/die Mitarbeiter/in  {employeeListingItemViewModel.Lastname}, {employeeListingItemViewModel.Firstname}  " +
-                "wird gelöscht!\n\nSollen die Bekleidungen dem Lager zugefügt werden?", "Mitarbeiter/in löschen"))
-            {
-                foreach (EmployeeClothesSize ecs in employee.Clothes)
-                {
-                    ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes.First(cs => cs.GuidId == ecs.ClothesSizeGuidId);
-                    ClothesSize editedClothesSize = CreateEditedClothesSize(existingClothesSize, ecs.Quantity);
-                    await UpdateClothesSize(editedClothesSize);
-                    await DeleteEmployeeClothesSizes(ecs);
-                    await UpdateClothes(editedClothesSize);
-                }
-
+            if (employee.Clothes == null)
                 await DeleteEmployee(employee);
-            }
             else
             {
-                foreach (EmployeeClothesSize ecs in employee.Clothes)
+                if (Confirm($"Der/die Mitarbeiter/in  {employeeListingItemViewModel.Lastname}, {employeeListingItemViewModel.Firstname}  " +
+                    "wird gelöscht!\n\nSollen die Bekleidungen dem Lager zugefügt werden?", "Mitarbeiter/in löschen"))
                 {
-                    await DeleteEmployeeClothesSizes(ecs);
-                }
+                    foreach (EmployeeClothesSize ecs in employee.Clothes)
+                    {
+                        ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes.First(cs => cs.GuidId == ecs.ClothesSizeGuidId);
+                        ClothesSize editedClothesSize = CreateEditedClothesSize(existingClothesSize, ecs.Quantity);
+                        await UpdateClothesSize(editedClothesSize);
+                        await DeleteEmployeeClothesSizes(ecs);
+                        await UpdateClothes(editedClothesSize);
+                    }
 
-                await DeleteEmployee(employee);
+                    await DeleteEmployee(employee);
+                }
+                else
+                {
+                    foreach (EmployeeClothesSize ecs in employee.Clothes)
+                    {
+                        await DeleteEmployeeClothesSizes(ecs);
+                    }
+
+                    await DeleteEmployee(employee);
+                }
             }
 
             employeeListingItemViewModel.IsDeleting = false;
