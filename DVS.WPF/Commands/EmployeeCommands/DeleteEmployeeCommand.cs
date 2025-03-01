@@ -19,7 +19,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
             Employee employee = employeeListingItemViewModel.Employee;
 
-            if (employee.Clothes == null)
+            if (employee.Clothes.Count < 1)
                 await DeleteEmployee(employee);
             else
             {
