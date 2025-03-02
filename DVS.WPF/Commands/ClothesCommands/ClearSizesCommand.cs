@@ -19,6 +19,14 @@ namespace DVS.WPF.Commands.ClothesCommands
 
         public override async Task ExecuteAsync(object parameter)
         {
+            if (clothesListingItemViewModel.Sizes.Count == 0)
+            {
+                ShowErrorMessageBox($"Die Bekleidung  {clothesListingItemViewModel.Id}, {clothesListingItemViewModel.Name}  " +
+                    $"enthält bereits keine Größen!", "Bekleidungs-Größen löschen");
+
+                return;
+            }
+
             if (Confirm($"Alle Größen der Bekleidung  \"{clothesListingItemViewModel.Id}, {clothesListingItemViewModel.Name}\"  werden gelöscht!" +
                 "\n\nLöschen fortsetzen?", "Alle Bekleidungs-Größen löschen"))
             {
@@ -27,7 +35,7 @@ namespace DVS.WPF.Commands.ClothesCommands
 
                 Clothes editedClothes = CreateEditedClothes();
                 await DeleteClothesSizes();
-                
+
                 if (ClothesSizesToEdit.Count > 0)
                 {
                     await UpdateClothesSizes(editedClothes);
