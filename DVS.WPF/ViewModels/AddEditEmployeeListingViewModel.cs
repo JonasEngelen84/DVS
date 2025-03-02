@@ -79,7 +79,7 @@ namespace DVS.WPF.ViewModels
                 });
             }
         }
-        public AvailableClothesSizeItem GetAvailableClothesSizeItemFrom_availableClothesSizes()
+        public AvailableClothesSizeItem? GetAvailableClothesSizeItemFrom_availableClothesSizes()
         {
             return _availableClothesSizes
                 .FirstOrDefault(acsi => acsi.ClothesSizeId == SelectedEmployeeClothesSizeItem.ClothesSize.GuidId);

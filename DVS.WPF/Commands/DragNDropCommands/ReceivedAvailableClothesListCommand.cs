@@ -11,7 +11,10 @@ namespace DVS.WPF.Commands.DragNDropCommands
     {
         public override void Execute(object parameter)
         {
+            if (addEditEmployeeListingViewModel.SelectedEmployeeClothesSizeItem == null) return;
+
             AvailableClothesSizeItem? existingAcsi = addEditEmployeeListingViewModel.GetAvailableClothesSizeItemFrom_availableClothesSizes();
+            
             existingAcsi.Quantity += 1;
 
             existingAcsi = addEditEmployeeListingViewModel.GetClothesSizeFrom_clothesSizesToEdit();
