@@ -11,6 +11,7 @@ namespace DVS.WPF.Stores
         public IEnumerable<ClothesSize> ClothesSizes => _clothesSizes;
 
         public event Action<ClothesSize> ClothesSizeUpdated;
+        public event Action<ClothesSize> ClothesSizeDeleted;
 
         public void Load(List<ClothesSize> clothesSizes)
         {
@@ -48,16 +49,18 @@ namespace DVS.WPF.Stores
             ClothesSizeUpdated.Invoke(editedClothesSize);
         }
 
-        public async Task Delete(ClothesSize clothesSize)
+        public async Task Delete(ClothesSize clothesSizeToDelete)
         {
-            await deleteClothesSizeCommand.Execute(clothesSize);
+            await deleteClothesSizeCommand.Execute(clothesSizeToDelete);
 
-            int index = _clothesSizes.FindIndex(y => y.GuidId == clothesSize.GuidId);
+            int index = _clothesSizes.FindIndex(y => y.GuidId == clothesSizeToDelete.GuidId);
 
             if (index != -1)
             {
-                _clothesSizes.RemoveAll(y => y.GuidId == clothesSize.GuidId);
+                _clothesSizes.RemoveAll(y => y.GuidId == clothesSizeToDelete.GuidId);
             }
+
+            ClothesSizeDeleted.Invoke(clothesSizeToDelete);
         }
     }
 }

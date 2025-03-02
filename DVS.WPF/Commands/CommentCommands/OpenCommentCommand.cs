@@ -19,32 +19,32 @@ namespace DVS.WPF.Commands.CommentCommands
     {
         public override void Execute(object parameter)
         {
-            if (selectedClothesSizeStore.SelectedClothesSize != null)
-            {
-                CommentClothesSizeViewModel commentClothesSizeViewModel = new(modalNavigationStore,
-                                                                              clothesStore,
-                                                                              categoryStore,
-                                                                              seasonStore,
-                                                                              clothesSizeStore,
-                                                                              selectedClothesSizeStore,
-                                                                              dVSListingViewModel);
+            //if (selectedClothesSizeStore.SelectedClothesSize != null)
+            //{
+            //    CommentClothesSizeViewModel commentClothesSizeViewModel = new(modalNavigationStore,
+            //                                                                  clothesStore,
+            //                                                                  categoryStore,
+            //                                                                  seasonStore,
+            //                                                                  clothesSizeStore,
+            //                                                                  selectedClothesSizeStore,
+            //                                                                  dVSListingViewModel);
 
-                modalNavigationStore.CurrentViewModel = commentClothesSizeViewModel;
-            }
-            else if (selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize != null)
-            {
-                CommentEmployeeClothesViewModel commentEmployeeClothesViewModel = new(modalNavigationStore,
-                                                                                      employeeStore,
-                                                                                      employeeClothesSizesStore,
-                                                                                      selectedEmployeeClothesSizeStore,
-                                                                                      dVSListingViewModel);
+            //    modalNavigationStore.CurrentViewModel = commentClothesSizeViewModel;
+            //}
+            //else if (selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize != null)
+            //{
+            //    CommentEmployeeClothesViewModel commentEmployeeClothesViewModel = new(modalNavigationStore,
+            //                                                                          employeeStore,
+            //                                                                          employeeClothesSizesStore,
+            //                                                                          selectedEmployeeClothesSizeStore,
+            //                                                                          dVSListingViewModel);
 
-                modalNavigationStore.CurrentViewModel = commentEmployeeClothesViewModel;
-            }
-            else
-            {
-                ShowErrorMessageBox("Bitte das gewünschte Element auswählen.", "Kommentieren");
-            }
+            //    modalNavigationStore.CurrentViewModel = commentEmployeeClothesViewModel;
+            //}
+            //else
+            //{
+            //    ShowErrorMessageBox("Bitte das gewünschte Element auswählen.", "Kommentieren");
+            //}
         }
     }
 }

@@ -4,55 +4,135 @@ using DVS.WPF.ViewModels.ListingItems;
 
 namespace DVS.WPF.Commands.ClothesCommands
 {
-    public class ClearSizesCommand(ClothesListingItemViewModel clothesListingItemViewModel, ClothesSizeStore clothesSizeStore) : AsyncCommandBase
+    public class ClearSizesCommand(
+        ClothesListingItemViewModel clothesListingItemViewModel,
+        ClothesStore clothesStore,
+        EmployeeStore employeeStore,
+        ClothesSizeStore clothesSizeStore,
+        EmployeeClothesSizeStore employeeClothesSizeStore)
+        : AsyncCommandBase
     {
+        private readonly List<ClothesSize> ClothesSizesToEdit = [];
+        private readonly List<EmployeeClothesSize> assignedClothesSizes = [];
+
         public override async Task ExecuteAsync(object parameter)
         {
-            if (Confirm($"Alle Größen der Bekleidung  \"{clothesListingItemViewModel.Name}\"  werden gelöscht!" +
-                $"\nDie Kleidungsstücke, dieser Bekleidung, bleiben den Mitarbeitern erhalten." +
-                $"\n\nLöschen fortsetzen?", "Alle Bekleidungsgrößen löschen"))
+            if (Confirm($"Alle Größen der Bekleidung  \"{clothesListingItemViewModel.Id}, {clothesListingItemViewModel.Name}\"  werden gelöscht!" +
+                "\n\nLöschen fortsetzen?", "Alle Bekleidungs-Größen löschen"))
             {
                 clothesListingItemViewModel.IsDeleting = true;
                 clothesListingItemViewModel.HasError = false;
 
-                Clothes newClothes = new(clothesListingItemViewModel.Id,
-                                         clothesListingItemViewModel.Name,
-                                         clothesListingItemViewModel.Category,
-                                         clothesListingItemViewModel.Season,
-                                         clothesListingItemViewModel.Comment);
+                Clothes editedClothes = CreateEditedClothes();
+                await DeleteClothesSizes(editedClothes);
+                
+                if (ClothesSizesToEdit.Count > 0)
+                {
+                    await UpdateClothesSizes(editedClothes);
+                }
 
-                // IEnumerable kann nicht in Foreach durchlaufen und bearbeitet werden!
-                List<ClothesSize> ClothesSizesToDelete = new(clothesListingItemViewModel.Clothes.Sizes);
-                foreach (ClothesSize clothesSize in ClothesSizesToDelete)
+                await UpdateClothes(editedClothes);
+
+                clothesListingItemViewModel.IsDeleting = false;
+            }
+        }
+
+        private Clothes CreateEditedClothes()
+        {
+            Clothes editedClothes = new(clothesListingItemViewModel.Id,
+                                        clothesListingItemViewModel.Name,
+                                        clothesListingItemViewModel.Category,
+                                        clothesListingItemViewModel.Season,
+                                        clothesListingItemViewModel.Comment)
+            {
+                Sizes = []
+            };
+
+            return editedClothes;
+        }
+
+        private async Task DeleteClothesSizes(Clothes editedClothes)
+        {
+            foreach (ClothesSize clothesSize in clothesListingItemViewModel.Sizes)
+            {
+                EmployeeClothesSize? assignedClothesSize = employeeClothesSizeStore.EmployeeClothesSizes
+                    .FirstOrDefault(ecs => ecs.ClothesSizeGuidId == clothesSize.GuidId);
+
+                if (assignedClothesSize != null)
+                {
+                    ClothesSizesToEdit.Add(clothesSize);
+                    ShowErrorMessageBox($"Löschen der Größe  {clothesSize.Size}  ist nicht möglich, da diese Größe in Besitz ist!", "Bekleidungs-Größen löschen");
+                }
+                else
                 {
                     try
                     {
                         await clothesSizeStore.Delete(clothesSize);
+
+                        ClothesSize existingClothesSize = clothesListingItemViewModel.Sizes
+                            .First(cs => cs.GuidId == clothesSize.GuidId);
+
+                        editedClothes.Sizes.Remove(existingClothesSize);
                     }
-                    catch (Exception)
+                    catch
                     {
-                        ShowErrorMessageBox("Löschen der Bekleidungsgrößen ist fehlgeschlagen!", "ClearSizesCommand DeleteClothesSizesAsync");
-
-                        clothesListingItemViewModel.HasError = false;
+                        ShowErrorMessageBox($"Löschen der Größe  {clothesSize.Size}  ist fehlgeschlagen!", "Bekleidungs-Größen löschen");
                     }
                 }
+            }
+        }
 
-                // Aktualisieren der Clothes-Listen von Category und Season
-                Clothes existingClothes = newClothes.Category.Clothes.FirstOrDefault(c => c.Id == clothesListingItemViewModel.Clothes.Id);
-                if (existingClothes != null)
+        private async Task UpdateClothesSizes(Clothes editedClothes)
+        {            
+            foreach (ClothesSize clothesSize in ClothesSizesToEdit)
+            {
+                ClothesSize editedClothesSize = new(
+                    clothesSize.GuidId,
+                    editedClothes,
+                    clothesSize.Size,
+                    clothesSize.Quantity,
+                    clothesSize.Comment)
                 {
-                    newClothes.Category.Clothes.Remove(existingClothes);
-                    newClothes.Category.Clothes.Add(newClothes);
+                    EmployeeClothesSizes = clothesSize.EmployeeClothesSizes
+                };
+
+                try
+                {
+                    await clothesSizeStore.Update(editedClothesSize);
+                }
+                catch
+                {
+                    ShowErrorMessageBox("Löschen der Bekleidungs-Größen ist fehlgeschlagen!", "Bekleidungs-Größen löschen");
                 }
 
-                existingClothes = newClothes.Season.Clothes.FirstOrDefault(c => c.Id == clothesListingItemViewModel.Clothes.Id);
-                if (existingClothes != null)
-                {
-                    newClothes.Season.Clothes.Remove(existingClothes);
-                    newClothes.Season.Clothes.Add(newClothes);
-                }
+                editedClothes.Sizes.Add(editedClothesSize);
+            }
+        }
 
-                clothesListingItemViewModel.IsDeleting = false;
+        private async Task UpdateClothes(Clothes editedClothes)
+        {
+            try
+            {
+                await clothesStore.Update(editedClothes);
+            }
+            catch
+            {
+                ShowErrorMessageBox("Löschen der Bekleidungs-Größen ist fehlgeschlagen!", "Bekleidungs-Größen löschen");
+            }
+        }
+
+        private async Task UpdateEmployeeClothesSizes(Clothes editedClothes)
+        {
+            foreach (ClothesSize clothesSize in  editedClothes.Sizes)
+            {
+                assignedClothesSizes = employeeClothesSizeStore.EmployeeClothesSizes
+                .Where(ecs => ecs.ClothesSizeGuidId == clothesSize.GuidId)
+                .ToList();
+
+                foreach (EmployeeClothesSize ecs in assignedClothesSizes)
+                {
+                    EmployeeClothesSize editedEcs = new(ecs.Employee, cl)
+                }
             }
         }
     }

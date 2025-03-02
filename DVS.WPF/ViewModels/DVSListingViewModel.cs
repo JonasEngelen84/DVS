@@ -74,6 +74,7 @@ namespace DVS.WPF.ViewModels
             _employeeStore.EmployeeUpdated += EmployeeStore_EmployeeUpdated;
             _employeeStore.EmployeeDeleted += EmployeeStore_EmployeeDeleted;
             _clothesSizeStore.ClothesSizeUpdated += ClothesSizeStore_ClothesSizeUpdated;
+            _clothesSizeStore.ClothesSizeDeleted += ClothesSizeStore_ClothesSizeDeleted;
             _employeeClothesSizeStore.EmployeeClothesSizeUpdated += EmployeeClothesSizeStore_EmployeeClothesSizeUpdated;
             _employeeClothesSizeStore.EmployeeClothesSizeDeleted += EmployeeClothesSizeStore_EmployeeClothesSizeDeleted;
 
@@ -191,6 +192,16 @@ namespace DVS.WPF.ViewModels
                 _clothesSizeCollection.Add(editedClothesSize);
             }
         }
+        private void ClothesSizeStore_ClothesSizeDeleted(ClothesSize ClothesSizeToDelete)
+        {
+            ClothesSize existingClothesSize = _clothesSizeCollection
+                .First(cs => cs.GuidId == ClothesSizeToDelete.GuidId);
+
+            if (existingClothesSize != null)
+            {
+                _clothesSizeCollection.Remove(existingClothesSize);
+            }
+        }
         
         private void EmployeeClothesSizeStore_EmployeeClothesSizeUpdated(EmployeeClothesSize editedEcs)
         {
@@ -222,6 +233,8 @@ namespace DVS.WPF.ViewModels
             _employeeStore.EmployeeAdded -= EmployeeStore_EmployeeAdded;
             _employeeStore.EmployeeUpdated -= EmployeeStore_EmployeeUpdated;
             _employeeStore.EmployeeDeleted += EmployeeStore_EmployeeDeleted;
+            _clothesSizeStore.ClothesSizeUpdated -= ClothesSizeStore_ClothesSizeUpdated;
+            _clothesSizeStore.ClothesSizeDeleted -= ClothesSizeStore_ClothesSizeDeleted;
             _employeeClothesSizeStore.EmployeeClothesSizeUpdated += EmployeeClothesSizeStore_EmployeeClothesSizeUpdated;
             _employeeClothesSizeStore.EmployeeClothesSizeDeleted += EmployeeClothesSizeStore_EmployeeClothesSizeDeleted;
 
