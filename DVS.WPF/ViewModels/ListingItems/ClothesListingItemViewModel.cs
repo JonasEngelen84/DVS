@@ -94,7 +94,14 @@ namespace DVS.WPF.ViewModels.ListingItems
                 dVSListingViewModel);
 
             DeleteClothes = new DeleteClothesCommand(this, clothesStore);
-            ClearClothesSizes = new ClearSizesCommand(this, clothesSizeStore);
+
+            ClearClothesSizes = new ClearSizesCommand(
+                this,
+                clothesStore,
+                employeeStore,
+                clothesSizeStore,
+                employeeClothesSizesStore);
+
             PrintClothes = new OpenPrintClothesCommand();
         }
 

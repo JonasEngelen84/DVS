@@ -12,8 +12,10 @@ namespace DVS.WPF.Commands.ClothesCommands
         EmployeeClothesSizeStore employeeClothesSizeStore)
         : AsyncCommandBase
     {
+        private readonly List<ClothesSize> ClothesSizesToDelete = new(clothesListingItemViewModel.Sizes);
         private readonly List<ClothesSize> ClothesSizesToEdit = [];
-        private readonly List<EmployeeClothesSize> assignedClothesSizes = [];
+        private List<EmployeeClothesSize> assignedClothesSizes = [];
+        private readonly List<EmployeeClothesSize> EditedEcs = [];
 
         public override async Task ExecuteAsync(object parameter)
         {
@@ -24,11 +26,13 @@ namespace DVS.WPF.Commands.ClothesCommands
                 clothesListingItemViewModel.HasError = false;
 
                 Clothes editedClothes = CreateEditedClothes();
-                await DeleteClothesSizes(editedClothes);
+                await DeleteClothesSizes();
                 
                 if (ClothesSizesToEdit.Count > 0)
                 {
                     await UpdateClothesSizes(editedClothes);
+                    await UpdateEmployeeClothesSizes(editedClothes);
+                    await UpdateEmployee();
                 }
 
                 await UpdateClothes(editedClothes);
@@ -51,9 +55,9 @@ namespace DVS.WPF.Commands.ClothesCommands
             return editedClothes;
         }
 
-        private async Task DeleteClothesSizes(Clothes editedClothes)
+        private async Task DeleteClothesSizes()
         {
-            foreach (ClothesSize clothesSize in clothesListingItemViewModel.Sizes)
+            foreach (ClothesSize clothesSize in ClothesSizesToDelete)
             {
                 EmployeeClothesSize? assignedClothesSize = employeeClothesSizeStore.EmployeeClothesSizes
                     .FirstOrDefault(ecs => ecs.ClothesSizeGuidId == clothesSize.GuidId);
@@ -68,11 +72,6 @@ namespace DVS.WPF.Commands.ClothesCommands
                     try
                     {
                         await clothesSizeStore.Delete(clothesSize);
-
-                        ClothesSize existingClothesSize = clothesListingItemViewModel.Sizes
-                            .First(cs => cs.GuidId == clothesSize.GuidId);
-
-                        editedClothes.Sizes.Remove(existingClothesSize);
                     }
                     catch
                     {
@@ -109,6 +108,74 @@ namespace DVS.WPF.Commands.ClothesCommands
             }
         }
 
+        private async Task UpdateEmployeeClothesSizes(Clothes editedClothes)
+        {
+            foreach (ClothesSize clothesSize in editedClothes.Sizes)
+            {
+                assignedClothesSizes = employeeClothesSizeStore.EmployeeClothesSizes
+                .Where(ecs => ecs.ClothesSizeGuidId == clothesSize.GuidId)
+                .ToList();
+
+                foreach (EmployeeClothesSize ecs in assignedClothesSizes)
+                {
+                    EmployeeClothesSize editedEcs = new(
+                        ecs.GuidId,
+                        ecs.Employee,
+                        clothesSize,
+                        ecs.Quantity,
+                        ecs.Comment);
+
+                    EditedEcs.Add(editedEcs);
+
+                    try
+                    {
+                        await employeeClothesSizeStore.Update(editedEcs);
+                    }
+                    catch
+                    {
+                        ShowErrorMessageBox("Löschen der Bekleidungs-Größen ist fehlgeschlagen!", "Bekleidungs-Größen löschen");
+                    }
+                }
+            }
+        }
+        
+        private async Task UpdateEmployee()
+        {
+            List<EmployeeClothesSize> ecsOwner = [];
+
+            foreach (EmployeeClothesSize employeeClothesSize in EditedEcs)
+            {
+                ecsOwner = EditedEcs.Where(ecs => ecs.EmployeeId == employeeClothesSize.EmployeeId).ToList();
+
+                Employee editedEmployee = new(
+                    employeeClothesSize.EmployeeId,
+                    employeeClothesSize.Employee.Lastname,
+                    employeeClothesSize.Employee.Firstname,
+                    employeeClothesSize.Employee.Comment)
+                {
+                    Clothes = employeeClothesSize.Employee.Clothes
+                };
+
+                foreach (EmployeeClothesSize employeeCS in ecsOwner)
+                {
+                    EmployeeClothesSize existingEcs = editedEmployee.Clothes
+                        .First(ecs => ecs.GuidId == employeeCS.GuidId);
+
+                    editedEmployee.Clothes.Remove(existingEcs);
+                    editedEmployee.Clothes.Add(employeeCS);
+                }
+
+                try
+                {
+                    await employeeStore.Update(editedEmployee);
+                }
+                catch
+                {
+                    ShowErrorMessageBox("Löschen der Bekleidungs-Größen ist fehlgeschlagen!", "Bekleidungs-Größen löschen");
+                }
+            }
+        }
+
         private async Task UpdateClothes(Clothes editedClothes)
         {
             try
@@ -118,21 +185,6 @@ namespace DVS.WPF.Commands.ClothesCommands
             catch
             {
                 ShowErrorMessageBox("Löschen der Bekleidungs-Größen ist fehlgeschlagen!", "Bekleidungs-Größen löschen");
-            }
-        }
-
-        private async Task UpdateEmployeeClothesSizes(Clothes editedClothes)
-        {
-            foreach (ClothesSize clothesSize in  editedClothes.Sizes)
-            {
-                assignedClothesSizes = employeeClothesSizeStore.EmployeeClothesSizes
-                .Where(ecs => ecs.ClothesSizeGuidId == clothesSize.GuidId)
-                .ToList();
-
-                foreach (EmployeeClothesSize ecs in assignedClothesSizes)
-                {
-                    EmployeeClothesSize editedEcs = new(ecs.Employee, cl)
-                }
             }
         }
     }
