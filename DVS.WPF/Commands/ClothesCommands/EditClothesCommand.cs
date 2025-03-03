@@ -19,7 +19,7 @@ namespace DVS.WPF.Commands.ClothesCommands
         {
             EditClothesFormViewModel editClothesFormViewModel = editClothesViewModel.EditClothesFormViewModel;
 
-            if (Confirm($"Soll die Bekleidung  \"{editClothesFormViewModel.Name}\"  und Ihre Schnittstellen bearbeiten werden?", "Bekleidung bearbeiten"))
+            if (Confirm($"Soll die Bekleidung  {editClothesFormViewModel.Name}  und Ihre Schnittstellen bearbeiten werden?", "Bekleidung bearbeiten"))
             {
                 editClothesFormViewModel.HasError = false;
                 editClothesFormViewModel.IsSubmitting = true;
