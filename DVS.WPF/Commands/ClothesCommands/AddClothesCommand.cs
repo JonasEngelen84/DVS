@@ -32,10 +32,9 @@ namespace DVS.WPF.Commands.ClothesCommands
             if (selectedSizes != null)
             {
                 CreateClothesSizes(selectedSizes, newClothes);
-                AddClothesSizeToStore(newClothes, clothesSizeStore);
             }
 
-            await AddClothesToDB(newClothes, addClothesFormViewModel);
+            await AddClothes(newClothes, addClothesFormViewModel);
 
             addClothesFormViewModel.IsSubmitting = false;
             modalNavigationStore.Close();
@@ -70,7 +69,7 @@ namespace DVS.WPF.Commands.ClothesCommands
                     .ToList();
         }
 
-        private static void CreateClothesSizes(List<SizeListingItemViewModel> selectedSizes, Clothes newClothes)
+        private void CreateClothesSizes(List<SizeListingItemViewModel> selectedSizes, Clothes newClothes)
         {
             foreach (SizeListingItemViewModel size in selectedSizes)
             {
@@ -79,19 +78,12 @@ namespace DVS.WPF.Commands.ClothesCommands
                     EmployeeClothesSizes = []
                 };
 
-                newClothes.Sizes.Add(newClothesSize);                
+                newClothes.Sizes.Add(newClothesSize);
+                clothesSizeStore.AddToStore(newClothesSize);
             }
         }
 
-        private static void AddClothesSizeToStore(Clothes newClothes, ClothesSizeStore clothesSizeStore)
-        {
-            foreach (ClothesSize cs in newClothes.Sizes)
-            {
-                clothesSizeStore.AddToStore(cs);
-            }
-        }
-
-        private async Task AddClothesToDB(Clothes newClothes, AddClothesFormViewModel addClothesFormViewModel)
+        private async Task AddClothes(Clothes newClothes, AddClothesFormViewModel addClothesFormViewModel)
         {
             try
             {

@@ -1,5 +1,4 @@
-﻿using System;
-using DVS.WPF.ViewModels;
+﻿using DVS.WPF.ViewModels;
 
 namespace DVS.WPF.Stores
 {

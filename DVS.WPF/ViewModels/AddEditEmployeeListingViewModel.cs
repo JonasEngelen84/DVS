@@ -18,7 +18,7 @@ namespace DVS.WPF.ViewModels
         private readonly List<AvailableClothesSizeItem> _clothesSizesToEdit = [];
         private readonly List<Clothes> _clothesToEdit = [];
 
-        private AvailableClothesSizeItem? _selectedAvailableClothesSizeItem;
+        private AvailableClothesSizeItem _selectedAvailableClothesSizeItem;
         public AvailableClothesSizeItem SelectedAvailableClothesSizeItem
         {
             get => _selectedAvailableClothesSizeItem;
@@ -32,7 +32,7 @@ namespace DVS.WPF.ViewModels
             }
         }
 
-        private EmployeeClothesSizeListingItemViewModel? _selectedEmployeeClothesSizeItem;
+        private EmployeeClothesSizeListingItemViewModel _selectedEmployeeClothesSizeItem;
         public EmployeeClothesSizeListingItemViewModel SelectedEmployeeClothesSizeItem
         {
             get => _selectedEmployeeClothesSizeItem;
