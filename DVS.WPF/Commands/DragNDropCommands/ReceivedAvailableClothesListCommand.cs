@@ -13,15 +13,20 @@ namespace DVS.WPF.Commands.DragNDropCommands
         {
             if (addEditEmployeeListingViewModel.SelectedEmployeeClothesSizeItem == null) return;
 
-            AvailableClothesSizeItem? existingAcsi = addEditEmployeeListingViewModel.GetAvailableClothesSizeItemFrom_availableClothesSizes();
-            
-            existingAcsi.Quantity += 1;
+            AvailableClothesSizeItem? editedAcsi = addEditEmployeeListingViewModel
+                .GetAvailableClothesSizeItemFrom_availableClothesSizes(addEditEmployeeListingViewModel.SelectedEmployeeClothesSizeItem.ClothesSizeId);
 
-            existingAcsi = addEditEmployeeListingViewModel.GetClothesSizeFrom_clothesSizesToEdit();
-            if (existingAcsi == null) addItemToEditedClothesSizesList.Invoke(existingAcsi);
+            editedAcsi.Quantity += 1;
 
-            Clothes? existingClothes = addEditEmployeeListingViewModel.GetClothesFrom_clothesToEdit();
-            if (existingClothes == null) addItemToEditedClothesList.Invoke(existingAcsi.ClothesSize.Clothes);
+            AvailableClothesSizeItem? existingAcsi = addEditEmployeeListingViewModel
+                .GetClothesSizeFrom_clothesSizesToEdit(addEditEmployeeListingViewModel.SelectedEmployeeClothesSizeItem.ClothesSizeId);
+
+            if (existingAcsi == null) addItemToEditedClothesSizesList.Invoke(editedAcsi);
+
+            Clothes? existingClothes = addEditEmployeeListingViewModel
+                .GetClothesFrom_clothesToEdit(addEditEmployeeListingViewModel.SelectedEmployeeClothesSizeItem.ClothesId);
+
+            if (existingClothes == null) addItemToEditedClothesList.Invoke(editedAcsi.ClothesSize.Clothes);
         }
     }
 }

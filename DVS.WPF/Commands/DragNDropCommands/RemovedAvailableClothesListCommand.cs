@@ -44,11 +44,15 @@ namespace DVS.WPF.Commands.DragNDropCommands
 
         private void UpdateEditedList()
         {
-            AvailableClothesSizeItem? existingAcsi = addEditEmployeeListingViewModel.GetClothesSizeFrom_clothesSizesToEdit();
+            AvailableClothesSizeItem? existingAcsi = addEditEmployeeListingViewModel
+                .GetClothesSizeFrom_clothesSizesToEdit(addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesSizeId);
+
             if (existingAcsi == null)
                 addItemToEditedClothesSizesList.Invoke(addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem);
 
-            Clothes? existingClothes = addEditEmployeeListingViewModel.GetClothesFrom_clothesToEdit();
+            Clothes? existingClothes = addEditEmployeeListingViewModel
+                .GetClothesFrom_clothesToEdit(addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesId);
+
             if (existingClothes == null)
                 addItemToEditedClothesList.Invoke(addEditEmployeeListingViewModel.SelectedAvailableClothesSizeItem.ClothesSize.Clothes);
         }

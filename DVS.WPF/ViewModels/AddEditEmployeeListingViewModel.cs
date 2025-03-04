@@ -27,6 +27,7 @@ namespace DVS.WPF.ViewModels
                 if (_selectedAvailableClothesSizeItem != value)
                 {
                     _selectedAvailableClothesSizeItem = value;
+                    _selectedEmployeeClothesSizeItem = null;
                 }
             }
         }
@@ -40,6 +41,7 @@ namespace DVS.WPF.ViewModels
                 if (_selectedEmployeeClothesSizeItem != value)
                 {
                     _selectedEmployeeClothesSizeItem = value;
+                    _selectedAvailableClothesSizeItem = null;
                 }
             }
         }
@@ -79,10 +81,9 @@ namespace DVS.WPF.ViewModels
                 });
             }
         }
-        public AvailableClothesSizeItem? GetAvailableClothesSizeItemFrom_availableClothesSizes()
+        public AvailableClothesSizeItem? GetAvailableClothesSizeItemFrom_availableClothesSizes(Guid guidId)
         {
-            return _availableClothesSizes
-                .FirstOrDefault(acsi => acsi.ClothesSizeId == SelectedEmployeeClothesSizeItem.ClothesSize.GuidId);
+            return _availableClothesSizes.FirstOrDefault(acsi => acsi.ClothesSizeId == guidId);
         }
         public Clothes GetClothesFrom_availableClothesSizes()
         {
@@ -119,21 +120,17 @@ namespace DVS.WPF.ViewModels
         private void AddItemToEmployeeClothesList(EmployeeClothesSizeListingItemViewModel ecslivm) => _employeeClothesList.Add(ecslivm);
         private void RemoveItemFromEmployeeClothesList(EmployeeClothesSizeListingItemViewModel ecslivm) => _employeeClothesList.Remove(ecslivm);
 
-        public AvailableClothesSizeItem? GetClothesSizeFrom_clothesSizesToEdit()
+        public AvailableClothesSizeItem? GetClothesSizeFrom_clothesSizesToEdit(Guid guidId)
         {
-            var found = _clothesSizesToEdit
-                .FirstOrDefault(acsi => acsi.ClothesSizeId == SelectedAvailableClothesSizeItem.ClothesSizeId);
-
+            var found = _clothesSizesToEdit.FirstOrDefault(acsi => acsi.ClothesSizeId == guidId);
             return found == default ? (AvailableClothesSizeItem?)null : found;
         }
         public List<AvailableClothesSizeItem> GetAllClothesSizesToEdit() { return _clothesSizesToEdit; }
         private void AddClothesSizesToEdit(AvailableClothesSizeItem acsi) => _clothesSizesToEdit.Add(acsi);
         
-        public Clothes? GetClothesFrom_clothesToEdit()
+        public Clothes? GetClothesFrom_clothesToEdit(string Id)
         {
-            var found = _clothesToEdit
-                .FirstOrDefault(c => c == SelectedAvailableClothesSizeItem.ClothesSize.Clothes);
-
+            var found = _clothesToEdit.FirstOrDefault(c => c.Id == Id);
             return found == default ? (Clothes?)null : found;
         }
         public List<Clothes> GetAllClothesToEdit() { return _clothesToEdit; }
