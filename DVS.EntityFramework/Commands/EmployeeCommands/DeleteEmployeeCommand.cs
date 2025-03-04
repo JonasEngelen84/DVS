@@ -7,10 +7,9 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
     {
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
-        public async Task Execute(string Id)
+        public async Task Execute(Employee employee)
         {
             using DVSDbContext context = _contextFactory.Create();
-            Employee? employee = await context.Employees.FindAsync(Id);
             context.Employees.Remove(employee);
             await context.SaveChangesAsync();
         }

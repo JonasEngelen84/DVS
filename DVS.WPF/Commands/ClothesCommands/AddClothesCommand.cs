@@ -71,13 +71,9 @@ namespace DVS.WPF.Commands.ClothesCommands
 
         private static void CreateClothesSizes(List<SizeListingItemViewModel> selectedSizes, Clothes newClothes)
         {
-            foreach (SizeListingItemViewModel slivm in selectedSizes)
+            foreach (SizeListingItemViewModel size in selectedSizes)
             {
-                ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, slivm.Size, slivm.Quantity, slivm.Comment)
-                {
-                    EmployeeClothesSizes = []
-                };
-
+                ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size.Size, size.Quantity, size.Comment);
                 newClothes.Sizes.Add(newClothesSize);                
             }
         }
