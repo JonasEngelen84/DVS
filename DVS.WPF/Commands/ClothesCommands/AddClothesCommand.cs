@@ -16,28 +16,29 @@ namespace DVS.WPF.Commands.ClothesCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddClothesFormViewModel addClothesFormViewModel = addClothesViewModel.AddClothesFormViewModel;
+
+            addClothesFormViewModel.HasError = false;
+            addClothesFormViewModel.IsSubmitting = true;
             
             if (CheckClothesId(addClothesFormViewModel) != null)
-                ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
-            else
             {
-                addClothesFormViewModel.HasError = false;
-                addClothesFormViewModel.IsSubmitting = true;
-
-                Clothes newClothes = CreateClothes(addClothesFormViewModel);
-                List<SizeListingItemViewModel> selectedSizes = GetSizes(addClothesFormViewModel);
-
-                if (selectedSizes != null)
-                {
-                    CreateClothesSizes(selectedSizes, newClothes);
-                    AddClothesSizeToStore(newClothes, clothesSizeStore);
-                }
-                
-                await AddClothesToDB(newClothes, addClothesFormViewModel);
-
-                addClothesFormViewModel.IsSubmitting = false;
-                modalNavigationStore.Close();
+                ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
+                return;
             }
+
+            Clothes newClothes = CreateClothes(addClothesFormViewModel);
+            List<SizeListingItemViewModel> selectedSizes = GetSizes(addClothesFormViewModel);
+
+            if (selectedSizes != null)
+            {
+                CreateClothesSizes(selectedSizes, newClothes);
+                AddClothesSizeToStore(newClothes, clothesSizeStore);
+            }
+
+            await AddClothesToDB(newClothes, addClothesFormViewModel);
+
+            addClothesFormViewModel.IsSubmitting = false;
+            modalNavigationStore.Close();
         }
 
         private Clothes CheckClothesId(AddClothesFormViewModel addClothesFormViewModel)
@@ -73,7 +74,11 @@ namespace DVS.WPF.Commands.ClothesCommands
         {
             foreach (SizeListingItemViewModel size in selectedSizes)
             {
-                ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size.Size, size.Quantity, size.Comment);
+                ClothesSize newClothesSize = new(Guid.NewGuid(), newClothes, size.Size, size.Quantity, size.Comment)
+                {
+                    EmployeeClothesSizes = []
+                };
+
                 newClothes.Sizes.Add(newClothesSize);                
             }
         }

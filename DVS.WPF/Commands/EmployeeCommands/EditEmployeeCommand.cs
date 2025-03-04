@@ -21,13 +21,12 @@ namespace DVS.WPF.Commands.EmployeeCommands
         {
             EditEmployeeFormViewModel editEmployeeFormViewModel = editEmployeeViewModel.EditEmployeeFormViewModel;
 
+            editEmployeeFormViewModel.HasError = false;
+            editEmployeeFormViewModel.IsSubmitting = true;
+
             if (Confirm($"Soll der/die Mitarbeiter/in  \"{editEmployeeFormViewModel.Lastname}\", \"{editEmployeeFormViewModel.Firstname}\"" +
                 "  bearbeiten werden?", "Mitarbeiter bearbeiten"))
-            {
-                editEmployeeFormViewModel.HasError = false;
-                editEmployeeFormViewModel.IsSubmitting = true;
-
-
+            {                
                 await UpdateClothesSizes(editEmployeeFormViewModel);
                 await UpdateClothes(editedClothesSizesList, editEmployeeFormViewModel);
                 Employee editedEmployee = EditEmployee(editEmployeeFormViewModel);
