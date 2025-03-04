@@ -21,36 +21,37 @@
                    FontSize="14"
                    FontWeight="Bold" />
             <!-- Id -->
-            <TextBox HorizontalAlignment="Stretch"
+            <TextBox Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalAlignment="Stretch"
                      Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
+                     IsReadOnly="True" />
 
             <Label Content="Nachname:"
                    Margin="-5 0 0 -3"
                    FontSize="14"
                    FontWeight="Bold" />
             <!-- Lastname -->
-            <TextBox HorizontalAlignment="Stretch"
-                     Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalAlignment="Stretch"
+                     Style="{StaticResource TextBoxStyle}" />
 
             <Label Content="Vorname:"
                    Margin="-5 0 0 -3"
                    FontSize="14"
                    FontWeight="Bold" />
             <!-- Firstname -->
-            <TextBox HorizontalAlignment="Stretch"
-                     Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalAlignment="Stretch"
+                     Style="{StaticResource TextBoxStyle}" />
 
             <Label Content="Kommentar:"
                    Margin="-5 0 0 -3"
                    FontSize="14"
                    FontWeight="Bold" />
             <!-- Comment -->
-            <TextBox HorizontalAlignment="Stretch"
-                     Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+                     HorizontalAlignment="Stretch"
+                     Style="{StaticResource TextBoxStyle}" />
 
             <Label Content="Bekleidung:"
                    Margin="-5 0 0 -3"

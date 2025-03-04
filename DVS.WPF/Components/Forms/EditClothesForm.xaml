@@ -39,24 +39,25 @@
                    FontSize="14"
                    FontWeight="Bold" />
             <!-- Id -->
-            <TextBox Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding Id, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource TextBoxStyle}"
+                     IsReadOnly="True" />
 
             <Label Content="Name:"
                    Margin="-5 0 0 -3"
                    FontSize="14"
                    FontWeight="Bold" />
             <!-- Name -->
-            <TextBox Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource TextBoxStyle}" />
 
             <Label Content="Kommentar:"
                    Margin="-5 0 0 -3"
                    FontSize="14"
                    FontWeight="Bold" />
             <!-- Comment -->
-            <TextBox Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+                     Style="{StaticResource TextBoxStyle}" />
 
             <Label Content="Kategorie:"
                    Margin="-5 0 0 -3"
