@@ -24,7 +24,7 @@ namespace DVS.WPF.ViewModels.Views
             EmployeeClothesSizeStore employeeClothesSizesStore,
             EmployeeStore employeeStore,
             DVSListingViewModel dVSListingViewModel)
-        {
+        {            
             SizesCategoriesSeasonsListingViewModel = new(clothes, categoryStore, seasonStore);
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
 
@@ -70,9 +70,9 @@ namespace DVS.WPF.ViewModels.Views
             {
                 Id = clothes.Id,
                 Name = clothes.Name,
-                Category = SizesCategoriesSeasonsListingViewModel.Categories
+                Category = categoryStore.Categories
                     .First(c => c.GuidId == clothes.Category?.GuidId),
-                Season = SizesCategoriesSeasonsListingViewModel.Seasons
+                Season = seasonStore.Seasons
                     .First(s => s.GuidId == clothes.Season?.GuidId),
                 Comment = clothes.Comment
             };

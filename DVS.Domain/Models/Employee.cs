@@ -4,10 +4,10 @@ namespace DVS.Domain.Models
 {
     public class Employee
     {
-        public string Id { get; private set; }
-        public string Lastname { get; private set; }
-        public string Firstname { get; private set; }
-        public string Comment { get; private set; }
+        public string Id { get; }
+        public string Lastname { get; }
+        public string Firstname { get; }
+        public string Comment { get; }
 
         public ObservableCollection<EmployeeClothesSize> Clothes { get; set; }
 

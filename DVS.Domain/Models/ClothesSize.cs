@@ -5,11 +5,11 @@ namespace DVS.Domain.Models
     public class ClothesSize
     {
         public Guid GuidId { get; }
-        public string ClothesId { get; private set; }
-        public Clothes Clothes { get; private set; }
-        public string Size { get; private set; }
-        public int Quantity { get; private set; }
-        public string Comment { get; private set; }
+        public string ClothesId { get; }
+        public Clothes Clothes { get; }
+        public string Size { get; }
+        public int Quantity { get; }
+        public string Comment { get; }
 
         public ObservableCollection<EmployeeClothesSize> EmployeeClothesSizes { get; set; }
 

@@ -5,7 +5,7 @@ namespace DVS.Domain.Models
     public class Season
     {
         public Guid GuidId { get; }
-        public string Name { get; private set; }
+        public string Name { get; }
 
         public ObservableCollection<Clothes> Clothes { get; set; }
 

@@ -3,12 +3,12 @@
     public class EmployeeClothesSize
     {
         public Guid GuidId { get; }
-        public Guid ClothesSizeGuidId { get; private set; }
-        public string EmployeeId { get; private set; }
-        public int Quantity { get; private set; }
-        public string Comment { get; private set; }
-        public Employee Employee { get; private set; }
-        public ClothesSize ClothesSize { get; private set; }
+        public Guid ClothesSizeGuidId { get; }
+        public string EmployeeId { get; }
+        public int Quantity { get; }
+        public string Comment { get; }
+        public Employee Employee { get; }
+        public ClothesSize ClothesSize { get; }
 
         public EmployeeClothesSize(
             Guid guidId,

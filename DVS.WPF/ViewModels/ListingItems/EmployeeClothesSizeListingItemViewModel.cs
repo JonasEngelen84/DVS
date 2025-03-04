@@ -27,7 +27,7 @@ namespace DVS.WPF.ViewModels.ListingItems
         private int _quantity;
         public int Quantity
         {
-            get { return _quantity; }
+            get => _quantity;
 
             set
             {

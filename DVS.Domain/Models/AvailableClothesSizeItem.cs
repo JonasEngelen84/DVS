@@ -18,7 +18,9 @@
 
             set
             {
-                _quantity = value;
+                if (_quantity != value)
+                    _quantity = value;
+
                 OnPropertyChanged(nameof(Quantity));
             }
         }
