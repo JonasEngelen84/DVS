@@ -60,7 +60,7 @@
             <!--EmployeeClothesList-->
             <components:AddEditEmployee_EmployeeClothesList Foreground="Black"
                                                                        Background="WhiteSmoke"
-                                                                       IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
+                                                                       IncomingClothesItem="{Binding SelectedAvailableClothesSizeItem}"
                                                                        ClothesItemDropCommand="{Binding ClothesItemReceivedNewEmployeeClothesListCommand}"
                                                                        ClothesItemRemovedCommand="{Binding ClothesItemRemovedAvailableClothesListCommand}" />
         </StackPanel>
@@ -73,7 +73,7 @@
                    FontWeight="Bold" />
             <components:AddEditEmployee_AvailableClothesList Foreground="Black"
                                                                      Background="WhiteSmoke"
-                                                                     IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
+                                                                     IncomingClothesItem="{Binding SelectedEmployeeClothesSizeItem}"
                                                                      ClothesItemDropCommand="{Binding ClothesItemReceivedAvailableClothesListCommand}"
                                                                      ClothesItemRemovedCommand="{Binding ClothesItemRemovedNewEmployeeClothesListCommand}" />
         </StackPanel>

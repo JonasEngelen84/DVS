@@ -58,7 +58,7 @@
                    FontWeight="Bold" />
             <!--EmployeeClothesList-->
             <components:AddEditEmployee_EmployeeClothesList Foreground="Black"
-                                                            IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
+                                                            IncomingClothesItem="{Binding SelectedAvailableClothesSizeItem}"
                                                             ClothesItemDropCommand="{Binding ClothesItemReceivedNewEmployeeClothesListCommand}"
                                                             ClothesItemRemovedCommand="{Binding ClothesItemRemovedAvailableClothesListCommand}" />
         </StackPanel>
@@ -70,7 +70,7 @@
                    FontSize="14"
                    FontWeight="Bold" />
             <components:AddEditEmployee_AvailableClothesList Foreground="Black"
-                                                             IncomingClothesItem="{Binding SelectedDetailedClothesItem}"
+                                                             IncomingClothesItem="{Binding SelectedEmployeeClothesSizeItem}"
                                                              ClothesItemDropCommand="{Binding ClothesItemReceivedAvailableClothesListCommand}"
                                                              ClothesItemRemovedCommand="{Binding ClothesItemRemovedNewEmployeeClothesListCommand}" />
         </StackPanel>
