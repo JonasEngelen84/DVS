@@ -4,6 +4,6 @@ namespace DVS.Domain.Commands.EmployeeCommands
 {
     public interface IDeleteEmployeeCommand
     {
-        Task Execute(Employee employee);
+        Task Execute(string Id);
     }
 }

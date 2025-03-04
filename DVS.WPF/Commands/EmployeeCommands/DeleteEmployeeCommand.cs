@@ -123,7 +123,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
             try
             {
                 employee.Clothes.Clear();
-                await employeeStore.Delete(employee);
+                await employeeStore.Delete(employee.Id);
             }
             catch (Exception)
             {

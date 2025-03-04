@@ -51,22 +51,22 @@ namespace DVS.WPF.Stores
             EmployeeUpdated.Invoke(updatedEmployee);
         }
 
-        public async Task Delete(Employee employee)
+        public async Task Delete(string Id)
         {
-            await deleteEmployeeCommand.Execute(employee);
+            await deleteEmployeeCommand.Execute(Id);
 
-            int index = _employees.FindIndex(e => e.Id == employee.Id);
+            int index = _employees.FindIndex(e => e.Id == Id);
 
             if (index != -1)
             {
-                _employees.RemoveAll(e => e.Id == employee.Id);
+                _employees.RemoveAll(e => e.Id == Id);
             }
             else
             {
                 throw new InvalidOperationException("Löschen des Mitarbeiters nicht möglich.");
             }
             
-            EmployeeDeleted?.Invoke(employee.Id);
+            EmployeeDeleted?.Invoke(Id);
         }
     }
 }

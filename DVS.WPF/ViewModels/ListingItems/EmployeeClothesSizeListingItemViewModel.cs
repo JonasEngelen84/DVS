@@ -6,6 +6,7 @@ namespace DVS.WPF.ViewModels.ListingItems
     {
         public ClothesSize ClothesSize { get; } = clothesSize;
         public Guid? EmployeeClothesSizeGuidId { get; } = employeeClothesSizeGuidId;
+        public Guid ClothesSizeId => ClothesSize.GuidId;
         public string ClothesId => ClothesSize.Clothes.Id;
         public string ClothesName => ClothesSize.Clothes.Name;
         public string Size => ClothesSize.Size;

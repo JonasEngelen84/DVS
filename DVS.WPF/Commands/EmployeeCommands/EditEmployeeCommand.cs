@@ -21,8 +21,14 @@ namespace DVS.WPF.Commands.EmployeeCommands
         {
             EditEmployeeFormViewModel editEmployeeFormViewModel = editEmployeeViewModel.EditEmployeeFormViewModel;
 
-            if (Confirm($"Soll der/die Mitarbeiter/in  \"{editEmployeeFormViewModel.Lastname}\", \"{editEmployeeFormViewModel.Firstname}\"" +
-                "  bearbeiten werden?", "Mitarbeiter bearbeiten"))
+            if (CheckEmployeeId(editEmployeeFormViewModel) != null)
+            {
+                ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
+                return;
+            }
+
+            if (Confirm($"Soll der/die Mitarbeiter/in  \"{editEmployeeFormViewModel.Employee.Lastname}\", \"{editEmployeeFormViewModel.Employee.Firstname}\"" +
+                    "  bearbeiten werden?", "Mitarbeiter bearbeiten"))
             {
                 editEmployeeFormViewModel.HasError = false;
                 editEmployeeFormViewModel.IsSubmitting = true;
@@ -38,6 +44,14 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
                 modalNavigationStore.Close();
             }
+        }
+
+        private Employee CheckEmployeeId(EditEmployeeFormViewModel editEmployeeFormViewModel)
+        {
+            Employee? existingEmployeeId = employeeStore.Employees
+                .FirstOrDefault(e => e.Id == editEmployeeFormViewModel.Id);
+
+            return existingEmployeeId;
         }
 
         private async Task UpdateClothesSizes(EditEmployeeFormViewModel editEmployeeFormViewModel)
@@ -141,7 +155,8 @@ namespace DVS.WPF.Commands.EmployeeCommands
         {
             try
             {
-                await employeeStore.Update(editedEmployee);
+                await employeeStore.Delete(editEmployeeFormViewModel.Employee.Id);
+                await employeeStore.Add(editedEmployee);
             }
             catch
             {
