@@ -23,7 +23,7 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
                 EmployeeClothesSizes = []
             };
 
-            context.ClothesSizes.Add(clothesSize);
+            context.ClothesSizes.Add(newClothesSize);
             await context.SaveChangesAsync();
         }
     }
