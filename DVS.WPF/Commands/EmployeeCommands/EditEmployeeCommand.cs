@@ -20,23 +20,24 @@ namespace DVS.WPF.Commands.EmployeeCommands
         public override async Task ExecuteAsync(object parameter)
         {
             EditEmployeeFormViewModel editEmployeeFormViewModel = editEmployeeViewModel.EditEmployeeFormViewModel;
-
             editEmployeeFormViewModel.HasError = false;
-            editEmployeeFormViewModel.IsSubmitting = true;
 
-            if (Confirm($"Soll der/die Mitarbeiter/in  \"{editEmployeeFormViewModel.Lastname}\", \"{editEmployeeFormViewModel.Firstname}\"" +
+            if (!Confirm($"Soll der/die Mitarbeiter/in  \"{editEmployeeFormViewModel.Lastname}\", \"{editEmployeeFormViewModel.Firstname}\"" +
                 "  bearbeiten werden?", "Mitarbeiter bearbeiten"))
             {                
-                await UpdateClothesSizes(editEmployeeFormViewModel);
-                await UpdateClothes(editedClothesSizesList, editEmployeeFormViewModel);
-                Employee editedEmployee = EditEmployee(editEmployeeFormViewModel);
-                await UpdateEmployee(editedEmployee, editEmployeeFormViewModel);
-                UpdateEmployeeClothesSizes(editedEmployee);
-
-                editEmployeeFormViewModel.IsSubmitting = false;
-
-                modalNavigationStore.Close();
+                return;
             }
+
+            editEmployeeFormViewModel.IsSubmitting = true;
+
+            await UpdateClothesSizes(editEmployeeFormViewModel);
+            await UpdateClothes(editedClothesSizesList, editEmployeeFormViewModel);
+            Employee editedEmployee = EditEmployee(editEmployeeFormViewModel);
+            await UpdateEmployee(editedEmployee, editEmployeeFormViewModel);
+            UpdateEmployeeClothesSizes(editedEmployee);
+
+            editEmployeeFormViewModel.IsSubmitting = false;
+            modalNavigationStore.Close();
         }
 
         private async Task UpdateClothesSizes(EditEmployeeFormViewModel editEmployeeFormViewModel)
@@ -74,7 +75,6 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 }
             }
         }
-
         private async Task UpdateClothes(List<ClothesSize> editedClothesSizesList, EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             List<Clothes> clothesToEdited = editEmployeeFormViewModel.AddEditEmployeeListingViewModel.GetAllClothesToEdit();
@@ -116,7 +116,6 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 }
             }
         }
-
         private static Employee EditEmployee(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             Employee editedEmployee = new(editEmployeeFormViewModel.Id,
@@ -135,7 +134,6 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
             return editedEmployee;
         }
-
         private async Task UpdateEmployee(Employee editedEmployee, EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             try
@@ -148,7 +146,6 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 editEmployeeFormViewModel.HasError = true;
             }
         }
-
         private void UpdateEmployeeClothesSizes(Employee editedEmployee)
         {
             foreach (EmployeeClothesSize ecs in editedEmployee.Clothes)

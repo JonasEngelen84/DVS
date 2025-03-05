@@ -15,39 +15,44 @@ namespace DVS.WPF.Commands.EmployeeCommands
         public override async Task ExecuteAsync(object parameter)
         {
             employeeListingItemViewModel.HasError = false;
-            employeeListingItemViewModel.IsDeleting = true;
 
             Employee employee = employeeListingItemViewModel.Employee;
 
             if (employee.Clothes.Count == 0)
-                ShowErrorMessageBox("Keine Bekleidung zum entfernen vorhandden!", "Bekleidungen entfernen");
+            {
+                ShowErrorMessageBox("Keine Bekleidung zum entfernen vorhanden!", "Bekleidungen entfernen");
+                return;
+            }
+
+            if (!Confirm($"Sollen alle Bekleidungen des/der Mitarbeiters/in  {employeeListingItemViewModel.Lastname}, {employeeListingItemViewModel.Firstname}  " +
+                    "wirklich entfernt werden?", "Alle Bekleidungen löschen"))
+            {
+                return;
+            }
+
+            employeeListingItemViewModel.IsDeleting = true;
+
+            if (Confirm("Bekleidungen dem Lager zufügen?", "Alle Bekleidungen löschen"))
+            {
+                foreach (EmployeeClothesSize ecs in employee.Clothes)
+                {
+                    ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes.First(cs => cs.GuidId == ecs.ClothesSizeGuidId);
+                    ClothesSize editedClothesSize = CreateEditedClothesSize(existingClothesSize, ecs.Quantity);
+                    await UpdateClothesSize(editedClothesSize);
+                    await DeleteEmployeeClothesSizes(ecs);
+                    await UpdateClothes(editedClothesSize);
+                }
+
+                await UpdateEmployee(employee);
+            }
             else
             {
-                if (Confirm("Alle Bekleidungen des Mitarbeiters" +
-                $"  {employeeListingItemViewModel.Lastname}, {employeeListingItemViewModel.Firstname}  werden entfernt!" +
-                $"\n\nSollen die Bekleidungen dem Lager zugefügt werden?",
-                "Alle Bekleidungen entfernen"))
+                foreach (EmployeeClothesSize ecs in employee.Clothes)
                 {
-                    foreach (EmployeeClothesSize ecs in employee.Clothes)
-                    {
-                        ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes.First(cs => cs.GuidId == ecs.ClothesSizeGuidId);
-                        ClothesSize editedClothesSize = CreateEditedClothesSize(existingClothesSize, ecs.Quantity);
-                        await UpdateClothesSize(editedClothesSize);
-                        await DeleteEmployeeClothesSizes(ecs);
-                        await UpdateClothes(editedClothesSize);
-                    }
-
-                    await UpdateEmployee(employee);
+                    await DeleteEmployeeClothesSizes(ecs);
                 }
-                else
-                {
-                    foreach (EmployeeClothesSize ecs in employee.Clothes)
-                    {
-                        await DeleteEmployeeClothesSizes(ecs);
-                    }
 
-                    await UpdateEmployee(employee);
-                }
+                await UpdateEmployee(employee);
             }
 
             employeeListingItemViewModel.IsDeleting = false;

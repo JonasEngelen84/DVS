@@ -16,15 +16,15 @@ namespace DVS.WPF.Commands.ClothesCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddClothesFormViewModel addClothesFormViewModel = addClothesViewModel.AddClothesFormViewModel;
-
             addClothesFormViewModel.HasError = false;
-            addClothesFormViewModel.IsSubmitting = true;
             
             if (CheckClothesId(addClothesFormViewModel) != null)
             {
                 ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
                 return;
             }
+
+            addClothesFormViewModel.IsSubmitting = true;
 
             Clothes newClothes = CreateClothes(addClothesFormViewModel);
             List<SizeListingItemViewModel> selectedSizes = GetSizes(addClothesFormViewModel);
@@ -47,7 +47,6 @@ namespace DVS.WPF.Commands.ClothesCommands
 
             return existingClothes;
         }
-
         private static Clothes CreateClothes(AddClothesFormViewModel addClothesFormViewModel)
         {
             return new Clothes(
@@ -60,7 +59,6 @@ namespace DVS.WPF.Commands.ClothesCommands
                 Sizes = []
             };
         }
-
         private static List<SizeListingItemViewModel> GetSizes(AddClothesFormViewModel addClothesFormViewModel)
         {
             return new List<SizeListingItemViewModel>(addClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Any(size => size.Quantity > 0)
@@ -68,7 +66,6 @@ namespace DVS.WPF.Commands.ClothesCommands
                     : addClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesEU.Where(size => size.Quantity > 0))
                     .ToList();
         }
-
         private void CreateClothesSizes(List<SizeListingItemViewModel> selectedSizes, Clothes newClothes)
         {
             foreach (SizeListingItemViewModel size in selectedSizes)
@@ -82,7 +79,6 @@ namespace DVS.WPF.Commands.ClothesCommands
                 clothesSizeStore.AddToStore(newClothesSize);
             }
         }
-
         private async Task AddClothes(Clothes newClothes, AddClothesFormViewModel addClothesFormViewModel)
         {
             try

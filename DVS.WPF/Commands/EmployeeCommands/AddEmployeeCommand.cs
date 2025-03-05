@@ -20,23 +20,24 @@ namespace DVS.WPF.Commands.EmployeeCommands
         public override async Task ExecuteAsync(object parameter)
         {
             AddEmployeeFormViewModel addEmployeeFormViewModel = addEmployeeViewModel.AddEmployeeFormViewModel;
+            addEmployeeFormViewModel.HasError = false;
 
             if (CheckEmployeeId(addEmployeeFormViewModel) != null)
-                ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
-            else
             {
-                addEmployeeFormViewModel.HasError = false;
-                addEmployeeFormViewModel.IsSubmitting = true;
-
-                await UpdateClothesSizes(editedClothesSizesList, addEmployeeFormViewModel);
-                await UpdateClothes(editedClothesSizesList, addEmployeeFormViewModel);
-                Employee newEmployee = CreateNewEmployee(addEmployeeFormViewModel);
-                await AddEmployee(newEmployee, addEmployeeFormViewModel);
-                AddEmployeeClothesSizeToStore(newEmployee);
-
-                addEmployeeFormViewModel.IsSubmitting = false;
-                modalNavigationStore.Close();
+                ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
+                return;
             }
+
+            addEmployeeFormViewModel.IsSubmitting = true;
+
+            await UpdateClothesSizes(editedClothesSizesList, addEmployeeFormViewModel);
+            await UpdateClothes(editedClothesSizesList, addEmployeeFormViewModel);
+            Employee newEmployee = CreateNewEmployee(addEmployeeFormViewModel);
+            await AddEmployee(newEmployee, addEmployeeFormViewModel);
+            AddEmployeeClothesSizeToStore(newEmployee);
+
+            addEmployeeFormViewModel.IsSubmitting = false;
+            modalNavigationStore.Close();
         }
 
         private Employee CheckEmployeeId(AddEmployeeFormViewModel addEmployeeFormViewModel)

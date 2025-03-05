@@ -15,6 +15,13 @@ namespace DVS.WPF.Commands.EmployeeCommands
         public override async Task ExecuteAsync(object parameter)
         {
             employeeListingItemViewModel.HasError = false;
+
+            if (!Confirm($"Soll der/die Mitarbeiter/in  {employeeListingItemViewModel.Lastname}, {employeeListingItemViewModel.Firstname}  " +
+                    "wirklich gelöscht werden?", "Mitarbeiter/in löschen"))
+            {
+                return;
+            }
+
             employeeListingItemViewModel.IsDeleting = true;
 
             Employee employee = employeeListingItemViewModel.Employee;
@@ -23,8 +30,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 await DeleteEmployee(employee);
             else
             {
-                if (Confirm($"Der/die Mitarbeiter/in  {employeeListingItemViewModel.Lastname}, {employeeListingItemViewModel.Firstname}  " +
-                    "wird gelöscht!\n\nSollen die Bekleidungen dem Lager zugefügt werden?", "Mitarbeiter/in löschen"))
+                if (Confirm("Bekleidungen dem Lager zufügen?", "Mitarbeiter/in löschen"))
                 {
                     foreach (EmployeeClothesSize ecs in employee.Clothes)
                     {
