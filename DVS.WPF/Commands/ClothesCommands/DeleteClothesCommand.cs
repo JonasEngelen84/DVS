@@ -1,4 +1,5 @@
-﻿using DVS.WPF.Stores;
+﻿using DVS.Domain.Models;
+using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.ListingItems;
 
 namespace DVS.WPF.Commands.ClothesCommands
@@ -13,7 +14,10 @@ namespace DVS.WPF.Commands.ClothesCommands
         {
             clothesListingItemViewModel.HasError = false;
 
-            if (!employeeClothesSizeStore.EmployeeClothesSizes.Any(ecs => ecs.ClothesSize.ClothesId == clothesListingItemViewModel.Id))
+            EmployeeClothesSize? employeeClothesSize = employeeClothesSizeStore.EmployeeClothesSizes
+                .FirstOrDefault(ecs => ecs.ClothesSize.ClothesId == clothesListingItemViewModel.Id);
+
+            if (employeeClothesSize != null)
             {
                 ShowErrorMessageBox("Die Bekleidung kann nicht gelöscht werden, da sie noch vergeben ist!", "Bekleidung löschen");
                 return;
