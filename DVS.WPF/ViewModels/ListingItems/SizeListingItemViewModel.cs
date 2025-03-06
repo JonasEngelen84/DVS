@@ -18,8 +18,8 @@
             }
         }
 
-        private string _comment = "";
-        public string Comment
+        private string? _comment;
+        public string? Comment
         {
             get => _comment;
             set
