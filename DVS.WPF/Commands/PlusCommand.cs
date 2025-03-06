@@ -15,26 +15,25 @@ namespace DVS.WPF.Commands
         public override async Task ExecuteAsync(object parameter)
         {
             if (selectedClothesSizeStore.SelectedClothesSize != null)
-                EditClothesSize();
-            else if (selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize != null)
-                EditEmployeeClothesSize();
-        }
-
-        private async void EditClothesSize()
-        {
-            ClothesSize selectedClothesSize = selectedClothesSizeStore.SelectedClothesSize;
-            ClothesSize editedClothesSize = CreatePlusEditedClothesSize(selectedClothesSize);
-            await UpdateClothesSize(editedClothesSize);
-            selectedClothesSizeStore.SelectedClothesSize = editedClothesSize;
-        }
-
-        private async void EditEmployeeClothesSize()
-        {
-            ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes
+            {
+                ClothesSize selectedClothesSize = selectedClothesSizeStore.SelectedClothesSize;
+                ClothesSize editedClothesSize = CreatePlusEditedClothesSize(selectedClothesSize);
+                await UpdateClothesSize(editedClothesSize);
+                selectedClothesSizeStore.SelectedClothesSize = editedClothesSize;
+            }
+            else
+            {
+                ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes
                 .First(cs => cs.GuidId == selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize.ClothesSizeGuidId);
 
-            if (existingClothesSize!= null && existingClothesSize.Quantity > 0)
-            {
+                if (existingClothesSize.Quantity == 0)
+                {
+                    ShowErrorMessageBox("Erhöhen der Stückzahl ist fehlgeschlagen!" +
+                        "\nGewählte Bekleidung ist nicht vorrätig.", "Bekleidung nicht vorhanden");
+
+                    return;
+                }
+
                 ClothesSize editedClothesSize = CreateMinusEditedClothesSize(existingClothesSize);
                 await UpdateClothesSize(editedClothesSize);
 
@@ -43,10 +42,8 @@ namespace DVS.WPF.Commands
                 UpdateEmployeeClothesSize(editedEcs);
 
                 selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize = editedEcs;
+
             }
-            else
-                ShowErrorMessageBox("Erhöhen der Stückzahl ist fehlgeschlagen!" +
-                    "\nGewählte Bekleidung ist nicht vorrätig.", "Bekleidung nicht vorhanden");
         }
 
         private static ClothesSize CreatePlusEditedClothesSize(ClothesSize selectedClothesSize)
