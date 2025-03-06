@@ -18,7 +18,8 @@ namespace DVS.EntityFramework.Migrations
                 columns: table => new
                 {
                     GuidId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
+                    Name = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    IsDirty = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -32,7 +33,8 @@ namespace DVS.EntityFramework.Migrations
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     Lastname = table.Column<string>(type: "TEXT", maxLength: 25, nullable: false),
                     Firstname = table.Column<string>(type: "TEXT", maxLength: 25, nullable: false),
-                    Comment = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
+                    Comment = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    IsDirty = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -44,7 +46,8 @@ namespace DVS.EntityFramework.Migrations
                 columns: table => new
                 {
                     GuidId = table.Column<Guid>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 15, nullable: false)
+                    Name = table.Column<string>(type: "TEXT", maxLength: 15, nullable: false),
+                    IsDirty = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -59,7 +62,8 @@ namespace DVS.EntityFramework.Migrations
                     SeasonGuidId = table.Column<Guid>(type: "TEXT", nullable: false),
                     CategoryGuidId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 25, nullable: false),
-                    Comment = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
+                    Comment = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    IsDirty = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -86,7 +90,8 @@ namespace DVS.EntityFramework.Migrations
                     ClothesId = table.Column<string>(type: "TEXT", nullable: false),
                     Size = table.Column<string>(type: "TEXT", nullable: false),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
-                    Comment = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
+                    Comment = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    IsDirty = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
@@ -107,7 +112,8 @@ namespace DVS.EntityFramework.Migrations
                     ClothesSizeGuidId = table.Column<Guid>(type: "TEXT", nullable: false),
                     EmployeeId = table.Column<string>(type: "TEXT", nullable: false),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
-                    Comment = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
+                    Comment = table.Column<string>(type: "TEXT", maxLength: 500, nullable: true),
+                    IsDirty = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
