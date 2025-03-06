@@ -124,13 +124,20 @@ namespace DVS.WPF.Commands
             }
             catch
             {
-                ShowErrorMessageBox("Erhöhen der Stückzahl ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Stückzahl erhöhen");
+                ShowErrorMessageBox("Erhöhen der Stückzahl ist fehlgeschlagen!", "Stückzahl erhöhen");
             }
         }
 
-        private void UpdateEmployeeClothesSize(EmployeeClothesSize editedEcs)
+        private async Task UpdateEmployeeClothesSize(EmployeeClothesSize editedEcs)
         {
-            employeeClothesSizesStore.Update(editedEcs);
+            try
+            {
+                await employeeClothesSizesStore.Update(editedEcs);
+            }
+            catch
+            {
+                ShowErrorMessageBox("Erhöhen der Stückzahl ist fehlgeschlagen!", "Stückzahl erhöhen");
+            }
         }
     }
 }
