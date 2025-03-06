@@ -69,9 +69,9 @@
             <!-- Header -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70" />
                     <ColumnDefinition Width="90" />
                     <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="110" />
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="50" />
                     <ColumnDefinition Width="55" />
@@ -94,9 +94,9 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="55" />
+                                <ColumnDefinition Width="75" />
                                 <ColumnDefinition Width="90" />
-                                <ColumnDefinition Width="90" />
+                                <ColumnDefinition Width="110" />
                                 <ColumnDefinition Width="80" />
                                 <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="55" />

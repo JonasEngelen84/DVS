@@ -13,7 +13,7 @@ namespace DVS.WPF.ViewModels.ListingItems
         public string Name => Clothes.Name;
         public Category Category => Clothes.Category;
         public Season Season => Clothes.Season;
-        public string? Comment => Clothes.Comment;
+        public string Comment => Clothes.Comment;
         public ObservableCollection<ClothesSize> Sizes => Clothes.Sizes;
 
         private bool _isSubmitting;
@@ -93,7 +93,10 @@ namespace DVS.WPF.ViewModels.ListingItems
                 employeeStore,
                 dVSListingViewModel);
 
-            DeleteClothes = new DeleteClothesCommand(this, clothesStore);
+            DeleteClothes = new DeleteClothesCommand(
+                this,
+                clothesStore,
+                employeeClothesSizesStore);
 
             ClearClothesSizes = new ClearSizesCommand(
                 this,

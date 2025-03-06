@@ -12,7 +12,7 @@ namespace DVS.WPF.ViewModels.ListingItems
         public string Id => Employee.Id;
         public string Lastname => Employee.Lastname;
         public string Firstname => Employee.Firstname;
-        public string? Comment => Employee.Comment;
+        public string Comment => Employee.Comment;
         public ObservableCollection<EmployeeClothesSize> Clothes => Employee.Clothes;
 
         private bool _isSubmitting;
