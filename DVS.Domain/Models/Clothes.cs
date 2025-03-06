@@ -2,15 +2,15 @@
 
 namespace DVS.Domain.Models
 {
-    public class Clothes
+    public class Clothes : ObservableEntity
     {
-        public Guid SeasonGuidId { get; }
-        public Guid CategoryGuidId { get; }
-        public string Id { get; }
-        public string Name { get; }
-        public string Comment { get; }
-        public Season Season { get; }
-        public Category Category { get; }
+        public Guid SeasonGuidId { get; set; }
+        public Guid CategoryGuidId { get; set; }
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Comment { get; set; }
+        public Season Season { get; set; }
+        public Category Category { get; set; }
 
         public ObservableCollection<ClothesSize> Sizes { get; set; }
 

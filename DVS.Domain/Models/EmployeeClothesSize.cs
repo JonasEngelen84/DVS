@@ -1,14 +1,14 @@
 ﻿namespace DVS.Domain.Models
 {
-    public class EmployeeClothesSize
+    public class EmployeeClothesSize : ObservableEntity
     {
-        public Guid GuidId { get; }
-        public Guid ClothesSizeGuidId { get; }
-        public string EmployeeId { get; }
-        public int Quantity { get; }
-        public string Comment { get; }
-        public Employee Employee { get; }
-        public ClothesSize ClothesSize { get; }
+        public Guid GuidId { get; set; }
+        public Guid ClothesSizeGuidId { get; set; }
+        public string EmployeeId { get; set; }
+        public int Quantity { get; set; }
+        public string Comment { get; set; }
+        public Employee Employee { get; set; }
+        public ClothesSize ClothesSize { get; set; }
 
         public EmployeeClothesSize(
             Guid guidId,
