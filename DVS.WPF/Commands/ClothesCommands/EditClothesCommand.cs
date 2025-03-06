@@ -109,7 +109,7 @@ namespace DVS.WPF.Commands.ClothesCommands
                 }
                 else
                 {
-                    if (oldClothesSize.Quantity == existingSize.Quantity && oldClothesSize.Comment.Equals(existingSize.Comment))
+                    if (oldClothesSize.Quantity == existingSize.Quantity && string.Equals(oldClothesSize.Comment, existingSize.Comment))
                         equalClothesSizes.Add(oldClothesSize);
                     else
                         editedClothes.Sizes.Add(CreateEditedClothesSize(oldClothesSize, editedClothes, existingSize.Quantity, existingSize.Comment));
