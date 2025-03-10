@@ -57,6 +57,8 @@ dotnet ef database update --project DVS.EntityFramework
 📁 Database Structure
 
 The database consists of the following main tables:
+ - Category
+ - Season
  - Clothes
  - ClothesSizes
  - Employee
