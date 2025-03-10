@@ -50,7 +50,7 @@ dotnet ef migrations add InitialCreate --project DVS.EntityFramework
 # Apply/create the database
 dotnet ef database update --project DVS.EntityFramework
 
-# Move the .db file from DVS.DVS.EntityFramework to DVS.DVS.WPF.bin.Debug.net8.0-windows. 
+# Move the .db file from DVS/DVS.EntityFramework to DVS/DVS.WPF/bin/Debug/net8.0-windows. 
 # If a .db file already exists there, replace it!
 
 
