@@ -1,4 +1,4 @@
-DVS (Dienstkleidungs-Verwaltungs-Software/Uniform managing software)
+DVS (Dienstkleidungs-Verwaltungs-Software/Uniform management software)
 
 
 ✨ Project Description
