@@ -7,6 +7,7 @@ DVS is an application for managing service clothing, including sizes, quantities
 The application enables efficient management of service clothing, including categorization by season and other attributes.
 
 
+
 🔍 Features
 
  - Create and manage Uniforms, including sizes and quantities
@@ -14,6 +15,7 @@ The application enables efficient management of service clothing, including cate
  - Support for drag & drop to easily assign clothing
  - Toggle between employee/clothing view and a detailed size overview
  - Dynamic updates of list views
+
 
 
 🌐 Future Development
@@ -26,12 +28,14 @@ Planned features:
  - Support for multiple locations
 
 
+
 🔧 Technologies
 
  - .NET Core / WPF - Frontend application
  - Entity Framework Core - ORM for database access
  - SQL Server / SQLite - Database technology
  - MVVM Pattern - Architectural approach
+
 
 
 📂 Project Structure
@@ -42,6 +46,7 @@ DVS/
  - DVS.EntityFramework/  # Database access using EF Core
  - DVS.sln               # Visual Studio solution file
  - README.md             # This documentation
+
 
 
 📁 Database Structure
@@ -55,9 +60,11 @@ The database consists of the following main tables:
  - EmployeeClothesSize (linking table for employees and clothing)
 
 
+
 🔮 Best Practices & Architecture
 
 The project follows the MVVM pattern (Model-View-ViewModel) to ensure a clean separation between UI and logic.
+
 
 
 🔍 Dependencies
@@ -67,9 +74,11 @@ The project follows the MVVM pattern (Model-View-ViewModel) to ensure a clean se
  - DVS.Domain is independent and contains the core logic
 
 
+
 ⚖ License
 
 This project is licensed under the MIT License – See the LICENSE file for details.
+
 
 
 🔼 Installation & Setup
@@ -90,6 +99,7 @@ dotnet ef database update --project DVS.EntityFramework
 
 # Move the .db file from DVS/DVS.EntityFramework to DVS/DVS.WPF/bin/Debug/net8.0-windows. 
 # If a .db file already exists there, replace it!
+
 
 
 If you have any questions or issues, feel free to create an issue or contact me!
