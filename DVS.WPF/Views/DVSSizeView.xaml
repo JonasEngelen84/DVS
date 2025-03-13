@@ -124,7 +124,7 @@
                           Width="18"
                           Margin="0,41,0,0"
                           Cursor="SizeWE"
-                          Background="#433331">
+                          Background="#91969e">
             </GridSplitter>
 
             <!-- component:DVSClothesSizeListing -->

@@ -19,7 +19,7 @@
         ResizeMode="CanResizeWithGrip"
         Background="Transparent"
         MouseLeftButtonDown="DragWindow"
-        StateChanged="WindowStateChanged">
+        StateChanged="ChangeMinMaxImage">
 
     <!-- Modal DataTypes -->
     <Window.Resources>
@@ -58,7 +58,7 @@
 
     <!--Background-->
     <Border CornerRadius="15 15 10 10"
-            Background="#433331"
+            Background="#91969e"
             Padding="10">
         <Border.Effect>
             <DropShadowEffect Color="#000000"
@@ -78,36 +78,41 @@
             <Border Height="40"
                     CornerRadius="10 10 0 0"
                     HorizontalAlignment="Stretch"
-                    Background="#FF2F2E2E">
+                    Background="#F32F2E2E">
 
                 <Grid>
-                    <!-- Title and App-Icon/Button -->
+                    <!-- Title, Icon -->
                     <WrapPanel VerticalAlignment="Center">
                         <TextBlock Text="DVS"
                                    FontSize="25"
                                    VerticalAlignment="Center"
-                                   Margin="6 0 0 0"
+                                   Margin="6 0 10 0"
                                    Foreground="#FFBDBDBD" />
 
-                        <Button Margin="10 0 0 0"
-                                Style="{StaticResource EditComboBoxButtonStyle}"
-                                Click="ChangeViewClick"
-                                Cursor="Hand">
-                            <Image Source="/Resources/Images/DVS Icon.png"
-                                   Height="22"
-                                   Width="22"
-                                   HorizontalAlignment="Left">
-                            </Image>
-                        </Button>
+                        <Image Source="/Resources/Images/DVS Icon.png"
+                               Height="25"
+                               Width="25"
+                               HorizontalAlignment="Left" />
                     </WrapPanel>
 
-                    <!-- Close/Minimize/Maximize -Button -->
+                    <!-- Toggle-, Minimize-, Min/Max-, Close-Button -->
                     <StackPanel Margin="0 0 10 0"
                                 Orientation="Horizontal"
                                 HorizontalAlignment="Right">
+
+                        <!-- Switch Button -->
+                        <Button Style="{StaticResource TitleBarButtonStyle}"
+                                Click="ChangeViewClick">
+                            <Image Source="/Resources/Images/Switch.png"
+                                   Height="22"
+                                   Width="22"
+                                   HorizontalAlignment="Center">
+                            </Image>
+                            
+                        </Button>
+                        
                         <!-- Minimize Button -->
                         <Button Style="{StaticResource TitleBarButtonStyle}"
-                                Width="40"
                                 Click="MinimizeAppClick">
                             <Image Source="/Resources/Images/Minimize.png"
                                    Height="18"
@@ -115,9 +120,8 @@
                                    HorizontalAlignment="Center" />
                         </Button>
 
-                        <!-- Maximize Button -->
+                        <!-- Min/Max Button -->
                         <Button Style="{StaticResource TitleBarButtonStyle}"
-                                Width="40"
                                 Click="MaximizeAppClick">
                             <Image x:Name="MaximizePNG"
                                    Source="/Resources/Images/Maximize.png"
@@ -128,7 +132,6 @@
 
                         <!-- Close Button -->
                         <Button Style="{StaticResource TitleBarButtonStyle}"
-                                Width="40"
                                 Click="CloseAppClick">
                             <Image Source="/Resources/Images/Close.png"
                                    Height="20"

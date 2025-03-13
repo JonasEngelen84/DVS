@@ -23,7 +23,7 @@
 
     <ListView FontSize="14"
               Foreground="#FF212129"
-              Background="#dedece"
+              Background="#e3e5e8"
               ItemsSource="{Binding Source={StaticResource SortedEmployeeClothesSizeCollection}}"
               SelectedItem="{Binding SelectedEmployeeClothesSize}"
               Loaded="SizesListsAutoWidth">
