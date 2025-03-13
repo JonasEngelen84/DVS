@@ -1,26 +1,42 @@
 DVS (Uniform management software)
 
 
+📢 Foreword
+
+DVS is my first self-developed "professional" application, and it is still in the development phase.
+Since this is a learning project for me, there are certainly areas that could be improved or optimized.
+
+I welcome any feedback, tips, or suggestions—whether it’s about best practices, performance improvements,
+or new feature ideas. Your input will help me refine and enhance the application over time.
+
+Thanks for checking out DVS, and I appreciate your support! 🚀
+
+
 ✨ Project Description
 
 DVS is an application for the efficient management of uniforms and their assignment to employees.
+DVS is a comprehensive application designed for the efficient management of uniforms,
+including their sizes, quantities, and assignment to employees. It streamlines the organization
+of workwear by allowing classification into categories and seasons.
+With an intuitive user interface and dynamic list updates, DVS simplifies the process of tracking
+and distributing uniforms, ensuring that employees always have the right clothing available.
 
 
 🔍 Features
 
  - Create and manage Uniforms, including sizes and quantities
- - Create and manage employees and assign Uniforms
- - Support for drag & drop to easily assign Uniforms
- - Toggle between employee/clothing view and a detailed size overview
+ - Create and manage employees and assign uniforms
+ - Support for drag & drop to easily assign uniforms
+ - Toggle between employee/uniforms view and a detailed size overview
  - Dynamic updates of list views
 
 
 🌐 Future Development
 
-DVS is still under development.
 Planned features:
  - Advanced filtering and search functions
  - Print function for employees and assigned clothing
+ - Implement clothes-images
  - User roles and permissions
  - Support for multiple locations
 
