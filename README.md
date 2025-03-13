@@ -5,7 +5,6 @@ DVS (Uniform management software)
 
 DVS is my first self-developed "professional" application, and it is still in the development phase.
 Since this is a learning project for me, there are certainly areas that could be improved or optimized.
-
 I welcome any feedback, tips, or suggestions—whether it’s about best practices, performance improvements,
 or new feature ideas. Your input will help me refine and enhance the application over time.
 
