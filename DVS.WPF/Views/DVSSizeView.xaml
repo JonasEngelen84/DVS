@@ -103,7 +103,7 @@
                 <!-- Plus -->
                 <Button Grid.Row="0"
                         Command="{Binding Plus}"
-                        Style="{StaticResource CircleButtonStyle}">
+                        Style="{StaticResource PlusMinusButtonStyle}">
                     <Image Source="/Resources/Images/Plus.png"
                            Height="14"
                            Width="14"/>
@@ -112,7 +112,7 @@
                 <!-- Minus -->
                 <Button Grid.Row="1"
                         Command="{Binding Minus}"
-                        Style="{StaticResource CircleButtonStyle}">
+                        Style="{StaticResource PlusMinusButtonStyle}">
                     <Image Source="/Resources/Images/Minus.png"
                            Height="13"
                            Width="13" />

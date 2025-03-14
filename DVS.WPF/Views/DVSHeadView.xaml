@@ -19,7 +19,7 @@
             <!--AddEmployee Button-->
             <Button Margin="5 0 0 0"
                     HorizontalAlignment="Left"
-                    Style="{StaticResource EditComboBoxButtonStyle}"
+                    Style="{StaticResource HeadViewButtonStyle}"
                     Command="{Binding OpenAddEmployee}"
                     Cursor="Hand">
                 <Image x:Name="addEmployeeButton"
@@ -30,7 +30,7 @@
             <!--AddClothes Button-->
             <Button Margin="5 0 0 0"
                     HorizontalAlignment="Right"
-                    Style="{StaticResource EditComboBoxButtonStyle}"
+                    Style="{StaticResource HeadViewButtonStyle}"
                     Command="{Binding OpenAddClothes}"
                     Cursor="Hand">
                 <Image x:Name="addClothesButton"

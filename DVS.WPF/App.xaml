@@ -7,12 +7,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Resources/Dictionaries/Button/HeadViewButtonRessourceDictionary.xaml" />
-                <ResourceDictionary Source="Resources/Dictionaries/Button/CircleButtonResourcesDictionary.xaml" />
-                <ResourceDictionary Source="Resources/Dictionaries/Button/ComboBoxButtonResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/Button/DropDownMenuItemResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/Button/EditCategoryAndSeasonButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/Button/HeadViewButtonResourceDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/Button/MenuItemResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/Button/ModalButtonResourcesDictionary.xaml" />
+                <ResourceDictionary Source="Resources/Dictionaries/Button/PlusMinusButtonResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/Button/SubMenuItemResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/Button/TitleBarButtonResourcesDictionary.xaml" />
                 <ResourceDictionary Source="Resources/Dictionaries/BorderDragClothesToEmployeeListView.xaml" />

@@ -13,8 +13,7 @@
                             BorderThickness="1"
                             Background="Transparent">
                         
-                        <ContentPresenter x:Name="image"
-                                          VerticalAlignment="Center"
+                        <ContentPresenter VerticalAlignment="Center"
                                           HorizontalAlignment="Center"
                                           ContentSource="Content" />
                     </Border>

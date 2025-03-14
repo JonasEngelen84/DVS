@@ -73,7 +73,7 @@
                           DisplayMemberPath="Name" />
 
                 <Button Margin="5 0 0 0"
-                        Style="{StaticResource EditComboBoxButtonStyle}"
+                        Style="{StaticResource EditCategoryAndSeasonButtonStyle}"
                         Command="{Binding OpenAddEditCategories}">
                     <Image x:Name="categorieEditButton"
                            Source="/Resources/Images/Edit.png"
@@ -98,7 +98,7 @@
                           DisplayMemberPath="Name" />
 
                 <Button Margin="5 0 0 0"
-                        Style="{StaticResource EditComboBoxButtonStyle}"
+                        Style="{StaticResource EditCategoryAndSeasonButtonStyle}"
                         Command="{Binding OpenAddEditSeasons}">
                     <Image x:Name="seasonEditButton"
                            Source="/Resources/Images/Edit.png"
