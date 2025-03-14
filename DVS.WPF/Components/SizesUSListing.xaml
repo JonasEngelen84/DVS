@@ -21,13 +21,13 @@
             <!-- Header -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
-                    <ColumnDefinition Width="25" />
+                    <ColumnDefinition Width="47" />
+                    <ColumnDefinition Width="30" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Größe" FontWeight="Bold" Margin="5 0 0 0" />
-                <TextBlock Grid.Column="1" Text="St." FontWeight="Bold" Margin="10 0 0 0" />
+                <TextBlock Grid.Column="0" Text="Gr." FontWeight="Bold" Margin="31 0 0 0" />
+                <TextBlock Grid.Column="1" Text="St." FontWeight="Bold" Margin="15 0 0 0" />
                 <TextBlock Grid.Column="2" Text="Kommentar" FontWeight="Bold" Margin="16 0 0 0" />
             </Grid>
 
