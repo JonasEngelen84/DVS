@@ -4,7 +4,7 @@
     {
         public string Size { get; } = size;
 
-        public bool IsSelected = false;
+        public bool IsChecked { get; set; } = false;
 
         private int _quantity;
         public int Quantity

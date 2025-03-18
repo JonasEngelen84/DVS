@@ -59,7 +59,8 @@ namespace DVS.WPF.ViewModels
                         _loadedSizesEU.Add(new SizeListingItemViewModel(size)
                         {
                             Quantity = selectedSize.Quantity,
-                            Comment = selectedSize.Comment
+                            Comment = selectedSize.Comment,
+                            IsChecked = true
                         });
                     else
                         _loadedSizesEU.Add(new SizeListingItemViewModel(size));
@@ -72,7 +73,8 @@ namespace DVS.WPF.ViewModels
                         _loadedSizesUS.Add(new SizeListingItemViewModel(size)
                         {
                             Quantity = selectedSize.Quantity,
-                            Comment = selectedSize.Comment
+                            Comment = selectedSize.Comment,
+                            IsChecked = true
                         });
                     else
                         _loadedSizesUS.Add(new SizeListingItemViewModel(size));
