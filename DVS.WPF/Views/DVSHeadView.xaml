@@ -13,28 +13,112 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <!--AddEmployee/AddClothes Button-->
+        <!--Button-->
         <Grid Grid.Row="0">
             
-            <!--AddEmployee Button-->
-            <Button Margin="5 0 0 0"
-                    HorizontalAlignment="Left"
+            <!--AddEmployee-->
+            <Button HorizontalAlignment="Left"
                     Style="{StaticResource HeadViewButtonStyle}"
                     Command="{Binding OpenAddEmployee}"
                     Cursor="Hand">
-                <Image x:Name="addEmployeeButton"
-                       Source="/Resources/Images/Add Employee.png"
+                <Image Source="/Resources/Images/Add Employee.png"
                        HorizontalAlignment="Center" />
             </Button>
 
-            <!--AddClothes Button-->
-            <Button Margin="5 0 0 0"
+            <!-- Employee Search -->
+            <Border Background="White"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Width="200"
+                    Height="25"
+                    HorizontalAlignment="Left"
+                    Margin="30 0 0 3"
+                    CornerRadius="5"
+                    Cursor="Arrow">
+
+                <Grid>
+                    <!-- Lupe links -->
+                    <Image Source="/Resources/Images/Search.png"
+                           Width="16"
+                           Height="16"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="3,1,0,0"
+                           Cursor="Arrow" />
+
+                    <TextBox x:Name="SearchEmployeeTextBox"
+                             Width="155"
+                             Height="20"
+                             HorizontalAlignment="Left"
+                             Margin="20 2 0 3"
+                             Padding="5,0,5,0"
+                             BorderThickness="0"
+                             FontSize="14" />
+
+                    <!-- X rechts zum Löschen -->
+                    <Button Content="✖"
+                            Width="20"
+                            Height="20"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,5,0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Cursor="Arrow"
+                            Click="ClearEmployeeSearchButton_Click" />
+                </Grid>
+            </Border>
+
+            <!-- Clothes Search -->
+            <Border Background="White"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    Width="200"
+                    Height="25"
                     HorizontalAlignment="Right"
+                    Margin="0 0 30 3"
+                    CornerRadius="5"
+                    Cursor="Arrow">
+
+                <Grid>
+                    <!-- Lupe links -->
+                    <Image Source="/Resources/Images/Search.png"
+                           Width="16"
+                           Height="16"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Left"
+                           Margin="3,1,0,0"
+                           Cursor="Arrow" />
+
+                    <TextBox x:Name="SearchClothesTextBox"
+                             Width="155"
+                             Height="20"
+                             HorizontalAlignment="Left"
+                             Margin="20 2 0 3"
+                             Padding="5,0,5,0"
+                             BorderThickness="0"
+                             FontSize="14" />
+
+                    <!-- X rechts zum Löschen -->
+                    <Button Content="✖"
+                            Width="20"
+                            Height="20"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,5,0"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Cursor="Arrow"
+                            Click="ClearClothesSearchButton_Click" />
+                </Grid>
+            </Border>
+
+            <!--AddClothes-->
+            <Button HorizontalAlignment="Right"
                     Style="{StaticResource HeadViewButtonStyle}"
                     Command="{Binding OpenAddClothes}"
                     Cursor="Hand">
-                <Image x:Name="addClothesButton"
-                       Source="/Resources/Images/Add Shirt.png"
+                <Image Source="/Resources/Images/Add Shirt.png"
                        HorizontalAlignment="Center" />
             </Button>
         </Grid>
