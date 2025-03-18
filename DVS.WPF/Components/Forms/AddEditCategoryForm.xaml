@@ -18,7 +18,7 @@
     </UserControl.Resources>
 
     <StackPanel>
-        <!-- Add Category Textbox & Button-->
+        <!-- Add Category Textbox / Button-->
         <StackPanel Orientation="Horizontal">
             <TextBox Width="165"
                      Style="{StaticResource TextBoxStyle}"
@@ -31,7 +31,7 @@
                     IsEnabled="{Binding CanAdd}" />
         </StackPanel>
 
-        <!-- Edit Category Textbox & Button-->
+        <!-- Edit Category Textbox / Button-->
         <StackPanel Orientation="Horizontal"
                     Margin="0 10 0 20">
             <TextBox Width="165"
@@ -51,9 +51,8 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <!-- Category-ListView-->
-            <Border Grid.Column="0"
-                    Style="{StaticResource BorderAddEmployeeListViewStyle}">
+            <!-- Category List -->
+            <Border Grid.Column="0" Style="{StaticResource BorderAddEmployeeListViewStyle}">
                 <Grid>
                     <Grid.OpacityMask>
                         <VisualBrush Visual="{Binding ElementName=border}" />

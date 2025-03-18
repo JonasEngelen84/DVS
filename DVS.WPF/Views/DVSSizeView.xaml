@@ -13,7 +13,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Menu/Button -->
+        <!-- Menu Button -->
         <Border Height="25"
                 Width="342"
                 Background="#363435"
@@ -79,7 +79,7 @@
             </Grid>
         </Border>
 
-        <!-- components/Plus Minus Button -->
+        <!-- Lists / Plus-Minus Button -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.2*" />
@@ -87,12 +87,12 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <!-- component:DVSEmployeeClothesSizeListing -->
+            <!-- EmployeeClothesSize List -->
             <components:DVSEmployeeClothesSizeListing x:Name="DVSEmployeeClothesSizeListing"
                                                       Grid.Column="0"
                                                       Margin="0 3 0 0"/>
 
-            <!-- Plus/Minus Button -->
+            <!-- Plus / Minus -Button -->
             <Grid Grid.Column="1"
                   Margin="0 3 0 0">
                 <Grid.RowDefinitions>
@@ -119,6 +119,7 @@
                 </Button>
             </Grid>
 
+            <!-- GridSplitter -->
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Center"
                           Width="18"
@@ -127,7 +128,7 @@
                           Background="#91969e">
             </GridSplitter>
 
-            <!-- component:DVSClothesSizeListing -->
+            <!-- ClothesSize List -->
             <components:DVSClothesSizeListing x:Name="DVSClothesSizeListing"
                                               Grid.Column="2"
                                               Margin="0 3 0 0"/>

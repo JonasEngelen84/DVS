@@ -13,11 +13,10 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <!-- TitleBar -->
-            <Border Grid.Row="0"
-                    Background="#FFBFBFBF">
+            <!-- Title / Close-Button -->
+            <Border Grid.Row="0" Background="#FFBFBFBF">
                 <Grid>
-                    <!-- Title -->
+                    <!-- Title "Saison" -->
                     <TextBlock Text="Saison"
                                FontSize="28"
                                FontWeight="SemiBold"
@@ -26,10 +25,10 @@
                                Margin="13 0 0 0" />
 
                     <!-- Close Button -->
-                    <Button HorizontalAlignment="Right"
-                                Width="45"
+                    <Button Command="{Binding CloseAddSeason}"
                             Style="{StaticResource TitleBarButtonStyle}"
-                            Command="{Binding CloseAddSeason}">
+                            HorizontalAlignment="Right"
+                            Width="45">
                         <Image Source="/Resources/Images/Close.png"
                                Height="20"
                                Width="20"
@@ -38,6 +37,7 @@
                 </Grid>
             </Border>
 
+            <!-- AddEditSeasonForm -->
             <components:AddEditSeasonForm Grid.Row="1"
                                           Margin="15 10 15 15"/>
         </Grid>

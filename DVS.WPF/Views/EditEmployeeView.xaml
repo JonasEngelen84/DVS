@@ -13,10 +13,10 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <!-- Title/Close-Button -->
+            <!-- Title / Close-Button -->
             <Border Grid.Row="0" Background="#FFBFBFBF">
                 <Grid>
-                    <!-- Title -->
+                    <!-- Title "Mitarbeiter" -->
                     <TextBlock Text="Mitarbeiter"
                                FontSize="28"
                                FontWeight="SemiBold"
@@ -24,7 +24,7 @@
                                VerticalAlignment="Center"
                                Margin="13 5 0 0" />
 
-                    <!-- Label-Edit -->
+                    <!-- Label "bearbeiten" -->
                     <Label Content="bearbeiten"
                            Width="100"
                            Margin="-220 10 0 0"
@@ -32,11 +32,11 @@
                            FontWeight="SemiBold" />
 
                     <!-- Close Button -->
-                    <Button HorizontalAlignment="Right"
-                            Width="40"
-                            Height="40"
+                    <Button Command="{Binding CloseAddEditEmployee}"
                             Style="{StaticResource TitleBarButtonStyle}"
-                            Command="{Binding CloseAddEditEmployee}">
+                            HorizontalAlignment="Right"
+                            Width="40"
+                            Height="40">
                         <Image Source="/Resources/Images/Close.png"
                                Height="25"
                                Width="25"

@@ -56,14 +56,14 @@
                    Margin="-5 0 0 -3"
                    FontSize="14"
                    FontWeight="Bold" />
-            <!--EmployeeClothesList-->
+            <!--EmployeeClothes List-->
             <components:AddEditEmployee_EmployeeClothesList Foreground="Black"
                                                             IncomingClothesItem="{Binding SelectedAvailableClothesSizeItem}"
                                                             ClothesItemDropCommand="{Binding ClothesItemReceivedNewEmployeeClothesListCommand}"
                                                             ClothesItemRemovedCommand="{Binding ClothesItemRemovedAvailableClothesListCommand}" />
         </StackPanel>
 
-        <!--AvailableClothesList-->
+        <!--AvailableClothes List-->
         <StackPanel Grid.Column="1">
             <Label Content="Vorrätige Bekleidung:"
                    Margin="-5 -10 0 -3"
@@ -75,7 +75,7 @@
                                                              ClothesItemRemovedCommand="{Binding ClothesItemRemovedNewEmployeeClothesListCommand}" />
         </StackPanel>
 
-        <!-- Button_Bestätigen -->
+        <!-- Button "BESTÄTIGEN" -->
         <Button Content="BESTÄTIGEN"
                 Grid.ColumnSpan="2"                
                 Margin="0 430 0 0"
