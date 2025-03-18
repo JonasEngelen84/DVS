@@ -1,6 +1,5 @@
 ﻿using DVS.WPF.Commands;
 using DVS.WPF.Commands.ClothesCommands;
-using DVS.WPF.Commands.CommentCommands;
 using DVS.WPF.Commands.EmployeeCommands;
 using DVS.WPF.Stores;
 using System.Windows.Input;
@@ -38,17 +37,6 @@ namespace DVS.WPF.ViewModels.Views
             clothesStore,
             clothesSizeStore,
             employeeClothesSizesStore);
-        public ICommand OpenComment { get; } = new OpenCommentCommand(
-            selectedClothesSizeStore,
-            selectedEmployeeClothesSizeStore,
-            modalNavigationStore,
-            clothesStore,
-            categoryStore,
-            seasonStore,
-            employeeStore,
-            clothesSizeStore,
-            employeeClothesSizesStore,
-            dVSListingViewModel);
         public ICommand OpenAddClothes { get; } = new OpenAddClothesCommand(
             modalNavigationStore,
             categoryStore,
