@@ -167,6 +167,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 }
             }
         }
+
         private void UpdateClothes(List<ClothesSize> editedClothesSizesList, EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             List<Clothes> clothesToEdited = editEmployeeFormViewModel.AddEditEmployeeListingViewModel.GetAllClothesToEdit();
@@ -200,6 +201,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
                 clothesStore.Update(editedClothes);
             }
         }
+
         private static Employee EditEmployee(EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             Employee editedEmployee = new(editEmployeeFormViewModel.Id,
