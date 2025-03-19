@@ -9,100 +9,97 @@ namespace DVS.WPF.Commands
         EmployeeStore employeeStore,
         ClothesStore clothesStore,
         ClothesSizeStore clothesSizeStore,
-        EmployeeClothesSizeStore employeeClothesSizesStore)
+        EmployeeClothesSizeStore employeeClothesSizeStore)
         : AsyncCommandBase
     {
         public override async Task ExecuteAsync(object parameter)
         {
-            if (selectedClothesSizeStore.SelectedClothesSize != null) EditClothesSize();
-            else if (selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize != null)
+            if (selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize != null)
             {
-                Clothes? existingClothes = clothesStore.Clothes
-                    .FirstOrDefault(c => c.Id == selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize.ClothesSize.ClothesId);
+                EmployeeClothesSize existingEcs = employeeClothesSizeStore.EmployeeClothesSizes
+                    .First(ecs => ecs.Id == selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize.Id);
 
-                if (existingClothes == null)
+                ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes
+                    .First(cs => cs.Id == selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize.ClothesSizeGuidId);
+
+                if (existingEcs.Quantity == 1)
                 {
-                    if (Confirm($"Diese Bekleidung ist nicht Im Bestand.\nSoll ein neues Objekt dieser Bekleidung angelegt werden?" +
-                                $"\nAndernfalls wird die zu entfernende Bekleidung gelöscht!", "Bekleidung nicht im Vorrat"))
-                        EditEmployeeClothesSize();
+                    if (!Confirm("Soll die Bekleidungsgröße wirklich restlos dem Mitarbeiter entzogen werden?", "Bekleidung entfernen"))
+                    {
+                        return;
+                    }
+
+                    await EditOrDeleteEmployeeClothesSize(existingClothesSize, existingEcs, true);
                 }
-                else EditEmployeeClothesSize();
+                else
+                    await EditOrDeleteEmployeeClothesSize(existingClothesSize, existingEcs, false);
+            }
+            else if (selectedClothesSizeStore.SelectedClothesSize != null)
+            {
+                ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes
+                    .First(cs => cs.Id == selectedClothesSizeStore.SelectedClothesSize.Id);
+
+                if (existingClothesSize.Quantity == 0)
+                {
+                    ShowErrorMessageBox("Diese Größe ist bereits nicht mehr vorrätig!", "Stückzahl verringern");
+                    return;
+                }
+
+                existingClothesSize.Quantity -= 1;
+                UpdateClothes(existingClothesSize);
+                clothesSizeStore.Update(existingClothesSize);
+                selectedClothesSizeStore.SelectedClothesSize = existingClothesSize;
             }
         }
 
-        private async void EditClothesSize()
+        private async Task EditOrDeleteEmployeeClothesSize(
+            ClothesSize editedClothesSize,
+            EmployeeClothesSize existingEcs,
+            bool deleteEcs)
         {
-            ClothesSize selectedClothesSize = selectedClothesSizeStore.SelectedClothesSize;
-            ClothesSize editedClothesSize = CreateMinusEditedClothesSize(selectedClothesSize);
-            await UpdateClothesSize(editedClothesSize);
-            selectedClothesSizeStore.SelectedClothesSize = editedClothesSize;
-        }
+            Employee existingEmployee = employeeStore.Employees.First(e => e.Id == existingEcs.EmployeeId);
+            EmployeeClothesSize oldEcs = existingEmployee.Clothes.First(ecs => ecs.Id == existingEcs.Id);
+            existingEmployee.Clothes.Remove(oldEcs);
+            editedClothesSize.Quantity += 1;
+            UpdateClothes(editedClothesSize);
+            clothesSizeStore.Update(editedClothesSize);
 
-        private async void EditEmployeeClothesSize()
-        {
-            EmployeeClothesSize selectedEcs = selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize;
-            ClothesSize editedClothesSize = CreatePlusEditedClothesSize(selectedEcs.ClothesSize);
-            await UpdateClothesSize(editedClothesSize);
-
-            EmployeeClothesSize editedEcs = CreateEditedEmployeeClothesSize(selectedEcs, editedClothesSize);
-            employeeClothesSizesStore.Update(editedEcs);
-
-            selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize = editedEcs;
-        }
-
-        private static ClothesSize CreateMinusEditedClothesSize(ClothesSize selectedClothesSize)
-        {
-            int quantity = selectedClothesSize.Quantity - 1;
-
-            return new ClothesSize(
-                selectedClothesSize.GuidId,
-                selectedClothesSize.Clothes,
-                selectedClothesSize.Size,
-                quantity,
-                selectedClothesSize.Comment)
+            if (deleteEcs)
             {
-                EmployeeClothesSizes = []
-            };
-        }
-
-        private static ClothesSize CreatePlusEditedClothesSize(ClothesSize selectedClothesSize)
-        {
-            int quantity = selectedClothesSize.Quantity + 1;
-
-            return new ClothesSize(
-                selectedClothesSize.GuidId,
-                selectedClothesSize.Clothes,
-                selectedClothesSize.Size,
-                quantity,
-                selectedClothesSize.Comment)
-            {
-                EmployeeClothesSizes = []
-            };
-        }
-
-        private static EmployeeClothesSize CreateEditedEmployeeClothesSize(
-            EmployeeClothesSize selectedEcs, ClothesSize editedClothesSize)
-        {
-            int quantity = selectedEcs.Quantity - 1;
-
-            return new EmployeeClothesSize(
-                selectedEcs.GuidId,
-                selectedEcs.Employee,
-                editedClothesSize,
-                quantity,
-                selectedEcs.Comment);
-        }
-
-        private async Task UpdateClothesSize(ClothesSize editedClothesSize)
-        {
-            try
-            {
-                await clothesSizeStore.Update(editedClothesSize);
+                try
+                {
+                    await employeeClothesSizeStore.Delete(existingEcs);
+                    selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize = null;
+                }
+                catch
+                {
+                    ShowErrorMessageBox("Entfernen der Bekleidung ist fehlgeschlagen!", "Bekleidung entziehen");
+                }
             }
-            catch
+            else
             {
-                ShowErrorMessageBox("Erhöhen der Stückzahl ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Stückzahl erhöhen");
+                existingEcs.Quantity -= 1;
+                existingEmployee.Clothes.Add(existingEcs);
+                employeeStore.Update(existingEmployee);
+                employeeClothesSizeStore.Update(existingEcs);
+                selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize = existingEcs;
             }
+
+            employeeStore.Update(existingEmployee);
+
+        }
+
+        private void UpdateClothes(ClothesSize editedClothesSize)
+        {
+            Clothes existingClothes = clothesStore.Clothes
+                .First(c => c.Id == editedClothesSize.ClothesId);
+
+            ClothesSize existingClothesSize = existingClothes.Sizes
+                .First(cs => cs.Id == editedClothesSize.Id);
+
+            existingClothes.Sizes.Remove(existingClothesSize);
+            existingClothes.Sizes.Add(editedClothesSize);
+            clothesStore.Update(existingClothes);
         }
     }
 }
