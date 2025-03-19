@@ -44,7 +44,7 @@ namespace DVS.WPF.Commands
 
         public abstract Task ExecuteAsync(object parameter);
 
-        public static bool Confirm(string text, string title)
+        new public static bool Confirm(string text, string title)
         {
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
@@ -52,7 +52,7 @@ namespace DVS.WPF.Commands
             return dialog == MessageBoxResult.Yes;
         }
 
-        public static void ShowErrorMessageBox(string message, string title)
+        new public static void ShowErrorMessageBox(string message, string title)
         {
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Warning;
