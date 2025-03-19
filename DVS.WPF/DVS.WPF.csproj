@@ -12,8 +12,10 @@
     <None Remove="Close.png" />
     <None Remove="Maximize.png" />
     <None Remove="Normalize.png" />
+    <None Remove="Resources\Images\Add Clothes.png" />
     <None Remove="Resources\Images\Add Employee.png" />
-    <None Remove="Resources\Images\Add Shirt.png" />
+    <None Remove="Resources\Images\Add Employee1.png" />
+    <None Remove="Resources\Images\Add Shirt1.png" />
     <None Remove="Resources\Images\AddEmployee.png" />
     <None Remove="Resources\Images\Close.png" />
     <None Remove="Resources\Images\DVS Icon.png" />
@@ -25,6 +27,7 @@
     <None Remove="Resources\Images\Normalize.png" />
     <None Remove="Resources\Images\Plus.png" />
     <None Remove="Resources\Images\Rückgängig.png" />
+    <None Remove="Resources\Images\Search.png" />
     <None Remove="Resources\Images\Speichern.png" />
     <None Remove="Resources\Images\Switch.png" />
   </ItemGroup>
@@ -43,7 +46,7 @@
 
   <ItemGroup>
     <Resource Include="Resources\Images\Add Employee.png" />
-    <Resource Include="Resources\Images\Add Shirt.png" />
+    <Resource Include="Resources\Images\Add Clothes.png" />
     <Resource Include="Resources\Images\Close.png" />
     <Resource Include="Resources\Images\DVS Icon.png" />
     <Resource Include="Resources\Images\Edit.png" />
@@ -52,6 +55,7 @@
     <Resource Include="Resources\Images\Minus.png" />
     <Resource Include="Resources\Images\Normalize.png" />
     <Resource Include="Resources\Images\Plus.png" />
+    <Resource Include="Resources\Images\Search.png" />
     <Resource Include="Resources\Images\Switch.png" />
   </ItemGroup>
 
