@@ -1,5 +1,4 @@
 ﻿using DVS.Domain.Models;
-using DVS.EntityFramework.Commands.EmployeeClothesSizeCommands;
 using DVS.WPF.Stores;
 
 namespace DVS.WPF.Commands
@@ -11,9 +10,9 @@ namespace DVS.WPF.Commands
         ClothesStore clothesStore,
         ClothesSizeStore clothesSizeStore,
         EmployeeClothesSizeStore employeeClothesSizeStore)
-        : AsyncCommandBase
+        : CommandBase
     {
-        public override async Task ExecuteAsync(object parameter)
+        public override void Execute(object parameter)
         {
             if (selectedEmployeeClothesSizeStore.SelectedEmployeeClothesSize != null)
             {
