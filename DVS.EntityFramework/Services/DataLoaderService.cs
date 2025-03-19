@@ -1,5 +1,5 @@
 ﻿using DVS.Domain.Models;
-using DVS.Domain.Services;
+using DVS.Domain.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace DVS.EntityFramework.Services
@@ -11,12 +11,16 @@ namespace DVS.EntityFramework.Services
         public async Task<List<Category>> LoadCategoriesAsync()
         {
             using var context = _contextFactory.Create();
-            return await context.Categories.ToListAsync();
+            var categories = await context.Categories.ToListAsync();
+
+            return categories;
         }
         public async Task<List<Season>> LoadSeasonsAsync()
         {
             using var context = _contextFactory.Create();
-            return await context.Seasons.ToListAsync();
+            var seasons = await context.Seasons.ToListAsync();
+
+            return seasons;
         }
         public async Task<List<Clothes>> LoadClothesAsync()
         {

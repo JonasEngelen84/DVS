@@ -7,13 +7,16 @@ namespace DVS.EntityFramework.Commands.CategoryCommands
     {
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
-        public async Task Execute(Category category)
+        public async Task Execute(Category editedCategory)
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            context.Categories.Update(category);
+            var existingCategory = await context.Categories.FindAsync(editedCategory.Id);
 
-            await context.SaveChangesAsync();
+            if (existingCategory != null)
+            {
+                context.Entry(existingCategory).CurrentValues.SetValues(editedCategory);
+            }
         }
     }
 }

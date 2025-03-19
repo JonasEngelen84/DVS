@@ -27,7 +27,7 @@ namespace DVS.EntityFramework.Commands.ClothesCommands
             foreach (ClothesSize cs in clothes.Sizes)
             {
                 ClothesSize newClothesSize = new(
-                    cs.GuidId,
+                    cs.Id,
                     newClothes,
                     cs.Size,
                     cs.Quantity,

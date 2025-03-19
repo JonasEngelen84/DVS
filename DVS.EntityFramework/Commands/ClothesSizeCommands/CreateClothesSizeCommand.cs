@@ -14,7 +14,7 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
             Clothes? existingClothes = await context.Clothes.FindAsync(clothesSize.ClothesId);
 
             ClothesSize newClothesSize = new(
-                clothesSize.GuidId,
+                clothesSize.Id,
                 existingClothes,
                 clothesSize.Size,
                 clothesSize.Quantity,

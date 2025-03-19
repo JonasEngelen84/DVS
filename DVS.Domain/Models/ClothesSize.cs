@@ -4,10 +4,22 @@ namespace DVS.Domain.Models
 {
     public class ClothesSize : ObservableEntity
     {
-        public Guid GuidId { get; set; }
+        public Guid Id { get; set; }
         public string ClothesId { get; set; }
-        public Clothes Clothes { get; set; }
         public string Size { get; set; }
+
+        private Clothes _clothes;
+        public Clothes Clothes
+        {
+            get => _clothes;
+            set
+            {
+                if ( _clothes != value)
+                {
+                    _clothes = value;
+                }
+            }
+        }
 
         private int _quantity;
         public int Quantity
@@ -18,7 +30,6 @@ namespace DVS.Domain.Models
                 if (_quantity != value)
                 {
                     _quantity = value;
-                    OnPropertyChanged();
                 }
             }
         }
@@ -32,7 +43,6 @@ namespace DVS.Domain.Models
                 if (_comment != value)
                 {
                     _comment = value;
-                    OnPropertyChanged();
                 }
             }
         }
@@ -40,13 +50,13 @@ namespace DVS.Domain.Models
         public ObservableCollection<EmployeeClothesSize> EmployeeClothesSizes { get; set; }
 
         public ClothesSize(
-            Guid guidId,
+            Guid id,
             Clothes clothes,
             string size,
             int quantity,
             string comment)
         {
-            GuidId = guidId;
+            Id = id;
             Clothes = clothes;
             ClothesId = clothes.Id;
             Size = size;
@@ -56,6 +66,6 @@ namespace DVS.Domain.Models
             EmployeeClothesSizes = [];
         }
 
-        public ClothesSize() {}
+        public ClothesSize() { }
     }
 }

@@ -8,7 +8,7 @@ namespace DVS.EntityFramework.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Category> builder)
         {
-            builder.HasKey(c => c.GuidId);
+            builder.HasKey(c => c.Id);
 
             builder.Property(c => c.Name)
                 .IsRequired()

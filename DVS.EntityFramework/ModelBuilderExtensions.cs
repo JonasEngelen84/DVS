@@ -1,4 +1,4 @@
-﻿using DVS.Domain.Models;
+﻿using DVS.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

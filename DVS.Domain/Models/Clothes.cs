@@ -4,13 +4,61 @@ namespace DVS.Domain.Models
 {
     public class Clothes : ObservableEntity
     {
+        public string Id { get; set; }
         public Guid SeasonGuidId { get; set; }
         public Guid CategoryGuidId { get; set; }
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Comment { get; set; }
-        public Season Season { get; set; }
-        public Category Category { get; set; }
+
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                }
+            }
+        }
+
+        private Season _season;
+        public Season Season
+        {
+            get => _season;
+            set
+            {
+                if (_season != value)
+                {
+                    _season = value;
+                }
+            }
+        }
+
+        private Category _category;
+        public Category Category
+        {
+            get => _category;
+            set
+            {
+                if (_category != value)
+                {
+                    _category = value;
+                }
+            }
+        }
+
+        private string? _comment;
+        public string? Comment
+        {
+            get => _comment;
+            set
+            {
+                if (_comment != value)
+                {
+                    _comment = value;
+                }
+            }
+        }
 
         public ObservableCollection<ClothesSize> Sizes { get; set; }
 
@@ -23,8 +71,8 @@ namespace DVS.Domain.Models
         {
             Season = season;
             Category = category;
-            SeasonGuidId = season.GuidId;
-            CategoryGuidId = category.GuidId;
+            SeasonGuidId = season.Id;
+            CategoryGuidId = category.Id;
             Id = id;
             Name = name;
             Comment = comment;
@@ -32,6 +80,6 @@ namespace DVS.Domain.Models
             Sizes = [];
         }
 
-        public Clothes() {}
+        public Clothes() { }
     }
 }

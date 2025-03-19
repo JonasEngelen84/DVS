@@ -3,7 +3,7 @@
     public class AvailableClothesSizeItem(ClothesSize clothesSize) : ModelBase
     {
         public ClothesSize ClothesSize { get; private set; } = clothesSize;
-        public Guid ClothesSizeId => ClothesSize.GuidId;
+        public Guid ClothesSizeId => ClothesSize.Id;
         public string ClothesId => ClothesSize.Clothes.Id;
         public string ClothesName => ClothesSize.Clothes.Name;
         public string Category => ClothesSize.Clothes.Category.Name;

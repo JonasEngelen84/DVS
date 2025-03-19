@@ -4,12 +4,12 @@ using DVS.Domain.Models;
 namespace DVS.WPF.Stores
 {
     public class EmployeeClothesSizeStore(ICreateEmployeeClothesSizeCommand createEmployeeClothesSizeCommand,
-                                          IUpdateEmployeeClothesSizeCommand updateEmployeeClothesSizeCommand,
                                           IDeleteEmployeeClothesSizeCommand deleteEmployeeClothesSizeCommand)
     {
         private readonly List<EmployeeClothesSize> _employeeClothesSizes = [];
         public IEnumerable<EmployeeClothesSize> EmployeeClothesSizes => _employeeClothesSizes;
 
+        public event Action<EmployeeClothesSize> EmployeeClothesSizeAdded;
         public event Action<EmployeeClothesSize> EmployeeClothesSizeUpdated;
         public event Action<EmployeeClothesSize> EmployeeClothesSizeDeleted;
 
@@ -23,11 +23,12 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task Add(EmployeeClothesSize employeeClothesSize)
+        public async Task AddToDataBase(EmployeeClothesSize employeeClothesSize)
         {
             await createEmployeeClothesSizeCommand.Execute(employeeClothesSize);
 
             _employeeClothesSizes.Add(employeeClothesSize);
+            EmployeeClothesSizeAdded.Invoke(employeeClothesSize);
         }
         
         public void AddToStore(EmployeeClothesSize employeeClothesSize)
@@ -35,33 +36,33 @@ namespace DVS.WPF.Stores
             _employeeClothesSizes.Add(employeeClothesSize);
         }
 
-        public async Task Update(EmployeeClothesSize updatedEmployeeClothesSize)
+        public void Update(EmployeeClothesSize editedEmployeeClothesSize)
         {
-            await updateEmployeeClothesSizeCommand.Execute(updatedEmployeeClothesSize);
-
-            int index = _employeeClothesSizes.FindIndex(y => y.GuidId == updatedEmployeeClothesSize.GuidId);
+            int index = _employeeClothesSizes.FindIndex(y => y.Id == editedEmployeeClothesSize.Id);
 
             if (index != -1)
             {
-                _employeeClothesSizes[index] = updatedEmployeeClothesSize;
+                _employeeClothesSizes[index] = editedEmployeeClothesSize;
             }
             else
             {
-                _employeeClothesSizes.Add(updatedEmployeeClothesSize);
+                _employeeClothesSizes.Add(editedEmployeeClothesSize);
             }
 
-            EmployeeClothesSizeUpdated.Invoke(updatedEmployeeClothesSize);
+            EmployeeClothesSizeUpdated.Invoke(editedEmployeeClothesSize);
+
+            editedEmployeeClothesSize.IsDirty = true;
         }
 
         public async Task Delete(EmployeeClothesSize employeeClothesSize)
         {
             await deleteEmployeeClothesSizeCommand.Execute(employeeClothesSize);
 
-            int index = _employeeClothesSizes.FindIndex(y => y.GuidId == employeeClothesSize.GuidId);
+            int index = _employeeClothesSizes.FindIndex(y => y.Id == employeeClothesSize.Id);
 
             if (index != -1)
             {
-                _employeeClothesSizes.RemoveAll(y => y.GuidId == employeeClothesSize.GuidId);
+                _employeeClothesSizes.RemoveAll(y => y.Id == employeeClothesSize.Id);
             }
             else
             {

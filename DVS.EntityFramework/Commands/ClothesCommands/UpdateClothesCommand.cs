@@ -17,8 +17,6 @@ namespace DVS.EntityFramework.Commands.ClothesCommands
             {
                 context.Entry(existingClothes).CurrentValues.SetValues(editedClothes);
             }
-
-            await context.SaveChangesAsync();
         }
     }
 }

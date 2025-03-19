@@ -4,19 +4,31 @@ namespace DVS.Domain.Models
 {
     public class Category : ObservableEntity
     { 
-        public Guid GuidId { get; set; }
-        public string Name { get; set; }
+        public Guid Id { get; set; }
+
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                }
+            }
+        }
 
         public ObservableCollection<Clothes> Clothes { get; set; }
 
-        public Category(Guid guidId, string name)
+        public Category(Guid id, string name)
         {
-            GuidId = guidId;
+            Id = id;
             Name = name;
 
             Clothes = [];
         }
 
-        public Category() {}
+        public Category() { }
     }
 }

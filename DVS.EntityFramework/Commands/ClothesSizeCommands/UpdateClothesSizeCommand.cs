@@ -11,14 +11,13 @@ namespace DVS.EntityFramework.Commands.ClothesSizeCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            var existingClothesSize = await context.ClothesSizes.FindAsync(editedClothesSize.GuidId);
+            var existingClothesSize = await context.ClothesSizes.FindAsync(editedClothesSize.Id);
 
             if (existingClothesSize != null)
             {
                 context.Entry(existingClothesSize).CurrentValues.SetValues(editedClothesSize);
             }
 
-            await context.SaveChangesAsync();
         }
     }
 }

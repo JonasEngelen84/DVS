@@ -2,7 +2,7 @@
 
 namespace DVS.Domain.Models
 {
-    public class ModelBase : INotifyPropertyChanged
+    public abstract class ModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

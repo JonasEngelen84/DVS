@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DVS.EntityFramework.Migrations
 {
     [DbContext(typeof(DVSDbContext))]
-    [Migration("20250306222639_InitialCreate")]
+    [Migration("20250318220750_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -22,7 +22,7 @@ namespace DVS.EntityFramework.Migrations
 
             modelBuilder.Entity("DVS.Domain.Models.Category", b =>
                 {
-                    b.Property<Guid>("GuidId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
@@ -37,62 +37,62 @@ namespace DVS.EntityFramework.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("GuidId");
+                    b.HasKey("Id");
 
                     b.ToTable("Categories");
 
                     b.HasData(
                         new
                         {
-                            GuidId = new Guid("7bcdf8d2-4d8a-41e0-837c-8427fbc42cda"),
+                            Id = new Guid("7bcdf8d2-4d8a-41e0-837c-8427fbc42cda"),
                             IsDirty = false,
                             Name = "-Kategorielos-"
                         },
                         new
                         {
-                            GuidId = new Guid("9f5e27f3-1f20-4976-aba5-2f7b54e0dbd8"),
+                            Id = new Guid("9f5e27f3-1f20-4976-aba5-2f7b54e0dbd8"),
                             IsDirty = false,
                             Name = "Handschuhe"
                         },
                         new
                         {
-                            GuidId = new Guid("d1f086e5-80a0-4c2b-bf78-3c8f383b88fb"),
+                            Id = new Guid("d1f086e5-80a0-4c2b-bf78-3c8f383b88fb"),
                             IsDirty = false,
                             Name = "Hemd"
                         },
                         new
                         {
-                            GuidId = new Guid("2341a6cd-b4d2-45a5-ae77-3cf4b0e9c689"),
+                            Id = new Guid("2341a6cd-b4d2-45a5-ae77-3cf4b0e9c689"),
                             IsDirty = false,
                             Name = "Hose"
                         },
                         new
                         {
-                            GuidId = new Guid("8aefb5f6-32b7-4a43-9931-4a31e1e92c0f"),
+                            Id = new Guid("8aefb5f6-32b7-4a43-9931-4a31e1e92c0f"),
                             IsDirty = false,
                             Name = "Jacke"
                         },
                         new
                         {
-                            GuidId = new Guid("b96f95ed-8e97-4b21-951b-377cebd9156e"),
+                            Id = new Guid("b96f95ed-8e97-4b21-951b-377cebd9156e"),
                             IsDirty = false,
                             Name = "Kopfbedeckung"
                         },
                         new
                         {
-                            GuidId = new Guid("6b49f933-4023-4f3e-a312-785a825fdb8e"),
+                            Id = new Guid("6b49f933-4023-4f3e-a312-785a825fdb8e"),
                             IsDirty = false,
                             Name = "Pullover"
                         },
                         new
                         {
-                            GuidId = new Guid("a7e93b9e-16ff-4b19-989f-08b2fa0326f6"),
+                            Id = new Guid("a7e93b9e-16ff-4b19-989f-08b2fa0326f6"),
                             IsDirty = false,
                             Name = "Schuhwerk"
                         },
                         new
                         {
-                            GuidId = new Guid("5139b4a5-2042-4069-9e4f-2556895c14b5"),
+                            Id = new Guid("5139b4a5-2042-4069-9e4f-2556895c14b5"),
                             IsDirty = false,
                             Name = "Shirt"
                         });
@@ -135,7 +135,7 @@ namespace DVS.EntityFramework.Migrations
 
             modelBuilder.Entity("DVS.Domain.Models.ClothesSize", b =>
                 {
-                    b.Property<Guid>("GuidId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
@@ -160,7 +160,7 @@ namespace DVS.EntityFramework.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("GuidId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ClothesId");
 
@@ -199,7 +199,7 @@ namespace DVS.EntityFramework.Migrations
 
             modelBuilder.Entity("DVS.Domain.Models.EmployeeClothesSize", b =>
                 {
-                    b.Property<Guid>("GuidId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
@@ -223,7 +223,7 @@ namespace DVS.EntityFramework.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("GuidId");
+                    b.HasKey("Id");
 
                     b.HasIndex("ClothesSizeGuidId");
 
@@ -234,7 +234,7 @@ namespace DVS.EntityFramework.Migrations
 
             modelBuilder.Entity("DVS.Domain.Models.Season", b =>
                 {
-                    b.Property<Guid>("GuidId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
@@ -249,38 +249,38 @@ namespace DVS.EntityFramework.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("GuidId");
+                    b.HasKey("Id");
 
                     b.ToTable("Seasons");
 
                     b.HasData(
                         new
                         {
-                            GuidId = new Guid("e1a3f5c8-7f7b-4e82-bc2d-8b0e4a7f26f3"),
+                            Id = new Guid("e1a3f5c8-7f7b-4e82-bc2d-8b0e4a7f26f3"),
                             IsDirty = false,
                             Name = "-Saisonlos-"
                         },
                         new
                         {
-                            GuidId = new Guid("3f8a1a87-9b74-4a32-8297-68f3b2eaa23f"),
+                            Id = new Guid("3f8a1a87-9b74-4a32-8297-68f3b2eaa23f"),
                             IsDirty = false,
                             Name = "Frühling"
                         },
                         new
                         {
-                            GuidId = new Guid("1d5f3c9e-2d2f-49cb-9b71-9b7e8f58b8a1"),
+                            Id = new Guid("1d5f3c9e-2d2f-49cb-9b71-9b7e8f58b8a1"),
                             IsDirty = false,
                             Name = "Herbst"
                         },
                         new
                         {
-                            GuidId = new Guid("6a2d84c5-743e-4298-8546-963b193e0d02"),
+                            Id = new Guid("6a2d84c5-743e-4298-8546-963b193e0d02"),
                             IsDirty = false,
                             Name = "Sommer"
                         },
                         new
                         {
-                            GuidId = new Guid("f4e9c892-903f-4047-bcd5-5f273db9dc5b"),
+                            Id = new Guid("f4e9c892-903f-4047-bcd5-5f273db9dc5b"),
                             IsDirty = false,
                             Name = "Winter"
                         });

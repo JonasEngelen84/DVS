@@ -1,6 +1,6 @@
 ﻿using DVS.Domain.Models;
 
-namespace DVS.Domain.Services
+namespace DVS.Domain.Services.Interfaces
 {
     public interface IDataLoaderService
     {

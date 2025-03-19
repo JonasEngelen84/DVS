@@ -46,17 +46,9 @@
         <DataTemplate DataType="{x:Type vms:AddEditSeasonViewModel}">
             <views:AddEditSeasonView />
         </DataTemplate>
-
-        <DataTemplate DataType="{x:Type vms:CommentClothesSizeViewModel}">
-            <views:CommentClothesSize />
-        </DataTemplate>
-        
-        <DataTemplate DataType="{x:Type vms:CommentEmployeeClothesViewModel}">
-            <views:CommentEmployeeClothesSize />
-        </DataTemplate>
     </Window.Resources>
 
-    <!--Background-->
+    <!-- Background -->
     <Border CornerRadius="15 15 10 10"
             Background="#91969e"
             Padding="10">
@@ -74,7 +66,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Titlebar-Buttons/-Icon -->
+            <!-- Title / Icon / Button -->
             <Border Height="40"
                     CornerRadius="10 10 0 0"
                     HorizontalAlignment="Stretch"
@@ -149,12 +141,12 @@
                 <ContentControl Content="{Binding CurrentModalViewModel}" />
             </custom:Modal>
 
-            <!-- view:DVSHeadView -->
+            <!-- DVSHeadView -->
             <views:DVSHeadView x:Name="HeadView"
                                Grid.Row="1"
                                Margin="0,3,0,0" />
 
-            <!-- view:DVSSizeView -->
+            <!-- DVSSizeView -->
             <views:DVSSizeView x:Name="SizeView"
                                Grid.Row="1"
                                Margin="0,3,0,0"

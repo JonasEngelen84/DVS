@@ -1,10 +1,12 @@
-﻿using DVS.Domain.Commands.CategoryCommands;
+﻿using DVS.Domain;
+using DVS.Domain.Commands.CategoryCommands;
 using DVS.Domain.Commands.ClothesCommands;
 using DVS.Domain.Commands.ClothesSizeCommands;
 using DVS.Domain.Commands.EmployeeClothesSizeCommands;
 using DVS.Domain.Commands.EmployeeCommands;
 using DVS.Domain.Commands.SeasonCommands;
 using DVS.Domain.Services;
+using DVS.Domain.Services.Interfaces;
 using DVS.EntityFramework;
 using DVS.EntityFramework.Commands.CategoryCommands;
 using DVS.EntityFramework.Commands.ClothesCommands;
@@ -35,28 +37,25 @@ namespace DVS.WPF
                 {
                     string? connectionString = context.Configuration.GetConnectionString("sqlite");
 
-                    services.AddSingleton<DbContextOptions>(new DbContextOptionsBuilder().UseSqlite(connectionString).Options);
                     services.AddSingleton<DVSDbContextFactory>();
 
+                    services.AddDbContextFactory<DbContext>(options =>
+                    {
+                        options.UseSqlite(connectionString);
+                    });
+
+                    services.AddSingleton<MainViewModel>();
+
+                    services.AddSingleton<MainWindow>((services) =>
+                    new MainWindow(services.GetRequiredService<IDirtyEntitySaver>())
+                    {
+                        DataContext = services.GetRequiredService<MainViewModel>()
+                    });
+
                     services.AddSingleton<IDataLoaderService, DataLoaderService>();
-                    services.AddSingleton<ICreateCategoryCommand, CreateCategoryCommand>();
-                    services.AddSingleton<IUpdateCategoryCommand, UpdateCategoryCommand>();
-                    services.AddSingleton<IDeleteCategoryCommand, DeleteCategoryCommand>();
-                    services.AddSingleton<ICreateSeasonCommand, CreateSeasonCommand>();
-                    services.AddSingleton<IUpdateSeasonCommand, UpdateSeasonCommand>();
-                    services.AddSingleton<IDeleteSeasonCommand, DeleteSeasonCommand>();
-                    services.AddSingleton<ICreateClothesCommand, CreateClothesCommand>();
-                    services.AddSingleton<IUpdateClothesCommand, UpdateClothesCommand>();
-                    services.AddSingleton<IDeleteClothesCommand, DeleteClothesCommand>();
-                    services.AddSingleton<ICreateEmployeeCommand, CreateEmployeeCommand>();
-                    services.AddSingleton<IUpdateEmployeeCommand, UpdateEmployeeCommand>();
-                    services.AddSingleton<IDeleteEmployeeCommand, DeleteEmployeeCommand>();
-                    services.AddSingleton<ICreateClothesSizeCommand, CreateClothesSizeCommand>();
-                    services.AddSingleton<IUpdateClothesSizeCommand, UpdateClothesSizeCommand>();
-                    services.AddSingleton<IDeleteClothesSizeCommand, DeleteClothesSizeCommand>();
-                    services.AddSingleton<ICreateEmployeeClothesSizeCommand, CreateEmployeeClothesSizeCommand>();
-                    services.AddSingleton<IUpdateEmployeeClothesSizeCommand, UpdateEmployeeClothesSizeCommand>();
-                    services.AddSingleton<IDeleteEmployeeClothesSizeCommand, DeleteEmployeeClothesSizeCommand>();
+
+                    services.AddSingleton<DirtyTrackingService>();
+                    services.AddSingleton<IDirtyEntitySaver, SaveDirtyEntitiesService>();
 
                     services.AddSingleton<DVSHeadViewModel>();
                     services.AddSingleton<DVSSizeViewModel>();
@@ -72,22 +71,40 @@ namespace DVS.WPF
                     services.AddSingleton<ClothesSizeStore>();
                     services.AddSingleton<EmployeeClothesSizeStore>();
 
-                    services.AddSingleton<MainViewModel>();
-
-                    services.AddSingleton<MainWindow>((services) => new MainWindow()
-                    {
-                        DataContext = services.GetRequiredService<MainViewModel>()
-                    });
+                    services.AddSingleton<ICreateCategoryCommand, CreateCategoryCommand>();
+                    //services.AddSingleton<IUpdateCategoryCommand, UpdateCategoryCommand>();
+                    services.AddSingleton<IDeleteCategoryCommand, DeleteCategoryCommand>();
+                    services.AddSingleton<ICreateSeasonCommand, CreateSeasonCommand>();
+                    //services.AddSingleton<IUpdateSeasonCommand, UpdateSeasonCommand>();
+                    services.AddSingleton<IDeleteSeasonCommand, DeleteSeasonCommand>();
+                    services.AddSingleton<ICreateClothesCommand, CreateClothesCommand>();
+                    //services.AddSingleton<IUpdateClothesCommand, UpdateClothesCommand>();
+                    services.AddSingleton<IDeleteClothesCommand, DeleteClothesCommand>();
+                    services.AddSingleton<ICreateEmployeeCommand, CreateEmployeeCommand>();
+                    //services.AddSingleton<IUpdateEmployeeCommand, UpdateEmployeeCommand>();
+                    services.AddSingleton<IDeleteEmployeeCommand, DeleteEmployeeCommand>();
+                    services.AddSingleton<ICreateClothesSizeCommand, CreateClothesSizeCommand>();
+                    //services.AddSingleton<IUpdateClothesSizeCommand, UpdateClothesSizeCommand>();
+                    services.AddSingleton<IDeleteClothesSizeCommand, DeleteClothesSizeCommand>();
+                    services.AddSingleton<ICreateEmployeeClothesSizeCommand, CreateEmployeeClothesSizeCommand>();
+                    //services.AddSingleton<IUpdateEmployeeClothesSizeCommand, UpdateEmployeeClothesSizeCommand>();
+                    services.AddSingleton<IDeleteEmployeeClothesSizeCommand, DeleteEmployeeClothesSizeCommand>();
                 })
                 .Build();
+
+            var dirtyTrackingService = _host.Services.GetRequiredService<DirtyTrackingService>();
+            ObservableEntity.Initialize(dirtyTrackingService);
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             _host.Start();
+
             LoadData();
+
             MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
+
             base.OnStartup(e);
         }
 

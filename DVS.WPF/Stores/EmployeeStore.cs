@@ -4,7 +4,6 @@ using DVS.Domain.Models;
 namespace DVS.WPF.Stores
 {
     public class EmployeeStore(ICreateEmployeeCommand createEmployeeCommand,
-                               IUpdateEmployeeCommand updateEmployeeCommand,
                                IDeleteEmployeeCommand deleteEmployeeCommand)
     {
         private readonly List<Employee> _employees = [];
@@ -33,22 +32,24 @@ namespace DVS.WPF.Stores
             EmployeeAdded?.Invoke(employee);
         }
 
-        public async Task Update(Employee updatedEmployee)
+        public void Update(Employee editedEmployee)
         {
-            await updateEmployeeCommand.Execute(updatedEmployee);
-
-            int index = _employees.FindIndex(e => e.Id == updatedEmployee.Id);
+            int index = _employees.FindIndex(e => e.Id == editedEmployee.Id);
 
             if (index != -1)
             {
-                _employees[index] = updatedEmployee;
+                _employees[index] = editedEmployee;
             }
             else
             {
-                _employees.Add(updatedEmployee);
+                _employees.Add(editedEmployee);
             }
 
-            EmployeeUpdated.Invoke(updatedEmployee);
+            EmployeeUpdated.Invoke(editedEmployee);
+
+            editedEmployee.IsDirty = true;
+
+
         }
 
         public async Task Delete(Employee employee)

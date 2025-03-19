@@ -4,7 +4,6 @@ using DVS.Domain.Models;
 namespace DVS.WPF.Stores
 {
     public class ClothesStore(ICreateClothesCommand createClothesCommand,
-                              IUpdateClothesCommand updateClothesCommand,
                               IDeleteClothesCommand deleteClothesCommand)
     {
         private readonly List<Clothes> _clothes = [];
@@ -33,22 +32,22 @@ namespace DVS.WPF.Stores
             ClothesAdded.Invoke(clothes);
         }
 
-        public async Task Update(Clothes updatedClothes)
+        public void Update(Clothes editedClothes)
         {
-            await updateClothesCommand.Execute(updatedClothes);
-
-            int index = _clothes.FindIndex(c => c.Id == updatedClothes.Id);
+            int index = _clothes.FindIndex(c => c.Id == editedClothes.Id);
 
             if (index != -1)
             {
-                _clothes[index] = updatedClothes;
+                _clothes[index] = editedClothes;
             }
             else
             {
-                _clothes.Add(updatedClothes);
+                _clothes.Add(editedClothes);
             }
 
-            ClothesUpdated.Invoke(updatedClothes);
+            ClothesUpdated.Invoke(editedClothes);
+
+            editedClothes.IsDirty = true;
         }
 
         public async Task Delete(Clothes clothes)

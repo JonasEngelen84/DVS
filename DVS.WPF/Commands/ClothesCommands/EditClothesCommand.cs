@@ -8,10 +8,10 @@ namespace DVS.WPF.Commands.ClothesCommands
 {
     public class EditClothesCommand(
         EditClothesViewModel editClothesViewModel,
-        EmployeeStore employeeStore,
         ClothesStore clothesStore,
         ClothesSizeStore clothesSizeStore,
         EmployeeClothesSizeStore employeeClothesSizeStore,
+        EmployeeStore employeeStore,
         ModalNavigationStore modalNavigationStore)
         : AsyncCommandBase
     {
@@ -20,7 +20,7 @@ namespace DVS.WPF.Commands.ClothesCommands
             EditClothesFormViewModel editClothesFormViewModel = editClothesViewModel.EditClothesFormViewModel;
             editClothesFormViewModel.HasError = false;
 
-            if (!Confirm($"Soll die Bekleidung  {editClothesFormViewModel.Id}, {editClothesFormViewModel.Name}  " +
+            if (!Confirm($"Soll die Bekleidung  {editClothesFormViewModel.Id}, {editClothesFormViewModel.Clothes.Name}  " +
                 "wirklich bearbeitet werden?", "Bekleidung bearbeiten"))
             {
                 return;
@@ -29,111 +29,113 @@ namespace DVS.WPF.Commands.ClothesCommands
             editClothesFormViewModel.IsSubmitting = true;
 
             List<ClothesSize> OldClothesSizes = new(editClothesFormViewModel.Clothes.Sizes);
-            List<ClothesSize> EqualClothesSizes = [];
-            List<ClothesSize> NewClothesSizes = [];
-            List<EmployeeClothesSize> EditedEmployeeClothesSizes = [];
-
-            Clothes editedClothes = CreateEditedClothes(editClothesFormViewModel);
             List<SizeListingItemViewModel> newSelectedSizes = GetSelectedSizes(editClothesFormViewModel);
+            List<EmployeeClothesSize> EditedEmployeeClothesSizes = [];
+            bool clothesPropertyChanged = false;
 
-            if (OldClothesSizes.Count > 0)
+            EditClothes(ref clothesPropertyChanged, editClothesFormViewModel);
+
+            if (OldClothesSizes.Count > 0 && newSelectedSizes.Count > 0)
             {
-                await CompareAndSortClothesSizes(
+                await DeleteOrUpdateClothesSizes(
                     OldClothesSizes,
                     newSelectedSizes,
-                    EqualClothesSizes,
-                    editedClothes,
+                    clothesPropertyChanged,
                     editClothesFormViewModel);
             }
 
-            await UpdateClothesSizes(editedClothes, editClothesFormViewModel);
-
             if (newSelectedSizes.Count > 0)
-            {
-                CreateNewClothesSizes(newSelectedSizes, editedClothes, NewClothesSizes);
-            }
+                await AddNewClothesSizesAsync(newSelectedSizes, editClothesFormViewModel);
 
-            await UpdateEmployeeClothesSizes(editedClothes, EditedEmployeeClothesSizes, editClothesFormViewModel);
-            await UpdateEmployees(EditedEmployeeClothesSizes, editClothesFormViewModel);
-            AddEqualClothesSizes(editedClothes, EqualClothesSizes);
-            await UpdateClothes(editedClothes, editClothesFormViewModel);
-            await AddNewClothesSizes(NewClothesSizes, editClothesFormViewModel);
+            if (clothesPropertyChanged)
+            {
+                UpdateEmployeeClothesSizes(EditedEmployeeClothesSizes, editClothesFormViewModel);
+                UpdateEmployees(EditedEmployeeClothesSizes);
+                UpdateClothes(editClothesFormViewModel);
+            }
 
             editClothesFormViewModel.IsSubmitting = false;
             modalNavigationStore.Close();
         }
 
-        private static Clothes CreateEditedClothes(EditClothesFormViewModel editClothesFormViewModel)
+        private static void EditClothes(ref bool clothesPropertyChanged, EditClothesFormViewModel editClothesFormViewModel)
         {
-            return new Clothes(
-                editClothesFormViewModel.Id,
-                editClothesFormViewModel.Name,
-                editClothesFormViewModel.Category,
-                editClothesFormViewModel.Season,
-                editClothesFormViewModel.Comment)
+            clothesPropertyChanged = false;
+
+            if (!editClothesFormViewModel.Clothes.Name.Equals(editClothesFormViewModel.Name))
             {
-                Sizes = []
-            };
+                editClothesFormViewModel.Clothes.Name = editClothesFormViewModel.Name;
+                clothesPropertyChanged = true;
+            }
+
+            if (editClothesFormViewModel.Clothes.Category != editClothesFormViewModel.Category)
+            {
+                editClothesFormViewModel.Clothes.Category = editClothesFormViewModel.Category;
+                clothesPropertyChanged = true;
+            }
+
+            if (editClothesFormViewModel.Clothes.Season != editClothesFormViewModel.Season)
+            {
+                editClothesFormViewModel.Clothes.Season = editClothesFormViewModel.Season;
+                clothesPropertyChanged = true;
+            }
+
+            if (!editClothesFormViewModel.Clothes.Comment.Equals(editClothesFormViewModel.Comment))
+            {
+                editClothesFormViewModel.Clothes.Comment = editClothesFormViewModel.Comment;
+                clothesPropertyChanged = true;
+            }
         }
 
         private static List<SizeListingItemViewModel> GetSelectedSizes(EditClothesFormViewModel editClothesFormViewModel)
         {
             return new List<SizeListingItemViewModel>(editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS
-                .Any(size => size.Quantity > 0)
-                ? editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Where(size => size.Quantity > 0)
-                : editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesEU.Where(size => size.Quantity > 0))
+                .Any(size => size.IsChecked)
+                ? editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Where(size => size.IsChecked)
+                : editClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesEU.Where(size => size.IsChecked))
                 .ToList();
         }
 
-        private async Task CompareAndSortClothesSizes(
+        private async Task DeleteOrUpdateClothesSizes(
             List<ClothesSize> oldClothesSizes,
             List<SizeListingItemViewModel> newSelectedSizes,
-            List<ClothesSize> equalClothesSizes,
-            Clothes editedClothes,
+            bool clothesPropertyChanged,
             EditClothesFormViewModel editClothesFormViewModel)
-        {
+        {            
             foreach (ClothesSize oldClothesSize in oldClothesSizes)
             {
-                SizeListingItemViewModel? existingSize = newSelectedSizes
+                SizeListingItemViewModel? newSelectedSize = newSelectedSizes
                     .FirstOrDefault(slivm => slivm.Size == oldClothesSize.Size);
 
-                if (existingSize == null)
+                if (newSelectedSize == null)
                 {
                     EmployeeClothesSize? assignedClothesSize = employeeClothesSizeStore.EmployeeClothesSizes
-                    .FirstOrDefault(ecs => ecs.ClothesSizeGuidId == oldClothesSize.GuidId);
+                    .FirstOrDefault(ecs => ecs.ClothesSizeGuidId == oldClothesSize.Id);
 
                     if (assignedClothesSize != null)
-                        editedClothes.Sizes.Add(CreateEditedClothesSize(oldClothesSize, editedClothes, 0, existingSize.Comment));
+                    {
+                        ShowErrorMessageBox($"Größe  \"{oldClothesSize.Size}\"  kann nicht enfernt werden, " +
+                            "da diese noch vergeben ist!\nDer Bestand wird auf \"0\" gesetzt.", " Bekleidung bearbeiten");
+
+                        UpdateClothesSize(true, oldClothesSize, null, clothesPropertyChanged, editClothesFormViewModel);
+                    }
                     else
-                        await DeleteClothesSize(oldClothesSize, editClothesFormViewModel);
+                        await DeleteClothesSizeAsync(oldClothesSize, editClothesFormViewModel);
                 }
                 else
                 {
-                    if (oldClothesSize.Quantity == existingSize.Quantity && string.Equals(oldClothesSize.Comment, existingSize.Comment))
-                        equalClothesSizes.Add(oldClothesSize);
-                    else
-                        editedClothes.Sizes.Add(CreateEditedClothesSize(oldClothesSize, editedClothes, existingSize.Quantity, existingSize.Comment));
-
-                    newSelectedSizes.Remove(existingSize);
+                    UpdateClothesSize(false, oldClothesSize, newSelectedSize, clothesPropertyChanged, editClothesFormViewModel);
+                    newSelectedSizes.Remove(newSelectedSize);
                 }
             }
         }
-
-        private static ClothesSize CreateEditedClothesSize(ClothesSize oldClothesSize, Clothes editedClothes, int quantity, string comment)
+                
+        private async Task DeleteClothesSizeAsync(
+            ClothesSize clothesSizeToDelete,
+            EditClothesFormViewModel editClothesFormViewModel)
         {
-            return new ClothesSize(
-                    oldClothesSize.GuidId,
-                    editedClothes,
-                    oldClothesSize.Size,
-                    quantity,
-                    comment)
-            {
-                EmployeeClothesSizes = oldClothesSize.EmployeeClothesSizes
-            };
-        }
+            editClothesFormViewModel.Clothes.Sizes.Remove(clothesSizeToDelete);
 
-        private async Task DeleteClothesSize(ClothesSize clothesSizeToDelete, EditClothesFormViewModel editClothesFormViewModel)
-        {
             try
             {
                 await clothesSizeStore.Delete(clothesSizeToDelete);
@@ -145,153 +147,105 @@ namespace DVS.WPF.Commands.ClothesCommands
             }
         }
 
-        private async Task UpdateClothesSizes(Clothes editedClothes, EditClothesFormViewModel editClothesFormViewModel)
+        private void UpdateClothesSize(
+            bool makeQuantityZero,
+            ClothesSize oldClothesSize,
+            SizeListingItemViewModel? newSelectedSize,
+            bool clothesPropertyChanged,
+            EditClothesFormViewModel editClothesFormViewModel)
         {
-            foreach (ClothesSize editedClothesSize in editedClothes.Sizes)
+            bool clothesSizePropertyChanged = false;
+
+            if (makeQuantityZero == true)
             {
-                try
+                oldClothesSize.Quantity = 0;
+                clothesSizePropertyChanged = true;
+            }
+            else
+            {
+                if (oldClothesSize.Quantity != newSelectedSize.Quantity)
                 {
-                    await clothesSizeStore.Update(editedClothesSize);
+                    oldClothesSize.Quantity = newSelectedSize.Quantity;
+                    clothesSizePropertyChanged = true;
                 }
-                catch
+
+                if (!string.Equals(oldClothesSize.Comment, newSelectedSize.Comment))
                 {
-                    ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", " Bekleidung bearbeiten");
-                    editClothesFormViewModel.HasError = true;
+                    oldClothesSize.Comment = newSelectedSize.Comment;
+                    clothesSizePropertyChanged = true;
                 }
+            }
+
+            if (clothesPropertyChanged)
+            {
+                oldClothesSize.Clothes = editClothesFormViewModel.Clothes;
+                clothesSizePropertyChanged = true;
+            }
+
+            if (clothesSizePropertyChanged)
+            {
+                ClothesSize existingClothesSize = editClothesFormViewModel.Clothes.Sizes
+                    .First(cs => cs.Id == oldClothesSize.Id);
+
+                editClothesFormViewModel.Clothes.Sizes.Remove(existingClothesSize);
+                editClothesFormViewModel.Clothes.Sizes.Add(oldClothesSize);
+                clothesSizeStore.Update(oldClothesSize);
             }
         }
 
-        private static void CreateNewClothesSizes(
-            List<SizeListingItemViewModel> newSelectedSizes,
-            Clothes editedClothes,
-            List<ClothesSize> NewClothesSizes)
+        private async Task AddNewClothesSizesAsync(List<SizeListingItemViewModel> newSelectedSizes, EditClothesFormViewModel editClothesFormViewModel)
         {
             foreach (SizeListingItemViewModel slivm in newSelectedSizes)
             {
-                ClothesSize newClothesSize = new(Guid.NewGuid(), editedClothes, slivm.Size, slivm.Quantity, slivm.Comment)
+                ClothesSize newClothesSize = new(Guid.NewGuid(), editClothesFormViewModel.Clothes, slivm.Size, slivm.Quantity, slivm.Comment)
                 {
                     EmployeeClothesSizes = []
                 };
 
-                editedClothes.Sizes.Add(newClothesSize);
-                NewClothesSizes.Add(newClothesSize);
+                editClothesFormViewModel.Clothes.Sizes.Add(newClothesSize);
+
+                try
+                {
+                    await clothesSizeStore.AddToDataBase(newClothesSize);
+                }
+                catch
+                {
+                    ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", " Bekleidung bearbeiten");
+                    editClothesFormViewModel.HasError = true;
+                }
             }
         }
-
-        private async Task UpdateEmployeeClothesSizes(
-            Clothes editedClothes,
-            List<EmployeeClothesSize> EditedEmployeeClothesSizes,
-            EditClothesFormViewModel editClothesFormViewModel)
+        
+        private void UpdateEmployeeClothesSizes(List<EmployeeClothesSize> editedEmployeeClothesSizes, EditClothesFormViewModel editClothesFormViewModel)
         {
-            List<EmployeeClothesSize> assignedClothesSizes = [];
-
-            foreach (ClothesSize clothesSize in editedClothes.Sizes)
+            foreach (ClothesSize clothesSize in editClothesFormViewModel.Clothes.Sizes)
             {
-                assignedClothesSizes = employeeClothesSizeStore.EmployeeClothesSizes
-                    .Where(ecs => ecs.ClothesSizeGuidId == clothesSize.GuidId)
+                List<EmployeeClothesSize> assignedClothesSizes = employeeClothesSizeStore.EmployeeClothesSizes
+                    .Where(ecs => ecs.ClothesSizeGuidId == clothesSize.Id)
                     .ToList();
 
                 foreach (EmployeeClothesSize ecs in assignedClothesSizes)
                 {
-                    EmployeeClothesSize editedEcs = new(
-                        ecs.GuidId,
-                        ecs.Employee,
-                        clothesSize,
-                        ecs.Quantity,
-                        ecs.Comment);
-
-                    EditedEmployeeClothesSizes.Add(editedEcs);
-
-                    try
-                    {
-                        await employeeClothesSizeStore.Update(editedEcs);
-                    }
-                    catch
-                    {
-                        ShowErrorMessageBox("Löschen der Bekleidungs-Größen ist fehlgeschlagen!", "Bekleidungs-Größen löschen");
-                        editClothesFormViewModel.HasError = true;
-                    }
+                    ecs.ClothesSize = clothesSize;
+                    editedEmployeeClothesSizes.Add(ecs);
+                    employeeClothesSizeStore.Update(ecs);
                 }
             }
         }
 
-        private async Task UpdateEmployees(
-            List<EmployeeClothesSize> EditedEmployeeClothesSizes,
-            EditClothesFormViewModel editClothesFormViewModel)
+        private void UpdateEmployees(List<EmployeeClothesSize> EditedEmployeeClothesSizes)
         {
-            List<EmployeeClothesSize> ecsOwner = [];
-
             foreach (EmployeeClothesSize employeeClothesSize in EditedEmployeeClothesSizes)
             {
-                ecsOwner = EditedEmployeeClothesSizes
-                    .Where(ecs => ecs.EmployeeId == employeeClothesSize.EmployeeId)
-                    .ToList();
+                EmployeeClothesSize existingEcs = employeeClothesSize.Employee.Clothes
+                    .First(ecs => ecs.Id == employeeClothesSize.Id);
 
-                Employee editedEmployee = new(
-                    employeeClothesSize.EmployeeId,
-                    employeeClothesSize.Employee.Lastname,
-                    employeeClothesSize.Employee.Firstname,
-                    employeeClothesSize.Employee.Comment)
-                {
-                    Clothes = new(employeeClothesSize.Employee.Clothes)
-                };
-
-                foreach (EmployeeClothesSize employeeCS in ecsOwner)
-                {
-                    EmployeeClothesSize existingEcs = editedEmployee.Clothes
-                        .First(ecs => ecs.GuidId == employeeCS.GuidId);
-
-                    editedEmployee.Clothes.Remove(existingEcs);
-                    editedEmployee.Clothes.Add(employeeCS);
-                }
-
-                try
-                {
-                    await employeeStore.Update(editedEmployee);
-                }
-                catch
-                {
-                    ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", " Bekleidung bearbeiten");
-                    editClothesFormViewModel.HasError = true;
-                }
+                employeeClothesSize.Employee.Clothes.Remove(existingEcs);
+                employeeClothesSize.Employee.Clothes.Add(employeeClothesSize);
+                employeeStore.Update(employeeClothesSize.Employee);
             }
         }
 
-        private static void AddEqualClothesSizes(Clothes editedClothes, List<ClothesSize> EqualClothesSizes)
-        {
-            foreach (ClothesSize cs in EqualClothesSizes)
-            {
-                editedClothes.Sizes.Add(cs);
-            }
-        }
-
-        private async Task UpdateClothes(Clothes editedClothes, EditClothesFormViewModel editClothesFormViewModel)
-        {
-            try
-            {
-                await clothesStore.Update(editedClothes);
-            }
-            catch
-            {
-                ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", "AddClothesCommand CreateAndAddNewClothesAsync");
-                editClothesFormViewModel.HasError = true;
-            }
-        }
-
-        private async Task AddNewClothesSizes(List<ClothesSize> NewClothesSizes, EditClothesFormViewModel editClothesFormViewModel)
-        {
-            foreach (ClothesSize newClothesSize in NewClothesSizes)
-            {
-                try
-                {
-                    await clothesSizeStore.Add(newClothesSize);
-                }
-                catch
-                {
-                    ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", " Bekleidung bearbeiten");
-                    editClothesFormViewModel.HasError = true;
-                }
-            }
-        }
+        private void UpdateClothes(EditClothesFormViewModel editClothesFormViewModel) => clothesStore.Update(editClothesFormViewModel.Clothes);
     }
 }

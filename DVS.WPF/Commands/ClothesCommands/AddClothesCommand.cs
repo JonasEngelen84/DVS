@@ -18,7 +18,7 @@ namespace DVS.WPF.Commands.ClothesCommands
             AddClothesFormViewModel addClothesFormViewModel = addClothesViewModel.AddClothesFormViewModel;
             addClothesFormViewModel.HasError = false;
             
-            if (CheckClothesId(addClothesFormViewModel) != null)
+            if (clothesStore.Clothes.Any(c => c.Id == addClothesFormViewModel.Id))
             {
                 ShowErrorMessageBox("Die eingegebene Id ist bereits vergeben!\nBitte eine andere Id eingeben.", "Vorhandene Id");
                 return;
@@ -27,7 +27,7 @@ namespace DVS.WPF.Commands.ClothesCommands
             addClothesFormViewModel.IsSubmitting = true;
 
             Clothes newClothes = CreateClothes(addClothesFormViewModel);
-            List<SizeListingItemViewModel> selectedSizes = GetSizes(addClothesFormViewModel);
+            List<SizeListingItemViewModel> selectedSizes = GetSelectedSizes(addClothesFormViewModel);
 
             if (selectedSizes != null)
             {
@@ -40,13 +40,6 @@ namespace DVS.WPF.Commands.ClothesCommands
             modalNavigationStore.Close();
         }
 
-        private Clothes CheckClothesId(AddClothesFormViewModel addClothesFormViewModel)
-        {
-            Clothes? existingClothes = clothesStore.Clothes
-                .FirstOrDefault(c => c.Id == addClothesFormViewModel.Id);
-
-            return existingClothes;
-        }
         private static Clothes CreateClothes(AddClothesFormViewModel addClothesFormViewModel)
         {
             return new Clothes(
@@ -59,12 +52,13 @@ namespace DVS.WPF.Commands.ClothesCommands
                 Sizes = []
             };
         }
-        private static List<SizeListingItemViewModel> GetSizes(AddClothesFormViewModel addClothesFormViewModel)
+        private static List<SizeListingItemViewModel> GetSelectedSizes(AddClothesFormViewModel addClothesFormViewModel)
         {
-            return new List<SizeListingItemViewModel>(addClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Any(size => size.Quantity > 0)
-                    ? addClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Where(size => size.Quantity > 0)
-                    : addClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesEU.Where(size => size.Quantity > 0))
-                    .ToList();
+            return new List<SizeListingItemViewModel>(addClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS
+                .Any(size => size.IsChecked)
+                ? addClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesUS.Where(size => size.IsChecked)
+                : addClothesFormViewModel.SizesCategoriesSeasonsListingViewModel.LoadedSizesEU.Where(size => size.IsChecked))
+                .ToList();
         }
         private void CreateClothesSizes(List<SizeListingItemViewModel> selectedSizes, Clothes newClothes)
         {

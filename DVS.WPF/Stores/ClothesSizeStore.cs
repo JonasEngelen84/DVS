@@ -4,12 +4,12 @@ using DVS.Domain.Models;
 namespace DVS.WPF.Stores
 {
     public class ClothesSizeStore(ICreateClothesSizeCommand createClothesSizeCommand,
-                                  IUpdateClothesSizeCommand updateClothesSizeCommand,
                                   IDeleteClothesSizeCommand deleteClothesSizeCommand)
     {
         private readonly List<ClothesSize> _clothesSizes = [];
         public IEnumerable<ClothesSize> ClothesSizes => _clothesSizes;
 
+        public event Action<ClothesSize> ClothesSizeAdded;
         public event Action<ClothesSize> ClothesSizeUpdated;
         public event Action<ClothesSize> ClothesSizeDeleted;
 
@@ -23,23 +23,21 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task Add(ClothesSize clothesSize)
+        public async Task AddToDataBase(ClothesSize newClothesSize)
         {
-            await createClothesSizeCommand.Execute(clothesSize);
-
-            _clothesSizes.Add(clothesSize);
+            await createClothesSizeCommand.Execute(newClothesSize);
+            _clothesSizes.Add(newClothesSize);
+            ClothesSizeAdded.Invoke(newClothesSize);
         }
         
-        public void AddToStore(ClothesSize clothesSize)
+        public void AddToStore(ClothesSize newClothesSize)
         {
-            _clothesSizes.Add(clothesSize);
+            _clothesSizes.Add(newClothesSize);
         }
 
-        public async Task Update(ClothesSize editedClothesSize)
+        public void Update(ClothesSize editedClothesSize)
         {
-            await updateClothesSizeCommand.Execute(editedClothesSize);
-
-            int index = _clothesSizes.FindIndex(y => y.GuidId == editedClothesSize.GuidId);
+            int index = _clothesSizes.FindIndex(y => y.Id == editedClothesSize.Id);
 
             if (index != -1)
             {
@@ -47,17 +45,19 @@ namespace DVS.WPF.Stores
             }
 
             ClothesSizeUpdated.Invoke(editedClothesSize);
+
+            editedClothesSize.IsDirty = true;
         }
 
         public async Task Delete(ClothesSize clothesSizeToDelete)
         {
             await deleteClothesSizeCommand.Execute(clothesSizeToDelete);
 
-            int index = _clothesSizes.FindIndex(y => y.GuidId == clothesSizeToDelete.GuidId);
+            int index = _clothesSizes.FindIndex(y => y.Id == clothesSizeToDelete.Id);
 
             if (index != -1)
             {
-                _clothesSizes.RemoveAll(y => y.GuidId == clothesSizeToDelete.GuidId);
+                _clothesSizes.RemoveAll(y => y.Id == clothesSizeToDelete.Id);
             }
 
             ClothesSizeDeleted.Invoke(clothesSizeToDelete);

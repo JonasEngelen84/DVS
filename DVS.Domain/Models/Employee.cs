@@ -1,15 +1,52 @@
 ﻿using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace DVS.Domain.Models
 {
     public class Employee : ObservableEntity
     {
         public string Id { get; set; }
-        public string Lastname { get; set; }
-        public string Firstname { get; set; }
-        public string Comment { get; set; }
 
-        public ObservableCollection<EmployeeClothesSize> Clothes { get; set; }
+        private string _lastname;
+        public string Lastname
+        {
+            get => _lastname;
+            set
+            {
+                if (_lastname != value)
+                {
+                    _lastname = value;
+                }
+            }
+        }
+
+        private string _firstname;
+        public string Firstname
+        {
+            get => _firstname;
+            set
+            {
+                if (_firstname != value)
+                {
+                    _firstname = value;
+                }
+            }
+        }
+
+        private string? _comment;
+        public string? Comment
+        {
+            get => _comment;
+            set
+            {
+                if (_comment != value)
+                {
+                    _comment = value;
+                }
+            }
+        }
+
+        public ObservableCollection<EmployeeClothesSize> Clothes {  get; set; }
 
         public Employee(
             string id,
@@ -25,6 +62,6 @@ namespace DVS.Domain.Models
             Clothes = [];
         }
 
-        public Employee() {}
+        public Employee() { }
     }
 }

@@ -7,13 +7,16 @@ namespace DVS.EntityFramework.Commands.SeasonCommands
     {
         private readonly DVSDbContextFactory _contextFactory = contextFactory;
 
-        public async Task Execute(Season season)
+        public async Task Execute(Season editedSeason)
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            context.Seasons.Update(season);
+            var existingSeason = await context.Seasons.FindAsync(editedSeason.Id);
 
-            await context.SaveChangesAsync();
+            if (existingSeason != null)
+            {
+                context.Entry(existingSeason).CurrentValues.SetValues(editedSeason);
+            }
         }
     }
 }

@@ -5,7 +5,6 @@ using DVS.WPF.ViewModels.Forms;
 namespace DVS.WPF.Stores
 {
     public class CategoryStore(ICreateCategoryCommand createCategoryCommand,
-                               IUpdateCategoryCommand updateCategoryCommand,
                                IDeleteCategoryCommand deleteCategoryCommand)
     {
         public Category Categoryless { get; }
@@ -38,33 +37,33 @@ namespace DVS.WPF.Stores
             CategoryAdded.Invoke(category, addEditCategoryFormViewModel);
         }
 
-        public async Task Update(Category updatedCategory, AddEditCategoryFormViewModel? addEditCategoryFormViewModel)
+        public void Update(Category editedCategory, AddEditCategoryFormViewModel? addEditCategoryFormViewModel)
         {
-            await updateCategoryCommand.Execute(updatedCategory);
-
-            int index = _categories.FindIndex(y => y.GuidId == updatedCategory.GuidId);
+            int index = _categories.FindIndex(y => y.Id == editedCategory.Id);
 
             if (index > -1)
             {
-                _categories[index] = updatedCategory;
-                CategoryUpdated.Invoke(updatedCategory, addEditCategoryFormViewModel != null ? addEditCategoryFormViewModel : null);
+                _categories[index] = editedCategory;
+                CategoryUpdated.Invoke(editedCategory, addEditCategoryFormViewModel != null ? addEditCategoryFormViewModel : null);
             }
             else
             {
                 throw new InvalidOperationException("Umbenennen der Kategorie nicht möglich.");
             }
+
+            editedCategory.IsDirty = true;
         }
 
         public async Task Delete(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             await deleteCategoryCommand.Execute(category);
 
-            int index = _categories.FindIndex(y => y.GuidId == category.GuidId);
+            int index = _categories.FindIndex(y => y.Id == category.Id);
 
             if (index > -1)
             {
-                _categories.RemoveAll(y => y.GuidId == category.GuidId);
-                CategoryDeleted.Invoke(category.GuidId, addEditCategoryFormViewModel);
+                _categories.RemoveAll(y => y.Id == category.Id);
+                CategoryDeleted.Invoke(category.Id, addEditCategoryFormViewModel);
             }
             else
             {

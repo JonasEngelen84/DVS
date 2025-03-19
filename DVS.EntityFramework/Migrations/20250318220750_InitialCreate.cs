@@ -17,13 +17,13 @@ namespace DVS.EntityFramework.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    GuidId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     IsDirty = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.GuidId);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,13 +45,13 @@ namespace DVS.EntityFramework.Migrations
                 name: "Seasons",
                 columns: table => new
                 {
-                    GuidId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", maxLength: 15, nullable: false),
                     IsDirty = table.Column<bool>(type: "INTEGER", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Seasons", x => x.GuidId);
+                    table.PrimaryKey("PK_Seasons", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,13 +72,13 @@ namespace DVS.EntityFramework.Migrations
                         name: "FK_Clothes_Categories_CategoryGuidId",
                         column: x => x.CategoryGuidId,
                         principalTable: "Categories",
-                        principalColumn: "GuidId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Clothes_Seasons_SeasonGuidId",
                         column: x => x.SeasonGuidId,
                         principalTable: "Seasons",
-                        principalColumn: "GuidId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -86,7 +86,7 @@ namespace DVS.EntityFramework.Migrations
                 name: "ClothesSizes",
                 columns: table => new
                 {
-                    GuidId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     ClothesId = table.Column<string>(type: "TEXT", nullable: false),
                     Size = table.Column<string>(type: "TEXT", nullable: false),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
@@ -95,7 +95,7 @@ namespace DVS.EntityFramework.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClothesSizes", x => x.GuidId);
+                    table.PrimaryKey("PK_ClothesSizes", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ClothesSizes_Clothes_ClothesId",
                         column: x => x.ClothesId,
@@ -108,7 +108,7 @@ namespace DVS.EntityFramework.Migrations
                 name: "EmployeeClothesSizes",
                 columns: table => new
                 {
-                    GuidId = table.Column<Guid>(type: "TEXT", nullable: false),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     ClothesSizeGuidId = table.Column<Guid>(type: "TEXT", nullable: false),
                     EmployeeId = table.Column<string>(type: "TEXT", nullable: false),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
@@ -117,12 +117,12 @@ namespace DVS.EntityFramework.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeClothesSizes", x => x.GuidId);
+                    table.PrimaryKey("PK_EmployeeClothesSizes", x => x.Id);
                     table.ForeignKey(
                         name: "FK_EmployeeClothesSizes_ClothesSizes_ClothesSizeGuidId",
                         column: x => x.ClothesSizeGuidId,
                         principalTable: "ClothesSizes",
-                        principalColumn: "GuidId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_EmployeeClothesSizes_Employees_EmployeeId",
@@ -134,7 +134,7 @@ namespace DVS.EntityFramework.Migrations
 
             migrationBuilder.InsertData(
                 table: "Categories",
-                columns: new[] { "GuidId", "Name" },
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
                     { new Guid("2341a6cd-b4d2-45a5-ae77-3cf4b0e9c689"), "Hose" },
@@ -150,7 +150,7 @@ namespace DVS.EntityFramework.Migrations
 
             migrationBuilder.InsertData(
                 table: "Seasons",
-                columns: new[] { "GuidId", "Name" },
+                columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
                     { new Guid("1d5f3c9e-2d2f-49cb-9b71-9b7e8f58b8a1"), "Herbst" },

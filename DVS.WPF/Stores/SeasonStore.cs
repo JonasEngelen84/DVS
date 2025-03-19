@@ -5,7 +5,6 @@ using DVS.WPF.ViewModels.Forms;
 namespace DVS.WPF.Stores
 {
     public class SeasonStore(ICreateSeasonCommand createSeasonCommand,
-                             IUpdateSeasonCommand updateSeasonCommand,
                              IDeleteSeasonCommand deleteSeasonCommand)
     {
         private readonly List<Season> _seasons = [];
@@ -35,33 +34,33 @@ namespace DVS.WPF.Stores
             SeasonAdded.Invoke(season, addEditSeasonFormViewModel);
         }
 
-        public async Task Update(Season updatedSeason, AddEditSeasonFormViewModel? addEditSeasonFormViewModel)
+        public void Update(Season editedSeason, AddEditSeasonFormViewModel? addEditSeasonFormViewModel)
         {
-            await updateSeasonCommand.Execute(updatedSeason);
-
-            int index = _seasons.FindIndex(y => y.GuidId == updatedSeason.GuidId);
+            int index = _seasons.FindIndex(y => y.Id == editedSeason.Id);
 
             if (index > -1)
             {
-                _seasons[index] = updatedSeason;
-                SeasonUpdated.Invoke(updatedSeason, addEditSeasonFormViewModel != null ? addEditSeasonFormViewModel : null);
+                _seasons[index] = editedSeason;
+                SeasonUpdated.Invoke(editedSeason, addEditSeasonFormViewModel != null ? addEditSeasonFormViewModel : null);
             }
             else
             {
                 throw new InvalidOperationException("Umbenennen der Saison nicht möglich.");
             }
+
+            editedSeason.IsDirty = true;
         }
 
         public async Task Delete(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
             await deleteSeasonCommand.Execute(season);
 
-            int index = _seasons.FindIndex(y => y.GuidId == season.GuidId);
+            int index = _seasons.FindIndex(y => y.Id == season.Id);
 
             if (index > -1)
             {
-                _seasons.RemoveAll(y => y.GuidId == season.GuidId);
-                SeasonDeleted.Invoke(season.GuidId, addEditSeasonFormViewModel);
+                _seasons.RemoveAll(y => y.Id == season.Id);
+                SeasonDeleted.Invoke(season.Id, addEditSeasonFormViewModel);
             }
             else
             {

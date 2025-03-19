@@ -2,30 +2,80 @@
 {
     public class EmployeeClothesSize : ObservableEntity
     {
-        public Guid GuidId { get; set; }
+        public Guid Id { get; set; }
         public Guid ClothesSizeGuidId { get; set; }
         public string EmployeeId { get; set; }
-        public int Quantity { get; set; }
-        public string Comment { get; set; }
-        public Employee Employee { get; set; }
-        public ClothesSize ClothesSize { get; set; }
+
+        private Employee _employee;
+        public Employee Employee
+        {
+            get => _employee;
+
+            set
+            {
+                if (_employee != value)
+                {
+                    _employee = value;
+                }
+            } 
+        }
+
+        private ClothesSize _clothesSize;
+        public ClothesSize ClothesSize
+        {
+            get => _clothesSize;
+
+            set
+            {
+                if (_clothesSize != value)
+                {
+                    _clothesSize = value;
+                }
+            }
+        }
+
+        private int _quantity;
+        public int Quantity
+        {
+            get => _quantity;
+            set
+            {
+                if (_quantity != value)
+                {
+                    _quantity = value;
+                }
+            }
+        }
+
+        private string? _comment;
+        public string? Comment
+        {
+            get => _comment;
+            set
+            {
+                if (_comment != value)
+                {
+                    _comment = value;
+                }
+            }
+        }
 
         public EmployeeClothesSize(
-            Guid guidId,
+            Guid id,
             Employee employee,
             ClothesSize clothesSize,
             int quantity,
             string comment)
         {
-            GuidId = guidId;
+            Id = id;
             Employee = employee;
             EmployeeId = employee.Id;
-            ClothesSize = clothesSize;
-            ClothesSizeGuidId = clothesSize.GuidId;
+            _clothesSize = clothesSize;
+            ClothesSizeGuidId = clothesSize.Id;
             Quantity = quantity;
             Comment = comment;
         }
 
-        public EmployeeClothesSize() {}
+        public EmployeeClothesSize() { }
     }
 }

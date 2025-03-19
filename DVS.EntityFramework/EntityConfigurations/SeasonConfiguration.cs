@@ -8,7 +8,7 @@ namespace DVS.EntityFramework.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Season> builder)
         {
-            builder.HasKey(s => s.GuidId);
+            builder.HasKey(s => s.Id);
 
             builder.Property(s => s.Name)
                 .IsRequired()

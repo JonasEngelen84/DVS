@@ -4,7 +4,7 @@ using System.Windows.Input;
 namespace DVS.WPF.ViewModels.Forms
 {
     public class EditClothesFormViewModel(
-        Clothes? clothes,
+        Clothes clothes,
         ICommand submitCommand,
         ICommand openAddEditCategoriesCommand,
         ICommand openAddEditSeasonsCommand,
@@ -17,7 +17,7 @@ namespace DVS.WPF.ViewModels.Forms
         public ICommand OpenAddEditSeasons { get; } = openAddEditSeasonsCommand;
         public ICommand SubmitClothes { get; } = submitCommand;
 
-        public Clothes? Clothes { get; } = clothes;
+        public Clothes Clothes { get; } = clothes;
 
         private string _id;
         public string Id

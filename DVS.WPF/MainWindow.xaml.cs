@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using CommunityToolkit.Mvvm.Input;
+using DVS.Domain;
+using DVS.Domain.Services.Interfaces;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -6,12 +9,14 @@ namespace DVS.WPF
 {
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public ICommand SaveCommand { get; }
+
+        public MainWindow(IDirtyEntitySaver dirtyEntitySaver)
         {
             InitializeComponent();
+            SaveCommand = new RelayCommand(async () => await dirtyEntitySaver.SaveDirtyEntitiesAsync());
         }
 
-        // Change View
         private void ChangeViewClick(object sender, RoutedEventArgs e)
         {
             if (SizeView.Visibility == Visibility.Visible)
@@ -30,25 +35,26 @@ namespace DVS.WPF
             }
         }
 
-        // removable MainWindow
         private void DragWindow(object sender, MouseButtonEventArgs e)
         {
             DragMove();
         }
 
-        // Close MainWindow
         private void CloseAppClick(object sender, RoutedEventArgs e)
         {
+            if (ObservableEntity.GlobalDirtyTrackingService.HasUnsavedChanges)
+            {
+                SaveCommand.Execute(null);
+            }
+
             Close();
         }
 
-        // Minimize MainWindow
         private void MinimizeAppClick(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
 
-        // Maximize/Normalize MainWindow
         private void MaximizeAppClick(object sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Normal)
@@ -58,8 +64,7 @@ namespace DVS.WPF
 
         }
 
-        // Change Min/Max-Image when WindowState changed (Drag window to top screen)
-        private void WindowStateChanged(object sender, EventArgs e)
+        private void ChangeMinMaxImage(object sender, EventArgs e)
         {
             if (WindowState == WindowState.Normal) 
             {

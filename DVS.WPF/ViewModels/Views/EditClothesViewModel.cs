@@ -30,10 +30,10 @@ namespace DVS.WPF.ViewModels.Views
 
             ICommand updatedClothes = new EditClothesCommand(
                 this,
-                employeeStore,
                 clothesStore,
                 clothesSizeStore,
                 employeeClothesSizesStore,
+                employeeStore,
                 modalNavigationStore);
 
             ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(
@@ -71,9 +71,9 @@ namespace DVS.WPF.ViewModels.Views
                 Id = clothes.Id,
                 Name = clothes.Name,
                 Category = categoryStore.Categories
-                    .First(c => c.GuidId == clothes.Category?.GuidId),
+                    .First(c => c.Id == clothes.Category?.Id),
                 Season = seasonStore.Seasons
-                    .First(s => s.GuidId == clothes.Season?.GuidId),
+                    .First(s => s.Id == clothes.Season?.Id),
                 Comment = clothes.Comment
             };
         }

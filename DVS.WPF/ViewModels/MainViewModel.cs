@@ -20,16 +20,15 @@ namespace DVS.WPF.ViewModels
         public DVSSizeViewModel DVSSizeViewModel { get; }
         private readonly ModalNavigationStore _modalNavigationStore;
 
-        // Pointer auf das aktuelle Modal(ViewModel) 
         public ViewModelBase CurrentModalViewModel => _modalNavigationStore.CurrentViewModel;
 
-        // Pointer auf "_modalNavigationStore.IsOpen" zur Prüfung ob ein Modal bereits geöffnet ist.
         public bool IsModalOpen => _modalNavigationStore.IsOpen;
 
 
-        public MainViewModel(DVSHeadViewModel dVSHeadViewModel,
-                             DVSSizeViewModel dVSViewModel,
-                             ModalNavigationStore modalNavigationStore)
+        public MainViewModel(
+            DVSHeadViewModel dVSHeadViewModel,
+            DVSSizeViewModel dVSViewModel,
+            ModalNavigationStore modalNavigationStore)
         {
             DVSHeadViewModel = dVSHeadViewModel;
             DVSSizeViewModel = dVSViewModel;

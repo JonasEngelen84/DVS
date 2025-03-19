@@ -18,8 +18,6 @@ namespace DVS.EntityFramework.Commands.EmployeeCommands
             {
                 context.Entry(existingEmployee).CurrentValues.SetValues(editedEmployee);
             }
-
-            await context.SaveChangesAsync();
         }
     }
 }

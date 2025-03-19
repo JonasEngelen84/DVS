@@ -6,7 +6,7 @@ namespace DVS.WPF.ViewModels.ListingItems
     {
         public ClothesSize ClothesSize { get; } = clothesSize;
         public Guid? EmployeeClothesSizeGuidId { get; } = employeeClothesSizeGuidId;
-        public Guid ClothesSizeId => ClothesSize.GuidId;
+        public Guid ClothesSizeId => ClothesSize.Id;
         public string ClothesId => ClothesSize.Clothes.Id;
         public string ClothesName => ClothesSize.Clothes.Name;
         public string Size => ClothesSize.Size;
@@ -28,7 +28,7 @@ namespace DVS.WPF.ViewModels.ListingItems
         private string? _comment;
         public string? Comment
         {
-            get { return _comment; }
+            get => _comment;
 
             set
             {

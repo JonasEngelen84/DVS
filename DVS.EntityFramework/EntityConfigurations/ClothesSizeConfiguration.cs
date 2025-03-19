@@ -8,7 +8,7 @@ namespace DVS.EntityFramework.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<ClothesSize> builder)
         {
-            builder.HasKey(cs => cs.GuidId);
+            builder.HasKey(cs => cs.Id);
 
             builder.Property(cs => cs.Size)
                 .IsRequired();
