@@ -1,4 +1,5 @@
-﻿using DVS.WPF.Stores;
+﻿using DVS.Domain.Services.Interfaces;
+using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Views;
 
@@ -14,14 +15,14 @@ namespace DVS.WPF.Commands.SeasonCommands
         EmployeeStore employeeStore,
         AddClothesViewModel addClothesViewModel,
         EditClothesViewModel editClothesViewModel,
-        SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel)
+        SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel,
+        IDirtyEntitySaver dirtyEntitySaver)
         : CommandBase
     {
         public override void Execute(object parameter)
         {
             AddEditSeasonViewModel addEditSeasonViewModel = new(
                 modalNavigationStore,
-                categoryStore,
                 seasonStore,
                 clothesStore,
                 clothesSizeStore,
@@ -29,7 +30,8 @@ namespace DVS.WPF.Commands.SeasonCommands
                 employeeStore,
                 addClothesViewModel,
                 editClothesViewModel,
-                SizesCategoriesSeasonsListingViewModel);
+                SizesCategoriesSeasonsListingViewModel,
+                dirtyEntitySaver);
 
             modalNavigationStore.CurrentViewModel = addEditSeasonViewModel;
         }
