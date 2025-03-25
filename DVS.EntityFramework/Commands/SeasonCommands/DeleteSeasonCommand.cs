@@ -11,7 +11,7 @@ namespace DVS.EntityFramework.Commands.SeasonCommands
         {
             using DVSDbContext context = _contextFactory.Create();
 
-            context.Seasons.Update(season);
+            context.Seasons.Remove(season);
 
             await context.SaveChangesAsync();
         }

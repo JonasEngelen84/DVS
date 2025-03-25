@@ -3,6 +3,7 @@ using DVS.WPF.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using DVS.WPF.Commands.ClothesCommands;
+using DVS.Domain.Services.Interfaces;
 
 namespace DVS.WPF.ViewModels.ListingItems
 {
@@ -78,7 +79,7 @@ namespace DVS.WPF.ViewModels.ListingItems
             ClothesSizeStore clothesSizeStore,
             EmployeeClothesSizeStore employeeClothesSizesStore,
             EmployeeStore employeeStore,
-            DVSListingViewModel dVSListingViewModel)
+            IDirtyEntitySaver dirtyEntitySaver)
         {
             Clothes = clothes;
 
@@ -91,7 +92,7 @@ namespace DVS.WPF.ViewModels.ListingItems
                 clothesSizeStore,
                 employeeClothesSizesStore,
                 employeeStore,
-                dVSListingViewModel);
+                dirtyEntitySaver);
 
             DeleteClothes = new DeleteClothesCommand(
                 this,

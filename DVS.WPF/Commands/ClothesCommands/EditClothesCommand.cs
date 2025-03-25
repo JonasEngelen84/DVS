@@ -30,7 +30,7 @@ namespace DVS.WPF.Commands.ClothesCommands
 
             List<ClothesSize> OldClothesSizes = new(editClothesFormViewModel.Clothes.Sizes);
             List<SizeListingItemViewModel> newSelectedSizes = GetSelectedSizes(editClothesFormViewModel);
-            List<EmployeeClothesSize> EditedEmployeeClothesSizes = [];
+            List<EmployeeClothesSize> EditedEcs = [];
             bool clothesPropertyChanged = false;
 
             EditClothes(ref clothesPropertyChanged, editClothesFormViewModel);
@@ -49,9 +49,9 @@ namespace DVS.WPF.Commands.ClothesCommands
 
             if (clothesPropertyChanged)
             {
-                UpdateEmployeeClothesSizes(EditedEmployeeClothesSizes, editClothesFormViewModel);
-                UpdateEmployees(EditedEmployeeClothesSizes);
-                UpdateClothes(editClothesFormViewModel);
+                UpdateEmployeeClothesSizes(EditedEcs, editClothesFormViewModel);
+                UpdateEmployees(EditedEcs);
+                clothesStore.Update(editClothesFormViewModel.Clothes);
             }
 
             editClothesFormViewModel.IsSubmitting = false;
@@ -60,23 +60,23 @@ namespace DVS.WPF.Commands.ClothesCommands
 
         private static void EditClothes(ref bool clothesPropertyChanged, EditClothesFormViewModel editClothesFormViewModel)
         {
-            clothesPropertyChanged = false;
-
             if (!editClothesFormViewModel.Clothes.Name.Equals(editClothesFormViewModel.Name))
             {
                 editClothesFormViewModel.Clothes.Name = editClothesFormViewModel.Name;
                 clothesPropertyChanged = true;
             }
 
-            if (editClothesFormViewModel.Clothes.Category != editClothesFormViewModel.Category)
+            if (!editClothesFormViewModel.Clothes.Category.Name.Equals(editClothesFormViewModel.Category.Name))
             {
                 editClothesFormViewModel.Clothes.Category = editClothesFormViewModel.Category;
+                editClothesFormViewModel.Clothes.CategoryGuidId = editClothesFormViewModel.Category.Id;
                 clothesPropertyChanged = true;
             }
 
-            if (editClothesFormViewModel.Clothes.Season != editClothesFormViewModel.Season)
+            if (!editClothesFormViewModel.Clothes.Season.Name.Equals(editClothesFormViewModel.Season.Name))
             {
                 editClothesFormViewModel.Clothes.Season = editClothesFormViewModel.Season;
+                editClothesFormViewModel.Clothes.SeasonGuidId = editClothesFormViewModel.Season.Id;
                 clothesPropertyChanged = true;
             }
 
@@ -156,7 +156,7 @@ namespace DVS.WPF.Commands.ClothesCommands
         {
             bool clothesSizePropertyChanged = false;
 
-            if (makeQuantityZero == true)
+            if (makeQuantityZero)
             {
                 oldClothesSize.Quantity = 0;
                 clothesSizePropertyChanged = true;
@@ -206,7 +206,7 @@ namespace DVS.WPF.Commands.ClothesCommands
 
                 try
                 {
-                    await clothesSizeStore.AddToDataBase(newClothesSize);
+                    await clothesSizeStore.AddDataBase(newClothesSize);
                 }
                 catch
                 {
@@ -245,7 +245,5 @@ namespace DVS.WPF.Commands.ClothesCommands
                 employeeStore.Update(employeeClothesSize.Employee);
             }
         }
-
-        private void UpdateClothes(EditClothesFormViewModel editClothesFormViewModel) => clothesStore.Update(editClothesFormViewModel.Clothes);
     }
 }

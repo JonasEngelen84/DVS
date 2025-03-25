@@ -1,4 +1,5 @@
 ﻿using DVS.Domain.Models;
+using DVS.Domain.Services.Interfaces;
 using DVS.WPF.Commands.CategoryCommands;
 using DVS.WPF.Commands.ClothesCommands;
 using DVS.WPF.Commands.SeasonCommands;
@@ -23,7 +24,7 @@ namespace DVS.WPF.ViewModels.Views
             ClothesSizeStore clothesSizeStore,
             EmployeeClothesSizeStore employeeClothesSizesStore,
             EmployeeStore employeeStore,
-            DVSListingViewModel dVSListingViewModel)
+            IDirtyEntitySaver dirtyEntitySaver)
         {            
             SizesCategoriesSeasonsListingViewModel = new(clothes, categoryStore, seasonStore);
             CloseAddEditClothes = new CloseAddEditClothesCommand(modalNavigationStore);
@@ -39,7 +40,6 @@ namespace DVS.WPF.ViewModels.Views
             ICommand openAddEditCategories = new OpenAddEditCategoriesCommand(
                 modalNavigationStore,
                 categoryStore,
-                seasonStore,
                 clothesStore,
                 clothesSizeStore,
                 employeeClothesSizesStore,
@@ -47,7 +47,7 @@ namespace DVS.WPF.ViewModels.Views
                 null,
                 this,
                 SizesCategoriesSeasonsListingViewModel,
-                dVSListingViewModel);
+                dirtyEntitySaver);
 
             ICommand openAddEditSeasons = new OpenAddEditSeasonsCommand(
                 modalNavigationStore,
@@ -59,7 +59,8 @@ namespace DVS.WPF.ViewModels.Views
                 employeeStore,
                 null,
                 this,
-                SizesCategoriesSeasonsListingViewModel);
+                SizesCategoriesSeasonsListingViewModel,
+                dirtyEntitySaver);
 
             EditClothesFormViewModel = new(
                 clothes,

@@ -1,4 +1,5 @@
-﻿using DVS.WPF.Stores;
+﻿using DVS.Domain.Services.Interfaces;
+using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Views;
 
@@ -10,11 +11,11 @@ namespace DVS.WPF.Commands
         ModalNavigationStore modalNavigationStore,
         ClothesStore clothesStore,
         EmployeeStore employeeStore,
-        DVSListingViewModel dVSListingViewModel,
         CategoryStore categoryStore,
         ClothesSizeStore clothesSizeStore,
         EmployeeClothesSizeStore employeeClothesSizesStore,
-        SeasonStore seasonStore)
+        SeasonStore seasonStore,
+        IDirtyEntitySaver dirtyEntitySaver)
         : CommandBase
     {
         public override void Execute(object parameter)
@@ -30,7 +31,7 @@ namespace DVS.WPF.Commands
                     clothesSizeStore,
                     employeeClothesSizesStore,
                     employeeStore,
-                    dVSListingViewModel);
+                    dirtyEntitySaver);
 
                 modalNavigationStore.CurrentViewModel = EditClothesViewModel;
             }

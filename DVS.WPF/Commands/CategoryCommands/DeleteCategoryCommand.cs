@@ -1,279 +1,126 @@
-﻿using DVS.Domain.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using DVS.Domain.Models;
+using DVS.Domain.Services.Interfaces;
 using DVS.WPF.Stores;
-using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
-using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace DVS.WPF.Commands.CategoryCommands
 {
     public class DeleteCategoryCommand(
         AddEditCategoryViewModel addEditCategoryViewModel,
         CategoryStore categoryStore,
-        SeasonStore seasonStore,
         ClothesStore clothesStore,
         ClothesSizeStore clothesSizeStore,
-        EmployeeClothesSizeStore employeeClothesSizesStore,
         EmployeeStore employeeStore,
-        DVSListingViewModel dVSListingViewModel)
+        EmployeeClothesSizeStore employeeClothesSizeStore,
+        IDirtyEntitySaver dirtyEntitySaver)
         : AsyncCommandBase
     {
+        public ICommand SaveCommand { get; } = new RelayCommand(async () => await dirtyEntitySaver.SaveDirtyEntitiesAsync());
+
         public override async Task ExecuteAsync(object parameter)
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = addEditCategoryViewModel.AddEditCategoryFormViewModel;
 
-            if (Confirm($"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\"" +
-                $"wird gelöscht, und ihre Schnittstellen werden auf \"Kategorielos\" gesetzt.\n\nLöschen fortsetzen?", "Kategorie löschen"))
+            if (Confirm($"Wenn die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" " +
+                $"gelöscht wird, werden ihre Schnittstellen auf \"Kategorielos\" gesetzt.\n\nLöschen fortsetzen?", "Kategorie löschen"))
             {
                 addEditCategoryFormViewModel.HasError = false;
                 addEditCategoryFormViewModel.IsDeleting = true;
 
-                var clothesToEdit = GetClothesToEdit(addEditCategoryFormViewModel, dVSListingViewModel);
-                var editedClothes = EditClothes(clothesToEdit);
-                var clothesSizesToEdit = GetClothesSizesToEdit(addEditCategoryFormViewModel);
-                var editedClothesSizes = EditClothesSizes(clothesSizesToEdit, editedClothes);
-                var employeeClothesSizesToEdit = GetEmployeeClothesSizeToEdit(addEditCategoryFormViewModel, dVSListingViewModel);
-                var editedEmployeeClothesSize = EditEmployeeClothesSizes(employeeClothesSizesToEdit, editedClothesSizes);
+                HashSet<ClothesSize> editedClothesSizes = [];
+                HashSet<EmployeeClothesSize> editedEcs = [];
+                HashSet<Clothes> clothesToEdit = GetClothesToEdit(addEditCategoryFormViewModel);
 
-                await UpdateClothesAsync(editedClothes, addEditCategoryFormViewModel);
+                UpdateClothes(clothesToEdit);
+                UpdateClothesSizes(clothesToEdit, editedClothesSizes);
+                UpdateEmployeeClothesSizes(editedClothesSizes, editedEcs);
+                UpdateEmployees(editedEcs);
+                SaveCommand.Execute(null);
                 await DeleteCategory(addEditCategoryFormViewModel);
+
+                addEditCategoryFormViewModel.IsDeleting = false;
             }
         }
 
-        private List<Clothes> GetClothesToEdit(AddEditCategoryFormViewModel addEditCategoryFormViewModel, DVSListingViewModel dVSListingViewModel)
+        private HashSet<Clothes> GetClothesToEdit(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            return dVSListingViewModel.ClothesCollection
-                .Where(clivm => clivm.Category == addEditCategoryFormViewModel.SelectedCategory)
-                .Select(clivm => clivm.Clothes)
-                .ToList();
+            return clothesStore.Clothes
+                .Where(c => c.Category.Name == addEditCategoryFormViewModel.SelectedCategory.Name)
+                .ToHashSet();
         }
 
-        private List<Clothes> EditClothes(List<Clothes> ClothesToEdit)
+        private void UpdateClothes(HashSet<Clothes> clothesToEdit)
         {
-            List<Clothes> editedClothes = [];
+            Category Categoryless = categoryStore.Categories
+                .First(c => c.Name == "-Kategorielos-");
 
-            foreach (Clothes clothes in ClothesToEdit)
+            foreach (Clothes clothes in clothesToEdit)
             {
-                Clothes newClothes = new(clothes.Id,
-                                         clothes.Name,
-                                         categoryStore.Categoryless,
-                                         clothes.Season,
-                                         clothes.Comment)
-                {
-                    Sizes = new ObservableCollection<ClothesSize>(clothes.Sizes)
-                };
+                clothes.Category = Categoryless;
+                clothes.CategoryGuidId = Categoryless.Id;
 
-                editedClothes.Add(newClothes);
+                clothesStore.Update(clothes);
             }
-
-            return editedClothes;
         }
 
-        private List<ClothesSize> GetClothesSizesToEdit(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        private void UpdateClothesSizes(HashSet<Clothes> editedClothes, HashSet<ClothesSize> editedClothesSizes)
         {
-            return dVSListingViewModel.EmployeeCollection
-                .Where(elivm => elivm.Clothes.Any(ecs => ecs.ClothesSize.Clothes.Category == addEditCategoryFormViewModel.SelectedCategory))
-                .SelectMany(elivm => elivm.Clothes)
-                .Where(ecs => ecs.ClothesSize.Clothes.Category == addEditCategoryFormViewModel.SelectedCategory)
-                .Select(ecs => ecs.ClothesSize)
-                .ToList();
-        }
-
-        private List<ClothesSize> EditClothesSizes(List<ClothesSize> clothesSizesToEdit, List<Clothes> editedClothes)
-        {
-            List<ClothesSize> editedClothesSizes = [];
-
-            foreach (ClothesSize cs in clothesSizesToEdit)
+            foreach (Clothes editedCl in editedClothes)
             {
-                ClothesSize newClothesSize = new(cs.GuidId,
-                                                 editedClothes.FirstOrDefault(c => c.Id == cs.Clothes.Id),
-                                                 cs.Size,
-                                                 cs.Quantity,
-                                                 cs.Comment)
+                foreach (ClothesSize csToEdit in editedCl.Sizes)
                 {
-                    EmployeeClothesSizes = new ObservableCollection<EmployeeClothesSize>(cs.EmployeeClothesSizes)
-                };
+                    csToEdit.Clothes = editedCl;
+                    editedClothesSizes.Add(csToEdit);
 
-                editedClothesSizes.Add(newClothesSize);
+                    clothesSizeStore.Update(csToEdit);
+                }
             }
-
-            return editedClothesSizes;
         }
 
-        private List<EmployeeClothesSize> GetEmployeeClothesSizeToEdit(AddEditCategoryFormViewModel addEditCategoryFormViewModel, DVSListingViewModel dVSListingViewModel)
+        private void UpdateEmployeeClothesSizes(HashSet<ClothesSize> editedClothesSizes, HashSet<EmployeeClothesSize> editedEcs)
         {
-            return dVSListingViewModel.EmployeeCollection
-                .SelectMany(elivm => elivm.Employee.Clothes)
-                .Where(ecs => ecs.ClothesSize.Clothes.Category == addEditCategoryFormViewModel.SelectedCategory)
-                .ToList();
+            foreach (ClothesSize clothesSize in editedClothesSizes)
+            {
+                List<EmployeeClothesSize> assignedClothesSizes = employeeClothesSizeStore.EmployeeClothesSizes
+                    .Where(ecs => ecs.ClothesSizeGuidId == clothesSize.Id)
+                    .ToList();
+
+                foreach (EmployeeClothesSize ecs in assignedClothesSizes)
+                {
+                    ecs.ClothesSize = clothesSize;
+                    editedEcs.Add(ecs);
+                    employeeClothesSizeStore.Update(ecs);
+                }
+            }
         }
 
-        private List<EmployeeClothesSize> EditEmployeeClothesSizes(List<EmployeeClothesSize> employeeClothesSizesToEdit, List<ClothesSize> editedClothesSizes)
+        private void UpdateEmployees(HashSet<EmployeeClothesSize> editedEcs)
         {
-            List<EmployeeClothesSize> editedEmployeeClothesSizes = [];
-
-            foreach (EmployeeClothesSize ecs in employeeClothesSizesToEdit)
+            foreach (EmployeeClothesSize employeeClothesSize in editedEcs)
             {
-                EmployeeClothesSize newEmployeeClothesSize = new(ecs.GuidId,
-                                                                 ecs.Employee,
-                                                                 editedClothesSizes.FirstOrDefault(cs => cs.GuidId == ecs.ClothesSizeGuidId),
-                                                                 ecs.Quantity,
-                                                                 ecs.Comment);
+                EmployeeClothesSize existingEcs = employeeClothesSize.Employee.Clothes
+                    .First(ecs => ecs.Id == employeeClothesSize.Id);
 
-                editedEmployeeClothesSizes.Add(newEmployeeClothesSize);
-            }
-
-            return editedEmployeeClothesSizes;
-        }
-
-        private async Task UpdateEmployeeClothesSizesAsync(List<ClothesSize> editedClothesSizes, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            foreach (ClothesSize cs in editedClothesSizes)
-            {
-                try
-                {
-                    await clothesSizeStore.Update(cs);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Löschen der Kategorie ist fehlgeschlagen!", "Kategorie löschen");
-                    addEditCategoryFormViewModel.HasError = true;
-                }
-            }
-        }
-        
-        private async Task UpdateEmployeeAsync(List<ClothesSize> editedClothesSizes, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            foreach (ClothesSize cs in editedClothesSizes)
-            {
-                try
-                {
-                    await clothesSizeStore.Update(cs);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Löschen der Kategorie ist fehlgeschlagen!", "Kategorie löschen");
-                    addEditCategoryFormViewModel.HasError = true;
-                }
-            }
-        }
-        
-        private async Task UpdateClothesSizesAsync(List<ClothesSize> editedClothesSizes, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            foreach (ClothesSize cs in editedClothesSizes)
-            {
-                try
-                {
-                    await clothesSizeStore.Update(cs);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Löschen der Kategorie ist fehlgeschlagen!", "Kategorie löschen");
-                    addEditCategoryFormViewModel.HasError = true;
-                }
+                employeeClothesSize.Employee.Clothes.Remove(existingEcs);
+                employeeClothesSize.Employee.Clothes.Add(employeeClothesSize);
+                employeeStore.Update(employeeClothesSize.Employee);
             }
         }
 
-        private async Task UpdateClothesAsync(List<Clothes> editedClothes, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            foreach (Clothes c in editedClothes)
-            {
-                try
-                {
-                    await clothesStore.Update(c);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Löschen der Kategorie ist fehlgeschlagen!", "Kategorie löschen");
-                    addEditCategoryFormViewModel.HasError = true;
-                }
-            }
-        }
-        
-        private async Task UpdateSizeAsync(List<ClothesSize> clothesSizesToEdit, List<ClothesSize> editedClothesSizes, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            //foreach (ClothesSize cs in clothesSizesToEdit)
-            //{
-            //    cs.Size.ClothesSizes.Remove(cs);
-            //}
-
-            //foreach (ClothesSize cs in editedClothesSizes)
-            //{
-            //    cs.Size.ClothesSizes.Add(cs);
-
-            //    try
-            //    {
-            //        await sizeStore.Update(cs.Size);
-            //    }
-            //    catch (Exception)
-            //    {
-            //        ShowErrorMessageBox("Löschen der Kategorie ist fehlgeschlagen!", "Kategorie löschen");
-            //        addEditCategoryFormViewModel.HasError = true;
-            //    }
-            //}
-        }
-        
-        private async Task UpdateSeasonAsync(List<Clothes> clothesToEdit, List<Clothes> editedClothes, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            foreach (Clothes c in clothesToEdit)
-            {
-                c.Season.Clothes.Remove(c);
-            }
-
-            foreach (Clothes c in editedClothes)
-            {
-                c.Season.Clothes.Add(c);
-
-                try
-                {
-                    await seasonStore.Update(c.Season, null);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Löschen der Kategorie ist fehlgeschlagen!", "Kategorie löschen");
-                    addEditCategoryFormViewModel.HasError = true;
-                }
-            }
-        }
-        
-        private async Task UpdateCategoryAsync(List<Clothes> clothesToEdit, List<Clothes> editedClothes, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
-        {
-            foreach (Clothes c in clothesToEdit)
-            {
-                categoryStore.Categoryless.Clothes.Remove(c);
-            }
-
-            foreach (Clothes c in editedClothes)
-            {
-                categoryStore.Categoryless.Clothes.Add(c);
-
-                try
-                {
-                    await categoryStore.Update(categoryStore.Categoryless, null);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Löschen der Kategorie ist fehlgeschlagen!", "Kategorie löschen");
-                    addEditCategoryFormViewModel.HasError = true;
-                }
-            }
-        }
-        
         private async Task DeleteCategory(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             try
             {
-                await categoryStore.Delete(addEditCategoryFormViewModel.SelectedCategory, addEditCategoryFormViewModel);
+                await categoryStore.Delete(addEditCategoryFormViewModel);
             }
             catch (Exception)
             {
                 ShowErrorMessageBox("Löschen der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Kategorie löschen");
 
                 addEditCategoryFormViewModel.HasError = true;
-            }
-            finally
-            {
-                addEditCategoryFormViewModel.IsDeleting = false;
             }
         }
     }

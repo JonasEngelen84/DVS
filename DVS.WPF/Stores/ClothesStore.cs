@@ -1,15 +1,17 @@
 ﻿using DVS.Domain.Commands.ClothesCommands;
 using DVS.Domain.Models;
+using DVS.Domain.Services.Interfaces;
 
 namespace DVS.WPF.Stores
 {
     public class ClothesStore(ICreateClothesCommand createClothesCommand,
-                              IDeleteClothesCommand deleteClothesCommand)
+                              IDeleteClothesCommand deleteClothesCommand,
+                              IDirtyEntitySaver dirtyEntitySaver)
     {
         private readonly List<Clothes> _clothes = [];
         public IEnumerable<Clothes> Clothes => _clothes;
 
-        public event Action<Clothes> ClothesAdded;
+        public event Action<Clothes, IDirtyEntitySaver> ClothesAdded;
         public event Action<Clothes> ClothesUpdated;
         public event Action<string> ClothesDeleted;
 
@@ -29,7 +31,7 @@ namespace DVS.WPF.Stores
 
             _clothes.Add(clothes);
 
-            ClothesAdded.Invoke(clothes);
+            ClothesAdded.Invoke(clothes, dirtyEntitySaver);
         }
 
         public void Update(Clothes editedClothes)

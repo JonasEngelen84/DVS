@@ -1,4 +1,5 @@
-﻿using DVS.WPF.Stores;
+﻿using DVS.Domain.Services.Interfaces;
+using DVS.WPF.Stores;
 using DVS.WPF.ViewModels;
 using DVS.WPF.ViewModels.Views;
 
@@ -7,7 +8,6 @@ namespace DVS.WPF.Commands.CategoryCommands
     public class OpenAddEditCategoriesCommand(
         ModalNavigationStore modalNavigationStore,
         CategoryStore categoryStore,
-        SeasonStore seasonStore,
         ClothesStore clothesStore,
         ClothesSizeStore clothesSizeStore,
         EmployeeClothesSizeStore employeeClothesSizesStore,
@@ -15,7 +15,7 @@ namespace DVS.WPF.Commands.CategoryCommands
         AddClothesViewModel addClothesViewModel,
         EditClothesViewModel editClothesViewModel,
         SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel,
-        DVSListingViewModel dVSListingViewModel)
+        IDirtyEntitySaver dirtyEntitySaver)
         : CommandBase
     {
         public override void Execute(object parameter)
@@ -23,7 +23,6 @@ namespace DVS.WPF.Commands.CategoryCommands
             AddEditCategoryViewModel addEditCategorieViewModel = new(
                 modalNavigationStore,
                 categoryStore,
-                seasonStore,
                 clothesStore,
                 clothesSizeStore,
                 employeeClothesSizesStore,
@@ -31,7 +30,7 @@ namespace DVS.WPF.Commands.CategoryCommands
                 addClothesViewModel,
                 editClothesViewModel,
                 SizesCategoriesSeasonsListingViewModel,
-                dVSListingViewModel);
+                dirtyEntitySaver);
 
             modalNavigationStore.CurrentViewModel = addEditCategorieViewModel;
         }

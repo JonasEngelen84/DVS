@@ -1,4 +1,5 @@
-﻿using DVS.WPF.Commands.CategoryCommands;
+﻿using DVS.Domain.Services.Interfaces;
+using DVS.WPF.Commands.CategoryCommands;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using System.Windows.Input;
@@ -13,7 +14,6 @@ namespace DVS.WPF.ViewModels.Views
         public AddEditCategoryViewModel(
             ModalNavigationStore modalNavigationStore,
             CategoryStore categoryStore,
-            SeasonStore seasonStore,
             ClothesStore clothesStore,
             ClothesSizeStore clothesSizeStore,
             EmployeeClothesSizeStore employeeClothesSizesStore,
@@ -21,19 +21,24 @@ namespace DVS.WPF.ViewModels.Views
             AddClothesViewModel addClothesViewModel,
             EditClothesViewModel editClothesViewModel,
             SizesCategoriesSeasonsListingViewModel SizesCategoriesSeasonsListingViewModel,
-            DVSListingViewModel dVSListingViewModel)
+            IDirtyEntitySaver dirtyEntitySaver)
         {
             ICommand addCategory = new AddCategoryCommand(this, categoryStore);
-            ICommand updateCategory = new EditCategoryCommand(this, categoryStore);
+            ICommand updateCategory = new EditCategoryCommand(
+                this,
+                categoryStore,
+                clothesStore,
+                clothesSizeStore,
+                employeeStore,
+                employeeClothesSizesStore);
             ICommand deleteCategory = new DeleteCategoryCommand(
                 this,
                 categoryStore,
-                seasonStore,
                 clothesStore,
                 clothesSizeStore,
-                employeeClothesSizesStore,
                 employeeStore,
-                dVSListingViewModel);
+                employeeClothesSizesStore,
+                dirtyEntitySaver);
 
             CloseAddEditCategory = new CloseAddEditCategoryCommand(
                 modalNavigationStore,

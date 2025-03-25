@@ -48,8 +48,6 @@ namespace DVS.WPF.Stores
             EmployeeUpdated.Invoke(editedEmployee);
 
             editedEmployee.IsDirty = true;
-
-
         }
 
         public async Task Delete(Employee employee)

@@ -7,15 +7,12 @@ namespace DVS.WPF.Stores
     public class CategoryStore(ICreateCategoryCommand createCategoryCommand,
                                IDeleteCategoryCommand deleteCategoryCommand)
     {
-        public Category Categoryless { get; }
-
         private readonly List<Category> _categories = [];
         public IEnumerable<Category> Categories => _categories;
 
         public event Action<Category, AddEditCategoryFormViewModel> CategoryAdded;
         public event Action<Category, AddEditCategoryFormViewModel> CategoryUpdated;
-        public event Action<Guid, AddEditCategoryFormViewModel> CategoryDeleted;
-        public event Action<AddEditCategoryFormViewModel> AllCategoriesDeleted;
+        public event Action<AddEditCategoryFormViewModel> CategoryDeleted;
 
 
         public void Load(List<Category> categorie)
@@ -54,16 +51,16 @@ namespace DVS.WPF.Stores
             editedCategory.IsDirty = true;
         }
 
-        public async Task Delete(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Delete(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            await deleteCategoryCommand.Execute(category);
+            await deleteCategoryCommand.Execute(addEditCategoryFormViewModel.SelectedCategory);
 
-            int index = _categories.FindIndex(y => y.Id == category.Id);
+            int index = _categories.FindIndex(y => y.Id == addEditCategoryFormViewModel.SelectedCategory.Id);
 
             if (index > -1)
             {
-                _categories.RemoveAll(y => y.Id == category.Id);
-                CategoryDeleted.Invoke(category.Id, addEditCategoryFormViewModel);
+                _categories.RemoveAll(y => y.Id == addEditCategoryFormViewModel.SelectedCategory.Id);
+                CategoryDeleted.Invoke(addEditCategoryFormViewModel);
             }
             else
             {

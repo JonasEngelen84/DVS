@@ -23,14 +23,14 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task AddToDataBase(ClothesSize newClothesSize)
+        public async Task AddDataBase(ClothesSize newClothesSize)
         {
             await createClothesSizeCommand.Execute(newClothesSize);
             _clothesSizes.Add(newClothesSize);
             ClothesSizeAdded.Invoke(newClothesSize);
         }
         
-        public void AddToStore(ClothesSize newClothesSize)
+        public void AddStore(ClothesSize newClothesSize)
         {
             _clothesSizes.Add(newClothesSize);
         }

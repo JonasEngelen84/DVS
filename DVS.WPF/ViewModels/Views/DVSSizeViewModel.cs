@@ -1,4 +1,5 @@
-﻿using DVS.WPF.Commands;
+﻿using DVS.Domain.Services.Interfaces;
+using DVS.WPF.Commands;
 using DVS.WPF.Commands.ClothesCommands;
 using DVS.WPF.Commands.EmployeeCommands;
 using DVS.WPF.Stores;
@@ -16,7 +17,8 @@ namespace DVS.WPF.ViewModels.Views
         EmployeeClothesSizeStore employeeClothesSizesStore,
         EmployeeStore employeeStore,
         SelectedClothesSizeStore selectedClothesSizeStore,
-        SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore)
+        SelectedEmployeeClothesSizeStore selectedEmployeeClothesSizeStore,
+        IDirtyEntitySaver dirtyEntitySaver)
         : ViewModelBase
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
@@ -45,7 +47,7 @@ namespace DVS.WPF.ViewModels.Views
             clothesSizeStore,
             employeeClothesSizesStore,
             employeeStore,
-            dVSListingViewModel);
+            dirtyEntitySaver);
         public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(
             employeeStore,
             clothesStore,
@@ -59,10 +61,10 @@ namespace DVS.WPF.ViewModels.Views
             modalNavigationStore,
             clothesStore,
             employeeStore,
-            dVSListingViewModel,
             categoryStore,
             clothesSizeStore,
             employeeClothesSizesStore,
-            seasonStore);
+            seasonStore,
+            dirtyEntitySaver);
     }
 }
