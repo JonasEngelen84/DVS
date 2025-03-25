@@ -129,9 +129,9 @@ namespace DVS.WPF.ViewModels
                 throw new InvalidOperationException("Umbenennen der Saison nicht möglich.");
             }
         }
-        private void SeasonStore_SeasonDeleted(Guid GuidId, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        private void SeasonStore_SeasonDeleted(AddEditSeasonFormViewModel addEditSeasonFormViewModel)
         {
-            var seasonToDelete = _seasons.FirstOrDefault(y => y.Id == GuidId);
+            var seasonToDelete = _seasons.First(s => s.Id == addEditSeasonFormViewModel.SelectedSeason.Id);
 
             if (seasonToDelete != null)
             {
@@ -180,9 +180,9 @@ namespace DVS.WPF.ViewModels
                 throw new InvalidOperationException("Umbenennen der Kategorie nicht möglich.");
             }
         }
-        private void CategoryStore_CategoryDeleted(Guid GuidId, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        private void CategoryStore_CategoryDeleted(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
-            var categoryToDelete = _categories.FirstOrDefault(y => y.Id == GuidId);
+            var categoryToDelete = _categories.FirstOrDefault(y => y.Id == addEditCategoryFormViewModel.SelectedCategory.Id);
 
             if (categoryToDelete != null)
             {

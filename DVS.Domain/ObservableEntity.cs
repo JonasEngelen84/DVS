@@ -13,7 +13,7 @@ namespace DVS.Domain
                 _isDirty = value;
                 
                 if (_isDirty)
-                    GlobalDirtyTrackingService?.AddToDirtyEntities(this);
+                    GlobalDirtyTrackingService?.AddDirtyEntity(this);
             }
         }
 

@@ -113,7 +113,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
         {
             foreach(EmployeeClothesSize ecs in newEmployee.Clothes)
             {
-                employeeClothesSizesStore.AddToStore(ecs);
+                employeeClothesSizesStore.AddStore(ecs);
             }
         }
     }

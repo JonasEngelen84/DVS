@@ -130,7 +130,7 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
                 try
                 {
-                    await employeeClothesSizeStore.AddToDataBase(newEcs);
+                    await employeeClothesSizeStore.AddDataBase(newEcs);
                 }
                 catch
                 {

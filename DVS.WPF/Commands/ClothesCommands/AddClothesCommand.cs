@@ -70,7 +70,7 @@ namespace DVS.WPF.Commands.ClothesCommands
                 };
 
                 newClothes.Sizes.Add(newClothesSize);
-                clothesSizeStore.AddToStore(newClothesSize);
+                clothesSizeStore.AddStore(newClothesSize);
             }
         }
         private async Task AddClothes(Clothes newClothes, AddClothesFormViewModel addClothesFormViewModel)
