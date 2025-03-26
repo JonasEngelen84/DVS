@@ -114,7 +114,7 @@ namespace DVS.WPF.Commands.CategoryCommands
         {
             try
             {
-                await categoryStore.Delete(addEditCategoryFormViewModel);
+                await categoryStore.Delete(addEditCategoryFormViewModel.SelectedCategory);
             }
             catch (Exception)
             {

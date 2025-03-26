@@ -116,7 +116,7 @@ namespace DVS.WPF.Commands.SeasonCommands
         {
             try
             {
-                await seasonStore.Delete(addEditSeasonFormViewModel);
+                await seasonStore.Delete(addEditSeasonFormViewModel.SelectedSeason);
             }
             catch (Exception)
             {
