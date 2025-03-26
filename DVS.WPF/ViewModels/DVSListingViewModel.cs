@@ -124,7 +124,9 @@ namespace DVS.WPF.ViewModels
         }         
         private void ClothesStore_ClothesUpdated(Clothes editedClothes)
         {
-            ClothesListingItemViewModel clivmToUpdate = _clothesCollection.First(clivm => clivm.Clothes.Id == editedClothes.Id);
+            ClothesListingItemViewModel clivmToUpdate = _clothesCollection
+                .First(clivm => clivm.Clothes.Id == editedClothes.Id);
+
             clivmToUpdate.Update(editedClothes);
         }        
         private void ClothesStore_ClothesDeleted(string ClothesId)
