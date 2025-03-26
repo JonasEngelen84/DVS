@@ -5,7 +5,10 @@ using DVS.WPF.ViewModels.Views;
 
 namespace DVS.WPF.Commands.CategoryCommands
 {
-    public class AddCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
+    public class AddCategoryCommand(
+        AddEditCategoryViewModel addEditCategoryViewModel,
+        CategoryStore categoryStore)
+        : AsyncCommandBase
     {
         public override async Task ExecuteAsync(object parameter)
         {
@@ -13,11 +16,13 @@ namespace DVS.WPF.Commands.CategoryCommands
             addEditCategoryFormViewModel.HasError = false;
             addEditCategoryFormViewModel.IsSubmitting = true;
 
-            Category newCategory = new(Guid.NewGuid(), addEditCategoryFormViewModel.AddNewCategory);
+            Category newCategory = new(Guid.NewGuid(), addEditCategoryFormViewModel.NewCategory);
+
+            addEditCategoryFormViewModel.NewCategory = "Neue Kategorie";
 
             try
             {
-                await categoryStore.Add(newCategory, addEditCategoryFormViewModel);
+                await categoryStore.Add(newCategory);
             }
             catch (Exception)
             {

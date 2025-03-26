@@ -124,6 +124,9 @@ namespace DVS.WPF.Commands.SeasonCommands
 
                 addEditSeasonFormViewModel.HasError = true;
             }
+
+            addEditSeasonFormViewModel.SelectedSeason = new(Guid.NewGuid(), "Saison wählen");
+            addEditSeasonFormViewModel.EditSelectedSeason = addEditSeasonFormViewModel.SelectedSeason.Name;
         }
     }
 }
