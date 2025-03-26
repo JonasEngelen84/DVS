@@ -130,12 +130,8 @@ namespace DVS.WPF.Commands.ClothesCommands
             }
         }
                 
-        private async Task DeleteClothesSizeAsync(
-            ClothesSize clothesSizeToDelete,
-            EditClothesFormViewModel editClothesFormViewModel)
+        private async Task DeleteClothesSizeAsync(ClothesSize clothesSizeToDelete, EditClothesFormViewModel editClothesFormViewModel)
         {
-            editClothesFormViewModel.Clothes.Sizes.Remove(clothesSizeToDelete);
-
             try
             {
                 await clothesSizeStore.Delete(clothesSizeToDelete);
@@ -145,6 +141,8 @@ namespace DVS.WPF.Commands.ClothesCommands
                 ShowErrorMessageBox("Bearbeiten der Bekleidung ist fehlgeschlagen!", " Bekleidung bearbeiten");
                 editClothesFormViewModel.HasError = true;
             }
+
+            editClothesFormViewModel.Clothes.Sizes.Remove(clothesSizeToDelete);
         }
 
         private void UpdateClothesSize(

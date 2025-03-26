@@ -30,30 +30,55 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
             editEmployeeFormViewModel.IsSubmitting = true;
 
-            List<EmployeeClothesSize> oldClothes = new(editEmployeeFormViewModel.Employee.Clothes);
-            List<EmployeeClothesSizeListingItemViewModel> newClothes = new(
+            List<EmployeeClothesSize> oldEmployeeClothes = new(editEmployeeFormViewModel.Employee.Clothes);
+            List<EmployeeClothesSizeListingItemViewModel> newEmployeeClothes = new(
                 editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList);
 
-            if (oldClothes.Count > 0 && newClothes.Count > 0)
+            bool employeePropertyChanged = false;
+
+            EditEmployee(editEmployeeFormViewModel, ref employeePropertyChanged);
+
+            if (oldEmployeeClothes.Count > 0 && newEmployeeClothes.Count > 0)
             {
-                await DeleteOrUpdateEcs(oldClothes, newClothes, editEmployeeFormViewModel);
+                await DeleteOrUpdateEcs(oldEmployeeClothes, newEmployeeClothes, employeePropertyChanged, editEmployeeFormViewModel);
             }
 
-            if (newClothes.Count > 0)
-                await AddNewEcsAsync(newClothes, editEmployeeFormViewModel);
+            if (newEmployeeClothes.Count > 0)
+                await AddNewEcsAsync(newEmployeeClothes, editEmployeeFormViewModel);
 
             UpdateClothesSizes(editEmployeeFormViewModel);
             UpdateClothes(editedClothesSizesList, editEmployeeFormViewModel);
-            Employee editedEmployee = EditEmployee(editEmployeeFormViewModel);
-            employeeStore.Update(editedEmployee);
+            employeeStore.Update(editEmployeeFormViewModel.Employee);
 
             editEmployeeFormViewModel.IsSubmitting = false;
             modalNavigationStore.Close();
         }
 
+        private static void EditEmployee(EditEmployeeFormViewModel editEmployeeFormViewModel, ref bool employeePropertyChanged)
+        {
+            if (!editEmployeeFormViewModel.Employee.Lastname.Equals(editEmployeeFormViewModel.Lastname))
+            {
+                editEmployeeFormViewModel.Employee.Lastname = editEmployeeFormViewModel.Lastname;
+                employeePropertyChanged = true;
+            }
+            
+            if (!editEmployeeFormViewModel.Employee.Firstname.Equals(editEmployeeFormViewModel.Firstname))
+            {
+                editEmployeeFormViewModel.Employee.Firstname = editEmployeeFormViewModel.Firstname;
+                employeePropertyChanged = true;
+            }
+            
+            if (!editEmployeeFormViewModel.Employee.Comment.Equals(editEmployeeFormViewModel.Comment))
+            {
+                editEmployeeFormViewModel.Employee.Comment = editEmployeeFormViewModel.Comment;
+                employeePropertyChanged = true;
+            }
+        }
+
         private async Task DeleteOrUpdateEcs(
             List<EmployeeClothesSize> oldClothes,
             List<EmployeeClothesSizeListingItemViewModel> newClothes,
+            bool employeePropertyChanged,
             EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             foreach (EmployeeClothesSize oldEcs in oldClothes)
@@ -63,29 +88,35 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
                 if (newEcs == null)
                 {
-                    editEmployeeFormViewModel.Employee.Clothes.Remove(oldEcs);
-
-                    try
-                    {
-                        await employeeClothesSizeStore.Delete(oldEcs);
-                    }
-                    catch
-                    {
-                        ShowErrorMessageBox("Bearbeiten des/der Mitarbeiter/in ist fehlgeschlagen!", " Mitarbeiter/in bearbeiten");
-                        editEmployeeFormViewModel.HasError = true;
-                    }
+                    await DeleteEcs(oldEcs, editEmployeeFormViewModel);
                 }
                 else
                 {
-                    UpdateEmployeeClothesSize(oldEcs, newEcs, editEmployeeFormViewModel);
+                    UpdateEmployeeClothesSize(oldEcs, newEcs, employeePropertyChanged, editEmployeeFormViewModel);
                     newClothes.Remove(newEcs);
                 }
             }
         }
 
+        private async Task DeleteEcs(EmployeeClothesSize oldEcs, EditEmployeeFormViewModel editEmployeeFormViewModel)
+        {
+            try
+            {
+                await employeeClothesSizeStore.Delete(oldEcs);
+            }
+            catch
+            {
+                ShowErrorMessageBox("Bearbeiten des/der Mitarbeiter/in ist fehlgeschlagen!", " Mitarbeiter/in bearbeiten");
+                editEmployeeFormViewModel.HasError = true;
+            }
+
+            editEmployeeFormViewModel.Employee.Clothes.Remove(oldEcs);
+        }
+
         private void UpdateEmployeeClothesSize(
             EmployeeClothesSize oldEcs,
             EmployeeClothesSizeListingItemViewModel newEcs,
+            bool employeePropertyChanged,
             EditEmployeeFormViewModel editEmployeeFormViewModel)
         {
             bool ecsPropertyChanged = false;
@@ -99,6 +130,12 @@ namespace DVS.WPF.Commands.EmployeeCommands
             if (!string.Equals(oldEcs.Comment, newEcs.Comment))
             {
                 oldEcs.Comment = newEcs.Comment;
+                ecsPropertyChanged = true;
+            }
+
+            if (employeePropertyChanged)
+            {
+                oldEcs.Employee = editEmployeeFormViewModel.Employee;
                 ecsPropertyChanged = true;
             }
 
@@ -148,23 +185,11 @@ namespace DVS.WPF.Commands.EmployeeCommands
             {
                 ClothesSize existingClothesSize = clothesSizeStore.ClothesSizes.First(cs => cs.Id == acsi.ClothesSizeId);
 
-                if (existingClothesSize != null)
-                {
-                    AvailableClothesSizeItem existingAcsi = ClothesSizesToEdit.First(acsi => acsi.ClothesSize.Id == existingClothesSize.Id);
+                existingClothesSize.Quantity = acsi.Quantity;
 
-                    ClothesSize editedClothesSize = new(existingClothesSize.Id,
-                                                        existingClothesSize.Clothes,
-                                                        existingClothesSize.Size,
-                                                        existingAcsi.Quantity,
-                                                        existingClothesSize.Comment)
-                    {
-                        EmployeeClothesSizes = []
-                    };
+                editedClothesSizesList.Add(existingClothesSize);
 
-                    editedClothesSizesList.Add(editedClothesSize);
-
-                    clothesSizeStore.Update(editedClothesSize);
-                }
+                clothesSizeStore.Update(existingClothesSize);
             }
         }
 
@@ -174,51 +199,22 @@ namespace DVS.WPF.Commands.EmployeeCommands
 
             foreach (Clothes clothes in clothesToEdited)
             {
-                Clothes editedClothes = new(
-                    clothes.Id,
-                    clothes.Name,
-                    clothes.Category,
-                    clothes.Season,
-                    clothes.Comment)
-                {
-                    Sizes = clothes.Sizes
-                };
-
                 foreach (ClothesSize editedClothesSize in editedClothesSizesList)
                 {
                     if (editedClothesSize.ClothesId == clothes.Id)
                     {
-                        ClothesSize existingClothesSize = editedClothes.Sizes.First(cs => cs.Id == editedClothesSize.Id);
+                        ClothesSize existingClothesSize = clothes.Sizes.First(cs => cs.Id == editedClothesSize.Id);
 
                         if (existingClothesSize != null)
                         {
-                            editedClothes.Sizes.Remove(existingClothesSize);
-                            editedClothes.Sizes.Add(editedClothesSize);
+                            clothes.Sizes.Remove(existingClothesSize);
+                            clothes.Sizes.Add(editedClothesSize);
                         }
                     }
                 }
 
-                clothesStore.Update(editedClothes);
+                clothesStore.Update(clothes);
             }
-        }
-
-        private static Employee EditEmployee(EditEmployeeFormViewModel editEmployeeFormViewModel)
-        {
-            Employee editedEmployee = new(editEmployeeFormViewModel.Id,
-                                          editEmployeeFormViewModel.Lastname,
-                                          editEmployeeFormViewModel.Firstname,
-                                          editEmployeeFormViewModel.Comment)
-            {
-                Clothes = []
-            };
-
-            foreach (EmployeeClothesSizeListingItemViewModel ecslivm in editEmployeeFormViewModel.AddEditEmployeeListingViewModel.EmployeeClothesList)
-            {
-                EmployeeClothesSize employeeClothesSize = new(ecslivm.EmployeeClothesSizeGuidId ?? Guid.NewGuid(), editedEmployee, ecslivm.ClothesSize, ecslivm.Quantity, ecslivm.Comment);
-                editedEmployee.Clothes.Add(employeeClothesSize);
-            }
-
-            return editedEmployee;
         }
     }
 }
