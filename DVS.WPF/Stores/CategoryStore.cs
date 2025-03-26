@@ -10,8 +10,8 @@ namespace DVS.WPF.Stores
         private readonly List<Category> _categories = [];
         public IEnumerable<Category> Categories => _categories;
 
-        public event Action<Category, AddEditCategoryFormViewModel> CategoryAdded;
-        public event Action<Category, AddEditCategoryFormViewModel> CategoryUpdated;
+        public event Action<Category> CategoryAdded;
+        public event Action<Category> CategoryUpdated;
         public event Action<AddEditCategoryFormViewModel> CategoryDeleted;
 
 
@@ -25,27 +25,23 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task Add(Category category, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Add(Category newCategory)
         {
-            await createCategoryCommand.Execute(category);
+            await createCategoryCommand.Execute(newCategory);
 
-            _categories.Add(category);
+            _categories.Add(newCategory);
 
-            CategoryAdded.Invoke(category, addEditCategoryFormViewModel);
+            CategoryAdded.Invoke(newCategory);
         }
 
-        public void Update(Category editedCategory, AddEditCategoryFormViewModel? addEditCategoryFormViewModel)
+        public void Update(Category editedCategory)
         {
             int index = _categories.FindIndex(y => y.Id == editedCategory.Id);
 
             if (index > -1)
             {
                 _categories[index] = editedCategory;
-                CategoryUpdated.Invoke(editedCategory, addEditCategoryFormViewModel != null ? addEditCategoryFormViewModel : null);
-            }
-            else
-            {
-                throw new InvalidOperationException("Umbenennen der Kategorie nicht möglich.");
+                CategoryUpdated.Invoke(editedCategory);
             }
 
             editedCategory.IsDirty = true;
@@ -61,11 +57,7 @@ namespace DVS.WPF.Stores
             {
                 _categories.RemoveAll(y => y.Id == addEditCategoryFormViewModel.SelectedCategory.Id);
                 CategoryDeleted.Invoke(addEditCategoryFormViewModel);
-            }
-            else
-            {
-                throw new InvalidOperationException("Löschen der Kategorie nicht möglich.");
-            }            
+            }           
         }
     }
 }

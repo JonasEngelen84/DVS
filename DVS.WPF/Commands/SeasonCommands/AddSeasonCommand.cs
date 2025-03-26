@@ -16,11 +16,13 @@ namespace DVS.WPF.Commands.SeasonCommands
             addEditSeasonFormViewModel.HasError = false;
             addEditSeasonFormViewModel.IsSubmitting = true;
 
-            Season newSeason = new(Guid.NewGuid(), addEditSeasonFormViewModel.AddNewSeason);
+            Season newSeason = new(Guid.NewGuid(), addEditSeasonFormViewModel.NewSeason);
+
+            addEditSeasonFormViewModel.NewSeason = "Neue Saison";
 
             try
             {
-                await seasonStore.Add(newSeason, addEditSeasonFormViewModel);
+                await seasonStore.Add(newSeason);
             }
             catch (Exception)
             {

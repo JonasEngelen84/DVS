@@ -15,14 +15,14 @@ namespace DVS.WPF.ViewModels.Forms
         public ICommand EditCategory { get; } = editCategoryCommand;
         public ICommand DeleteCategory { get; } = deleteCategoryCommand;
 
-        private string _addNewCategory;
-        public string AddNewCategory
+        private string _newCategory;
+        public string NewCategory
         {
-            get => _addNewCategory;
+            get => _newCategory;
             set
             {
-                _addNewCategory = value;
-                OnPropertyChanged(nameof(AddNewCategory));
+                _newCategory = value;
+                OnPropertyChanged(nameof(NewCategory));
                 OnPropertyChanged(nameof(CanAdd));
             }
         }
@@ -86,8 +86,8 @@ namespace DVS.WPF.ViewModels.Forms
         public bool HasError;
 
         public bool CanAdd =>
-            !string.IsNullOrEmpty(AddNewCategory) &&
-            !AddNewCategory.Equals("Neue Kategorie");
+            !string.IsNullOrEmpty(NewCategory) &&
+            !NewCategory.Equals("Neue Kategorie");
 
         public bool CanEdit =>
             !string.IsNullOrEmpty(EditSelectedCategory) &&

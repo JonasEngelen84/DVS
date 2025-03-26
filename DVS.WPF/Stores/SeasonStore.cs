@@ -10,8 +10,8 @@ namespace DVS.WPF.Stores
         private readonly List<Season> _seasons = [];
         public IEnumerable<Season> Seasons => _seasons;
 
-        public event Action<Season, AddEditSeasonFormViewModel> SeasonAdded;
-        public event Action<Season, AddEditSeasonFormViewModel> SeasonUpdated;
+        public event Action<Season> SeasonAdded;
+        public event Action<Season> SeasonUpdated;
         public event Action<AddEditSeasonFormViewModel> SeasonDeleted;
 
         public void Load(List<Season> seasons)
@@ -24,27 +24,23 @@ namespace DVS.WPF.Stores
             }
         }
 
-        public async Task Add(Season season, AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        public async Task Add(Season season)
         {
             await createSeasonCommand.Execute(season);
 
             _seasons.Add(season);
 
-            SeasonAdded.Invoke(season, addEditSeasonFormViewModel);
+            SeasonAdded.Invoke(season);
         }
 
-        public void Update(Season editedSeason, AddEditSeasonFormViewModel? addEditSeasonFormViewModel)
+        public void Update(Season editedSeason)
         {
             int index = _seasons.FindIndex(y => y.Id == editedSeason.Id);
 
             if (index > -1)
             {
                 _seasons[index] = editedSeason;
-                SeasonUpdated.Invoke(editedSeason, addEditSeasonFormViewModel != null ? addEditSeasonFormViewModel : null);
-            }
-            else
-            {
-                throw new InvalidOperationException("Umbenennen der Saison nicht möglich.");
+                SeasonUpdated.Invoke(editedSeason);
             }
 
             editedSeason.IsDirty = true;
@@ -60,11 +56,7 @@ namespace DVS.WPF.Stores
             {
                 _seasons.RemoveAll(y => y.Id == addEditSeasonFormViewModel.SelectedSeason.Id);
                 SeasonDeleted.Invoke(addEditSeasonFormViewModel);
-            }
-            else
-            {
-                throw new InvalidOperationException("Löschen der Saison nicht möglich.");
-            }            
+            }           
         }
     }
 }

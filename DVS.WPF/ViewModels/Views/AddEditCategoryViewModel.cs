@@ -51,7 +51,7 @@ namespace DVS.WPF.ViewModels.Views
                 deleteCategory,
                 SizesCategoriesSeasonsListingViewModel)
             {
-                AddNewCategory = "Neue Kategorie",
+                NewCategory = "Neue Kategorie",
                 SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen")
             };
         }

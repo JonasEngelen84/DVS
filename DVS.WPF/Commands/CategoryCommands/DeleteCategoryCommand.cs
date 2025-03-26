@@ -122,6 +122,9 @@ namespace DVS.WPF.Commands.CategoryCommands
 
                 addEditCategoryFormViewModel.HasError = true;
             }
+
+            addEditCategoryFormViewModel.SelectedCategory = new(Guid.NewGuid(), "Kategorie wählen");
+            addEditCategoryFormViewModel.EditSelectedCategory = addEditCategoryFormViewModel.SelectedCategory.Name;
         }
     }
 }

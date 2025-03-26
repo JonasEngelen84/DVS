@@ -53,7 +53,7 @@ namespace DVS.WPF.ViewModels.Views
                 deleteSeason,
                 SizesCategoriesSeasonsListingViewModel)
             {
-                AddNewSeason = "Neue Saison",
+                NewSeason = "Neue Saison",
                 SelectedSeason = new(Guid.NewGuid(), "Saison wählen")
             };
         }

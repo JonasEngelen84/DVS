@@ -15,14 +15,14 @@ namespace DVS.WPF.ViewModels.Forms
         public ICommand EditSeason { get; } = editSeasonCommand;
         public ICommand DeleteSeason { get; } = deleteSeasonCommand;
 
-        private string _addNewSeason;
-        public string AddNewSeason
+        private string _newSeason;
+        public string NewSeason
         {
-            get => _addNewSeason;
+            get => _newSeason;
             set
             {
-                _addNewSeason = value;
-                OnPropertyChanged(nameof(AddNewSeason));
+                _newSeason = value;
+                OnPropertyChanged(nameof(NewSeason));
                 OnPropertyChanged(nameof(CanAdd));
             }
         }
@@ -86,8 +86,8 @@ namespace DVS.WPF.ViewModels.Forms
         public bool HasError;
 
         public bool CanAdd =>
-            !string.IsNullOrEmpty(AddNewSeason) &&
-            !AddNewSeason.Equals("Neue Saison");
+            !string.IsNullOrEmpty(NewSeason) &&
+            !NewSeason.Equals("Neue Saison");
 
         public bool CanEdit =>
             !string.IsNullOrEmpty(EditSelectedSeason) &&
