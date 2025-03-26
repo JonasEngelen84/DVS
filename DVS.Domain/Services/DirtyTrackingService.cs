@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace DVS.Domain.Services
+﻿namespace DVS.Domain.Services
 {
     public class DirtyTrackingService
     {
