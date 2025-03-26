@@ -37,7 +37,7 @@ namespace DVS.WPF.Commands.ClothesCommands
 
             if (OldClothesSizes.Count > 0 && newSelectedSizes.Count > 0)
             {
-                await DeleteOrUpdateClothesSizes(
+                await CompareClothesSizes(
                     OldClothesSizes,
                     newSelectedSizes,
                     clothesPropertyChanged,
@@ -96,7 +96,7 @@ namespace DVS.WPF.Commands.ClothesCommands
                 .ToList();
         }
 
-        private async Task DeleteOrUpdateClothesSizes(
+        private async Task CompareClothesSizes(
             List<ClothesSize> oldClothesSizes,
             List<SizeListingItemViewModel> newSelectedSizes,
             bool clothesPropertyChanged,
@@ -231,9 +231,9 @@ namespace DVS.WPF.Commands.ClothesCommands
             }
         }
 
-        private void UpdateEmployees(List<EmployeeClothesSize> EditedEmployeeClothesSizes)
+        private void UpdateEmployees(List<EmployeeClothesSize> editedEmployeeClothesSizes)
         {
-            foreach (EmployeeClothesSize employeeClothesSize in EditedEmployeeClothesSizes)
+            foreach (EmployeeClothesSize employeeClothesSize in editedEmployeeClothesSizes)
             {
                 EmployeeClothesSize existingEcs = employeeClothesSize.Employee.Clothes
                     .First(ecs => ecs.Id == employeeClothesSize.Id);
