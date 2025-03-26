@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Commands.SeasonCommands;
 using DVS.Domain.Models;
-using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
 {
@@ -12,7 +11,7 @@ namespace DVS.WPF.Stores
 
         public event Action<Season> SeasonAdded;
         public event Action<Season> SeasonUpdated;
-        public event Action<AddEditSeasonFormViewModel> SeasonDeleted;
+        public event Action<Season> SeasonDeleted;
 
         public void Load(List<Season> seasons)
         {
@@ -46,16 +45,16 @@ namespace DVS.WPF.Stores
             editedSeason.IsDirty = true;
         }
 
-        public async Task Delete(AddEditSeasonFormViewModel addEditSeasonFormViewModel)
+        public async Task Delete(Season seasonToDelete)
         {
-            await deleteSeasonCommand.Execute(addEditSeasonFormViewModel.SelectedSeason);
+            await deleteSeasonCommand.Execute(seasonToDelete);
 
-            int index = _seasons.FindIndex(y => y.Id == addEditSeasonFormViewModel.SelectedSeason.Id);
+            int index = _seasons.FindIndex(y => y.Id == seasonToDelete.Id);
 
             if (index > -1)
             {
-                _seasons.RemoveAll(y => y.Id == addEditSeasonFormViewModel.SelectedSeason.Id);
-                SeasonDeleted.Invoke(addEditSeasonFormViewModel);
+                _seasons.RemoveAll(y => y.Id == seasonToDelete.Id);
+                SeasonDeleted.Invoke(seasonToDelete);
             }           
         }
     }

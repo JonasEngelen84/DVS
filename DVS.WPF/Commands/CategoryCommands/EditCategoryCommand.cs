@@ -5,9 +5,16 @@ using DVS.WPF.ViewModels.Views;
 
 namespace DVS.WPF.Commands.CategoryCommands
 {
-    public class EditCategoryCommand(AddEditCategoryViewModel addEditCategoryViewModel, CategoryStore categoryStore) : AsyncCommandBase
+    public class EditCategoryCommand(
+        AddEditCategoryViewModel addEditCategoryViewModel,
+        CategoryStore categoryStore,
+        ClothesStore clothesStore,
+        ClothesSizeStore clothesSizeStore,
+        EmployeeStore employeeStore,
+        EmployeeClothesSizeStore employeeClothesSizeStore)
+        : CommandBase
     {
-        public override async Task ExecuteAsync(object parameter)
+        public override void Execute(object parameter)
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = addEditCategoryViewModel.AddEditCategoryFormViewModel;
 
@@ -17,22 +24,85 @@ namespace DVS.WPF.Commands.CategoryCommands
                 addEditCategoryFormViewModel.HasError = false;
                 addEditCategoryFormViewModel.IsSubmitting = true;
 
-                Category updatedCategory = new(addEditCategoryFormViewModel.SelectedCategory.GuidId, addEditCategoryFormViewModel.EditSelectedCategory);
+                HashSet<ClothesSize> editedClothesSizes = [];
+                HashSet<EmployeeClothesSize> editedEcs = [];
+                HashSet<Clothes> clothesToEdit = GetClothesToEdit(addEditCategoryFormViewModel);
 
-                try
-                {
-                    await categoryStore.Update(updatedCategory, addEditCategoryFormViewModel);
-                }
-                catch (Exception)
-                {
-                    ShowErrorMessageBox("Umbenennen der Kategorie ist fehlgeschlagen!\nBitte versuchen Sie es erneut.", "Kategorie umbenennen");
+                EditCategory(addEditCategoryFormViewModel);
+                UpdateClothes(clothesToEdit, addEditCategoryFormViewModel);
+                UpdateClothesSizes(clothesToEdit, editedClothesSizes);
+                UpdateEmployeeClothesSizes(editedClothesSizes, editedEcs);
+                UpdateEmployees(editedEcs);
 
-                    addEditCategoryFormViewModel.HasError = true;
-                }
-                finally
+                addEditCategoryFormViewModel.IsDeleting = false;
+            }
+        }
+
+        private void EditCategory(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        {
+            addEditCategoryFormViewModel.SelectedCategory.Name = addEditCategoryFormViewModel.EditSelectedCategory;
+
+            categoryStore.Update(addEditCategoryFormViewModel.SelectedCategory);
+        }
+
+        private HashSet<Clothes> GetClothesToEdit(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        {
+            return clothesStore.Clothes
+                .Where(c => c.Category.Name == addEditCategoryFormViewModel.SelectedCategory.Name)
+                .ToHashSet();
+        }
+
+        private void UpdateClothes(HashSet<Clothes> clothesToEdit, AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        {
+            foreach (Clothes clothes in clothesToEdit)
+            {
+                clothes.Category = addEditCategoryFormViewModel.SelectedCategory;
+
+                clothesStore.Update(clothes);
+            }
+        }
+
+        private void UpdateClothesSizes(HashSet<Clothes> editedClothes, HashSet<ClothesSize> editedClothesSizes)
+        {
+            foreach (Clothes editedCl in editedClothes)
+            {
+                foreach (ClothesSize csToEdit in editedCl.Sizes)
                 {
-                    addEditCategoryFormViewModel.IsSubmitting = false;
+                    csToEdit.Clothes = editedCl;
+                    editedClothesSizes.Add(csToEdit);
+
+                    clothesSizeStore.Update(csToEdit);
                 }
+            }
+        }
+
+        private void UpdateEmployeeClothesSizes(HashSet<ClothesSize> editedClothesSizes, HashSet<EmployeeClothesSize> editedEcs)
+        {
+            foreach (ClothesSize clothesSize in editedClothesSizes)
+            {
+                List<EmployeeClothesSize> assignedClothesSizes = employeeClothesSizeStore.EmployeeClothesSizes
+                    .Where(ecs => ecs.ClothesSizeGuidId == clothesSize.Id)
+                    .ToList();
+
+                foreach (EmployeeClothesSize ecs in assignedClothesSizes)
+                {
+                    ecs.ClothesSize = clothesSize;
+                    editedEcs.Add(ecs);
+                    employeeClothesSizeStore.Update(ecs);
+                }
+            }
+        }
+
+        private void UpdateEmployees(HashSet<EmployeeClothesSize> editedEcs)
+        {
+            foreach (EmployeeClothesSize employeeClothesSize in editedEcs)
+            {
+                EmployeeClothesSize existingEcs = employeeClothesSize.Employee.Clothes
+                    .First(ecs => ecs.Id == employeeClothesSize.Id);
+
+                employeeClothesSize.Employee.Clothes.Remove(existingEcs);
+                employeeClothesSize.Employee.Clothes.Add(employeeClothesSize);
+                employeeStore.Update(employeeClothesSize.Employee);
             }
         }
     }

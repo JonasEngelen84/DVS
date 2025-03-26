@@ -22,7 +22,7 @@
         <StackPanel Orientation="Horizontal">
             <TextBox Width="165"
                      Style="{StaticResource TextBoxStyle}"
-                     Text="{Binding AddNewSeason, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding NewSeason, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Content="ERSTELLEN"
                     Width="100"
                     Margin="5 0 0 0"

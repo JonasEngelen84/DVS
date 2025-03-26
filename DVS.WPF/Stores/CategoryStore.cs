@@ -1,6 +1,5 @@
 ﻿using DVS.Domain.Commands.CategoryCommands;
 using DVS.Domain.Models;
-using DVS.WPF.ViewModels.Forms;
 
 namespace DVS.WPF.Stores
 {
@@ -12,7 +11,7 @@ namespace DVS.WPF.Stores
 
         public event Action<Category> CategoryAdded;
         public event Action<Category> CategoryUpdated;
-        public event Action<AddEditCategoryFormViewModel> CategoryDeleted;
+        public event Action<Category> CategoryDeleted;
 
 
         public void Load(List<Category> categorie)
@@ -47,16 +46,16 @@ namespace DVS.WPF.Stores
             editedCategory.IsDirty = true;
         }
 
-        public async Task Delete(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
+        public async Task Delete(Category CategoryToDelete)
         {
-            await deleteCategoryCommand.Execute(addEditCategoryFormViewModel.SelectedCategory);
+            await deleteCategoryCommand.Execute(CategoryToDelete);
 
-            int index = _categories.FindIndex(y => y.Id == addEditCategoryFormViewModel.SelectedCategory.Id);
+            int index = _categories.FindIndex(y => y.Id == CategoryToDelete.Id);
 
             if (index > -1)
             {
-                _categories.RemoveAll(y => y.Id == addEditCategoryFormViewModel.SelectedCategory.Id);
-                CategoryDeleted.Invoke(addEditCategoryFormViewModel);
+                _categories.RemoveAll(y => y.Id == CategoryToDelete.Id);
+                CategoryDeleted.Invoke(CategoryToDelete);
             }           
         }
     }

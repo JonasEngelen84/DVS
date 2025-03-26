@@ -108,14 +108,13 @@ namespace DVS.WPF.ViewModels
         }
         private void SeasonStore_SeasonUpdated(Season editedSeason)
         {
-            Season seasonToUpdate = _seasons.First(y => y.Id == editedSeason.Id);
-
-            int index = _seasons.IndexOf(seasonToUpdate);
-            _seasons[index] = editedSeason;
+            Season seasonToUpdate = _seasons.First(s => s.Id == editedSeason.Id);
+            _seasons.Remove(seasonToUpdate);
+            _seasons.Add(editedSeason);
         }
         private void SeasonStore_SeasonDeleted(Season seasonToDelete)
         {
-            var sToDelete = _seasons.First(s => s.Id == seasonToDelete.Id);
+            Season sToDelete = _seasons.First(s => s.Id == seasonToDelete.Id);
             _seasons.Remove(sToDelete);
         }
         
@@ -134,10 +133,9 @@ namespace DVS.WPF.ViewModels
         }
         private void CategoryStore_CategoryUpdated(Category editedCategory)
         {
-            Category categoryToUpdate = _categories.First(y => y.Id == editedCategory.Id);
-
-            int index = _categories.IndexOf(categoryToUpdate);
-            _categories[index] = editedCategory;
+            Category categoryToUpdate = _categories.First(c => c.Id == editedCategory.Id);
+            _categories.Remove(categoryToUpdate);
+            _categories.Add(editedCategory);
         }
         private void CategoryStore_CategoryDeleted(Category categoryToDelete)
         {
