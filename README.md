@@ -3,7 +3,6 @@ DVS (Dienstkleidungs-Verwaltungs-Software/Uniform management software)
 
 ✨ Project Description
 
-DVS is an application for the efficient management of uniforms and their assignment to employees.
 DVS is a comprehensive application designed for the efficient management of uniforms,
 including their sizes, quantities, and assignment to employees. It streamlines the organization
 of workwear by allowing classification into categories and seasons.
