@@ -1,0 +1,21 @@
+﻿PROPRIETARY LICENSE
+
+Copyright (c) [2025] [Jonas Engelen / OBS GmbH]
+
+All rights reserved.
+
+This software and associated documentation files (the "Software") are provided for viewing purposes only.
+Permission is granted to view the Software, but not to modify, distribute, sublicense, or use it for commercial purposes.
+
+Restrictions
+
+You may not modify, merge, publish, distribute, sublicense, or sell copies of the Software.
+You may not reverse engineer, decompile, or disassemble any part of the Software.
+You may not remove or alter any proprietary notices from the Software.
+The Software is provided "as is," without warranty of any kind.
+
+Limited Use
+
+The Software may only be used for educational and review purposes.
+Any other use requires explicit written permission from the author.
+For inquiries regarding licensing, please contact jonasengelen@hotmail.de.
