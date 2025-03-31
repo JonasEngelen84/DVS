@@ -93,5 +93,11 @@ dotnet ef database update --project DVS.EntityFramework
 # Move the .db file from DVS/DVS.EntityFramework to DVS/DVS.WPF/bin/Debug/net8.0-windows. If a .db file already exists there, replace it!
 
 
+🤝 Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+📧 Contact
+
 If you have any questions or issues, feel free to create an issue or contact me!
 Happy Coding! 🚀
