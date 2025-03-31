@@ -71,7 +71,7 @@ The project follows the MVVM pattern (Model-View-ViewModel) to ensure a clean se
 
 ⚖ License
 
-This project is licensed under the MIT License – See the LICENSE file for details.
+This project is licensed under a proprietary license – See the LICENSE file for details.
 
 
 🔼 Installation & Setup
