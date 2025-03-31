@@ -5,24 +5,17 @@ Copyright (c) [2025] [Jonas Engelen / OBS GmbH]
 All rights reserved.
 
 Grant of License
-
 You are granted a non-exclusive, non-transferable, and revocable license to view the Software for personal or internal business purposes only.
 
 Restrictions
-
 You may not modify, merge, publish, distribute, sublicense, or sell copies of the Software.
-
 You may not reverse engineer, decompile, or disassemble any part of the Software.
-
 You may not remove or alter any proprietary notices from the Software.
-
 The Software is provided "as is," without warranty of any kind.
 
 Limited Use
-
 Any use beyond personal or internal review—including commercial use, redistribution, or modification—requires prior written approval from [YOUR NAME / COMPANY].
 
 Enforcement
-
 Unauthorized use of this Software may result in legal action.
 For inquiries regarding licensing, please contact jonasengelen@hotmail.de.
