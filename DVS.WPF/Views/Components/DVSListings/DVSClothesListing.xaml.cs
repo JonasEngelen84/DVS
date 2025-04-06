@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DVS.WPF.Components.DVSListings
+namespace DVS.WPF.Views.Components.DVSListings
 {
     public partial class DVSClothesListing : UserControl
     {

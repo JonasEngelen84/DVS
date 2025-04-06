@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace DVS.WPF.Components.DVSListings
+namespace DVS.WPF.Views.Components.DVSListings
 {
     public partial class DVSEmployeeClothesSizeListing : UserControl
     {

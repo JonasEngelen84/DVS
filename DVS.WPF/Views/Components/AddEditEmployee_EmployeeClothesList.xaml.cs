@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace DVS.WPF.Components
+namespace DVS.WPF.Views.Components
 {
     public partial class AddEditEmployee_EmployeeClothesList : UserControl
     {

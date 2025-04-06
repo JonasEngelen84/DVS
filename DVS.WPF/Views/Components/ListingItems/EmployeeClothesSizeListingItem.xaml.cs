@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace DVS.WPF.Components.ListingItems
+namespace DVS.WPF.Views.Components.ListingItems
 {
     public partial class EmployeeClothesSizeListingItem : UserControl
     {

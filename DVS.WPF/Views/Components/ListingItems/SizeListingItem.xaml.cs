@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace DVS.WPF.Components.ListingItems
+namespace DVS.WPF.Views.Components.ListingItems
 {
     public partial class SizeListingItem : UserControl
     {

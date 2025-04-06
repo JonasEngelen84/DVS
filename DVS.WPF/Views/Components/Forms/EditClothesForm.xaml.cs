@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace DVS.WPF.Components.Forms
+namespace DVS.WPF.Views.Components.Forms
 {
     public partial class EditClothesForm : UserControl
     {
