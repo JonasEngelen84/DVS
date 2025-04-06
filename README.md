@@ -81,6 +81,12 @@ Requirements:
  - Entity Framework Core
  -  SQL Server or SQLite as the database
 
+NuGet Packages:
+ - Microsoft.Extensions.Hosting
+ - CommunityToolkit.Mvvm
+ - DropdownMenu.WPF
+ - SimpleModal.WPF
+
 Creating & Migrating the Database
 Run the following commands in PowerShell:
 
