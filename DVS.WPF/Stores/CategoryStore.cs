@@ -3,6 +3,7 @@ using DVS.Domain.Models;
 
 namespace DVS.WPF.Stores
 {
+    //TODO: IDirtyEntitySaver implementieren
     public class CategoryStore(ICreateCategoryCommand createCategoryCommand,
                                IDeleteCategoryCommand deleteCategoryCommand)
     {

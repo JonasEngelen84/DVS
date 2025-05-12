@@ -56,6 +56,7 @@ namespace DVS.WPF.Commands.SeasonCommands
             foreach (Clothes clothes in clothesToEdit)
             {
                 clothes.Season = addEditSeasonFormViewModel.SelectedSeason;
+                clothes.SeasonGuidId = addEditSeasonFormViewModel.SelectedSeason.Id;
 
                 clothesStore.Update(clothes);
             }

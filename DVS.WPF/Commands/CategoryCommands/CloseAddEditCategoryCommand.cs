@@ -5,8 +5,8 @@ namespace DVS.WPF.Commands.CategoryCommands
 {
     public class CloseAddEditCategoryCommand(
         ModalNavigationStore modalNavigationStore,
-        AddClothesViewModel addClothesViewModel,
-        EditClothesViewModel editClothesViewModel)
+        AddClothesViewModel? addClothesViewModel,
+        EditClothesViewModel? editClothesViewModel)
         : CommandBase
     {
         public override void Execute(object parameter)

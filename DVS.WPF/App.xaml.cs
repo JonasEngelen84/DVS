@@ -109,9 +109,9 @@ namespace DVS.WPF
             base.OnStartup(e);
         }
 
-        protected override void OnExit(ExitEventArgs e)
+        protected override async void OnExit(ExitEventArgs e)
         {
-            _host.StopAsync();
+            await _host.StopAsync();
             _host.Dispose();
             base.OnExit(e);
         }

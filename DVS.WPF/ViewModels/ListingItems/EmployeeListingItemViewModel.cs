@@ -70,12 +70,9 @@ namespace DVS.WPF.ViewModels.ListingItems
 
         public EmployeeListingItemViewModel(
             Employee employee,
-            DVSListingViewModel dVSListingViewModel,
             ModalNavigationStore modalNavigationStore,
             EmployeeStore employeeStore,
             ClothesStore clothesStore,
-            CategoryStore categoryStore,
-            SeasonStore seasonStore,
             ClothesSizeStore clothesSizeStore,
             EmployeeClothesSizeStore employeeClothesSizesStore)
         {
