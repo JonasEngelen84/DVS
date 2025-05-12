@@ -3,7 +3,6 @@ using DVS.Domain.Models;
 
 namespace DVS.WPF.Stores
 {
-    //TODO: IDirtyEntitySaver implementieren
     public class ClothesSizeStore(ICreateClothesSizeCommand createClothesSizeCommand,
                                   IDeleteClothesSizeCommand deleteClothesSizeCommand)
     {
