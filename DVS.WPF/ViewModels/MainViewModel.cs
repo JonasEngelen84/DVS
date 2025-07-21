@@ -5,7 +5,7 @@ namespace DVS.WPF.ViewModels
 {
     /// <summary>
     /// Hauptklasse zur Implementierung der allgemeinen Betrefflickeiten der App:
-    /// Dieser Klasse wird in App.xaml.cs der Datenkontext zugeteilt.
+    /// Dieser Klasse wird in App.xaml.cs der Datenkontext zugeteilt,
     /// sowie die Instanzen von "ModalNavigationStore" und "DVSViewModel" übergeben.
     /// 
     /// In dieser Klasse wird das handling der Modals vorgenommen.
@@ -16,8 +16,8 @@ namespace DVS.WPF.ViewModels
     /// </summary>
     class MainViewModel : ViewModelBase
     {
-        public DVSHeadViewModel DVSHeadViewModel { get; }
-        public DVSSizeViewModel DVSSizeViewModel { get; }
+        public DVSMainViewModel DVSMainViewModel { get; }
+        public DVSDetailedViewModel DVSDetailedViewModel { get; }
         private readonly ModalNavigationStore _modalNavigationStore;
 
         public ViewModelBase CurrentModalViewModel => _modalNavigationStore.CurrentViewModel;
@@ -26,12 +26,12 @@ namespace DVS.WPF.ViewModels
 
 
         public MainViewModel(
-            DVSHeadViewModel dVSHeadViewModel,
-            DVSSizeViewModel dVSViewModel,
+            DVSMainViewModel dVSMainViewModel,
+            DVSDetailedViewModel dVSDetailedViewModel,
             ModalNavigationStore modalNavigationStore)
         {
-            DVSHeadViewModel = dVSHeadViewModel;
-            DVSSizeViewModel = dVSViewModel;
+            DVSMainViewModel = dVSMainViewModel;
+            DVSDetailedViewModel = dVSDetailedViewModel;
             _modalNavigationStore = modalNavigationStore;
 
             _modalNavigationStore.CurrentViewModelChanged += ModalNavigationStore_CurrentViewModelChanged;

@@ -141,16 +141,16 @@
                 <ContentControl Content="{Binding CurrentModalViewModel}" />
             </custom:Modal>
 
-            <!-- DVSHeadView -->
-            <views:DVSHeadView x:Name="HeadView"
+            <!-- DVSMainView -->
+            <views:DVSMainView x:Name="MainView"
                                Grid.Row="1"
                                Margin="0,3,0,0" />
 
-            <!-- DVSSizeView -->
-            <views:DVSSizeView x:Name="SizeView"
-                               Grid.Row="1"
-                               Margin="0,3,0,0"
-                               Visibility="Hidden" />
+            <!-- DVSDetailedView -->
+            <views:DVSDetailedView x:Name="DetailedView"
+                                   Grid.Row="1"
+                                   Margin="0,3,0,0"
+                                   Visibility="Hidden" />
 
         </Grid>
     </Border>

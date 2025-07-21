@@ -19,17 +19,17 @@ namespace DVS.WPF.Views
 
         private void ChangeViewClick(object sender, RoutedEventArgs e)
         {
-            if (SizeView.Visibility == Visibility.Visible)
+            if (DetailedView.Visibility == Visibility.Visible)
             {
-                SizeView.Visibility = Visibility.Hidden;
-                HeadView.Visibility = Visibility.Visible;
+                DetailedView.Visibility = Visibility.Hidden;
+                MainView.Visibility = Visibility.Visible;
                 UserWindow.Width = 900;
                 UserWindow.Height = 900;
             }
             else
             {
-                SizeView.Visibility = Visibility.Visible;
-                HeadView.Visibility = Visibility.Hidden;
+                DetailedView.Visibility = Visibility.Visible;
+                MainView.Visibility = Visibility.Hidden;
                 UserWindow.Width = 1250;
                 UserWindow.Height = 900;
             }

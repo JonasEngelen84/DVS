@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Views
 {
-    public class DVSSizeViewModel(
+    public class DVSDetailedViewModel(
         DVSListingViewModel dVSListingViewModel,
         ModalNavigationStore modalNavigationStore,
         CategoryStore categoryStore,

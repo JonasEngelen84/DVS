@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace DVS.WPF.ViewModels.Views
 {
-    public class DVSHeadViewModel(
+    public class DVSMainViewModel(
         DVSListingViewModel dVSListingViewModel,
         ModalNavigationStore modalNavigationStore,
         CategoryStore categoryStore,
@@ -19,6 +19,36 @@ namespace DVS.WPF.ViewModels.Views
         : ViewModelBase
     {
         public DVSListingViewModel DVSListingViewModel { get; } = dVSListingViewModel;
+        
+        private string _searchClothes;
+        public string SearchClothes
+        {
+            get => _searchClothes;
+            set
+            {
+                if (value != _searchClothes)
+                {
+                    _searchClothes = value;
+                    OnPropertyChanged(nameof(SearchClothes));
+                    DVSListingViewModel.ApplyClothesFilter(_searchClothes);
+                }
+            }
+        }
+
+        private string _searchEmployee;
+        public string SearchEmployee
+        {
+            get => _searchEmployee;
+            set
+            {
+                if (value != _searchEmployee)
+                {
+                    _searchEmployee = value;
+                    OnPropertyChanged(nameof(SearchEmployee));
+                    DVSListingViewModel.ApplyEmployeeFilter(_searchEmployee);
+                }
+            }
+        }
 
         public ICommand OpenAddEmployee { get; } = new OpenAddEmployeeCommand(
             employeeStore,

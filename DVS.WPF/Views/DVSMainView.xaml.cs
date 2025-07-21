@@ -3,9 +3,9 @@ using System.Windows.Controls;
 
 namespace DVS.WPF.Views
 {
-    public partial class DVSHeadView : UserControl
+    public partial class DVSMainView : UserControl
     {
-        public DVSHeadView()
+        public DVSMainView()
         {
             InitializeComponent();
         }
