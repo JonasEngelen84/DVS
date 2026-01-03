@@ -11,7 +11,6 @@ namespace DVS.WPF.Views.Components.DVSListings
             InitializeComponent();
         }
 
-        //TODO: OnClothesItemClicked beschreiben
         public void OnClothesItemClicked(object sender, MouseButtonEventArgs e)
         {
             if (sender is ListViewItem listViewItem)

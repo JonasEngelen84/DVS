@@ -9,7 +9,7 @@
         public string Category => ClothesSize.Clothes.Category.Name;
         public string Season => ClothesSize.Clothes.Season.Name;
         public string Size => ClothesSize.Size;
-        public string Comment => ClothesSize.Comment;
+        public string Comment => ClothesSize.Comment ?? string.Empty; 
 
         private int _quantity;
         public int Quantity

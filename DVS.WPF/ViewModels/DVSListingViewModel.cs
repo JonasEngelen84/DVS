@@ -3,19 +3,23 @@ using DVS.Domain.Services.Interfaces;
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.ListingItems;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace DVS.WPF.ViewModels
 {
     public class DVSListingViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<ClothesListingItemViewModel> _clothesCollection = [];
-        public IEnumerable<ClothesListingItemViewModel> ClothesCollection => _clothesCollection;
+        private readonly ObservableCollection<ClothesListingItemViewModel> _clothesCollection;
+        public IEnumerable<ClothesListingItemViewModel> FilteredClothesCollection => _clothesCollection;
+        //public ICollectionView FilteredClothesCollection { get; private set; }
 
         private readonly ObservableCollection<ClothesSize> _clothesSizeCollection = [];
         public IEnumerable<ClothesSize> ClothesSizeCollection => _clothesSizeCollection;
 
-        private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeCollection = [];
-        public IEnumerable<EmployeeListingItemViewModel> EmployeeCollection => _employeeCollection;
+        private readonly ObservableCollection<EmployeeListingItemViewModel> _employeeCollection;
+        public IEnumerable<EmployeeListingItemViewModel> FilteredEmployeeCollection => _employeeCollection;
+        //public ICollectionView FilteredEmployeeCollection { get; private set; }
 
         private readonly ObservableCollection<EmployeeClothesSize> _employeeClothesSizeCollection = [];
         public IEnumerable<EmployeeClothesSize> EmployeeClothesSizeCollection => _employeeClothesSizeCollection;
@@ -46,7 +50,6 @@ namespace DVS.WPF.ViewModels
         private readonly EmployeeClothesSizeStore _employeeClothesSizeStore;
         private readonly SelectedClothesSizeStore _selectedClothesSizeStore;
         private readonly SelectedEmployeeClothesSizeStore _selectedEmployeeClothesSizeStore;
-        private readonly IDirtyEntitySaver _dirtyEntitySaver;
 
         public DVSListingViewModel(
             ClothesStore clothesStore,
@@ -69,7 +72,14 @@ namespace DVS.WPF.ViewModels
             _employeeClothesSizeStore = employeeClothesSizesStore;
             _selectedClothesSizeStore = selectedClothesSizeStore;
             _selectedEmployeeClothesSizeStore = selectedEmployeeClothesSizeStore;
-            _dirtyEntitySaver = dirtyEntitySaver;
+
+            _clothesCollection = [];
+            //FilteredClothesCollection = CollectionViewSource.GetDefaultView(_clothesCollection);
+            //FilteredClothesCollection.Filter = FilterClothesPredicate;
+
+            _employeeCollection = [];
+            //FilteredEmployeeCollection = CollectionViewSource.GetDefaultView(_employeeCollection);
+            //FilteredEmployeeCollection.Filter = FilterEmployeePredicate;
 
             _clothesStore.ClothesAdded += ClothesStore_ClothesAdded;
             _clothesStore.ClothesUpdated += ClothesStore_ClothesUpdated;
@@ -98,10 +108,52 @@ namespace DVS.WPF.ViewModels
 
             foreach (Clothes clothes in _clothesStore.Clothes)
             {
-                ClothesStore_ClothesAdded(clothes, dirtyEntitySaver);
+                AddClothes(clothes, dirtyEntitySaver);
             }
+
+            //FilteredClothesCollection.Refresh();
         }
+
+        public void ApplyClothesFilter(string filter)
+        {
+            _clothesFilter = filter ?? string.Empty;
+            //FilteredClothesCollection.Refresh();
+        }
+
+        private string _clothesFilter = string.Empty;
+        private bool FilterClothesPredicate(object obj)
+        {
+            if (string.IsNullOrWhiteSpace(_clothesFilter))
+                return true;
+
+            if (obj is not ClothesListingItemViewModel cliv)
+                return false;
+
+            return cliv.Id.Contains(_clothesFilter,StringComparison.OrdinalIgnoreCase)
+                || cliv.Name.Contains(_clothesFilter, StringComparison.OrdinalIgnoreCase)
+                || cliv.Category.Name.Contains(_clothesFilter, StringComparison.OrdinalIgnoreCase)
+                || cliv.Season.Name.Contains(_clothesFilter, StringComparison.OrdinalIgnoreCase);
+        }
+
         private void ClothesStore_ClothesAdded(Clothes clothes, IDirtyEntitySaver dirtyEntitySaver)
+        {
+            AddClothes(clothes, dirtyEntitySaver);
+        }         
+        private void ClothesStore_ClothesUpdated(Clothes editedClothes)
+        {
+            ClothesListingItemViewModel clivmToUpdate = _clothesCollection
+                .First(clivm => clivm.Clothes.Id == editedClothes.Id);
+
+            clivmToUpdate.Update(editedClothes);
+        }        
+        private void ClothesStore_ClothesDeleted(string ClothesId)
+        {
+            ClothesListingItemViewModel? ItemToDelete = _clothesCollection
+                .FirstOrDefault(y => y.Clothes.Id == ClothesId);
+
+            _clothesCollection.Remove(ItemToDelete);
+        }
+        private void AddClothes(Clothes clothes, IDirtyEntitySaver dirtyEntitySaver)
         {
             _clothesCollection.Add(new ClothesListingItemViewModel(
                 clothes,
@@ -118,24 +170,38 @@ namespace DVS.WPF.ViewModels
             {
                 foreach (ClothesSize clothesSize in clothes.Sizes)
                 {
-                    _clothesSizeCollection.Add(clothesSize);
+                    AddClothesSize(clothesSize);
                 }
             }
-        }         
-        private void ClothesStore_ClothesUpdated(Clothes editedClothes)
-        {
-            ClothesListingItemViewModel clivmToUpdate = _clothesCollection
-                .First(clivm => clivm.Clothes.Id == editedClothes.Id);
+        }
 
-            clivmToUpdate.Update(editedClothes);
-        }        
-        private void ClothesStore_ClothesDeleted(string ClothesId)
+        private void ClothesSizeStore_ClothesSizeAdded(ClothesSize newClothesSize)
         {
-            ClothesListingItemViewModel? ItemToDelete = _clothesCollection
-                .FirstOrDefault(y => y.Clothes.Id == ClothesId);
+            AddClothesSize(newClothesSize);
+        }
+        private void ClothesSizeStore_ClothesSizeUpdated(ClothesSize editedClothesSize)
+        {
+            ClothesSize? existingClothesSize = _clothesSizeCollection
+                .FirstOrDefault(ecs => ecs.Id == editedClothesSize.Id);
 
-            _clothesCollection.Remove(ItemToDelete);
-        }        
+            if (existingClothesSize != null)
+            {
+                _clothesSizeCollection.Remove(existingClothesSize);
+            }
+
+            _clothesSizeCollection.Add(editedClothesSize);
+        }
+        private void ClothesSizeStore_ClothesSizeDeleted(ClothesSize ClothesSizeToDelete)
+        {
+            ClothesSize existingClothesSize = _clothesSizeCollection
+                .First(cs => cs.Id == ClothesSizeToDelete.Id);
+
+            if (existingClothesSize != null)
+            {
+                _clothesSizeCollection.Remove(existingClothesSize);
+            }
+        }
+        private void AddClothesSize(ClothesSize newClothesSize) { _clothesSizeCollection.Add(newClothesSize); }
 
         private void LoadEmployees()
         {
@@ -144,29 +210,38 @@ namespace DVS.WPF.ViewModels
 
             foreach (Employee employee in _employeeStore.Employees)
             {
-                EmployeeStore_EmployeeAdded(employee);
+                AddEmployee(employee);
             }
+
+            //FilteredEmployeeCollection.Refresh();
         }
+
+        public void ApplyEmployeeFilter(string filter)
+        {
+            _employeeFilter = filter ?? string.Empty;
+            //FilteredEmployeeCollection.Refresh();
+        }
+
+        private string _employeeFilter = string.Empty;
+        private bool FilterEmployeePredicate(object obj)
+        {
+            if (string.IsNullOrWhiteSpace(_employeeFilter))
+                return true;
+
+            if (obj is not Employee emp)
+                return false;
+
+            return emp.Id.Contains(_employeeFilter, StringComparison.OrdinalIgnoreCase)
+                || emp.Lastname.Contains(_employeeFilter, StringComparison.OrdinalIgnoreCase)
+                || emp.Firstname.Contains(_employeeFilter, StringComparison.OrdinalIgnoreCase)
+                || emp.Clothes.Any(ecs => ecs.ClothesSize.Clothes.Name.Contains(_employeeFilter, StringComparison.OrdinalIgnoreCase)
+                    || ecs.ClothesSize.Clothes.Category.Name.Contains(_employeeFilter, StringComparison.OrdinalIgnoreCase)
+                    || ecs.ClothesSize.Clothes.Season.Name.Contains(_employeeFilter, StringComparison.OrdinalIgnoreCase));
+        }
+
         private void EmployeeStore_EmployeeAdded(Employee newEmployee)
         {
-            _employeeCollection.Add(new EmployeeListingItemViewModel(
-                newEmployee,
-                this,
-                _modalNavigationStore,
-                _employeeStore,
-                _clothesStore,
-                _categoryStore,
-                _seasonStore,
-                _clothesSizeStore,
-                _employeeClothesSizeStore));
-
-            if (newEmployee.Clothes.Count > 0)
-            {
-                foreach (EmployeeClothesSize ecs in newEmployee.Clothes)
-                {
-                    _employeeClothesSizeCollection.Add(ecs);
-                }
-            }
+            AddEmployee(newEmployee);
         }        
         private void EmployeeStore_EmployeeUpdated(Employee editedEmployee)
         {
@@ -191,37 +266,28 @@ namespace DVS.WPF.ViewModels
                 EmployeeClothesSizeStore_EmployeeClothesSizeDeleted(ecs);
             }
         }
-
-        private void ClothesSizeStore_ClothesSizeAdded(ClothesSize newClothesSize)
+        private void AddEmployee(Employee newEmployee)
         {
-            _clothesSizeCollection.Add(newClothesSize);
-        }
-        private void ClothesSizeStore_ClothesSizeUpdated(ClothesSize editedClothesSize)
-        {
-            ClothesSize? existingClothesSize = _clothesSizeCollection
-                .FirstOrDefault(ecs => ecs.Id == editedClothesSize.Id);
+            _employeeCollection.Add(new EmployeeListingItemViewModel(
+                newEmployee,
+                _modalNavigationStore,
+                _employeeStore,
+                _clothesStore,
+                _clothesSizeStore,
+                _employeeClothesSizeStore));
 
-            if (existingClothesSize != null)
+            if (newEmployee.Clothes.Count > 0)
             {
-                _clothesSizeCollection.Remove(existingClothesSize);
-            }
-
-            _clothesSizeCollection.Add(editedClothesSize);
-        }
-        private void ClothesSizeStore_ClothesSizeDeleted(ClothesSize ClothesSizeToDelete)
-        {
-            ClothesSize existingClothesSize = _clothesSizeCollection
-                .First(cs => cs.Id == ClothesSizeToDelete.Id);
-
-            if (existingClothesSize != null)
-            {
-                _clothesSizeCollection.Remove(existingClothesSize);
+                foreach (EmployeeClothesSize ecs in newEmployee.Clothes)
+                {
+                    AddEmpoyeeClothesSize(ecs);
+                }
             }
         }
         
         private void EmployeeClothesSizeStore_EmployeeClothesSizeAdded(EmployeeClothesSize newEcs)
         {
-            _employeeClothesSizeCollection.Add(newEcs);
+            AddEmpoyeeClothesSize(newEcs);
         }
         private void EmployeeClothesSizeStore_EmployeeClothesSizeUpdated(EmployeeClothesSize editedEcs)
         {
@@ -243,6 +309,7 @@ namespace DVS.WPF.ViewModels
 
             _employeeClothesSizeCollection.Remove(existingEcs);
         }
+        private void AddEmpoyeeClothesSize(EmployeeClothesSize newEcs) { _employeeClothesSizeCollection.Add(newEcs); }
 
         protected override void Dispose()
         {

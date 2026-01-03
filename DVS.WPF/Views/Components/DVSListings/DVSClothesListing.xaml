@@ -10,7 +10,7 @@
 
     <UserControl.Resources>
         <CollectionViewSource x:Key="SortedClothesCollection"
-                              Source="{Binding ClothesCollection}">
+                              Source="{Binding FilteredClothesCollection}">
             <CollectionViewSource.SortDescriptions>
                 <componentmodel:SortDescription PropertyName="Id"
                                                 Direction="Ascending" />
@@ -18,7 +18,7 @@
         </CollectionViewSource>
     </UserControl.Resources>
 
-    <Border BorderBrush="#e3e5e8"
+    <Border BorderBrush="#1c1c1c"
             BorderThickness="0"
             CornerRadius="5"
             SnapsToDevicePixels="True">

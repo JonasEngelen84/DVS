@@ -58,8 +58,8 @@ namespace DVS.WPF
                     services.AddSingleton<DirtyTrackingService>();
                     services.AddSingleton<IDirtyEntitySaver, SaveDirtyEntitiesService>();
 
-                    services.AddSingleton<DVSHeadViewModel>();
-                    services.AddSingleton<DVSSizeViewModel>();
+                    services.AddSingleton<DVSMainViewModel>();
+                    services.AddSingleton<DVSDetailedViewModel>();
                     services.AddSingleton<DVSListingViewModel>();
 
                     services.AddSingleton<ModalNavigationStore>();

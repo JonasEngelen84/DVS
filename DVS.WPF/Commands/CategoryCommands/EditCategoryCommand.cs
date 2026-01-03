@@ -2,6 +2,7 @@
 using DVS.WPF.Stores;
 using DVS.WPF.ViewModels.Forms;
 using DVS.WPF.ViewModels.Views;
+using System.Diagnostics;
 
 namespace DVS.WPF.Commands.CategoryCommands
 {
@@ -18,23 +19,38 @@ namespace DVS.WPF.Commands.CategoryCommands
         {
             AddEditCategoryFormViewModel addEditCategoryFormViewModel = addEditCategoryViewModel.AddEditCategoryFormViewModel;
 
-            if (Confirm($"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
+            if (!Confirm($"Die Kategorie \"{addEditCategoryFormViewModel.SelectedCategory.Name}\" und ihre Schnittstellen werden in" +
                     $"\"{addEditCategoryFormViewModel.EditSelectedCategory}\" umbenannt.\n\nUmbennen fortsetzen?", "Kategorie umbenennen"))
             {
-                addEditCategoryFormViewModel.HasError = false;
-                addEditCategoryFormViewModel.IsSubmitting = true;
+                return;
+            }
 
+            addEditCategoryFormViewModel.HasError = false;
+            addEditCategoryFormViewModel.IsSubmitting = true;
+
+            try
+            {
                 HashSet<ClothesSize> editedClothesSizes = [];
                 HashSet<EmployeeClothesSize> editedEcs = [];
                 HashSet<Clothes> clothesToEdit = GetClothesToEdit(addEditCategoryFormViewModel);
 
+                //TODO: transaction implementieren
+                //using var transaction = categoryStore.BeginTransaction();
                 EditCategory(addEditCategoryFormViewModel);
                 UpdateClothes(clothesToEdit, addEditCategoryFormViewModel);
                 UpdateClothesSizes(clothesToEdit, editedClothesSizes);
                 UpdateEmployeeClothesSizes(editedClothesSizes, editedEcs);
                 UpdateEmployees(editedEcs);
-
-                addEditCategoryFormViewModel.IsDeleting = false;
+                //transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                LogError(ex);
+                addEditCategoryFormViewModel.HasError = true;
+            }
+            finally
+            {
+                addEditCategoryFormViewModel.IsSubmitting = false;
             }
         }
 
@@ -48,7 +64,7 @@ namespace DVS.WPF.Commands.CategoryCommands
         private HashSet<Clothes> GetClothesToEdit(AddEditCategoryFormViewModel addEditCategoryFormViewModel)
         {
             return clothesStore.Clothes
-                .Where(c => c.Category.Name == addEditCategoryFormViewModel.SelectedCategory.Name)
+                .Where(c => c.Category.Id == addEditCategoryFormViewModel.SelectedCategory.Id)
                 .ToHashSet();
         }
 
@@ -57,6 +73,7 @@ namespace DVS.WPF.Commands.CategoryCommands
             foreach (Clothes clothes in clothesToEdit)
             {
                 clothes.Category = addEditCategoryFormViewModel.SelectedCategory;
+                clothes.CategoryGuidId = addEditCategoryFormViewModel.SelectedCategory.Id;
 
                 clothesStore.Update(clothes);
             }
@@ -97,13 +114,22 @@ namespace DVS.WPF.Commands.CategoryCommands
         {
             foreach (EmployeeClothesSize employeeClothesSize in editedEcs)
             {
-                EmployeeClothesSize existingEcs = employeeClothesSize.Employee.Clothes
-                    .First(ecs => ecs.Id == employeeClothesSize.Id);
+                var existingEcs = employeeClothesSize.Employee.Clothes
+                    .FirstOrDefault(ecs => ecs.Id == employeeClothesSize.Id);
 
-                employeeClothesSize.Employee.Clothes.Remove(existingEcs);
+                if (existingEcs != null)
+                {
+                    employeeClothesSize.Employee.Clothes.Remove(existingEcs);
+                }
+
                 employeeClothesSize.Employee.Clothes.Add(employeeClothesSize);
                 employeeStore.Update(employeeClothesSize.Employee);
             }
+        }
+
+        private static void LogError(Exception ex)
+        {
+            Debug.WriteLine($"[ERROR] {ex.Message}");
         }
     }
 }

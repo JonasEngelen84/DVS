@@ -10,7 +10,7 @@
 
     <UserControl.Resources>
         <CollectionViewSource x:Key="SortedEmployeeCollection"
-                              Source="{Binding EmployeeCollection}">
+                              Source="{Binding FilteredEmployeeCollection}">
             <CollectionViewSource.SortDescriptions>
                 <componentmodel:SortDescription PropertyName="Lastname"
                                                 Direction="Ascending" />
