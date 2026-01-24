@@ -77,7 +77,7 @@ This project is licensed under a proprietary license – See the LICENSE file fo
 🔼 Installation & Setup
 
 Requirements:
- - .NET 8.0 or later
+ - .NET 8.0
  - Entity Framework Core
  -  SQL Server or SQLite as the database
 
